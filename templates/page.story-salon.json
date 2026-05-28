@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "story_salon_landing": {
+      "type": "story-salon-landing",
+      "blocks": {
+        "card_01": { "type": "series_card", "settings": { "name": "Raw & Uncut" } },
+        "card_02": { "type": "series_card", "settings": { "name": "The Layer Series" } }
+      },
+      "block_order": ["card_01", "card_02"],
+      "settings": {
+        "s1_number": "n° 01",
+        "s1_title": "Raw & Uncut",
+        "s1_text": "<p>Unfiltered, unpolished, and entirely honest. Raw & Uncut is TRIIIPLE's first content series — an exploration of craft, material, and the beauty found in imperfection.</p><p>We pull back the curtain on how each piece is made, who makes it, and why the details that others overlook are the ones we obsess over.</p>",
+        "s1_cta": "Explore Raw & Uncut",
+        "s2_number": "n° 02",
+        "s2_title": "The Layer Series",
+        "s2_text": "<p>Layering is not styling — it's thinking. The Layer Series goes deep into the art of wearing multiple pieces together, and what each combination says about the person doing the wearing.</p><p>From technical base layers to considered outerwear, a guide to building looks that last beyond the season.</p>",
+        "s2_cta": "Explore The Layer Series",
+        "s2_image_side": "left",
+        "archive_heading": "All Series"
+      }
+    }
+  },
+  "order": ["story_salon_landing"]
+}

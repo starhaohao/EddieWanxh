@@ -1,0 +1,204 @@
+{% comment %}
+  Story Salon — split text + image layout
+  Image side is configurable (left or right)
+{% endcomment %}
+
+<style>
+  .story-salon {
+    padding: 80px var(--outer, 16px);
+  }
+  .story-salon__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .story-salon__inner--reverse .story-salon__media {
+    order: 2;
+  }
+  .story-salon__inner--reverse .story-salon__content {
+    order: 1;
+  }
+  .story-salon__image-wrap {
+    border-radius: 32px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background-color: var(--COLOR-BG-SECONDARY, #f5f5f5);
+  }
+  .story-salon__image-wrap .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .story-salon__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .story-salon__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .story-salon__label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--COLOR-TEXT-A60, #999);
+    margin: 0;
+  }
+  .story-salon__heading {
+    font-family: 'Galdeano', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+    color: var(--COLOR-TEXT, #111);
+  }
+  .story-salon__text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--COLOR-TEXT-A80, #444);
+    margin: 0;
+  }
+  .story-salon__text p {
+    margin: 0 0 16px;
+  }
+  .story-salon__text p:last-child {
+    margin-bottom: 0;
+  }
+  .story-salon__btn {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 14px 28px;
+    border: 1px solid var(--COLOR-TEXT, #111);
+    color: var(--COLOR-TEXT, #111);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .story-salon__btn:hover {
+    background: var(--COLOR-TEXT, #111);
+    color: var(--COLOR-BG, #fff);
+  }
+
+  .story-salon__banner {
+    border-radius: 32px;
+    overflow: hidden;
+    margin-bottom: 60px;
+    aspect-ratio: 16 / 7;
+    background-color: var(--COLOR-BG-SECONDARY, #f5f5f5);
+  }
+  .story-salon__banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    .story-salon {
+      padding: 48px var(--outer, 16px);
+    }
+    .story-salon__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .story-salon__inner--reverse .story-salon__media,
+    .story-salon__inner--reverse .story-salon__content {
+      order: unset;
+    }
+    .story-salon__image-wrap {
+      border-radius: 16px;
+      aspect-ratio: 4 / 3;
+    }
+    .story-salon__banner {
+      border-radius: 16px;
+      margin-bottom: 32px;
+      aspect-ratio: 4 / 3;
+    }
+    .story-salon__content {
+      gap: 16px;
+    }
+    .story-salon__btn {
+      align-self: stretch;
+      justify-content: center;
+    }
+  }
+</style>
+
+<section class="story-salon" id="story-salon-{{ section.id }}">
+
+  {%- if section.settings.banner_image != blank -%}
+    <div class="story-salon__banner">
+      {{ section.settings.banner_image | image_url: width: 2400 | image_tag:
+        loading: 'lazy',
+        sizes: '100vw'
+      }}
+    </div>
+  {%- endif -%}
+
+  <div class="story-salon__inner{% if section.settings.image_position == 'right' %} story-salon__inner--reverse{% endif %}">
+
+    <div class="story-salon__media">
+      <div class="story-salon__image-wrap">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag:
+            loading: 'lazy',
+            class: 'story-salon__image',
+            sizes: '(max-width: 749px) 100vw, 50vw'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'story-salon__image placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="story-salon__content">
+      {%- if section.settings.label != blank -%}
+        <p class="story-salon__label">{{ section.settings.label }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="story-salon__heading">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="story-salon__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="story-salon__btn">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Story Salon",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Banner (optional)" },
+    { "type": "image_picker", "id": "banner_image", "label": "Full-width banner image", "info": "Displays above the split layout. Wide landscape photo works best." },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "select", "id": "image_position", "label": "Image side", "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }], "default": "left" },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "label", "label": "Label (small text above heading)", "default": "Our Story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Story Salon" },
+    { "type": "richtext", "id": "text", "label": "Body text", "default": "<p>Tell your brand story here. Share what makes TRIIIPLE Studio unique, the creative vision behind every piece, and the journey that led here.</p>" },
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Story Salon" }]
+}
+{% endschema %}

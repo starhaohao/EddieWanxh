@@ -1,0 +1,363 @@
+<!doctype html>
+<html class="no-touch supports-no-cookies" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta name="color-scheme" content="light only">
+    <meta name="p:domain_verify" content="5c1fa15ab61b4fa82d6a93d7ce33f9ac"/>
+    <meta name="facebook-domain-verification" content="hfy3mzkap4l02r5trn9fl53u6awt7s" />
+    {%- render 'head' -%}
+
+    {{ content_for_header }}
+  {% render 'pagefly-app-header' %}
+
+<style>
+/* Mobile header */
+@media screen and (max-width: 749px) {
+  .header__wrapper .section-padding {
+    padding-left: var(--outer) !important;
+    padding-right: var(--outer) !important;
+  }
+  .header__mobile {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .header__mobile .header__logo {
+    order: 1;
+    flex: 0 0 auto;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .header__mobile .header__logo .header__logo__link {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .header__mobile .header__mobile__right {
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto !important;
+    padding: 0 !important;
+    margin-right: 0 !important;
+  }
+  .header__mobile .header__mobile__left {
+    order: 3;
+    display: flex;
+    align-items: center;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .header__mobile .header__mobile__button {
+    width: 36px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .header__mobile .header__mobile__hamburger {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .header__mobile .popout-header {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+  .theme__header {
+    border-bottom: 1px solid var(--COLOR-BORDER);
+  }
+}
+
+/* Mobile menu — slide down from top */
+@media screen and (max-width: 749px) {
+  .drawer.drawer--header {
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    transform: translateY(-100%) !important;
+  }
+  .drawer.drawer--header.is-open {
+    transform: translateY(0) !important;
+  }
+  .drawer.drawer--header.is-closing {
+    transform: translateY(-100%) !important;
+  }
+  .drawer.drawer--header .drawer__inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Social sticky bottom bar */
+.social-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--HEADER-HEIGHT-MOBILE, 64px);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: var(--outer, 16px);
+  z-index: 200;
+}
+.social-sticky-bar.is-docked {
+  position: absolute;
+  top: 0;
+  bottom: auto;
+}
+.social-sticky-bar .socials {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+.social-sticky-bar .socials a {
+  color: #ffffff !important;
+  display: flex;
+  align-items: center;
+}
+.social-sticky-bar .socials svg { color: #ffffff; }
+.social-sticky-bar .socials svg path {
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+.social-bar-prefooter-wrap { position: relative; }
+[data-site-container] { padding-bottom: var(--HEADER-HEIGHT-MOBILE, 64px); }
+
+/* Galdeano custom font */
+@font-face {
+  font-family: 'Galdeano';
+  src: url('{{ 'GaldeanoRegular.ttf' | asset_url }}') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif !important;
+}
+.navlink--toplevel .navtext,
+.navlink--child .navtext,
+.navlink--grandchild .navtext,
+.header__logo__text span,
+h1, h2, h3 {
+  font-family: 'Galdeano', sans-serif !important;
+}
+html {
+  scrollbar-gutter: stable;
+  overflow-x: hidden;
+}
+.image img,
+.banner img,
+.section-image img {
+  border-radius: 32px;
+  overflow: hidden;
+}
+@media screen and (max-width: 749px) {
+  .image img,
+  .banner img,
+  .section-image img { border-radius: 16px; }
+}
+.product-item__image {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.product-item__bg { background-color: var(--COLOR-BG); }
+.lookbook-grid__image {
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: var(--COLOR-BG);
+}
+@media screen and (max-width: 749px) {
+  .product-item__image,
+  .lookbook-grid__image { border-radius: 14px; }
+}
+@media screen and (max-width: 749px) {
+  body.template-index .slideshow .hero__content {
+    width: calc(100% - (var(--outer) * 2)) !important;
+  }
+  body.template-index .hero__button { width: 100% !important; }
+  body.template-index .hero__button .btn {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
+@media screen and (min-width: 750px) {
+  body.template-index .hero__button {
+    display: flex;
+    justify-content: flex-end;
+  }
+  body.template-index .hero__button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+}
+
+/* Klaviyo form SKhdji */
+.klaviyo-form-SKhdji > div,
+.klaviyo-form-SKhdji form {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.klaviyo-form-SKhdji h1,
+.klaviyo-form-SKhdji h2,
+.klaviyo-form-SKhdji h3 {
+  font-family: 'Galdeano', sans-serif !important;
+  color: var(--COLOR-TEXT) !important;
+  letter-spacing: 0.04em !important;
+}
+.klaviyo-form-SKhdji p,
+.klaviyo-form-SKhdji label {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif !important;
+  color: var(--COLOR-TEXT) !important;
+  font-size: 13px !important;
+}
+.klaviyo-form-SKhdji input[type="email"],
+.klaviyo-form-SKhdji input[type="text"] {
+  background-color: transparent !important;
+  color: var(--COLOR-TEXT) !important;
+  border: 1px solid var(--COLOR-BORDER) !important;
+  border-radius: 0 !important;
+  padding: 14px 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif !important;
+  font-size: 13px !important;
+}
+.klaviyo-form-SKhdji input::placeholder {
+  color: var(--COLOR-TEXT-A50) !important;
+  opacity: 1 !important;
+}
+.klaviyo-form-SKhdji button[type="submit"] {
+  background-color: var(--COLOR-TEXT) !important;
+  color: var(--COLOR-BG) !important;
+  width: 100% !important;
+  border: none !important;
+  font-family: 'Galdeano', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  padding: 14px 16px !important;
+  border-radius: 0 !important;
+  margin-top: 8px !important;
+  cursor: pointer !important;
+}
+.klaviyo-form-SKhdji button[type="submit"]:hover { opacity: 0.8 !important; }
+
+/* Klaviyo popup V3iqKn */
+.klaviyo-form-V3iqKn input::placeholder { color: rgba(255,255,255,0.4) !important; }
+.klaviyo-form-V3iqKn button[type="submit"] {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  width: 100% !important;
+  border: none !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  padding: 14px !important;
+  border-radius: 4px !important;
+  margin-top: 8px !important;
+}
+.klaviyo-form-V3iqKn button[type="submit"]:hover { background-color: #e8e8e8 !important; }
+.klaviyo-form-V3iqKn h1,
+.klaviyo-form-V3iqKn h2,
+.klaviyo-form-V3iqKn h3 { font-family: 'Galdeano', sans-serif !important; }
+.klaviyo-form-V3iqKn p,
+.klaviyo-form-V3iqKn label {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif !important;
+}
+</style>
+</head>
+
+  <body
+    id="{{ page_title | handle }}"
+    class="template-{{ template.name | handle }} grid-{{ settings.grid_style }}{% if customer %} customer-logged-in{% endif %}{% if settings.animations_enable %} aos-initialized{% endif %}{% if settings.product_grid_outline %} has-line-design{% endif %}"
+    data-animations="{{ settings.animations_enable }}"
+  >
+    {%- render 'loading' -%}
+
+    <a class="in-page-link visually-hidden skip-link" data-skip-content href="#MainContent">
+      {{- 'general.accessibility.skip_to_content' | t -}}
+    </a>
+
+    <div class="container" data-site-container>
+      <div class="header-sections">
+        {% sections 'group-header' %}
+      </div>
+
+      {% sections 'group-overlay' %}
+
+      <main role="main" id="MainContent" class="main-content">
+        {{ content_for_layout }}
+      </main>
+    </div>
+
+    <!-- Social sticky bar: fixed at bottom, docks into pre-footer on scroll -->
+    <div class="social-bar-prefooter-wrap" id="social-bar-prefooter-wrap">
+      <div id="social-sticky-bar" class="social-sticky-bar">
+        {%- render 'social-icons' -%}
+      </div>
+      {% sections 'group-pre-footer' %}
+    </div>
+
+    <footer class="footer-sections">
+      {% sections 'group-footer' %}
+    </footer>
+
+    {% render 'zoom-pswp' %}
+
+    {%- if template.name != 'product' and settings.show_scroll_top_button -%}
+      <button
+        type="button"
+        class="btn btn--scroll-top btn--black btn--solid"
+        aria-label="{{ 'general.accessibility.scroll_to_top' | t }}"
+        data-scroll-top-button
+      >
+        {%- render 'icon-nav-arrow-up' -%}
+      </button>
+    {%- endif -%}
+
+    <!-- Paste marketing code or third party scripts below this comment line ============== -->
+
+    <!-- Klaviyo onsite tracking -->
+    <script async type="text/javascript" src="//static.klaviyo.com/onsite/js/TiCZgn/klaviyo.js"></script>
+
+    <!-- Social sticky bar: dock into pre-footer when reached -->
+    <script>
+    (function() {
+      var bar = document.getElementById('social-sticky-bar');
+      var wrap = document.getElementById('social-bar-prefooter-wrap');
+      if (!bar || !wrap) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            bar.classList.add('is-docked');
+            wrap.style.paddingTop = bar.offsetHeight + 'px';
+          } else {
+            bar.classList.remove('is-docked');
+            wrap.style.paddingTop = '';
+          }
+        });
+      }, { threshold: 0 });
+      observer.observe(wrap);
+    })();
+    </script>
+
+    <!-- And above this comment line ================================================== -->
+  </body>
+</html>

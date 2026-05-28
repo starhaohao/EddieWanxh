@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "blog",
+      "settings": {
+        "rows": 2,
+        "color_scheme": ""
+      }
+    }
+  },
+  "order": ["main"]
+}

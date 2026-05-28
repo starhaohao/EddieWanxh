@@ -1,0 +1,312 @@
+{% comment %}
+  Story Salon Landing
+  Series 01: Gentlewoman-style centered editorial hero
+  Series 02: CDLP/Arket-style full-width image split
+  Archive: 4-col grid of all series
+{% endcomment %}
+
+<style>
+  .ssl { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; }
+
+  /* Series 01 — Gentlewoman centered editorial */
+  .ssl__hero {
+    padding: 72px var(--outer, 16px) 64px;
+    text-align: center;
+    border-bottom: 1px solid var(--COLOR-BORDER);
+  }
+  .ssl__hero-inner { max-width: 620px; margin: 0 auto; }
+  .ssl__eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--COLOR-TEXT-A50, #aaa);
+    margin: 0 0 20px;
+  }
+  .ssl__hero-title {
+    font-family: 'Galdeano', serif;
+    font-size: clamp(30px, 6vw, 56px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0 0 28px;
+    color: var(--COLOR-TEXT, #111);
+  }
+  .ssl__rule {
+    width: 36px;
+    height: 1px;
+    background: var(--COLOR-TEXT-A30, #ccc);
+    margin: 0 auto 28px;
+  }
+  .ssl__body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--COLOR-TEXT-A70, #555);
+    margin: 0 0 28px;
+  }
+  .ssl__body p { margin: 0 0 16px; }
+  .ssl__body p:last-child { margin-bottom: 0; }
+  .ssl__cta {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--COLOR-TEXT, #111);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .ssl__cta:hover { opacity: 0.55; }
+
+  /* Series 02 — CDLP/Arket full-width split */
+  .ssl__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--COLOR-BORDER);
+  }
+  .ssl__split--reverse .ssl__split-image { order: 2; }
+  .ssl__split--reverse .ssl__split-content { order: 1; }
+  .ssl__split-image {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--COLOR-BG-SECONDARY, #f0f0f0);
+    border-right: 1px solid var(--COLOR-BORDER);
+  }
+  .ssl__split--reverse .ssl__split-image {
+    border-right: none;
+    border-left: 1px solid var(--COLOR-BORDER);
+  }
+  .ssl__split-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .ssl__split-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 48px;
+    gap: 20px;
+  }
+  .ssl__split-title {
+    font-family: 'Galdeano', serif;
+    font-size: clamp(24px, 3.5vw, 44px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+    color: var(--COLOR-TEXT, #111);
+  }
+  .ssl__split-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--COLOR-TEXT-A70, #555);
+    margin: 0;
+  }
+  .ssl__split-body p { margin: 0 0 14px; }
+  .ssl__split-body p:last-child { margin-bottom: 0; }
+  .ssl__split-cta {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--COLOR-TEXT, #111);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    margin-top: 8px;
+  }
+  .ssl__split-cta:hover { opacity: 0.55; }
+
+  /* Archive — Gentlewoman "All Series" grid */
+  .ssl__archive { padding: 56px var(--outer, 16px) 80px; }
+  .ssl__archive-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+  .ssl__archive-row::before,
+  .ssl__archive-row::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--COLOR-BORDER);
+  }
+  .ssl__archive-heading {
+    font-family: 'Galdeano', serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    margin: 0;
+    color: var(--COLOR-TEXT, #111);
+  }
+  .ssl__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px 16px;
+  }
+  .ssl__card a { text-decoration: none; color: inherit; display: block; }
+  .ssl__card-image {
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    background: var(--COLOR-BG-SECONDARY, #f0f0f0);
+    margin-bottom: 10px;
+  }
+  .ssl__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .ssl__card:hover .ssl__card-image img { transform: scale(1.05); }
+  .ssl__card-name {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--COLOR-TEXT-A60, #888);
+    text-align: center;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ssl__hero { padding: 48px var(--outer, 16px) 40px; }
+    .ssl__split { grid-template-columns: 1fr; }
+    .ssl__split--reverse .ssl__split-image,
+    .ssl__split--reverse .ssl__split-content { order: unset; }
+    .ssl__split-image {
+      aspect-ratio: 4 / 3;
+      border-right: none !important;
+      border-left: none !important;
+      border-bottom: 1px solid var(--COLOR-BORDER);
+    }
+    .ssl__split-content { padding: 32px var(--outer, 16px); }
+    .ssl__grid { grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
+  }
+</style>
+
+<div class="ssl">
+
+  {%- if section.settings.s1_title != blank -%}
+  <div class="ssl__hero">
+    <div class="ssl__hero-inner">
+      {%- if section.settings.s1_number != blank -%}
+        <p class="ssl__eyebrow">{{ section.settings.s1_number }}</p>
+      {%- endif -%}
+      <h1 class="ssl__hero-title">{{ section.settings.s1_title }}</h1>
+      <div class="ssl__rule"></div>
+      {%- if section.settings.s1_text != blank -%}
+        <div class="ssl__body rte">{{ section.settings.s1_text }}</div>
+      {%- endif -%}
+      {%- if section.settings.s1_cta != blank -%}
+        <a href="{{ section.settings.s1_link | default: '#' }}" class="ssl__cta">
+          {{ section.settings.s1_cta }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- if section.settings.s2_title != blank -%}
+  <div class="ssl__split{% if section.settings.s2_image_side == 'right' %} ssl__split--reverse{% endif %}">
+    <div class="ssl__split-image">
+      {%- if section.settings.s2_image != blank -%}
+        {{ section.settings.s2_image | image_url: width: 1400 | image_tag:
+          loading: 'lazy',
+          sizes: '(max-width: 749px) 100vw, 50vw'
+        }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <div class="ssl__split-content">
+      {%- if section.settings.s2_number != blank -%}
+        <p class="ssl__eyebrow">{{ section.settings.s2_number }}</p>
+      {%- endif -%}
+      <h2 class="ssl__split-title">{{ section.settings.s2_title }}</h2>
+      {%- if section.settings.s2_text != blank -%}
+        <div class="ssl__split-body rte">{{ section.settings.s2_text }}</div>
+      {%- endif -%}
+      {%- if section.settings.s2_cta != blank -%}
+        <a href="{{ section.settings.s2_link | default: '#' }}" class="ssl__split-cta">
+          {{ section.settings.s2_cta }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+  <div class="ssl__archive">
+    <div class="ssl__archive-row">
+      <h2 class="ssl__archive-heading">{{ section.settings.archive_heading | default: 'All Series' }}</h2>
+    </div>
+    <div class="ssl__grid">
+      {%- for block in section.blocks -%}
+        <div class="ssl__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{%- endif -%}
+          <div class="ssl__card-image">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag:
+                loading: 'lazy',
+                sizes: '(max-width: 749px) 50vw, 25vw'
+              }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag }}
+            {%- endif -%}
+          </div>
+          {%- if block.settings.name != blank -%}
+            <p class="ssl__card-name">{{ block.settings.name }}</p>
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}</a>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Story Salon Landing",
+  "settings": [
+    { "type": "header", "content": "Series 01 — Raw & Uncut" },
+    { "type": "text", "id": "s1_number", "label": "Series label", "default": "n° 01" },
+    { "type": "text", "id": "s1_title", "label": "Title", "default": "Raw & Uncut" },
+    { "type": "richtext", "id": "s1_text", "label": "Editorial text", "default": "<p>Unfiltered, unpolished, and entirely honest. Raw & Uncut is TRIIIPLE's first content series — an exploration of craft, material, and the beauty found in imperfection.</p><p>We pull back the curtain on how each piece is made, who makes it, and why the details that others overlook are the ones we obsess over.</p>" },
+    { "type": "text", "id": "s1_cta", "label": "Link label", "default": "Explore Raw & Uncut" },
+    { "type": "url", "id": "s1_link", "label": "Link URL" },
+    { "type": "header", "content": "Series 02 — The Layer Series" },
+    { "type": "image_picker", "id": "s2_image", "label": "Image" },
+    { "type": "select", "id": "s2_image_side", "label": "Image side", "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }], "default": "left" },
+    { "type": "text", "id": "s2_number", "label": "Series label", "default": "n° 02" },
+    { "type": "text", "id": "s2_title", "label": "Title", "default": "The Layer Series" },
+    { "type": "richtext", "id": "s2_text", "label": "Editorial text", "default": "<p>Layering is not styling — it's thinking. The Layer Series goes deep into the art of wearing multiple pieces together, and what each combination says about the person doing the wearing.</p><p>From technical base layers to considered outerwear, a guide to building looks that last beyond the season.</p>" },
+    { "type": "text", "id": "s2_cta", "label": "Link label", "default": "Explore The Layer Series" },
+    { "type": "url", "id": "s2_link", "label": "Link URL" },
+    { "type": "header", "content": "Archive" },
+    { "type": "text", "id": "archive_heading", "label": "Archive heading", "default": "All Series" }
+  ],
+  "blocks": [
+    {
+      "type": "series_card",
+      "name": "Series card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Cover image" },
+        { "type": "text", "id": "name", "label": "Series name" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Story Salon Landing",
+      "blocks": [
+        { "type": "series_card", "settings": { "name": "Raw & Uncut" } },
+        { "type": "series_card", "settings": { "name": "The Layer Series" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
