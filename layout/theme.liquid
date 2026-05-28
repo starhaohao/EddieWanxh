@@ -136,6 +136,40 @@
 .social-bar-prefooter-wrap { position: relative; }
 [data-site-container] { padding-bottom: var(--HEADER-HEIGHT-MOBILE, 64px); }
 
+/* Social bar — currency + account on right */
+.social-sticky-bar__utils {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+  padding-right: var(--outer, 16px);
+}
+.social-sticky-bar__currency {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+.social-sticky-bar__account {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
+}
+.social-sticky-bar__account svg { width: 22px; height: 22px; }
+.social-sticky-bar__account svg path {
+  stroke: #ffffff !important;
+  fill: none !important;
+}
+
+/* Hide account + currency from mobile header — they live in the bar now */
+@media screen and (max-width: 749px) {
+  .header__mobile .header__icon--account { display: none !important; }
+  .header__mobile .popout-header { display: none !important; }
+  .header__mobile [data-popout-currency] { display: none !important; }
+  .header__mobile .header__localization { display: none !important; }
+}
+
 /* Galdeano custom font */
 @font-face {
   font-family: 'Galdeano';
@@ -311,6 +345,14 @@ html {
     <div class="social-bar-prefooter-wrap" id="social-bar-prefooter-wrap">
       <div id="social-sticky-bar" class="social-sticky-bar">
         {%- render 'social-icons' -%}
+        <div class="social-sticky-bar__utils">
+          <span class="social-sticky-bar__currency">
+            {{ localization.current_country.currency.iso_code }} {{ localization.current_country.currency.symbol }}
+          </span>
+          <a href="{{ routes.account_url }}" class="social-sticky-bar__account" aria-label="Account">
+            {%- render 'icon-profile-circled' -%}
+          </a>
+        </div>
       </div>
       {% sections 'group-pre-footer' %}
     </div>
