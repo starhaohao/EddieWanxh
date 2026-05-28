@@ -102,8 +102,9 @@
   left: 0;
   right: 0;
   height: var(--HEADER-HEIGHT-MOBILE, 64px);
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: var(--COLOR-BG, #ffffff);
+  color: var(--COLOR-TEXT, #111111);
+  border-top: 1px solid var(--COLOR-BORDER);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -124,13 +125,13 @@
   list-style: none !important;
 }
 .social-sticky-bar .socials a {
-  color: #ffffff !important;
+  color: var(--COLOR-TEXT, #111111) !important;
   display: flex;
   align-items: center;
 }
-.social-sticky-bar .socials svg { color: #ffffff; }
+.social-sticky-bar .socials svg { color: var(--COLOR-TEXT, #111111); }
 .social-sticky-bar .socials svg path {
-  stroke: #ffffff !important;
+  stroke: var(--COLOR-TEXT, #111111) !important;
   fill: none !important;
 }
 .social-bar-prefooter-wrap { position: relative; }
@@ -147,13 +148,13 @@
 .social-sticky-bar__currency {
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: #ffffff;
+  color: var(--COLOR-TEXT, #111111);
   white-space: nowrap;
 }
 .social-sticky-bar__account {
   display: flex;
   align-items: center;
-  color: #ffffff;
+  color: var(--COLOR-TEXT, #111111);
   text-decoration: none;
   font-size: 11px;
   letter-spacing: 0.1em;
