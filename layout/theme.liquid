@@ -108,7 +108,7 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: var(--outer, 16px);
-  z-index: 200;
+  z-index: 99;
 }
 .social-sticky-bar.is-docked {
   position: absolute;
@@ -155,11 +155,9 @@
   align-items: center;
   color: #ffffff;
   text-decoration: none;
-}
-.social-sticky-bar__account svg { width: 22px; height: 22px; }
-.social-sticky-bar__account svg path {
-  stroke: #ffffff !important;
-  fill: none !important;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* Hide account + currency from mobile header — they live in the bar now */
@@ -168,6 +166,13 @@
   .header__mobile .popout-header { display: none !important; }
   .header__mobile [data-popout-currency] { display: none !important; }
   .header__mobile .header__localization { display: none !important; }
+}
+
+/* Scroll-to-top button — lift it above the social sticky bar on mobile */
+@media screen and (max-width: 749px) {
+  .btn--scroll-top {
+    bottom: calc(var(--HEADER-HEIGHT-MOBILE, 64px) + 16px) !important;
+  }
 }
 
 /* Galdeano custom font */
@@ -350,7 +355,7 @@ html {
             {{ localization.current_country.currency.iso_code }} {{ localization.current_country.currency.symbol }}
           </span>
           <a href="{{ routes.account_url }}" class="social-sticky-bar__account" aria-label="Account">
-            {%- render 'icon-profile-circled' -%}
+            Account
           </a>
         </div>
       </div>
