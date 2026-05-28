@@ -175,6 +175,22 @@
   }
 }
 
+/* Promo tag — anchor to top edge of social sticky bar on mobile */
+@media screen and (max-width: 749px) {
+  .promo-tag,
+  [data-promo-tag],
+  .tag-floating,
+  .promo-tags__tag,
+  .floating-tag {
+    bottom: var(--HEADER-HEIGHT-MOBILE, 64px) !important;
+  }
+}
+
+/* Social sticky bar icons — tighten gap */
+.social-sticky-bar .socials {
+  gap: 12px !important;
+}
+
 /* Galdeano custom font */
 @font-face {
   font-family: 'Galdeano';
