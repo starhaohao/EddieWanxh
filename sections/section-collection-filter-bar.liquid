@@ -437,10 +437,10 @@
             {%- endfor -%}
             <tr{% if sale_row %} class="is-sale"{% endif %}>
               <td class="cfb-sz">{{ row_sz }}</td>
-              {%- for c in cols offset: 1 -%}
-                {%- assign ci = forloop.index0 | modulo: 2 -%}
-                <td class="{% if ci == 0 %}col-cm{% else %}col-in{% endif %}">{{ c | strip }}</td>
-              {%- endfor -%}
+              <td class="col-cm">{{ cols[1] | strip }}</td>
+              <td class="col-in">{{ cols[2] | strip }}</td>
+              <td class="col-cm">{{ cols[3] | strip }}</td>
+              <td class="col-in">{{ cols[4] | strip }}</td>
             </tr>
           {%- endif -%}
         {%- endfor -%}
