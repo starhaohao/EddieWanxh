@@ -18,6 +18,8 @@
             srcset="{{ section.settings[image_key] | image_url: width: 400 }} 400w,
                     {{ section.settings[image_key] | image_url: width: 800 }} 800w"
             sizes="(max-width: 749px) 75vw, 25vw"
+            width="{{ section.settings[image_key].width }}"
+            height="{{ section.settings[image_key].height }}"
             alt="{{ section.settings[label_key] | escape }}"
             loading="lazy"
           >
