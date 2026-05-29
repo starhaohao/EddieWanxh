@@ -1,7 +1,6 @@
 {% comment %}
   Dual Banner — two side-by-side full-width panels
-  Desktop: 50/50 split, full viewport width
-  Mobile: stacked, 4:5 (1080×1350) aspect ratio per panel
+  Height system mirrors Broadcast's Image Banner (desktop + mobile selects)
 {% endcomment %}
 
 <style>
@@ -15,9 +14,17 @@
     position: relative;
     display: block;
     overflow: hidden;
-    aspect-ratio: 3 / 4;
     text-decoration: none;
   }
+
+  /* ── Desktop heights ── */
+  #db-{{ section.id }} .db__panel.image-height              { aspect-ratio: 3 / 4; }
+  #db-{{ section.id }} .db__panel.screen-height-full        { height: 100vh; }
+  #db-{{ section.id }} .db__panel.screen-height-three-quarters { height: 75vh; }
+  #db-{{ section.id }} .db__panel.screen-height-two-thirds  { height: 66.666vh; }
+  #db-{{ section.id }} .db__panel.sixty-fifty-height-hero   { height: min(60vw, 800px); }
+  #db-{{ section.id }} .db__panel.screen-height-one-half    { height: 50vh; }
+  #db-{{ section.id }} .db__panel.screen-height-one-third   { height: 33.333vh; }
 
   #db-{{ section.id }} .db__image {
     position: absolute;
@@ -58,39 +65,43 @@
     padding: 0 5% 7%;
   }
 
-  /* Heading — uses theme heading font stack automatically */
   #db-{{ section.id }} .db__heading {
     font-family: 'Galdeano', sans-serif;
-    font-weight: 800;
-    line-height: 0.92;
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    margin: 0 0 14px;
+    margin: 0 0 12px;
     word-break: break-word;
   }
 
-  /* Size scale — mirrors the theme's Small/Medium/Large/XL/Huge */
-  #db-{{ section.id }}.db-size--small   .db__heading { font-size: clamp(20px, 2.5vw, 32px); }
-  #db-{{ section.id }}.db-size--medium  .db__heading { font-size: clamp(28px, 3.8vw, 52px); }
-  #db-{{ section.id }}.db-size--large   .db__heading { font-size: clamp(36px, 5.5vw, 72px); }
-  #db-{{ section.id }}.db-size--xlarge  .db__heading { font-size: clamp(48px, 7.5vw, 96px); }
-  #db-{{ section.id }}.db-size--huge    .db__heading { font-size: clamp(60px, 10vw, 130px); }
+  /* Size scale — matches Broadcast's Small → Huge */
+  #db-{{ section.id }}.db-size--small   .db__heading { font-size: clamp(18px, 2.2vw, 28px); }
+  #db-{{ section.id }}.db-size--medium  .db__heading { font-size: clamp(24px, 3.2vw, 42px); }
+  #db-{{ section.id }}.db-size--large   .db__heading { font-size: clamp(32px, 4.8vw, 62px); }
+  #db-{{ section.id }}.db-size--xlarge  .db__heading { font-size: clamp(42px, 6.5vw, 82px); }
+  #db-{{ section.id }}.db-size--huge    .db__heading { font-size: clamp(54px, 9vw, 118px); }
 
+  /* CTA — matches Broadcast's outline button style */
   #db-{{ section.id }} .db__cta {
     display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid currentColor;
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
   }
 
   /* Text colour variants */
   #db-{{ section.id }}.db--white .db__heading,
   #db-{{ section.id }}.db--white .db__cta { color: #ffffff; }
+  #db-{{ section.id }}.db--white .db__cta:hover { background: #ffffff; color: #000000; }
 
   #db-{{ section.id }}.db--black .db__heading,
   #db-{{ section.id }}.db--black .db__cta { color: #000000; }
+  #db-{{ section.id }}.db--black .db__cta:hover { background: #000000; color: #ffffff; }
 
   #db-{{ section.id }}.db--theme .db__heading,
   #db-{{ section.id }}.db--theme .db__cta { color: var(--COLOR-TEXT, #111); }
@@ -99,24 +110,33 @@
     border-right: 1px solid rgba(255,255,255,0.15);
   }
 
-  /* Mobile — stack, 4:5 ratio */
+  /* ── Mobile ── */
   @media screen and (max-width: 749px) {
     #db-{{ section.id }} {
       grid-template-columns: 1fr;
     }
     #db-{{ section.id }} .db__panel {
-      aspect-ratio: 4 / 5;
       border-right: none !important;
     }
     #db-{{ section.id }} .db__content {
       padding: 0 6% 8%;
     }
-    /* Scale up one step on mobile for visual impact */
-    #db-{{ section.id }}.db-size--small   .db__heading { font-size: clamp(24px, 7vw, 40px); }
-    #db-{{ section.id }}.db-size--medium  .db__heading { font-size: clamp(32px, 9vw, 54px); }
-    #db-{{ section.id }}.db-size--large   .db__heading { font-size: clamp(40px, 11vw, 68px); }
-    #db-{{ section.id }}.db-size--xlarge  .db__heading { font-size: clamp(52px, 13vw, 84px); }
-    #db-{{ section.id }}.db-size--huge    .db__heading { font-size: clamp(64px, 16vw, 110px); }
+
+    /* Mobile height overrides */
+    #db-{{ section.id }} .db__panel.image-height--mobile                { aspect-ratio: 4 / 5; height: auto; }
+    #db-{{ section.id }} .db__panel.screen-height-full--mobile          { height: 100vh; }
+    #db-{{ section.id }} .db__panel.screen-height-three-quarters--mobile { height: 75vh; }
+    #db-{{ section.id }} .db__panel.screen-height-two-thirds--mobile    { height: 66.666vh; }
+    #db-{{ section.id }} .db__panel.sixty-fifty-height-hero--mobile     { height: 75vw; }
+    #db-{{ section.id }} .db__panel.screen-height-one-half--mobile      { height: 50vh; }
+    #db-{{ section.id }} .db__panel.screen-height-one-third--mobile     { height: 33.333vh; }
+
+    /* Scale up one step on mobile */
+    #db-{{ section.id }}.db-size--small   .db__heading { font-size: clamp(22px, 7vw, 36px); }
+    #db-{{ section.id }}.db-size--medium  .db__heading { font-size: clamp(28px, 9vw, 48px); }
+    #db-{{ section.id }}.db-size--large   .db__heading { font-size: clamp(36px, 11vw, 60px); }
+    #db-{{ section.id }}.db-size--xlarge  .db__heading { font-size: clamp(46px, 13vw, 76px); }
+    #db-{{ section.id }}.db-size--huge    .db__heading { font-size: clamp(58px, 16vw, 100px); }
   }
 </style>
 
@@ -141,7 +161,7 @@
     -%}
 
     <a
-      class="db__panel"
+      class="db__panel {{ section.settings.height }} {{ section.settings.mobile_height }}"
       href="{{ link | default: '#' }}"
       {% if link == blank %}aria-disabled="true"{% endif %}
     >
@@ -202,8 +222,8 @@
     {
       "type": "text",
       "id": "cta_1",
-      "label": "Link label",
-      "default": "Explore Men's Summer Sale"
+      "label": "Button label",
+      "default": "Explore"
     },
     {
       "type": "url",
@@ -228,13 +248,47 @@
     {
       "type": "text",
       "id": "cta_2",
-      "label": "Link label",
-      "default": "Explore Women's Summer Sale"
+      "label": "Button label",
+      "default": "Explore"
     },
     {
       "type": "url",
       "id": "link_2",
       "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Desktop height",
+      "options": [
+        { "value": "image-height",                   "label": "Image height" },
+        { "value": "screen-height-full",             "label": "Full screen" },
+        { "value": "screen-height-three-quarters",   "label": "3/4 of screen" },
+        { "value": "screen-height-two-thirds",       "label": "2/3 of screen" },
+        { "value": "sixty-fifty-height-hero",        "label": "60 / 50" },
+        { "value": "screen-height-one-half",         "label": "1/2 of screen" },
+        { "value": "screen-height-one-third",        "label": "1/3 of screen" }
+      ],
+      "default": "sixty-fifty-height-hero"
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "Mobile height",
+      "options": [
+        { "value": "image-height--mobile",                    "label": "Image height" },
+        { "value": "screen-height-full--mobile",              "label": "Full screen" },
+        { "value": "screen-height-three-quarters--mobile",    "label": "3/4 of screen" },
+        { "value": "screen-height-two-thirds--mobile",        "label": "2/3 of screen" },
+        { "value": "sixty-fifty-height-hero--mobile",         "label": "60 / 50" },
+        { "value": "screen-height-one-half--mobile",          "label": "1/2 of screen" },
+        { "value": "screen-height-one-third--mobile",         "label": "1/3 of screen" }
+      ],
+      "default": "screen-height-three-quarters--mobile"
     },
     {
       "type": "header",
@@ -267,7 +321,7 @@
     {
       "type": "checkbox",
       "id": "show_overlay",
-      "label": "Show gradient overlay (improves text legibility)",
+      "label": "Show gradient overlay",
       "default": true
     }
   ],
@@ -276,10 +330,12 @@
       "name": "Dual Banner",
       "settings": {
         "heading_1": "Men's Summer Sale",
-        "cta_1": "Explore Men's Summer Sale",
+        "cta_1": "Explore",
         "heading_2": "Women's Summer Sale",
-        "cta_2": "Explore Women's Summer Sale",
-        "heading_size": "xlarge"
+        "cta_2": "Explore",
+        "heading_size": "xlarge",
+        "height": "sixty-fifty-height-hero",
+        "mobile_height": "screen-height-three-quarters--mobile"
       }
     }
   ]
