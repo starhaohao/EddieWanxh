@@ -358,6 +358,9 @@ html {
       {% sections 'group-overlay' %}
 
       <main role="main" id="MainContent" class="main-content">
+        {%- if template.name == 'collection' -%}
+          {%- section 'section-collection-filter-bar' -%}
+        {%- endif -%}
         {{ content_for_layout }}
       </main>
     </div>
