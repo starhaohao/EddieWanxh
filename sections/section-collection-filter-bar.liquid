@@ -325,7 +325,8 @@
           {%- assign sz = s | strip -%}
           {%- assign on_sale = false -%}
           {%- for sl in sale_list -%}
-            {%- if sl | strip == sz -%}{%- assign on_sale = true -%}{%- endif -%}
+            {%- assign sl_stripped = sl | strip -%}
+            {%- if sl_stripped == sz -%}{%- assign on_sale = true -%}{%- endif -%}
           {%- endfor -%}
           <a
             href="{{ collection.url }}?filter.v.option.size={{ sz | url_encode }}"
@@ -433,7 +434,8 @@
             {%- assign row_sz = cols[0] | strip -%}
             {%- assign sale_row = false -%}
             {%- for ss in sale_arr -%}
-              {%- if ss | strip == row_sz -%}{%- assign sale_row = true -%}{%- endif -%}
+              {%- assign ss_stripped = ss | strip -%}
+              {%- if ss_stripped == row_sz -%}{%- assign sale_row = true -%}{%- endif -%}
             {%- endfor -%}
             <tr{% if sale_row %} class="is-sale"{% endif %}>
               <td class="cfb-sz">{{ row_sz }}</td>
