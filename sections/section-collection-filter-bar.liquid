@@ -14,9 +14,11 @@
 
   .cfb__inner {
     padding: 0 var(--outer, 20px);
+    display: flex;
+    align-items: stretch;
   }
 
-  /* ── Filter row ── */
+  /* ── Filter rows ── */
   .cfb__row {
     display: flex;
     align-items: center;
@@ -25,8 +27,46 @@
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    flex-shrink: 0;
   }
   .cfb__row::-webkit-scrollbar { display: none; }
+
+  /* Row 1 (Size) — auto width, add a right divider on desktop */
+  .cfb__row--size {
+    flex-shrink: 0;
+    padding-right: 14px;
+    border-right: 1px solid var(--COLOR-BORDER, #e8e8e8);
+    margin-right: 14px;
+  }
+
+  /* Row 2 (Style + Color) — fills remaining width */
+  .cfb__row--filters {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cfb__inner {
+      flex-direction: column;
+      padding: 0;
+    }
+    .cfb__row {
+      height: 44px;
+      padding: 0 var(--outer, 16px);
+    }
+    .cfb__row--size {
+      border-right: none;
+      border-bottom: 1px solid var(--COLOR-BORDER, #e8e8e8);
+      padding-right: var(--outer, 16px);
+      margin-right: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .cfb__row--filters {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
 
   .cfb__group-label {
     font-family: 'Galdeano', sans-serif;
@@ -180,7 +220,6 @@
 
   @media screen and (max-width: 749px) {
     .cfb__sets-msg { display: none; }
-    .cfb__row { height: 44px; }
   }
 
   /* ── SIZE GUIDE MODAL ── */
@@ -314,13 +353,12 @@
 
 <div class="cfb">
   <div class="cfb__inner">
-    <div class="cfb__row">
-
-      {%- comment -%} SIZE {%- endcomment -%}
+    {%- comment -%} ROW 1 — Size + Size Guide {%- endcomment -%}
+    <div class="cfb__row cfb__row--size">
       {%- if section.settings.show_size_filter -%}
         <span class="cfb__group-label">Size</span>
-        {%- assign size_list  = section.settings.size_options | split: ',' -%}
-        {%- assign sale_list  = section.settings.sale_sizes   | split: ',' -%}
+        {%- assign size_list = section.settings.size_options | split: ',' -%}
+        {%- assign sale_list = section.settings.sale_sizes   | split: ',' -%}
         {%- for s in size_list -%}
           {%- assign sz = s | strip -%}
           {%- assign on_sale = false -%}
@@ -334,10 +372,16 @@
             data-cfb="size:{{ sz }}"
           >{{ sz }}{%- if on_sale -%}<span class="cfb__sale-dot" title="On markdown"></span>{%- endif -%}</a>
         {%- endfor -%}
-        <span class="cfb__sep"></span>
       {%- endif -%}
+      {%- if section.settings.show_size_guide -%}
+        <button class="cfb__sg-btn" id="cfb-open-{{ section.id }}" type="button" aria-haspopup="dialog">
+          Size Guide
+        </button>
+      {%- endif -%}
+    </div>
 
-      {%- comment -%} STYLE {%- endcomment -%}
+    {%- comment -%} ROW 2 — Style + Color {%- endcomment -%}
+    <div class="cfb__row cfb__row--filters">
       {%- if section.settings.show_style_filter -%}
         <span class="cfb__group-label">Style</span>
         {%- assign style_list = section.settings.style_options | split: ',' -%}
@@ -351,8 +395,6 @@
         {%- endfor -%}
         <span class="cfb__sep"></span>
       {%- endif -%}
-
-      {%- comment -%} COLOR {%- endcomment -%}
       {%- if section.settings.show_color_filter -%}
         <span class="cfb__group-label">Color</span>
         {%- assign swatch_rows = section.settings.color_swatches | newline_to_br | split: '<br />' -%}
@@ -375,15 +417,8 @@
           {%- endif -%}
         {%- endfor -%}
       {%- endif -%}
-
-      {%- comment -%} SIZE GUIDE {%- endcomment -%}
-      {%- if section.settings.show_size_guide -%}
-        <button class="cfb__sg-btn" id="cfb-open-{{ section.id }}" type="button" aria-haspopup="dialog">
-          Size Guide
-        </button>
-      {%- endif -%}
-
     </div>
+
   </div>
 
   {%- comment -%} SETS PROMO STRIP {%- endcomment -%}
