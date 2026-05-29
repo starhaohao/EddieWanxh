@@ -1,9 +1,36 @@
 {% comment %}
   Collection Filter Bar — auto-injected on all collection pages via layout/theme.liquid
-  Styling inherits Broadcast theme variables (--COLOR-TEXT, --COLOR-BG, --COLOR-BORDER, --outer)
+  Layout:
+    [Collection title — scrolls with page]
+    [Sticky bar]
+      Row 1: Size pills
+      Row 2: Style | Color
+      Row 3: Size Guide
+      Sets promo strip
 {% endcomment %}
 
 <style>
+  /* ── Collection title (non-sticky) ── */
+  .cfb-title {
+    padding: 28px var(--outer, 20px) 16px;
+    font-family: 'Galdeano', sans-serif;
+    font-size: clamp(26px, 6vw, 40px);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--COLOR-TEXT, #111);
+    margin: 0;
+    line-height: 1;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cfb-title {
+      padding: 20px var(--outer, 16px) 12px;
+      font-size: clamp(22px, 7vw, 32px);
+    }
+  }
+
+  /* ── Sticky filter bar ── */
   .cfb {
     position: sticky;
     top: 0;
@@ -12,6 +39,7 @@
     border-bottom: 1px solid var(--COLOR-BORDER, #e8e8e8);
   }
 
+  /* Desktop: rows side-by-side via flex */
   .cfb__inner {
     padding: 0 var(--outer, 20px);
     display: flex;
@@ -23,7 +51,7 @@
     display: flex;
     align-items: center;
     gap: 0;
-    height: 48px;
+    height: 46px;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -31,7 +59,7 @@
   }
   .cfb__row::-webkit-scrollbar { display: none; }
 
-  /* Row 1 (Size) — auto width, add a right divider on desktop */
+  /* Row 1 — Size pills */
   .cfb__row--size {
     flex-shrink: 0;
     padding-right: 14px;
@@ -39,12 +67,21 @@
     margin-right: 14px;
   }
 
-  /* Row 2 (Style + Color) — fills remaining width */
+  /* Row 2 — Style + Color (fills remaining width on desktop) */
   .cfb__row--filters {
     flex: 1;
     min-width: 0;
   }
 
+  /* Row 3 — Size Guide (desktop: hidden, always visible on mobile) */
+  .cfb__row--guide {
+    flex-shrink: 0;
+    padding-left: 14px;
+    border-left: 1px solid var(--COLOR-BORDER, #e8e8e8);
+    margin-left: 14px;
+  }
+
+  /* ── Mobile overrides ── */
   @media screen and (max-width: 749px) {
     .cfb__inner {
       flex-direction: column;
@@ -53,21 +90,34 @@
     .cfb__row {
       height: 44px;
       padding: 0 var(--outer, 16px);
+      width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
     .cfb__row--size {
       border-right: none;
       border-bottom: 1px solid var(--COLOR-BORDER, #e8e8e8);
       padding-right: var(--outer, 16px);
       margin-right: 0;
-      width: 100%;
-      box-sizing: border-box;
     }
     .cfb__row--filters {
-      width: 100%;
-      box-sizing: border-box;
+      border-bottom: 1px solid var(--COLOR-BORDER, #e8e8e8);
+    }
+    .cfb__row--guide {
+      border-left: none;
+      border-bottom: 1px solid var(--COLOR-BORDER, #e8e8e8);
+      padding-left: var(--outer, 16px);
+      margin-left: 0;
+      height: 38px;
+    }
+    /* Size guide button — left-aligned and smaller on its own row */
+    .cfb__row--guide .cfb__sg-btn {
+      margin-left: 0;
+      font-size: 11px;
     }
   }
 
+  /* ── Group label ── */
   .cfb__group-label {
     font-family: 'Galdeano', sans-serif;
     font-size: 10px;
@@ -102,18 +152,14 @@
     transition: background 0.15s, color 0.15s, border-color 0.15s;
     -webkit-tap-highlight-color: transparent;
   }
-  .cfb__pill:hover {
-    background: var(--COLOR-TEXT, #111);
-    color: var(--COLOR-BG, #fff);
-    border-color: var(--COLOR-TEXT, #111);
-  }
+  .cfb__pill:hover,
   .cfb__pill.is-active {
     background: var(--COLOR-TEXT, #111);
     color: var(--COLOR-BG, #fff);
     border-color: var(--COLOR-TEXT, #111);
   }
 
-  /* Red dot = on markdown */
+  /* Sale red dot */
   .cfb__sale-dot {
     position: absolute;
     top: -3px;
@@ -142,9 +188,7 @@
     -webkit-tap-highlight-color: transparent;
   }
   .cfb__swatch:hover,
-  .cfb__swatch.is-active {
-    outline-color: var(--COLOR-TEXT, #111);
-  }
+  .cfb__swatch.is-active { outline-color: var(--COLOR-TEXT, #111); }
 
   /* ── Separator ── */
   .cfb__sep {
@@ -183,7 +227,6 @@
     padding: 10px var(--outer, 20px);
     background: var(--COLOR-TEXT, #111);
     color: var(--COLOR-BG, #fff);
-    border-top: 1px solid var(--COLOR-BORDER, #e8e8e8);
   }
   .cfb__sets-label {
     font-family: 'Galdeano', sans-serif;
@@ -220,6 +263,7 @@
 
   @media screen and (max-width: 749px) {
     .cfb__sets-msg { display: none; }
+    .cfb__sets { padding: 10px var(--outer, 16px); }
   }
 
   /* ── SIZE GUIDE MODAL ── */
@@ -233,7 +277,6 @@
     justify-content: center;
   }
   .cfb-overlay.is-open { display: flex; }
-
   @media screen and (min-width: 750px) {
     .cfb-overlay { align-items: center; }
   }
@@ -246,7 +289,6 @@
     overflow-y: auto;
     padding: 28px 24px 40px;
   }
-
   .cfb-modal__top {
     display: flex;
     align-items: center;
@@ -275,11 +317,7 @@
   }
   .cfb-modal__close:hover { opacity: 1; }
 
-  /* Units toggle */
-  .cfb-units {
-    display: flex;
-    margin-bottom: 18px;
-  }
+  .cfb-units { display: flex; margin-bottom: 18px; }
   .cfb-unit-btn {
     font-family: 'Galdeano', sans-serif;
     font-size: 10px;
@@ -298,7 +336,6 @@
     color: var(--COLOR-BG, #fff);
   }
 
-  /* Size table */
   .cfb-table {
     width: 100%;
     border-collapse: collapse;
@@ -331,13 +368,8 @@
   }
   .cfb-table tr.is-sale td { background: #fff6f6; }
   .cfb-table tr.is-sale .cfb-sz { color: #c0392b; }
-  .cfb-table tr.is-sale .cfb-sz::after {
-    content: ' ↓';
-    font-size: 10px;
-    opacity: 0.6;
-  }
+  .cfb-table tr.is-sale .cfb-sz::after { content: ' ↓'; font-size: 10px; opacity: 0.6; }
 
-  /* Unit column visibility */
   .cfb-table .col-cm  { display: table-cell; }
   .cfb-table .col-in  { display: none; }
   .cfb-table.show-in .col-cm { display: none; }
@@ -351,9 +383,15 @@
   }
 </style>
 
+{%- comment -%} Collection title — scrolls with page, not sticky {%- endcomment -%}
+{%- if collection.title != blank -%}
+  <p class="cfb-title">{{ collection.title }}</p>
+{%- endif -%}
+
 <div class="cfb">
   <div class="cfb__inner">
-    {%- comment -%} ROW 1 — Size + Size Guide {%- endcomment -%}
+
+    {%- comment -%} ROW 1 — Size {%- endcomment -%}
     <div class="cfb__row cfb__row--size">
       {%- if section.settings.show_size_filter -%}
         <span class="cfb__group-label">Size</span>
@@ -372,11 +410,6 @@
             data-cfb="size:{{ sz }}"
           >{{ sz }}{%- if on_sale -%}<span class="cfb__sale-dot" title="On markdown"></span>{%- endif -%}</a>
         {%- endfor -%}
-      {%- endif -%}
-      {%- if section.settings.show_size_guide -%}
-        <button class="cfb__sg-btn" id="cfb-open-{{ section.id }}" type="button" aria-haspopup="dialog">
-          Size Guide
-        </button>
       {%- endif -%}
     </div>
 
@@ -418,6 +451,15 @@
         {%- endfor -%}
       {%- endif -%}
     </div>
+
+    {%- comment -%} ROW 3 — Size Guide {%- endcomment -%}
+    {%- if section.settings.show_size_guide -%}
+      <div class="cfb__row cfb__row--guide">
+        <button class="cfb__sg-btn" id="cfb-open-{{ section.id }}" type="button" aria-haspopup="dialog">
+          Size Guide
+        </button>
+      </div>
+    {%- endif -%}
 
   </div>
 
@@ -521,7 +563,6 @@
     });
   }
 
-  /* Mark active filter from URL */
   var params = new URLSearchParams(window.location.search);
   document.querySelectorAll('[data-cfb]').forEach(function(el) {
     var kv = el.dataset.cfb.split(':'), type = kv[0], val = kv[1];
