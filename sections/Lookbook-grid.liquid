@@ -1,0 +1,229 @@
+{% comment %} Lookbook Grid {% endcomment %}
+
+{%- assign h_pad = section.settings.padding_horizontal -%}
+{%- assign label_align = section.settings.label_align -%}
+{%- assign pt = section.settings.padding_top -%}
+{%- assign pb = section.settings.padding_bottom -%}
+
+<div class="lookbook-grid" id="lg-{{ section.id }}" style="padding-top: {{ pt }}px; padding-bottom: {{ pb }}px;">
+  {% for i in (1..4) %}
+    {% assign image_key = 'image_' | append: i %}
+    {% assign label_key = 'label_' | append: i %}
+    {% assign link_key  = 'link_'  | append: i %}
+    <a class="lookbook-grid__item" href="{{ section.settings[link_key] | default: '#' }}">
+      <div class="lookbook-grid__image-wrap">
+        {% if section.settings[image_key] %}
+          <img
+            src="{{ section.settings[image_key] | image_url: width: 800 }}"
+            srcset="{{ section.settings[image_key] | image_url: width: 400 }} 400w,
+                    {{ section.settings[image_key] | image_url: width: 800 }} 800w"
+            sizes="(max-width: 749px) 75vw, 25vw"
+            alt="{{ section.settings[label_key] | escape }}"
+            loading="lazy"
+          >
+        {% else %}
+          {{ 'lifestyle-1' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+      <p class="lookbook-grid__label"
+         style="padding-left: {{ h_pad }}px; padding-right: {{ h_pad }}px; text-align: {{ label_align }};">
+        {{ section.settings[label_key] }}
+      </p>
+    </a>
+  {% endfor %}
+</div>
+
+<!-- Mobile slide dots -->
+<div class="lookbook-dots" id="lg-dots-{{ section.id }}" aria-hidden="true">
+  {% for i in (1..4) %}
+    <span class="lookbook-dot{% if forloop.first %} is-active{% endif %}"></span>
+  {% endfor %}
+</div>
+
+<style>
+  /* ── Desktop grid ── */
+  #lg-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    width: 100%;
+    margin: 0;
+  }
+
+  .lookbook-grid__item {
+    display: block;
+    text-decoration: none;
+    color: var(--COLOR-TEXT, #121212);
+  }
+
+  .lookbook-grid__image-wrap {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .lookbook-grid__image-wrap img,
+  .lookbook-grid__image-wrap svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .lookbook-grid__item:hover .lookbook-grid__image-wrap img {
+    transform: scale(1.04);
+  }
+
+  .lookbook-grid__label {
+    font-family: 'Galdeano', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    margin: 10px 0 0 0;
+    padding-bottom: 24px;
+    color: var(--COLOR-TEXT, #121212);
+  }
+
+  /* Dots — hidden on desktop */
+  .lookbook-dots { display: none; }
+
+  /* ── Mobile slider ── */
+  @media screen and (max-width: 749px) {
+    #lg-{{ section.id }} {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 12px;
+      padding-left: var(--outer, 16px) !important;
+      padding-right: var(--outer, 16px) !important;
+    }
+    #lg-{{ section.id }}::-webkit-scrollbar { display: none; }
+
+    #lg-{{ section.id }} .lookbook-grid__item {
+      flex: 0 0 72vw;
+      scroll-snap-align: start;
+    }
+
+    #lg-{{ section.id }} .lookbook-grid__image-wrap {
+      border-radius: 14px;
+    }
+
+    #lg-{{ section.id }} .lookbook-grid__label {
+      font-size: 11px;
+      padding-bottom: 16px;
+    }
+
+    /* Dots */
+    .lookbook-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      padding-bottom: 4px;
+    }
+    .lookbook-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--COLOR-BORDER, #ddd);
+      transition: background 0.25s, transform 0.25s;
+      flex-shrink: 0;
+    }
+    .lookbook-dot.is-active {
+      background: var(--COLOR-TEXT, #111);
+      transform: scale(1.35);
+    }
+  }
+</style>
+
+<script>
+(function() {
+  var track  = document.getElementById('lg-{{ section.id }}');
+  var dotsEl = document.getElementById('lg-dots-{{ section.id }}');
+  if (!track || !dotsEl) return;
+
+  var dots  = dotsEl.querySelectorAll('.lookbook-dot');
+  var items = track.querySelectorAll('.lookbook-grid__item');
+  if (!dots.length || !items.length) return;
+
+  function updateDots() {
+    var scrollLeft  = track.scrollLeft;
+    var itemWidth   = items[0].offsetWidth + 12; /* width + gap */
+    var active = Math.round(scrollLeft / itemWidth);
+    active = Math.max(0, Math.min(active, dots.length - 1));
+    dots.forEach(function(d, i) {
+      d.classList.toggle('is-active', i === active);
+    });
+  }
+
+  track.addEventListener('scroll', updateDots, { passive: true });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Lookbook Grid",
+  "settings": [
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "text",         "id": "label_1", "label": "Label 1", "default": "Shop Underwear" },
+    { "type": "url",          "id": "link_1",  "label": "Link 1" },
+
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "text",         "id": "label_2", "label": "Label 2", "default": "Shop T-Shirts" },
+    { "type": "url",          "id": "link_2",  "label": "Link 2" },
+
+    { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+    { "type": "text",         "id": "label_3", "label": "Label 3", "default": "Shop Socks" },
+    { "type": "url",          "id": "link_3",  "label": "Link 3" },
+
+    { "type": "image_picker", "id": "image_4", "label": "Image 4" },
+    { "type": "text",         "id": "label_4", "label": "Label 4", "default": "Shop Homewear" },
+    { "type": "url",          "id": "link_4",  "label": "Link 4" },
+
+    { "type": "header", "content": "Layout & Spacing" },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Label side padding",
+      "min": 0, "max": 32, "step": 2, "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "label_align",
+      "label": "Label alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    { "name": "Lookbook Grid" }
+  ]
+}
+{% endschema %}
