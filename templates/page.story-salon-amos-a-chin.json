@@ -1,18 +1,18 @@
 {
   "sections": {
-    "campaign_banner_aa01": {
+    "campaign_banner_A7TARg": {
       "type": "campaign-banner",
       "blocks": {
-        "panel_aa01a": {
+        "panel_bUQXCj": {
           "type": "panel",
           "settings": { "image": "shopify://shop_images/Amos_Ashley_Chin_-_Split_Panel_B_Detail___Environment.jpg" }
         },
-        "panel_aa01b": {
+        "panel_QJkqhc": {
           "type": "panel",
           "settings": { "image": "shopify://shop_images/LP_-_amos-001_-_Amos_Ashley_Chin_1_1.jpg" }
         }
       },
-      "block_order": ["panel_aa01a", "panel_aa01b"],
+      "block_order": ["panel_bUQXCj", "panel_QJkqhc"],
       "name": "Campaign Banner",
       "settings": {
         "eyebrow": "The first layer with",
@@ -33,10 +33,10 @@
         "padding_bottom": 0
       }
     },
-    "section_custom_content_aa02": {
+    "section_custom_content_NfX36f": {
       "type": "section-custom-content",
       "blocks": {
-        "text_aa02a": {
+        "text_YPCiLm": {
           "type": "text",
           "settings": {
             "subheading": "on honesty",
@@ -58,10 +58,10 @@
             "heading_tag": "automatic"
           }
         },
-        "image_aa02b": {
+        "image_Bd6W4C": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Amos_Ashley_Chin_-_Q_A_Image_3_4_3.jpg",
+            "image": "",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -81,7 +81,7 @@
           }
         }
       },
-      "block_order": ["text_aa02a", "image_aa02b"],
+      "block_order": ["text_YPCiLm", "image_Bd6W4C"],
       "name": "Custom section",
       "settings": {
         "borders": true,
@@ -95,10 +95,10 @@
         "padding_bottom": 0
       }
     },
-    "section_rich_text_columns_aa03": {
+    "section_rich_text_columns_YzFEJa": {
       "type": "section-rich-text-columns",
       "blocks": {
-        "heading_aa03a": {
+        "heading_ByJbrU": {
           "type": "heading",
           "settings": {
             "title": "\"The most interesting thing about any person is never the surface. I lead with what I actually feel.\"",
@@ -108,7 +108,7 @@
             "heading_tag": "automatic"
           }
         },
-        "text_aa03b": {
+        "text_TUEGNd": {
           "type": "text",
           "settings": {
             "text": "<p>- Amos A Chin</p>",
@@ -118,7 +118,7 @@
           }
         }
       },
-      "block_order": ["heading_aa03a", "text_aa03b"],
+      "block_order": ["heading_ByJbrU", "text_TUEGNd"],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -133,10 +133,10 @@
         "padding_bottom": 50
       }
     },
-    "section_multicolumn_aa04": {
+    "section_multicolumn_jydc97": {
       "type": "section-multicolumn",
       "blocks": {
-        "icon_aa04a": {
+        "icon_DX3GKC": {
           "type": "icon",
           "settings": {
             "column_width": 100,
@@ -152,7 +152,7 @@
             "heading_tag": "automatic"
           }
         },
-        "icon_aa04b": {
+        "icon_QteHwt": {
           "type": "icon",
           "settings": {
             "column_width": 100,
@@ -168,7 +168,7 @@
             "heading_tag": "automatic"
           }
         },
-        "icon_aa04c": {
+        "icon_NkMPDM": {
           "type": "icon",
           "settings": {
             "column_width": 100,
@@ -185,7 +185,7 @@
           }
         }
       },
-      "block_order": ["icon_aa04a", "icon_aa04b", "icon_aa04c"],
+      "block_order": ["icon_DX3GKC", "icon_QteHwt", "icon_NkMPDM"],
       "name": "Multi column",
       "settings": {
         "title": "In His Own Words",
@@ -202,13 +202,13 @@
         "heading_tag": "automatic"
       }
     },
-    "section_custom_content_aa05": {
+    "section_custom_content_AVnnp4": {
       "type": "section-custom-content",
       "blocks": {
-        "image_aa05a": {
+        "image_MdxPN9": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/LP_-_amos-001_-_Amos_Ashley_Chin_1_1.jpg",
+            "image": "",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -227,7 +227,7 @@
             "heading_tag": "automatic"
           }
         },
-        "text_aa05b": {
+        "text_UUncEa": {
           "type": "text",
           "settings": {
             "subheading": "how he starts",
@@ -250,7 +250,7 @@
           }
         }
       },
-      "block_order": ["image_aa05a", "text_aa05b"],
+      "block_order": ["image_MdxPN9", "text_UUncEa"],
       "name": "Custom section",
       "settings": {
         "borders": false,
@@ -264,10 +264,10 @@
         "padding_bottom": 0
       }
     },
-    "section_rich_text_columns_aa06": {
+    "section_rich_text_columns_HwPbhH": {
       "type": "section-rich-text-columns",
       "blocks": {
-        "heading_aa06a": {
+        "heading_q6kVcG": {
           "type": "heading",
           "settings": {
             "title": "\"The one who never poses. Always themselves.\"",
@@ -277,7 +277,7 @@
             "heading_tag": "automatic"
           }
         },
-        "text_aa06b": {
+        "text_8rxNVe": {
           "type": "text",
           "settings": {
             "text": "<p>If TRIIIPLE were a person, </p><p>what kind of energy would they have?</p>",
@@ -287,7 +287,7 @@
           }
         }
       },
-      "block_order": ["heading_aa06a", "text_aa06b"],
+      "block_order": ["heading_q6kVcG", "text_8rxNVe"],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -302,7 +302,7 @@
         "padding_bottom": 60
       }
     },
-    "story_salon_teaser_aa07": {
+    "story_salon_teaser_bT9RDn": {
       "type": "story-salon-teaser",
       "name": "Story Salon Blog",
       "settings": {
@@ -317,26 +317,26 @@
         "shop_all_url": "shopify://collections"
       }
     },
-    "apps_aa08": {
+    "178029763221aa94f5": {
       "type": "apps",
       "blocks": {
-        "klaviyo_aa08a": {
+        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X": {
           "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
           "settings": { "formId": "<div class=\"klaviyo-form-U5igv3\"></div>" }
         }
       },
-      "block_order": ["klaviyo_aa08a"],
+      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_ADEw9X"],
       "settings": { "include_margins": false }
     }
   },
   "order": [
-    "campaign_banner_aa01",
-    "section_custom_content_aa02",
-    "section_rich_text_columns_aa03",
-    "section_multicolumn_aa04",
-    "section_custom_content_aa05",
-    "section_rich_text_columns_aa06",
-    "story_salon_teaser_aa07",
-    "apps_aa08"
+    "campaign_banner_A7TARg",
+    "section_custom_content_NfX36f",
+    "section_rich_text_columns_YzFEJa",
+    "section_multicolumn_jydc97",
+    "section_custom_content_AVnnp4",
+    "section_rich_text_columns_HwPbhH",
+    "story_salon_teaser_bT9RDn",
+    "178029763221aa94f5"
   ]
 }

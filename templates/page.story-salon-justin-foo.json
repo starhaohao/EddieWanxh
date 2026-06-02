@@ -1,18 +1,18 @@
 {
   "sections": {
-    "campaign_banner_jf01": {
+    "campaign_banner_A7TARg": {
       "type": "campaign-banner",
       "blocks": {
-        "panel_jf01a": {
+        "panel_bUQXCj": {
           "type": "panel",
           "settings": { "image": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg" }
         },
-        "panel_jf01b": {
+        "panel_QJkqhc": {
           "type": "panel",
           "settings": { "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg" }
         }
       },
-      "block_order": ["panel_jf01a", "panel_jf01b"],
+      "block_order": ["panel_bUQXCj", "panel_QJkqhc"],
       "name": "Campaign Banner",
       "settings": {
         "eyebrow": "The first layer with",
@@ -33,10 +33,10 @@
         "padding_bottom": 0
       }
     },
-    "section_custom_content_jf02": {
+    "section_custom_content_NfX36f": {
       "type": "section-custom-content",
       "blocks": {
-        "text_jf02a": {
+        "text_YPCiLm": {
           "type": "text",
           "settings": {
             "subheading": "on earning it",
@@ -58,10 +58,10 @@
             "heading_tag": "automatic"
           }
         },
-        "image_jf02b": {
+        "image_Bd6W4C": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg",
+            "image": "",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -81,7 +81,7 @@
           }
         }
       },
-      "block_order": ["text_jf02a", "image_jf02b"],
+      "block_order": ["text_YPCiLm", "image_Bd6W4C"],
       "name": "Custom section",
       "settings": {
         "borders": true,
@@ -95,10 +95,10 @@
         "padding_bottom": 0
       }
     },
-    "section_rich_text_columns_jf03": {
+    "section_rich_text_columns_YzFEJa": {
       "type": "section-rich-text-columns",
       "blocks": {
-        "heading_jf03a": {
+        "heading_ByJbrU": {
           "type": "heading",
           "settings": {
             "title": "\"Validation from a guest lasts a night. The kind you build for yourself — that stays.\"",
@@ -108,7 +108,7 @@
             "heading_tag": "automatic"
           }
         },
-        "text_jf03b": {
+        "text_TUEGNd": {
           "type": "text",
           "settings": {
             "text": "<p>- Justin Foo</p>",
@@ -118,7 +118,7 @@
           }
         }
       },
-      "block_order": ["heading_jf03a", "text_jf03b"],
+      "block_order": ["heading_ByJbrU", "text_TUEGNd"],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -133,10 +133,10 @@
         "padding_bottom": 50
       }
     },
-    "section_multicolumn_jf04": {
+    "section_multicolumn_jydc97": {
       "type": "section-multicolumn",
       "blocks": {
-        "icon_jf04a": {
+        "icon_DX3GKC": {
           "type": "icon",
           "settings": {
             "column_width": 100,
@@ -152,7 +152,7 @@
             "heading_tag": "automatic"
           }
         },
-        "icon_jf04b": {
+        "icon_QteHwt": {
           "type": "icon",
           "settings": {
             "column_width": 100,
@@ -168,7 +168,7 @@
             "heading_tag": "automatic"
           }
         },
-        "icon_jf04c": {
+        "icon_NkMPDM": {
           "type": "icon",
           "settings": {
             "column_width": 100,
@@ -185,7 +185,7 @@
           }
         }
       },
-      "block_order": ["icon_jf04a", "icon_jf04b", "icon_jf04c"],
+      "block_order": ["icon_DX3GKC", "icon_QteHwt", "icon_NkMPDM"],
       "name": "Multi column",
       "settings": {
         "title": "In His Own Words",
@@ -202,13 +202,13 @@
         "heading_tag": "automatic"
       }
     },
-    "section_custom_content_jf05": {
+    "section_custom_content_AVnnp4": {
       "type": "section-custom-content",
       "blocks": {
-        "image_jf05a": {
+        "image_MdxPN9": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg",
+            "image": "",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -227,7 +227,7 @@
             "heading_tag": "automatic"
           }
         },
-        "text_jf05b": {
+        "text_UUncEa": {
           "type": "text",
           "settings": {
             "subheading": "how he starts",
@@ -250,7 +250,7 @@
           }
         }
       },
-      "block_order": ["image_jf05a", "text_jf05b"],
+      "block_order": ["image_MdxPN9", "text_UUncEa"],
       "name": "Custom section",
       "settings": {
         "borders": false,
@@ -264,10 +264,10 @@
         "padding_bottom": 0
       }
     },
-    "section_rich_text_columns_jf06": {
+    "section_rich_text_columns_HwPbhH": {
       "type": "section-rich-text-columns",
       "blocks": {
-        "heading_jf06a": {
+        "heading_q6kVcG": {
           "type": "heading",
           "settings": {
             "title": "\"The one who doesn't need to say much. Presence speaks.\"",
@@ -277,7 +277,7 @@
             "heading_tag": "automatic"
           }
         },
-        "text_jf06b": {
+        "text_8rxNVe": {
           "type": "text",
           "settings": {
             "text": "<p>If TRIIIPLE were a person, </p><p>what kind of energy would they have?</p>",
@@ -287,7 +287,7 @@
           }
         }
       },
-      "block_order": ["heading_jf06a", "text_jf06b"],
+      "block_order": ["heading_q6kVcG", "text_8rxNVe"],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -302,7 +302,7 @@
         "padding_bottom": 60
       }
     },
-    "story_salon_teaser_jf07": {
+    "story_salon_teaser_bT9RDn": {
       "type": "story-salon-teaser",
       "name": "Story Salon Blog",
       "settings": {
@@ -317,26 +317,26 @@
         "shop_all_url": "shopify://collections"
       }
     },
-    "apps_jf08": {
+    "178029763221aa94f5": {
       "type": "apps",
       "blocks": {
-        "klaviyo_jf08a": {
+        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X": {
           "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
           "settings": { "formId": "<div class=\"klaviyo-form-U5igv3\"></div>" }
         }
       },
-      "block_order": ["klaviyo_jf08a"],
+      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_ADEw9X"],
       "settings": { "include_margins": false }
     }
   },
   "order": [
-    "campaign_banner_jf01",
-    "section_custom_content_jf02",
-    "section_rich_text_columns_jf03",
-    "section_multicolumn_jf04",
-    "section_custom_content_jf05",
-    "section_rich_text_columns_jf06",
-    "story_salon_teaser_jf07",
-    "apps_jf08"
+    "campaign_banner_A7TARg",
+    "section_custom_content_NfX36f",
+    "section_rich_text_columns_YzFEJa",
+    "section_multicolumn_jydc97",
+    "section_custom_content_AVnnp4",
+    "section_rich_text_columns_HwPbhH",
+    "story_salon_teaser_bT9RDn",
+    "178029763221aa94f5"
   ]
 }

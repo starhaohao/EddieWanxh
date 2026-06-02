@@ -1,18 +1,18 @@
 {
   "sections": {
-    "campaign_banner_kc01": {
+    "campaign_banner_A7TARg": {
       "type": "campaign-banner",
       "blocks": {
-        "panel_kc01a": {
+        "panel_bUQXCj": {
           "type": "panel",
           "settings": { "image": "shopify://shop_images/LP_-_kris-001_-_Kris_Chaser_3_4.jpg" }
         },
-        "panel_kc01b": {
+        "panel_QJkqhc": {
           "type": "panel",
           "settings": { "image": "shopify://shop_images/IG_Story_20thJun-3.png" }
         }
       },
-      "block_order": ["panel_kc01a", "panel_kc01b"],
+      "block_order": ["panel_bUQXCj", "panel_QJkqhc"],
       "name": "Campaign Banner",
       "settings": {
         "eyebrow": "The first layer with",
@@ -33,10 +33,10 @@
         "padding_bottom": 0
       }
     },
-    "section_custom_content_kc02": {
+    "section_custom_content_NfX36f": {
       "type": "section-custom-content",
       "blocks": {
-        "text_kc02a": {
+        "text_YPCiLm": {
           "type": "text",
           "settings": {
             "subheading": "on intimacy",
@@ -58,10 +58,10 @@
             "heading_tag": "automatic"
           }
         },
-        "image_kc02b": {
+        "image_Bd6W4C": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/LP_-_kris-001_-_Kris_Chaser_3_4.jpg",
+            "image": "",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -81,7 +81,7 @@
           }
         }
       },
-      "block_order": ["text_kc02a", "image_kc02b"],
+      "block_order": ["text_YPCiLm", "image_Bd6W4C"],
       "name": "Custom section",
       "settings": {
         "borders": true,
@@ -95,10 +95,10 @@
         "padding_bottom": 0
       }
     },
-    "section_rich_text_columns_kc03": {
+    "section_rich_text_columns_YzFEJa": {
       "type": "section-rich-text-columns",
       "blocks": {
-        "heading_kc03a": {
+        "heading_ByJbrU": {
           "type": "heading",
           "settings": {
             "title": "\"I draw the bodies I wanted to see when I was younger — tender, real, unashamed.\"",
@@ -108,7 +108,7 @@
             "heading_tag": "automatic"
           }
         },
-        "text_kc03b": {
+        "text_TUEGNd": {
           "type": "text",
           "settings": {
             "text": "<p>- Kris Chaser</p>",
@@ -118,7 +118,7 @@
           }
         }
       },
-      "block_order": ["heading_kc03a", "text_kc03b"],
+      "block_order": ["heading_ByJbrU", "text_TUEGNd"],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -133,10 +133,10 @@
         "padding_bottom": 50
       }
     },
-    "section_multicolumn_kc04": {
+    "section_multicolumn_jydc97": {
       "type": "section-multicolumn",
       "blocks": {
-        "icon_kc04a": {
+        "icon_DX3GKC": {
           "type": "icon",
           "settings": {
             "column_width": 100,
@@ -152,7 +152,7 @@
             "heading_tag": "automatic"
           }
         },
-        "icon_kc04b": {
+        "icon_QteHwt": {
           "type": "icon",
           "settings": {
             "column_width": 100,
@@ -168,7 +168,7 @@
             "heading_tag": "automatic"
           }
         },
-        "icon_kc04c": {
+        "icon_NkMPDM": {
           "type": "icon",
           "settings": {
             "column_width": 100,
@@ -185,7 +185,7 @@
           }
         }
       },
-      "block_order": ["icon_kc04a", "icon_kc04b", "icon_kc04c"],
+      "block_order": ["icon_DX3GKC", "icon_QteHwt", "icon_NkMPDM"],
       "name": "Multi column",
       "settings": {
         "title": "In His Own Words",
@@ -202,13 +202,13 @@
         "heading_tag": "automatic"
       }
     },
-    "section_custom_content_kc05": {
+    "section_custom_content_AVnnp4": {
       "type": "section-custom-content",
       "blocks": {
-        "image_kc05a": {
+        "image_MdxPN9": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/IG_Story_20thJun-3.png",
+            "image": "",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -227,7 +227,7 @@
             "heading_tag": "automatic"
           }
         },
-        "text_kc05b": {
+        "text_UUncEa": {
           "type": "text",
           "settings": {
             "subheading": "how he wears it",
@@ -250,7 +250,7 @@
           }
         }
       },
-      "block_order": ["image_kc05a", "text_kc05b"],
+      "block_order": ["image_MdxPN9", "text_UUncEa"],
       "name": "Custom section",
       "settings": {
         "borders": false,
@@ -264,10 +264,10 @@
         "padding_bottom": 0
       }
     },
-    "section_rich_text_columns_kc06": {
+    "section_rich_text_columns_HwPbhH": {
       "type": "section-rich-text-columns",
       "blocks": {
-        "heading_kc06a": {
+        "heading_q6kVcG": {
           "type": "heading",
           "settings": {
             "title": "\"The friend who listens without judgment. Soft, but very present.\"",
@@ -277,7 +277,7 @@
             "heading_tag": "automatic"
           }
         },
-        "text_kc06b": {
+        "text_8rxNVe": {
           "type": "text",
           "settings": {
             "text": "<p>If TRIIIPLE were a person, </p><p>what kind of energy would they have?</p>",
@@ -287,7 +287,7 @@
           }
         }
       },
-      "block_order": ["heading_kc06a", "text_kc06b"],
+      "block_order": ["heading_q6kVcG", "text_8rxNVe"],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -302,7 +302,7 @@
         "padding_bottom": 60
       }
     },
-    "story_salon_teaser_kc07": {
+    "story_salon_teaser_bT9RDn": {
       "type": "story-salon-teaser",
       "name": "Story Salon Blog",
       "settings": {
@@ -317,26 +317,26 @@
         "shop_all_url": "shopify://collections"
       }
     },
-    "apps_kc08": {
+    "178029763221aa94f5": {
       "type": "apps",
       "blocks": {
-        "klaviyo_kc08a": {
+        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X": {
           "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
           "settings": { "formId": "<div class=\"klaviyo-form-U5igv3\"></div>" }
         }
       },
-      "block_order": ["klaviyo_kc08a"],
+      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_ADEw9X"],
       "settings": { "include_margins": false }
     }
   },
   "order": [
-    "campaign_banner_kc01",
-    "section_custom_content_kc02",
-    "section_rich_text_columns_kc03",
-    "section_multicolumn_kc04",
-    "section_custom_content_kc05",
-    "section_rich_text_columns_kc06",
-    "story_salon_teaser_kc07",
-    "apps_kc08"
+    "campaign_banner_A7TARg",
+    "section_custom_content_NfX36f",
+    "section_rich_text_columns_YzFEJa",
+    "section_multicolumn_jydc97",
+    "section_custom_content_AVnnp4",
+    "section_rich_text_columns_HwPbhH",
+    "story_salon_teaser_bT9RDn",
+    "178029763221aa94f5"
   ]
 }
