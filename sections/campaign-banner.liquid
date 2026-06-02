@@ -1,0 +1,458 @@
+{%- comment -%}
+  TRIIIPLE Dual-Image Campaign Banner  (v3)
+  Desktop: two images side-by-side with a centered title over the seam.
+  Mobile: sliding panel — second image peeks on the right and slides over,
+          a single title travels left↔right and its heading re-justifies as it
+          crosses the MIDDLE of the screen (eyebrow + footer stay fixed).
+  v3: adds up to 2 configurable buttons with colour + gap controls.
+{%- endcomment -%}
+
+{%- liquid
+  assign dh = section.settings.desktop_height
+  assign mh = section.settings.mobile_height
+  case dh
+    when 'Full screen height'
+      assign dh_css = '100vh'
+    when '3/4 of screen'
+      assign dh_css = '75vh'
+    when '2/3 of screen'
+      assign dh_css = '66.66vh'
+    when '1/2 of screen'
+      assign dh_css = '50vh'
+    when '1/3 of screen'
+      assign dh_css = '33.33vh'
+    when 'Image height'
+      assign dh_css = 'auto'
+    else
+      assign dh_css = dh
+  endcase
+  case mh
+    when 'Full screen height'
+      assign mh_css = '100vh'
+    when '3/4 of screen'
+      assign mh_css = '75vh'
+    when '2/3 of screen'
+      assign mh_css = '66.66vh'
+    when '1/2 of screen'
+      assign mh_css = '50vh'
+    when '1/3 of screen'
+      assign mh_css = '33.33vh'
+    when 'Image height'
+      assign mh_css = 'auto'
+    else
+      assign mh_css = mh
+  endcase
+-%}
+
+{%- style -%}
+  {{ section.settings.heading_font | font_face: font_display: 'swap' }}
+  {{ section.settings.body_font | font_face: font_display: 'swap' }}
+  {{ section.settings.title_font | font_face: font_display: 'swap' }}
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #Banner-{{ section.id }} {
+    --ink: #1a1a1a;
+    --lime: #cdff00;
+    --crimson: #923531;
+    --font-heading: {{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }};
+    --font-body: {{ section.settings.body_font.family }}, {{ section.settings.body_font.fallback_families }};
+    --font-ui: var(--font-body);
+    --title-font: {{ section.settings.title_font.family }}, {{ section.settings.title_font.fallback_families }};
+    --btn-color: {{ section.settings.btn_color }};
+    --btn-gap: {{ section.settings.btn_gap }}px;
+
+    width: 100%; margin: 0 auto; position: relative; overflow: hidden;
+    background-color: var(--ink); color: #fff;
+    container-type: inline-size; container-name: banner;
+  }
+  {% if section.settings.width == 'Page width' %}
+    #Banner-{{ section.id }} { max-width: var(--page-width, 1200px); }
+  {% endif %}
+
+  /* clip + track */
+  #Banner-{{ section.id }} .tb-clip { position: relative; height: {{ mh_css }}; min-height: 420px; overflow: hidden; }
+  #Banner-{{ section.id }} .tb-track {
+    position: absolute; inset: 0; display: flex; width: 200%;
+    touch-action: pan-y; user-select: none; will-change: transform;
+  }
+  #Banner-{{ section.id }} .tb-slide { position: relative; flex: 0 0 50%; height: 100%; overflow: hidden; }
+  #Banner-{{ section.id }} .tb-slide img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  #Banner-{{ section.id }} .tb-slide::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,0) 26%, rgba(0,0,0,0) 64%, rgba(0,0,0,.34));
+  }
+  #Banner-{{ section.id }} .tb-haze {
+    position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    background: radial-gradient(80% 40% at var(--haze-x,50%) 50%, rgba(0,0,0,.36), rgba(0,0,0,0) 74%);
+  }
+
+  /* traveling title */
+  #Banner-{{ section.id }} .tb-title {
+    position: absolute; top: 50%; left: 0; z-index: 6;
+    transform: translate(20px,-50%); text-align: left; max-width: 78%;
+    pointer-events: none; text-shadow: 0 2px 40px rgba(0,0,0,.4); color: #fff;
+  }
+  #Banner-{{ section.id }} .tb-eyebrow,
+  #Banner-{{ section.id }} .tb-footer {
+    font-family: var(--font-heading); letter-spacing: .03em;
+    font-size: clamp(13px, 3.6cqw, 18px); color: #fff;
+  }
+  #Banner-{{ section.id }} .tb-eyebrow .accent { color: var(--crimson); font-style: italic; }
+  #Banner-{{ section.id }} .tb-heading {
+    font-family: var(--title-font); line-height: .86; letter-spacing: -.01em; margin: .35em 0;
+    {% case section.settings.heading_size %}
+      {% when 'Mini' %} font-size: clamp(16px, 8cqw, 20px);
+      {% when 'Small' %} font-size: clamp(22px, 12cqw, 30px);
+      {% when 'Medium' %} font-size: clamp(24px, 14cqw, 40px);
+      {% when 'Large' %} font-size: clamp(32px, 17cqw, 50px);
+      {% when 'X-Large' %} font-size: clamp(40px, 19cqw, 64px);
+      {% else %} font-size: clamp(45px, 21cqw, 94px);
+    {% endcase %}
+  }
+
+  /* dots */
+  #Banner-{{ section.id }} .tb-dots {
+    position: absolute; left: 0; bottom: 28px; z-index: 8;
+    display: flex; gap: 7px; padding: 0 clamp(20px,3cqw,40px);
+  }
+  #Banner-{{ section.id }} .tb-dots button {
+    width: 26px; height: 3px; border-radius: 2px; border: 0; padding: 0; cursor: pointer;
+    background: rgba(255,255,255,.4); transition: background .25s ease;
+  }
+  #Banner-{{ section.id }} .tb-dots button[aria-current="true"] { background: var(--lime); }
+
+  /* ── Buttons ── */
+  #Banner-{{ section.id }} .tb-btns {
+    position: absolute;
+    bottom: clamp(24px, 3.5cqw, 44px);
+    right: clamp(20px, 3cqw, 40px);
+    z-index: 8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--btn-gap);
+  }
+  #Banner-{{ section.id }} .tb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    border-radius: 999px;
+    border: 1px solid var(--btn-color);
+    font-family: var(--font-heading);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--btn-color);
+    text-decoration: none;
+    background: transparent;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  #Banner-{{ section.id }} .tb-btn:hover {
+    background: var(--btn-color);
+    color: var(--ink);
+  }
+
+  /* ── Desktop split (≥640px): centered title over the seam ── */
+  @container banner (min-width: 640px) {
+    #Banner-{{ section.id }} .tb-clip { height: {{ dh_css }}; }
+    #Banner-{{ section.id }} .tb-track {
+      position: absolute; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 100%;
+      width: 100%; transform: none !important;
+    }
+    #Banner-{{ section.id }} .tb-slide { border-right: 1px solid rgba(255,255,255,.35); }
+    #Banner-{{ section.id }} .tb-slide:last-child { border-right: 0; }
+    #Banner-{{ section.id }} .tb-title {
+      left: 50%; top: 50%; transform: translate(-50%,-50%) !important; text-align: center !important; max-width: 90%;
+    }
+    #Banner-{{ section.id }} .tb-heading { white-space: nowrap; text-align: center !important; }
+    #Banner-{{ section.id }} .tb-dots { display: none; }
+    #Banner-{{ section.id }} .tb-haze { background: radial-gradient(60% 48% at 50% 52%, rgba(0,0,0,.34), rgba(0,0,0,0) 72%); }
+    #Banner-{{ section.id }} .tb-btns {
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <section id="Banner-{{ section.id }}"
+           data-scheme="{{ section.settings.color_scheme }}"
+           data-autoplay="{{ section.settings.auto_rotate }}"
+           data-speed="{{ section.settings.change_slides_speed | times: 1000 }}"
+           data-title-ends="{{ section.settings.title_ends }}">
+    <div class="tb-clip">
+      <div class="tb-track" data-track>
+        {%- for block in section.blocks limit: 2 -%}
+          <div class="tb-slide" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', sizes: '100vw', widths: '600,900,1200,1600,2000' }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="tb-haze" data-haze></div>
+
+      <div class="tb-title" data-title>
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="tb-eyebrow">{{ section.settings.eyebrow }}</div>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <div class="tb-heading" data-word>{{ section.settings.title }}</div>
+        {%- endif -%}
+        {%- if section.settings.footer_line != blank -%}
+          <div class="tb-footer">{{ section.settings.footer_line }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.btn_1_label != blank or section.settings.btn_2_label != blank -%}
+        <div class="tb-btns">
+          {%- if section.settings.btn_1_label != blank -%}
+            <a href="{{ section.settings.btn_1_url | default: '#' }}" class="tb-btn">
+              {{ section.settings.btn_1_label }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.btn_2_label != blank -%}
+            <a href="{{ section.settings.btn_2_url | default: '#' }}" class="tb-btn">
+              {{ section.settings.btn_2_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="tb-dots" data-dots>
+        <button aria-current="true" aria-label="Slide 1"></button>
+        <button aria-current="false" aria-label="Slide 2"></button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById('Banner-{{ section.id }}');
+  if(!root) return;
+  var banner = root;
+  var track = root.querySelector('[data-track]');
+  var title = root.querySelector('[data-title]');
+  var word  = root.querySelector('[data-word]');
+  var haze  = root.querySelector('[data-haze]');
+  var dots  = [].slice.call(root.querySelectorAll('[data-dots] button'));
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var mode='desktop', progress=0, dir=1, dragging=false, snapTarget=null, lastAlign='left';
+  var playing = banner.dataset.autoplay === 'true';
+  var holdMs = parseInt(banner.dataset.speed,10) || 12000;
+  var titleEnds = banner.dataset.titleEnds || 'right';
+  var peek = 13, holdUntil = 0;
+  var ease = function(t){ return t*t*(3-2*t); };
+  var clamp = function(v,a,b){ return Math.max(a,Math.min(b,v)); };
+
+  var ro = new ResizeObserver(function(es){
+    for(var i=0;i<es.length;i++){
+      var m = es[i].contentRect.width <= 640 ? 'mobile':'desktop';
+      if(m!==mode){ mode=m; banner.dataset.mode=m; if(m==='mobile'){ holdUntil=performance.now()+600; } }
+    }
+    render();
+  });
+  ro.observe(banner);
+
+  function render(){
+    if(mode==='mobile'){
+      var e = ease(progress);
+      var tx0 = -(peek/2);
+      var tx = tx0 + e*(-50 - tx0);
+      track.style.transform = 'translateX('+tx+'%)';
+      var pad=22, tw=title.offsetWidth;
+      var maxX = Math.max(0, banner.clientWidth - tw - pad*2);
+      var px = (titleEnds==='right') ? pad + e*maxX : pad + (1-e)*maxX;
+      title.style.transform = 'translate('+px+'px,-50%)';
+      var titleMid = px + tw/2, screenMid = banner.clientWidth/2;
+      if(titleMid > screenMid + 12) lastAlign='right';
+      else if(titleMid < screenMid - 12) lastAlign='left';
+      if(word) word.style.textAlign = lastAlign;
+      haze.style.setProperty('--haze-x', (e<0.5 ? '34%' : '66%'));
+      dots.forEach(function(d,i){ d.setAttribute('aria-current', String((e<0.5?0:1)===i)); });
+    } else {
+      track.style.transform=''; title.style.transform='';
+      if(word) word.style.textAlign='';
+    }
+  }
+
+  var last = performance.now();
+  function tick(now){
+    var dt = Math.min(0.05,(now-last)/1000); last=now;
+    if(mode==='mobile' && !dragging && !reduce){
+      if(snapTarget!==null){
+        progress += (snapTarget-progress)*Math.min(1,dt*7);
+        if(Math.abs(snapTarget-progress)<0.002){ progress=snapTarget; snapTarget=null; holdUntil=now+holdMs; }
+      } else if(playing){
+        if(now>=holdUntil){
+          progress += dir*dt*0.34;
+          if(progress>=1){ progress=1; dir=-1; holdUntil=now+holdMs; }
+          else if(progress<=0){ progress=0; dir=1; holdUntil=now+holdMs; }
+        }
+      }
+      render();
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  var startX=0, startP=0;
+  banner.addEventListener('pointerdown', function(e){
+    if(mode!=='mobile') return;
+    dragging=true; snapTarget=null; startX=e.clientX; startP=progress;
+  });
+  window.addEventListener('pointermove', function(e){
+    if(!dragging) return;
+    progress = clamp(startP - (e.clientX-startX)/banner.clientWidth, 0, 1);
+    render(); if(e.cancelable) e.preventDefault();
+  }, {passive:false});
+  window.addEventListener('pointerup', function(){
+    if(!dragging) return; dragging=false;
+    snapTarget = progress<0.5?0:1; dir = snapTarget===1?-1:1;
+  });
+  dots.forEach(function(d,i){ d.addEventListener('click', function(){ snapTarget=i; dir=i===1?-1:1; }); });
+
+  render();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Campaign Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Title" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "TRIIIPLE presents" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "RAW n UNCUT" },
+    { "type": "text", "id": "footer_line", "label": "Footer line", "default": "Spring Summer 2026" },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size",
+      "options": [
+        { "value": "Mini", "label": "Mini" },
+        { "value": "Small", "label": "Small" },
+        { "value": "Medium", "label": "Medium" },
+        { "value": "Large", "label": "Large" },
+        { "value": "X-Large", "label": "X-Large" },
+        { "value": "Display", "label": "Display" }
+      ],
+      "default": "Display"
+    },
+    {
+      "type": "select", "id": "title_ends", "label": "Title ends (mobile)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
+    },
+    { "type": "font_picker", "id": "title_font", "label": "Title font", "default": "sans-serif" },
+    { "type": "font_picker", "id": "heading_font", "label": "Eyebrow / footer font", "default": "sans-serif" },
+    { "type": "font_picker", "id": "body_font", "label": "Body font", "default": "sans-serif" },
+
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "btn_1_label", "label": "Button 1 label" },
+    { "type": "url", "id": "btn_1_url", "label": "Button 1 URL" },
+    { "type": "text", "id": "btn_2_label", "label": "Button 2 label" },
+    { "type": "url", "id": "btn_2_url", "label": "Button 2 URL" },
+    { "type": "color", "id": "btn_color", "label": "Button color", "default": "#ffffff" },
+    { "type": "range", "id": "btn_gap", "min": 0, "max": 32, "step": 4, "unit": "px", "label": "Gap between buttons", "default": 8 },
+
+    { "type": "header", "content": "Autoplay" },
+    { "type": "checkbox", "id": "auto_rotate", "label": "Auto-rotate slides", "default": false },
+    { "type": "range", "id": "change_slides_speed", "min": 3, "max": 15, "step": 1, "unit": "s", "label": "Change slides every", "default": 12 },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "width", "label": "Width",
+      "options": [
+        { "value": "Page width", "label": "Page width" },
+        { "value": "Full width", "label": "Full width" }
+      ],
+      "default": "Full width"
+    },
+
+    { "type": "header", "content": "Desktop" },
+    {
+      "type": "select", "id": "desktop_height", "label": "Height",
+      "options": [
+        { "value": "Image height", "label": "Image height" },
+        { "value": "Full screen height", "label": "Full screen height" },
+        { "value": "3/4 of screen", "label": "3/4 of screen" },
+        { "value": "2/3 of screen", "label": "2/3 of screen" },
+        { "value": "1/2 of screen", "label": "1/2 of screen" },
+        { "value": "1/3 of screen", "label": "1/3 of screen" },
+        { "value": "750px", "label": "750px" },
+        { "value": "650px", "label": "650px" },
+        { "value": "550px", "label": "550px" },
+        { "value": "450px", "label": "450px" }
+      ],
+      "default": "650px"
+    },
+
+    { "type": "header", "content": "Mobile" },
+    {
+      "type": "select", "id": "mobile_height", "label": "Height",
+      "options": [
+        { "value": "Image height", "label": "Image height" },
+        { "value": "Full screen height", "label": "Full screen height" },
+        { "value": "3/4 of screen", "label": "3/4 of screen" },
+        { "value": "2/3 of screen", "label": "2/3 of screen" },
+        { "value": "1/2 of screen", "label": "1/2 of screen" },
+        { "value": "1/3 of screen", "label": "1/3 of screen" },
+        { "value": "750px", "label": "750px" },
+        { "value": "650px", "label": "650px" },
+        { "value": "550px", "label": "550px" },
+        { "value": "450px", "label": "450px" }
+      ],
+      "default": "650px"
+    },
+
+    { "type": "header", "content": "Colors" },
+    {
+      "type": "select", "id": "color_scheme", "label": "Color scheme",
+      "options": [
+        { "value": "Scheme 1", "label": "Scheme 1" },
+        { "value": "Scheme 2", "label": "Scheme 2" },
+        { "value": "Scheme 3", "label": "Scheme 3" }
+      ],
+      "default": "Scheme 2"
+    },
+
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Image",
+      "limit": 2,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Campaign Banner",
+      "blocks": [ { "type": "panel" }, { "type": "panel" } ]
+    }
+  ]
+}
+{% endschema %}
