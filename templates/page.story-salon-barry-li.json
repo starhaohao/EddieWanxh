@@ -16,8 +16,8 @@
       "name": "Campaign Banner",
       "settings": {
         "eyebrow": "The first layer with",
-        "title": "Jocelyn Leon",
-        "footer_line": "Neutral. Earthy. Iconic. She translates what you carry inside into something permanent.",
+        "title": "Barry Li",
+        "footer_line": "Effortless. Athletic. Unpretentious. He knows his worth before the room does.",
         "heading_size": "Display",
         "title_ends": "right",
         "title_font": "rock_salt_n4",
@@ -39,13 +39,13 @@
         "text_YPCiLm": {
           "type": "text",
           "settings": {
-            "subheading": "on translation",
-            "title": "Emotion, heritage, symbolism — she puts it all into permanent form.",
+            "subheading": "on knowing your worth",
+            "title": "Confidence isn't about proving yourself — it's knowing your worth, even when others don't yet.",
             "heading_font_size": "heading-x-small",
-            "text": "<p>Jocelyn Leon tattoos at Peonypink. Her style is genderless, versatile, grounded — she translates what a person carries inside into something they can wear on their skin forever.</p><p></p>",
+            "text": "<p>Barry Li is a PhD student and educator. His world runs on data, theories, and precision. Quietly magnetic — the kind of presence that earns attention without asking for it.</p><p></p>",
             "text_font_size": "body-small",
             "button_text": "",
-            "button_url": "shopify://products/ed-cotton-spandex-t-shirt-black",
+            "button_url": "shopify://products/v-cotton-spandex-brief-black",
             "button_type": "btn--white",
             "button_size": "btn--small",
             "button_style": "btn--text",
@@ -101,7 +101,7 @@
         "heading_ByJbrU": {
           "type": "heading",
           "settings": {
-            "title": "\"It's about translating emotion, heritage, and symbolism into visual form — something that flows with the body, not just on it.\"",
+            "title": "\"Confidence isn't about proving yourself — it's knowing your worth, even when others don't yet.\"",
             "heading_font_size": "heading-x-small",
             "position": "left",
             "padding_bottom": 16,
@@ -111,7 +111,7 @@
         "text_TUEGNd": {
           "type": "text",
           "settings": {
-            "text": "<p>- Jocelyn Leon</p>",
+            "text": "<p>- Barry Li</p>",
             "text_font_size": "body-medium",
             "position": "left",
             "padding_bottom": 16
@@ -145,9 +145,9 @@
             "icon_size": 35,
             "icon_alignment": "icon--left",
             "icon_color": "",
-            "title": "\"It's all about trust. Once there's alignment, the idea becomes something honest — for both of us.\"",
+            "title": "\"That I'm a PhD student. There's this myth that confidence and intellect can't coexist, but they do — my brain's my secret weapon.\"",
             "heading_font_size": "heading-mini",
-            "text": "<p>How do you balance your creativity</p><p>with a customer's vision?</p>",
+            "text": "<p>What's one thing about you</p><p>that people never expect?</p>",
             "text_font_size": "body-x-small",
             "heading_tag": "automatic"
           }
@@ -161,9 +161,9 @@
             "icon_size": 35,
             "icon_alignment": "icon--left",
             "icon_color": "",
-            "title": "\"It's about translating emotion, heritage, and symbolism into visual form — something that flows with the body, not just on it.\"",
+            "title": "\"I used to worry my analytical side made me seem cold. Now? I lean into it. It's not detachment, it's precision. That focus shapes how I teach, research, and even how I step into a room.\"",
             "heading_font_size": "heading-mini",
-            "text": "<p>What does self-expression mean to you —</p><p>on skin and beyond?</p>",
+            "text": "<p>What did you used to hide</p><p>but now own completely?</p>",
             "text_font_size": "body-x-small",
             "heading_tag": "automatic"
           }
@@ -177,9 +177,9 @@
             "icon_size": 35,
             "icon_alignment": "icon--left",
             "icon_color": "",
-            "title": "\"Neutral. Earthy. Iconic.\"",
+            "title": "\"Effortless. Athletic but unpretentious, pure in its simplicity — the kind of presence that doesn't scream for attention but earns it.\"",
             "heading_font_size": "heading-mini",
-            "text": "<p>Three words for your tattoo style?</p>",
+            "text": "<p>If TRIIIPLE were a person,</p><p>what kind of energy would they have?</p>",
             "text_font_size": "body-x-small",
             "heading_tag": "automatic"
           }
@@ -188,7 +188,7 @@
       "block_order": ["icon_DX3GKC", "icon_QteHwt", "icon_NkMPDM"],
       "name": "Multi column",
       "settings": {
-        "title": "In Her Own Words",
+        "title": "In His Own Words",
         "heading_font_size": "heading-x-small",
         "description": "",
         "align_heading": "text-left",
@@ -230,13 +230,13 @@
         "text_UUncEa": {
           "type": "text",
           "settings": {
-            "subheading": "how she starts",
-            "title": "The first layer is where intention begins.",
+            "subheading": "how he shows up",
+            "title": "The layer closest to the skin — as considered as everything else.",
             "heading_font_size": "heading-mini",
-            "text": "<p>\"Before the design, before the sitting — there is the quiet choice of what goes on first. Jocelyn builds from the foundation up. What's closest to the skin should be as considered as everything else.\"</p><p></p>",
+            "text": "<p>\"Before the lecture. Before the data. Before the room fills up — he reaches for what fits without explanation. Comfort that matches the precision he brings to everything else.\"</p><p></p>",
             "text_font_size": "body-x-small",
             "button_text": "",
-            "button_url": "shopify://products/ed-cotton-spandex-t-shirt-black",
+            "button_url": "shopify://products/v-cotton-spandex-brief-black",
             "button_type": "btn--white",
             "button_size": "btn--small",
             "button_style": "btn--text",
@@ -270,7 +270,7 @@
         "heading_q6kVcG": {
           "type": "heading",
           "settings": {
-            "title": "\"A barcode or Roman numeral — quiet, but loaded with meaning. Something minimal you carry with confidence.\"",
+            "title": "\"Humility with quiet competence. Someone who doesn't need applause but steps up when it matters — that understated power is magnetic.\"",
             "heading_font_size": "heading-mini",
             "position": "left",
             "padding_bottom": 16,
@@ -280,7 +280,7 @@
         "text_8rxNVe": {
           "type": "text",
           "settings": {
-            "text": "<p>If TRIIIPLE were a tattoo,</p><p>what would it be?</p>",
+            "text": "<p>What's the most underrated thing</p><p>that makes someone attractive?</p>",
             "text_font_size": "body-x-small",
             "position": "left",
             "padding_bottom": 14
@@ -311,8 +311,8 @@
         "cta_label": "Explore Story Salon",
         "cta_url": "shopify://pages/story-salon",
         "show_strip": true,
-        "product_1": "ed-cotton-spandex-t-shirt-black",
-        "product_2": "v-cotton-spandex-brief-black",
+        "product_1": "v-cotton-spandex-brief-black",
+        "product_2": "ed-cotton-spandex-t-shirt-black",
         "product_3": "ed-cotton-spandex-sleeveless-top-white",
         "shop_all_url": "shopify://collections"
       }
