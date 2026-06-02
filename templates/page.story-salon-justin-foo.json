@@ -1,0 +1,342 @@
+{
+  "sections": {
+    "campaign_banner_A7TARg": {
+      "type": "campaign-banner",
+      "blocks": {
+        "panel_bUQXCj": {
+          "type": "panel",
+          "settings": { "image": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg" }
+        },
+        "panel_QJkqhc": {
+          "type": "panel",
+          "settings": { "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg" }
+        }
+      },
+      "block_order": ["panel_bUQXCj", "panel_QJkqhc"],
+      "name": "Campaign Banner",
+      "settings": {
+        "eyebrow": "The first layer with",
+        "title": "Justin Foo",
+        "footer_line": "Sixteen years in the making — shaped by the work no one sees.",
+        "heading_size": "Display",
+        "title_ends": "right",
+        "title_font": "rock_salt_n4",
+        "heading_font": "sans_serif_n4",
+        "body_font": "mono",
+        "auto_rotate": true,
+        "change_slides_speed": 3,
+        "width": "Full width",
+        "desktop_height": "650px",
+        "mobile_height": "550px",
+        "color_scheme": "Scheme 2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_custom_content_NfX36f": {
+      "type": "section-custom-content",
+      "blocks": {
+        "text_YPCiLm": {
+          "type": "text",
+          "settings": {
+            "subheading": "on earning it",
+            "title": "There is no shortcut to the kind of confidence that comes from within.",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>He has spent sixteen years in F&B — behind bars, in kitchens, in front of guests who will always have an opinion. None of that, he says, compares to the standard you set for yourself.</p><p></p>",
+            "text_font_size": "body-small",
+            "button_text": "",
+            "button_url": "shopify://products/ed-cotton-spandex-sleeveless-top-white",
+            "button_type": "btn--white",
+            "button_size": "btn--small",
+            "button_style": "btn--text",
+            "show_arrow": false,
+            "show_social_links": true,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "#19222a",
+            "color": "#ffffff",
+            "heading_tag": "automatic"
+          }
+        },
+        "image_Bd6W4C": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "title": "",
+            "heading_font_size": "heading-large",
+            "text": "",
+            "text_font_size": "body-medium",
+            "flex_align": "align--middle-center",
+            "show_text_background": false,
+            "bg_color": "",
+            "color": "",
+            "overlay_type": "disabled",
+            "link_text": "",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": ["text_YPCiLm", "image_Bd6W4C"],
+      "name": "Custom section",
+      "settings": {
+        "borders": true,
+        "gutters": false,
+        "width": "wrapper--full",
+        "height": "seven-fifty-height-hero",
+        "mobile_height": "sixty-fifty-height-hero--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_rich_text_columns_YzFEJa": {
+      "type": "section-rich-text-columns",
+      "blocks": {
+        "heading_ByJbrU": {
+          "type": "heading",
+          "settings": {
+            "title": "\"Validation from a guest lasts a night. The kind you build for yourself — that stays.\"",
+            "heading_font_size": "heading-x-small",
+            "position": "left",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        },
+        "text_TUEGNd": {
+          "type": "text",
+          "settings": {
+            "text": "<p>- Justin Foo</p>",
+            "text_font_size": "body-medium",
+            "position": "left",
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": ["heading_ByJbrU", "text_TUEGNd"],
+      "name": "Rich text columns",
+      "settings": {
+        "left_column_width": 100,
+        "divider_width": 0,
+        "show_line": false,
+        "right_column_width": 100,
+        "align_text": "text-right",
+        "width": "wrapper--full-padded",
+        "align_text_mobile": "text-left--mobile",
+        "color_scheme": "",
+        "padding_top": 60,
+        "padding_bottom": 50
+      }
+    },
+    "section_multicolumn_jydc97": {
+      "type": "section-multicolumn",
+      "blocks": {
+        "icon_DX3GKC": {
+          "type": "icon",
+          "settings": {
+            "column_width": 100,
+            "icon_name": "icon-info-empty",
+            "image": "shopify://shop_images/Social_Media_Icon-7.jpg",
+            "icon_size": 35,
+            "icon_alignment": "icon--left",
+            "icon_color": "",
+            "title": "\"Ease. Something I don't have to think about. When the room is full and the noise is high, what you wear should disappear.\"",
+            "heading_font_size": "heading-mini",
+            "text": "<p>How do you dress for a twelve-hour shift</p><p>without losing who you are?</p>",
+            "text_font_size": "body-x-small",
+            "heading_tag": "automatic"
+          }
+        },
+        "icon_QteHwt": {
+          "type": "icon",
+          "settings": {
+            "column_width": 100,
+            "icon_name": "icon-info-empty",
+            "image": "shopify://shop_images/Social_Media_Icon-7.jpg",
+            "icon_size": 35,
+            "icon_alignment": "icon--left",
+            "icon_color": "",
+            "title": "\"It's about trust — trusting the work, trusting yourself. Quiet, but certain.\"",
+            "heading_font_size": "heading-mini",
+            "text": "<p>Sixteen years. What does that kind of</p><p>earned confidence feel like?</p>",
+            "text_font_size": "body-x-small",
+            "heading_tag": "automatic"
+          }
+        },
+        "icon_NkMPDM": {
+          "type": "icon",
+          "settings": {
+            "column_width": 100,
+            "icon_name": "icon-info-empty",
+            "image": "shopify://shop_images/Social_Media_Icon-7.jpg",
+            "icon_size": 35,
+            "icon_alignment": "icon--left",
+            "icon_color": "",
+            "title": "\"Earned. Honest. Comfortable.\"",
+            "heading_font_size": "heading-mini",
+            "text": "<p>Three words for your style?</p>",
+            "text_font_size": "body-x-small",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": ["icon_DX3GKC", "icon_QteHwt", "icon_NkMPDM"],
+      "name": "Multi column",
+      "settings": {
+        "title": "In His Own Words",
+        "heading_font_size": "heading-x-small",
+        "description": "",
+        "align_heading": "text-left",
+        "align_text": "text-left",
+        "width": "wrapper--full-padded",
+        "align_columns": "flex-align-top",
+        "layout_mobile": "2",
+        "color_scheme": "scheme-4",
+        "padding_top": 50,
+        "padding_bottom": 60,
+        "heading_tag": "automatic"
+      }
+    },
+    "section_custom_content_AVnnp4": {
+      "type": "section-custom-content",
+      "blocks": {
+        "image_MdxPN9": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "title": "",
+            "heading_font_size": "heading-large",
+            "text": "",
+            "text_font_size": "body-medium",
+            "flex_align": "align--middle-center",
+            "show_text_background": false,
+            "bg_color": "",
+            "color": "",
+            "overlay_type": "disabled",
+            "link_text": "",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "heading_tag": "automatic"
+          }
+        },
+        "text_UUncEa": {
+          "type": "text",
+          "settings": {
+            "subheading": "how he starts",
+            "title": "The layer nobody sees is the one that matters most.",
+            "heading_font_size": "heading-mini",
+            "text": "<p>\"Every layer that goes on top is a decision made easier when the one closest to your skin is right. That is the only thing I need to get correct before the shift begins.\"</p><p></p>",
+            "text_font_size": "body-x-small",
+            "button_text": "",
+            "button_url": "shopify://products/ed-cotton-spandex-sleeveless-top-white",
+            "button_type": "btn--white",
+            "button_size": "btn--small",
+            "button_style": "btn--text",
+            "show_arrow": false,
+            "show_social_links": false,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "#ffffff",
+            "color": "#153a54",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": ["image_MdxPN9", "text_UUncEa"],
+      "name": "Custom section",
+      "settings": {
+        "borders": false,
+        "gutters": false,
+        "width": "wrapper--full",
+        "height": "seven-fifty-height-hero",
+        "mobile_height": "screen-height-two-thirds--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_rich_text_columns_HwPbhH": {
+      "type": "section-rich-text-columns",
+      "blocks": {
+        "heading_q6kVcG": {
+          "type": "heading",
+          "settings": {
+            "title": "\"The one who doesn't need to say much. Presence speaks.\"",
+            "heading_font_size": "heading-mini",
+            "position": "left",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        },
+        "text_8rxNVe": {
+          "type": "text",
+          "settings": {
+            "text": "<p>If TRIIIPLE were a person, </p><p>what kind of energy would they have?</p>",
+            "text_font_size": "body-x-small",
+            "position": "left",
+            "padding_bottom": 14
+          }
+        }
+      },
+      "block_order": ["heading_q6kVcG", "text_8rxNVe"],
+      "name": "Rich text columns",
+      "settings": {
+        "left_column_width": 100,
+        "divider_width": 100,
+        "show_line": true,
+        "right_column_width": 0,
+        "align_text": "text-left",
+        "width": "wrapper--full-padded",
+        "align_text_mobile": "text-left--mobile",
+        "color_scheme": "scheme-2",
+        "padding_top": 200,
+        "padding_bottom": 60
+      }
+    },
+    "story_salon_teaser_bT9RDn": {
+      "type": "story-salon-teaser",
+      "name": "Story Salon Blog",
+      "settings": {
+        "label": "Worn in the stories",
+        "tagline": "",
+        "cta_label": "Explore Story Salon",
+        "cta_url": "shopify://pages/story-salon",
+        "show_strip": true,
+        "product_1": "ed-cotton-spandex-sleeveless-top-white",
+        "product_2": "v-cotton-spandex-brief-black",
+        "product_3": "ed-cotton-spandex-t-shirt-black",
+        "shop_all_url": "shopify://collections"
+      }
+    },
+    "178029763221aa94f5": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": { "formId": "<div class=\"klaviyo-form-U5igv3\"></div>" }
+        }
+      },
+      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_ADEw9X"],
+      "settings": { "include_margins": false }
+    }
+  },
+  "order": [
+    "campaign_banner_A7TARg",
+    "section_custom_content_NfX36f",
+    "section_rich_text_columns_YzFEJa",
+    "section_multicolumn_jydc97",
+    "section_custom_content_AVnnp4",
+    "section_rich_text_columns_HwPbhH",
+    "story_salon_teaser_bT9RDn",
+    "178029763221aa94f5"
+  ]
+}
