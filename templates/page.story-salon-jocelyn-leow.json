@@ -16,7 +16,7 @@
       "name": "Campaign Banner",
       "settings": {
         "eyebrow": "The first layer with",
-        "title": "Jocelyn Leon",
+        "title": "Jocelyn Leow",
         "footer_line": "Neutral. Earthy. Iconic. She translates what you carry inside into something permanent.",
         "heading_size": "Display",
         "title_ends": "right",
@@ -42,7 +42,7 @@
             "subheading": "on translation",
             "title": "Emotion, heritage, symbolism — she puts it all into permanent form.",
             "heading_font_size": "heading-x-small",
-            "text": "<p>Jocelyn Leon tattoos at Peonypink. Her style is genderless, versatile, grounded — she translates what a person carries inside into something they can wear on their skin forever.</p><p></p>",
+            "text": "<p>Jocelyn Leow tattoos at Peonypink. Her style is genderless, versatile, grounded — she translates what a person carries inside into something they can wear on their skin forever.</p><p></p>",
             "text_font_size": "body-small",
             "button_text": "",
             "button_url": "shopify://products/ed-cotton-spandex-t-shirt-black",
@@ -111,7 +111,7 @@
         "text_TUEGNd": {
           "type": "text",
           "settings": {
-            "text": "<p>- Jocelyn Leon</p>",
+            "text": "<p>- Jocelyn Leow</p>",
             "text_font_size": "body-medium",
             "position": "left",
             "padding_bottom": 16
