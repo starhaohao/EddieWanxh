@@ -1,25 +1,427 @@
 {
   "sections": {
-    "story_salon_landing": {
-      "type": "story-salon-landing",
-      "blocks": {
-        "card_01": { "type": "series_card", "settings": { "name": "Raw & Uncut" } },
-        "card_02": { "type": "series_card", "settings": { "name": "The Layer Series" } }
-      },
-      "block_order": ["card_01", "card_02"],
+    "main": {
+      "type": "main-page",
+      "disabled": true,
       "settings": {
-        "s1_number": "n° 01",
-        "s1_title": "Raw & Uncut",
-        "s1_text": "<p>Unfiltered, unpolished, and entirely honest. Raw & Uncut is TRIIIPLE's first content series — an exploration of craft, material, and the beauty found in imperfection.</p><p>We pull back the curtain on how each piece is made, who makes it, and why the details that others overlook are the ones we obsess over.</p>",
-        "s1_cta": "Explore Raw & Uncut",
-        "s2_number": "n° 02",
-        "s2_title": "The Layer Series",
-        "s2_text": "<p>Layering is not styling — it's thinking. The Layer Series goes deep into the art of wearing multiple pieces together, and what each combination says about the person doing the wearing.</p><p>From technical base layers to considered outerwear, a guide to building looks that last beyond the season.</p>",
-        "s2_cta": "Explore The Layer Series",
-        "s2_image_side": "left",
-        "archive_heading": "All Series"
+        "subheading": "",
+        "show_title": false,
+        "heading_font_size": "heading-mini",
+        "show_content": true,
+        "text_font_size": "body-x-small",
+        "align_text": "text-left",
+        "width": "wrapper",
+        "color_scheme": "scheme-2",
+        "padding_top": 56,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    },
+    "gallery_banner_P7wtj6": {
+      "type": "gallery-banner",
+      "blocks": {
+        "tile_cBjyNp": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Amos_Ashley_Chin_-_Split_Panel_B_Detail___Environment.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_MMH7eG": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/LP_-_barry-001_-_Barry_4_5.jpg",
+            "framed": true,
+            "frame_shape": "tall",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_m9zeCB": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Split_Panel_B_Detail___Environment.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_qffYCe": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/IG_Story_20thJun-3.png",
+            "framed": true,
+            "frame_shape": "wide",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_mfz8Ur": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/1_d15cc441-a5d7-4d08-927f-8c16b3c29454.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_pFeP6w": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg",
+            "framed": true,
+            "frame_shape": "wide",
+            "focal": "object-position:right center"
+          }
+        },
+        "tile_MfYdkX": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/2.png",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_NYJpja": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/LP_-_rama-001_-_Rama_3_4.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_rRBAEi": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/LP_-_peonypink-001_-_PEONYPINK_1_1_1a8393a3-88d8-41d1-a125-9305e836b9aa.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_7gBk3e": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/LP_-_fabric-transdry_3_4.jpg",
+            "framed": true,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        }
+      },
+      "block_order": [
+        "tile_cBjyNp",
+        "tile_MMH7eG",
+        "tile_m9zeCB",
+        "tile_qffYCe",
+        "tile_mfz8Ur",
+        "tile_pFeP6w",
+        "tile_MfYdkX",
+        "tile_NYJpja",
+        "tile_rRBAEi",
+        "tile_7gBk3e"
+      ],
+      "name": "Gallery Banner",
+      "settings": {
+        "eyebrow": "Welcome",
+        "title": "Story Salon",
+        "title_position": "right",
+        "title_vertical": "bottom",
+        "title_size": "Small",
+        "title_color": "#ffffff",
+        "heading_font": "archivo_n8",
+        "body_font": "system_ui_n4",
+        "width": "Full width",
+        "tile_gap": 0,
+        "desktop_columns": "5",
+        "mobile_columns": "3",
+        "tile_aspect": "4/5",
+        "color_scheme": "Scheme 2",
+        "field_color": "#d4d40c",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "story_feed_wL367e": {
+      "type": "story-feed",
+      "blocks": {
+        "filter_ymLrnb": {
+          "type": "filter",
+          "settings": {
+            "title": "The 1st Layer",
+            "filter_id": "first"
+          }
+        },
+        "filter_JVwHcJ": {
+          "type": "filter",
+          "settings": {
+            "title": "Raw n Uncut",
+            "filter_id": "raw"
+          }
+        },
+        "card_4kcKjN": {
+          "type": "card",
+          "settings": {
+            "category_id": "Raw",
+            "aspect_ratio": "1/1",
+            "image": "shopify://shop_images/LP_-_barry-001_-_Barry_4_5.jpg",
+            "series": "Raw n Uncut",
+            "subject_name": "Bary Li",
+            "card_title": "A Quiet Revolution",
+            "card_desc": "A PhD student who once hid his analytical mind. Now it's his time — competence as the most attractive trait.",
+            "link_text": "Read story",
+            "link": "shopify://blogs/storysalon/raw-n-uncut-when-the-mind-undresses"
+          }
+        },
+        "card_xyikAQ": {
+          "type": "card",
+          "settings": {
+            "category_id": "First",
+            "aspect_ratio": "4/5",
+            "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg",
+            "series": "The First Layer",
+            "subject_name": "Justin Foo",
+            "card_title": "Earning It Quietly",
+            "card_desc": "Sixteen years in F&B, built on unseen work. Validation, he argues, has to come from within — a place no client can reach.",
+            "link_text": "Explore",
+            "link": "shopify://pages/story-salon-justin-foo"
+          }
+        },
+        "card_mQaerz": {
+          "type": "card",
+          "settings": {
+            "category_id": "First",
+            "aspect_ratio": "3/4",
+            "image": "shopify://shop_images/LP_-_peonypink-001_-_PEONYPINK_1_1.jpg",
+            "series": "The First Layer",
+            "subject_name": "Peonypink",
+            "card_title": "Carrying It on Their Skin",
+            "card_desc": "A women-led tattoo studio — Jocelyn, Sonia and Daphne. Same first layer, worn loudly and permanently, in ink.",
+            "link_text": "Explore",
+            "link": "shopify://pages/story-salon-peonypink"
+          }
+        },
+        "card_zCJaF4": {
+          "type": "card",
+          "settings": {
+            "category_id": "Raw",
+            "aspect_ratio": "4/5",
+            "image": "shopify://shop_images/LP_-_khairul-001_-_Khairul_1_1.jpg",
+            "series": "Raw n Uncut",
+            "subject_name": "Khairul",
+            "card_title": "Embracing the Unexpected",
+            "card_desc": "A film creative who hid his hair under caps; now he lets it speak. Weirdness as a trait to nurture, not armour.",
+            "link_text": "Read story",
+            "link": "shopify://blogs/storysalon/raw-n-uncut-nothing-to-hide-everything-to-own"
+          }
+        },
+        "card_xCPchq": {
+          "type": "card",
+          "settings": {
+            "category_id": "Raw",
+            "aspect_ratio": "4/5",
+            "image": "shopify://shop_images/LP_-_rama-001_-_Rama_3_4.jpg",
+            "series": "Raw n Uncut",
+            "subject_name": "Rama",
+            "card_title": "Owning His Power",
+            "card_desc": "From hiding in oversized clothes to standing boldly in front of the lens. Confidence, redefined as a quiet triumph.",
+            "link_text": "Read story",
+            "link": "shopify://blogs/storysalon/raw-n-uncut-when-confidence-finds-its-voice"
+          }
+        },
+        "card_hTK4yT": {
+          "type": "card",
+          "settings": {
+            "category_id": "First",
+            "aspect_ratio": "1/1",
+            "image": "shopify://shop_images/LP_-_ethan-001_-_Ethan_Cheng_4_5.jpg",
+            "series": "The First Layer",
+            "subject_name": "Ethan Cheng",
+            "card_title": "Moving with quiet confidence",
+            "card_desc": "An interior designer who curates light, proportion and the silence between objects. He doesn't announce himself — he simply arrives.",
+            "link_text": "Explore",
+            "link": "shopify://pages/story-salon-ethan-cheng"
+          }
+        },
+        "card_cYngJP": {
+          "type": "card",
+          "settings": {
+            "category_id": "First",
+            "aspect_ratio": "1/1",
+            "image": "shopify://shop_images/LP_-_kris-001_-_Kris_Chaser_3_4.jpg",
+            "series": "The First Layer",
+            "subject_name": "Kris Chaser",
+            "card_title": "Making Intimacy Visible",
+            "card_desc": "An illustrator in Jakarta drawing queer, unhurried bodies in watercolour and ink. A quiet way of saying: I see you.",
+            "link_text": "Explore",
+            "link": "shopify://pages/story-salon-kris-chaser"
+          }
+        },
+        "card_ggg6pa": {
+          "type": "card",
+          "settings": {
+            "category_id": "First",
+            "aspect_ratio": "3/4",
+            "image": "shopify://shop_images/LP_-_amos-001_-_Amos_Ashley_Chin_1_1.jpg",
+            "series": "The First Layer",
+            "subject_name": "Amos A Chin",
+            "card_title": "Wearing Honesty",
+            "card_desc": "Editor, model, maker. In an industry that rewards a polished surface, he leads with his feelings — and refuses to shrink.",
+            "link_text": "Explore",
+            "link": "shopify://pages/story-salon-amos-a-chin"
+          }
+        }
+      },
+      "block_order": [
+        "filter_ymLrnb",
+        "filter_JVwHcJ",
+        "card_4kcKjN",
+        "card_xyikAQ",
+        "card_mQaerz",
+        "card_zCJaF4",
+        "card_xCPchq",
+        "card_hTK4yT",
+        "card_cYngJP",
+        "card_ggg6pa"
+      ],
+      "name": "Journal Feed",
+      "settings": {
+        "title": "The First Layer",
+        "subtitle": "Three series, one feed. Different people, different lives..."
+      }
+    },
+    "story_feed_q8MBC4": {
+      "type": "story-feed",
+      "blocks": {
+        "card_gkzVRg": {
+          "type": "card",
+          "settings": {
+            "category_id": "fabric",
+            "aspect_ratio": "3/4",
+            "image": "shopify://shop_images/IG_Post_13thJun-1.png",
+            "series": "Fabric n Fit",
+            "subject_name": "94% & 6%",
+            "card_title": "Everyday Comfort, Upgraded",
+            "card_desc": "Breathes, hugs and stretches with you. Natural breathability with the perfect snap-back — like a second skin.",
+            "link_text": "Read story",
+            "link": "shopify://blogs/storysalon/story-salon-how-to-care-for-your-triiiples"
+          }
+        },
+        "card_MHjkwY": {
+          "type": "card",
+          "settings": {
+            "category_id": "fabric",
+            "aspect_ratio": "1/1",
+            "image": "shopify://shop_images/LP_-_fabric-why-both_4_5.jpg",
+            "series": "Fabric n Fit",
+            "subject_name": "Why We Chose Both",
+            "card_title": "You don't wear the same mood everyday",
+            "card_desc": "Some days are for lounging, others demand movement. Comfort and confidence in equal measure — built to last.",
+            "link_text": "Read story",
+            "link": "shopify://blogs/storysalon/story-salon-how-to-chose-your-intimate-wear-size"
+          }
+        },
+        "card_ENXqeL": {
+          "type": "card",
+          "settings": {
+            "category_id": "fabric",
+            "aspect_ratio": "1/1",
+            "image": "shopify://shop_images/LP_-_fabric-cotton-spandex_1_1.jpg",
+            "series": "Fabric n Fit",
+            "subject_name": "Engineered to Flex",
+            "card_title": "Meet our Fabric",
+            "card_desc": "We refuse to compromise on the layer closest to your skin. Every thread, stitch and fabric serves a purpose.",
+            "link_text": "Read story",
+            "link": "shopify://blogs/storysalon/story-salon-engineered-to-flex-made-to-last-meet-our-fabrics"
+          }
+        }
+      },
+      "block_order": ["card_gkzVRg", "card_MHjkwY", "card_ENXqeL"],
+      "name": "Journal Feed",
+      "settings": {
+        "title": "Fabric n Fit",
+        "subtitle": "Three series, one feed. Different people, different lives..."
+      }
+    },
+    "story_lookbook_rAcJzH": {
+      "type": "story-lookbook",
+      "blocks": {
+        "look_Y6NLU6": {
+          "type": "look",
+          "settings": {
+            "number": "Cotton Spandex",
+            "image": "shopify://shop_images/IG_Story_20thJun-3.png",
+            "meta": "",
+            "subject_name": "Kris Chaser",
+            "wear_text": "L Socks",
+            "link": "shopify://collections/socks"
+          }
+        },
+        "look_HMUEcr": {
+          "type": "look",
+          "settings": {
+            "number": "Cotton Spandex",
+            "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg",
+            "meta": "The First Layer",
+            "subject_name": "",
+            "wear_text": "ED Sleeveless Top",
+            "link": "shopify://products/ed-cotton-spandex-sleeveless-top-white"
+          }
+        },
+        "look_DWktPe": {
+          "type": "look",
+          "settings": {
+            "number": "TransDRY®",
+            "image": "shopify://shop_images/Amos_Ashley_Chin_-_Q_A_Image_3_4_3.jpg",
+            "meta": "",
+            "subject_name": "Amos A Chin",
+            "wear_text": "X TransDRY® Brief",
+            "link": "shopify://products/x-transdry-brief-black"
+          }
+        },
+        "look_rYgDUw": {
+          "type": "look",
+          "settings": {
+            "number": "Cotton Spandex",
+            "image": "shopify://shop_images/Split_Panel_A_3_4_Portrait.jpg",
+            "meta": "",
+            "subject_name": "Ethan Cheng",
+            "wear_text": "V Brief",
+            "link": "shopify://products/v-cotton-spandex-brief-black"
+          }
+        }
+      },
+      "block_order": ["look_Y6NLU6", "look_HMUEcr", "look_DWktPe", "look_rYgDUw"],
+      "name": "Lookbook Gallery",
+      "settings": {
+        "title": "What They Wear",
+        "subtitle": "Spotlight"
+      }
+    },
+    "17802952390b83b768": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_aDKDKj": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "<div class=\"klaviyo-form-U5igv3\"></div>"
+          }
+        }
+      },
+      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_aDKDKj"],
+      "settings": {
+        "include_margins": true
       }
     }
   },
-  "order": ["story_salon_landing"]
+  "order": [
+    "main",
+    "gallery_banner_P7wtj6",
+    "story_feed_wL367e",
+    "story_feed_q8MBC4",
+    "story_lookbook_rAcJzH",
+    "17802952390b83b768"
+  ]
 }
