@@ -60,7 +60,7 @@
           "type": "tile",
           "settings": {
             "image": "shopify://shop_images/1_d15cc441-a5d7-4d08-927f-8c16b3c29454.jpg",
-            "framed": false,
+            "framed": true,
             "frame_shape": "",
             "focal": "object-position:center"
           }
@@ -69,7 +69,7 @@
           "type": "tile",
           "settings": {
             "image": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg",
-            "framed": true,
+            "framed": false,
             "frame_shape": "wide",
             "focal": "object-position:right center"
           }
@@ -87,8 +87,8 @@
           "type": "tile",
           "settings": {
             "image": "shopify://shop_images/LP_-_rama-001_-_Rama_3_4.jpg",
-            "framed": false,
-            "frame_shape": "",
+            "framed": true,
+            "frame_shape": "tall",
             "focal": "object-position:center"
           }
         },
@@ -97,7 +97,7 @@
           "settings": {
             "image": "shopify://shop_images/LP_-_peonypink-001_-_PEONYPINK_1_1_1a8393a3-88d8-41d1-a125-9305e836b9aa.jpg",
             "framed": false,
-            "frame_shape": "",
+            "frame_shape": "wide",
             "focal": "object-position:center"
           }
         },
@@ -105,7 +105,7 @@
           "type": "tile",
           "settings": {
             "image": "shopify://shop_images/LP_-_fabric-transdry_3_4.jpg",
-            "framed": true,
+            "framed": false,
             "frame_shape": "",
             "focal": "object-position:center"
           }
@@ -125,7 +125,7 @@
       ],
       "name": "Gallery Banner",
       "settings": {
-        "eyebrow": "Welcome",
+        "eyebrow": "See you again.",
         "title": "Story Salon",
         "title_position": "right",
         "title_vertical": "bottom",
@@ -136,10 +136,10 @@
         "width": "Full width",
         "tile_gap": 0,
         "desktop_columns": "5",
-        "mobile_columns": "3",
-        "tile_aspect": "4/5",
+        "mobile_columns": "2",
+        "tile_aspect": "5/4",
         "color_scheme": "Scheme 2",
-        "field_color": "#d4d40c",
+        "field_color": "#923531",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -161,24 +161,10 @@
             "filter_id": "raw"
           }
         },
-        "card_4kcKjN": {
-          "type": "card",
-          "settings": {
-            "category_id": "Raw",
-            "aspect_ratio": "1/1",
-            "image": "shopify://shop_images/LP_-_barry-001_-_Barry_4_5.jpg",
-            "series": "Raw n Uncut",
-            "subject_name": "Barry Li",
-            "card_title": "When the Mind Undresses",
-            "card_desc": "A PhD student who once hid his analytical mind. Now it's his time — competence as the most attractive trait.",
-            "link_text": "Explore",
-            "link": "shopify://pages/story-salon-barry-li"
-          }
-        },
         "card_xyikAQ": {
           "type": "card",
           "settings": {
-            "category_id": "First",
+            "category_id": "first",
             "aspect_ratio": "4/5",
             "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg",
             "series": "The First Layer",
@@ -189,10 +175,24 @@
             "link": "shopify://pages/story-salon-justin-foo"
           }
         },
+        "card_4kcKjN": {
+          "type": "card",
+          "settings": {
+            "category_id": "raw",
+            "aspect_ratio": "1/1",
+            "image": "shopify://shop_images/LP_-_barry-001_-_Barry_4_5.jpg",
+            "series": "Raw n Uncut",
+            "subject_name": "Barry Li",
+            "card_title": "When the Mind Undresses",
+            "card_desc": "A PhD student who once hid his analytical mind. Now it's his time — competence as the most attractive trait.",
+            "link_text": "Explore",
+            "link": "shopify://pages/story-salon-barry-li"
+          }
+        },
         "card_mQaerz": {
           "type": "card",
           "settings": {
-            "category_id": "First",
+            "category_id": "first",
             "aspect_ratio": "3/4",
             "image": "shopify://shop_images/LP_-_peonypink-001_-_PEONYPINK_1_1.jpg",
             "series": "The First Layer",
@@ -206,7 +206,7 @@
         "card_zCJaF4": {
           "type": "card",
           "settings": {
-            "category_id": "Raw",
+            "category_id": "raw",
             "aspect_ratio": "4/5",
             "image": "shopify://shop_images/LP_-_khairul-001_-_Khairul_1_1.jpg",
             "series": "Raw n Uncut",
@@ -217,10 +217,38 @@
             "link": "shopify://pages/story-salon-khairul"
           }
         },
+        "card_ggg6pa": {
+          "type": "card",
+          "settings": {
+            "category_id": "first",
+            "aspect_ratio": "3/4",
+            "image": "shopify://shop_images/LP_-_amos-001_-_Amos_Ashley_Chin_1_1.jpg",
+            "series": "The First Layer",
+            "subject_name": "Amos A Chin",
+            "card_title": "Wearing Honesty",
+            "card_desc": "Editor, model, maker. In an industry that rewards a polished surface, he leads with his feelings — and refuses to shrink.",
+            "link_text": "Explore",
+            "link": "shopify://pages/story-salon-amos-a-chin"
+          }
+        },
+        "card_HkgHY7": {
+          "type": "card",
+          "settings": {
+            "category_id": "first",
+            "aspect_ratio": "1/1",
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_11_30f020ff-8401-4652-8665-ca7be24ccd48.jpg",
+            "series": "The First Layer",
+            "subject_name": "Jocelyn Leow",
+            "card_title": "She Translates What You Carry",
+            "card_desc": "She turns emotion, heritage and symbolism into something permanent.",
+            "link_text": "Explore",
+            "link": "shopify://pages/story-salon-jocelyn-leow"
+          }
+        },
         "card_xCPchq": {
           "type": "card",
           "settings": {
-            "category_id": "Raw",
+            "category_id": "raw",
             "aspect_ratio": "4/5",
             "image": "shopify://shop_images/LP_-_rama-001_-_Rama_3_4.jpg",
             "series": "Raw n Uncut",
@@ -234,7 +262,7 @@
         "card_hTK4yT": {
           "type": "card",
           "settings": {
-            "category_id": "First",
+            "category_id": "first",
             "aspect_ratio": "1/1",
             "image": "shopify://shop_images/LP_-_ethan-001_-_Ethan_Cheng_4_5.jpg",
             "series": "The First Layer",
@@ -245,11 +273,25 @@
             "link": "shopify://pages/story-salon-ethan-cheng"
           }
         },
+        "card_6k7GGy": {
+          "type": "card",
+          "settings": {
+            "category_id": "first",
+            "aspect_ratio": "4/5",
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_715ffebd-a8fe-43ab-aae3-5e0228472ef6.jpg",
+            "series": "The First Layer",
+            "subject_name": "Sonia Seraphina",
+            "card_title": "Still trying, still her",
+            "card_desc": "A tattoo artist at Peonypink. Grungy, messy, controlled-ish — she shows up as herself, and that is the whole point.",
+            "link_text": "Explore",
+            "link": "shopify://pages/story-salon-sonia-seraphina"
+          }
+        },
         "card_cYngJP": {
           "type": "card",
           "settings": {
-            "category_id": "First",
-            "aspect_ratio": "1/1",
+            "category_id": "first",
+            "aspect_ratio": "3/4",
             "image": "shopify://shop_images/LP_-_kris-001_-_Kris_Chaser_3_4.jpg",
             "series": "The First Layer",
             "subject_name": "Kris Chaser",
@@ -259,32 +301,35 @@
             "link": "shopify://pages/story-salon-kris-chaser"
           }
         },
-        "card_ggg6pa": {
+        "card_Hpn6kw": {
           "type": "card",
           "settings": {
-            "category_id": "First",
-            "aspect_ratio": "3/4",
-            "image": "shopify://shop_images/LP_-_amos-001_-_Amos_Ashley_Chin_1_1.jpg",
+            "category_id": "first",
+            "aspect_ratio": "1/1",
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_12_ef36e761-a4d7-426a-a681-8d4f2fcbb642.jpg",
             "series": "The First Layer",
-            "subject_name": "Amos A Chin",
-            "card_title": "Wearing Honesty",
-            "card_desc": "Editor, model, maker. In an industry that rewards a polished surface, he leads with his feelings — and refuses to shrink.",
+            "subject_name": "Daphne Tan",
+            "card_title": "No Performance, No Mask",
+            "card_desc": "Illustrative, black and grey — what she puts on skin and what she wears carry the same intention.",
             "link_text": "Explore",
-            "link": "shopify://pages/story-salon-amos-a-chin"
+            "link": "shopify://pages/story-salon-daphne-tan"
           }
         }
       },
       "block_order": [
         "filter_ymLrnb",
         "filter_JVwHcJ",
-        "card_4kcKjN",
         "card_xyikAQ",
+        "card_4kcKjN",
         "card_mQaerz",
         "card_zCJaF4",
+        "card_ggg6pa",
+        "card_HkgHY7",
         "card_xCPchq",
         "card_hTK4yT",
+        "card_6k7GGy",
         "card_cYngJP",
-        "card_ggg6pa"
+        "card_Hpn6kw"
       ],
       "name": "Journal Feed",
       "settings": {
@@ -306,7 +351,7 @@
             "card_title": "Everyday Comfort, Upgraded",
             "card_desc": "Breathes, hugs and stretches with you. Natural breathability with the perfect snap-back — like a second skin.",
             "link_text": "Read story",
-            "link": "shopify://blogs/storysalon/story-salon-how-to-care-for-your-triiiples"
+            "link": ""
           }
         },
         "card_MHjkwY": {
@@ -320,7 +365,7 @@
             "card_title": "You don't wear the same mood everyday",
             "card_desc": "Some days are for lounging, others demand movement. Comfort and confidence in equal measure — built to last.",
             "link_text": "Read story",
-            "link": "shopify://blogs/storysalon/story-salon-how-to-chose-your-intimate-wear-size"
+            "link": ""
           }
         },
         "card_ENXqeL": {
@@ -334,7 +379,7 @@
             "card_title": "Meet our Fabric",
             "card_desc": "We refuse to compromise on the layer closest to your skin. Every thread, stitch and fabric serves a purpose.",
             "link_text": "Read story",
-            "link": "shopify://blogs/storysalon/story-salon-engineered-to-flex-made-to-last-meet-our-fabrics"
+            "link": ""
           }
         }
       },
@@ -399,21 +444,6 @@
         "title": "What They Wear",
         "subtitle": "Spotlight"
       }
-    },
-    "17802952390b83b768": {
-      "type": "apps",
-      "blocks": {
-        "klaviyo_email_marketing_sms_form_embed_block_aDKDKj": {
-          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
-          "settings": {
-            "formId": "<div class=\"klaviyo-form-U5igv3\"></div>"
-          }
-        }
-      },
-      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_aDKDKj"],
-      "settings": {
-        "include_margins": true
-      }
     }
   },
   "order": [
@@ -421,7 +451,6 @@
     "gallery_banner_P7wtj6",
     "story_feed_wL367e",
     "story_feed_q8MBC4",
-    "story_lookbook_rAcJzH",
-    "17802952390b83b768"
+    "story_lookbook_rAcJzH"
   ]
 }
