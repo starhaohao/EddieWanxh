@@ -1,0 +1,107 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign border_top_color = section.settings.border_top_color
+  assign accent = section.settings.accent_color
+  assign text = section.settings.text_color
+  assign muted = section.settings.muted_color
+-%}
+
+<div class="sts" style="--sts-bg:{{ bg }};--sts-btc:{{ border_top_color }};--sts-accent:{{ accent }};--sts-text:{{ text }};--sts-muted:{{ muted }};">
+  <div class="sts__items">
+    {%- for block in section.blocks -%}
+      <div class="sts__item" {{ block.shopify_attributes }}>
+        <span class="sts__pct">{{ block.settings.highlight }}</span>
+        <span>{{ block.settings.label }}</span>
+      </div>
+    {%- endfor -%}
+    {%- if section.settings.badge_text != blank -%}
+      <div class="sts__badge">{{ section.settings.badge_text }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .sts {
+    background: var(--sts-bg);
+    border-top: 2px solid var(--sts-btc);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sts__items {
+    display: flex;
+    align-items: center;
+  }
+  .sts__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 40px;
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sts-text);
+    border-right: 1px solid rgba(0,0,0,0.08);
+  }
+  .sts__item:last-of-type { border-right: none; }
+  .sts__pct {
+    font-size: 20px;
+    letter-spacing: -0.04em;
+    color: var(--sts-accent);
+  }
+  .sts__badge {
+    padding: 0 40px;
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sts-muted);
+    border-left: 1px solid rgba(0,0,0,0.08);
+  }
+  @media (max-width: 749px) {
+    .sts { height: auto; padding: 12px 16px; }
+    .sts__items { flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .sts__item { padding: 6px 16px; border-right: none; font-size: 9px; }
+    .sts__pct { font-size: 16px; }
+    .sts__badge { border-left: none; padding: 6px 16px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Sale Tier Strip",
+  "tag": "section",
+  "class": "sale-tier-strip-section",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#E7E3DC" },
+    { "type": "color", "id": "border_top_color", "label": "Top border", "default": "#923531" },
+    { "type": "color", "id": "accent_color", "label": "Highlight color", "default": "#923531" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#212529" },
+    { "type": "color", "id": "muted_color", "label": "Badge color", "default": "rgba(33,37,41,0.42)" },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "No code needed" }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Tier",
+      "settings": [
+        { "type": "text", "id": "highlight", "label": "Highlight", "default": "15%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "off — 3 items" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sale Tier Strip",
+      "blocks": [
+        { "type": "tier", "settings": { "highlight": "15%", "label": "off — 3 items" } },
+        { "type": "tier", "settings": { "highlight": "25%", "label": "off — 5 items" } },
+        { "type": "tier", "settings": { "highlight": "$50+", "label": "free shipping · SG" } }
+      ]
+    }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}

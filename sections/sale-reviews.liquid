@@ -1,0 +1,137 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign title_color = section.settings.title_color
+  assign card_bg = section.settings.card_bg
+  assign star_color = section.settings.star_color
+  assign quote_color = section.settings.quote_color
+  assign who_color = section.settings.who_color
+-%}
+
+<section class="sr" style="--sr-bg:{{ bg }};--sr-tc:{{ title_color }};--sr-cb:{{ card_bg }};--sr-star:{{ star_color }};--sr-qc:{{ quote_color }};--sr-wc:{{ who_color }};">
+  <div class="sr__header">
+    <h2 class="sr__title">{{ section.settings.heading }}</h2>
+    <div class="sr__meta">
+      <div class="sr__stars-big">★★★★★</div>
+      {{ section.settings.meta_text }}
+    </div>
+  </div>
+  <div class="sr__grid">
+    {%- for block in section.blocks -%}
+      <div class="sr__card" {{ block.shopify_attributes }}>
+        <div class="sr__stars">★★★★★</div>
+        <div class="sr__quote">"{{ block.settings.quote }}"</div>
+        <div class="sr__who">{{ block.settings.author }}</div>
+        {%- if block.settings.sku != blank -%}
+          <div class="sr__sku">{{ block.settings.sku }}</div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  .sr {
+    padding: 64px 40px;
+    background: var(--sr-bg);
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .sr__header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .sr__title {
+    font-size: 32px;
+    letter-spacing: -0.04em;
+    color: var(--sr-tc);
+    font-weight: 400;
+  }
+  .sr__meta {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sr-wc);
+  }
+  .sr__stars-big { color: var(--sr-star); font-size: 13px; letter-spacing: 2px; }
+  .sr__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .sr__card {
+    background: var(--sr-cb);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .sr__stars { color: var(--sr-star); font-size: 11px; letter-spacing: 2px; }
+  .sr__quote {
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
+    color: var(--sr-qc);
+  }
+  .sr__who {
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--sr-wc);
+  }
+  .sr__sku {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: rgba(0,0,0,0.15);
+    margin-top: auto;
+  }
+  @media (max-width: 749px) {
+    .sr { padding: 40px 16px; }
+    .sr__grid { grid-template-columns: 1fr; }
+    .sr__header { flex-direction: column; gap: 8px; }
+    .sr__title { font-size: 24px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Sale Reviews",
+  "tag": "div",
+  "class": "sale-reviews-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What they say." },
+    { "type": "text", "id": "meta_text", "label": "Meta text", "default": "4.9 · 214 reviews" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2EFE9" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#212529" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#E7E3DC" },
+    { "type": "color", "id": "star_color", "label": "Star color", "default": "#923531" },
+    { "type": "color", "id": "quote_color", "label": "Quote color", "default": "#212529" },
+    { "type": "color", "id": "who_color", "label": "Author color", "default": "rgba(33,37,41,0.42)" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "quote", "label": "Quote", "default": "Best underwear I've owned. Period." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Marcus T. — Verified buyer" },
+        { "type": "text", "id": "sku", "label": "Product SKU", "default": "Studio Brief · Black · M" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sale Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "quote": "Best underwear I've owned. Period.", "author": "Marcus T. — Verified buyer", "sku": "Studio Brief · Black · M" } },
+        { "type": "review", "settings": { "quote": "Bought 3 packs. Won't go back to anything else.", "author": "James L. — Verified buyer", "sku": "Boxer Trunk · White · L" } },
+        { "type": "review", "settings": { "quote": "The fit is surgical. Exactly what I needed.", "author": "Ryan K. — Verified buyer", "sku": "Studio Brief · Black · S" } }
+      ]
+    }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}

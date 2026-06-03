@@ -1,0 +1,106 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign border = section.settings.border_color
+  assign cat_color = section.settings.category_color
+  assign title_color = section.settings.title_color
+  assign desc_color = section.settings.desc_color
+-%}
+
+<section class="sp" style="--sp-bg:{{ bg }};--sp-bd:{{ border }};--sp-cat:{{ cat_color }};--sp-tc:{{ title_color }};--sp-dc:{{ desc_color }};">
+  <div class="sp__grid">
+    {%- for block in section.blocks -%}
+      <div class="sp__card" {{ block.shopify_attributes }}>
+        {%- if block.settings.icon != blank -%}
+          <img class="sp__icon" src="{{ block.settings.icon | image_url: width: 48 }}" alt="" loading="lazy">
+        {%- endif -%}
+        <div class="sp__cat">{{ block.settings.category }}</div>
+        <div class="sp__title">{{ block.settings.title }}</div>
+        <div class="sp__desc">{{ block.settings.description }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  .sp {
+    padding: 64px 40px;
+    background: var(--sp-bg);
+  }
+  .sp__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .sp__card {
+    padding: 36px 28px;
+    border: 1px solid var(--sp-bd);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sp__icon { width: 22px; height: 22px; opacity: 0.35; }
+  .sp__cat {
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--sp-cat);
+  }
+  .sp__title {
+    font-size: 20px;
+    letter-spacing: -0.03em;
+    color: var(--sp-tc);
+    line-height: 1.1;
+  }
+  .sp__desc {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--sp-dc);
+  }
+  @media (max-width: 749px) {
+    .sp { padding: 40px 16px; }
+    .sp__grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .sp__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Sale Pillars",
+  "tag": "div",
+  "class": "sale-pillars-section",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#212529" },
+    { "type": "color", "id": "border_color", "label": "Border", "default": "rgba(255,255,255,0.11)" },
+    { "type": "color", "id": "category_color", "label": "Category color", "default": "#923531" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#ffffff" },
+    { "type": "color", "id": "desc_color", "label": "Description color", "default": "rgba(255,255,255,0.42)" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "category", "label": "Category", "default": "Technology" },
+        { "type": "text", "id": "title", "label": "Title", "default": "TransDRY®" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Moisture-wicking micro-channel fabric. Stays dry under pressure." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sale Pillars",
+      "blocks": [
+        { "type": "pillar", "settings": { "category": "Technology", "title": "TransDRY®", "description": "Moisture-wicking micro-channel fabric. Stays dry under pressure." } },
+        { "type": "pillar", "settings": { "category": "Material", "title": "Cotton Spandex", "description": "72% Pima cotton, 20% modal, 8% elastane. Moves with you." } },
+        { "type": "pillar", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Conceived in Singapore. Precision-crafted in Thailand." } },
+        { "type": "pillar", "settings": { "category": "Performance", "title": "Made to Move", "description": "Contoured pouch. Double-stitched waistband. Zero ride-up." } }
+      ]
+    }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}

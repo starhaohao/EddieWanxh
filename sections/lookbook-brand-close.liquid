@@ -1,0 +1,49 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign headline_color = section.settings.headline_color
+  assign spec_color = section.settings.spec_color
+  assign cta_bg = section.settings.cta_bg
+  assign cta_text = section.settings.cta_text
+  assign headline_size = section.settings.headline_size
+-%}
+<section class="lbc" style="--lbc-bg:{{ bg }};--lbc-hc:{{ headline_color }};--lbc-sc:{{ spec_color }};--lbc-cb:{{ cta_bg }};--lbc-ct:{{ cta_text }};--lbc-hs:{{ headline_size }}px;">
+  {%- if section.settings.logo != blank -%}
+    <div class="lbc__logo"><img src="{{ section.settings.logo | image_url: width: 200 }}" alt=""></div>
+  {%- endif -%}
+  <div class="lbc__headline">{{ section.settings.headline }}</div>
+  <div class="lbc__spec">{{ section.settings.spec }}</div>
+  {%- if section.settings.cta_text != blank -%}
+    <a class="lbc__cta" href="{{ section.settings.cta_url | default: '#' }}">{{ section.settings.cta_label }} →</a>
+  {%- endif -%}
+</section>
+<style>
+  .lbc { background:var(--lbc-bg); padding:80px 40px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; }
+  .lbc__logo img { height:13px; opacity:0.35; }
+  .lbc__headline { font-size:var(--lbc-hs); letter-spacing:-0.04em; line-height:1.1; color:var(--lbc-hc); max-width:360px; font-weight:400; }
+  .lbc__spec { font-family:monospace; font-size:9px; text-transform:uppercase; letter-spacing:0.18em; color:var(--lbc-sc); }
+  .lbc__cta { margin-top:10px; display:inline-flex; align-items:center; background:var(--lbc-cb); color:var(--lbc-ct); padding:14px 30px; font-family:monospace; font-size:9px; letter-spacing:0.18em; text-transform:uppercase; text-decoration:none; transition:opacity 0.2s; }
+  .lbc__cta:hover { opacity:0.85; }
+  @media (max-width:749px){ .lbc{ padding:60px 20px; } .lbc__headline{ font-size:calc(var(--lbc-hs) * 0.7); max-width:280px; } }
+</style>
+{% schema %}
+{
+  "name":"Lookbook Brand Close",
+  "tag":"div",
+  "class":"lookbook-brand-close-section",
+  "settings":[
+    { "type":"color","id":"bg_color","label":"Background","default":"#111214" },
+    { "type":"color","id":"headline_color","label":"Headline color","default":"rgba(255,255,255,0.65)" },
+    { "type":"color","id":"spec_color","label":"Spec color","default":"rgba(255,255,255,0.2)" },
+    { "type":"color","id":"cta_bg","label":"CTA background","default":"#923531" },
+    { "type":"color","id":"cta_text","label":"CTA text","default":"#ffffff" },
+    { "type":"range","id":"headline_size","label":"Headline size (px)","min":20,"max":56,"step":2,"default":36 },
+    { "type":"image_picker","id":"logo","label":"Logo" },
+    { "type":"text","id":"headline","label":"Headline","default":"Engineered underwear. Nothing more." },
+    { "type":"text","id":"spec","label":"Spec line","default":"Pima cotton · Modal · TransDRY®" },
+    { "type":"text","id":"cta_label","label":"CTA label","default":"Shop the Range" },
+    { "type":"url","id":"cta_url","label":"CTA url" }
+  ],
+  "presets":[{ "name":"Lookbook Brand Close" }],
+  "templates":["page"]
+}
+{% endschema %}

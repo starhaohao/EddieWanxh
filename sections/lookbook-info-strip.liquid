@@ -1,0 +1,29 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign text = section.settings.text_color
+  assign border = section.settings.border_color
+-%}
+<div class="lbs" style="--lbs-bg:{{ bg }};--lbs-tc:{{ text }};--lbs-bd:{{ border }};">
+  <span class="lbs__l">{{ section.settings.left_text }}</span>
+  <span class="lbs__r">{{ section.settings.right_text }}</span>
+</div>
+<style>
+  .lbs { padding:14px 40px; background:var(--lbs-bg); border-bottom:1px solid var(--lbs-bd); display:flex; justify-content:space-between; align-items:center; font-family:monospace; font-size:9px; text-transform:uppercase; letter-spacing:0.14em; color:var(--lbs-tc); }
+  @media (max-width:749px){ .lbs{ padding:13px 20px; } .lbs__r{ display:none; } }
+</style>
+{% schema %}
+{
+  "name":"Lookbook Info Strip",
+  "tag":"div",
+  "class":"lookbook-info-strip-section",
+  "settings":[
+    { "type":"color","id":"bg_color","label":"Background","default":"#FAFAF8" },
+    { "type":"color","id":"text_color","label":"Text color","default":"rgba(17,18,20,0.4)" },
+    { "type":"color","id":"border_color","label":"Border","default":"rgba(17,18,20,0.08)" },
+    { "type":"text","id":"left_text","label":"Left text","default":"3 styles · 3 colorways · Designed in SG" },
+    { "type":"text","id":"right_text","label":"Right text","default":"6 products" }
+  ],
+  "presets":[{ "name":"Lookbook Info Strip" }],
+  "templates":["page"]
+}
+{% endschema %}

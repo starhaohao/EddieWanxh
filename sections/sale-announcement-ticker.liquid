@@ -1,0 +1,94 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign text_color = section.settings.text_color
+  assign dot_color = section.settings.dot_color
+  assign speed = section.settings.speed
+  assign bar_height = section.settings.bar_height
+  assign font_size = section.settings.font_size
+-%}
+
+<div class="sat" style="--sat-bg:{{ bg }};--sat-text:{{ text_color }};--sat-dot:{{ dot_color }};--sat-speed:{{ speed }}s;--sat-h:{{ bar_height }}px;--sat-fs:{{ font_size }}px;">
+  <div class="sat__track">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span class="sat__item">{{ block.settings.text }}</span>
+        {%- unless forloop.last and i == 2 -%}<span class="sat__dot"></span>{%- endunless -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<style>
+  .sat {
+    background: var(--sat-bg);
+    height: var(--sat-h);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .sat__track {
+    display: flex;
+    white-space: nowrap;
+    animation: sat-scroll var(--sat-speed) linear infinite;
+  }
+  .sat__track:hover { animation-play-state: paused; }
+  @keyframes sat-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .sat__item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 28px;
+    font-family: monospace;
+    font-size: var(--sat-fs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sat-text);
+  }
+  .sat__dot {
+    width: 3px; height: 3px;
+    background: var(--sat-dot);
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Sale Ticker",
+  "tag": "section",
+  "class": "sale-ticker-section",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#923531" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" },
+    { "type": "color", "id": "dot_color", "label": "Dot color", "default": "rgba(255,255,255,0.5)" },
+    { "type": "range", "id": "speed", "label": "Scroll speed (seconds)", "min": 10, "max": 60, "step": 2, "default": 26 },
+    { "type": "range", "id": "bar_height", "label": "Bar height (px)", "min": 28, "max": 56, "step": 2, "default": 38 },
+    { "type": "range", "id": "font_size", "label": "Font size (px)", "min": 8, "max": 14, "step": 1, "default": 10 }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Buy 3 · 15% Off" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sale Ticker",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Buy 3 · 15% Off" } },
+        { "type": "message", "settings": { "text": "Buy 5 · 25% Off" } },
+        { "type": "message", "settings": { "text": "New Customer · 10% Off First Order" } },
+        { "type": "message", "settings": { "text": "Free Shipping Over $50 · SG" } },
+        { "type": "message", "settings": { "text": "Final Stock · No Restock" } },
+        { "type": "message", "settings": { "text": "No Code Needed" } }
+      ]
+    }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}

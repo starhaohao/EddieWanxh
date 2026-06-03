@@ -1,0 +1,93 @@
+{
+  "sections": {
+    "sale_ticker": {
+      "type": "sale-announcement-ticker",
+      "blocks": {
+        "msg_1": { "type": "message", "settings": { "text": "Buy 3 · 15% Off" } },
+        "msg_2": { "type": "message", "settings": { "text": "Buy 5 · 25% Off" } },
+        "msg_3": { "type": "message", "settings": { "text": "New Customer · 10% Off First Order" } },
+        "msg_4": { "type": "message", "settings": { "text": "Free Shipping Over $50 · SG" } },
+        "msg_5": { "type": "message", "settings": { "text": "Final Stock · No Restock" } },
+        "msg_6": { "type": "message", "settings": { "text": "No Code Needed" } }
+      },
+      "block_order": ["msg_1", "msg_2", "msg_3", "msg_4", "msg_5", "msg_6"],
+      "settings": {}
+    },
+    "sale_hero": {
+      "type": "sale-hero",
+      "blocks": {
+        "ghost_1": { "type": "ghost_cta", "settings": { "label": "Briefs" } },
+        "ghost_2": { "type": "ghost_cta", "settings": { "label": "Boxer Trunks" } },
+        "ghost_3": { "type": "ghost_cta", "settings": { "label": "Tops" } }
+      },
+      "block_order": ["ghost_1", "ghost_2", "ghost_3"],
+      "settings": {}
+    },
+    "sale_tiers": {
+      "type": "sale-tier-strip",
+      "blocks": {
+        "tier_1": { "type": "tier", "settings": { "highlight": "15%", "label": "off — 3 items" } },
+        "tier_2": { "type": "tier", "settings": { "highlight": "25%", "label": "off — 5 items" } },
+        "tier_3": { "type": "tier", "settings": { "highlight": "$50+", "label": "free shipping · SG" } }
+      },
+      "block_order": ["tier_1", "tier_2", "tier_3"],
+      "settings": {}
+    },
+    "sale_collections": {
+      "type": "sale-collection-grid",
+      "blocks": {
+        "tile_1": { "type": "tile", "settings": { "title": "Briefs" } },
+        "tile_2": { "type": "tile", "settings": { "title": "Boxer Trunks" } },
+        "tile_3": { "type": "tile", "settings": { "title": "Tops" } },
+        "tile_4": { "type": "tile", "settings": { "title": "Socks" } }
+      },
+      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4"],
+      "settings": {}
+    },
+    "sale_pillars": {
+      "type": "sale-pillars",
+      "blocks": {
+        "p_1": { "type": "pillar", "settings": { "category": "Technology", "title": "TransDRY®", "description": "Moisture-wicking micro-channel fabric. Stays dry under pressure." } },
+        "p_2": { "type": "pillar", "settings": { "category": "Material", "title": "Cotton Spandex", "description": "72% Pima cotton, 20% modal, 8% elastane. Moves with you." } },
+        "p_3": { "type": "pillar", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Conceived in Singapore. Precision-crafted in Thailand." } },
+        "p_4": { "type": "pillar", "settings": { "category": "Performance", "title": "Made to Move", "description": "Contoured pouch. Double-stitched waistband. Zero ride-up." } }
+      },
+      "block_order": ["p_1", "p_2", "p_3", "p_4"],
+      "settings": {}
+    },
+    "sale_reviews": {
+      "type": "sale-reviews",
+      "blocks": {
+        "r_1": { "type": "review", "settings": { "quote": "Best underwear I've owned. Period.", "author": "Marcus T. — Verified buyer", "sku": "Studio Brief · Black · M" } },
+        "r_2": { "type": "review", "settings": { "quote": "Bought 3 packs. Won't go back to anything else.", "author": "James L. — Verified buyer", "sku": "Boxer Trunk · White · L" } },
+        "r_3": { "type": "review", "settings": { "quote": "The fit is surgical. Exactly what I needed.", "author": "Ryan K. — Verified buyer", "sku": "Studio Brief · Black · S" } }
+      },
+      "block_order": ["r_1", "r_2", "r_3"],
+      "settings": {}
+    },
+    "sale_klaviyo": {
+      "type": "sale-klaviyo",
+      "blocks": {
+        "perk_1": { "type": "perk", "settings": { "text": "No spam" } },
+        "perk_2": { "type": "perk", "settings": { "text": "Unsubscribe anytime" } },
+        "perk_3": { "type": "perk", "settings": { "text": "SG only" } }
+      },
+      "block_order": ["perk_1", "perk_2", "perk_3"],
+      "settings": {}
+    },
+    "sale_brand_story": {
+      "type": "sale-brand-story",
+      "settings": {}
+    }
+  },
+  "order": [
+    "sale_ticker",
+    "sale_hero",
+    "sale_tiers",
+    "sale_collections",
+    "sale_pillars",
+    "sale_reviews",
+    "sale_klaviyo",
+    "sale_brand_story"
+  ]
+}

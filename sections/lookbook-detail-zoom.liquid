@@ -1,0 +1,90 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign border = section.settings.border_color
+  assign title_color = section.settings.title_color
+  assign meta_color = section.settings.meta_color
+  assign label_bg = section.settings.label_bg
+  assign label_text = section.settings.label_text
+  assign label_spec = section.settings.label_spec
+  assign title_size = section.settings.title_size
+-%}
+<section class="ldz" style="--ldz-bg:{{ bg }};--ldz-bd:{{ border }};--ldz-tc:{{ title_color }};--ldz-mc:{{ meta_color }};--ldz-lb:{{ label_bg }};--ldz-lt:{{ label_text }};--ldz-ls:{{ label_spec }};--ldz-ts:{{ title_size }}px;">
+  <div class="ldz__head">
+    <h2 class="ldz__title">{{ section.settings.heading }}</h2>
+    <span class="ldz__meta">{{ section.settings.meta }}</span>
+  </div>
+  <div class="ldz__grid">
+    {%- for block in section.blocks -%}
+      <div class="ldz__cell{% if block.settings.full_width %} ldz__cell--full{% endif %}" {{ block.shopify_attributes }} style="--zx:{{ block.settings.zoom_x }}%;--zy:{{ block.settings.zoom_y }}%;--zs:{{ block.settings.zoom_scale }};">
+        {%- if block.settings.image != blank -%}
+          <img src="{{ block.settings.image | image_url: width: 1400 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
+        {%- endif -%}
+        <div class="ldz__label">
+          <span class="ldz__name">{{ block.settings.name }}</span>
+          <span class="ldz__spec">{{ block.settings.spec }}</span>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+<style>
+  .ldz { background:var(--ldz-bg); padding-top:44px; }
+  .ldz__head { padding:0 40px 24px; display:flex; justify-content:space-between; align-items:baseline; }
+  .ldz__title { font-size:var(--ldz-ts); letter-spacing:-0.04em; color:var(--ldz-tc); font-weight:400; }
+  .ldz__meta { font-family:monospace; font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:var(--ldz-mc); }
+  .ldz__grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--ldz-bd); }
+  .ldz__cell { position:relative; overflow:hidden; aspect-ratio:1/1; background:#EDEAE3; }
+  .ldz__cell img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.9s ease; object-position:var(--zx) var(--zy); transform:scale(var(--zs)); }
+  .ldz__cell:hover img { transform:scale(calc(var(--zs) + 0.1)); }
+  .ldz__cell--full { grid-column:1 / -1; aspect-ratio:21/6; }
+  .ldz__label { position:absolute; bottom:0; left:0; right:0; background:var(--ldz-lb); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); padding:10px 14px; display:flex; justify-content:space-between; align-items:baseline; }
+  .ldz__name { font-size:14px; letter-spacing:-0.02em; color:var(--ldz-lt); }
+  .ldz__spec { font-family:monospace; font-size:8px; text-transform:uppercase; letter-spacing:0.12em; color:var(--ldz-ls); }
+  @media (max-width:749px){ .ldz__head{ padding:0 20px 24px; } .ldz__grid{ grid-template-columns:1fr 1fr; } .ldz__cell--full{ aspect-ratio:16/7; } }
+</style>
+{% schema %}
+{
+  "name":"Lookbook Detail Zoom",
+  "tag":"div",
+  "class":"lookbook-detail-zoom-section",
+  "settings":[
+    { "type":"text","id":"heading","label":"Heading","default":"Up close." },
+    { "type":"text","id":"meta","label":"Meta","default":"Construction · Fabric · Fit" },
+    { "type":"color","id":"bg_color","label":"Background","default":"#FAFAF8" },
+    { "type":"color","id":"border_color","label":"Grid gap color","default":"rgba(17,18,20,0.08)" },
+    { "type":"color","id":"title_color","label":"Title color","default":"#111214" },
+    { "type":"color","id":"meta_color","label":"Meta color","default":"rgba(17,18,20,0.4)" },
+    { "type":"color","id":"label_bg","label":"Label background","default":"rgba(250,250,248,0.9)" },
+    { "type":"color","id":"label_text","label":"Label text","default":"#111214" },
+    { "type":"color","id":"label_spec","label":"Label spec","default":"rgba(17,18,20,0.4)" },
+    { "type":"range","id":"title_size","label":"Title size (px)","min":20,"max":56,"step":2,"default":28 }
+  ],
+  "blocks":[
+    {
+      "type":"zoom","name":"Zoom cell",
+      "settings":[
+        { "type":"image_picker","id":"image","label":"Image" },
+        { "type":"text","id":"name","label":"Name","default":"Waistband" },
+        { "type":"text","id":"spec","label":"Spec","default":"4cm Jacquard" },
+        { "type":"range","id":"zoom_x","label":"Zoom X (%)","min":0,"max":100,"step":2,"default":50 },
+        { "type":"range","id":"zoom_y","label":"Zoom Y (%)","min":0,"max":100,"step":2,"default":40 },
+        { "type":"range","id":"zoom_scale","label":"Zoom scale","min":1,"max":3,"step":0.1,"default":2.2 },
+        { "type":"checkbox","id":"full_width","label":"Full width","default":false }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"Lookbook Detail Zoom",
+      "blocks":[
+        { "type":"zoom","settings":{"name":"Waistband","spec":"4cm Jacquard","zoom_x":50,"zoom_y":34,"zoom_scale":2.1} },
+        { "type":"zoom","settings":{"name":"Fabric","spec":"TransDRY®","zoom_x":50,"zoom_y":54,"zoom_scale":2.4} },
+        { "type":"zoom","settings":{"name":"Seam","spec":"Flatlock stitch","zoom_x":38,"zoom_y":48,"zoom_scale":2.6} },
+        { "type":"zoom","settings":{"name":"Profile","spec":"Low-rise contour","zoom_x":60,"zoom_y":42,"zoom_scale":2.2} },
+        { "type":"zoom","settings":{"name":"Studio Collection · 2025","spec":"Designed SG · Crafted TH","zoom_x":50,"zoom_y":28,"zoom_scale":1.4,"full_width":true} }
+      ]
+    }
+  ],
+  "templates":["page"]
+}
+{% endschema %}

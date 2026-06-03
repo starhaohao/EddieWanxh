@@ -1,0 +1,209 @@
+{%- liquid
+  assign overlay_from = section.settings.overlay_from
+  assign overlay_to = section.settings.overlay_to
+  assign eyebrow_color = section.settings.eyebrow_color
+  assign title_size = section.settings.title_size
+  assign hero_height = section.settings.hero_height
+-%}
+
+<section class="sh" style="--sh-h:{{ hero_height }}vh;--sh-ov1:{{ overlay_from }};--sh-ov2:{{ overlay_to }};--sh-eye:{{ eyebrow_color }};--sh-ts:{{ title_size }}px;">
+  {%- if section.settings.image != blank -%}
+    <img class="sh__img" src="{{ section.settings.image | image_url: width: 2400 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
+  {%- else -%}
+    <div class="sh__img sh__img--placeholder"></div>
+  {%- endif -%}
+  <div class="sh__overlay"></div>
+
+  {%- if section.settings.show_urgency -%}
+  <div class="sh__urgency">
+    <div class="sh__urgency-label">{{ section.settings.urgency_label }}</div>
+    <div class="sh__urgency-tag">{{ section.settings.urgency_text }}</div>
+  </div>
+  {%- endif -%}
+
+  <div class="sh__content">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="sh__eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h1 class="sh__title">{{ section.settings.title }}</h1>
+    {%- if section.settings.subtitle != blank -%}
+      <div class="sh__sub">{{ section.settings.subtitle }}</div>
+    {%- endif -%}
+    <div class="sh__ctas">
+      {%- if section.settings.cta_text != blank -%}
+        <a class="sh__cta" href="{{ section.settings.cta_url }}" style="background:{{ section.settings.cta_bg }};color:{{ section.settings.cta_text_color }};">{{ section.settings.cta_text }} →</a>
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        <a class="sh__cta-ghost" href="{{ block.settings.url }}">{{ block.settings.label }}</a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sh {
+    position: relative;
+    height: var(--sh-h);
+    min-height: 500px;
+    overflow: hidden;
+  }
+  .sh__img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+  .sh__img--placeholder {
+    background: #1a1d20;
+  }
+  .sh__overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--sh-ov1) 0%, var(--sh-ov2) 52%, rgba(10,10,10,0.04) 100%);
+  }
+  .sh__urgency {
+    position: absolute;
+    top: 40px; right: 48px;
+    text-align: right;
+    z-index: 2;
+  }
+  .sh__urgency-label {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 6px;
+  }
+  .sh__urgency-tag {
+    font-size: 13px;
+    letter-spacing: -0.02em;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+  }
+  .sh__content {
+    position: absolute;
+    bottom: 72px; left: 64px;
+    max-width: 520px;
+    z-index: 2;
+  }
+  .sh__eyebrow {
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sh-eye);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sh__eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--sh-eye);
+  }
+  .sh__title {
+    font-size: clamp(36px, 5.8vw, var(--sh-ts));
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.96;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .sh__sub {
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+    line-height: 2.2;
+  }
+  .sh__ctas {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .sh__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .sh__cta:hover { opacity: 0.85; }
+  .sh__cta-ghost {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.28);
+    padding: 13px 22px;
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .sh__cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+
+  @media (max-width: 749px) {
+    .sh__content { bottom: 40px; left: 24px; right: 24px; }
+    .sh__urgency { top: 20px; right: 20px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Sale Hero",
+  "tag": "div",
+  "class": "sale-hero-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "range", "id": "hero_height", "label": "Height (vh)", "min": 50, "max": 100, "step": 2, "default": 92 },
+    { "type": "color", "id": "overlay_from", "label": "Overlay start", "default": "rgba(10,10,10,0.75)" },
+    { "type": "color", "id": "overlay_to", "label": "Overlay end", "default": "rgba(10,10,10,0.32)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Final Clearance" },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow color", "default": "#923531" },
+    { "type": "richtext", "id": "title", "label": "Title", "default": "<p>The<br>Last Run.</p>" },
+    { "type": "range", "id": "title_size", "label": "Title max size (px)", "min": 36, "max": 120, "step": 2, "default": 84 },
+    { "type": "richtext", "id": "subtitle", "label": "Subtitle", "default": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br>Free shipping over $50 · Singapore</p>" },
+    { "type": "text", "id": "cta_text", "label": "Primary CTA text", "default": "Shop All" },
+    { "type": "url", "id": "cta_url", "label": "Primary CTA link" },
+    { "type": "color", "id": "cta_bg", "label": "CTA background", "default": "#923531" },
+    { "type": "color", "id": "cta_text_color", "label": "CTA text color", "default": "#ffffff" },
+    { "type": "checkbox", "id": "show_urgency", "label": "Show urgency tag", "default": true },
+    { "type": "text", "id": "urgency_label", "label": "Urgency label", "default": "Stock Status" },
+    { "type": "richtext", "id": "urgency_text", "label": "Urgency text", "default": "<p>Final stock.<br>No restock.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "ghost_cta",
+      "name": "Ghost CTA",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Briefs" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sale Hero",
+      "blocks": [
+        { "type": "ghost_cta", "settings": { "label": "Briefs" } },
+        { "type": "ghost_cta", "settings": { "label": "Boxer Trunks" } },
+        { "type": "ghost_cta", "settings": { "label": "Tops" } }
+      ]
+    }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}
