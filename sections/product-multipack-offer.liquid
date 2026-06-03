@@ -1,0 +1,460 @@
+{% comment %}
+  Multi-Pack Offer — product page only
+  Renders a tier selector (1 / 3 / 5 pack) with radio buttons, save tags,
+  and an ATC button that adds the correct quantity to cart.
+  Discount is applied via Shopify automatic discount (set up separately in admin).
+{% endcomment %}
+
+{%- liquid
+  assign base_price = product.selected_or_first_available_variant.price
+  assign t1_qty   = section.settings.tier1_qty
+  assign t1_disc  = section.settings.tier1_discount
+  assign t2_qty   = section.settings.tier2_qty
+  assign t2_disc  = section.settings.tier2_discount
+  assign t3_qty   = section.settings.tier3_qty
+  assign t3_disc  = section.settings.tier3_discount
+-%}
+
+<div class="mpo" data-section-id="{{ section.id }}" data-base-price="{{ base_price }}">
+
+  <p class="mpo__label">{{ section.settings.label }}</p>
+
+  <div class="mpo__tiers" role="radiogroup" aria-label="Pack size">
+
+    {%- comment -%} ── TIER 1 ── {%- endcomment -%}
+    {%- assign t1_total  = base_price | times: t1_qty -%}
+    {%- assign t1_saving = 0 -%}
+    <label class="mpo__tier{% if section.settings.default_tier == 1 %} is-on{% endif %}"
+           data-qty="{{ t1_qty }}"
+           data-total="{{ t1_total | money }}"
+           data-unit="{{ base_price | money }}"
+           data-compare="">
+      <input class="mpo__radio-input" type="radio" name="mpo-{{ section.id }}"
+             value="{{ t1_qty }}"{% if section.settings.default_tier == 1 %} checked{% endif %}
+             aria-label="{{ t1_qty }} Pack">
+      <span class="mpo__radio" aria-hidden="true"><span class="mpo__radio-dot"></span></span>
+      <span class="mpo__info">
+        <span class="mpo__name">{{ t1_qty }} Pack</span>
+        <span class="mpo__sub">Single unit</span>
+      </span>
+      <span class="mpo__pricing">
+        <span class="mpo__total">{{ t1_total | money }}</span>
+        <span class="mpo__unit">{{ base_price | money }} / unit</span>
+      </span>
+    </label>
+
+    {%- comment -%} ── TIER 2 ── {%- endcomment -%}
+    {%- assign t2_disc_mult  = t2_disc | times: 1.0 | divided_by: 100 -%}
+    {%- assign t2_unit_disc  = base_price | times: t2_disc_mult | round -%}
+    {%- assign t2_unit_price = base_price | minus: t2_unit_disc -%}
+    {%- assign t2_total      = t2_unit_price | times: t2_qty -%}
+    {%- assign t2_compare    = base_price | times: t2_qty -%}
+    {%- assign t2_saving     = t2_compare | minus: t2_total -%}
+    <label class="mpo__tier{% if section.settings.default_tier == 2 %} is-on{% endif %}"
+           data-qty="{{ t2_qty }}"
+           data-total="{{ t2_total | money }}"
+           data-unit="{{ t2_unit_price | money }}"
+           data-compare="{{ t2_compare | money }}">
+      <input class="mpo__radio-input" type="radio" name="mpo-{{ section.id }}"
+             value="{{ t2_qty }}"{% if section.settings.default_tier == 2 %} checked{% endif %}
+             aria-label="{{ t2_qty }} Pack — Save {{ t2_disc }}%">
+      <span class="mpo__radio" aria-hidden="true"><span class="mpo__radio-dot"></span></span>
+      <span class="mpo__info">
+        <span class="mpo__name">{{ t2_qty }} Pack</span>
+        <span class="mpo__sub">Save {{ t2_disc }}%</span>
+      </span>
+      <span class="mpo__pricing">
+        <span class="mpo__total">{{ t2_total | money }}</span>
+        <span class="mpo__unit">{{ t2_unit_price | money }} / unit</span>
+        <span class="mpo__compare">{{ t2_compare | money }}</span>
+      </span>
+      <span class="mpo__save-tag" aria-hidden="true">Save {{ t2_saving | money }}</span>
+    </label>
+
+    {%- comment -%} ── TIER 3 ── {%- endcomment -%}
+    {%- assign t3_disc_mult  = t3_disc | times: 1.0 | divided_by: 100 -%}
+    {%- assign t3_unit_disc  = base_price | times: t3_disc_mult | round -%}
+    {%- assign t3_unit_price = base_price | minus: t3_unit_disc -%}
+    {%- assign t3_total      = t3_unit_price | times: t3_qty -%}
+    {%- assign t3_compare    = base_price | times: t3_qty -%}
+    {%- assign t3_saving     = t3_compare | minus: t3_total -%}
+    <label class="mpo__tier{% if section.settings.default_tier == 3 %} is-on{% endif %}"
+           data-qty="{{ t3_qty }}"
+           data-total="{{ t3_total | money }}"
+           data-unit="{{ t3_unit_price | money }}"
+           data-compare="{{ t3_compare | money }}">
+      <input class="mpo__radio-input" type="radio" name="mpo-{{ section.id }}"
+             value="{{ t3_qty }}"{% if section.settings.default_tier == 3 %} checked{% endif %}
+             aria-label="{{ t3_qty }} Pack — Save {{ t3_disc }}%">
+      <span class="mpo__radio" aria-hidden="true"><span class="mpo__radio-dot"></span></span>
+      <span class="mpo__info">
+        <span class="mpo__name">{{ t3_qty }} Pack</span>
+        <span class="mpo__sub">Save {{ t3_disc }}%</span>
+      </span>
+      <span class="mpo__pricing">
+        <span class="mpo__total">{{ t3_total | money }}</span>
+        <span class="mpo__unit">{{ t3_unit_price | money }} / unit</span>
+        <span class="mpo__compare">{{ t3_compare | money }}</span>
+      </span>
+      <span class="mpo__save-tag" aria-hidden="true">Save {{ t3_saving | money }}</span>
+    </label>
+
+  </div>
+
+  <button
+    class="mpo__atc"
+    id="mpo-atc-{{ section.id }}"
+    type="button"
+    data-variant="{{ product.selected_or_first_available_variant.id }}"
+    aria-live="polite">
+    <span class="mpo__atc-qty" id="mpo-qty-text-{{ section.id }}">
+      {%- if section.settings.default_tier == 1 -%}Add {{ t1_qty }} to cart
+      {%- elsif section.settings.default_tier == 2 -%}Add {{ t2_qty }} to cart
+      {%- else -%}Add {{ t3_qty }} to cart
+      {%- endif -%}
+    </span>
+    <span class="mpo__atc-sub" id="mpo-sub-text-{{ section.id }}">
+      {%- if section.settings.default_tier == 1 -%}{{ t1_total | money }}
+      {%- elsif section.settings.default_tier == 2 -%}{{ t2_total | money }}
+      {%- else -%}{{ t3_total | money }}
+      {%- endif -%}
+      &nbsp;·&nbsp; free shipping
+    </span>
+  </button>
+
+</div>
+
+<style>
+  .mpo {
+    --mpo-bg:       #212529;
+    --mpo-raised:   #2c3035;
+    --mpo-border:   rgba(255,255,255,0.12);
+    --mpo-text:     #fff;
+    --mpo-muted:    rgba(255,255,255,0.45);
+    --mpo-crimson:  #923531;
+    --mpo-crimson-h:#7d2e2a;
+    --mpo-mono:     'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  /* label */
+  .mpo__label {
+    font-family: var(--mpo-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--mpo-muted);
+    margin-bottom: 12px;
+  }
+
+  /* tier list */
+  .mpo__tiers { border: 1px solid var(--mpo-border); }
+
+  /* individual tier row */
+  .mpo__tier {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 16px;
+    border-bottom: 1px solid var(--mpo-border);
+    cursor: pointer;
+    position: relative;
+    transition: background 0.18s;
+    background: var(--mpo-bg);
+    border-left: 2px solid transparent;
+    user-select: none;
+  }
+  .mpo__tier:last-child { border-bottom: none; }
+  .mpo__tier.is-on {
+    background: var(--mpo-raised);
+    border-left-color: var(--mpo-crimson);
+  }
+  .mpo__tier:hover:not(.is-on) { background: rgba(255,255,255,0.02); }
+
+  /* hide native radio */
+  .mpo__radio-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  /* custom radio */
+  .mpo__radio {
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.18s;
+  }
+  .mpo__tier.is-on .mpo__radio { border-color: var(--mpo-crimson); }
+  .mpo__radio-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--mpo-crimson);
+    transform: scale(0);
+    transition: transform 0.18s;
+  }
+  .mpo__tier.is-on .mpo__radio-dot { transform: scale(1); }
+
+  /* text block */
+  .mpo__info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .mpo__name {
+    font-size: 17px;
+    letter-spacing: -0.03em;
+    color: var(--mpo-text);
+  }
+  .mpo__sub {
+    font-family: var(--mpo-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mpo-muted);
+  }
+
+  /* pricing block */
+  .mpo__pricing { text-align: right; display: flex; flex-direction: column; gap: 2px; }
+  .mpo__total { font-size: 15px; color: var(--mpo-text); }
+  .mpo__unit {
+    font-family: var(--mpo-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--mpo-muted);
+  }
+  .mpo__compare {
+    font-size: 10px;
+    color: rgba(255,255,255,0.28);
+    text-decoration: line-through;
+  }
+
+  /* save tag */
+  .mpo__save-tag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--mpo-crimson);
+    color: #fff;
+    font-family: var(--mpo-mono);
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 7px;
+  }
+
+  /* ATC button */
+  .mpo__atc {
+    width: 100%;
+    padding: 17px;
+    background: var(--mpo-crimson);
+    color: #fff;
+    border: none;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 2px;
+  }
+  .mpo__atc:hover { background: var(--mpo-crimson-h); }
+  .mpo__atc:disabled { opacity: 0.5; cursor: not-allowed; }
+  .mpo__atc-sub {
+    font-size: 10px;
+    opacity: 0.6;
+    letter-spacing: 0.06em;
+  }
+</style>
+
+<script>
+(function () {
+  var sec      = {{ section.id | json }};
+  var wrap     = document.querySelector('[data-section-id="{{ section.id }}"]');
+  if (!wrap) return;
+
+  var tiers    = wrap.querySelectorAll('.mpo__tier');
+  var atcBtn   = document.getElementById('mpo-atc-' + sec);
+  var qtyText  = document.getElementById('mpo-qty-text-' + sec);
+  var subText  = document.getElementById('mpo-sub-text-' + sec);
+
+  /* ── sync selected tier state ── */
+  function activateTier(tier) {
+    tiers.forEach(function(t) { t.classList.remove('is-on'); });
+    tier.classList.add('is-on');
+    qtyText.textContent = 'Add ' + tier.dataset.qty + ' to cart';
+    subText.innerHTML   = tier.dataset.total + ' &nbsp;·&nbsp; free shipping';
+  }
+
+  tiers.forEach(function (tier) {
+    tier.addEventListener('click', function () {
+      var radio = tier.querySelector('.mpo__radio-input');
+      radio.checked = true;
+      activateTier(tier);
+    });
+  });
+
+  /* ── Add to cart ── */
+  atcBtn.addEventListener('click', function () {
+    var activeTier = wrap.querySelector('.mpo__tier.is-on');
+    if (!activeTier) return;
+
+    var variantId = parseInt(atcBtn.dataset.variant, 10);
+    var qty       = parseInt(activeTier.dataset.qty, 10);
+
+    /* keep button from double-firing */
+    atcBtn.disabled = true;
+    var original    = qtyText.textContent;
+    qtyText.textContent = 'Adding…';
+
+    fetch(window.Shopify.routes.root + 'cart/add.js', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity: qty })
+    })
+    .then(function (r) { return r.json(); })
+    .then(function () {
+      qtyText.textContent = 'Added ✓';
+      /* bubble an event so cart drawer / header count can update */
+      document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true }));
+      setTimeout(function () {
+        qtyText.textContent = original;
+        atcBtn.disabled = false;
+      }, 2000);
+    })
+    .catch(function () {
+      qtyText.textContent = 'Error — try again';
+      atcBtn.disabled = false;
+    });
+  });
+
+  /* ── Re-price when variant changes (size swatch fires change on select) ── */
+  document.addEventListener('variant:changed', function (e) {
+    if (!e.detail || !e.detail.variant) return;
+    var v       = e.detail.variant;
+    var newBase = v.price; /* in cents */
+    atcBtn.dataset.variant = v.id;
+
+    tiers.forEach(function (tier) {
+      var qty      = parseInt(tier.dataset.qty, 10);
+      var disc     = parseFloat(tier.dataset.qty === '{{ section.settings.tier1_qty }}' ? 0
+                     : tier.dataset.qty === '{{ section.settings.tier2_qty }}' ? {{ section.settings.tier2_discount }}
+                     : {{ section.settings.tier3_discount }});
+      var unitPrice = Math.round(newBase * (1 - disc / 100));
+      var total     = unitPrice * qty;
+      var compare   = newBase * qty;
+      var saving    = compare - total;
+
+      tier.dataset.total   = formatMoney(total);
+      tier.dataset.unit    = formatMoney(unitPrice);
+      tier.dataset.compare = disc > 0 ? formatMoney(compare) : '';
+
+      tier.querySelector('.mpo__total').textContent = formatMoney(total);
+      tier.querySelector('.mpo__unit').textContent  = formatMoney(unitPrice) + ' / unit';
+      var cmp = tier.querySelector('.mpo__compare');
+      if (cmp) cmp.textContent = disc > 0 ? formatMoney(compare) : '';
+      var tag = tier.querySelector('.mpo__save-tag');
+      if (tag) tag.textContent = 'Save ' + formatMoney(saving);
+    });
+
+    /* refresh active tier display */
+    var active = wrap.querySelector('.mpo__tier.is-on');
+    if (active) {
+      subText.innerHTML = active.dataset.total + ' &nbsp;·&nbsp; free shipping';
+    }
+  });
+
+  function formatMoney(cents) {
+    return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Multi-Pack Offer",
+  "tag": "div",
+  "class": "shopify-section--multipack-offer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Widget label",
+      "default": "multi-pack offer"
+    },
+    {
+      "type": "select",
+      "id": "default_tier",
+      "label": "Pre-selected tier",
+      "options": [
+        { "value": "1", "label": "Tier 1 (1 pack)" },
+        { "value": "2", "label": "Tier 2 (3 pack)" },
+        { "value": "3", "label": "Tier 3 (5 pack)" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Tier 1 — Single"
+    },
+    {
+      "type": "number",
+      "id": "tier1_qty",
+      "label": "Quantity",
+      "default": 1
+    },
+    {
+      "type": "number",
+      "id": "tier1_discount",
+      "label": "Discount %",
+      "default": 0,
+      "info": "0 = full price"
+    },
+    {
+      "type": "header",
+      "content": "Tier 2 — Mid"
+    },
+    {
+      "type": "number",
+      "id": "tier2_qty",
+      "label": "Quantity",
+      "default": 3
+    },
+    {
+      "type": "number",
+      "id": "tier2_discount",
+      "label": "Discount %",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Tier 3 — Best value"
+    },
+    {
+      "type": "number",
+      "id": "tier3_qty",
+      "label": "Quantity",
+      "default": 5
+    },
+    {
+      "type": "number",
+      "id": "tier3_discount",
+      "label": "Discount %",
+      "default": 25
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multi-Pack Offer"
+    }
+  ],
+  "templates": ["product"]
+}
+{% endschema %}
