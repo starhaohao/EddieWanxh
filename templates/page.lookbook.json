@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "lb_banner": { "type": "lookbook-banner", "settings": {} },
+    "lb_strip": { "type": "lookbook-info-strip", "settings": {} },
+    "lb_grid": {
+      "type": "lookbook-product-grid",
+      "blocks": {
+        "c1": { "type": "card", "settings": { "variant": "product", "name": "Studio Brief", "sku": "TSU-1001", "price": "$39" } },
+        "c2": { "type": "card", "settings": { "variant": "model", "name": "Studio Brief", "sku": "TSU-1001", "price": "$39" } },
+        "c3": { "type": "card", "settings": { "variant": "product", "name": "Boxer Trunk", "sku": "TSU-1003", "price": "$39" } },
+        "c4": { "type": "card", "settings": { "variant": "model", "name": "Boxer Trunk", "sku": "TSU-1003", "price": "$39" } }
+      },
+      "block_order": ["c1","c2","c3","c4"],
+      "settings": {}
+    },
+    "lb_zoom": {
+      "type": "lookbook-detail-zoom",
+      "blocks": {
+        "z1": { "type": "zoom", "settings": { "name": "Waistband", "spec": "4cm Jacquard", "zoom_x": 50, "zoom_y": 34, "zoom_scale": 2.1 } },
+        "z2": { "type": "zoom", "settings": { "name": "Fabric", "spec": "TransDRY®", "zoom_x": 50, "zoom_y": 54, "zoom_scale": 2.4 } },
+        "z3": { "type": "zoom", "settings": { "name": "Seam", "spec": "Flatlock stitch", "zoom_x": 38, "zoom_y": 48, "zoom_scale": 2.6 } },
+        "z4": { "type": "zoom", "settings": { "name": "Profile", "spec": "Low-rise contour", "zoom_x": 60, "zoom_y": 42, "zoom_scale": 2.2 } },
+        "z5": { "type": "zoom", "settings": { "name": "Studio Collection · 2025", "spec": "Designed SG · Crafted TH", "zoom_x": 50, "zoom_y": 28, "zoom_scale": 1.4, "full_width": true } }
+      },
+      "block_order": ["z1","z2","z3","z4","z5"],
+      "settings": {}
+    },
+    "lb_close": { "type": "lookbook-brand-close", "settings": {} }
+  },
+  "order": ["lb_banner","lb_strip","lb_grid","lb_zoom","lb_close"]
+}

@@ -1,0 +1,97 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign card_bg = section.settings.card_bg
+  assign name_color = section.settings.name_color
+  assign sku_color = section.settings.sku_color
+  assign price_color = section.settings.price_color
+  assign shop_color = section.settings.shop_color
+  assign name_size = section.settings.name_size
+  assign price_size = section.settings.price_size
+-%}
+<div class="lpg" style="--lpg-bg:{{ bg }};--lpg-cb:{{ card_bg }};--lpg-nc:{{ name_color }};--lpg-sc:{{ sku_color }};--lpg-pc:{{ price_color }};--lpg-shc:{{ shop_color }};--lpg-ns:{{ name_size }}px;--lpg-ps:{{ price_size }}px;">
+  <div class="lpg__grid">
+    {%- for block in section.blocks -%}
+      <a class="lpg__card lpg__card--{{ block.settings.variant }}" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
+        <div class="lpg__img">
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
+          {%- endif -%}
+        </div>
+        {%- if block.settings.variant == 'product' -%}
+        <div class="lpg__body">
+          <div class="lpg__name">{{ block.settings.name }}</div>
+          <div class="lpg__sku">{{ block.settings.sku }}</div>
+          <div class="lpg__foot">
+            <span class="lpg__price">{{ block.settings.price }}</span>
+            <span class="lpg__shop">Shop →</span>
+          </div>
+        </div>
+        {%- else -%}
+        <div class="lpg__body lpg__body--model">
+          <span class="lpg__shop">Shop →</span>
+        </div>
+        {%- endif -%}
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+<style>
+  .lpg { background:var(--lpg-bg); padding:0; }
+  .lpg__grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:0; padding:0 16px; }
+  .lpg__card { text-decoration:none; color:inherit; display:flex; flex-direction:column; background:var(--lpg-bg); }
+  .lpg__img { position:relative; overflow:hidden; aspect-ratio:3/4; background:var(--lpg-cb); }
+  .lpg__img img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform 0.7s ease; }
+  .lpg__card:hover .lpg__img img { transform:scale(1.04); }
+  .lpg__body { padding:11px 13px 16px; display:flex; flex-direction:column; gap:5px; flex:1; }
+  .lpg__body--model { flex-direction:row; justify-content:flex-end; align-items:center; padding:10px 13px 14px; }
+  .lpg__name { font-size:var(--lpg-ns); letter-spacing:-0.03em; color:var(--lpg-nc); line-height:1.1; }
+  .lpg__sku { font-family:monospace; font-size:8px; text-transform:uppercase; letter-spacing:0.1em; color:var(--lpg-sc); }
+  .lpg__foot { display:flex; justify-content:space-between; align-items:center; margin-top:5px; }
+  .lpg__price { font-size:var(--lpg-ps); letter-spacing:-0.03em; color:var(--lpg-pc); }
+  .lpg__shop { font-family:monospace; font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:var(--lpg-shc); }
+  @media (min-width:1024px){ .lpg__grid{ padding:0 80px; } .lpg__img{ aspect-ratio:2/3; } }
+</style>
+
+{% schema %}
+{
+  "name":"Lookbook Product Grid",
+  "tag":"div",
+  "class":"lookbook-product-grid-section",
+  "settings":[
+    { "type":"color","id":"bg_color","label":"Background","default":"#FAFAF8" },
+    { "type":"color","id":"card_bg","label":"Image fallback","default":"#EDEAE3" },
+    { "type":"color","id":"name_color","label":"Name color","default":"#111214" },
+    { "type":"color","id":"sku_color","label":"SKU color","default":"rgba(17,18,20,0.4)" },
+    { "type":"color","id":"price_color","label":"Price color","default":"#111214" },
+    { "type":"color","id":"shop_color","label":"Shop link color","default":"rgba(17,18,20,0.4)" },
+    { "type":"range","id":"name_size","label":"Name size (px)","min":12,"max":24,"step":1,"default":15 },
+    { "type":"range","id":"price_size","label":"Price size (px)","min":12,"max":24,"step":1,"default":15 }
+  ],
+  "blocks":[
+    {
+      "type":"card","name":"Card",
+      "settings":[
+        { "type":"select","id":"variant","label":"Variant","options":[{"value":"product","label":"Product card"},{"value":"model","label":"Model card"}],"default":"product" },
+        { "type":"image_picker","id":"image","label":"Image" },
+        { "type":"text","id":"name","label":"Name","default":"Studio Brief" },
+        { "type":"text","id":"sku","label":"SKU","default":"TSU-1001" },
+        { "type":"text","id":"price","label":"Price","default":"$39" },
+        { "type":"url","id":"url","label":"Link" }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"Lookbook Product Grid",
+      "blocks":[
+        { "type":"card","settings":{"variant":"product","name":"Studio Brief","sku":"TSU-1001","price":"$39"} },
+        { "type":"card","settings":{"variant":"model","name":"Studio Brief","sku":"TSU-1001","price":"$39"} },
+        { "type":"card","settings":{"variant":"product","name":"Boxer Trunk","sku":"TSU-1003","price":"$39"} },
+        { "type":"card","settings":{"variant":"model","name":"Boxer Trunk","sku":"TSU-1003","price":"$39"} }
+      ]
+    }
+  ],
+  "templates":["page"]
+}
+{% endschema %}
