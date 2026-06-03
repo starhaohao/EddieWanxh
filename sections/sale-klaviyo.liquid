@@ -1,0 +1,222 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign input_bg = section.settings.input_bg
+  assign border = section.settings.border_color
+  assign accent = section.settings.accent_color
+  assign title_color = section.settings.title_color
+  assign sub_color = section.settings.sub_color
+-%}
+
+<section class="sk" style="--sk-bg:{{ bg }};--sk-ib:{{ input_bg }};--sk-bd:{{ border }};--sk-accent:{{ accent }};--sk-tc:{{ title_color }};--sk-sc:{{ sub_color }};">
+  <div class="sk__left">
+    <div class="sk__eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2 class="sk__title">{{ section.settings.title }}</h2>
+    <p class="sk__sub">{{ section.settings.subtitle }}</p>
+    {%- if section.settings.badge_text != blank -%}
+      <div class="sk__badge">{{ section.settings.badge_text }}</div>
+    {%- endif -%}
+  </div>
+  <div class="sk__right">
+    <div>
+      <div class="sk__input-label">{{ section.settings.email_label }}</div>
+      <div class="sk__row">
+        <input class="sk__input" type="email" placeholder="{{ section.settings.email_placeholder }}">
+        <button class="sk__btn" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
+      </div>
+    </div>
+    {%- if section.settings.show_sms -%}
+    <div class="sk__divider">or</div>
+    <div>
+      <div class="sk__input-label">{{ section.settings.sms_label }}</div>
+      <div class="sk__row">
+        <input class="sk__input" type="tel" placeholder="{{ section.settings.sms_placeholder }}">
+        <button class="sk__btn" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
+      </div>
+    </div>
+    {%- endif -%}
+    <div class="sk__perks">
+      {%- for block in section.blocks -%}
+        <div class="sk__perk" {{ block.shopify_attributes }}><span class="sk__perk-dot" style="background:{{ accent }};"></span>{{ block.settings.text }}</div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sk {
+    background: var(--sk-bg);
+    border-top: 1px solid var(--sk-bd);
+    border-bottom: 1px solid var(--sk-bd);
+    padding: 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .sk__eyebrow {
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--sk-accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sk__eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px; height: 1px;
+    background: var(--sk-accent);
+  }
+  .sk__title {
+    font-size: clamp(32px, 3.2vw, 52px);
+    letter-spacing: -0.04em;
+    line-height: 1.0;
+    color: var(--sk-tc);
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+  .sk__sub {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--sk-sc);
+    max-width: 360px;
+  }
+  .sk__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--sk-accent);
+    border: 1px solid var(--sk-accent);
+    padding: 6px 12px;
+  }
+  .sk__badge::before {
+    content: '';
+    display: block;
+    width: 6px; height: 6px;
+    background: var(--sk-accent);
+    border-radius: 50%;
+  }
+  .sk__right { display: flex; flex-direction: column; gap: 12px; }
+  .sk__input-label {
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--sk-sc);
+    margin-bottom: 4px;
+  }
+  .sk__row { display: flex; }
+  .sk__input {
+    flex: 1;
+    background: var(--sk-ib);
+    border: 1px solid var(--sk-bd);
+    border-right: none;
+    color: var(--sk-tc);
+    padding: 14px 18px;
+    font-size: 13px;
+    outline: none;
+  }
+  .sk__input::placeholder { color: var(--sk-sc); }
+  .sk__btn {
+    border: none;
+    color: #fff;
+    padding: 14px 22px;
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .sk__btn:hover { opacity: 0.85; }
+  .sk__divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--sk-sc);
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .sk__divider::before, .sk__divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--sk-bd);
+  }
+  .sk__perks { display: flex; gap: 20px; margin-top: 4px; }
+  .sk__perk {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.28);
+  }
+  .sk__perk-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  @media (max-width: 749px) {
+    .sk { grid-template-columns: 1fr; gap: 40px; padding: 48px 16px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Sale Klaviyo Signup",
+  "tag": "div",
+  "class": "sale-klaviyo-section",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#2c3035" },
+    { "type": "color", "id": "input_bg", "label": "Input background", "default": "#212529" },
+    { "type": "color", "id": "border_color", "label": "Border color", "default": "rgba(255,255,255,0.11)" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#923531" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#ffffff" },
+    { "type": "color", "id": "sub_color", "label": "Subtitle color", "default": "rgba(255,255,255,0.42)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Customer Offer" },
+    { "type": "richtext", "id": "title", "label": "Title", "default": "<p>10% off<br>your first order.</p>" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Sign up via email or SMS and your discount lands instantly. Plus early access to drops, restocks, and sale alerts." },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "Code sent on signup" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email address" },
+    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "your@email.com" },
+    { "type": "checkbox", "id": "show_sms", "label": "Show SMS field", "default": true },
+    { "type": "text", "id": "sms_label", "label": "SMS label", "default": "Mobile number · SMS alerts" },
+    { "type": "text", "id": "sms_placeholder", "label": "SMS placeholder", "default": "+65 9123 4567" },
+    { "type": "text", "id": "btn_text", "label": "Button text", "default": "Join" }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Perk",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "No spam" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sale Klaviyo Signup",
+      "blocks": [
+        { "type": "perk", "settings": { "text": "No spam" } },
+        { "type": "perk", "settings": { "text": "Unsubscribe anytime" } },
+        { "type": "perk", "settings": { "text": "SG only" } }
+      ]
+    }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}

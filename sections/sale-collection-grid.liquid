@@ -1,0 +1,128 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign heading_color = section.settings.heading_color
+  assign gap = section.settings.gap
+-%}
+
+<section class="scg" style="--scg-bg:{{ bg }};--scg-hc:{{ heading_color }};--scg-gap:{{ gap }}px;">
+  {%- if section.settings.heading != blank -%}
+    <div class="scg__heading">{{ section.settings.heading }}</div>
+  {%- endif -%}
+  <div class="scg__grid">
+    {%- for block in section.blocks -%}
+      <a class="scg__tile" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+        {%- else -%}
+          <div class="scg__tile-placeholder"></div>
+        {%- endif -%}
+        <div class="scg__label">
+          <div class="scg__name">{{ block.settings.title }}</div>
+          <div class="scg__cta">Shop now</div>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  .scg {
+    padding: 64px 40px;
+    background: var(--scg-bg);
+  }
+  .scg__heading {
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    color: var(--scg-hc);
+    margin-bottom: 28px;
+  }
+  .scg__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--scg-gap);
+  }
+  .scg__tile {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/2;
+    cursor: pointer;
+    background: #1a1d20;
+    text-decoration: none;
+    display: block;
+  }
+  .scg__tile img, .scg__tile-placeholder {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.6s ease;
+    filter: brightness(0.72);
+  }
+  .scg__tile-placeholder { background: #2c3035; }
+  .scg__tile:hover img { transform: scale(1.03); filter: brightness(0.84); }
+  .scg__label {
+    position: absolute;
+    bottom: 24px; left: 24px;
+  }
+  .scg__name {
+    font-size: 28px;
+    letter-spacing: -0.03em;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .scg__cta {
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .scg__cta::after { content: '→'; font-size: 11px; }
+
+  @media (max-width: 749px) {
+    .scg { padding: 40px 16px; }
+    .scg__grid { grid-template-columns: 1fr; }
+    .scg__name { font-size: 22px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Sale Collection Grid",
+  "tag": "div",
+  "class": "sale-collection-grid-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop the range." },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F2EFE9" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#212529" },
+    { "type": "range", "id": "gap", "label": "Tile gap (px)", "min": 0, "max": 16, "step": 1, "default": 3 }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Collection Tile",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Briefs" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sale Collection Grid",
+      "blocks": [
+        { "type": "tile", "settings": { "title": "Briefs" } },
+        { "type": "tile", "settings": { "title": "Boxer Trunks" } },
+        { "type": "tile", "settings": { "title": "Tops" } },
+        { "type": "tile", "settings": { "title": "Socks" } }
+      ]
+    }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}
