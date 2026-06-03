@@ -5,7 +5,22 @@
 {%- endcomment -%}
 
 {%- liquid
-  assign font = section.settings.headline_font
+  case section.settings.headline_font
+    when 'galdeano'
+      assign font_family = '"Galdeano", serif'
+    when 'archivo'
+      assign font_family = '"Archivo", "Helvetica Neue", sans-serif'
+    when 'rock_salt'
+      assign font_family = '"Rock Salt", cursive'
+    when 'quantico'
+      assign font_family = '"Quantico", sans-serif'
+    when 'dm_sans'
+      assign font_family = '"DM Sans", sans-serif'
+    when 'mono'
+      assign font_family = 'ui-monospace, "SF Mono", Menlo, monospace'
+    else
+      assign font_family = '"Helvetica Neue", Helvetica, Arial, sans-serif'
+  endcase
 
   assign dh = section.settings.desktop_h_align
   assign dv = section.settings.desktop_v_align
@@ -62,8 +77,6 @@
 -%}
 
 {%- style -%}
-  {{ font | font_face: font_display: 'swap' }}
-
   #SaleBanner-{{ section.id }} {
     --sb-from:   {{ section.settings.gradient_from }};
     --sb-to:     {{ section.settings.gradient_to }};
@@ -124,9 +137,9 @@
 
   /* Headline */
   #SaleBanner-{{ section.id }} .sb-headline {
-    font-family: {{ font.family }}, {{ font.fallback_families }};
-    font-weight: {{ font.weight }};
-    font-style: {{ font.style }};
+    font-family: {{ font_family }};
+    font-weight: 800;
+    font-style: normal;
     font-size: {{ section.settings.headline_size_desktop }}px;
     letter-spacing: {{ section.settings.headline_tracking }}em;
     line-height: 0.92;
@@ -274,7 +287,19 @@
     { "type": "text", "id": "terms", "label": "Terms line", "default": "Terms and conditions apply" },
 
     { "type": "header", "content": "Headline font" },
-    { "type": "font_picker", "id": "headline_font", "label": "Font", "default": "sans-serif" },
+    {
+      "type": "select", "id": "headline_font", "label": "Font",
+      "options": [
+        { "value": "helvetica",  "label": "Helvetica Neue" },
+        { "value": "galdeano",   "label": "Galdeano" },
+        { "value": "archivo",    "label": "Archivo" },
+        { "value": "rock_salt",  "label": "Rock Salt" },
+        { "value": "quantico",   "label": "Quantico" },
+        { "value": "dm_sans",    "label": "DM Sans" },
+        { "value": "mono",       "label": "Monospace" }
+      ],
+      "default": "helvetica"
+    },
     {
       "type": "select", "id": "headline_case", "label": "Text case",
       "options": [
