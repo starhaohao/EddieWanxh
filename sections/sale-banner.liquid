@@ -1,10 +1,69 @@
 {%- comment -%}
   Sale Banner — editorial full-width promo header
-  Matches the MrPorter "UP TO 50% OFF" style:
-  rich gradient background · massive centred headline · pill category links
+  Matches the MrPorter "UP TO 50% OFF" style.
+  v2: font picker · font size (desktop/mobile) · full position control (H+V, desktop/mobile)
 {%- endcomment -%}
 
+{%- liquid
+  assign font = section.settings.headline_font
+
+  assign dh = section.settings.desktop_h_align
+  assign dv = section.settings.desktop_v_align
+  assign mh = section.settings.mobile_h_align
+  assign mv = section.settings.mobile_v_align
+
+  case dh
+    when 'left'
+      assign d_items = 'flex-start'
+      assign d_text  = 'left'
+      assign d_pills = 'flex-start'
+    when 'right'
+      assign d_items = 'flex-end'
+      assign d_text  = 'right'
+      assign d_pills = 'flex-end'
+    else
+      assign d_items = 'center'
+      assign d_text  = 'center'
+      assign d_pills = 'center'
+  endcase
+
+  case dv
+    when 'top'
+      assign d_justify = 'flex-start'
+    when 'bottom'
+      assign d_justify = 'flex-end'
+    else
+      assign d_justify = 'center'
+  endcase
+
+  case mh
+    when 'left'
+      assign m_items = 'flex-start'
+      assign m_text  = 'left'
+      assign m_pills = 'flex-start'
+    when 'right'
+      assign m_items = 'flex-end'
+      assign m_text  = 'right'
+      assign m_pills = 'flex-end'
+    else
+      assign m_items = 'center'
+      assign m_text  = 'center'
+      assign m_pills = 'center'
+  endcase
+
+  case mv
+    when 'top'
+      assign m_justify = 'flex-start'
+    when 'bottom'
+      assign m_justify = 'flex-end'
+    else
+      assign m_justify = 'center'
+  endcase
+-%}
+
 {%- style -%}
+  {{ font | font_face: font_display: 'swap' }}
+
   #SaleBanner-{{ section.id }} {
     --sb-from:   {{ section.settings.gradient_from }};
     --sb-to:     {{ section.settings.gradient_to }};
@@ -16,10 +75,16 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    padding: {{ section.settings.padding_top }}px clamp(20px,5vw,60px) {{ section.settings.padding_bottom }}px;
-    text-align: center;
+    min-height: {{ section.settings.desktop_min_height }}px;
+    padding: {{ section.settings.padding_top }}px clamp(20px,5vw,72px) {{ section.settings.padding_bottom }}px;
 
-    /* Painterly gradient — mirrors MrPorter's blurred red sweep */
+    /* Flex: vertical (justify) + horizontal (align-items) for desktop */
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ d_justify }};
+    align-items: {{ d_items }};
+
+    /* Painterly gradient background */
     background:
       radial-gradient(ellipse 80% 120% at 0% 40%,   rgba(180,60,30,.55)  0%, transparent 55%),
       radial-gradient(ellipse 60% 80%  at 100% 60%,  rgba(140,30,20,.70)  0%, transparent 52%),
@@ -27,7 +92,7 @@
     background-color: var(--sb-from);
   }
 
-  /* Soft noise / texture layer for depth */
+  /* Noise texture overlay */
   #SaleBanner-{{ section.id }}::before {
     content: '';
     position: absolute; inset: 0; z-index: 0; pointer-events: none;
@@ -46,25 +111,32 @@
     mix-blend-mode: multiply;
   }
 
-  /* All content above gradients */
+  /* Content wrapper */
   #SaleBanner-{{ section.id }} .sb-inner {
     position: relative; z-index: 2;
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: {{ d_items }};
+    text-align: {{ d_text }};
   }
 
-  /* Main headline */
+  /* Headline */
   #SaleBanner-{{ section.id }} .sb-headline {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: clamp(40px, 8vw, 110px);
-    font-weight: 800;
-    letter-spacing: -0.01em;
+    font-family: {{ font.family }}, {{ font.fallback_families }};
+    font-weight: {{ font.weight }};
+    font-style: {{ font.style }};
+    font-size: {{ section.settings.headline_size_desktop }}px;
+    letter-spacing: {{ section.settings.headline_tracking }}em;
     line-height: 0.92;
     color: var(--sb-text);
-    margin: 0 0 clamp(8px,1.4vw,18px);
-    text-transform: uppercase;
+    margin: 0 0 clamp(6px, 1.2vw, 16px);
+    text-transform: {{ section.settings.headline_case }};
     text-shadow: 0 2px 40px rgba(0,0,0,.25);
   }
 
-  /* "SALE" label */
+  /* "SALE" sub-label */
   #SaleBanner-{{ section.id }} .sb-label {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: clamp(10px, 1.4vw, 14px);
@@ -72,17 +144,18 @@
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--sb-text);
-    margin: 0 0 clamp(20px, 3.5vw, 40px);
+    margin: 0 0 clamp(18px, 3vw, 36px);
     opacity: 0.88;
   }
 
-  /* Category pills row */
+  /* Category pills */
   #SaleBanner-{{ section.id }} .sb-pills {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: {{ d_pills }};
     gap: 8px;
-    margin: 0 0 clamp(16px, 2.5vw, 28px);
+    margin: 0 0 clamp(14px, 2.2vw, 24px);
+    width: 100%;
   }
   #SaleBanner-{{ section.id }} .sb-pill {
     display: inline-flex;
@@ -127,7 +200,23 @@
     text-underline-offset: 2px;
   }
 
+  /* ── Mobile overrides ── */
   @media (max-width: 749px) {
+    #SaleBanner-{{ section.id }} {
+      min-height: {{ section.settings.mobile_min_height }}px;
+      justify-content: {{ m_justify }};
+      align-items: {{ m_items }};
+    }
+    #SaleBanner-{{ section.id }} .sb-inner {
+      align-items: {{ m_items }};
+      text-align: {{ m_text }};
+    }
+    #SaleBanner-{{ section.id }} .sb-headline {
+      font-size: {{ section.settings.headline_size_mobile }}px;
+    }
+    #SaleBanner-{{ section.id }} .sb-pills {
+      justify-content: {{ m_pills }};
+    }
     #SaleBanner-{{ section.id }} .sb-pill {
       font-size: 11px;
       padding: 8px 14px;
@@ -184,9 +273,68 @@
     { "type": "text", "id": "sub_label", "label": "Label below headline", "default": "Sale" },
     { "type": "text", "id": "terms", "label": "Terms line", "default": "Terms and conditions apply" },
 
+    { "type": "header", "content": "Headline font" },
+    { "type": "font_picker", "id": "headline_font", "label": "Font", "default": "helvetica_neue_n8" },
+    {
+      "type": "select", "id": "headline_case", "label": "Text case",
+      "options": [
+        { "value": "uppercase", "label": "UPPERCASE" },
+        { "value": "capitalize", "label": "Capitalize" },
+        { "value": "none", "label": "As typed" }
+      ],
+      "default": "uppercase"
+    },
+    { "type": "range", "id": "headline_tracking", "min": -5, "max": 20, "step": 1, "unit": "/100em", "label": "Letter spacing", "default": -1, "info": "Value × 0.01em. -1 = -0.01em, 5 = 0.05em" },
+
+    { "type": "header", "content": "Font size" },
+    { "type": "range", "id": "headline_size_desktop", "min": 32, "max": 160, "step": 4, "unit": "px", "label": "Desktop font size", "default": 104 },
+    { "type": "range", "id": "headline_size_mobile", "min": 24, "max": 96, "step": 4, "unit": "px", "label": "Mobile font size", "default": 52 },
+
+    { "type": "header", "content": "Desktop position" },
+    {
+      "type": "select", "id": "desktop_h_align", "label": "Horizontal",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select", "id": "desktop_v_align", "label": "Vertical",
+      "options": [
+        { "value": "top",    "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "middle"
+    },
+    { "type": "range", "id": "desktop_min_height", "min": 100, "max": 700, "step": 20, "unit": "px", "label": "Min height", "default": 200 },
+
+    { "type": "header", "content": "Mobile position" },
+    {
+      "type": "select", "id": "mobile_h_align", "label": "Horizontal",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select", "id": "mobile_v_align", "label": "Vertical",
+      "options": [
+        { "value": "top",    "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "middle"
+    },
+    { "type": "range", "id": "mobile_min_height", "min": 100, "max": 500, "step": 20, "unit": "px", "label": "Min height", "default": 160 },
+
     { "type": "header", "content": "Background image (optional)" },
     { "type": "image_picker", "id": "bg_image", "label": "Background image" },
-    { "type": "range", "id": "image_opacity", "min": 10, "max": 100, "step": 5, "unit": "%", "label": "Image opacity", "default": 55, "info": "Blends over the gradient via multiply" },
+    { "type": "range", "id": "image_opacity", "min": 10, "max": 100, "step": 5, "unit": "%", "label": "Image opacity", "default": 55, "info": "Blends multiply over gradient" },
 
     { "type": "header", "content": "Gradient colors" },
     { "type": "color", "id": "gradient_from", "label": "Base / darkest color", "default": "#6b1a14" },
@@ -196,11 +344,11 @@
     { "type": "header", "content": "Text colors" },
     { "type": "color", "id": "text_color", "label": "Headline color", "default": "#ffffff" },
     { "type": "color", "id": "pill_color", "label": "Pill border & text", "default": "#ffffff" },
-    { "type": "color", "id": "terms_color", "label": "Terms text color", "default": "#ffffff" },
+    { "type": "color", "id": "terms_color", "label": "Terms text", "default": "#ffffff" },
 
     { "type": "header", "content": "Padding" },
-    { "type": "range", "id": "padding_top", "min": 32, "max": 160, "step": 8, "unit": "px", "label": "Top", "default": 64 },
-    { "type": "range", "id": "padding_bottom", "min": 32, "max": 160, "step": 8, "unit": "px", "label": "Bottom", "default": 64 }
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 8, "unit": "px", "label": "Top", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 8, "unit": "px", "label": "Bottom", "default": 56 }
   ],
   "blocks": [
     {
