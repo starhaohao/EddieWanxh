@@ -1,0 +1,235 @@
+{%- comment -%}
+  Sale Banner — editorial full-width promo header
+  Matches the MrPorter "UP TO 50% OFF" style:
+  rich gradient background · massive centred headline · pill category links
+{%- endcomment -%}
+
+{%- style -%}
+  #SaleBanner-{{ section.id }} {
+    --sb-from:   {{ section.settings.gradient_from }};
+    --sb-to:     {{ section.settings.gradient_to }};
+    --sb-mid:    {{ section.settings.gradient_mid }};
+    --sb-text:   {{ section.settings.text_color }};
+    --sb-pill:   {{ section.settings.pill_color }};
+    --sb-terms:  {{ section.settings.terms_color }};
+
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: {{ section.settings.padding_top }}px clamp(20px,5vw,60px) {{ section.settings.padding_bottom }}px;
+    text-align: center;
+
+    /* Painterly gradient — mirrors MrPorter's blurred red sweep */
+    background:
+      radial-gradient(ellipse 80% 120% at 0% 40%,   rgba(180,60,30,.55)  0%, transparent 55%),
+      radial-gradient(ellipse 60% 80%  at 100% 60%,  rgba(140,30,20,.70)  0%, transparent 52%),
+      radial-gradient(ellipse 100% 100% at 50% 50%,  var(--sb-mid)        0%, var(--sb-to) 100%);
+    background-color: var(--sb-from);
+  }
+
+  /* Soft noise / texture layer for depth */
+  #SaleBanner-{{ section.id }}::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.18;
+  }
+
+  /* Optional background image */
+  #SaleBanner-{{ section.id }} .sb-img {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  #SaleBanner-{{ section.id }} .sb-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    opacity: {{ section.settings.image_opacity | divided_by: 100.0 }};
+    mix-blend-mode: multiply;
+  }
+
+  /* All content above gradients */
+  #SaleBanner-{{ section.id }} .sb-inner {
+    position: relative; z-index: 2;
+  }
+
+  /* Main headline */
+  #SaleBanner-{{ section.id }} .sb-headline {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(40px, 8vw, 110px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+    color: var(--sb-text);
+    margin: 0 0 clamp(8px,1.4vw,18px);
+    text-transform: uppercase;
+    text-shadow: 0 2px 40px rgba(0,0,0,.25);
+  }
+
+  /* "SALE" label */
+  #SaleBanner-{{ section.id }} .sb-label {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(10px, 1.4vw, 14px);
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sb-text);
+    margin: 0 0 clamp(20px, 3.5vw, 40px);
+    opacity: 0.88;
+  }
+
+  /* Category pills row */
+  #SaleBanner-{{ section.id }} .sb-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 clamp(16px, 2.5vw, 28px);
+  }
+  #SaleBanner-{{ section.id }} .sb-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 18px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(10px, 1.2vw, 13px);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--sb-pill);
+    border: 1px solid var(--sb-pill);
+    border-radius: 2px;
+    text-decoration: none;
+    background: transparent;
+    transition: background 0.18s ease, color 0.18s ease;
+    white-space: nowrap;
+    opacity: 0.88;
+  }
+  #SaleBanner-{{ section.id }} .sb-pill:hover {
+    background: var(--sb-pill);
+    color: {{ section.settings.gradient_from }};
+    opacity: 1;
+  }
+  #SaleBanner-{{ section.id }} .sb-pill--active {
+    background: var(--sb-pill);
+    color: {{ section.settings.gradient_from }};
+    opacity: 1;
+  }
+
+  /* Terms */
+  #SaleBanner-{{ section.id }} .sb-terms {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(10px, 1.1vw, 12px);
+    letter-spacing: 0.03em;
+    color: var(--sb-terms);
+    margin: 0;
+    opacity: 0.72;
+  }
+  #SaleBanner-{{ section.id }} .sb-terms a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 749px) {
+    #SaleBanner-{{ section.id }} .sb-pill {
+      font-size: 11px;
+      padding: 8px 14px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="SaleBanner-{{ section.id }}">
+  {%- if section.settings.bg_image != blank -%}
+    <div class="sb-img">
+      {{ section.settings.bg_image | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw' }}
+    </div>
+  {%- endif -%}
+
+  <div class="sb-inner">
+
+    {%- if section.settings.headline != blank -%}
+      <h2 class="sb-headline">{{ section.settings.headline }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.sub_label != blank -%}
+      <p class="sb-label">{{ section.settings.sub_label }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="sb-pills">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.label != blank -%}
+            <a href="{{ block.settings.url | default: '#' }}"
+               class="sb-pill{% if block.settings.active %} sb-pill--active{% endif %}"
+               {{ block.shopify_attributes }}>
+              {{ block.settings.label }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.terms != blank -%}
+      <p class="sb-terms">{{ section.settings.terms }}</p>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Sale Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "headline", "label": "Main headline", "default": "Up to 50% Off" },
+    { "type": "text", "id": "sub_label", "label": "Label below headline", "default": "Sale" },
+    { "type": "text", "id": "terms", "label": "Terms line", "default": "Terms and conditions apply" },
+
+    { "type": "header", "content": "Background image (optional)" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
+    { "type": "range", "id": "image_opacity", "min": 10, "max": 100, "step": 5, "unit": "%", "label": "Image opacity", "default": 55, "info": "Blends over the gradient via multiply" },
+
+    { "type": "header", "content": "Gradient colors" },
+    { "type": "color", "id": "gradient_from", "label": "Base / darkest color", "default": "#6b1a14" },
+    { "type": "color", "id": "gradient_mid", "label": "Mid color", "default": "#923531" },
+    { "type": "color", "id": "gradient_to", "label": "Edge / fade color", "default": "#4a0e0b" },
+
+    { "type": "header", "content": "Text colors" },
+    { "type": "color", "id": "text_color", "label": "Headline color", "default": "#ffffff" },
+    { "type": "color", "id": "pill_color", "label": "Pill border & text", "default": "#ffffff" },
+    { "type": "color", "id": "terms_color", "label": "Terms text color", "default": "#ffffff" },
+
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "min": 32, "max": 160, "step": 8, "unit": "px", "label": "Top", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 32, "max": 160, "step": 8, "unit": "px", "label": "Bottom", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Category pill",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "All Sale" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "checkbox", "id": "active", "label": "Highlight as active", "default": false }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Sale Banner",
+      "settings": {
+        "headline": "Up to 50% Off",
+        "sub_label": "Sale",
+        "terms": "Terms and conditions apply"
+      },
+      "blocks": [
+        { "type": "pill", "settings": { "label": "All Sale", "active": true } },
+        { "type": "pill", "settings": { "label": "T-Shirts" } },
+        { "type": "pill", "settings": { "label": "Briefs" } },
+        { "type": "pill", "settings": { "label": "Boxer Trunks" } },
+        { "type": "pill", "settings": { "label": "Socks" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
