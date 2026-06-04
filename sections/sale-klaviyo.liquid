@@ -5,9 +5,12 @@
   assign accent = section.settings.accent_color
   assign title_color = section.settings.title_color
   assign sub_color = section.settings.sub_color
+  assign kl_key = section.settings.klaviyo_public_key
+  assign kl_list = section.settings.klaviyo_list_id
+  assign section_id = section.id
 -%}
 
-<section class="sk" style="--sk-bg:{{ bg }};--sk-ib:{{ input_bg }};--sk-bd:{{ border }};--sk-accent:{{ accent }};--sk-tc:{{ title_color }};--sk-sc:{{ sub_color }};">
+<section class="sk" id="sk-{{ section_id }}" style="--sk-bg:{{ bg }};--sk-ib:{{ input_bg }};--sk-bd:{{ border }};--sk-accent:{{ accent }};--sk-tc:{{ title_color }};--sk-sc:{{ sub_color }};" data-kl-key="{{ kl_key }}" data-kl-list="{{ kl_list }}">
   <div class="sk__left">
     <div class="sk__eyebrow">{{ section.settings.eyebrow }}</div>
     <h2 class="sk__title">{{ section.settings.title }}</h2>
@@ -17,22 +20,24 @@
     {%- endif -%}
   </div>
   <div class="sk__right">
-    <div>
+    <form class="sk__form" data-sk-form="email" novalidate>
       <div class="sk__input-label">{{ section.settings.email_label }}</div>
       <div class="sk__row">
-        <input class="sk__input" type="email" placeholder="{{ section.settings.email_placeholder }}">
-        <button class="sk__btn" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
+        <input class="sk__input" type="email" name="email" placeholder="{{ section.settings.email_placeholder }}" required autocomplete="email">
+        <button class="sk__btn" type="submit" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
       </div>
-    </div>
+      <div class="sk__msg" data-sk-msg></div>
+    </form>
     {%- if section.settings.show_sms -%}
     <div class="sk__divider">or</div>
-    <div>
+    <form class="sk__form" data-sk-form="sms" novalidate>
       <div class="sk__input-label">{{ section.settings.sms_label }}</div>
       <div class="sk__row">
-        <input class="sk__input" type="tel" placeholder="{{ section.settings.sms_placeholder }}">
-        <button class="sk__btn" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
+        <input class="sk__input" type="tel" name="phone" placeholder="{{ section.settings.sms_placeholder }}" required autocomplete="tel">
+        <button class="sk__btn" type="submit" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
       </div>
-    </div>
+      <div class="sk__msg" data-sk-msg></div>
+    </form>
     {%- endif -%}
     <div class="sk__perks">
       {%- for block in section.blocks -%}
@@ -56,127 +61,109 @@
     gap: 80px;
     align-items: center;
   }
-  .sk__eyebrow {
-    font-family: monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--sk-accent);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .sk__eyebrow::before {
-    content: '';
-    display: block;
-    width: 20px; height: 1px;
-    background: var(--sk-accent);
-  }
-  .sk__title {
-    font-size: clamp(32px, 3.2vw, 52px);
-    letter-spacing: -0.04em;
-    line-height: 1.0;
-    color: var(--sk-tc);
-    margin-bottom: 14px;
-    font-weight: 400;
-  }
-  .sk__sub {
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--sk-sc);
-    max-width: 360px;
-  }
-  .sk__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 20px;
-    font-family: monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--sk-accent);
-    border: 1px solid var(--sk-accent);
-    padding: 6px 12px;
-  }
-  .sk__badge::before {
-    content: '';
-    display: block;
-    width: 6px; height: 6px;
-    background: var(--sk-accent);
-    border-radius: 50%;
-  }
+  .sk__eyebrow { font-family: monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--sk-accent); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .sk__eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--sk-accent); }
+  .sk__title { font-size: clamp(32px, 3.2vw, 52px); letter-spacing: -0.04em; line-height: 1.0; color: var(--sk-tc); margin-bottom: 14px; font-weight: 400; }
+  .sk__sub { font-size: 13px; line-height: 1.7; color: var(--sk-sc); max-width: 360px; }
+  .sk__badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; font-family: monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--sk-accent); border: 1px solid var(--sk-accent); padding: 6px 12px; }
+  .sk__badge::before { content: ''; display: block; width: 6px; height: 6px; background: var(--sk-accent); border-radius: 50%; }
   .sk__right { display: flex; flex-direction: column; gap: 12px; }
-  .sk__input-label {
-    font-family: monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--sk-sc);
-    margin-bottom: 4px;
-  }
+  .sk__form { margin: 0; }
+  .sk__input-label { font-family: monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sk-sc); margin-bottom: 4px; }
   .sk__row { display: flex; }
-  .sk__input {
-    flex: 1;
-    background: var(--sk-ib);
-    border: 1px solid var(--sk-bd);
-    border-right: none;
-    color: var(--sk-tc);
-    padding: 14px 18px;
-    font-size: 13px;
-    outline: none;
-  }
+  .sk__input { flex: 1; background: var(--sk-ib); border: 1px solid var(--sk-bd); border-right: none; color: var(--sk-tc); padding: 14px 18px; font-size: 13px; outline: none; border-radius: 0; }
   .sk__input::placeholder { color: var(--sk-sc); }
-  .sk__btn {
-    border: none;
-    color: #fff;
-    padding: 14px 22px;
-    font-family: monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    white-space: nowrap;
-  }
+  .sk__btn { border: none; color: #fff; padding: 14px 22px; font-family: monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; cursor: pointer; transition: opacity 0.2s; white-space: nowrap; border-radius: 0; }
   .sk__btn:hover { opacity: 0.85; }
-  .sk__divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--sk-sc);
-    font-family: monospace;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .sk__divider::before, .sk__divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--sk-bd);
-  }
-  .sk__perks { display: flex; gap: 20px; margin-top: 4px; }
-  .sk__perk {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.28);
-  }
-  .sk__perk-dot {
-    width: 3px; height: 3px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .sk__btn:disabled { opacity: 0.5; cursor: wait; }
+  .sk__msg { font-family: monospace; font-size: 10px; letter-spacing: 0.08em; margin-top: 8px; min-height: 14px; color: var(--sk-sc); }
+  .sk__msg--ok { color: var(--sk-tc); }
+  .sk__msg--err { color: var(--sk-accent); }
+  .sk__divider { display: flex; align-items: center; gap: 12px; color: var(--sk-sc); font-family: monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .sk__divider::before, .sk__divider::after { content: ''; flex: 1; height: 1px; background: var(--sk-bd); }
+  .sk__perks { display: flex; gap: 20px; margin-top: 4px; flex-wrap: wrap; }
+  .sk__perk { display: flex; align-items: center; gap: 6px; font-family: monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.28); }
+  .sk__perk-dot { width: 3px; height: 3px; border-radius: 50%; flex-shrink: 0; }
   @media (max-width: 749px) {
     .sk { grid-template-columns: 1fr; gap: 40px; padding: 48px 16px; }
   }
 </style>
+
+{%- if kl_key != blank -%}
+<script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id={{ kl_key }}"></script>
+{%- endif -%}
+
+<script>
+(function(){
+  var root = document.getElementById('sk-{{ section_id }}');
+  if(!root) return;
+  var pubKey = root.dataset.klKey;
+  var listId = root.dataset.klList;
+
+  root.querySelectorAll('[data-sk-form]').forEach(function(form){
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var type = form.dataset.skForm;
+      var input = form.querySelector('input');
+      var btn = form.querySelector('button');
+      var msg = form.querySelector('[data-sk-msg]');
+      var val = (input.value || '').trim();
+      if(!val){ return; }
+
+      msg.className = 'sk__msg';
+      msg.textContent = '';
+      btn.disabled = true;
+
+      if(!pubKey || !listId){
+        msg.className = 'sk__msg sk__msg--err';
+        msg.textContent = 'Klaviyo not configured. Set Public API Key + List ID in section settings.';
+        btn.disabled = false;
+        return;
+      }
+
+      var profileAttrs = {};
+      if(type === 'email') profileAttrs.email = val;
+      else profileAttrs.phone_number = val;
+
+      var payload = {
+        data: {
+          type: 'subscription',
+          attributes: {
+            custom_source: 'TRIIIPLE Sale Signup',
+            profile: { data: { type: 'profile', attributes: profileAttrs } }
+          },
+          relationships: { list: { data: { type: 'list', id: listId } } }
+        }
+      };
+
+      try{
+        var res = await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(pubKey), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'revision': '2024-10-15' },
+          body: JSON.stringify(payload)
+        });
+        if(res.status === 202 || res.status === 200 || res.status === 201){
+          msg.className = 'sk__msg sk__msg--ok';
+          msg.textContent = type === 'email' ? 'Thanks — check your inbox for the code.' : 'Thanks — watch for an SMS shortly.';
+          input.value = '';
+          if(window._learnq){ window._learnq.push(['identify', type === 'email' ? {'$email': val} : {'$phone_number': val}]); }
+        } else {
+          var err = await res.text();
+          msg.className = 'sk__msg sk__msg--err';
+          msg.textContent = 'Something went wrong. Try again.';
+          console.warn('Klaviyo subscribe error', res.status, err);
+        }
+      } catch(err){
+        msg.className = 'sk__msg sk__msg--err';
+        msg.textContent = 'Network error. Try again.';
+        console.warn(err);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+})();
+</script>
 
 {% schema %}
 {
@@ -184,12 +171,17 @@
   "tag": "div",
   "class": "sale-klaviyo-section",
   "settings": [
+    { "type": "header", "content": "Klaviyo connection" },
+    { "type": "text", "id": "klaviyo_public_key", "label": "Klaviyo Public API Key (Company ID)", "info": "Found in Klaviyo Account → Settings → API Keys. Example: ABC123" },
+    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo List ID", "info": "Lists & Segments → your list → Settings → List ID. Example: XyZ7Bk" },
+    { "type": "header", "content": "Style" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#2c3035" },
     { "type": "color", "id": "input_bg", "label": "Input background", "default": "#212529" },
     { "type": "color", "id": "border_color", "label": "Border color", "default": "rgba(255,255,255,0.11)" },
     { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#923531" },
     { "type": "color", "id": "title_color", "label": "Title color", "default": "#ffffff" },
     { "type": "color", "id": "sub_color", "label": "Subtitle color", "default": "rgba(255,255,255,0.42)" },
+    { "type": "header", "content": "Content" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Customer Offer" },
     { "type": "richtext", "id": "title", "label": "Title", "default": "<p>10% off<br>your first order.</p>" },
     { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Sign up via email or SMS and your discount lands instantly. Plus early access to drops, restocks, and sale alerts." },
