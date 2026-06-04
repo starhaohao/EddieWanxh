@@ -42,6 +42,9 @@
 
 <style>
   .sh {
+    overflow-x: hidden;
+    box-sizing: border-box;
+    max-width: 100%;
     position: relative;
     height: var(--sh-h);
     min-height: 500px;
@@ -156,6 +159,7 @@
   .sh__cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
 
   @media (max-width: 749px) {
+    .sh { height: 600px; min-height: 600px; }
     .sh__content { bottom: 40px; left: 24px; right: 24px; }
     .sh__urgency { top: 20px; right: 20px; }
   }
