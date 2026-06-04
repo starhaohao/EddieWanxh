@@ -1,0 +1,114 @@
+{
+  "sections": {
+    "hp_ticker": {
+      "type": "sale-announcement-ticker",
+      "settings": {}
+    },
+    "hp_hero": {
+      "type": "sale-hero",
+      "settings": {}
+    },
+    "hp_tier": {
+      "type": "sale-tier-strip",
+      "settings": {}
+    },
+    "hp_grid": {
+      "type": "sale-collection-grid",
+      "blocks": {
+        "t1": { "type": "tile", "settings": { "title": "Briefs", "url": "/collections/brief" } },
+        "t2": { "type": "tile", "settings": { "title": "Boxer Trunks", "url": "/collections/boxer-trunk" } },
+        "t3": { "type": "tile", "settings": { "title": "Tops", "url": "/collections/tops" } },
+        "t4": { "type": "tile", "settings": { "title": "Socks", "url": "/collections/socks" } }
+      },
+      "block_order": ["t1","t2","t3","t4"],
+      "settings": { "heading": "Shop the range." }
+    },
+    "hp_pillars": {
+      "type": "sale-pillars",
+      "settings": {}
+    },
+    "hp_reviews": {
+      "type": "sale-reviews",
+      "settings": {}
+    },
+    "hp_klaviyo": {
+      "type": "sale-klaviyo",
+      "settings": {}
+    },
+    "section_newsletter_JAq9FC": {
+      "type": "section-newsletter",
+      "blocks": {
+        "image_BMxFFp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Land_Page-mobile-1_4d65e172-287e-4ea3-8f59-3176e1b05d93.png",
+            "title": "",
+            "heading_font_size": "heading-large",
+            "text": "",
+            "text_font_size": "body-large",
+            "flex_align": "align--bottom-left",
+            "show_text_background": false,
+            "bg_color": "rgba(0,0,0,0)",
+            "color": "#cdff00",
+            "overlay_type": "disabled",
+            "link_text": "",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "heading_tag": "automatic"
+          }
+        },
+        "newsletter_NRLyUk": {
+          "type": "newsletter",
+          "settings": {
+            "subheading": "Join us",
+            "heading": "First Layer Perks",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Subscribe to receive exclusive offers, free giveaways and once-in-a-lifetime deals.</p>",
+            "text_font_size": "body-x-small",
+            "text_columns": 1,
+            "align_text": "text-left",
+            "button_text": "Join",
+            "show_arrow": true,
+            "terms": true,
+            "show_name": true,
+            "button_type": "btn--white",
+            "button_size": "btn--small",
+            "button_style": "btn--outline",
+            "show_social_links": true,
+            "bg_color": "#799dba",
+            "color": "#32393e",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": ["image_BMxFFp","newsletter_NRLyUk"],
+      "name": "Newsletter",
+      "settings": {
+        "width": "wrapper--full-padded",
+        "height": "screen-height-three-quarters",
+        "mobile_height": "five-fifty-height-hero--mobile",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 100
+      }
+    },
+    "hp_story": {
+      "type": "sale-brand-story",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hp_ticker",
+    "hp_hero",
+    "hp_tier",
+    "hp_grid",
+    "hp_pillars",
+    "hp_reviews",
+    "hp_klaviyo",
+    "section_newsletter_JAq9FC",
+    "hp_story"
+  ]
+}
