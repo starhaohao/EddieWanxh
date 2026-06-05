@@ -1,0 +1,101 @@
+{%- comment -%}
+══════════════════════════════════════════════════════════════════
+  TRIIIPLE · EMAIL 01 — THANK YOU (first order)
+  Trigger: Order created → branch where order count = 1
+  Type: Shopify transactional email
+  Paste into: Settings → Notifications → "Order confirmation" → Edit code
+──────────────────────────────────────────────────────────────────
+  ARCHITECTURE: Shopify owns consent & sends this email.
+  Klaviyo syncs the subscriber list only — no Klaviyo code here.
+
+  BEFORE SENDING — do these two things:
+  1. Upload in Settings → Files, then paste URLs below:
+       email-banner-crop.jpg   → banner_url
+       triiiple-logo-white.png → logo_url
+       social-facebook.png     → ic_facebook
+       social-instagram.png    → ic_instagram
+       social-pinterest.png    → ic_pinterest
+  2. Send yourself a test from the email editor to preview in a real inbox.
+  Note: Galdeano won't load in most inboxes — headings fall back to
+  Helvetica (already the brand body face), so the design still holds.
+══════════════════════════════════════════════════════════════════
+{%- endcomment -%}
+
+{%- assign banner_url   = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/banner_95fad9c2-498a-4c15-954d-51b26ef0f6b8.jpg?v=1780649539" -%}
+{%- assign logo_url     = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/Frame_77.png?v=1775028055" -%}
+{%- assign ic_facebook  = "PASTE_FACEBOOK_ICON_URL" -%}
+{%- assign ic_instagram = "PASTE_INSTAGRAM_ICON_URL" -%}
+{%- assign ic_pinterest = "PASTE_PINTEREST_ICON_URL" -%}
+
+{%- assign ff = "'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+{%- assign fm = "'Courier New', Courier, monospace" -%}
+{%- assign fd = "Galdeano, 'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">Packed, and on its way. Here's what you just started.&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
+
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background:#15171a;">
+<tr><td align="center" style="padding:24px 12px;">
+
+  <table role="presentation" width="600" border="0" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:#212529;">
+
+    <!-- logo + slogan -->
+    <tr><td align="center" style="padding:40px 56px 0;">
+      <img src="{{ logo_url }}" width="96" alt="TRIIIPLE" style="display:block;width:96px;height:auto;border:0;">
+      <div style="font-family:{{ fm }};font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#6c7178;padding-top:12px;">wear it, own it, explain nothing</div>
+    </td></tr>
+
+    <!-- hero -->
+    <tr><td style="padding:30px 0 0;">
+      <img src="{{ banner_url }}" width="600" alt="TRIIIPLE campaign" style="display:block;width:100%;max-width:600px;height:auto;border:0;">
+    </td></tr>
+
+    <!-- body -->
+    <tr><td align="center" style="padding:38px 56px 0;">
+      <div style="font-family:{{ fm }};font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6c7178;padding-bottom:18px;">order {{ order.name }} · confirmed</div>
+      <div style="font-family:{{ fd }};font-size:44px;line-height:1.0;letter-spacing:-2px;color:#ffffff;">thank you<br>for the first one.</div>
+      <div style="font-family:{{ ff }};font-size:15px;line-height:1.75;color:#9aa0a6;padding:24px 0 0;">You just picked up your first TRIIIPLE. Basics engineered for Singapore humidity — built to disappear under everything, then quietly outlast it.</div>
+      <div style="font-family:{{ ff }};font-size:15px;line-height:1.75;color:#9aa0a6;padding:16px 0 0;">Your order's being packed at the studio. We'll send tracking the moment it ships. From here, it only gets easier — you already know your size.</div>
+    </td></tr>
+
+    <!-- CTA -->
+    <tr><td align="center" style="padding:34px 56px 0;">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr><td align="center" bgcolor="#ffffff" style="background:#ffffff;">
+          <a href="{{ shop.url }}" style="display:inline-block;padding:17px 34px;font-family:{{ fm }};font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#212529;text-decoration:none;">explore the studio</a>
+        </td></tr>
+      </table>
+      <div style="font-family:{{ fm }};font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#6c7178;padding-top:18px;">questions before it lands? just reply — a human reads it.</div>
+    </td></tr>
+
+    <!-- feature strip -->
+    <tr><td style="padding:40px 56px 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border-top:1px solid #2f3338;border-bottom:1px solid #2f3338;">
+        <tr>
+          <td width="33%" align="center" style="padding:18px 6px;font-family:{{ fm }};font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#9aa0a6;line-height:1.6;">ships in<br>48 hours</td>
+          <td width="34%" align="center" style="padding:18px 6px;border-left:1px solid #2f3338;border-right:1px solid #2f3338;font-family:{{ fm }};font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#9aa0a6;line-height:1.6;">free returns<br>within 30 days</td>
+          <td width="33%" align="center" style="padding:18px 6px;font-family:{{ fm }};font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#9aa0a6;line-height:1.6;">humidity-<br>tested · sg</td>
+        </tr>
+      </table>
+    </td></tr>
+
+    <!-- footer -->
+    <tr><td style="padding:44px 0 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background:#2a2e33;">
+        <tr><td align="center" style="padding:36px 56px 40px;">
+          <div style="font-family:{{ ff }};font-size:13px;line-height:1.65;color:#9aa0a6;max-width:300px;margin:0 auto;">Welcome to the rotation. We keep the inbox quiet — only the drops worth knowing about.</div>
+          <div style="width:28px;height:1px;background:#383c41;margin:24px auto;font-size:0;line-height:0;">&nbsp;</div>
+          <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center"><tr>
+            <td style="padding:0 5px;"><a href="https://www.facebook.com/triiiplestudio"><img src="{{ ic_facebook }}" width="18" height="18" alt="Facebook" style="display:block;border:1px solid #383c41;padding:11px;background:#2a2e33;"></a></td>
+            <td style="padding:0 5px;"><a href="https://www.instagram.com/triiiple_studio"><img src="{{ ic_instagram }}" width="18" height="18" alt="Instagram" style="display:block;border:1px solid #383c41;padding:11px;background:#2a2e33;"></a></td>
+            <td style="padding:0 5px;"><a href="https://www.pinterest.com/triiiple_studio/"><img src="{{ ic_pinterest }}" width="18" height="18" alt="Pinterest" style="display:block;border:1px solid #383c41;padding:11px;background:#2a2e33;"></a></td>
+          </tr></table>
+          <img src="{{ logo_url }}" width="78" alt="TRIIIPLE" style="display:block;width:78px;height:auto;border:0;margin:28px auto 14px;opacity:0.7;">
+          <div style="font-family:{{ fm }};font-size:9px;letter-spacing:1px;color:#6c7178;line-height:2;">© 2026 triiiple studio · singapore · sgd<br>no longer want these? {{ unsubscribe_link }}</div>
+        </td></tr>
+      </table>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
