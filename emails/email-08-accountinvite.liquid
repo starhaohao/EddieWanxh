@@ -43,7 +43,11 @@
       <div style="font-family:{{ fm }};font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6c7178;padding-bottom:18px;">you're invited</div>
       <div style="font-family:{{ fd }};font-size:46px;line-height:1.0;letter-spacing:-2px;color:#ffffff;">create<br>your account.</div>
       <div style="font-family:{{ ff }};font-size:15px;line-height:1.75;color:#9aa0a6;padding:24px 0 0;">You've been invited to create a TRIIIPLE account — faster checkout, order history, the works. One tap sets it up.</div>
+      {%- if custom_message != blank -%}
+      <div style="font-family:{{ ff }};font-size:15px;line-height:1.75;color:#9aa0a6;padding:14px 0 0;">{{ custom_message }}</div>
+      {%- else -%}
       <div style="font-family:{{ ff }};font-size:14px;line-height:1.7;color:#6c7178;padding:14px 0 0;">Didn't expect this? You can ignore it — no account gets created.</div>
+      {%- endif -%}
     </td></tr>
 
     <tr><td align="center" style="padding:36px 56px 4px;">
