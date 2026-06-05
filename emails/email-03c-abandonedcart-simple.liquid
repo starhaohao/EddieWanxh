@@ -1,0 +1,79 @@
+{%- comment -%}
+══════════════════════════════════════════════════════════════════
+  TRIIIPLE · EMAIL 03c — ABANDONED CART (SIMPLIFIED)
+  Trigger: Checkout / cart abandoned automation (reminder)
+  Type: Shopify transactional email
+  Paste into: Settings → Automations → "Cart abandoned" (any delay)
+──────────────────────────────────────────────────────────────────
+  ARCHITECTURE: Shopify owns consent & sends this email.
+  Klaviyo syncs the subscriber list only — no Klaviyo code here.
+
+  Simplified version: no line items, only free shipping progress.
+  Use for secondary/reminder emails.
+
+  Free-shipping threshold is set to S$130 — change `threshold` (in cents)
+  if yours differs.
+══════════════════════════════════════════════════════════════════
+{%- endcomment -%}
+
+{%- assign logo_url     = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/TRIIIPLE_LOGO_White.png?v=1760773519" -%}
+{%- assign ic_facebook  = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/File_1.png?v=1780662733" -%}
+{%- assign ic_instagram = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/File_4.png?v=1780662734" -%}
+{%- assign ic_pinterest = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/File_7.png?v=1780662734" -%}
+
+{%- assign ff = "'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+{%- assign fm = "'Courier New', Courier, monospace" -%}
+{%- assign fd = "Galdeano, 'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+
+{%- comment -%} free-shipping maths {%- endcomment -%}
+{%- assign threshold = 13000 -%}
+{%- assign sub = checkout.subtotal_price -%}
+{%- assign remaining = threshold | minus: sub -%}
+{%- assign pct = sub | times: 100 | divided_by: threshold -%}
+{%- if pct > 100 -%}{%- assign pct = 100 -%}{%- endif -%}
+
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">Your cart's still here. Complete your order.&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
+
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background:#15171a;">
+<tr><td align="center" style="padding:0;">
+
+  <table role="presentation" width="600" border="0" cellpadding="0" cellspacing="0" align="center" style="width:100%;max-width:600px;background:#212529;">
+
+    <!-- body -->
+    <tr><td align="center" style="padding:48px 56px 0;">
+      <div style="font-family:{{ fm }};font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6c7178;padding-bottom:18px;">your cart's waiting</div>
+      <div style="font-family:{{ fd }};font-size:40px;line-height:1.0;letter-spacing:-2px;color:#ffffff;">finish<br>checkout.</div>
+      <div style="font-family:{{ ff }};font-size:15px;line-height:1.75;color:#9aa0a6;padding:22px 0 0;">We've held your size. Your order's waiting for you at checkout — just a few taps away.</div>
+    </td></tr>
+
+    <!-- free-shipping nudge -->
+    <tr><td style="padding:22px 56px 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border:1px solid #383c41;">
+        <tr><td style="padding:16px 18px;">
+          <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+            <td style="font-family:{{ fm }};font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#ececed;">
+              {%- if remaining > 0 -%}{{ remaining | money }} to free shipping{%- else -%}✓ free shipping unlocked{%- endif -%}
+            </td>
+            <td align="right" style="font-family:{{ fm }};font-size:9px;color:#6c7178;">{{ checkout.subtotal_price | money }} / {{ threshold | money }}</td>
+          </tr></table>
+          <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-top:10px;background:#1d2024;"><tr>
+            <td height="3" style="font-size:0;line-height:0;"><table role="presentation" width="{{ pct }}%" border="0" cellpadding="0" cellspacing="0"><tr><td height="3" style="background:#ffffff;font-size:0;line-height:0;">&nbsp;</td></tr></table></td>
+          </tr></table>
+        </td></tr>
+      </table>
+    </td></tr>
+
+    <!-- CTA -->
+    <tr><td align="center" style="padding:32px 56px 0;">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr><td align="center" bgcolor="#ffffff" style="background:#ffffff;">
+          <a href="{{ checkout.abandoned_checkout_url }}" style="display:inline-block;padding:17px 40px;font-family:{{ fm }};font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#212529;text-decoration:none;">finish checkout</a>
+        </td></tr>
+      </table>
+      <div style="font-family:{{ fm }};font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#6c7178;padding-top:18px;">bag saved 48 hours.</div>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
