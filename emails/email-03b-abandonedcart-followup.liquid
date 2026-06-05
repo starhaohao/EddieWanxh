@@ -1,0 +1,120 @@
+{%- comment -%}
+══════════════════════════════════════════════════════════════════
+  TRIIIPLE · EMAIL 03b — ABANDONED CART (4-HOUR FOLLOW-UP)
+  Trigger: Checkout / cart abandoned automation (4 hours delay)
+  Type: Shopify transactional email
+  Paste into: Settings → Automations → "Cart abandoned" (4 hour delay)
+──────────────────────────────────────────────────────────────────
+  ARCHITECTURE: Shopify owns consent & sends this email.
+  Klaviyo syncs the subscriber list only — no Klaviyo code here.
+
+  This is the 4-hour follow-up with 10% discount incentive.
+  Discount code: RECOVER10 (10% off, min $35, valid 2 days)
+
+  Pulls LIVE data: cart items, subtotal, and a back-to-checkout link.
+  Upload logo + 3 social icons in Settings → Files and paste URLs below.
+  Free-shipping threshold is set to S$130 — change `threshold` (in cents)
+  if yours differs.
+══════════════════════════════════════════════════════════════════
+{%- endcomment -%}
+
+{%- assign logo_url     = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/TRIIIPLE_LOGO_White.png?v=1760773519" -%}
+{%- assign ic_facebook  = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/File_1.png?v=1780662733" -%}
+{%- assign ic_instagram = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/File_4.png?v=1780662734" -%}
+{%- assign ic_pinterest = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/File_7.png?v=1780662734" -%}
+
+{%- assign ff = "'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+{%- assign fm = "'Courier New', Courier, monospace" -%}
+{%- assign fd = "Galdeano, 'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+
+{%- comment -%} free-shipping maths {%- endcomment -%}
+{%- assign threshold = 13000 -%}
+{%- assign sub = checkout.subtotal_price -%}
+{%- assign remaining = threshold | minus: sub -%}
+{%- assign pct = sub | times: 100 | divided_by: threshold -%}
+{%- if pct > 100 -%}{%- assign pct = 100 -%}{%- endif -%}
+
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">Still interested? Here's 10% off to finish your order.&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
+
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background:#15171a;">
+<tr><td align="center" style="padding:0;">
+
+  <table role="presentation" width="600" border="0" cellpadding="0" cellspacing="0" align="center" style="width:100%;max-width:600px;background:#212529;">
+
+    <!-- body -->
+    <tr><td align="center" style="padding:48px 56px 0;">
+      <div style="font-family:{{ fm }};font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6c7178;padding-bottom:18px;">still in your bag · last chance</div>
+      <div style="font-family:{{ fd }};font-size:40px;line-height:1.0;letter-spacing:-2px;color:#ffffff;">come back.<br>10% off.</div>
+      <div style="font-family:{{ ff }};font-size:15px;line-height:1.75;color:#9aa0a6;padding:22px 0 0;">Stock's moving, and we'd hate for you to miss out. Use the code below to get 10% off — but only for the next 2 days.</div>
+    </td></tr>
+
+    <!-- line items -->
+    <tr><td style="padding:30px 56px 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+        {%- for line in checkout.line_items -%}
+        <tr>
+          <td width="60" valign="middle" style="padding:16px 16px 16px 0;border-top:1px solid #2f3338;">
+            <img src="{{ line.image | img_url: '160x' }}" width="60" alt="{{ line.title }}" style="display:block;width:60px;height:74px;border:0;background:#e9e8e4;object-fit:cover;">
+          </td>
+          <td valign="middle" style="padding:16px 0;border-top:1px solid #2f3338;">
+            <div style="font-family:{{ fm }};font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#6c7178;">{{ line.vendor | default: 'TRIIIPLE' }}</div>
+            <div style="font-family:{{ fd }};font-size:16px;letter-spacing:-0.5px;color:#ececed;padding-top:2px;">{{ line.title }}</div>
+            <div style="font-family:{{ ff }};font-size:12px;color:#9aa0a6;padding-top:4px;">{{ line.variant.title }} · qty {{ line.quantity }}</div>
+          </td>
+          <td valign="middle" align="right" style="padding:16px 0;border-top:1px solid #2f3338;font-family:{{ fd }};font-size:16px;letter-spacing:-0.5px;color:#ececed;white-space:nowrap;">{{ line.final_line_price | money }}</td>
+        </tr>
+        {%- endfor -%}
+        <tr><td colspan="3" style="border-top:1px solid #2f3338;font-size:0;line-height:0;">&nbsp;</td></tr>
+      </table>
+    </td></tr>
+
+    <!-- subtotal -->
+    <tr><td style="padding:18px 56px 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+        <td style="font-family:{{ fm }};font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6c7178;">subtotal</td>
+        <td align="right" style="font-family:{{ fd }};font-size:22px;letter-spacing:-1px;color:#ffffff;">{{ checkout.subtotal_price | money }}</td>
+      </tr></table>
+    </td></tr>
+
+    <!-- free-shipping nudge -->
+    <tr><td style="padding:22px 56px 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border:1px solid #383c41;">
+        <tr><td style="padding:16px 18px;">
+          <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+            <td style="font-family:{{ fm }};font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#ececed;">
+              {%- if remaining > 0 -%}{{ remaining | money }} to free shipping{%- else -%}✓ free shipping unlocked{%- endif -%}
+            </td>
+            <td align="right" style="font-family:{{ fm }};font-size:9px;color:#6c7178;">{{ checkout.subtotal_price | money }} / {{ threshold | money }}</td>
+          </tr></table>
+          <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-top:10px;background:#1d2024;"><tr>
+            <td height="3" style="font-size:0;line-height:0;"><table role="presentation" width="{{ pct }}%" border="0" cellpadding="0" cellspacing="0"><tr><td height="3" style="background:#ffffff;font-size:0;line-height:0;">&nbsp;</td></tr></table></td>
+          </tr></table>
+        </td></tr>
+      </table>
+    </td></tr>
+
+    <!-- discount code -->
+    <tr><td style="padding:22px 56px 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border:1px dashed #4a4f55;">
+        <tr><td align="center" style="padding:22px 20px;">
+          <div style="font-family:{{ fm }};font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#9aa0a6;">10% off your order</div>
+          <div style="font-family:{{ fm }};font-size:26px;letter-spacing:3px;color:#ffffff;font-weight:bold;padding:10px 0 8px;">RECOVER10</div>
+          <div style="font-family:{{ fm }};font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#6c7178;">min $35 · valid 2 days only</div>
+        </td></tr>
+      </table>
+    </td></tr>
+
+    <!-- CTA -->
+    <tr><td align="center" style="padding:32px 56px 0;">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr><td align="center" bgcolor="#ffffff" style="background:#ffffff;">
+          <a href="{{ checkout.abandoned_checkout_url }}" style="display:inline-block;padding:17px 40px;font-family:{{ fm }};font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#212529;text-decoration:none;">finish checkout</a>
+        </td></tr>
+      </table>
+      <div style="font-family:{{ fm }};font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#6c7178;padding-top:18px;">apply code at checkout. bag saved 48 hours.</div>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
