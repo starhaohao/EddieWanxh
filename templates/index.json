@@ -1,114 +1,93 @@
 {
   "sections": {
-    "hp_ticker": {
+    "sale_ticker": {
       "type": "sale-announcement-ticker",
+      "blocks": {
+        "msg_1": { "type": "message", "settings": { "text": "Buy 3 · 15% Off" } },
+        "msg_2": { "type": "message", "settings": { "text": "Buy 5 · 25% Off" } },
+        "msg_3": { "type": "message", "settings": { "text": "New Customer · 10% Off First Order" } },
+        "msg_4": { "type": "message", "settings": { "text": "Free Shipping Over $50 · SG" } },
+        "msg_5": { "type": "message", "settings": { "text": "Final Stock · No Restock" } },
+        "msg_6": { "type": "message", "settings": { "text": "No Code Needed" } }
+      },
+      "block_order": ["msg_1", "msg_2", "msg_3", "msg_4", "msg_5", "msg_6"],
       "settings": {}
     },
-    "hp_hero": {
+    "sale_hero": {
       "type": "sale-hero",
+      "blocks": {
+        "ghost_1": { "type": "ghost_cta", "settings": { "label": "Briefs" } },
+        "ghost_2": { "type": "ghost_cta", "settings": { "label": "Boxer Trunks" } },
+        "ghost_3": { "type": "ghost_cta", "settings": { "label": "Tops" } }
+      },
+      "block_order": ["ghost_1", "ghost_2", "ghost_3"],
       "settings": {}
     },
-    "hp_tier": {
+    "sale_tiers": {
       "type": "sale-tier-strip",
+      "blocks": {
+        "tier_1": { "type": "tier", "settings": { "highlight": "15%", "label": "off — 3 items" } },
+        "tier_2": { "type": "tier", "settings": { "highlight": "25%", "label": "off — 5 items" } },
+        "tier_3": { "type": "tier", "settings": { "highlight": "$50+", "label": "free shipping · SG" } }
+      },
+      "block_order": ["tier_1", "tier_2", "tier_3"],
       "settings": {}
     },
-    "hp_grid": {
+    "sale_collections": {
       "type": "sale-collection-grid",
       "blocks": {
-        "t1": { "type": "tile", "settings": { "title": "Briefs", "url": "/collections/brief" } },
-        "t2": { "type": "tile", "settings": { "title": "Boxer Trunks", "url": "/collections/boxer-trunk" } },
-        "t3": { "type": "tile", "settings": { "title": "Tops", "url": "/collections/tops" } },
-        "t4": { "type": "tile", "settings": { "title": "Socks", "url": "/collections/socks" } }
+        "tile_1": { "type": "tile", "settings": { "title": "Briefs" } },
+        "tile_2": { "type": "tile", "settings": { "title": "Boxer Trunks" } },
+        "tile_3": { "type": "tile", "settings": { "title": "Tops" } },
+        "tile_4": { "type": "tile", "settings": { "title": "Socks" } }
       },
-      "block_order": ["t1","t2","t3","t4"],
-      "settings": { "heading": "Shop the range." }
+      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4"],
+      "settings": {}
     },
-    "hp_pillars": {
+    "sale_pillars": {
       "type": "sale-pillars",
-      "settings": {}
-    },
-    "hp_reviews": {
-      "type": "sale-reviews",
-      "settings": {}
-    },
-    "hp_klaviyo": {
-      "type": "sale-klaviyo",
-      "settings": {}
-    },
-    "section_newsletter_JAq9FC": {
-      "type": "section-newsletter",
       "blocks": {
-        "image_BMxFFp": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Land_Page-mobile-1_4d65e172-287e-4ea3-8f59-3176e1b05d93.png",
-            "title": "",
-            "heading_font_size": "heading-large",
-            "text": "",
-            "text_font_size": "body-large",
-            "flex_align": "align--bottom-left",
-            "show_text_background": false,
-            "bg_color": "rgba(0,0,0,0)",
-            "color": "#cdff00",
-            "overlay_type": "disabled",
-            "link_text": "",
-            "link": "",
-            "button_type": "btn--primary",
-            "button_size": "",
-            "button_style": "btn--solid",
-            "show_arrow": false,
-            "heading_tag": "automatic"
-          }
-        },
-        "newsletter_NRLyUk": {
-          "type": "newsletter",
-          "settings": {
-            "subheading": "Join us",
-            "heading": "First Layer Perks",
-            "heading_font_size": "heading-x-small",
-            "text": "<p>Subscribe to receive exclusive offers, free giveaways and once-in-a-lifetime deals.</p>",
-            "text_font_size": "body-x-small",
-            "text_columns": 1,
-            "align_text": "text-left",
-            "button_text": "Join",
-            "show_arrow": true,
-            "terms": true,
-            "show_name": true,
-            "button_type": "btn--white",
-            "button_size": "btn--small",
-            "button_style": "btn--outline",
-            "show_social_links": true,
-            "bg_color": "#799dba",
-            "color": "#32393e",
-            "heading_tag": "automatic"
-          }
-        }
+        "p_1": { "type": "pillar", "settings": { "category": "Technology", "title": "TransDRY®", "description": "Moisture-wicking micro-channel fabric. Stays dry under pressure." } },
+        "p_2": { "type": "pillar", "settings": { "category": "Material", "title": "Cotton Spandex", "description": "72% Pima cotton, 20% modal, 8% elastane. Moves with you." } },
+        "p_3": { "type": "pillar", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Conceived in Singapore. Precision-crafted in Thailand." } },
+        "p_4": { "type": "pillar", "settings": { "category": "Performance", "title": "Made to Move", "description": "Contoured pouch. Double-stitched waistband. Zero ride-up." } }
       },
-      "block_order": ["image_BMxFFp","newsletter_NRLyUk"],
-      "name": "Newsletter",
-      "settings": {
-        "width": "wrapper--full-padded",
-        "height": "screen-height-three-quarters",
-        "mobile_height": "five-fifty-height-hero--mobile",
-        "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 100
-      }
+      "block_order": ["p_1", "p_2", "p_3", "p_4"],
+      "settings": {}
     },
-    "hp_story": {
+    "sale_reviews": {
+      "type": "sale-reviews",
+      "blocks": {
+        "r_1": { "type": "review", "settings": { "quote": "Best underwear I've owned. Period.", "author": "Marcus T. — Verified buyer", "sku": "Studio Brief · Black · M" } },
+        "r_2": { "type": "review", "settings": { "quote": "Bought 3 packs. Won't go back to anything else.", "author": "James L. — Verified buyer", "sku": "Boxer Trunk · White · L" } },
+        "r_3": { "type": "review", "settings": { "quote": "The fit is surgical. Exactly what I needed.", "author": "Ryan K. — Verified buyer", "sku": "Studio Brief · Black · S" } }
+      },
+      "block_order": ["r_1", "r_2", "r_3"],
+      "settings": {}
+    },
+    "sale_klaviyo": {
+      "type": "sale-klaviyo",
+      "blocks": {
+        "perk_1": { "type": "perk", "settings": { "text": "No spam" } },
+        "perk_2": { "type": "perk", "settings": { "text": "Unsubscribe anytime" } },
+        "perk_3": { "type": "perk", "settings": { "text": "SG only" } }
+      },
+      "block_order": ["perk_1", "perk_2", "perk_3"],
+      "settings": {}
+    },
+    "sale_brand_story": {
       "type": "sale-brand-story",
       "settings": {}
     }
   },
   "order": [
-    "hp_ticker",
-    "hp_hero",
-    "hp_tier",
-    "hp_grid",
-    "hp_pillars",
-    "hp_reviews",
-    "hp_klaviyo",
-    "section_newsletter_JAq9FC",
-    "hp_story"
+    "sale_ticker",
+    "sale_hero",
+    "sale_tiers",
+    "sale_collections",
+    "sale_pillars",
+    "sale_reviews",
+    "sale_klaviyo",
+    "sale_brand_story"
   ]
 }
