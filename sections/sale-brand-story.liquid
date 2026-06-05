@@ -1,22 +1,51 @@
 {%- liquid
-  assign bg = section.settings.bg_color
-  assign border = section.settings.border_color
-  assign eyebrow_color = section.settings.eyebrow_color
-  assign title_color = section.settings.title_color
-  assign body_color = section.settings.body_color
+  assign preset = section.settings.color_preset
+  if preset == 'lime'
+    assign bg = '#cdff00'
+    assign border = 'rgba(0,0,0,0.08)'
+    assign eyebrow_color = 'rgba(0,0,0,0.5)'
+    assign title_color = '#000000'
+    assign body_color = 'rgba(0,0,0,0.6)'
+  elsif preset == 'custom'
+    assign bg = section.settings.bg_color
+    assign border = section.settings.border_color
+    assign eyebrow_color = section.settings.eyebrow_color
+    assign title_color = section.settings.title_color
+    assign body_color = section.settings.body_color
+  else
+    assign bg = '#212529'
+    assign border = 'rgba(255,255,255,0.11)'
+    assign eyebrow_color = 'rgba(255,255,255,0.42)'
+    assign title_color = '#ffffff'
+    assign body_color = 'rgba(255,255,255,0.42)'
+  endif
+  assign layout = section.settings.layout_type
 -%}
 
-<section class="sbs" style="--sbs-bg:{{ bg }};--sbs-bd:{{ border }};--sbs-ec:{{ eyebrow_color }};--sbs-tc:{{ title_color }};--sbs-bc:{{ body_color }};">
+<section class="sbs" style="--sbs-bg:{{ bg }};--sbs-bd:{{ border }};--sbs-ec:{{ eyebrow_color }};--sbs-tc:{{ title_color }};--sbs-bc:{{ body_color }};" data-layout="{{ layout }}">
   <div class="sbs__text">
     <div class="sbs__eyebrow">{{ section.settings.eyebrow }}</div>
     <h2 class="sbs__title">{{ section.settings.title }}</h2>
-    <p class="sbs__body">{{ section.settings.body }}</p>
+    <div class="sbs__body">{{ section.settings.body }}</div>
   </div>
-  <div class="sbs__img">
-    {%- if section.settings.image != blank -%}
-      <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.image.alt | escape }}" loading="lazy">
-    {%- endif -%}
-  </div>
+
+  {%- if layout == 'gallery' -%}
+    <div class="sbs__gallery">
+      {%- for block in section.blocks -%}
+        <div class="sbs__gallery-item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="sbs__img">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.image.alt | escape }}" loading="lazy">
+      {%- endif -%}
+    </div>
+  {%- endif -%}
 </section>
 
 <style>
@@ -51,10 +80,13 @@
     color: var(--sbs-bc);
     max-width: 380px;
   }
+
+  /* Single image layout */
   .sbs__img {
     width: 100%;
     aspect-ratio: 4/3;
     overflow: hidden;
+    border-radius: 4px;
   }
   .sbs__img img {
     width: 100%; height: 100%;
@@ -62,9 +94,32 @@
     filter: brightness(0.8);
     display: block;
   }
+
+  /* Gallery grid layout (2x2) */
+  .sbs[data-layout="gallery"] .sbs__gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .sbs__gallery-item {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .sbs__gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   @media (max-width: 749px) {
     .sbs { grid-template-columns: 1fr; gap: 32px; padding: 48px 16px; }
     .sbs__title { font-size: 28px; }
+    .sbs[data-layout="gallery"] .sbs__gallery {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
   }
 </style>
 
@@ -74,20 +129,56 @@
   "tag": "div",
   "class": "sale-brand-story-section",
   "settings": [
+    { "type": "header", "content": "Color Scheme" },
+    {
+      "type": "select",
+      "id": "color_preset",
+      "label": "Preset",
+      "options": [
+        { "value": "dark", "label": "Dark (Default)" },
+        { "value": "lime", "label": "Lime Green" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "dark"
+    },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#212529" },
     { "type": "color", "id": "border_color", "label": "Border", "default": "rgba(255,255,255,0.11)" },
     { "type": "color", "id": "eyebrow_color", "label": "Eyebrow color", "default": "rgba(255,255,255,0.42)" },
     { "type": "color", "id": "title_color", "label": "Title color", "default": "#ffffff" },
     { "type": "color", "id": "body_color", "label": "Body color", "default": "rgba(255,255,255,0.42)" },
+
+    { "type": "header", "content": "Content" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Studio" },
     { "type": "richtext", "id": "title", "label": "Title", "default": "<p>Designed in Singapore.<br>Crafted in Thailand.</p>" },
     { "type": "richtext", "id": "body", "label": "Body", "default": "<p>TRIIIPLE was built on a single premise — that underwear should be engineered, not just made. Every cut, every stitch, every fabric blend is a deliberate decision. This is not basics. This is the baseline.</p>" },
-    { "type": "image_picker", "id": "image", "label": "Image" }
+
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image (single)" },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "Right side layout",
+      "options": [
+        { "value": "single", "label": "Single image" },
+        { "value": "gallery", "label": "Gallery grid (2x2)" }
+      ],
+      "default": "single"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_image",
+      "name": "Gallery image",
+      "limit": 4,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
   ],
   "presets": [
-    {
-      "name": "Sale Brand Story"
-    }
+    { "name": "Sale Brand Story" }
   ],
   "templates": ["page","index"]
 }
