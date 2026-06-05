@@ -17,29 +17,53 @@
     {%- endif -%}
   </div>
   <div class="sk__right">
-    <div>
-      <div class="sk__input-label">{{ section.settings.email_label }}</div>
-      <div class="sk__row">
-        <input class="sk__input" type="email" placeholder="{{ section.settings.email_placeholder }}">
-        <button class="sk__btn" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
+    <!-- Email signup form — connects to Shopify automations -->
+    <form method="post" action="/contact" class="sk__form" id="newsletter-form">
+      <div>
+        <div class="sk__input-label">{{ section.settings.email_label }}</div>
+        <div class="sk__row">
+          <input
+            class="sk__input"
+            type="email"
+            name="contact[email]"
+            placeholder="{{ section.settings.email_placeholder }}"
+            required
+            aria-label="Email address">
+          <button type="submit" class="sk__btn" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
+        </div>
       </div>
-    </div>
-    {%- if section.settings.show_sms -%}
-    <div class="sk__divider">or</div>
-    <div>
-      <div class="sk__input-label">{{ section.settings.sms_label }}</div>
-      <div class="sk__row">
-        <input class="sk__input" type="tel" placeholder="{{ section.settings.sms_placeholder }}">
-        <button class="sk__btn" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
-      </div>
-    </div>
-    {%- endif -%}
+      <!-- Hidden field to subscribe to marketing — triggers Email 04 & 05 -->
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="hidden" name="contact[body]" value="Signed up from landing page banner">
+    </form>
+
     <div class="sk__perks">
       {%- for block in section.blocks -%}
         <div class="sk__perk" {{ block.shopify_attributes }}><span class="sk__perk-dot" style="background:{{ accent }};"></span>{{ block.settings.text }}</div>
       {%- endfor -%}
     </div>
   </div>
+
+  <script>
+    // Form submission handler for visual feedback
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      const btn = this.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+
+      // Show loading state
+      btn.disabled = true;
+      btn.textContent = 'Subscribing...';
+
+      // Form naturally submits to /contact (Shopify endpoint)
+      // This triggers the "Customer subscribes" automation → Email 04 & 05
+
+      // Restore button after a short delay for UX feedback
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }, 2000);
+    });
+  </script>
 </section>
 
 <style>
