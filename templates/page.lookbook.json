@@ -5,10 +5,10 @@
     "lb_grid": {
       "type": "lookbook-product-grid",
       "blocks": {
-        "c1": { "type": "card", "settings": { "variant": "product", "name": "Studio Brief", "sku": "TSU-1001", "price": "$39" } },
-        "c2": { "type": "card", "settings": { "variant": "model", "name": "Studio Brief", "sku": "TSU-1001", "price": "$39" } },
-        "c3": { "type": "card", "settings": { "variant": "product", "name": "Boxer Trunk", "sku": "TSU-1003", "price": "$39" } },
-        "c4": { "type": "card", "settings": { "variant": "model", "name": "Boxer Trunk", "sku": "TSU-1003", "price": "$39" } }
+        "c1": { "type": "card", "settings": { "variant": "product", "category": "The 1st Layer", "name": "Studio Brief", "sku": "TSU-1001", "price": "$39", "name_galdeano": true, "text_align": "left", "show_shop": false } },
+        "c2": { "type": "card", "settings": { "variant": "model", "category": "The 1st Layer", "name": "Studio Brief", "sku": "TSU-1001", "price": "$39", "name_galdeano": true, "text_align": "left", "show_shop": false } },
+        "c3": { "type": "card", "settings": { "variant": "product", "category": "Raw N Uncut", "name": "Boxer Trunk", "sku": "TSU-1003", "price": "$39", "name_galdeano": true, "text_align": "left", "show_shop": false } },
+        "c4": { "type": "card", "settings": { "variant": "model", "category": "Raw N Uncut", "name": "Boxer Trunk", "sku": "TSU-1003", "price": "$39", "name_galdeano": true, "text_align": "left", "show_shop": false } }
       },
       "block_order": ["c1","c2","c3","c4"],
       "settings": {}

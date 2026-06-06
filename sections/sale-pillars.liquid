@@ -15,6 +15,9 @@
         {%- endif -%}
         <div class="sp__cat">{{ block.settings.category }}</div>
         <div class="sp__title">{{ block.settings.title }}</div>
+        {%- if block.settings.subtitle != blank -%}
+          <div class="sp__sub">{{ block.settings.subtitle }}</div>
+        {%- endif -%}
         <div class="sp__desc">{{ block.settings.description }}</div>
       </div>
     {%- endfor -%}
@@ -53,6 +56,14 @@
     letter-spacing: -0.03em;
     color: var(--sp-tc);
     line-height: 1.1;
+  }
+  .sp__sub {
+    font-family: monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--sp-cat);
+    margin-top: -4px;
   }
   .sp__desc {
     font-size: 12px;
@@ -95,6 +106,7 @@
         { "type": "image_picker", "id": "icon", "label": "Icon" },
         { "type": "text", "id": "category", "label": "Category", "default": "Technology" },
         { "type": "text", "id": "title", "label": "Title", "default": "TransDRY®" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle (line below title)" },
         { "type": "text", "id": "description", "label": "Description", "default": "Moisture-wicking micro-channel fabric. Stays dry under pressure." }
       ]
     }

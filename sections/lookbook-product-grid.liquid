@@ -5,28 +5,54 @@
   assign sku_color = section.settings.sku_color
   assign price_color = section.settings.price_color
   assign shop_color = section.settings.shop_color
+  assign tag_color = section.settings.tag_color
+  assign tag_bg = section.settings.tag_bg
   assign name_size = section.settings.name_size
   assign price_size = section.settings.price_size
+  assign name_font = section.settings.name_font
+
+  assign cat_list = section.settings.categories | split: ','
 -%}
-<div class="lpg" style="--lpg-bg:{{ bg }};--lpg-cb:{{ card_bg }};--lpg-nc:{{ name_color }};--lpg-sc:{{ sku_color }};--lpg-pc:{{ price_color }};--lpg-shc:{{ shop_color }};--lpg-ns:{{ name_size }}px;--lpg-ps:{{ price_size }}px;">
+<div class="lpg" style="--lpg-bg:{{ bg }};--lpg-cb:{{ card_bg }};--lpg-nc:{{ name_color }};--lpg-sc:{{ sku_color }};--lpg-pc:{{ price_color }};--lpg-shc:{{ shop_color }};--lpg-tc:{{ tag_color }};--lpg-tbg:{{ tag_bg }};--lpg-ns:{{ name_size }}px;--lpg-ps:{{ price_size }}px;">
+
+  {%- if section.settings.show_filters and cat_list.size > 0 -%}
+  <div class="lpg__filters">
+    <button class="lpg__chip is-active" data-cat="__all">ALL</button>
+    {%- for c in cat_list -%}
+      {%- assign label = c | strip -%}
+      {%- assign slug = label | handleize -%}
+      <button class="lpg__chip" data-cat="{{ slug }}">{{ label }}</button>
+    {%- endfor -%}
+  </div>
+  {%- endif -%}
+
   <div class="lpg__grid">
     {%- for block in section.blocks -%}
-      <a class="lpg__card lpg__card--{{ block.settings.variant }}" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
+      {%- assign cat_slug = block.settings.category | handleize -%}
+      <a class="lpg__card lpg__card--{{ block.settings.variant }}{% if block.settings.name_galdeano %} lpg__card--gald{% endif %}"
+         href="{{ block.settings.url | default: '#' }}"
+         data-cat="{{ cat_slug }}"
+         style="--lpg-align:{{ block.settings.text_align }};--lpg-card-ns:{{ block.settings.name_size_override | default: 0 }}px;"
+         {{ block.shopify_attributes }}>
         <div class="lpg__img">
+          {%- if block.settings.category != blank -%}
+            <span class="lpg__tag">{{ block.settings.category }}</span>
+          {%- endif -%}
           {%- if block.settings.image != blank -%}
             <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
           {%- endif -%}
         </div>
         {%- if block.settings.variant == 'product' -%}
         <div class="lpg__body">
-          <div class="lpg__name">{{ block.settings.name }}</div>
-          <div class="lpg__sku">{{ block.settings.sku }}</div>
+          {%- if block.settings.name != blank -%}<div class="lpg__name">{{ block.settings.name }}</div>{%- endif -%}
+          {%- if block.settings.subtitle != blank -%}<div class="lpg__sub">{{ block.settings.subtitle }}</div>{%- endif -%}
+          {%- if block.settings.sku != blank -%}<div class="lpg__sku">{{ block.settings.sku }}</div>{%- endif -%}
           <div class="lpg__foot">
-            <span class="lpg__price">{{ block.settings.price }}</span>
-            <span class="lpg__shop">Shop →</span>
+            {%- if block.settings.price != blank -%}<span class="lpg__price">{{ block.settings.price }}</span>{%- endif -%}
+            {%- if block.settings.show_shop -%}<span class="lpg__shop">Shop →</span>{%- endif -%}
           </div>
         </div>
-        {%- else -%}
+        {%- elsif block.settings.show_shop -%}
         <div class="lpg__body lpg__body--model">
           <span class="lpg__shop">Shop →</span>
         </div>
@@ -38,20 +64,69 @@
 
 <style>
   .lpg { background:var(--lpg-bg); padding:0; }
+  .lpg__filters { display:flex; flex-wrap:wrap; gap:10px; padding:24px 16px 20px; }
+  .lpg__chip {
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    background:transparent; color:var(--lpg-nc);
+    border:1px solid rgba(17,18,20,0.18);
+    border-radius:999px; padding:8px 18px; cursor:pointer;
+    transition:background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .lpg__chip:hover { border-color:rgba(17,18,20,0.5); }
+  .lpg__chip.is-active { background:var(--lpg-nc); color:var(--lpg-bg); border-color:var(--lpg-nc); }
+
   .lpg__grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:0; padding:0 16px; }
-  .lpg__card { text-decoration:none; color:inherit; display:flex; flex-direction:column; background:var(--lpg-bg); }
+  .lpg__card { text-decoration:none; color:inherit; display:flex; flex-direction:column; background:var(--lpg-bg); text-align:var(--lpg-align, left); }
+  .lpg__card.is-hidden { display:none; }
   .lpg__img { position:relative; overflow:hidden; aspect-ratio:3/4; background:var(--lpg-cb); }
   .lpg__img img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform 0.7s ease; }
   .lpg__card:hover .lpg__img img { transform:scale(1.04); }
-  .lpg__body { padding:11px 13px 16px; display:flex; flex-direction:column; gap:5px; flex:1; }
+  .lpg__tag {
+    position:absolute; top:14px; left:14px; z-index:2;
+    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--lpg-tc); background:var(--lpg-tbg);
+    padding:4px 8px;
+  }
+  .lpg__body { padding:11px 13px 16px; display:flex; flex-direction:column; gap:5px; flex:1; align-items:flex-start; }
+  .lpg__card[style*="--lpg-align:center"] .lpg__body { align-items:center; }
+  .lpg__card[style*="--lpg-align:right"]  .lpg__body { align-items:flex-end; }
   .lpg__body--model { flex-direction:row; justify-content:flex-end; align-items:center; padding:10px 13px 14px; }
-  .lpg__name { font-size:var(--lpg-ns); letter-spacing:-0.03em; color:var(--lpg-nc); line-height:1.1; }
+  .lpg__name { font-size:var(--lpg-card-ns, var(--lpg-ns)); letter-spacing:-0.03em; color:var(--lpg-nc); line-height:1.15; }
+  .lpg__card--gald .lpg__name { font-family:'Galdeano', 'Helvetica Neue', Helvetica, sans-serif; font-weight:400; letter-spacing:-0.04em; }
+  .lpg__sub { font-size:12px; color:var(--lpg-sc); letter-spacing:0.02em; line-height:1.4; }
   .lpg__sku { font-family:monospace; font-size:8px; text-transform:uppercase; letter-spacing:0.1em; color:var(--lpg-sc); }
-  .lpg__foot { display:flex; justify-content:space-between; align-items:center; margin-top:5px; }
+  .lpg__foot { display:flex; justify-content:space-between; align-items:center; margin-top:5px; width:100%; gap:12px; }
   .lpg__price { font-size:var(--lpg-ps); letter-spacing:-0.03em; color:var(--lpg-pc); }
   .lpg__shop { font-family:monospace; font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:var(--lpg-shc); }
-  @media (min-width:1024px){ .lpg__grid{ padding:0 80px; } .lpg__img{ aspect-ratio:2/3; } }
+  @media (min-width:1024px){ .lpg__grid{ padding:0 80px; } .lpg__filters{ padding:32px 80px 24px; } .lpg__img{ aspect-ratio:2/3; } }
+  @media (max-width:749px){ .lpg__grid{ grid-template-columns:repeat(2, 1fr); } }
 </style>
+
+<script>
+(function(){
+  var root = document.currentScript.previousElementSibling;
+  while (root && !root.classList.contains('lpg')) root = root.previousElementSibling;
+  if (!root) return;
+  var chips = root.querySelectorAll('.lpg__chip');
+  var cards = root.querySelectorAll('.lpg__card');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var cat = chip.getAttribute('data-cat');
+      chips.forEach(function(c){ c.classList.remove('is-active'); });
+      chip.classList.add('is-active');
+      cards.forEach(function(card){
+        if (cat === '__all' || card.getAttribute('data-cat') === cat) {
+          card.classList.remove('is-hidden');
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+    });
+  });
+})();
+</script>
 
 {% schema %}
 {
@@ -59,14 +134,22 @@
   "tag":"div",
   "class":"lookbook-product-grid-section",
   "settings":[
+    { "type":"header","content":"Filters" },
+    { "type":"checkbox","id":"show_filters","label":"Show category filter bar","default":true },
+    { "type":"text","id":"categories","label":"Categories (comma-separated)","default":"The 1st Layer, Raw N Uncut","info":"These become the filter chips. Card category must match (case-insensitive) to be filterable." },
+    { "type":"header","content":"Colors" },
     { "type":"color","id":"bg_color","label":"Background","default":"#FAFAF8" },
     { "type":"color","id":"card_bg","label":"Image fallback","default":"#EDEAE3" },
     { "type":"color","id":"name_color","label":"Name color","default":"#111214" },
-    { "type":"color","id":"sku_color","label":"SKU color","default":"rgba(17,18,20,0.4)" },
+    { "type":"color","id":"sku_color","label":"SKU / subtitle color","default":"rgba(17,18,20,0.55)" },
     { "type":"color","id":"price_color","label":"Price color","default":"#111214" },
     { "type":"color","id":"shop_color","label":"Shop link color","default":"rgba(17,18,20,0.4)" },
-    { "type":"range","id":"name_size","label":"Name size (px)","min":12,"max":24,"step":1,"default":15 },
-    { "type":"range","id":"price_size","label":"Price size (px)","min":12,"max":24,"step":1,"default":15 }
+    { "type":"color","id":"tag_color","label":"Category tag color","default":"#FFFFFF" },
+    { "type":"color","id":"tag_bg","label":"Category tag background","default":"rgba(17,18,20,0.65)" },
+    { "type":"header","content":"Type" },
+    { "type":"range","id":"name_size","label":"Default name size (px)","min":12,"max":32,"step":1,"default":15 },
+    { "type":"range","id":"price_size","label":"Price size (px)","min":12,"max":24,"step":1,"default":15 },
+    { "type":"select","id":"name_font","label":"Name font (legacy — use per-card toggle)","options":[{"value":"default","label":"Default"},{"value":"galdeano","label":"Galdeano"}],"default":"default" }
   ],
   "blocks":[
     {
@@ -74,10 +157,17 @@
       "settings":[
         { "type":"select","id":"variant","label":"Variant","options":[{"value":"product","label":"Product card"},{"value":"model","label":"Model card"}],"default":"product" },
         { "type":"image_picker","id":"image","label":"Image" },
+        { "type":"text","id":"category","label":"Category tag","info":"Shown on image. Must match one of the filter categories to be filterable." },
         { "type":"text","id":"name","label":"Name","default":"Studio Brief" },
+        { "type":"text","id":"subtitle","label":"Subtitle (optional)" },
         { "type":"text","id":"sku","label":"SKU","default":"TSU-1001" },
         { "type":"text","id":"price","label":"Price","default":"$39" },
-        { "type":"url","id":"url","label":"Link" }
+        { "type":"url","id":"url","label":"Link" },
+        { "type":"header","content":"Card style" },
+        { "type":"checkbox","id":"name_galdeano","label":"Use Galdeano font for name","default":false },
+        { "type":"select","id":"text_align","label":"Text direction","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left" },
+        { "type":"range","id":"name_size_override","label":"Name size override (px, 0 = use default)","min":0,"max":48,"step":1,"default":0 },
+        { "type":"checkbox","id":"show_shop","label":"Show Shop link","default":false }
       ]
     }
   ],
@@ -85,10 +175,10 @@
     {
       "name":"Lookbook Product Grid",
       "blocks":[
-        { "type":"card","settings":{"variant":"product","name":"Studio Brief","sku":"TSU-1001","price":"$39"} },
-        { "type":"card","settings":{"variant":"model","name":"Studio Brief","sku":"TSU-1001","price":"$39"} },
-        { "type":"card","settings":{"variant":"product","name":"Boxer Trunk","sku":"TSU-1003","price":"$39"} },
-        { "type":"card","settings":{"variant":"model","name":"Boxer Trunk","sku":"TSU-1003","price":"$39"} }
+        { "type":"card","settings":{"variant":"product","category":"The 1st Layer","name":"Studio Brief","sku":"TSU-1001","price":"$39"} },
+        { "type":"card","settings":{"variant":"model","category":"The 1st Layer","name":"Studio Brief","sku":"TSU-1001","price":"$39"} },
+        { "type":"card","settings":{"variant":"product","category":"Raw N Uncut","name":"Boxer Trunk","sku":"TSU-1003","price":"$39"} },
+        { "type":"card","settings":{"variant":"model","category":"Raw N Uncut","name":"Boxer Trunk","sku":"TSU-1003","price":"$39"} }
       ]
     }
   ],
