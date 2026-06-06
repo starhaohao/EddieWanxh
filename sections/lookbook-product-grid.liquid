@@ -49,7 +49,14 @@
           {%- if block.settings.subtitle != blank -%}<div class="lpg__sub">{{ block.settings.subtitle }}</div>{%- endif -%}
           {%- if block.settings.sku != blank -%}<div class="lpg__sku">{{ block.settings.sku }}</div>{%- endif -%}
           <div class="lpg__foot">
-            {%- if block.settings.price != blank -%}<span class="lpg__price">{{ block.settings.price }}</span>{%- endif -%}
+            {%- if block.settings.price != blank -%}
+              <span class="lpg__price-wrap">
+                <span class="lpg__price">{{ block.settings.price }}</span>
+                {%- if block.settings.compare_price != blank -%}
+                  <span class="lpg__compare">{{ block.settings.compare_price }}</span>
+                {%- endif -%}
+              </span>
+            {%- endif -%}
             {%- if block.settings.show_shop -%}<span class="lpg__shop">Shop →</span>{%- endif -%}
           </div>
         </div>
@@ -100,7 +107,9 @@
   .lpg__sub { font-size:12px; color:var(--lpg-sc); letter-spacing:0.02em; line-height:1.4; }
   .lpg__sku { font-family:monospace; font-size:8px; text-transform:uppercase; letter-spacing:0.1em; color:var(--lpg-sc); }
   .lpg__foot { display:flex; justify-content:space-between; align-items:center; margin-top:5px; width:100%; gap:12px; }
+  .lpg__price-wrap { display:inline-flex; align-items:baseline; gap:8px; }
   .lpg__price { font-size:var(--lpg-ps); letter-spacing:-0.03em; color:var(--lpg-pc); }
+  .lpg__compare { font-size:calc(var(--lpg-ps) * 0.85); color:var(--lpg-sc); text-decoration:line-through; }
   .lpg__shop { font-family:monospace; font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:var(--lpg-shc); }
   @media (min-width:1024px){ .lpg__grid{ padding:0 80px; } .lpg__filters{ padding:32px 80px 24px; } .lpg__img{ aspect-ratio:2/3; } }
   @media (max-width:749px){ .lpg__grid{ grid-template-columns:repeat(2, 1fr); } }
@@ -165,6 +174,7 @@
         { "type":"text","id":"subtitle","label":"Subtitle (optional)" },
         { "type":"text","id":"sku","label":"SKU","default":"TSU-1001" },
         { "type":"text","id":"price","label":"Price","default":"$39" },
+        { "type":"text","id":"compare_price","label":"Compare-at price (strikethrough)","info":"e.g. SGD 369 — shown struck through next to price" },
         { "type":"url","id":"url","label":"Link" },
         { "type":"header","content":"Card style" },
         { "type":"checkbox","id":"name_galdeano","label":"Use Galdeano font for name","default":false },
