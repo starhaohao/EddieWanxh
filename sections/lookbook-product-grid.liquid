@@ -9,7 +9,6 @@
   assign tag_bg = section.settings.tag_bg
   assign name_size = section.settings.name_size
   assign price_size = section.settings.price_size
-  assign name_font = section.settings.name_font
   assign grid_line_color = section.settings.grid_line_color
 
   assign cat_list = section.settings.categories | split: ','
@@ -40,7 +39,7 @@
             <span class="lpg__tag">{{ block.settings.category }}</span>
           {%- endif -%}
           {%- if block.settings.image != blank -%}
-            <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
+            {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300,600,900,1200', sizes: '(min-width:1024px) 22vw, (min-width:750px) 25vw, 50vw' }}
           {%- endif -%}
         </div>
         {%- if block.settings.variant == 'product' -%}
@@ -160,8 +159,7 @@
     { "type":"color","id":"grid_line_color","label":"Grid line color (when card grid lines are on)","default":"rgba(17,18,20,0.12)" },
     { "type":"header","content":"Type" },
     { "type":"range","id":"name_size","label":"Default name size (px)","min":12,"max":32,"step":1,"default":15 },
-    { "type":"range","id":"price_size","label":"Price size (px)","min":12,"max":24,"step":1,"default":15 },
-    { "type":"select","id":"name_font","label":"Name font (legacy — use per-card toggle)","options":[{"value":"default","label":"Default"},{"value":"galdeano","label":"Galdeano"}],"default":"default" }
+    { "type":"range","id":"price_size","label":"Price size (px)","min":12,"max":24,"step":1,"default":15 }
   ],
   "blocks":[
     {
@@ -196,6 +194,6 @@
       ]
     }
   ],
-  "templates":["page"]
+  "enabled_on": { "templates": ["page"] }
 }
 {% endschema %}
