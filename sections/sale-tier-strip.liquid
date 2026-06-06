@@ -4,13 +4,14 @@
   assign accent = section.settings.accent_color
   assign text = section.settings.text_color
   assign muted = section.settings.muted_color
+  assign highlight_size = section.settings.highlight_size
 -%}
 
-<div class="sts" style="--sts-bg:{{ bg }};--sts-btc:{{ border_top_color }};--sts-accent:{{ accent }};--sts-text:{{ text }};--sts-muted:{{ muted }};">
+<div class="sts" style="--sts-bg:{{ bg }};--sts-btc:{{ border_top_color }};--sts-accent:{{ accent }};--sts-text:{{ text }};--sts-muted:{{ muted }};--sts-hs:{{ highlight_size }}px;">
   <div class="sts__items">
     {%- for block in section.blocks -%}
       <div class="sts__item" {{ block.shopify_attributes }}>
-        <span class="sts__pct">{{ block.settings.highlight }}</span>
+        <span class="sts__pct" style="font-weight:{{ block.settings.highlight_weight }};">{{ block.settings.highlight }}</span>
         <span>{{ block.settings.label }}</span>
       </div>
     {%- endfor -%}
@@ -47,9 +48,13 @@
   }
   .sts__item:last-of-type { border-right: none; }
   .sts__pct {
-    font-size: 20px;
+    font-size: var(--sts-hs, 20px);
+    line-height: 1;
     letter-spacing: -0.04em;
     color: var(--sts-accent);
+    display: inline-block;
+    min-width: 1.2em;
+    text-align: center;
   }
   .sts__badge {
     padding: 0 40px;
@@ -64,7 +69,7 @@
     .sts { height: auto; padding: 12px 16px; }
     .sts__items { flex-wrap: wrap; justify-content: center; gap: 8px; }
     .sts__item { padding: 6px 16px; border-right: none; font-size: 9px; }
-    .sts__pct { font-size: 16px; }
+    .sts__pct { font-size: calc(var(--sts-hs, 20px) * 0.8); }
     .sts__badge { border-left: none; padding: 6px 16px; }
   }
 </style>
@@ -80,6 +85,7 @@
     { "type": "color", "id": "accent_color", "label": "Highlight color", "default": "#923531" },
     { "type": "color", "id": "text_color", "label": "Text color", "default": "#212529" },
     { "type": "color", "id": "muted_color", "label": "Badge color", "default": "rgba(33,37,41,0.42)" },
+    { "type": "range", "id": "highlight_size", "label": "Highlight number size (px) — uniform across all tiers", "min": 14, "max": 40, "step": 1, "default": 20 },
     { "type": "text", "id": "badge_text", "label": "Badge text", "default": "No code needed" }
   ],
   "blocks": [
@@ -88,7 +94,15 @@
       "name": "Tier",
       "settings": [
         { "type": "text", "id": "highlight", "label": "Highlight", "default": "15%" },
-        { "type": "text", "id": "label", "label": "Label", "default": "off — 3 items" }
+        { "type": "text", "id": "label", "label": "Label", "default": "off — 3 items" },
+        { "type": "select", "id": "highlight_weight", "label": "Highlight weight", "options": [
+          { "value": "300", "label": "Light (300)" },
+          { "value": "400", "label": "Regular (400)" },
+          { "value": "500", "label": "Medium (500)" },
+          { "value": "600", "label": "Semibold (600)" },
+          { "value": "700", "label": "Bold (700)" },
+          { "value": "800", "label": "Extra bold (800)" }
+        ], "default": "400" }
       ]
     }
   ],
