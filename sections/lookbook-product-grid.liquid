@@ -10,10 +10,11 @@
   assign name_size = section.settings.name_size
   assign price_size = section.settings.price_size
   assign name_font = section.settings.name_font
+  assign grid_line_color = section.settings.grid_line_color
 
   assign cat_list = section.settings.categories | split: ','
 -%}
-<div class="lpg" style="--lpg-bg:{{ bg }};--lpg-cb:{{ card_bg }};--lpg-nc:{{ name_color }};--lpg-sc:{{ sku_color }};--lpg-pc:{{ price_color }};--lpg-shc:{{ shop_color }};--lpg-tc:{{ tag_color }};--lpg-tbg:{{ tag_bg }};--lpg-ns:{{ name_size }}px;--lpg-ps:{{ price_size }}px;">
+<div class="lpg" style="--lpg-bg:{{ bg }};--lpg-cb:{{ card_bg }};--lpg-nc:{{ name_color }};--lpg-sc:{{ sku_color }};--lpg-pc:{{ price_color }};--lpg-shc:{{ shop_color }};--lpg-tc:{{ tag_color }};--lpg-tbg:{{ tag_bg }};--lpg-ns:{{ name_size }}px;--lpg-ps:{{ price_size }}px;--lpg-gl:{{ grid_line_color }};">
 
   {%- if section.settings.show_filters and cat_list.size > 0 -%}
   <div class="lpg__filters">
@@ -29,7 +30,7 @@
   <div class="lpg__grid">
     {%- for block in section.blocks -%}
       {%- assign cat_slug = block.settings.category | handleize -%}
-      <a class="lpg__card lpg__card--{{ block.settings.variant }}{% if block.settings.name_galdeano %} lpg__card--gald{% endif %}"
+      <a class="lpg__card lpg__card--{{ block.settings.variant }}{% if block.settings.name_galdeano %} lpg__card--gald{% endif %}{% if block.settings.show_grid_lines %} lpg__card--lined{% endif %}"
          href="{{ block.settings.url | default: '#' }}"
          data-cat="{{ cat_slug }}"
          style="--lpg-align:{{ block.settings.text_align }};--lpg-card-ns:{{ block.settings.name_size_override | default: 0 }}px;"
@@ -79,6 +80,7 @@
   .lpg__grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:0; padding:0 16px; }
   .lpg__card { text-decoration:none; color:inherit; display:flex; flex-direction:column; background:var(--lpg-bg); text-align:var(--lpg-align, left); }
   .lpg__card.is-hidden { display:none; }
+  .lpg__card--lined { border-right:1px solid var(--lpg-gl); border-bottom:1px solid var(--lpg-gl); }
   .lpg__img { position:relative; overflow:hidden; aspect-ratio:3/4; background:var(--lpg-cb); }
   .lpg__img img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform 0.7s ease; }
   .lpg__card:hover .lpg__img img { transform:scale(1.04); }
@@ -146,6 +148,7 @@
     { "type":"color","id":"shop_color","label":"Shop link color","default":"rgba(17,18,20,0.4)" },
     { "type":"color","id":"tag_color","label":"Category tag color","default":"#FFFFFF" },
     { "type":"color","id":"tag_bg","label":"Category tag background","default":"rgba(17,18,20,0.65)" },
+    { "type":"color","id":"grid_line_color","label":"Grid line color (when card grid lines are on)","default":"rgba(17,18,20,0.12)" },
     { "type":"header","content":"Type" },
     { "type":"range","id":"name_size","label":"Default name size (px)","min":12,"max":32,"step":1,"default":15 },
     { "type":"range","id":"price_size","label":"Price size (px)","min":12,"max":24,"step":1,"default":15 },
@@ -167,7 +170,8 @@
         { "type":"checkbox","id":"name_galdeano","label":"Use Galdeano font for name","default":false },
         { "type":"select","id":"text_align","label":"Text direction","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left" },
         { "type":"range","id":"name_size_override","label":"Name size override (px, 0 = use default)","min":0,"max":48,"step":1,"default":0 },
-        { "type":"checkbox","id":"show_shop","label":"Show Shop link","default":false }
+        { "type":"checkbox","id":"show_shop","label":"Show Shop link","default":false },
+        { "type":"checkbox","id":"show_grid_lines","label":"Show grid lines (right + bottom border)","default":false }
       ]
     }
   ],
