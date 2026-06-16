@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "enable_sticky_info": true,
+        "show_vendor": true,
+        "show_rating": true
+      }
+    },
+    "promo_freesocks26_Hn3WYy": {
+      "type": "promo-freesocks26",
+      "settings": {
+        "badge_text": "free gift",
+        "heading": "buy any 2 items",
+        "subheading": "get a free pair of L Cotton Spandex Socks",
+        "code": "freesocks26",
+        "min_qty": 2,
+        "socks_url": "/collections/socks",
+        "shade_1": "Black",
+        "shade_2": "Dusty Blue",
+        "shade_3": "Pink",
+        "shade_4": "Heather Grey",
+        "show_cart_nudge": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promo_freesocks26_Hn3WYy"
+  ]
+}
