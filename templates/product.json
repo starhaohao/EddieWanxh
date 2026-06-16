@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "product",
       "settings": {
         "enable_sticky_info": true,
         "show_vendor": true,
