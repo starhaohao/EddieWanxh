@@ -120,6 +120,22 @@ fetch(`https://graph.facebook.com/v20.0/52537734326322?fields=account_id&access_
   ).then(data => console.log(JSON.stringify(data, null, 2)));
 ```
 
+## Pixels
+
+| Pixel Name | Pixel ID | Status | Used By |
+|---|---|---|---|
+| TRIIIPLE Studio's pixel | 639397552556252 | ✅ Active (fires daily) | Conversion campaign |
+| Shopify_Triiiple_online | 1441438253353263 | ⚠️ Stale (last fired 2026-06-02) | Not used — investigate in Shopify Admin |
+
+**Conversion campaign setup:**
+- optimization_goal: OFFSITE_CONVERSIONS → PURCHASE
+- product_set_id: 27080259148325878 (Shopify catalog connected)
+- variation: PRODUCT_SET_AND_WEBSITE
+
+**Awareness campaign setup:**
+- optimization_goal: AD_RECALL_LIFT
+- promoted_object: page_id 624009770796180 (Facebook Page only, no pixel needed)
+
 ## Locale Targeting Reference
 
 Meta locale targeting hits people whose **Facebook app language** is set to that locale — not ethnicity.
