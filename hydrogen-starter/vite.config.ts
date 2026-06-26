@@ -27,6 +27,6 @@ export default defineConfig({
     optimizeDeps: {
       include: [],
     },
-    noExternal: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
+    noExternal: true,
   },
 });
