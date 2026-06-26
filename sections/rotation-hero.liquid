@@ -1,0 +1,229 @@
+{%- liquid
+  assign eyebrow      = section.settings.eyebrow
+  assign title        = section.settings.title
+  assign accent_word  = section.settings.accent_word
+  assign meta1_label  = section.settings.meta1_label
+  assign meta1_value  = section.settings.meta1_value
+  assign meta2_label  = section.settings.meta2_label
+  assign meta2_value  = section.settings.meta2_value
+  assign cta_text     = section.settings.cta_text
+  assign cta_url      = section.settings.cta_url
+  assign badge_text   = section.settings.badge_text
+  assign rule_text    = section.settings.rule_text
+-%}
+
+<section class="rh">
+  <div class="rh__left">
+    {%- if rule_text != blank -%}
+      <div class="rh__rule"><span>{{ rule_text }}</span></div>
+    {%- endif -%}
+    {%- if eyebrow != blank -%}
+      <p class="rh__eye">{{ eyebrow }}</p>
+    {%- endif -%}
+    <h1 class="rh__title">
+      {{ title }}
+      {%- if accent_word != blank -%}<br><span class="rh__accent">{{ accent_word }}</span>{%- endif -%}
+    </h1>
+    {%- if meta1_label != blank or meta2_label != blank -%}
+    <div class="rh__meta">
+      {%- if meta1_label != blank -%}
+        <div class="rh__meta-item">
+          <label>{{ meta1_label }}</label>
+          <p>{{ meta1_value }}</p>
+        </div>
+      {%- endif -%}
+      {%- if meta2_label != blank -%}
+        <div class="rh__meta-item">
+          <label>{{ meta2_label }}</label>
+          <p>{{ meta2_value }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+    {%- if cta_text != blank -%}
+      <a class="rh__cta" href="{{ cta_url }}">{{ cta_text }} →</a>
+    {%- endif -%}
+  </div>
+
+  <div class="rh__right">
+    {%- if section.settings.image != blank -%}
+      <img src="{{ section.settings.image | image_url: width: 1800 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
+    {%- else -%}
+      <div class="rh__right-ph"></div>
+    {%- endif -%}
+    {%- if badge_text != blank -%}
+      <div class="rh__badge">
+        {%- assign badge_lines = badge_text | split: '|' -%}
+        {%- for line in badge_lines -%}
+          <p>{{ line | strip }}</p>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .rh {
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(23,25,28,.1);
+  }
+
+  /* LEFT — dark panel */
+  .rh__left {
+    background: #17191C;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px 56px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .rh__rule {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    border-bottom: 1px solid rgba(250,248,243,.08);
+    display: flex;
+    align-items: center;
+    padding: 0 56px;
+  }
+  .rh__rule span {
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(250,248,243,.3);
+  }
+  .rh__eye {
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(250,248,243,.4);
+    margin-bottom: 28px;
+  }
+  .rh__title {
+    font-size: clamp(60px, 7vw, 108px);
+    font-weight: 400;
+    letter-spacing: -0.045em;
+    line-height: .93;
+    color: #FAF8F3;
+    margin-bottom: 0;
+  }
+  .rh__accent {
+    color: #AAC9E3;
+  }
+  .rh__meta {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(250,248,243,.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .rh__meta-item label {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(250,248,243,.3);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .rh__meta-item p {
+    font-size: 13px;
+    color: rgba(250,248,243,.7);
+    letter-spacing: -0.01em;
+  }
+  .rh__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 36px;
+    background: #FAF8F3;
+    color: #17191C;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: 13px 20px;
+    border: 1px solid rgba(250,248,243,.15);
+    transition: background .2s, color .2s;
+    align-self: flex-start;
+  }
+  .rh__cta:hover {
+    background: #AAC9E3;
+    color: #17191C;
+    border-color: #AAC9E3;
+  }
+
+  /* RIGHT — image panel */
+  .rh__right {
+    position: relative;
+    overflow: hidden;
+    border-left: 1px solid rgba(23,25,28,.1);
+  }
+  .rh__right img,
+  .rh__right-ph {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .rh__right-ph {
+    background: #AAC9E3;
+    opacity: .2;
+  }
+  .rh__badge {
+    position: absolute;
+    bottom: 32px; right: 32px;
+    background: #AAC9E3;
+    padding: 16px 20px;
+  }
+  .rh__badge p {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #17191C;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 989px) {
+    .rh { grid-template-columns: 1fr; }
+    .rh__right { display: none; }
+    .rh__left { min-height: 100svh; padding: 88px 24px 56px; }
+    .rh__rule { padding: 0 24px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Rotation Hero",
+  "tag": "div",
+  "class": "rotation-hero-section",
+  "settings": [
+    { "type": "header", "content": "Left panel — text" },
+    { "type": "text", "id": "rule_text", "label": "Top rule text", "default": "Singapore · Final Units · 2025" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The collection" },
+    { "type": "text", "id": "title", "label": "Title (first word/line)", "default": "Last" },
+    { "type": "text", "id": "accent_word", "label": "Accent word (blue, second line)", "default": "rotation." },
+    { "type": "text", "id": "meta1_label", "label": "Meta 1 label", "default": "Styles" },
+    { "type": "text", "id": "meta1_value", "label": "Meta 1 value", "default": "10 remaining" },
+    { "type": "text", "id": "meta2_label", "label": "Meta 2 label", "default": "Offer" },
+    { "type": "text", "id": "meta2_value", "label": "Meta 2 value", "default": "Up to 25% off" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Shop now" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" },
+    { "type": "header", "content": "Right panel — image" },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "badge_text", "label": "Badge text (use | to separate lines)", "default": "3 pairs · 15% off|5 pairs · 25% off|Auto applied" }
+  ],
+  "presets": [
+    { "name": "Rotation Hero" }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}

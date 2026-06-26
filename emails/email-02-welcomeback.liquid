@@ -1,0 +1,106 @@
+{%- comment -%}
+══════════════════════════════════════════════════════════════════
+  TRIIIPLE · EMAIL 02 — WELCOME BACK (second order)
+  Trigger: Order created → branch where order count = 2
+  Type: Shopify transactional email
+  Paste into: Settings → Notifications → "Order confirmation" → Edit code
+──────────────────────────────────────────────────────────────────
+  ARCHITECTURE: Shopify owns consent & sends this email.
+  Klaviyo syncs the subscriber list only — no Klaviyo code here.
+
+  Upload in Settings → Files and paste each URL below:
+    triiiple-logo-white.png + the 3 product shots + 3 social icons.
+  Swap the product handles in p1_url / p2_url / p3_url for real ones.
+══════════════════════════════════════════════════════════════════
+{%- endcomment -%}
+
+{%- assign logo_url     = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/Frame_77.png?v=1775028055" -%}
+{%- assign ic_facebook  = "PASTE_FACEBOOK_ICON_URL" -%}
+{%- assign ic_instagram = "PASTE_INSTAGRAM_ICON_URL" -%}
+{%- assign ic_pinterest = "PASTE_PINTEREST_ICON_URL" -%}
+
+{%- assign p1_img = "PASTE_TSU1003_IMG" -%}{%- assign p1_url = "/products/tsu1003-transdry-brief" -%}
+{%- assign p2_img = "PASTE_TSU1001_BLK_IMG" -%}{%- assign p2_url = "/products/tsu1001-v-brief" -%}
+{%- assign p3_img = "PASTE_TSU1001_WHT_IMG" -%}{%- assign p3_url = "/products/tsu1001-v-brief" -%}
+
+{%- assign ff = "'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+{%- assign fm = "'Courier New', Courier, monospace" -%}
+{%- assign fd = "Galdeano, 'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">Twice now. That's not nothing — thank you.&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
+
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background:#15171a;">
+<tr><td align="center" style="padding:24px 12px;">
+
+  <table role="presentation" width="600" border="0" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:#212529;">
+
+    <!-- logo + slogan -->
+    <tr><td align="center" style="padding:40px 56px 0;">
+      <img src="{{ logo_url }}" width="96" alt="TRIIIPLE" style="display:block;width:96px;height:auto;border:0;">
+      <div style="font-family:{{ fm }};font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#6c7178;padding-top:12px;">round two</div>
+    </td></tr>
+
+    <!-- body -->
+    <tr><td align="center" style="padding:48px 56px 0;">
+      <div style="font-family:{{ fm }};font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6c7178;padding-bottom:18px;">order {{ order.name }} · repeat customer</div>
+      <div style="font-family:{{ fd }};font-size:44px;line-height:1.0;letter-spacing:-2px;color:#ffffff;">good to<br>see you again.</div>
+      <div style="font-family:{{ ff }};font-size:15px;line-height:1.75;color:#9aa0a6;padding:24px 0 0;">Most people buy basics once and forget they own them. You came back — which tells us the first set earned its place in the drawer.</div>
+      <div style="font-family:{{ ff }};font-size:15px;line-height:1.75;color:#9aa0a6;padding:16px 0 0;">That's the whole point of what we make: quiet things you reach for without thinking. Thank you for keeping us in the rotation.</div>
+    </td></tr>
+
+    <!-- product trio -->
+    <tr><td style="padding:42px 56px 0;">
+      <div style="font-family:{{ fm }};font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#6c7178;padding-bottom:18px;">what people reorder</div>
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+        <td width="33.33%" valign="top" style="padding-right:7px;">
+          <a href="{{ p1_url }}" style="text-decoration:none;"><img src="{{ p1_img }}" width="100%" alt="Y TransDRY Brief" style="display:block;width:100%;height:auto;border:0;background:#e9e8e4;"></a>
+          <div style="font-family:{{ fm }};font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#6c7178;padding-top:10px;">TSU1003</div>
+          <div style="font-family:{{ fd }};font-size:13px;letter-spacing:-0.5px;color:#ececed;padding-top:3px;line-height:1.15;">Y TransDRY® Brief</div>
+          <div style="font-family:{{ ff }};font-size:12px;color:#9aa0a6;padding-top:4px;">$19.90</div>
+        </td>
+        <td width="33.33%" valign="top" style="padding:0 3.5px;">
+          <a href="{{ p2_url }}" style="text-decoration:none;"><img src="{{ p2_img }}" width="100%" alt="V Brief onyx" style="display:block;width:100%;height:auto;border:0;background:#e9e8e4;"></a>
+          <div style="font-family:{{ fm }};font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#6c7178;padding-top:10px;">TSU1001</div>
+          <div style="font-family:{{ fd }};font-size:13px;letter-spacing:-0.5px;color:#ececed;padding-top:3px;line-height:1.15;">V Brief · onyx</div>
+          <div style="font-family:{{ ff }};font-size:12px;color:#9aa0a6;padding-top:4px;">$14.90</div>
+        </td>
+        <td width="33.33%" valign="top" style="padding-left:7px;">
+          <a href="{{ p3_url }}" style="text-decoration:none;"><img src="{{ p3_img }}" width="100%" alt="V Brief white" style="display:block;width:100%;height:auto;border:0;background:#e9e8e4;"></a>
+          <div style="font-family:{{ fm }};font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#6c7178;padding-top:10px;">TSU1001</div>
+          <div style="font-family:{{ fd }};font-size:13px;letter-spacing:-0.5px;color:#ececed;padding-top:3px;line-height:1.15;">V Brief · white</div>
+          <div style="font-family:{{ ff }};font-size:12px;color:#9aa0a6;padding-top:4px;">$14.90</div>
+        </td>
+      </tr></table>
+    </td></tr>
+
+    <!-- CTA -->
+    <tr><td align="center" style="padding:32px 56px 0;">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr><td align="center" bgcolor="#ffffff" style="background:#ffffff;">
+          <a href="{{ shop.url }}/collections/new" style="display:inline-block;padding:17px 34px;font-family:{{ fm }};font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#212529;text-decoration:none;">see what's new</a>
+        </td></tr>
+      </table>
+      <div style="font-family:{{ fm }};font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#6c7178;padding-top:18px;">repeat buyers see new drops first.</div>
+    </td></tr>
+
+    <!-- footer -->
+    <tr><td style="padding:46px 0 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background:#2a2e33;">
+        <tr><td align="center" style="padding:36px 56px 40px;">
+          <div style="font-family:{{ ff }};font-size:13px;line-height:1.65;color:#9aa0a6;max-width:300px;margin:0 auto;">Still the quiet inbox. We'll only write when there's something worth your size.</div>
+          <div style="width:28px;height:1px;background:#383c41;margin:24px auto;font-size:0;line-height:0;">&nbsp;</div>
+          <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center"><tr>
+            <td style="padding:0 5px;"><a href="https://www.facebook.com/triiiplestudio"><img src="{{ ic_facebook }}" width="18" height="18" alt="Facebook" style="display:block;border:1px solid #383c41;padding:11px;background:#2a2e33;"></a></td>
+            <td style="padding:0 5px;"><a href="https://www.instagram.com/triiiple_studio"><img src="{{ ic_instagram }}" width="18" height="18" alt="Instagram" style="display:block;border:1px solid #383c41;padding:11px;background:#2a2e33;"></a></td>
+            <td style="padding:0 5px;"><a href="https://www.pinterest.com/triiiple_studio/"><img src="{{ ic_pinterest }}" width="18" height="18" alt="Pinterest" style="display:block;border:1px solid #383c41;padding:11px;background:#2a2e33;"></a></td>
+          </tr></table>
+          <img src="{{ logo_url }}" width="78" alt="TRIIIPLE" style="display:block;width:78px;height:auto;border:0;margin:28px auto 14px;opacity:0.7;">
+          <div style="font-family:{{ fm }};font-size:9px;letter-spacing:1px;color:#6c7178;line-height:2;">© 2026 triiiple studio · singapore · sgd<br>no longer want these? {{ unsubscribe_link }}</div>
+        </td></tr>
+      </table>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
