@@ -1,12 +1,16 @@
 import {defineConfig} from 'vite';
 import {hydrogen} from '@shopify/hydrogen/vite';
-import {oxygen} from '@shopify/mini-oxygen/vite';
 import {vitePlugin as remix} from '@remix-run/dev';
+import path from 'node:path';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '~': path.resolve('./app'),
+    },
+  },
   plugins: [
     hydrogen(),
-    oxygen(),
     remix({
       presets: [hydrogen.preset()],
       future: {
@@ -23,5 +27,6 @@ export default defineConfig({
     optimizeDeps: {
       include: [],
     },
+    noExternal: true,
   },
 });

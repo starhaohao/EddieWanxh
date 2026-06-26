@@ -26,16 +26,18 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('hydrogen-starter/package.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+        working-directory: hydrogen-starter
 
       - name: Build and Publish to Oxygen
-        run: npx shopify hydrogen deploy
+        run: npx shopify hydrogen deploy --force
+        working-directory: hydrogen-starter
         env:
           SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN_1000152227 }}
