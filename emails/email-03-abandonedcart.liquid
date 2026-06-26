@@ -1,0 +1,129 @@
+{%- comment -%}
+══════════════════════════════════════════════════════════════════
+  TRIIIPLE · EMAIL 03 — ABANDONED CART
+  Trigger: Checkout / cart abandoned automation
+  Type: Shopify transactional email
+  Paste into: Settings → Notifications → "Abandoned checkout" → Edit code
+──────────────────────────────────────────────────────────────────
+  ARCHITECTURE: Shopify owns consent & sends this email.
+  Klaviyo syncs the subscriber list only — no Klaviyo code here.
+
+  Pulls LIVE data: cart items, subtotal, and a back-to-checkout link.
+  Upload logo + 3 social icons in Settings → Files and paste URLs below.
+  Free-shipping threshold is set to S$130 — change `threshold` (in cents)
+  if yours differs.
+══════════════════════════════════════════════════════════════════
+{%- endcomment -%}
+
+{%- assign logo_url     = "https://cdn.shopify.com/s/files/1/0738/4947/0999/files/Frame_77.png?v=1775028055" -%}
+{%- assign ic_facebook  = "PASTE_FACEBOOK_ICON_URL" -%}
+{%- assign ic_instagram = "PASTE_INSTAGRAM_ICON_URL" -%}
+{%- assign ic_pinterest = "PASTE_PINTEREST_ICON_URL" -%}
+
+{%- assign ff = "'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+{%- assign fm = "'Courier New', Courier, monospace" -%}
+{%- assign fd = "Galdeano, 'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+
+{%- comment -%} free-shipping maths {%- endcomment -%}
+{%- assign threshold = 13000 -%}
+{%- assign sub = checkout.subtotal_price -%}
+{%- assign remaining = threshold | minus: sub -%}
+{%- assign pct = sub | times: 100 | divided_by: threshold -%}
+{%- if pct > 100 -%}{%- assign pct = 100 -%}{%- endif -%}
+
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">We held your size. It won't hold forever.&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
+
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background:#15171a;">
+<tr><td align="center" style="padding:24px 12px;">
+
+  <table role="presentation" width="600" border="0" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:#212529;">
+
+    <!-- logo + slogan -->
+    <tr><td align="center" style="padding:40px 56px 0;">
+      <img src="{{ logo_url }}" width="96" alt="TRIIIPLE" style="display:block;width:96px;height:auto;border:0;">
+      <div style="font-family:{{ fm }};font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#6c7178;padding-top:12px;">still in your bag</div>
+    </td></tr>
+
+    <!-- body -->
+    <tr><td align="center" style="padding:48px 56px 0;">
+      <div style="font-family:{{ fm }};font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6c7178;padding-bottom:18px;">cart saved · 48 hours</div>
+      <div style="font-family:{{ fd }};font-size:40px;line-height:1.0;letter-spacing:-2px;color:#ffffff;">your cart's<br>still warm.</div>
+      <div style="font-family:{{ ff }};font-size:15px;line-height:1.75;color:#9aa0a6;padding:22px 0 0;">You got as far as checkout, then life happened. We held your size — but stock moves, and it won't sit there forever.</div>
+    </td></tr>
+
+    <!-- line items -->
+    <tr><td style="padding:30px 56px 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+        {%- for line in checkout.line_items -%}
+        <tr>
+          <td width="60" valign="middle" style="padding:16px 16px 16px 0;border-top:1px solid #2f3338;">
+            <img src="{{ line.image | img_url: '160x' }}" width="60" alt="{{ line.title }}" style="display:block;width:60px;height:74px;border:0;background:#e9e8e4;object-fit:cover;">
+          </td>
+          <td valign="middle" style="padding:16px 0;border-top:1px solid #2f3338;">
+            <div style="font-family:{{ fm }};font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#6c7178;">{{ line.vendor | default: 'TRIIIPLE' }}</div>
+            <div style="font-family:{{ fd }};font-size:16px;letter-spacing:-0.5px;color:#ececed;padding-top:2px;">{{ line.title }}</div>
+            <div style="font-family:{{ ff }};font-size:12px;color:#9aa0a6;padding-top:4px;">{{ line.variant.title }} · qty {{ line.quantity }}</div>
+          </td>
+          <td valign="middle" align="right" style="padding:16px 0;border-top:1px solid #2f3338;font-family:{{ fd }};font-size:16px;letter-spacing:-0.5px;color:#ececed;white-space:nowrap;">{{ line.final_line_price | money }}</td>
+        </tr>
+        {%- endfor -%}
+        <tr><td colspan="3" style="border-top:1px solid #2f3338;font-size:0;line-height:0;">&nbsp;</td></tr>
+      </table>
+    </td></tr>
+
+    <!-- subtotal -->
+    <tr><td style="padding:18px 56px 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+        <td style="font-family:{{ fm }};font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6c7178;">subtotal</td>
+        <td align="right" style="font-family:{{ fd }};font-size:22px;letter-spacing:-1px;color:#ffffff;">{{ checkout.subtotal_price | money }}</td>
+      </tr></table>
+    </td></tr>
+
+    <!-- free-shipping nudge -->
+    <tr><td style="padding:22px 56px 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border:1px solid #383c41;">
+        <tr><td style="padding:16px 18px;">
+          <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+            <td style="font-family:{{ fm }};font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#ececed;">
+              {%- if remaining > 0 -%}{{ remaining | money }} to free shipping{%- else -%}✓ free shipping unlocked{%- endif -%}
+            </td>
+            <td align="right" style="font-family:{{ fm }};font-size:9px;color:#6c7178;">{{ checkout.subtotal_price | money }} / {{ threshold | money }}</td>
+          </tr></table>
+          <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-top:10px;background:#1d2024;"><tr>
+            <td height="3" style="font-size:0;line-height:0;"><table role="presentation" width="{{ pct }}%" border="0" cellpadding="0" cellspacing="0"><tr><td height="3" style="background:#ffffff;font-size:0;line-height:0;">&nbsp;</td></tr></table></td>
+          </tr></table>
+        </td></tr>
+      </table>
+    </td></tr>
+
+    <!-- CTA -->
+    <tr><td align="center" style="padding:32px 56px 0;">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr><td align="center" bgcolor="#ffffff" style="background:#ffffff;">
+          <a href="{{ checkout.abandoned_checkout_url }}" style="display:inline-block;padding:17px 40px;font-family:{{ fm }};font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#212529;text-decoration:none;">finish checkout</a>
+        </td></tr>
+      </table>
+      <div style="font-family:{{ fm }};font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#6c7178;padding-top:18px;">your bag is saved for 48 hours.</div>
+    </td></tr>
+
+    <!-- footer -->
+    <tr><td style="padding:46px 0 0;">
+      <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background:#2a2e33;">
+        <tr><td align="center" style="padding:36px 56px 40px;">
+          <div style="font-family:{{ ff }};font-size:13px;line-height:1.65;color:#9aa0a6;max-width:300px;margin:0 auto;">Changed your mind? No hard feelings. The studio's always open when you are.</div>
+          <div style="width:28px;height:1px;background:#383c41;margin:24px auto;font-size:0;line-height:0;">&nbsp;</div>
+          <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center"><tr>
+            <td style="padding:0 5px;"><a href="https://www.facebook.com/triiiplestudio"><img src="{{ ic_facebook }}" width="18" height="18" alt="Facebook" style="display:block;border:1px solid #383c41;padding:11px;background:#2a2e33;"></a></td>
+            <td style="padding:0 5px;"><a href="https://www.instagram.com/triiiple_studio"><img src="{{ ic_instagram }}" width="18" height="18" alt="Instagram" style="display:block;border:1px solid #383c41;padding:11px;background:#2a2e33;"></a></td>
+            <td style="padding:0 5px;"><a href="https://www.pinterest.com/triiiple_studio/"><img src="{{ ic_pinterest }}" width="18" height="18" alt="Pinterest" style="display:block;border:1px solid #383c41;padding:11px;background:#2a2e33;"></a></td>
+          </tr></table>
+          <img src="{{ logo_url }}" width="78" alt="TRIIIPLE" style="display:block;width:78px;height:auto;border:0;margin:28px auto 14px;opacity:0.7;">
+          <div style="font-family:{{ fm }};font-size:9px;letter-spacing:1px;color:#6c7178;line-height:2;">© 2026 triiiple studio · singapore · sgd<br>no longer want these? {{ unsubscribe_link }}</div>
+        </td></tr>
+      </table>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>

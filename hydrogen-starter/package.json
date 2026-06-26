@@ -1,0 +1,25 @@
+{
+  "name": "triiiple-hydrogen",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "shopify hydrogen dev",
+    "build": "shopify hydrogen build",
+    "preview": "shopify hydrogen preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@shopify/hydrogen": "^2024.7.0",
+    "@shopify/remix-oxygen": "^2.0.7",
+    "@remix-run/react": "^2.10.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@shopify/cli": "^3.64.0",
+    "@remix-run/dev": "^2.10.0",
+    "typescript": "^5.5.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0"
+  }
+}
