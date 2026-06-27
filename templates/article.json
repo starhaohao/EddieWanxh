@@ -1,0 +1,94 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "article",
+      "blocks": {
+        "image_qNcCe8": {
+          "type": "image",
+          "settings": {
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_qNcCe8"
+      ],
+      "settings": {
+        "show_image": false,
+        "show_date": false,
+        "show_author": false,
+        "tags": false,
+        "show_sharing": false,
+        "arrows": false,
+        "height": "screen-height-one-third",
+        "mobile_height": "screen-height-one-third--mobile",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 50
+      }
+    },
+    "section_hero_UKNqre": {
+      "type": "section-hero",
+      "blocks": {
+        "heading_qqb9kn": {
+          "type": "heading",
+          "settings": {
+            "title": "Image banner",
+            "heading_font_size": "heading-x-large",
+            "heading_tag": "automatic"
+          }
+        },
+        "text_3PY4yr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tell your brand's story through images.</p>",
+            "text_font_size": "body-large"
+          }
+        },
+        "button_ck8VjC": {
+          "type": "button",
+          "settings": {
+            "link_text": "View products",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_qqb9kn",
+        "text_3PY4yr",
+        "button_ck8VjC"
+      ],
+      "settings": {
+        "link": "",
+        "width": "wrapper--full",
+        "height": "screen-height-three-quarters",
+        "flex_align_desktop": "align--middle-center-desktop",
+        "content_width": 50,
+        "mobile_height": "screen-height-three-quarters--mobile",
+        "flex_align_mobile": "align--middle-center-mobile",
+        "color_scheme": "",
+        "show_text_background": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_hero_UKNqre"
+  ]
+}

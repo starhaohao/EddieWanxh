@@ -1,0 +1,381 @@
+{% comment %} Lookbook Grid {% endcomment %}
+
+{%- assign h_pad = section.settings.padding_horizontal -%}
+{%- assign label_align = section.settings.label_align -%}
+{%- assign pt = section.settings.padding_top -%}
+{%- assign pb = section.settings.padding_bottom -%}
+
+{%- comment %} Map short font key to actual CSS stack {%- endcomment %}
+{%- assign font_key = section.settings.label_font -%}
+{%- if font_key == 'system' -%}
+  {%- assign font_stack = "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" -%}
+{%- elsif font_key == 'helvetica' -%}
+  {%- assign font_stack = "'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
+{%- elsif font_key == 'georgia' -%}
+  {%- assign font_stack = "Georgia, 'Times New Roman', serif" -%}
+{%- elsif font_key == 'courier' -%}
+  {%- assign font_stack = "'Courier New', Courier, monospace" -%}
+{%- elsif font_key == 'futura' -%}
+  {%- assign font_stack = "Futura, 'Trebuchet MS', sans-serif" -%}
+{%- elsif font_key == 'garamond' -%}
+  {%- assign font_stack = "Garamond, 'EB Garamond', serif" -%}
+{%- else -%}
+  {%- assign font_stack = "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" -%}
+{%- endif -%}
+
+<div class="lookbook-grid" id="lg-{{ section.id }}" style="padding-top: {{ pt }}px; padding-bottom: {{ pb }}px;">
+  {% for i in (1..4) %}
+    {% assign image_key = 'image_' | append: i %}
+    {% assign label_key = 'label_' | append: i %}
+    {% assign body_key  = 'body_'  | append: i %}
+    {% assign btn_key   = 'btn_'   | append: i %}
+    {% assign link_key  = 'link_'  | append: i %}
+
+    <div class="lookbook-grid__item">
+      <a class="lookbook-grid__image-link" href="{{ section.settings[link_key] | default: '#' }}">
+        <div class="lookbook-grid__image-wrap">
+          {% if section.settings[image_key] %}
+            <img
+              src="{{ section.settings[image_key] | image_url: width: 800 }}"
+              srcset="{{ section.settings[image_key] | image_url: width: 400 }} 400w,
+                      {{ section.settings[image_key] | image_url: width: 800 }} 800w"
+              sizes="(max-width: 749px) 75vw, 25vw"
+              alt="{{ section.settings[label_key] | escape }}"
+              loading="lazy"
+            >
+          {% else %}
+            {{ 'lifestyle-1' | placeholder_svg_tag }}
+          {% endif %}
+        </div>
+      </a>
+
+      <div class="lookbook-grid__caption"
+           style="padding-left: {{ h_pad }}px; padding-right: {{ h_pad }}px; text-align: {{ label_align }};">
+
+        {% if section.settings[label_key] != blank %}
+          <p class="lookbook-grid__label">{{ section.settings[label_key] }}</p>
+        {% endif %}
+
+        {% if section.settings[body_key] != blank %}
+          <p class="lookbook-grid__body">{{ section.settings[body_key] }}</p>
+        {% endif %}
+
+        {% if section.settings[btn_key] != blank %}
+          <a class="lookbook-grid__btn" href="{{ section.settings[link_key] | default: '#' }}">
+            {{ section.settings[btn_key] }}
+          </a>
+        {% endif %}
+
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="lookbook-dots" id="lg-dots-{{ section.id }}" aria-hidden="true">
+  {% for i in (1..4) %}
+    <span class="lookbook-dot{% if forloop.first %} is-active{% endif %}"></span>
+  {% endfor %}
+</div>
+
+<style>
+  #lg-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    width: 100%;
+    margin: 0;
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__item {
+    display: flex;
+    flex-direction: column;
+    color: var(--COLOR-TEXT, #121212);
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__image-link {
+    display: block;
+    text-decoration: none;
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__image-wrap {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__image-wrap img,
+  #lg-{{ section.id }} .lookbook-grid__image-wrap svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__image-link:hover .lookbook-grid__image-wrap img {
+    transform: scale(1.04);
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__caption {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 12px;
+    padding-bottom: 24px;
+    flex: 1;
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__label {
+    font-family: {{ font_stack }};
+    font-size: {{ section.settings.label_size }}px;
+    font-weight: {{ section.settings.label_weight }};
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.3;
+    margin: 0;
+    color: var(--COLOR-TEXT, #121212);
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__body {
+    font-family: {{ font_stack }};
+    font-size: {{ section.settings.body_size }}px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.55;
+    margin: 0;
+    color: var(--COLOR-TEXT-2, rgba(18,18,18,0.65));
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__btn {
+    display: inline-block;
+    margin-top: 4px;
+    align-self: {% if label_align == 'center' %}center{% elsif label_align == 'right' %}flex-end{% else %}flex-start{% endif %};
+    padding: 9px 20px;
+    font-family: {{ font_stack }};
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-decoration: none;
+    color: var(--COLOR-TEXT, #121212);
+    border: 1px solid var(--COLOR-TEXT, #121212);
+    border-radius: {{ section.settings.btn_radius }}px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  #lg-{{ section.id }} .lookbook-grid__btn:hover {
+    background: var(--COLOR-TEXT, #121212);
+    color: var(--COLOR-BG, #ffffff);
+  }
+
+  .lookbook-dots { display: none; }
+
+  @media screen and (max-width: 749px) {
+    #lg-{{ section.id }} {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 12px;
+      padding-left: var(--outer, 16px) !important;
+      padding-right: var(--outer, 16px) !important;
+    }
+    #lg-{{ section.id }}::-webkit-scrollbar { display: none; }
+
+    #lg-{{ section.id }} .lookbook-grid__item {
+      flex: 0 0 72vw;
+      scroll-snap-align: start;
+    }
+
+    #lg-{{ section.id }} .lookbook-grid__image-wrap {
+      border-radius: 14px;
+    }
+
+    #lg-{{ section.id }} .lookbook-grid__caption {
+      padding-bottom: 16px;
+    }
+
+    .lookbook-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      padding-bottom: 4px;
+    }
+    .lookbook-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--COLOR-BORDER, #ddd);
+      transition: background 0.25s, transform 0.25s;
+      flex-shrink: 0;
+    }
+    .lookbook-dot.is-active {
+      background: var(--COLOR-TEXT, #111);
+      transform: scale(1.35);
+    }
+  }
+</style>
+
+<script>
+(function() {
+  var track  = document.getElementById('lg-{{ section.id }}');
+  var dotsEl = document.getElementById('lg-dots-{{ section.id }}');
+  if (!track || !dotsEl) return;
+  var dots  = dotsEl.querySelectorAll('.lookbook-dot');
+  var items = track.querySelectorAll('.lookbook-grid__item');
+  if (!dots.length || !items.length) return;
+  function updateDots() {
+    var scrollLeft = track.scrollLeft;
+    var itemWidth  = items[0].offsetWidth + 12;
+    var active = Math.round(scrollLeft / itemWidth);
+    active = Math.max(0, Math.min(active, dots.length - 1));
+    dots.forEach(function(d, i) {
+      d.classList.toggle('is-active', i === active);
+    });
+  }
+  track.addEventListener('scroll', updateDots, { passive: true });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Lookbook Grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "label_font",
+      "label": "Font",
+      "options": [
+        { "value": "system",    "label": "System Default" },
+        { "value": "helvetica", "label": "Helvetica Neue" },
+        { "value": "georgia",   "label": "Georgia (serif)" },
+        { "value": "courier",   "label": "Courier New (mono)" },
+        { "value": "futura",    "label": "Futura" },
+        { "value": "garamond",  "label": "Garamond (serif)" }
+      ],
+      "default": "system"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "label": "Heading size",
+      "min": 10, "max": 28, "step": 1, "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "label_weight",
+      "label": "Heading weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body text size",
+      "min": 10, "max": 18, "step": 1, "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "range",
+      "id": "btn_radius",
+      "label": "Button border radius",
+      "min": 0, "max": 0, "step": 2, "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Tile 1"
+    },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "text",         "id": "label_1", "label": "Heading 1", "default": "Shop Underwear" },
+    { "type": "textarea",     "id": "body_1",  "label": "Body text 1" },
+    { "type": "text",         "id": "btn_1",   "label": "Button label 1 (blank to hide)" },
+    { "type": "url",          "id": "link_1",  "label": "Link 1" },
+    {
+      "type": "header",
+      "content": "Tile 2"
+    },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "text",         "id": "label_2", "label": "Heading 2", "default": "Shop T-Shirts" },
+    { "type": "textarea",     "id": "body_2",  "label": "Body text 2" },
+    { "type": "text",         "id": "btn_2",   "label": "Button label 2 (blank to hide)" },
+    { "type": "url",          "id": "link_2",  "label": "Link 2" },
+    {
+      "type": "header",
+      "content": "Tile 3"
+    },
+    { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+    { "type": "text",         "id": "label_3", "label": "Heading 3", "default": "Shop Socks" },
+    { "type": "textarea",     "id": "body_3",  "label": "Body text 3" },
+    { "type": "text",         "id": "btn_3",   "label": "Button label 3 (blank to hide)" },
+    { "type": "url",          "id": "link_3",  "label": "Link 3" },
+    {
+      "type": "header",
+      "content": "Tile 4"
+    },
+    { "type": "image_picker", "id": "image_4", "label": "Image 4" },
+    { "type": "text",         "id": "label_4", "label": "Heading 4", "default": "Shop Homewear" },
+    { "type": "textarea",     "id": "body_4",  "label": "Body text 4" },
+    { "type": "text",         "id": "btn_4",   "label": "Button label 4 (blank to hide)" },
+    { "type": "url",          "id": "link_4",  "label": "Link 4" },
+    {
+      "type": "header",
+      "content": "Layout & Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Label side padding",
+      "min": 0, "max": 32, "step": 2, "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "label_align",
+      "label": "Label alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    { "name": "Lookbook Grid" }
+  ]
+}
+{% endschema %}

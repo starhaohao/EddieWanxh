@@ -1,93 +1,405 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "sale_ticker": {
       "type": "sale-announcement-ticker",
       "blocks": {
-        "msg_1": { "type": "message", "settings": { "text": "Buy 3 · 15% Off" } },
-        "msg_2": { "type": "message", "settings": { "text": "Buy 5 · 25% Off" } },
-        "msg_3": { "type": "message", "settings": { "text": "New Customer · 10% Off First Order" } },
-        "msg_4": { "type": "message", "settings": { "text": "Free Shipping Over $50 · SG" } },
-        "msg_5": { "type": "message", "settings": { "text": "Final Stock · No Restock" } },
-        "msg_6": { "type": "message", "settings": { "text": "No Code Needed" } }
+        "msg_1": {
+          "type": "message",
+          "settings": {
+            "text": "Buy 3 · 15% Off"
+          }
+        },
+        "msg_2": {
+          "type": "message",
+          "settings": {
+            "text": "Buy 5 · 25% Off"
+          }
+        },
+        "msg_3": {
+          "type": "message",
+          "settings": {
+            "text": "New Customer · 10% Off First Order"
+          }
+        },
+        "msg_4": {
+          "type": "message",
+          "settings": {
+            "text": "Free Shipping Over $50 · SG"
+          }
+        },
+        "msg_5": {
+          "type": "message",
+          "settings": {
+            "text": "Final Stock · No Restock"
+          }
+        },
+        "msg_6": {
+          "type": "message",
+          "settings": {
+            "text": "No Code Needed"
+          }
+        }
       },
-      "block_order": ["msg_1", "msg_2", "msg_3", "msg_4", "msg_5", "msg_6"],
-      "settings": {}
+      "block_order": [
+        "msg_1",
+        "msg_2",
+        "msg_3",
+        "msg_4",
+        "msg_5",
+        "msg_6"
+      ],
+      "settings": {
+        "bg_color": "#697f94",
+        "text_color": "#ffffff",
+        "dot_color": "#00000080",
+        "speed": 60,
+        "bar_height": 28,
+        "font_size": 9
+      }
     },
     "sale_hero": {
       "type": "sale-hero",
       "blocks": {
-        "ghost_1": { "type": "ghost_cta", "settings": { "label": "Briefs" } },
-        "ghost_2": { "type": "ghost_cta", "settings": { "label": "Boxer Trunks" } },
-        "ghost_3": { "type": "ghost_cta", "settings": { "label": "Tops" } }
+        "ghost_1": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Briefs",
+            "url": "shopify://collections/briefs"
+          }
+        },
+        "ghost_2": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Boxer Trunks",
+            "url": "shopify://collections/boxer-trunks"
+          }
+        },
+        "ghost_3": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Essentials",
+            "url": "shopify://collections/essentials"
+          }
+        }
       },
-      "block_order": ["ghost_1", "ghost_2", "ghost_3"],
-      "settings": {}
+      "block_order": [
+        "ghost_1",
+        "ghost_2",
+        "ghost_3"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/fathers-day-edm-model-white-black-brief-duo.jpg",
+        "hero_height": 100,
+        "overlay_from": "#000000bf",
+        "overlay_to": "#1b1b1b52",
+        "eyebrow": "Final Clearance",
+        "eyebrow_color": "#f1f4f5",
+        "title": "<p>The<br/>Last Run.</p>",
+        "title_size": 84,
+        "subtitle": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore</p>",
+        "cta_text": "Shop All",
+        "cta_url": "shopify://pages/lookbook",
+        "cta_bg": "#344e5c",
+        "cta_text_color": "#f1f4f5",
+        "show_urgency": true,
+        "urgency_label": "Stock Status",
+        "urgency_text": "<p>Wear it.</p><p>Own it. </p><p>Explain nothing.</p>"
+      }
     },
     "sale_tiers": {
       "type": "sale-tier-strip",
       "blocks": {
-        "tier_1": { "type": "tier", "settings": { "highlight": "15%", "label": "off — 3 items" } },
-        "tier_2": { "type": "tier", "settings": { "highlight": "25%", "label": "off — 5 items" } },
-        "tier_3": { "type": "tier", "settings": { "highlight": "$50+", "label": "free shipping · SG" } }
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "highlight": "3",
+            "label": "items - 15% OFF",
+            "highlight_weight": "400"
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "highlight": "5",
+            "label": "items -25% OFF",
+            "highlight_weight": "400"
+          }
+        }
       },
-      "block_order": ["tier_1", "tier_2", "tier_3"],
-      "settings": {}
+      "block_order": [
+        "tier_1",
+        "tier_2"
+      ],
+      "settings": {
+        "bg_color": "#1b3a49",
+        "border_top_color": "#000000",
+        "accent_color": "#f2bd7e",
+        "text_color": "#fcfcfc",
+        "muted_color": "#dfdfdf6b",
+        "highlight_size": 20,
+        "badge_text": "No code needed"
+      }
+    },
+    "section_newsletter_dRCVHt": {
+      "type": "section-newsletter",
+      "blocks": {
+        "image_i7tFEq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_b1e174f5-ce05-40b7-8458-7460dd1ce877.jpg",
+            "title": "Stay in touch.",
+            "heading_font_size": "heading-small",
+            "text": "<p>Enjoy an <span style=\"text-decoration:underline\">extra 10% off</span></p><p>and <span style=\"text-decoration:underline\">free socks</span> from us.</p>",
+            "text_font_size": "body-medium",
+            "flex_align": "align--bottom-left",
+            "show_text_background": true,
+            "bg_color": "#ffffff",
+            "color": "#000000",
+            "overlay_type": "disabled",
+            "link_text": "10% OFF",
+            "link": "shopify://pages/unlock-first-layer-perks",
+            "button_type": "btn--black",
+            "button_size": "btn--small",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "image_i7tFEq"
+      ],
+      "name": "Newsletter",
+      "settings": {
+        "width": "wrapper--full",
+        "height": "three-fifty-height-hero",
+        "mobile_height": "screen-height-one-half--mobile",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_collection_q7gxCD": {
+      "type": "section-collection",
+      "name": "Featured collection",
+      "settings": {
+        "featured_collection": "landing-heros",
+        "heading": "Best Sellers",
+        "heading_font_size": "heading-small",
+        "description": "",
+        "text_font_size": "body-medium",
+        "layout": "inline",
+        "link_text": "Shop Now",
+        "link_url": "shopify://collections",
+        "button_type": "btn--primary",
+        "button_size": "",
+        "button_style": "btn--text",
+        "show_arrow": true,
+        "layout_desktop": "grid",
+        "grid": 4,
+        "rows": 3,
+        "width": "wrapper",
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
+        "padding_top": 0,
+        "padding_bottom": 100,
+        "heading_tag": "automatic"
+      }
     },
     "sale_collections": {
       "type": "sale-collection-grid",
       "blocks": {
-        "tile_1": { "type": "tile", "settings": { "title": "Briefs" } },
-        "tile_2": { "type": "tile", "settings": { "title": "Boxer Trunks" } },
-        "tile_3": { "type": "tile", "settings": { "title": "Tops" } },
-        "tile_4": { "type": "tile", "settings": { "title": "Socks" } }
+        "tile_1": {
+          "type": "tile",
+          "settings": {
+            "title": "Briefs",
+            "image": "shopify://shop_images/I2mag2e-17830572103482.png",
+            "url": "shopify://collections/briefs"
+          }
+        },
+        "tile_2": {
+          "type": "tile",
+          "settings": {
+            "title": "Boxer Trunks",
+            "image": "shopify://shop_images/Imag2e-17830572103482.png",
+            "url": "shopify://collections/boxer-trunks"
+          }
+        },
+        "tile_3": {
+          "type": "tile",
+          "settings": {
+            "title": "Tops",
+            "image": "shopify://shop_images/ED-Tee-Heathergrey.jpg",
+            "url": "shopify://collections/tops"
+          }
+        },
+        "tile_4": {
+          "type": "tile",
+          "settings": {
+            "title": "Socks",
+            "image": "shopify://shop_images/socks_406f3953-b8a1-4607-96f2-434246b15ce0.png",
+            "url": "shopify://collections/socks"
+          }
+        }
       },
-      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4"],
-      "settings": {}
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3",
+        "tile_4"
+      ],
+      "settings": {
+        "heading": "Explore more",
+        "bg_color": "#ffffff",
+        "heading_color": "#212529",
+        "gap": 0
+      }
     },
     "sale_pillars": {
       "type": "sale-pillars",
       "blocks": {
-        "p_1": { "type": "pillar", "settings": { "category": "Technology", "title": "TransDRY®", "description": "Moisture-wicking micro-channel fabric. Stays dry under pressure." } },
-        "p_2": { "type": "pillar", "settings": { "category": "Material", "title": "Cotton Spandex", "description": "72% Pima cotton, 20% modal, 8% elastane. Moves with you." } },
-        "p_3": { "type": "pillar", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Conceived in Singapore. Precision-crafted in Thailand." } },
-        "p_4": { "type": "pillar", "settings": { "category": "Performance", "title": "Made to Move", "description": "Contoured pouch. Double-stitched waistband. Zero ride-up." } }
+        "p_1": {
+          "type": "pillar",
+          "settings": {
+            "category": "Technology",
+            "title": "TransDRY®",
+            "description": "Moisture-wicking micro-channel fabric. Stays dry under pressure."
+          }
+        },
+        "p_2": {
+          "type": "pillar",
+          "settings": {
+            "category": "Material",
+            "title": "Cotton Spandex",
+            "description": "Our curated material moves with you."
+          }
+        },
+        "p_3": {
+          "type": "pillar",
+          "settings": {
+            "category": "Origin",
+            "title": "Designed in SG",
+            "description": "Conceived in Singapore. Precision-crafted in Thailand."
+          }
+        },
+        "p_4": {
+          "type": "pillar",
+          "settings": {
+            "category": "Performance",
+            "title": "Made to Move",
+            "description": "Contoured pouch. Double-stitched waistband. Zero ride-up."
+          }
+        }
       },
-      "block_order": ["p_1", "p_2", "p_3", "p_4"],
-      "settings": {}
+      "block_order": [
+        "p_1",
+        "p_2",
+        "p_3",
+        "p_4"
+      ],
+      "settings": {
+        "bg_color": "#212529",
+        "border_color": "#ffffff1c",
+        "category_color": "#dfdbd7",
+        "title_color": "#ffffff",
+        "desc_color": "#ffffff6b"
+      }
     },
     "sale_reviews": {
       "type": "sale-reviews",
       "blocks": {
-        "r_1": { "type": "review", "settings": { "quote": "Best underwear I've owned. Period.", "author": "Marcus T. — Verified buyer", "sku": "Studio Brief · Black · M" } },
-        "r_2": { "type": "review", "settings": { "quote": "Bought 3 packs. Won't go back to anything else.", "author": "James L. — Verified buyer", "sku": "Boxer Trunk · White · L" } },
-        "r_3": { "type": "review", "settings": { "quote": "The fit is surgical. Exactly what I needed.", "author": "Ryan K. — Verified buyer", "sku": "Studio Brief · Black · S" } }
+        "r_1": {
+          "type": "review",
+          "settings": {
+            "quote": "Best underwear I've owned.",
+            "author": "Marcus T. — Verified buyer",
+            "sku": "Studio Brief · Black · M"
+          }
+        },
+        "r_2": {
+          "type": "review",
+          "settings": {
+            "quote": "Bought 3 packs. Won't go back to anything else.",
+            "author": "James L. — Verified buyer",
+            "sku": "Boxer Trunk · White · L"
+          }
+        },
+        "r_3": {
+          "type": "review",
+          "settings": {
+            "quote": "The fit is surgical. Exactly what I needed.",
+            "author": "Ryan K. — Verified buyer",
+            "sku": "Studio Brief · Black · S"
+          }
+        },
+        "review_UKDHxF": {
+          "type": "review",
+          "settings": {
+            "quote": "Best underwear I've owned. Period.",
+            "author": "Marcus T. — Verified buyer",
+            "sku": "Studio Brief · Black · M"
+          }
+        },
+        "review_pFx64h": {
+          "type": "review",
+          "settings": {
+            "quote": "Best underwear I've owned. Period.",
+            "author": "Marcus T. — Verified buyer",
+            "sku": "Studio Brief · Black · M"
+          }
+        }
       },
-      "block_order": ["r_1", "r_2", "r_3"],
-      "settings": {}
-    },
-    "sale_klaviyo": {
-      "type": "sale-klaviyo",
-      "blocks": {
-        "perk_1": { "type": "perk", "settings": { "text": "No spam" } },
-        "perk_2": { "type": "perk", "settings": { "text": "Unsubscribe anytime" } },
-        "perk_3": { "type": "perk", "settings": { "text": "SG only" } }
-      },
-      "block_order": ["perk_1", "perk_2", "perk_3"],
-      "settings": {}
+      "block_order": [
+        "r_1",
+        "r_2",
+        "r_3",
+        "review_UKDHxF",
+        "review_pFx64h"
+      ],
+      "settings": {
+        "heading": "They approved",
+        "meta_text": "4.9 · 214 reviews",
+        "bg_color": "#ffffff",
+        "title_color": "#2d4256",
+        "card_bg": "#000000",
+        "star_color": "#8a9eb1",
+        "quote_color": "#ffffff",
+        "who_color": "#babdc1"
+      }
     },
     "sale_brand_story": {
       "type": "sale-brand-story",
-      "settings": {}
+      "settings": {
+        "bg_color": "#ffffff",
+        "border_color": "#ffffff1c",
+        "eyebrow_color": "#ff8b00",
+        "title_color": "#000000",
+        "body_color": "#d9d9d96b",
+        "eyebrow": "The Studio",
+        "title": "<p>Designed in Singapore.<br/>Crafted in Thailand.</p>",
+        "body": "<p>TRIIIPLE was built on a single premise</p><p>— that underwear should be engineered, </p><p>not just made. Every cut, every stitch, </p><p>every fabric blend is a deliberate decision.</p><p> This is not basics. This is the baseline.</p>",
+        "image": "shopify://shop_images/faster.jpg"
+      }
     }
   },
   "order": [
     "sale_ticker",
     "sale_hero",
     "sale_tiers",
+    "section_newsletter_dRCVHt",
+    "section_collection_q7gxCD",
     "sale_collections",
     "sale_pillars",
     "sale_reviews",
-    "sale_klaviyo",
     "sale_brand_story"
   ]
 }

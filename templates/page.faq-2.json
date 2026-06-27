@@ -1,0 +1,172 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "subheading": "",
+        "show_title": false,
+        "heading_font_size": "heading-mini",
+        "show_content": false,
+        "text_font_size": "body-medium",
+        "align_text": "text-center",
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    },
+    "section_sidebar_NyWgde": {
+      "type": "section-sidebar",
+      "blocks": {
+        "header_NFKfgp": {
+          "type": "header",
+          "settings": {
+            "title": "Order Online"
+          }
+        },
+        "accordion_78NTxB": {
+          "type": "accordion",
+          "settings": {
+            "title": "Do I need an account to place an order online?",
+            "content": "<p>You don’t need to create an account to place an order. We recommend creating one for easier future checkouts, but you can still checkout as a guest.</p>"
+          }
+        },
+        "accordion_yXX8Ca": {
+          "type": "accordion",
+          "settings": {
+            "title": "Can I change or cancel my order after I’ve placed it?",
+            "content": "<p>If you want to change or cancel your order, please contact us as soon as possible. We’ll do our best to help you, but unfortunately, we can’t change or cancel orders once they’ve been shipped.</p>"
+          }
+        },
+        "accordion_eaNWGp": {
+          "type": "accordion",
+          "settings": {
+            "title": "Local Shipping and Internationa shipping policy",
+            "content": "<p><strong>Singapore Shipping</strong></p><p><strong>Free Shipping</strong> on all Singapore local orders <strong>above SGD 50</strong>.</p><p>For orders below <strong>SGD 50</strong>. a flat shipping fee of <strong>SGD 5</strong> applies.</p><p><br/></p><p><strong>International Shipping</strong></p><p><br/><strong>Free worldwide shipping</strong> for orders above <strong>SGD 180</strong>.</p><p>For orders below <strong>SGD 180</strong>, the following shipping fees apply:<br/><br/></p><ul><li>Zone 1: <strong>Malaysia</strong>.  Shipping Fee: <strong>SGD 10</strong></li><li>Zone 2: <strong>Indonesia, Philippines, Thailand, Vietnam</strong>, Shipping Fee: <strong>SGD 15</strong></li><li>Zone 3: <strong>Hong Kong SAR, Japan, South Korea, Taiwan, China, Shipping Fee</strong>: <strong>SGD 20</strong></li><li>Zone 4: <strong>Australia, New Zealand</strong>, Shipping Fee <strong>SGD 25</strong></li><li>Zone 5: <strong>France, Germany, Ireland, Italy, Norway, Spain, Sweden, Switzerland, United Kingdom, United States, Canada, Denmark, Finland</strong>, Shipping Fee: <strong>SGD 30</strong></li></ul><p><strong>Delivery Duty Unpaid (DDU)</strong>: Please note that duties, taxes, and customs charges (if any) are not included and must be paid by the recipient upon delivery.</p>"
+          }
+        },
+        "accordion_7PmdQy": {
+          "type": "accordion",
+          "settings": {
+            "title": "How do I cancel my order?",
+            "content": "<p>If you want to cancel your order, please contact us as soon as possible. We’ll do our best to issue a refund, but unfortunately, we can’t cancel orders once they’ve been shipped.</p>"
+          }
+        },
+        "accordion_L8JCbE": {
+          "type": "accordion",
+          "settings": {
+            "title": "Can I exchange my item?",
+            "content": "<p>At this time, we are unable to offer exchanges. We recommend contacting us at <strong>info@triiiplestudio.com </strong>to place an order for a new item. However, regarding hygiene concerns, underwear is non-refundable once opened.</p>"
+          }
+        },
+        "accordion_97KWN8": {
+          "type": "accordion",
+          "settings": {
+            "title": "I didn’t receive an order confirmation.",
+            "content": "<p>Please contact us at <strong>isaiah.thomas@triiiplestudio.com</strong>. We’ll check everything and provide you with your order confirmation. We also recommend checking your spam inbox.</p>"
+          }
+        },
+        "header_QH9kkV": {
+          "type": "header",
+          "settings": {
+            "title": "Customer Service"
+          }
+        },
+        "accordion_CfLFfF": {
+          "type": "accordion",
+          "settings": {
+            "title": "Is there a return fee?",
+            "content": "<p>Yes, a return fee, which includes the shipping cost, will be deducted from the refund amount.</p>"
+          }
+        },
+        "accordion_xQJfKn": {
+          "type": "accordion",
+          "settings": {
+            "title": "What is the return policy?",
+            "content": "<p>Our return policy allows you to return an item within 14 days of receiving it. However, a return fee will be added to the refund amount. To be eligible for a refund, the product must be returned in its original condition, unwrapped, unwashed, and with all tags attached. Before opening the product, please double-check the size and style to ensure a proper fit.</p>"
+          }
+        },
+        "accordion_UVT9wq": {
+          "type": "accordion",
+          "settings": {
+            "title": "What if my item is the wrong size or damaged? ",
+            "content": "<p>If you received damaged or incorrect-sized items, we’ll find the best solution for you. Please contact us at <strong>isaiah.thomas@triiiplestudio.com</strong>. Attach the order number and a photo or video of the item in the email. The return window<strong> </strong>is<strong> </strong>within 14 days of receiving your purchase. We won’t accept returns or exchanges for items more than 14 days from your order date.</p>"
+          }
+        },
+        "accordion_pTpQae": {
+          "type": "accordion",
+          "settings": {
+            "title": "When do I get my refund?",
+            "content": "<p>When we’ve received and processed your return, you’ll receive an email notification. Typically, it takes 7 business days for the refund to appear on your account, depending on your payment method. We strive to process the refund as soon as we receive the return, but the latest refund will be issued within 14 days of receiving it.</p>"
+          }
+        },
+        "header_tWdNJg": {
+          "type": "header",
+          "settings": {
+            "title": "Sizing"
+          }
+        },
+        "accordion_ipQC9x": {
+          "type": "accordion",
+          "settings": {
+            "title": "What size should I order?",
+            "content": "<p>Please refer to the size guide on the product page for accurate measurements. If you still need assistance, our team will be happy to guide you in selecting the right size. Kindly contact us at <strong>info@triiiplestudio.com</strong>. </p><p></p><p>However, please note that underwear cannot be exchanged or refunded once opened due to hygiene concerns. </p>"
+          }
+        },
+        "accordion_9pAg7n": {
+          "type": "accordion",
+          "settings": {
+            "title": "Where can I find the size guide?",
+            "content": "<p>You can find our size guide on every product page.</p>"
+          }
+        },
+        "accordion_dJMhVc": {
+          "type": "accordion",
+          "settings": {
+            "title": "Frequently asked question",
+            "content": "<p>Share details about your shipping policies, item returns, or customer service.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "header_NFKfgp",
+        "accordion_78NTxB",
+        "accordion_yXX8Ca",
+        "accordion_eaNWGp",
+        "accordion_7PmdQy",
+        "accordion_L8JCbE",
+        "accordion_97KWN8",
+        "header_QH9kkV",
+        "accordion_CfLFfF",
+        "accordion_xQJfKn",
+        "accordion_UVT9wq",
+        "accordion_pTpQae",
+        "header_tWdNJg",
+        "accordion_ipQC9x",
+        "accordion_9pAg7n",
+        "accordion_dJMhVc"
+      ],
+      "settings": {
+        "heading_font_size": "heading-x-small",
+        "width": "wrapper--full-padded",
+        "color_scheme": "",
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_sidebar_NyWgde"
+  ]
+}

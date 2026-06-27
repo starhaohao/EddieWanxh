@@ -1,0 +1,116 @@
+{%- liquid
+  assign filters_default = search.filters | default: collection.filters
+  assign default_open = section.settings.default_open
+
+  capture swatch_button_style
+    case settings.swatch_style
+      when 'square'
+        echo 'swatch__button--square'
+      when 'circle'
+        echo 'swatch__button--circle'
+    endcase
+  endcapture
+
+  comment
+    FILTER REORGANIZATION FOR CLEARANCE
+    Priority order: Size > Category > Material (collapsed, underwear only) > Hide Type/Color/Vendor
+  endcomment
+  
+  assign filters_order = 'Size,Category,Material,Fabric' | split: ','
+  assign filters_hidden = 'Type,Color,Vendor' | split: ','
+  
+  comment
+    Material/Fabric only visible on underwear collection
+  endcomment
+  assign is_underwear_collection = false
+  if collection.handle == 'underwear' or collection.handle == 'all'
+    assign is_underwear_collection = true
+  endif
+-%}
+
+<collapsible-elements>
+  <form data-collection-filters-form class="collection__filters" id="{{ section.id }}-form-filter">
+    {%- if template.name == 'search' and search.terms -%}
+      <input type="hidden" name="q" value="{{ search.terms | escape }}">
+      <input name="options[prefix]" type="hidden" value="last">
+    {%- endif -%}
+
+    {%- comment -%}
+      LINKLIST REMOVED: First Layer Perks section hidden
+    {%- endcomment -%}
+
+    {%- comment -%}
+      REORDERED FILTER LOOP
+      Render filters in priority order: Size first, Category second, Material third (collapsed, underwear only), 
+      then remaining filters (except Type/Color/Vendor which are hidden)
+    {%- endcomment -%}
+    
+    {%- for priority_filter in filters_order -%}
+      {%- for filter in filters_default -%}
+        {%- if filter.label == priority_filter -%}
+          {%- comment -%}
+            Skip Material/Fabric unless on underwear collection
+          {%- endcomment -%}
+          {%- if filter.label == 'Material' or filter.label == 'Fabric' -%}
+            {%- if is_underwear_collection -%}
+              {%- render 'filters-group',
+                filter: filter,
+                default_open: default_open,
+                animation_name: animation_name,
+                animation_duration: animation_duration,
+                animation_delay_increment: animation_delay_increment,
+                swatch_button_style: swatch_button_style,
+                should_collapse: true
+              -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- render 'filters-group',
+              filter: filter,
+              default_open: default_open,
+              animation_name: animation_name,
+              animation_duration: animation_duration,
+              animation_delay_increment: animation_delay_increment,
+              swatch_button_style: swatch_button_style,
+              should_collapse: false
+            -%}
+          {%- endif -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+
+    {%- comment -%}
+      Render remaining filters that aren't in priority order and aren't hidden
+    {%- endcomment -%}
+    {%- for filter in filters_default -%}
+      {%- assign is_priority = false -%}
+      {%- assign is_hidden = false -%}
+
+      {%- for priority in filters_order -%}
+        {%- if filter.label == priority -%}
+          {%- assign is_priority = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- for hidden in filters_hidden -%}
+        {%- if filter.label == hidden -%}
+          {%- assign is_hidden = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- unless is_priority or is_hidden -%}
+        {%- render 'filters-group',
+          filter: filter,
+          default_open: default_open,
+          animation_name: animation_name,
+          animation_duration: animation_duration,
+          animation_delay_increment: animation_delay_increment,
+          swatch_button_style: swatch_button_style,
+          should_collapse: false
+        -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  </form>
+</collapsible-elements>
