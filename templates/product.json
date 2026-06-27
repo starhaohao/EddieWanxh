@@ -9,6 +9,17 @@
  */
 {
   "sections": {
+    "section_custom_code_WGKwXq": {
+      "type": "section-custom-code",
+      "name": "Custom code",
+      "settings": {
+        "code": "",
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "main": {
       "type": "product",
       "blocks": {
@@ -43,8 +54,8 @@
           "settings": {
             "info_page": "t-shirt-sleeveless-top-size-chart",
             "size_chart_style": "text",
-            "option_font_size": "body-medium",
-            "value_font_size": "body-small",
+            "option_font_size": "body-large",
+            "value_font_size": "body-large",
             "padding_bottom": 16
           }
         },
@@ -129,7 +140,7 @@
         "image_layout": "grid-2",
         "image_size": "large",
         "mobile_image_style": "slider",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
         "padding_top": 0,
         "padding_bottom": 61
       }
@@ -762,6 +773,7 @@
     }
   },
   "order": [
+    "section_custom_code_WGKwXq",
     "main",
     "section_look_gallery_ePcTQJ",
     "section_dynamic_content_44xTqw",
