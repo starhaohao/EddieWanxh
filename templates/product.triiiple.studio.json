@@ -58,7 +58,7 @@
             "button_type": "btn--secondary",
             "button_size": "btn--large",
             "button_style": "btn--solid",
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "button_type_dynamic": "btn--secondary",
             "button_size_dynamic": "",
             "button_style_dynamic": "btn--solid",
