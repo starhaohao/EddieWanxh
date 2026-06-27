@@ -69,6 +69,13 @@
     "sale_hero": {
       "type": "sale-hero",
       "blocks": {
+        "ghost_cta_RgqEx3": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Briefs",
+            "url": ""
+          }
+        },
         "ghost_1": {
           "type": "ghost_cta",
           "settings": {
@@ -92,6 +99,7 @@
         }
       },
       "block_order": [
+        "ghost_cta_RgqEx3",
         "ghost_1",
         "ghost_2",
         "ghost_3"
