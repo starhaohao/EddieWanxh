@@ -4,62 +4,86 @@
       "type": "landing-hero",
       "settings": {
         "bg_type": "image",
-        "hero_height": 90,
-        "overlay_opacity": 40,
-        "text_align": "center",
-        "eyebrow": "New Season — SS25",
-        "title": "Wear Less.\nFeel More.",
-        "subtitle": "Premium basics for the modern man",
+        "hero_height": 92,
+        "overlay_from": "rgba(10,10,10,0.75)",
+        "overlay_to": "rgba(10,10,10,0.32)",
+        "eyebrow": "New Season",
+        "eyebrow_color": "#923531",
+        "title": "<p>Wear Less.<br/>Feel More.</p>",
+        "title_size": 84,
+        "subtitle": "<p>Premium basics for the modern man</p>",
+        "show_urgency": false,
+        "urgency_label": "Drops In",
+        "urgency_text": "<p>New drop.<br/>Limited stock.</p>",
         "show_countdown": false,
         "countdown_end": "2025-12-31T23:59:59",
         "cta_text": "Shop Now",
-        "cta2_text": "View Lookbook",
-        "show_scroll_hint": true
-      }
+        "cta_url": "/collections",
+        "cta_bg": "#923531",
+        "cta_text_color": "#ffffff"
+      },
+      "blocks": {
+        "ghost-briefs": { "type": "ghost_cta", "settings": { "label": "Briefs", "url": "/collections/briefs" } },
+        "ghost-trunks": { "type": "ghost_cta", "settings": { "label": "Boxer Trunks", "url": "/collections/boxer-trunks" } },
+        "ghost-tops": { "type": "ghost_cta", "settings": { "label": "Tops", "url": "/collections/tops" } }
+      },
+      "block_order": ["ghost-briefs", "ghost-trunks", "ghost-tops"]
     },
     "features-strip": {
       "type": "landing-features-strip",
       "settings": {
-        "bg_color": "#f0ede8",
-        "text_color": "#111111"
+        "bg_color": "#212529",
+        "border_color": "rgba(255,255,255,0.11)",
+        "cat_color": "#923531",
+        "title_color": "#ffffff",
+        "desc_color": "rgba(255,255,255,0.42)"
       },
       "blocks": {
-        "feat-1": { "type": "feature", "settings": { "icon": "✦", "title": "Free Shipping", "sub": "Orders over $50" } },
-        "feat-2": { "type": "feature", "settings": { "icon": "◎", "title": "Ethical Materials", "sub": "OEKO-TEX certified" } },
-        "feat-3": { "type": "feature", "settings": { "icon": "↩", "title": "Easy Returns", "sub": "30-day policy" } },
-        "feat-4": { "type": "feature", "settings": { "icon": "⊕", "title": "SG-Based Brand", "sub": "Made for the climate" } }
+        "feat-1": { "type": "feature", "settings": { "category": "Shipping", "title": "Free over $50", "description": "SG & MY. 2–4 business days." } },
+        "feat-2": { "type": "feature", "settings": { "category": "Materials", "title": "OEKO-TEX®", "description": "Certified safe for skin." } },
+        "feat-3": { "type": "feature", "settings": { "category": "Returns", "title": "30-Day Policy", "description": "Hassle-free exchanges." } },
+        "feat-4": { "type": "feature", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Crafted in Thailand." } }
       },
       "block_order": ["feat-1", "feat-2", "feat-3", "feat-4"]
     },
     "collections-grid": {
       "type": "landing-collections-grid",
       "settings": {
-        "heading": "Shop by Category",
-        "subheading": "Collections",
+        "bg_color": "#1a1d20",
+        "border_color": "rgba(255,255,255,0.11)",
+        "text_color": "#ffffff",
+        "sub_color": "rgba(255,255,255,0.42)",
+        "eyebrow": "Shop by Category",
+        "heading": "Collections",
         "columns": 3,
         "cta_text": "View All",
         "cta_url": "/collections"
       },
       "blocks": {
-        "coll-1": { "type": "collection_card", "settings": { "label": "Briefs", "tag": "Best Seller" } },
-        "coll-2": { "type": "collection_card", "settings": { "label": "Boxer Trunks" } },
-        "coll-3": { "type": "collection_card", "settings": { "label": "Tops", "tag": "New" } }
+        "coll-1": { "type": "collection_card", "settings": { "label": "Briefs", "tag": "Best Seller", "link": "/collections/briefs" } },
+        "coll-2": { "type": "collection_card", "settings": { "label": "Boxer Trunks", "link": "/collections/boxer-trunks" } },
+        "coll-3": { "type": "collection_card", "settings": { "label": "Tops", "tag": "New", "link": "/collections/tops" } }
       },
       "block_order": ["coll-1", "coll-2", "coll-3"]
     },
     "testimonials": {
       "type": "landing-testimonials",
       "settings": {
-        "bg_color": "#ffffff",
-        "eyebrow": "Reviews",
-        "heading": "What Our Customers Say"
+        "bg_color": "#1a1d20",
+        "title_color": "#ffffff",
+        "card_bg": "#212529",
+        "star_color": "#c8a96e",
+        "quote_color": "rgba(255,255,255,0.85)",
+        "who_color": "rgba(255,255,255,0.45)",
+        "heading": "What they say."
       },
       "blocks": {
-        "rev-1": { "type": "review", "settings": { "stars": 5, "quote": "The most comfortable underwear I've ever worn. Unreal fabric quality.", "name": "James T.", "product": "Classic Brief 3-Pack" } },
+        "rev-1": { "type": "review", "settings": { "stars": 5, "quote": "The most comfortable underwear I've ever worn. Fabric quality is unreal.", "name": "James T.", "product": "Classic Brief 3-Pack" } },
         "rev-2": { "type": "review", "settings": { "stars": 5, "quote": "Finally a local brand that gets it. Fits perfectly, feels premium.", "name": "Wei H.", "product": "Boxer Trunk" } },
-        "rev-3": { "type": "review", "settings": { "stars": 5, "quote": "Ordered 5. Will order 5 more. That's all I need to say.", "name": "Raj K.", "product": "Bundle Pack" } }
+        "rev-3": { "type": "review", "settings": { "stars": 5, "quote": "Ordered 5. Will order 5 more. That's all I need to say.", "name": "Raj K.", "product": "Bundle Pack" } },
+        "rev-4": { "type": "review", "settings": { "stars": 5, "quote": "Best basics I've owned. Worth every cent.", "name": "Daniel L.", "product": "Cotton Spandex Brief" } }
       },
-      "block_order": ["rev-1", "rev-2", "rev-3"]
+      "block_order": ["rev-1", "rev-2", "rev-3", "rev-4"]
     }
   },
   "order": ["landing-hero", "features-strip", "collections-grid", "testimonials"]

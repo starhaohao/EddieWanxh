@@ -1,16 +1,18 @@
 {%- liquid
   assign bg_type = section.settings.bg_type
   assign hero_height = section.settings.hero_height
-  assign overlay_opacity = section.settings.overlay_opacity
-  assign text_align = section.settings.text_align
+  assign overlay_from = section.settings.overlay_from
+  assign overlay_to = section.settings.overlay_to
+  assign eyebrow_color = section.settings.eyebrow_color
+  assign title_size = section.settings.title_size
   assign show_countdown = section.settings.show_countdown
   assign countdown_end = section.settings.countdown_end
 -%}
 
-<section class="lh" style="--lh-h:{{ hero_height }}vh;--lh-ov:{{ overlay_opacity | divided_by: 100.0 }};--lh-align:{{ text_align }};">
+<section class="lh" style="--lh-h:{{ hero_height }}vh;--lh-ov1:{{ overlay_from }};--lh-ov2:{{ overlay_to }};--lh-eye:{{ eyebrow_color }};--lh-ts:{{ title_size }}px;">
 
   {%- if bg_type == 'video' and section.settings.video_url != blank -%}
-    <video class="lh__bg lh__bg--video" autoplay muted loop playsinline>
+    <video class="lh__bg" autoplay muted loop playsinline>
       <source src="{{ section.settings.video_url }}" type="video/mp4">
     </video>
   {%- elsif section.settings.image != blank -%}
@@ -21,47 +23,45 @@
 
   <div class="lh__overlay"></div>
 
-  <div class="lh__inner">
+  {%- if section.settings.show_urgency -%}
+    <div class="lh__urgency">
+      <div class="lh__urgency-label">{{ section.settings.urgency_label }}</div>
+      <div class="lh__urgency-tag">{{ section.settings.urgency_text }}</div>
+    </div>
+  {%- endif -%}
+
+  <div class="lh__content">
     {%- if section.settings.eyebrow != blank -%}
-      <p class="lh__eyebrow">{{ section.settings.eyebrow }}</p>
+      <div class="lh__eyebrow">{{ section.settings.eyebrow }}</div>
     {%- endif -%}
 
-    {%- if section.settings.title != blank -%}
-      <h1 class="lh__title">{{ section.settings.title }}</h1>
-    {%- endif -%}
+    <h1 class="lh__title">{{ section.settings.title }}</h1>
 
     {%- if section.settings.subtitle != blank -%}
-      <p class="lh__sub">{{ section.settings.subtitle }}</p>
+      <div class="lh__sub">{{ section.settings.subtitle }}</div>
     {%- endif -%}
 
     {%- if show_countdown and countdown_end != blank -%}
       <div class="lh__countdown" data-end="{{ countdown_end }}">
-        <div class="lh__countdown-block"><span class="lh__cd-num" data-days>00</span><span class="lh__cd-label">Days</span></div>
-        <div class="lh__countdown-sep">:</div>
-        <div class="lh__countdown-block"><span class="lh__cd-num" data-hours>00</span><span class="lh__cd-label">Hrs</span></div>
-        <div class="lh__countdown-sep">:</div>
-        <div class="lh__countdown-block"><span class="lh__cd-num" data-mins>00</span><span class="lh__cd-label">Min</span></div>
-        <div class="lh__countdown-sep">:</div>
-        <div class="lh__countdown-block"><span class="lh__cd-num" data-secs>00</span><span class="lh__cd-label">Sec</span></div>
+        <div class="lh__cd-block"><span class="lh__cd-num" data-days>00</span><span class="lh__cd-lbl">Days</span></div>
+        <div class="lh__cd-sep">:</div>
+        <div class="lh__cd-block"><span class="lh__cd-num" data-hours>00</span><span class="lh__cd-lbl">Hrs</span></div>
+        <div class="lh__cd-sep">:</div>
+        <div class="lh__cd-block"><span class="lh__cd-num" data-mins>00</span><span class="lh__cd-lbl">Min</span></div>
+        <div class="lh__cd-sep">:</div>
+        <div class="lh__cd-block"><span class="lh__cd-num" data-secs>00</span><span class="lh__cd-lbl">Sec</span></div>
       </div>
     {%- endif -%}
 
     <div class="lh__ctas">
       {%- if section.settings.cta_text != blank -%}
-        <a class="lh__cta lh__cta--primary" href="{{ section.settings.cta_url }}">{{ section.settings.cta_text }}</a>
+        <a class="lh__cta" href="{{ section.settings.cta_url }}" style="background:{{ section.settings.cta_bg }};color:{{ section.settings.cta_text_color }};">{{ section.settings.cta_text }} →</a>
       {%- endif -%}
-      {%- if section.settings.cta2_text != blank -%}
-        <a class="lh__cta lh__cta--ghost" href="{{ section.settings.cta2_url }}">{{ section.settings.cta2_text }}</a>
-      {%- endif -%}
+      {%- for block in section.blocks -%}
+        <a class="lh__cta-ghost" href="{{ block.settings.url }}">{{ block.settings.label }}</a>
+      {%- endfor -%}
     </div>
   </div>
-
-  {%- if section.settings.show_scroll_hint -%}
-    <div class="lh__scroll-hint">
-      <span class="lh__scroll-line"></span>
-      <span class="lh__scroll-text">Scroll</span>
-    </div>
-  {%- endif -%}
 </section>
 
 {%- if show_countdown and countdown_end != blank -%}
@@ -73,15 +73,11 @@
   function pad(n) { return String(n).padStart(2, '0'); }
   function tick() {
     var diff = end - Date.now();
-    if (diff <= 0) { el.textContent = 'Sale ended'; return; }
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var s = Math.floor((diff % 60000) / 1000);
-    el.querySelector('[data-days]').textContent = pad(d);
-    el.querySelector('[data-hours]').textContent = pad(h);
-    el.querySelector('[data-mins]').textContent = pad(m);
-    el.querySelector('[data-secs]').textContent = pad(s);
+    if (diff <= 0) { el.innerHTML = '<span style="font-size:12px;letter-spacing:0.1em;color:rgba(255,255,255,0.5)">SALE ENDED</span>'; return; }
+    el.querySelector('[data-days]').textContent = pad(Math.floor(diff / 86400000));
+    el.querySelector('[data-hours]').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+    el.querySelector('[data-mins]').textContent = pad(Math.floor((diff % 3600000) / 60000));
+    el.querySelector('[data-secs]').textContent = pad(Math.floor((diff % 60000) / 1000));
   }
   tick();
   setInterval(tick, 1000);
@@ -91,163 +87,166 @@
 
 <style>
   .lh {
+    overflow-x: hidden;
+    box-sizing: border-box;
+    max-width: 100%;
     position: relative;
     height: var(--lh-h);
-    min-height: 480px;
+    min-height: 500px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: var(--lh-align, center);
   }
   .lh__bg {
     position: absolute;
     inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center 20%;
+    display: block;
   }
-  .lh__bg--video { object-fit: cover; }
-  .lh__bg--placeholder { background: #f0ede8; }
+  .lh__bg--placeholder { background: #1a1d20; }
   .lh__overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,var(--lh-ov));
-    pointer-events: none;
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--lh-ov1) 0%, var(--lh-ov2) 52%, rgba(10,10,10,0.04) 100%);
   }
-  .lh__inner {
-    position: relative;
+  .lh__urgency {
+    position: absolute;
+    top: 40px; right: 48px;
+    text-align: right;
     z-index: 2;
-    text-align: center;
-    padding: 0 24px;
-    max-width: 760px;
+  }
+  .lh__urgency-label {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 6px;
+  }
+  .lh__urgency-tag {
+    font-size: 13px;
+    letter-spacing: -0.02em;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+  }
+  .lh__content {
+    position: absolute;
+    bottom: 72px; left: 64px;
+    max-width: 560px;
+    z-index: 2;
   }
   .lh__eyebrow {
     font-family: monospace;
     font-size: 10px;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-    margin: 0 0 18px;
+    color: var(--lh-eye);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .lh__eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--lh-eye);
   }
   .lh__title {
-    font-size: clamp(40px, 6vw, 96px);
+    font-size: clamp(36px, 5.8vw, var(--lh-ts));
     font-weight: 400;
     letter-spacing: -0.04em;
-    line-height: 0.95;
+    line-height: 0.96;
     color: #fff;
-    margin: 0 0 22px;
+    margin-bottom: 24px;
   }
   .lh__sub {
     font-family: monospace;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.65);
-    margin: 0 0 32px;
-    line-height: 2;
+    margin-bottom: 28px;
+    line-height: 2.2;
   }
   .lh__countdown {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 4px;
-    margin: 0 0 32px;
+    margin-bottom: 28px;
   }
-  .lh__countdown-block {
+  .lh__cd-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 56px;
+    min-width: 52px;
   }
   .lh__cd-num {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 300;
     letter-spacing: -0.04em;
     color: #fff;
     line-height: 1;
   }
-  .lh__cd-label {
+  .lh__cd-lbl {
     font-family: monospace;
-    font-size: 8px;
+    font-size: 7px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.4);
     margin-top: 4px;
   }
-  .lh__countdown-sep {
-    font-size: 24px;
-    color: rgba(255,255,255,0.4);
-    padding-bottom: 16px;
+  .lh__cd-sep {
+    font-size: 20px;
+    color: rgba(255,255,255,0.35);
+    padding-bottom: 14px;
     line-height: 1;
   }
   .lh__ctas {
     display: flex;
-    gap: 12px;
-    justify-content: center;
+    gap: 10px;
     flex-wrap: wrap;
+    align-items: center;
   }
   .lh__cta {
     display: inline-flex;
     align-items: center;
-    padding: 15px 36px;
+    gap: 12px;
+    padding: 14px 28px;
     font-family: monospace;
     font-size: 10px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: all 0.2s;
+    transition: opacity 0.2s;
   }
-  .lh__cta--primary {
-    background: #fff;
-    color: #111;
-  }
-  .lh__cta--primary:hover { background: #f0ede8; }
-  .lh__cta--ghost {
-    background: transparent;
-    color: rgba(255,255,255,0.85);
-    border: 1px solid rgba(255,255,255,0.35);
-  }
-  .lh__cta--ghost:hover { border-color: rgba(255,255,255,0.8); color: #fff; }
-  .lh__scroll-hint {
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
+  .lh__cta:hover { opacity: 0.85; }
+  .lh__cta-ghost {
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    z-index: 2;
-  }
-  .lh__scroll-line {
-    display: block;
-    width: 1px;
-    height: 48px;
-    background: rgba(255,255,255,0.3);
-    animation: lh-scroll-line 1.6s ease-in-out infinite;
-  }
-  @keyframes lh-scroll-line {
-    0%,100% { transform: scaleY(1); opacity: 0.3; }
-    50% { transform: scaleY(0.5); opacity: 0.8; }
-  }
-  .lh__scroll-text {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.28);
+    padding: 13px 22px;
     font-family: monospace;
-    font-size: 8px;
-    letter-spacing: 0.2em;
+    font-size: 10px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
   }
+  .lh__cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
   @media (max-width: 749px) {
     .lh { height: 100svh; min-height: 560px; }
-    .lh__title { font-size: clamp(36px, 10vw, 64px); }
-    .lh__cd-num { font-size: 24px; }
-    .lh__countdown-block { min-width: 44px; }
+    .lh__content { bottom: 40px; left: 24px; right: 24px; }
+    .lh__urgency { top: 20px; right: 20px; }
+    .lh__cd-num { font-size: 22px; }
+    .lh__cd-block { min-width: 42px; }
   }
 </style>
 
 {% schema %}
 {
-  "name": "Landing Hero",
+  "name": "Landing Hero (+ Countdown)",
   "tag": "div",
   "class": "landing-hero-section",
   "settings": [
@@ -259,43 +258,50 @@
       "default": "image",
       "options": [
         { "value": "image", "label": "Image" },
-        { "value": "video", "label": "Video" }
+        { "value": "video", "label": "Video (MP4 URL)" }
       ]
     },
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "text", "id": "video_url", "label": "Video URL (.mp4)", "info": "Paste a direct .mp4 URL for autoplay video background" },
-    { "type": "range", "id": "overlay_opacity", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 5, "default": 40 },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "video_url", "label": "Video URL (.mp4)", "info": "Direct .mp4 URL for autoplay background video" },
+    { "type": "range", "id": "hero_height", "label": "Height (vh)", "min": 50, "max": 100, "step": 2, "default": 92 },
+    { "type": "color", "id": "overlay_from", "label": "Overlay start", "default": "rgba(10,10,10,0.75)" },
+    { "type": "color", "id": "overlay_to", "label": "Overlay end", "default": "rgba(10,10,10,0.32)" },
     { "type": "header", "content": "Content" },
-    { "type": "select", "id": "text_align", "label": "Alignment", "default": "center", "options": [{"value":"flex-start","label":"Left"},{"value":"center","label":"Center"}] },
-    { "type": "range", "id": "hero_height", "label": "Height (vh)", "min": 60, "max": 100, "step": 2, "default": 90 },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "New Season" },
-    { "type": "text", "id": "title", "label": "Headline", "default": "Wear Less.\nFeel More." },
-    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Premium basics for the modern man" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Season" },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow color", "default": "#923531" },
+    { "type": "richtext", "id": "title", "label": "Title", "default": "<p>Wear Less.<br>Feel More.</p>" },
+    { "type": "range", "id": "title_size", "label": "Title max size (px)", "min": 36, "max": 120, "step": 2, "default": 84 },
+    { "type": "richtext", "id": "subtitle", "label": "Subtitle", "default": "<p>Premium basics for the modern man</p>" },
+    { "type": "header", "content": "Urgency tag (top right)" },
+    { "type": "checkbox", "id": "show_urgency", "label": "Show urgency tag", "default": false },
+    { "type": "text", "id": "urgency_label", "label": "Label", "default": "Drops In" },
+    { "type": "richtext", "id": "urgency_text", "label": "Text", "default": "<p>New drop.<br>Limited stock.</p>" },
     { "type": "header", "content": "Countdown Timer" },
     { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": false },
     { "type": "text", "id": "countdown_end", "label": "End date/time", "info": "Format: 2025-12-31T23:59:59", "default": "2025-12-31T23:59:59" },
-    { "type": "header", "content": "CTA Buttons" },
-    { "type": "text", "id": "cta_text", "label": "Primary button text", "default": "Shop Now" },
-    { "type": "url", "id": "cta_url", "label": "Primary button link" },
-    { "type": "text", "id": "cta2_text", "label": "Secondary button text", "default": "View Lookbook" },
-    { "type": "url", "id": "cta2_url", "label": "Secondary button link" },
-    { "type": "header", "content": "Scroll hint" },
-    { "type": "checkbox", "id": "show_scroll_hint", "label": "Show scroll indicator", "default": true }
+    { "type": "header", "content": "Primary CTA" },
+    { "type": "text", "id": "cta_text", "label": "Button text", "default": "Shop Now" },
+    { "type": "url", "id": "cta_url", "label": "Button link" },
+    { "type": "color", "id": "cta_bg", "label": "Button background", "default": "#923531" },
+    { "type": "color", "id": "cta_text_color", "label": "Button text color", "default": "#ffffff" }
+  ],
+  "blocks": [
+    {
+      "type": "ghost_cta",
+      "name": "Ghost CTA",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Shop Briefs" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
   ],
   "presets": [
     {
-      "name": "Landing Hero",
-      "settings": {
-        "eyebrow": "New Season",
-        "title": "Wear Less.\nFeel More.",
-        "subtitle": "Premium basics for the modern man",
-        "hero_height": 90,
-        "overlay_opacity": 40,
-        "show_countdown": false,
-        "show_scroll_hint": true,
-        "cta_text": "Shop Now",
-        "cta2_text": "View Lookbook"
-      }
+      "name": "Landing Hero (+ Countdown)",
+      "blocks": [
+        { "type": "ghost_cta", "settings": { "label": "Briefs" } },
+        { "type": "ghost_cta", "settings": { "label": "Boxer Trunks" } }
+      ]
     }
   ],
   "templates": ["index", "page"]

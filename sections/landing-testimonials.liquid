@@ -1,163 +1,166 @@
-<section class="lt" style="--lt-bg:{{ section.settings.bg_color }};">
-  <div class="lt__inner">
-    {%- if section.settings.heading != blank -%}
-      <div class="lt__header">
-        {%- if section.settings.eyebrow != blank -%}
-          <p class="lt__eyebrow">{{ section.settings.eyebrow }}</p>
-        {%- endif -%}
-        <h2 class="lt__heading">{{ section.settings.heading }}</h2>
-      </div>
-    {%- endif -%}
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign title_color = section.settings.title_color
+  assign card_bg = section.settings.card_bg
+  assign star_color = section.settings.star_color
+  assign quote_color = section.settings.quote_color
+  assign who_color = section.settings.who_color
+-%}
 
-    <div class="lt__track-wrap">
-      <div class="lt__track" id="lt-track-{{ section.id }}">
-        {%- for block in section.blocks -%}
-          <div class="lt__card" {{ block.shopify_attributes }}>
-            <div class="lt__stars">
-              {%- for i in (1..block.settings.stars) -%}★{%- endfor -%}
-            </div>
-            <blockquote class="lt__quote">{{ block.settings.quote }}</blockquote>
-            <div class="lt__author">
-              <span class="lt__author-name">{{ block.settings.name }}</span>
-              {%- if block.settings.product != blank -%}
-                <span class="lt__author-product">— {{ block.settings.product }}</span>
-              {%- endif -%}
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
+<section class="lt" style="--lt-bg:{{ bg }};--lt-tc:{{ title_color }};--lt-cb:{{ card_bg }};--lt-star:{{ star_color }};--lt-qc:{{ quote_color }};--lt-wc:{{ who_color }};" id="lt-{{ section.id }}">
+  <div class="lt__header">
+    <h2 class="lt__title">{{ section.settings.heading }}</h2>
+    <div class="lt__nav">
+      <button class="lt__nav-btn" id="lt-prev-{{ section.id }}" aria-label="Previous">←</button>
+      <button class="lt__nav-btn" id="lt-next-{{ section.id }}" aria-label="Next">→</button>
     </div>
-
-    {%- if section.blocks.size > 1 -%}
-      <div class="lt__dots" id="lt-dots-{{ section.id }}">
-        {%- for block in section.blocks -%}
-          <button class="lt__dot{% if forloop.first %} lt__dot--active{% endif %}" data-idx="{{ forloop.index0 }}" aria-label="Review {{ forloop.index }}"></button>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
+  </div>
+  <div class="lt__track-wrap">
+    <div class="lt__track" id="lt-track-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        <div class="lt__card" {{ block.shopify_attributes }}>
+          <div class="lt__stars">
+            {%- for i in (1..block.settings.stars) -%}★{%- endfor -%}
+          </div>
+          <blockquote class="lt__quote">"{{ block.settings.quote }}"</blockquote>
+          <div class="lt__who">
+            <span class="lt__name">{{ block.settings.name }}</span>
+            {%- if block.settings.product != blank -%}
+              <span class="lt__sku">{{ block.settings.product }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
   </div>
 </section>
 
 <script>
 (function() {
   var track = document.getElementById('lt-track-{{ section.id }}');
-  var dotsWrap = document.getElementById('lt-dots-{{ section.id }}');
+  var prev = document.getElementById('lt-prev-{{ section.id }}');
+  var next = document.getElementById('lt-next-{{ section.id }}');
   if (!track) return;
-  var dots = dotsWrap ? dotsWrap.querySelectorAll('.lt__dot') : [];
-  var current = 0;
   var cards = track.querySelectorAll('.lt__card');
   var total = cards.length;
-  if (total <= 1) return;
+  if (total <= 1) { if (prev) prev.style.display = 'none'; if (next) next.style.display = 'none'; return; }
+  var current = 0;
+  var visible = window.innerWidth >= 990 ? 3 : window.innerWidth >= 750 ? 2 : 1;
 
   function goTo(idx) {
-    current = idx;
-    track.style.transform = 'translateX(-' + (idx * (100 / total)) + '%)';
-    dots.forEach(function(d, i) {
-      d.classList.toggle('lt__dot--active', i === idx);
-    });
+    var max = Math.max(0, total - visible);
+    current = Math.max(0, Math.min(idx, max));
+    track.style.transform = 'translateX(calc(-' + current + ' * (100% / ' + visible + ' + 8px)))';
   }
 
-  dots.forEach(function(dot) {
-    dot.addEventListener('click', function() { goTo(parseInt(this.dataset.idx)); });
-  });
+  if (prev) prev.addEventListener('click', function() { goTo(current - 1); });
+  if (next) next.addEventListener('click', function() { goTo(current + 1); });
 
-  setInterval(function() { goTo((current + 1) % total); }, 5000);
+  var auto = setInterval(function() { goTo(current + 1 > Math.max(0, total - visible) ? 0 : current + 1); }, 5000);
+  track.addEventListener('mouseenter', function() { clearInterval(auto); });
 })();
 </script>
 
 <style>
   .lt {
-    background: var(--lt-bg, #fff);
-    padding: 80px 48px;
-    overflow: hidden;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: 64px 40px;
+    background: var(--lt-bg);
   }
-  .lt__inner { max-width: 1100px; margin: 0 auto; }
   .lt__header {
-    text-align: center;
-    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 16px;
+    flex-wrap: wrap;
   }
-  .lt__eyebrow {
-    font-family: monospace;
-    font-size: 9px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #888;
-    margin: 0 0 14px;
-  }
-  .lt__heading {
-    font-size: clamp(24px, 3vw, 40px);
+  .lt__title {
+    font-size: clamp(22px, 2.8vw, 32px);
     font-weight: 400;
-    letter-spacing: -0.03em;
-    color: #111;
+    letter-spacing: -0.04em;
+    color: var(--lt-tc);
     margin: 0;
   }
+  .lt__nav { display: flex; gap: 8px; }
+  .lt__nav-btn {
+    width: 38px; height: 38px;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lt__nav-btn:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
   .lt__track-wrap { overflow: hidden; }
   .lt__track {
-    display: flex;
-    transition: transform 0.5s cubic-bezier(0.25,0,0,1);
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size }}, calc(33.33% - 11px));
+    gap: 12px;
+    transition: transform 0.45s cubic-bezier(0.25,0,0,1);
   }
   .lt__card {
-    flex: 0 0 100%;
-    padding: 0 60px;
-    text-align: center;
+    padding: 28px 24px;
+    background: var(--lt-cb);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
   .lt__stars {
-    font-size: 14px;
-    color: #c8a96e;
+    font-size: 12px;
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    color: var(--lt-star);
   }
   .lt__quote {
-    font-size: clamp(16px, 2vw, 22px);
+    font-size: 15px;
     font-weight: 300;
     letter-spacing: -0.01em;
     line-height: 1.6;
-    color: #222;
-    margin: 0 0 24px;
+    color: var(--lt-qc);
+    margin: 0;
     font-style: italic;
+    flex: 1;
   }
-  .lt__author {
+  .lt__who {
     font-family: monospace;
-    font-size: 9px;
-    letter-spacing: 0.16em;
+    font-size: 8px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #888;
-  }
-  .lt__author-product {
-    color: #bbb;
-    margin-left: 6px;
-  }
-  .lt__dots {
+    color: var(--lt-wc);
     display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 36px;
+    flex-direction: column;
+    gap: 3px;
   }
-  .lt__dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    border: none;
-    background: #ddd;
-    cursor: pointer;
-    padding: 0;
-    transition: background 0.2s, transform 0.2s;
+  .lt__sku { opacity: 0.5; }
+  @media (max-width: 989px) {
+    .lt { padding: 48px 24px; }
+    .lt__track { grid-template-columns: repeat({{ section.blocks.size }}, calc(50% - 6px)); }
   }
-  .lt__dot--active { background: #111; transform: scale(1.4); }
   @media (max-width: 749px) {
-    .lt { padding: 48px 16px; }
-    .lt__card { padding: 0 8px; }
+    .lt { padding: 40px 16px; }
+    .lt__track { grid-template-columns: repeat({{ section.blocks.size }}, calc(100% - 32px)); }
   }
 </style>
 
 {% schema %}
 {
-  "name": "Testimonials",
+  "name": "Testimonials Carousel",
   "tag": "div",
   "class": "landing-testimonials-section",
   "settings": [
-    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reviews" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "What Our Customers Say" }
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#1a1d20" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#ffffff" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#212529" },
+    { "type": "color", "id": "star_color", "label": "Star color", "default": "#c8a96e" },
+    { "type": "color", "id": "quote_color", "label": "Quote color", "default": "rgba(255,255,255,0.85)" },
+    { "type": "color", "id": "who_color", "label": "Name color", "default": "rgba(255,255,255,0.45)" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What they say." }
   ],
   "blocks": [
     {
@@ -165,7 +168,7 @@
       "name": "Review",
       "settings": [
         { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-        { "type": "textarea", "id": "quote", "label": "Review text", "default": "The most comfortable underwear I've ever worn. The fabric quality is unreal." },
+        { "type": "textarea", "id": "quote", "label": "Review text", "default": "The most comfortable underwear I've ever worn. Fabric quality is unreal." },
         { "type": "text", "id": "name", "label": "Customer name", "default": "James T." },
         { "type": "text", "id": "product", "label": "Product", "default": "Classic Brief 3-Pack" }
       ]
@@ -173,11 +176,12 @@
   ],
   "presets": [
     {
-      "name": "Testimonials",
+      "name": "Testimonials Carousel",
       "blocks": [
-        { "type": "review", "settings": { "stars": 5, "quote": "The most comfortable underwear I've ever worn. Unreal fabric quality.", "name": "James T.", "product": "Classic Brief 3-Pack" } },
+        { "type": "review", "settings": { "stars": 5, "quote": "The most comfortable underwear I've ever worn. Fabric quality is unreal.", "name": "James T.", "product": "Classic Brief 3-Pack" } },
         { "type": "review", "settings": { "stars": 5, "quote": "Finally a local brand that gets it. Fits perfectly, feels premium.", "name": "Wei H.", "product": "Boxer Trunk" } },
-        { "type": "review", "settings": { "stars": 5, "quote": "Ordered 5. Will order 5 more. That's all I need to say.", "name": "Raj K.", "product": "Bundle Pack" } }
+        { "type": "review", "settings": { "stars": 5, "quote": "Ordered 5. Will order 5 more. That's all I need to say.", "name": "Raj K.", "product": "Bundle Pack" } },
+        { "type": "review", "settings": { "stars": 5, "quote": "Best basics I've owned. Worth every cent.", "name": "Daniel L.", "product": "Cotton Spandex Brief" } }
       ]
     }
   ],

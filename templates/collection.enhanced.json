@@ -1,17 +1,82 @@
 {
   "sections": {
-    "collection-header": {
-      "type": "campaign-banner",
+    "hero": {
+      "type": "collection-image-with-title",
+      "settings": {
+        "show_title": true,
+        "show_description": true,
+        "flex_align": "align--bottom-left",
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "show_text_background": false,
+        "overlay_type": "disabled",
+        "show_image": true,
+        "banner_layout": "overlay",
+        "height": "two-fifty-height-hero",
+        "mobile_height": "two-fifty-height-hero--mobile",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "quick-add": {
+      "type": "section-quick-add",
       "settings": {}
     },
-    "collection-grid": {
-      "type": "collection-quick-add",
+    "main": {
+      "type": "collection",
+      "custom_css": [
+        ".product-item__image { border-radius: 0 !important; overflow: hidden; }",
+        ".product-item__image img { border-radius: 0 !important; }",
+        ".product-item__bg { border-radius: 0 !important; }",
+        ".product-item__bg img { border-radius: 0 !important; }"
+      ],
       "settings": {
-        "columns": 3,
-        "products_per_page": 12,
-        "show_filter_bar": true
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "inline-open",
+        "default_open": true,
+        "collection_linklist": "footer",
+        "grid": 3,
+        "grid_mobile": "2",
+        "products_per_page": 24,
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "padding_top": 0,
+        "padding_bottom": 60
+      }
+    },
+    "features": {
+      "type": "landing-features-strip",
+      "settings": {
+        "bg_color": "#212529",
+        "border_color": "rgba(255,255,255,0.11)",
+        "cat_color": "#923531",
+        "title_color": "#ffffff",
+        "desc_color": "rgba(255,255,255,0.42)"
+      },
+      "blocks": {
+        "feat-1": { "type": "feature", "settings": { "category": "Shipping", "title": "Free over $50", "description": "SG & MY. 2–4 business days." } },
+        "feat-2": { "type": "feature", "settings": { "category": "Materials", "title": "OEKO-TEX®", "description": "Certified safe for skin." } },
+        "feat-3": { "type": "feature", "settings": { "category": "Returns", "title": "30-Day Policy", "description": "Hassle-free exchanges." } },
+        "feat-4": { "type": "feature", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Crafted in Thailand." } }
+      },
+      "block_order": ["feat-1", "feat-2", "feat-3", "feat-4"]
+    },
+    "section_recent_products": {
+      "type": "section-recent-products",
+      "settings": {
+        "product_recently_limit": 10,
+        "product_recently_minimum": 4,
+        "product_recently_heading": "Viewed",
+        "heading_font_size": "heading-mini",
+        "layout_desktop": "slider",
+        "grid": 3,
+        "rows": 3,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-2",
+        "padding_top": 30,
+        "padding_bottom": 49,
+        "heading_tag": "automatic"
       }
     }
   },
-  "order": ["collection-header", "collection-grid"]
+  "order": ["hero", "quick-add", "main", "features", "section_recent_products"]
 }
