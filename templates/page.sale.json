@@ -58,7 +58,7 @@
         "msg_6"
       ],
       "settings": {
-        "bg_color": "#697f94",
+        "bg_color": "#34070B",
         "text_color": "#ffffff",
         "dot_color": "#00000080",
         "speed": 60,
@@ -105,9 +105,9 @@
         "ghost_3"
       ],
       "settings": {
-        "image": "shopify://shop_images/fathers-day-edm-model-white-black-brief-duo.jpg",
+        "image": "shopify://shop_images/In_TRIIIPLE_Instagram_Post_45.jpg",
         "hero_height": 100,
-        "overlay_from": "#000000bf",
+        "overlay_from": "#2C0000",
         "overlay_to": "#1b1b1b52",
         "eyebrow": "Final Clearance",
         "eyebrow_color": "#f1f4f5",
@@ -129,7 +129,7 @@
         "tier_1": {
           "type": "tier",
           "settings": {
-            "highlight": "3",
+            "highlight": "4",
             "label": "items - 15% OFF",
             "highlight_weight": "400"
           }
@@ -137,6 +137,10 @@
       },
       "block_order": [
         "tier_1"
+      ],
+      "custom_css": [
+        "/* ── Announcement bar — thinner strip ── */.page-announcement .announcement__slide,.page-announcement .announcement__bar {--PT: 6px !important; --PB: 6px !important; min-height: 28px !important;}",
+        ".page-announcement {--ANNOUNCEMENT-HEIGHT-DESKTOP: 28px !important; --ANNOUNCEMENT-HEIGHT-MOBILE: 28px !important;}"
       ],
       "settings": {
         "bg_color": "#1b3a49",

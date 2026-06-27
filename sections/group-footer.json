@@ -29,6 +29,7 @@
         "footer-1"
       ],
       "settings": {
+        "logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "logo_image_width": 70,
         "color_scheme": "scheme-1",
         "border_color": "#212121",
