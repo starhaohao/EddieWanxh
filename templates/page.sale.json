@@ -125,19 +125,10 @@
             "label": "items - 15% OFF",
             "highlight_weight": "400"
           }
-        },
-        "tier_2": {
-          "type": "tier",
-          "settings": {
-            "highlight": "5",
-            "label": "items -25% OFF",
-            "highlight_weight": "400"
-          }
         }
       },
       "block_order": [
-        "tier_1",
-        "tier_2"
+        "tier_1"
       ],
       "settings": {
         "bg_color": "#1b3a49",
@@ -145,7 +136,7 @@
         "accent_color": "#f2bd7e",
         "text_color": "#fcfcfc",
         "muted_color": "#dfdfdf6b",
-        "highlight_size": 20,
+        "highlight_size": 14,
         "badge_text": "No code needed"
       }
     },
@@ -196,21 +187,21 @@
         "heading": "Best Sellers",
         "heading_font_size": "heading-small",
         "description": "",
-        "text_font_size": "body-medium",
+        "text_font_size": "body-small",
         "layout": "inline",
         "link_text": "Shop Now",
         "link_url": "shopify://collections",
         "button_type": "btn--primary",
         "button_size": "",
-        "button_style": "btn--text",
+        "button_style": "btn--outline",
         "show_arrow": true,
-        "layout_desktop": "grid",
+        "layout_desktop": "slider",
         "grid": 4,
         "rows": 3,
         "width": "wrapper",
         "layout_mobile": "slider",
-        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
-        "padding_top": 0,
+        "color_scheme": "scheme-2",
+        "padding_top": 23,
         "padding_bottom": 100,
         "heading_tag": "automatic"
       }

@@ -30,7 +30,7 @@
           "type": "text",
           "settings": {
             "text": "<p><a href=\"/pages/unlock-first-layer-perks\" target=\"_blank\" title=\"Unlock First Layer Perks\"><strong>New customers save 10% with code TRIIIPLE10</strong></a><strong>.</strong></p>",
-            "target_url_enabled": false,
+            "target_url_enabled": true,
             "target_url": "shopify://pages/unlock-first-layer-perks",
             "target_referrer_enabled": false,
             "target_referrer": "",
@@ -212,10 +212,10 @@
       ],
       "settings": {
         "header_sticky": true,
-        "enable_search": true,
+        "enable_search": false,
         "header_style": "logo_beside",
         "show_separator_line": true,
-        "header_border_color": "#ffffff",
+        "header_border_color": "#7C9BDB",
         "separator_opacity": 100,
         "show_icons": true,
         "icon_as_circle": true,
