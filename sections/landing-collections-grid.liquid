@@ -10,7 +10,7 @@
 
 <section class="lcg" style="--lcg-bg:{{ bg }};--lcg-bd:{{ border }};--lcg-tc:{{ text_color }};--lcg-sc:{{ sub_color }};--lcg-cols:{{ columns }};">
   {%- if heading != blank or eyebrow != blank -%}
-    <div class="lcg__header">
+    <div class="lcg__header" data-ts-fade style="--ts-delay:0ms">
       {%- if eyebrow != blank -%}<p class="lcg__eyebrow">{{ eyebrow }}</p>{%- endif -%}
       {%- if heading != blank -%}<h2 class="lcg__heading">{{ heading }}</h2>{%- endif -%}
       {%- if section.settings.cta_text != blank -%}
@@ -27,7 +27,7 @@
         assign coll_img = block.settings.image | default: coll.image
         assign link = block.settings.link | default: coll.url
       -%}
-      <a class="lcg__item" href="{{ link }}" {{ block.shopify_attributes }}>
+      <a class="lcg__item" href="{{ link }}" data-ts-fade style="--ts-delay:{{ forloop.index0 | times: 80 }}ms" {{ block.shopify_attributes }}>
         <div class="lcg__img-wrap">
           {%- if coll_img != blank -%}
             <img class="lcg__img" src="{{ coll_img | image_url: width: 1200 }}" alt="{{ label | escape }}" loading="lazy">
@@ -48,6 +48,15 @@
 </section>
 
 <style>
+  /* ── Scroll-fade shared rules ── */
+  [data-ts-fade] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+    transition-delay: var(--ts-delay, 0ms);
+  }
+  [data-ts-fade].ts-visible { opacity: 1; transform: none; }
+
   .lcg {
     overflow-x: hidden;
     box-sizing: border-box;

@@ -85,7 +85,21 @@
 </script>
 {%- endif -%}
 
+<script src="{{ 'triiiple-animations.js' | asset_url }}" defer></script>
+
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400&display=swap');
+
+  /* ── Hero keyframe animations (above-fold, play immediately) ── */
+  @keyframes lhBgReveal {
+    from { transform: scale(1.04); opacity: 0.6; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+  @keyframes lhFadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   .lh {
     overflow-x: hidden;
     box-sizing: border-box;
@@ -102,6 +116,7 @@
     object-fit: cover;
     object-position: center 20%;
     display: block;
+    animation: lhBgReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   .lh__bg--placeholder { background: #1a1d20; }
   .lh__overlay {
@@ -135,7 +150,7 @@
     z-index: 2;
   }
   .lh__eyebrow {
-    font-family: monospace;
+    font-family: 'IBM Plex Sans', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -144,6 +159,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    animation: lhFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
   }
   .lh__eyebrow::before {
     content: '';
@@ -152,21 +168,24 @@
     background: var(--lh-eye);
   }
   .lh__title {
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: clamp(36px, 5.8vw, var(--lh-ts));
     font-weight: 400;
     letter-spacing: -0.04em;
     line-height: 0.96;
     color: #fff;
     margin-bottom: 24px;
+    animation: lhFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
   }
   .lh__sub {
-    font-family: monospace;
+    font-family: 'IBM Plex Sans', monospace;
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.65);
     margin-bottom: 28px;
     line-height: 2.2;
+    animation: lhFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
   }
   .lh__countdown {
     display: flex;
@@ -206,20 +225,21 @@
     gap: 10px;
     flex-wrap: wrap;
     align-items: center;
+    animation: lhFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.58s both;
   }
   .lh__cta {
     display: inline-flex;
     align-items: center;
     gap: 12px;
     padding: 14px 28px;
-    font-family: monospace;
+    font-family: 'IBM Plex Sans', monospace;
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: opacity 0.2s;
+    transition: opacity 0.22s ease, transform 0.22s ease;
   }
-  .lh__cta:hover { opacity: 0.85; }
+  .lh__cta:hover { opacity: 0.88; transform: translateY(-1px); }
   .lh__cta-ghost {
     display: inline-flex;
     align-items: center;
@@ -227,14 +247,14 @@
     color: rgba(255,255,255,0.8);
     border: 1px solid rgba(255,255,255,0.28);
     padding: 13px 22px;
-    font-family: monospace;
+    font-family: 'IBM Plex Sans', monospace;
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: border-color 0.2s, color 0.2s;
+    transition: border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
   }
-  .lh__cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+  .lh__cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; transform: translateY(-1px); }
   @media (max-width: 749px) {
     .lh { height: 100svh; min-height: 560px; }
     .lh__content { bottom: 40px; left: 24px; right: 24px; }

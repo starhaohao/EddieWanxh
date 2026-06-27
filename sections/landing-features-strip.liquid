@@ -9,7 +9,7 @@
 <section class="lfs" style="--lfs-bg:{{ bg }};--lfs-bd:{{ border }};--lfs-cat:{{ cat_color }};--lfs-tc:{{ title_color }};--lfs-dc:{{ desc_color }};">
   <div class="lfs__grid">
     {%- for block in section.blocks -%}
-      <div class="lfs__card" {{ block.shopify_attributes }}>
+      <div class="lfs__card" data-ts-fade style="--ts-delay:{{ forloop.index0 | times: 70 }}ms" {{ block.shopify_attributes }}>
         <div class="lfs__cat">{{ block.settings.category }}</div>
         <div class="lfs__title">{{ block.settings.title }}</div>
         {%- if block.settings.description != blank -%}
@@ -21,6 +21,14 @@
 </section>
 
 <style>
+  [data-ts-fade] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    transition-delay: var(--ts-delay, 0ms);
+  }
+  [data-ts-fade].ts-visible { opacity: 1; transform: none; }
+
   .lfs {
     overflow-x: hidden;
     box-sizing: border-box;

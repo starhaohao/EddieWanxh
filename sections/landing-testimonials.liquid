@@ -8,14 +8,14 @@
 -%}
 
 <section class="lt" style="--lt-bg:{{ bg }};--lt-tc:{{ title_color }};--lt-cb:{{ card_bg }};--lt-star:{{ star_color }};--lt-qc:{{ quote_color }};--lt-wc:{{ who_color }};" id="lt-{{ section.id }}">
-  <div class="lt__header">
+  <div class="lt__header" data-ts-fade style="--ts-delay:0ms">
     <h2 class="lt__title">{{ section.settings.heading }}</h2>
     <div class="lt__nav">
       <button class="lt__nav-btn" id="lt-prev-{{ section.id }}" aria-label="Previous">←</button>
       <button class="lt__nav-btn" id="lt-next-{{ section.id }}" aria-label="Next">→</button>
     </div>
   </div>
-  <div class="lt__track-wrap">
+  <div class="lt__track-wrap" data-ts-fade style="--ts-delay:120ms">
     <div class="lt__track" id="lt-track-{{ section.id }}">
       {%- for block in section.blocks -%}
         <div class="lt__card" {{ block.shopify_attributes }}>
@@ -62,6 +62,14 @@
 </script>
 
 <style>
+  [data-ts-fade] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+    transition-delay: var(--ts-delay, 0ms);
+  }
+  [data-ts-fade].ts-visible { opacity: 1; transform: none; }
+
   .lt {
     overflow-x: hidden;
     box-sizing: border-box;
