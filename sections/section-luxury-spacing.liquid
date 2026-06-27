@@ -280,6 +280,20 @@
   .template-product .badge-box {
     border-radius: 0 !important;
   }
+
+  /* ─────────────────────────────────────────────────────────────────
+     SHARED — Announcement bar: thinner strip
+     ───────────────────────────────────────────────────────────────── */
+  .page-announcement .announcement__slide,
+  .page-announcement .announcement__bar {
+    --PT: 5px !important;
+    --PB: 5px !important;
+    min-height: 28px !important;
+  }
+  .page-announcement {
+    --ANNOUNCEMENT-HEIGHT-DESKTOP: 28px !important;
+    --ANNOUNCEMENT-HEIGHT-MOBILE: 28px !important;
+  }
 </style>
 
 {% schema %}
