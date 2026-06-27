@@ -1,0 +1,303 @@
+{%- liquid
+  assign bg_type = section.settings.bg_type
+  assign hero_height = section.settings.hero_height
+  assign overlay_opacity = section.settings.overlay_opacity
+  assign text_align = section.settings.text_align
+  assign show_countdown = section.settings.show_countdown
+  assign countdown_end = section.settings.countdown_end
+-%}
+
+<section class="lh" style="--lh-h:{{ hero_height }}vh;--lh-ov:{{ overlay_opacity | divided_by: 100.0 }};--lh-align:{{ text_align }};">
+
+  {%- if bg_type == 'video' and section.settings.video_url != blank -%}
+    <video class="lh__bg lh__bg--video" autoplay muted loop playsinline>
+      <source src="{{ section.settings.video_url }}" type="video/mp4">
+    </video>
+  {%- elsif section.settings.image != blank -%}
+    <img class="lh__bg" src="{{ section.settings.image | image_url: width: 2800 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
+  {%- else -%}
+    <div class="lh__bg lh__bg--placeholder"></div>
+  {%- endif -%}
+
+  <div class="lh__overlay"></div>
+
+  <div class="lh__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="lh__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.title != blank -%}
+      <h1 class="lh__title">{{ section.settings.title }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="lh__sub">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    {%- if show_countdown and countdown_end != blank -%}
+      <div class="lh__countdown" data-end="{{ countdown_end }}">
+        <div class="lh__countdown-block"><span class="lh__cd-num" data-days>00</span><span class="lh__cd-label">Days</span></div>
+        <div class="lh__countdown-sep">:</div>
+        <div class="lh__countdown-block"><span class="lh__cd-num" data-hours>00</span><span class="lh__cd-label">Hrs</span></div>
+        <div class="lh__countdown-sep">:</div>
+        <div class="lh__countdown-block"><span class="lh__cd-num" data-mins>00</span><span class="lh__cd-label">Min</span></div>
+        <div class="lh__countdown-sep">:</div>
+        <div class="lh__countdown-block"><span class="lh__cd-num" data-secs>00</span><span class="lh__cd-label">Sec</span></div>
+      </div>
+    {%- endif -%}
+
+    <div class="lh__ctas">
+      {%- if section.settings.cta_text != blank -%}
+        <a class="lh__cta lh__cta--primary" href="{{ section.settings.cta_url }}">{{ section.settings.cta_text }}</a>
+      {%- endif -%}
+      {%- if section.settings.cta2_text != blank -%}
+        <a class="lh__cta lh__cta--ghost" href="{{ section.settings.cta2_url }}">{{ section.settings.cta2_text }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_scroll_hint -%}
+    <div class="lh__scroll-hint">
+      <span class="lh__scroll-line"></span>
+      <span class="lh__scroll-text">Scroll</span>
+    </div>
+  {%- endif -%}
+</section>
+
+{%- if show_countdown and countdown_end != blank -%}
+<script>
+(function() {
+  var el = document.querySelector('.lh__countdown[data-end]');
+  if (!el) return;
+  var end = new Date(el.dataset.end).getTime();
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    var diff = end - Date.now();
+    if (diff <= 0) { el.textContent = 'Sale ended'; return; }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    el.querySelector('[data-days]').textContent = pad(d);
+    el.querySelector('[data-hours]').textContent = pad(h);
+    el.querySelector('[data-mins]').textContent = pad(m);
+    el.querySelector('[data-secs]').textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+{%- endif -%}
+
+<style>
+  .lh {
+    position: relative;
+    height: var(--lh-h);
+    min-height: 480px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: var(--lh-align, center);
+  }
+  .lh__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .lh__bg--video { object-fit: cover; }
+  .lh__bg--placeholder { background: #f0ede8; }
+  .lh__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,var(--lh-ov));
+    pointer-events: none;
+  }
+  .lh__inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 760px;
+  }
+  .lh__eyebrow {
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin: 0 0 18px;
+  }
+  .lh__title {
+    font-size: clamp(40px, 6vw, 96px);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: #fff;
+    margin: 0 0 22px;
+  }
+  .lh__sub {
+    font-family: monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin: 0 0 32px;
+    line-height: 2;
+  }
+  .lh__countdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin: 0 0 32px;
+  }
+  .lh__countdown-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 56px;
+  }
+  .lh__cd-num {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    color: #fff;
+    line-height: 1;
+  }
+  .lh__cd-label {
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+  }
+  .lh__countdown-sep {
+    font-size: 24px;
+    color: rgba(255,255,255,0.4);
+    padding-bottom: 16px;
+    line-height: 1;
+  }
+  .lh__ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .lh__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 36px;
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .lh__cta--primary {
+    background: #fff;
+    color: #111;
+  }
+  .lh__cta--primary:hover { background: #f0ede8; }
+  .lh__cta--ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+  .lh__cta--ghost:hover { border-color: rgba(255,255,255,0.8); color: #fff; }
+  .lh__scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+  }
+  .lh__scroll-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: rgba(255,255,255,0.3);
+    animation: lh-scroll-line 1.6s ease-in-out infinite;
+  }
+  @keyframes lh-scroll-line {
+    0%,100% { transform: scaleY(1); opacity: 0.3; }
+    50% { transform: scaleY(0.5); opacity: 0.8; }
+  }
+  .lh__scroll-text {
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  @media (max-width: 749px) {
+    .lh { height: 100svh; min-height: 560px; }
+    .lh__title { font-size: clamp(36px, 10vw, 64px); }
+    .lh__cd-num { font-size: 24px; }
+    .lh__countdown-block { min-width: 44px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Landing Hero",
+  "tag": "div",
+  "class": "landing-hero-section",
+  "settings": [
+    { "type": "header", "content": "Background" },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background type",
+      "default": "image",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video" }
+      ]
+    },
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "video_url", "label": "Video URL (.mp4)", "info": "Paste a direct .mp4 URL for autoplay video background" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay darkness (%)", "min": 0, "max": 80, "step": 5, "default": 40 },
+    { "type": "header", "content": "Content" },
+    { "type": "select", "id": "text_align", "label": "Alignment", "default": "center", "options": [{"value":"flex-start","label":"Left"},{"value":"center","label":"Center"}] },
+    { "type": "range", "id": "hero_height", "label": "Height (vh)", "min": 60, "max": 100, "step": 2, "default": 90 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "New Season" },
+    { "type": "text", "id": "title", "label": "Headline", "default": "Wear Less.\nFeel More." },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Premium basics for the modern man" },
+    { "type": "header", "content": "Countdown Timer" },
+    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": false },
+    { "type": "text", "id": "countdown_end", "label": "End date/time", "info": "Format: 2025-12-31T23:59:59", "default": "2025-12-31T23:59:59" },
+    { "type": "header", "content": "CTA Buttons" },
+    { "type": "text", "id": "cta_text", "label": "Primary button text", "default": "Shop Now" },
+    { "type": "url", "id": "cta_url", "label": "Primary button link" },
+    { "type": "text", "id": "cta2_text", "label": "Secondary button text", "default": "View Lookbook" },
+    { "type": "url", "id": "cta2_url", "label": "Secondary button link" },
+    { "type": "header", "content": "Scroll hint" },
+    { "type": "checkbox", "id": "show_scroll_hint", "label": "Show scroll indicator", "default": true }
+  ],
+  "presets": [
+    {
+      "name": "Landing Hero",
+      "settings": {
+        "eyebrow": "New Season",
+        "title": "Wear Less.\nFeel More.",
+        "subtitle": "Premium basics for the modern man",
+        "hero_height": 90,
+        "overlay_opacity": 40,
+        "show_countdown": false,
+        "show_scroll_hint": true,
+        "cta_text": "Shop Now",
+        "cta2_text": "View Lookbook"
+      }
+    }
+  ],
+  "templates": ["index", "page"]
+}
+{% endschema %}

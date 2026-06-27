@@ -1,0 +1,116 @@
+<section class="lfs" style="--lfs-bg:{{ section.settings.bg_color }};--lfs-text:{{ section.settings.text_color }};">
+  <div class="lfs__inner">
+    {%- for block in section.blocks -%}
+      <div class="lfs__item" {{ block.shopify_attributes }}>
+        {%- if block.settings.icon != blank -%}
+          <div class="lfs__icon">{{ block.settings.icon }}</div>
+        {%- endif -%}
+        <div class="lfs__text">
+          <p class="lfs__title">{{ block.settings.title }}</p>
+          {%- if block.settings.subtitle != blank -%}
+            <p class="lfs__sub">{{ block.settings.sub }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+      {%- unless forloop.last -%}<div class="lfs__divider"></div>{%- endunless -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  .lfs {
+    background: var(--lfs-bg, #f0ede8);
+    padding: 28px 48px;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+  .lfs__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .lfs__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 32px;
+    flex: 1;
+    justify-content: center;
+    min-width: 160px;
+  }
+  .lfs__icon {
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+    color: var(--lfs-text, #111);
+  }
+  .lfs__text { text-align: left; }
+  .lfs__title {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lfs-text, #111);
+    margin: 0;
+    font-weight: 600;
+  }
+  .lfs__sub {
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.45);
+    margin: 2px 0 0;
+  }
+  .lfs__divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(0,0,0,0.12);
+    flex-shrink: 0;
+  }
+  @media (max-width: 749px) {
+    .lfs { padding: 20px 16px; }
+    .lfs__item { padding: 10px 16px; min-width: 140px; }
+    .lfs__divider { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Features Strip",
+  "tag": "div",
+  "class": "landing-features-strip-section",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f0ede8" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature item",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon / Emoji", "default": "✦" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Free Shipping" },
+        { "type": "text", "id": "sub", "label": "Subtitle", "default": "Over $50" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Features Strip",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "✦", "title": "Free Shipping", "sub": "Orders over $50" } },
+        { "type": "feature", "settings": { "icon": "◎", "title": "Ethical Materials", "sub": "OEKO-TEX certified" } },
+        { "type": "feature", "settings": { "icon": "↩", "title": "Easy Returns", "sub": "30-day policy" } },
+        { "type": "feature", "settings": { "icon": "⊕", "title": "SG-Based Brand", "sub": "Made for the climate" } }
+      ]
+    }
+  ],
+  "templates": ["index", "page"]
+}
+{% endschema %}

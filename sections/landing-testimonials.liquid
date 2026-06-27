@@ -1,0 +1,186 @@
+<section class="lt" style="--lt-bg:{{ section.settings.bg_color }};">
+  <div class="lt__inner">
+    {%- if section.settings.heading != blank -%}
+      <div class="lt__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="lt__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="lt__heading">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="lt__track-wrap">
+      <div class="lt__track" id="lt-track-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          <div class="lt__card" {{ block.shopify_attributes }}>
+            <div class="lt__stars">
+              {%- for i in (1..block.settings.stars) -%}★{%- endfor -%}
+            </div>
+            <blockquote class="lt__quote">{{ block.settings.quote }}</blockquote>
+            <div class="lt__author">
+              <span class="lt__author-name">{{ block.settings.name }}</span>
+              {%- if block.settings.product != blank -%}
+                <span class="lt__author-product">— {{ block.settings.product }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 1 -%}
+      <div class="lt__dots" id="lt-dots-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          <button class="lt__dot{% if forloop.first %} lt__dot--active{% endif %}" data-idx="{{ forloop.index0 }}" aria-label="Review {{ forloop.index }}"></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+(function() {
+  var track = document.getElementById('lt-track-{{ section.id }}');
+  var dotsWrap = document.getElementById('lt-dots-{{ section.id }}');
+  if (!track) return;
+  var dots = dotsWrap ? dotsWrap.querySelectorAll('.lt__dot') : [];
+  var current = 0;
+  var cards = track.querySelectorAll('.lt__card');
+  var total = cards.length;
+  if (total <= 1) return;
+
+  function goTo(idx) {
+    current = idx;
+    track.style.transform = 'translateX(-' + (idx * (100 / total)) + '%)';
+    dots.forEach(function(d, i) {
+      d.classList.toggle('lt__dot--active', i === idx);
+    });
+  }
+
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() { goTo(parseInt(this.dataset.idx)); });
+  });
+
+  setInterval(function() { goTo((current + 1) % total); }, 5000);
+})();
+</script>
+
+<style>
+  .lt {
+    background: var(--lt-bg, #fff);
+    padding: 80px 48px;
+    overflow: hidden;
+  }
+  .lt__inner { max-width: 1100px; margin: 0 auto; }
+  .lt__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .lt__eyebrow {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #888;
+    margin: 0 0 14px;
+  }
+  .lt__heading {
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    color: #111;
+    margin: 0;
+  }
+  .lt__track-wrap { overflow: hidden; }
+  .lt__track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25,0,0,1);
+  }
+  .lt__card {
+    flex: 0 0 100%;
+    padding: 0 60px;
+    text-align: center;
+  }
+  .lt__stars {
+    font-size: 14px;
+    color: #c8a96e;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .lt__quote {
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    line-height: 1.6;
+    color: #222;
+    margin: 0 0 24px;
+    font-style: italic;
+  }
+  .lt__author {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #888;
+  }
+  .lt__author-product {
+    color: #bbb;
+    margin-left: 6px;
+  }
+  .lt__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 36px;
+  }
+  .lt__dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .lt__dot--active { background: #111; transform: scale(1.4); }
+  @media (max-width: 749px) {
+    .lt { padding: 48px 16px; }
+    .lt__card { padding: 0 8px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "div",
+  "class": "landing-testimonials-section",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What Our Customers Say" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Review text", "default": "The most comfortable underwear I've ever worn. The fabric quality is unreal." },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "James T." },
+        { "type": "text", "id": "product", "label": "Product", "default": "Classic Brief 3-Pack" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "review", "settings": { "stars": 5, "quote": "The most comfortable underwear I've ever worn. Unreal fabric quality.", "name": "James T.", "product": "Classic Brief 3-Pack" } },
+        { "type": "review", "settings": { "stars": 5, "quote": "Finally a local brand that gets it. Fits perfectly, feels premium.", "name": "Wei H.", "product": "Boxer Trunk" } },
+        { "type": "review", "settings": { "stars": 5, "quote": "Ordered 5. Will order 5 more. That's all I need to say.", "name": "Raj K.", "product": "Bundle Pack" } }
+      ]
+    }
+  ],
+  "templates": ["index", "page"]
+}
+{% endschema %}

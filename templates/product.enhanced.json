@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "product-main": {
+      "type": "product-enhanced",
+      "settings": {
+        "show_size_guide": true,
+        "show_tabs": true
+      },
+      "blocks": {
+        "tab-desc": { "type": "tab", "settings": { "title": "Description", "content": "<p>Premium quality underwear crafted from sustainably sourced materials. Designed in Singapore for the tropical climate.</p>" } },
+        "tab-care": { "type": "tab", "settings": { "title": "Care", "content": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>" } },
+        "tab-ship": { "type": "tab", "settings": { "title": "Shipping", "content": "<p>Free shipping on orders over $50 within Singapore. Standard delivery 2–4 business days. International shipping available.</p>" } },
+        "size-guide": { "type": "size_guide", "settings": { "content": "<table><tr><th>Size</th><th>Waist (cm)</th><th>Hip (cm)</th><th>Inseam (cm)</th></tr><tr><td>XS</td><td>68–74</td><td>84–90</td><td>7</td></tr><tr><td>S</td><td>74–80</td><td>90–96</td><td>7.5</td></tr><tr><td>M</td><td>80–86</td><td>96–102</td><td>8</td></tr><tr><td>L</td><td>86–92</td><td>102–108</td><td>8.5</td></tr><tr><td>XL</td><td>92–98</td><td>108–114</td><td>9</td></tr></table>" } }
+      },
+      "block_order": ["tab-desc", "tab-care", "tab-ship", "size-guide"]
+    }
+  },
+  "order": ["product-main"]
+}

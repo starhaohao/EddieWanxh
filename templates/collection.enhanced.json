@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "collection-header": {
+      "type": "campaign-banner",
+      "settings": {}
+    },
+    "collection-grid": {
+      "type": "collection-quick-add",
+      "settings": {
+        "columns": 3,
+        "products_per_page": 12,
+        "show_filter_bar": true
+      }
+    }
+  },
+  "order": ["collection-header", "collection-grid"]
+}
