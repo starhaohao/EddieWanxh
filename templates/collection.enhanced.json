@@ -35,7 +35,7 @@
         "filter_layout": "inline-open",
         "default_open": true,
         "collection_linklist": "footer",
-        "grid": 3,
+        "grid": 4,
         "grid_mobile": "2",
         "products_per_page": 24,
         "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
@@ -60,6 +60,10 @@
       },
       "block_order": ["feat-1", "feat-2", "feat-3", "feat-4"]
     },
+    "luxury-spacing": {
+      "type": "section-luxury-spacing",
+      "settings": {}
+    },
     "section_recent_products": {
       "type": "section-recent-products",
       "settings": {
@@ -78,5 +82,5 @@
       }
     }
   },
-  "order": ["hero", "quick-add", "main", "features", "section_recent_products"]
+  "order": ["hero", "quick-add", "luxury-spacing", "main", "features", "section_recent_products"]
 }

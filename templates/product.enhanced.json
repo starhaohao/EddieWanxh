@@ -153,6 +153,10 @@
       },
       "block_order": ["rev-1", "rev-2", "rev-3", "rev-4"]
     },
+    "luxury-spacing": {
+      "type": "section-luxury-spacing",
+      "settings": {}
+    },
     "apps": {
       "type": "apps",
       "blocks": {
@@ -198,5 +202,5 @@
       }
     }
   },
-  "order": ["main", "features", "testimonials", "apps", "related"]
+  "order": ["main", "luxury-spacing", "features", "testimonials", "apps", "related"]
 }
