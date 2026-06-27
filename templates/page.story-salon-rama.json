@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "campaign_banner_A7TARg": {
@@ -5,22 +14,29 @@
       "blocks": {
         "panel_bUQXCj": {
           "type": "panel",
-          "settings": { "image": "" }
+          "settings": {
+            "image": "shopify://shop_images/Nothing-to-Hide-Everything-to-Own-5.jpg"
+          }
         },
         "panel_QJkqhc": {
           "type": "panel",
-          "settings": { "image": "" }
+          "settings": {
+            "image": "shopify://shop_images/Nothing-to-Hide-Everything-to-Own-2.jpg"
+          }
         }
       },
-      "block_order": ["panel_bUQXCj", "panel_QJkqhc"],
+      "block_order": [
+        "panel_bUQXCj",
+        "panel_QJkqhc"
+      ],
       "name": "Campaign Banner",
       "settings": {
-        "eyebrow": "The first layer with",
-        "title": "Rama",
+        "eyebrow": "Raw n Uncut with",
+        "title": "RAMA",
         "footer_line": "From baggy to bold — he reclaimed his body and the narrative with it.",
         "heading_size": "Display",
         "title_ends": "right",
-        "title_font": "rock_salt_n4",
+        "title_font": "chivo_i9",
         "heading_font": "sans_serif_n4",
         "body_font": "mono",
         "auto_rotate": true,
@@ -61,7 +77,7 @@
         "image_Bd6W4C": {
           "type": "image",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/Foreplay_5.jpg",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -81,7 +97,10 @@
           }
         }
       },
-      "block_order": ["text_YPCiLm", "image_Bd6W4C"],
+      "block_order": [
+        "text_YPCiLm",
+        "image_Bd6W4C"
+      ],
       "name": "Custom section",
       "settings": {
         "borders": true,
@@ -118,7 +137,10 @@
           }
         }
       },
-      "block_order": ["heading_ByJbrU", "text_TUEGNd"],
+      "block_order": [
+        "heading_ByJbrU",
+        "text_TUEGNd"
+      ],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -185,7 +207,11 @@
           }
         }
       },
-      "block_order": ["icon_DX3GKC", "icon_QteHwt", "icon_NkMPDM"],
+      "block_order": [
+        "icon_DX3GKC",
+        "icon_QteHwt",
+        "icon_NkMPDM"
+      ],
       "name": "Multi column",
       "settings": {
         "title": "In His Own Words",
@@ -196,7 +222,7 @@
         "width": "wrapper--full-padded",
         "align_columns": "flex-align-top",
         "layout_mobile": "2",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-2",
         "padding_top": 50,
         "padding_bottom": 60,
         "heading_tag": "automatic"
@@ -208,7 +234,7 @@
         "image_MdxPN9": {
           "type": "image",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/Product_1_7894d80c-6100-4723-97f7-b33cab97baf0.jpg",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -250,7 +276,10 @@
           }
         }
       },
-      "block_order": ["image_MdxPN9", "text_UUncEa"],
+      "block_order": [
+        "image_MdxPN9",
+        "text_UUncEa"
+      ],
       "name": "Custom section",
       "settings": {
         "borders": false,
@@ -287,7 +316,10 @@
           }
         }
       },
-      "block_order": ["heading_q6kVcG", "text_8rxNVe"],
+      "block_order": [
+        "heading_q6kVcG",
+        "text_8rxNVe"
+      ],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -322,11 +354,17 @@
       "blocks": {
         "klaviyo_email_marketing_sms_form_embed_block_ADEw9X": {
           "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
-          "settings": { "formId": "<div class=\"klaviyo-form-U5igv3\"></div>" }
+          "settings": {
+            "formId": "<div class=\"klaviyo-form-U5igv3\"></div>"
+          }
         }
       },
-      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_ADEw9X"],
-      "settings": { "include_margins": false }
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X"
+      ],
+      "settings": {
+        "include_margins": false
+      }
     }
   },
   "order": [

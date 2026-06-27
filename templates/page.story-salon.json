@@ -1,38 +1,14 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "campaign_banner_A7TARg": {
-      "type": "campaign-banner",
-      "blocks": {
-        "panel_bUQXCj": {
-          "type": "panel",
-          "settings": { "image": "shopify://shop_images/Split_Panel_B_Detail___Environment.jpg" }
-        },
-        "panel_QJkqhc": {
-          "type": "panel",
-          "settings": { "image": "shopify://shop_images/LP_-_ethan-001_-_Ethan_Cheng_4_5.jpg" }
-        }
-      },
-      "block_order": ["panel_bUQXCj", "panel_QJkqhc"],
-      "name": "Campaign Banner",
-      "settings": {
-        "eyebrow": "The first layer with",
-        "title": "Ethan Cheng",
-        "footer_line": "Moving with quiet confidence — curating light, proportion and silence.",
-        "heading_size": "Display",
-        "title_ends": "right",
-        "title_font": "rock_salt_n4",
-        "heading_font": "sans_serif_n4",
-        "body_font": "mono",
-        "auto_rotate": true,
-        "change_slides_speed": 3,
-        "width": "Full width",
-        "desktop_height": "650px",
-        "mobile_height": "550px",
-        "color_scheme": "Scheme 2",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "section_custom_content_NfX36f": {
       "type": "section-custom-content",
       "blocks": {
@@ -81,7 +57,10 @@
           }
         }
       },
-      "block_order": ["text_YPCiLm", "image_Bd6W4C"],
+      "block_order": [
+        "text_YPCiLm",
+        "image_Bd6W4C"
+      ],
       "name": "Custom section",
       "settings": {
         "borders": true,
@@ -91,6 +70,46 @@
         "mobile_height": "sixty-fifty-height-hero--mobile",
         "reverse_blocks": false,
         "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "campaign_banner_A7TARg": {
+      "type": "campaign-banner",
+      "blocks": {
+        "panel_bUQXCj": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/Split_Panel_B_Detail___Environment.jpg"
+          }
+        },
+        "panel_QJkqhc": {
+          "type": "panel",
+          "settings": {
+            "image": "shopify://shop_images/LP_-_ethan-001_-_Ethan_Cheng_4_5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "panel_bUQXCj",
+        "panel_QJkqhc"
+      ],
+      "name": "Campaign Banner",
+      "settings": {
+        "eyebrow": "The first layer with",
+        "title": "Ethan Cheng",
+        "footer_line": "Moving with quiet confidence — curating light, proportion and silence.",
+        "heading_size": "Display",
+        "title_ends": "right",
+        "title_font": "rock_salt_n4",
+        "heading_font": "sans_serif_n4",
+        "body_font": "mono",
+        "auto_rotate": true,
+        "change_slides_speed": 3,
+        "width": "Full width",
+        "desktop_height": "650px",
+        "mobile_height": "550px",
+        "color_scheme": "Scheme 2",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -118,7 +137,10 @@
           }
         }
       },
-      "block_order": ["heading_ByJbrU", "text_TUEGNd"],
+      "block_order": [
+        "heading_ByJbrU",
+        "text_TUEGNd"
+      ],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -185,7 +207,11 @@
           }
         }
       },
-      "block_order": ["icon_DX3GKC", "icon_QteHwt", "icon_NkMPDM"],
+      "block_order": [
+        "icon_DX3GKC",
+        "icon_QteHwt",
+        "icon_NkMPDM"
+      ],
       "name": "Multi column",
       "settings": {
         "title": "In His Own Words",
@@ -230,10 +256,10 @@
         "text_UUncEa": {
           "type": "text",
           "settings": {
-            "subheading": "how he picks",
+            "subheading": "how he pick",
             "title": "The piece has to disappear into your day.",
             "heading_font_size": "heading-mini",
-            "text": "<p>\"If you're thinking about it, it's not right. Confidence is a question of trusting your own choices. Quiet, but certain.\"</p><p></p>",
+            "text": "<p>\"If you're thinking about it, it's not right. Confidence is a question of trusting your own choices. Quiet, but certain.\"</p><p></p><p></p>",
             "text_font_size": "body-x-small",
             "button_text": "",
             "button_url": "shopify://products/v-cotton-spandex-brief-black",
@@ -250,7 +276,10 @@
           }
         }
       },
-      "block_order": ["image_MdxPN9", "text_UUncEa"],
+      "block_order": [
+        "image_MdxPN9",
+        "text_UUncEa"
+      ],
       "name": "Custom section",
       "settings": {
         "borders": false,
@@ -261,6 +290,38 @@
         "reverse_blocks": false,
         "color_scheme": "scheme-4",
         "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_rich_text_columns_GUYJbJ": {
+      "type": "section-rich-text-columns",
+      "blocks": {
+        "heading_ejPA9R": {
+          "type": "heading",
+          "settings": {
+            "title": "In His Own Words",
+            "heading_font_size": "heading-small",
+            "position": "left",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "heading_ejPA9R"
+      ],
+      "disabled": true,
+      "name": "Rich text columns",
+      "settings": {
+        "left_column_width": 27,
+        "divider_width": 37,
+        "show_line": false,
+        "right_column_width": 40,
+        "align_text": "text-left",
+        "width": "wrapper--full-padded",
+        "align_text_mobile": "text-left--mobile",
+        "color_scheme": "",
+        "padding_top": 100,
         "padding_bottom": 0
       }
     },
@@ -287,7 +348,10 @@
           }
         }
       },
-      "block_order": ["heading_q6kVcG", "text_8rxNVe"],
+      "block_order": [
+        "heading_q6kVcG",
+        "text_8rxNVe"
+      ],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -327,8 +391,12 @@
           }
         }
       },
-      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_ADEw9X"],
-      "settings": { "include_margins": false }
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X"
+      ],
+      "settings": {
+        "include_margins": false
+      }
     }
   },
   "order": [
@@ -337,6 +405,7 @@
     "section_rich_text_columns_YzFEJa",
     "section_multicolumn_jydc97",
     "section_custom_content_AVnnp4",
+    "section_rich_text_columns_GUYJbJ",
     "section_rich_text_columns_HwPbhH",
     "story_salon_teaser_bT9RDn",
     "178029763221aa94f5"

@@ -1,0 +1,147 @@
+{%- style -%}
+  .section-{{ section.id }} {
+    --outer: clamp(20px, 4vw, 56px); --max: 1440px; --t-fast: 180ms cubic-bezier(.2,.7,.2,1);
+    background: #ffffff; color: #0f1623; border-top: 1px solid rgba(15,22,35,.08);
+  }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--outer); }
+  .jintro {
+    display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+    gap: 20px; padding: clamp(36px, 5vw, 64px) 0 clamp(20px, 3vw, 28px);
+  }
+  .jintro h2 { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: clamp(24px, 3vw, 40px); font-weight: 400; line-height: 1; letter-spacing: -0.025em; margin: 0; }
+  .jintro h2 i, .jintro h2 em { font-style: italic; color: #923531; }
+  .jintro p { font-family: "DM Sans", sans-serif; margin: 12px 0 0; font-size: clamp(12px, 1.2vw, 14px); letter-spacing: -0.025em; color: rgba(15,22,35,.72); max-width: 44ch; line-height: 1.55; }
+  
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .chip {
+    padding: 9px 16px; border-radius: 999px; font-family: "Helvetica Neue", Helvetica, sans-serif; font-size: 10px; font-weight: 400; letter-spacing: -0.025em; text-transform: uppercase;
+    background: transparent; box-shadow: inset 0 0 0 1px rgba(15,22,35,.22); color: rgba(15,22,35,.6); transition: all var(--t-fast); cursor: pointer; border: none; white-space: nowrap;
+  }
+  .chip:hover { box-shadow: inset 0 0 0 1px #0f1623; color: #0f1623; }
+  .chip[aria-pressed="true"] { background: #0f1623; color: #fff; box-shadow: none; }
+
+  .journal__cards { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 0; row-gap: 0; align-items: stretch; }
+  @media (min-width: 900px) { .journal__cards { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 749px) { .journal__cards { row-gap: clamp(24px, 5vw, 34px); } }
+
+  .jcard { position: relative; display: flex; flex-direction: column; text-decoration: none; border-right: 1px solid #0f1623; }
+  .jcard:nth-child(2n) { border-right: none; }
+  @media (min-width: 900px) { .jcard:nth-child(2n) { border-right: 1px solid #0f1623; } .jcard:nth-child(4n) { border-right: none; } }
+
+  .jcard__media { position: relative; overflow: hidden; }
+  .jcard__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .jcard__media::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top, rgba(15,11,8,.6) 0%, rgba(15,11,8,.05) 42%, transparent 60%), linear-gradient(to bottom, rgba(15,11,8,.34) 0%, transparent 32%);
+  }
+  .jcard__series { position: absolute; top: clamp(14px, 1.6vw, 22px); left: clamp(14px, 1.6vw, 22px); z-index: 2; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(246,242,234,.92); }
+  .jcard__name { position: absolute; left: clamp(14px, 1.6vw, 22px); bottom: clamp(14px, 1.6vw, 20px); z-index: 2; font-family: "Galdeano", serif; color: #f6f2ea; font-size: clamp(24px, 2.6vw, 40px); letter-spacing: -0.01em; line-height: .94; }
+
+  .jcard__cap { padding: clamp(14px, 1.4vw, 18px) clamp(16px, 1.6vw, 22px) clamp(22px, 2.4vw, 30px); }
+  .jcard__title { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #0f1623; margin: 0; }
+  .jcard__desc { font-family: "DM Sans", sans-serif; margin: 5px 0 0; font-size: 12px; letter-spacing: -0.015em; line-height: 1.45; color: rgba(15,22,35,.72); }
+  .jcard__more { margin-top: 12px; display: inline-flex; align-items: center; gap: 7px; font-family: "Helvetica Neue", Helvetica, sans-serif; font-size: 10px; text-transform: uppercase; color: rgba(15,22,35,.4); transition: all var(--t-fast); }
+  .jcard:hover .jcard__more { color: #923531; gap: 11px; }
+  .jcard__more svg { width: 11px; height: 11px; }
+{%- endstyle -%}
+
+<section class="section-{{ section.id }}" id="journal-{{ section.id }}">
+  <div class="wrap">
+    <div class="jintro">
+      <div>
+        <h2>{{ section.settings.title }}</h2>
+        <p>{{ section.settings.subtitle }}</p>
+      </div>
+      
+      <div class="filters" role="tablist">
+        <button class="chip" aria-pressed="true" data-filter="all">All</button>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'filter' -%}
+            <button class="chip" aria-pressed="false" data-filter="{{ block.settings.filter_id }}" {{ block.shopify_attributes }}>
+              {{ block.settings.title }}
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="journal__cards" id="journalGrid-{{ section.id }}">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'card' -%}
+        <a class="jcard" data-cat="{{ block.settings.category_id }}" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+          <div class="jcard__media" style="aspect-ratio: {{ block.settings.aspect_ratio }}; background: #e0e0e0;">
+            <span class="jcard__series">{{ block.settings.series }}</span>
+            <span class="jcard__name">{{ block.settings.subject_name }}</span>
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+               {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="jcard__cap">
+            <p class="jcard__title">{{ block.settings.card_title }}</p>
+            <p class="jcard__desc">{{ block.settings.card_desc }}</p>
+            <span class="jcard__more">{{ block.settings.link_text }} <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
+          </div>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const chips = document.querySelectorAll('#journal-{{ section.id }} .filters .chip');
+    const cards = document.querySelectorAll('#journalGrid-{{ section.id }} .jcard');
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+        chip.setAttribute('aria-pressed', 'true');
+        const filter = chip.dataset.filter;
+        cards.forEach(card => {
+          const show = filter === 'all' || card.dataset.cat === filter;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Journal Feed",
+  "settings": [
+    { "type": "html", "id": "title", "label": "Heading", "default": "The <i>Journal</i>" },
+    { "type": "textarea", "id": "subtitle", "label": "Subheading", "default": "Three series, one feed. Different people, different lives..." }
+  ],
+  "blocks": [
+    {
+      "type": "filter",
+      "name": "Filter Tab",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Tab Label", "default": "The First Layer" },
+        { "type": "text", "id": "filter_id", "label": "Filter ID", "info": "Matches 'Category ID' on cards (e.g., 'first')", "default": "first" }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Journal Card",
+      "settings": [
+        { "type": "text", "id": "category_id", "label": "Category ID", "info": "Matches 'Filter ID' from tabs above" },
+        { "type": "select", "id": "aspect_ratio", "label": "Image Ratio", "options": [ { "value": "1/1", "label": "1:1" }, { "value": "3/4", "label": "3:4" }, { "value": "4/5", "label": "4:5" } ], "default": "4/5" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "series", "label": "Series Name", "default": "The First Layer" },
+        { "type": "text", "id": "subject_name", "label": "Subject Name", "default": "Ethan Cheng" },
+        { "type": "text", "id": "card_title", "label": "Card Title", "default": "01 — Moving with quiet confidence" },
+        { "type": "textarea", "id": "card_desc", "label": "Card Description", "default": "An interior designer who curates light..." },
+        { "type": "text", "id": "link_text", "label": "Link Text", "default": "Read story" },
+        { "type": "url", "id": "link", "label": "Card Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Journal Feed" }]
+}
+{% endschema %}

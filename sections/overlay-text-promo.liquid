@@ -1,0 +1,473 @@
+<!-- /sections/overlay-text-promo.liquid -->
+
+{%- liquid
+  assign popup_classlist = 'popup-promo ' | append: section.settings.position
+
+  if section.settings.position_vertical != blank
+    assign popup_classlist = popup_classlist | append: ' ' | append: section.settings.position_vertical
+  endif
+
+  if section.settings.target_device_enabled
+    if section.settings.target_device == 'mobile'
+      assign popup_classlist = popup_classlist | append: ' mobile'
+    endif
+
+    if section.settings.target_device == 'desktop'
+      assign popup_classlist = popup_classlist | append: ' desktop'
+    endif
+  endif
+
+  assign show_popup = true
+
+  if section.settings.target_url_enabled and section.settings.target_url != blank
+    assign show_popup = false
+  endif
+
+  if section.settings.target_referrer_enabled and section.settings.target_referrer != blank
+    assign show_popup = false
+  endif
+
+  if section.settings.target_url_enabled and section.settings.target_url != blank
+    assign request_path = request.path
+
+    if request.page_type == 'product'
+      assign request_path = request_path | split: '/products/' | last | prepend: '/products/'
+    endif
+
+    if section.settings.target_url == request_path
+      assign show_popup = true
+    endif
+  endif
+
+  if section.settings.target_referrer_enabled and section.settings.target_referrer != blank
+    capture target_referrer_attribute
+      echo 'data-target-referrer="' | append: section.settings.target_referrer | append: '"'
+    endcapture
+
+    assign show_popup = true
+  endif
+
+  assign bg_color = section.settings.bg_color
+  assign text_color = section.settings.color
+  assign color_scheme = 'color-' | append: section.settings.color_scheme
+
+  assign button_style = section.settings.button_style
+  if button_style == 'btn--text' and section.settings.show_arrow
+    assign button_style = button_style | append: ' btn--text-no-underline'
+  endif
+
+  assign text_align_class = section.settings.text_alignment | default: 'text-center'
+  assign heading_size_class = section.settings.heading_size | default: 'h4'
+  assign text_size_class = section.settings.text_size | default: 'text-medium'
+-%}
+
+{%- render 'stylesheet', name: 'popup.css' -%}
+
+{%- style -%}
+  #Popup--{{ section.id }} {
+    {%- unless bg_color == 'rgba(0,0,0,0)' or bg_color == blank -%}
+      --bg: {{ bg_color }};
+    {%- endunless -%}
+
+    {%- unless text_color == 'rgba(0,0,0,0)' or text_color == blank -%}
+      --text: {{ text_color }};
+    {%- endunless -%}
+  }
+
+  /* Vertical position */
+  #Popup--{{ section.id }}.popup-promo--top    { top: {{ section.settings.top_offset | default: 16 }}px; bottom: auto; }
+  #Popup--{{ section.id }}.popup-promo--middle { top: 50%; transform: translateY(-50%); }
+  #Popup--{{ section.id }}.popup-promo--bottom { bottom: {{ section.settings.bottom_offset | default: 18 }}px; top: auto; }
+
+  /* Text sizes */
+  #Popup--{{ section.id }} .text-small  { font-size: 0.75rem; line-height: 1.4; }
+  #Popup--{{ section.id }} .text-medium { font-size: 1rem; line-height: 1.5; }
+  #Popup--{{ section.id }} .text-large  { font-size: 1.25rem; line-height: 1.6; }
+
+  /* Text alignment */
+  #Popup--{{ section.id }} .text-left   { text-align: left; }
+  #Popup--{{ section.id }} .text-center { text-align: center; }
+  #Popup--{{ section.id }} .text-right  { text-align: right; }
+
+  /* Divider */
+  #Popup--{{ section.id }} .popup__divider {
+    width: 100%;
+    margin: 1rem 0;
+    border: none;
+    border-top-style: solid;
+    border-top-width: {{ section.settings.divider_thickness | default: 1 }}px;
+    {%- unless section.settings.divider_color == 'rgba(0,0,0,0)' or section.settings.divider_color == blank -%}
+      border-top-color: {{ section.settings.divider_color }};
+    {%- else -%}
+      border-top-color: currentColor;
+      opacity: 0.2;
+    {%- endunless -%}
+  }
+
+  #Popup--{{ section.id }} .divider--dashed { border-top-style: dashed; }
+  #Popup--{{ section.id }} .divider--dotted { border-top-style: dotted; }
+  #Popup--{{ section.id }} .divider--solid  { border-top-style: solid; }
+{%- endstyle -%}
+
+<section data-section-id="{{ section.id }}" data-section-type="popups">
+  {%- if show_popup -%}
+    <popup-component>
+      <dialog
+        class="{{ popup_classlist }} {{ color_scheme }}"
+        id="Popup--{{ section.id }}"
+        aria-modal="true"
+        aria-labelledby="Popup"
+        data-popup-delay="{{ section.settings.trigger }}"
+        data-cookie-name="popup-{{ section.id }}"
+        data-cookie-value="user_has_closed"
+        data-prevent-top-layer
+        {{ target_referrer_attribute }}
+      >
+        <form method="dialog">
+          <button class="visually-hidden" aria-label="{{ 'general.accessibility.close' | t }}"></button>
+        </form>
+
+        <div class="popup-promo__inner {{ text_align_class }}">
+
+          {%- if section.settings.title != blank -%}
+            <p class="{{ heading_size_class }} popup__title">{{ section.settings.title | escape }}</p>
+          {%- endif -%}
+
+          {%- if section.settings.show_divider_above_text -%}
+            <hr class="popup__divider {{ section.settings.divider_style }}">
+          {%- endif -%}
+
+          <div class="popup__text {{ text_size_class }}">
+            {%- if section.settings.text != blank -%}
+              {{ section.settings.text }}
+            {%- endif -%}
+          </div>
+
+          {%- if section.settings.show_divider_below_text -%}
+            <hr class="popup__divider {{ section.settings.divider_style }}">
+          {%- endif -%}
+
+          {%- if section.settings.button_text != blank -%}
+            <a
+              href="{{ section.settings.button_url }}"
+              class="btn {{ button_style }} {{ section.settings.button_type }} {{ section.settings.button_size }}"
+            >
+              <span>{{ section.settings.button_text }}</span>
+
+              {%- if section.settings.show_arrow -%}
+                {%- render 'icon-nav-arrow-right' -%}
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+
+          <button data-popup-close class="close" title="{{ 'general.accessibility.close' | t }}">
+            {%- render 'icon-cancel' -%}
+          </button>
+
+        </div>
+      </dialog>
+    </popup-component>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Text promotion",
+  "class": "shopify-section-popups",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Position"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Horizontal position",
+      "options": [
+        { "value": "popup-promo--left",   "label": "Left"   },
+        { "value": "popup-promo--right",  "label": "Right"  },
+        { "value": "popup-promo--center", "label": "Center" }
+      ],
+      "default": "popup-promo--right"
+    },
+    {
+      "type": "select",
+      "id": "position_vertical",
+      "label": "Vertical position",
+      "options": [
+        { "value": "popup-promo--top",    "label": "Top"    },
+        { "value": "popup-promo--middle", "label": "Middle" },
+        { "value": "popup-promo--bottom", "label": "Bottom" }
+      ],
+      "default": "popup-promo--bottom"
+    },
+    {
+      "type": "range",
+      "id": "bottom_offset",
+      "label": "Bottom offset (px)",
+      "info": "Raise the popup up from the bottom edge — useful if a nav bar is covering it",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "top_offset",
+      "label": "Top offset (px)",
+      "info": "Distance from the top edge when vertical position is set to Top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "text-center",
+      "options": [
+        { "value": "text-left",   "label": "Left"   },
+        { "value": "text-center", "label": "Center" },
+        { "value": "text-right",  "label": "Right"  }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Text block"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h4",
+      "options": [
+        { "value": "h6", "label": "Small"   },
+        { "value": "h5", "label": "Medium"  },
+        { "value": "h4", "label": "Large"   },
+        { "value": "h3", "label": "X-Large" }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Use this text to share announcements or sales.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Text size",
+      "default": "text-medium",
+      "options": [
+        { "value": "text-small",  "label": "Small"  },
+        { "value": "text-medium", "label": "Medium" },
+        { "value": "text-large",  "label": "Large"  }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Divider"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider_above_text",
+      "label": "Show divider above text",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider_below_text",
+      "label": "Show divider below text",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "divider_style",
+      "label": "Divider style",
+      "default": "divider--solid",
+      "options": [
+        { "value": "divider--solid",  "label": "Solid"  },
+        { "value": "divider--dashed", "label": "Dashed" },
+        { "value": "divider--dotted", "label": "Dotted" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "divider_thickness",
+      "label": "Divider thickness",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "button_type",
+      "label": "Color",
+      "default": "btn--primary",
+      "options": [
+        { "value": "btn--black",     "label": "Black"     },
+        { "value": "btn--white",     "label": "White"     },
+        { "value": "btn--primary",   "label": "Primary"   },
+        { "value": "btn--secondary", "label": "Secondary" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Size",
+      "default": "",
+      "options": [
+        { "label": "Small",  "value": "btn--small" },
+        { "label": "Medium", "value": ""           },
+        { "label": "Large",  "value": "btn--large" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Style",
+      "default": "btn--solid",
+      "options": [
+        { "label": "Solid",   "value": "btn--solid"   },
+        { "label": "Outline", "value": "btn--outline" },
+        { "label": "Text",    "value": "btn--text"    }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show arrow",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme_1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "paragraph",
+      "content": "Overrides color scheme. Set to Transparent to revert back to using color schemes."
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Text",
+      "alpha": true
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "alpha": true
+    },
+    {
+      "type": "header",
+      "content": "Popup behavior"
+    },
+    {
+      "type": "select",
+      "id": "trigger",
+      "label": "Delay appearance",
+      "default": "always",
+      "options": [
+        { "value": "always",     "label": "Show immediately"                           },
+        { "value": "delayed_10", "label": "Show 10 seconds after page load"            },
+        { "value": "bottom",     "label": "Show after user scrolls to page bottom"     },
+        { "value": "idle",       "label": "Show after user has been idle for 1 minute" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Target page"
+    },
+    {
+      "id": "target_url_enabled",
+      "type": "checkbox",
+      "label": "Limit to specific page"
+    },
+    {
+      "id": "target_url",
+      "type": "url",
+      "label": "Targeted page"
+    },
+    {
+      "type": "header",
+      "content": "Target referrer"
+    },
+    {
+      "id": "target_referrer_enabled",
+      "type": "checkbox",
+      "label": "Limit to specific referrer path"
+    },
+    {
+      "id": "target_referrer",
+      "type": "text",
+      "label": "Targeted referrer"
+    },
+    {
+      "type": "header",
+      "content": "Target device"
+    },
+    {
+      "id": "target_device_enabled",
+      "type": "checkbox",
+      "label": "Limit to desktop or mobile"
+    },
+    {
+      "type": "select",
+      "id": "target_device",
+      "label": "Device",
+      "default": "mobile",
+      "options": [
+        { "value": "mobile",  "label": "Only show on mobile"  },
+        { "value": "desktop", "label": "Only show on desktop" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text promotion",
+      "category": "Text"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["aside"]
+  }
+}
+{% endschema %}

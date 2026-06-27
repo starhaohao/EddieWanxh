@@ -1,0 +1,629 @@
+{% comment %}
+  Story Salon — Article Page Section
+  Template: templates/article.storysalon.json
+  Blog handle: storysalon
+  Version: 1.0
+
+  Metafields used (set in Shopify Admin > Articles > Metafields):
+    article.metafields.custom.worn_product  → type: product reference
+    article.metafields.custom.read_time     → type: single_line_text (e.g. "5 min read")
+    article.metafields.custom.subject_name  → type: single_line_text (e.g. "Ram")
+    article.metafields.custom.subject_ig    → type: url (e.g. https://www.instagram.com/ramandraisin/)
+    article.metafields.custom.photo_credit  → type: single_line_text (e.g. "@superhomme")
+    article.metafields.custom.styling_credit → type: single_line_text
+    article.metafields.custom.mua_credit    → type: single_line_text
+{% endcomment %}
+
+{%- assign worn_product   = article.metafields.custom.worn_product.value -%}
+{%- assign read_time      = article.metafields.custom.read_time.value | default: '4 min read' -%}
+{%- assign first_tag      = article.tags | first -%}
+{%- assign first_tag_display = first_tag | replace: '-', ' ' | capitalize -%}
+{%- assign first_tag_slug = first_tag | handle -%}
+{%- assign blog_obj       = blogs['storysalon'] -%}
+
+<style>
+  /* ─── RESET & BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --ss-black:     #0a0a0a;
+    --ss-white:     #ffffff;
+    --ss-off-white: #f4f3f1;
+    --ss-neon:      #c8ff00;
+    --ss-grey-100:  #f0efed;
+    --ss-grey-200:  #e0dedd;
+    --ss-grey-400:  #a0a0a0;
+    --ss-grey-700:  #4a4a4a;
+    --ss-pill:      999px;
+    --ss-ease:      0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* ─── ARTICLE HERO ─── */
+  .sa-hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 56px 48px 52px;
+    overflow: hidden;
+    background: var(--ss-black);
+  }
+  .sa-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+    transition: transform 0.1s ease;
+  }
+  .sa-hero__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.4) 45%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+    z-index: 1;
+  }
+  .sa-hero__breadcrumb {
+    position: relative;
+    z-index: 2;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ss-grey-400);
+    margin-bottom: 18px;
+  }
+  .sa-hero__breadcrumb a {
+    color: var(--ss-neon);
+    text-decoration: none;
+    transition: opacity var(--ss-ease);
+  }
+  .sa-hero__breadcrumb a:hover { opacity: 0.75; }
+  .sa-hero__breadcrumb span { color: var(--ss-grey-400); margin: 0 8px; }
+  .sa-hero__cat {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--ss-neon);
+    margin-bottom: 16px;
+  }
+  .sa-hero__title {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(32px, 5.5vw, 70px);
+    font-weight: 400;
+    line-height: 1.0;
+  2 letter-spacing: -0.03em;
+    color: var(--ss-white);
+    max-width: 840px;
+    margin: 0 0 20px;
+  }
+  .sa-hero__meta {
+    position: relative;
+    z-index: 2;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ss-grey-400);
+  }
+
+  /* ─── ARTICLE BODY ─── */
+  .sa-body {
+    background: var(--ss-white);
+    padding: 72px 48px;
+    display: grid;
+    grid-template-columns: 110px 1fr 300px;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* sidebar */
+  .sa-sidebar {}
+  .sa-sidebar__label {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ss-grey-400);
+    margin-bottom: 14px;
+  }
+  .sa-sidebar__links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sa-sidebar__links a {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ss-grey-700);
+    text-decoration: none;
+    transition: color var(--ss-ease);
+  }
+  .sa-sidebar__links a:hover { color: var(--ss-black); }
+
+  /* main content */
+  .sa-content {
+    max-width: 640px;
+  }
+  .sa-content p,
+  .sa-content .sa-rte p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ss-grey-700);
+    margin: 0 0 22px;
+  }
+  .sa-content h2,
+  .sa-content .sa-rte h2 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ss-black);
+    margin: 44px 0 14px;
+  }
+  .sa-content h3,
+  .sa-content .sa-rte h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ss-black);
+    margin: 32px 0 10px;
+  }
+  .sa-content blockquote,
+  .sa-content .sa-rte blockquote {
+    font-size: clamp(18px, 2.2vw, 24px);
+    line-height: 1.35;
+    color: var(--ss-black);
+    font-style: italic;
+    letter-spacing: -0.01em;
+    border-left: 3px solid var(--ss-neon);
+    padding-left: 26px;
+    margin: 40px 0;
+  }
+  .sa-content img,
+  .sa-content .sa-rte img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin: 32px 0;
+    display: block;
+  }
+  .sa-content a,
+  .sa-content .sa-rte a {
+    color: var(--ss-black);
+    text-decoration: underline;
+    transition: opacity var(--ss-ease);
+  }
+  .sa-content a:hover { opacity: 0.6; }
+
+  /* credits */
+  .sa-credits {
+    font-size: 11px;
+    color: var(--ss-grey-400);
+    padding-top: 28px;
+    border-top: 1px solid var(--ss-grey-200);
+    line-height: 1.9;
+    margin-top: 40px;
+  }
+  .sa-credits a {
+    color: var(--ss-grey-700) !important;
+    text-decoration: underline !important;
+  }
+
+  /* aside / product card */
+  .sa-aside {}
+  .sa-product-card {
+    background: var(--ss-grey-100);
+    border-radius: 4px;
+    overflow: hidden;
+    position: sticky;
+    top: 80px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: opacity var(--ss-ease);
+  }
+  .sa-product-card:hover { opacity: 0.92; }
+  .sa-product-card__img {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--ss-grey-200);
+  }
+  .sa-product-card__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .sa-product-card:hover .sa-product-card__img img { transform: scale(1.04); }
+  .sa-product-card__info { padding: 18px 20px 4px; }
+  .sa-product-card__label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ss-grey-400);
+    margin-bottom: 8px;
+  }
+  .sa-product-card__name { font-size: 14px; font-weight: 500; margin: 0 0 4px; }
+  .sa-product-card__price { font-size: 12px; color: var(--ss-grey-400); margin: 0 0 16px; }
+  .sa-product-card__cta {
+    display: block;
+    margin: 0 20px 20px;
+    padding: 13px;
+    background: var(--ss-black);
+    color: var(--ss-white);
+    text-align: center;
+    border-radius: var(--ss-pill);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity var(--ss-ease);
+  }
+  .sa-product-card__cta:hover { opacity: 0.78; }
+
+  /* ─── RELATED ARTICLES ─── */
+  .sa-related {
+    background: var(--ss-off-white);
+    padding: 56px 48px 68px;
+    border-top: 1px solid var(--ss-grey-200);
+  }
+  .sa-related__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 28px;
+  }
+  .sa-related__title { font-size: 15px; font-weight: 500; margin: 0; }
+  .sa-related__all {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ss-grey-700);
+    border-bottom: 1px solid var(--ss-grey-400);
+    padding-bottom: 1px;
+    text-decoration: none;
+    transition: color var(--ss-ease), border-color var(--ss-ease);
+  }
+  .sa-related__all:hover { color: var(--ss-black); border-color: var(--ss-black); }
+  .sa-related__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--ss-grey-200);
+  }
+  .sa-related-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--ss-black);
+    aspect-ratio: 3 / 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-decoration: none;
+    color: inherit;
+  }
+  .sa-related-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: brightness(0.65);
+  }
+  .sa-related-card:hover .sa-related-card__img { transform: scale(1.04); }
+  .sa-related-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+  }
+  .sa-related-card__content {
+    position: relative;
+    z-index: 2;
+    padding: 20px 20px 24px;
+  }
+  .sa-related-card__cat {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ss-neon);
+    margin-bottom: 6px;
+  }
+  .sa-related-card__title {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ss-white);
+    margin: 0;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .sa-body {
+      grid-template-columns: 1fr;
+      padding: 48px 24px;
+      gap: 40px;
+    }
+    .sa-sidebar { display: flex; gap: 20px; align-items: center; }
+    .sa-sidebar__label { margin-bottom: 0; white-space: nowrap; }
+    .sa-sidebar__links { flex-direction: row; gap: 16px; }
+    .sa-product-card { position: static; }
+    .sa-related { padding: 48px 24px 60px; }
+    .sa-related__grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .sa-hero { padding: 40px 24px 44px; min-height: 65vh; }
+    .sa-hero__title { font-size: clamp(30px, 9vw, 44px); }
+    .sa-body { padding: 44px 20px; }
+    .sa-content p { font-size: 14px; }
+  }
+</style>
+
+{%- comment %} ─── ARTICLE HERO ─── {%- endcomment %}
+<section class="sa-hero" aria-label="{{ article.title | escape }}">
+
+  {%- if article.image -%}
+    <img
+      class="sa-hero__bg"
+      src="{{ article.image | image_url: width: 1600 }}"
+      srcset="
+        {{ article.image | image_url: width: 800 }}  800w,
+        {{ article.image | image_url: width: 1200 }} 1200w,
+        {{ article.image | image_url: width: 1600 }} 1600w
+      "
+      sizes="100vw"
+      alt="{{ article.image.alt | default: article.title | escape }}"
+      fetchpriority="high"
+    />
+  {%- endif -%}
+  <div class="sa-hero__gradient"></div>
+
+  <nav class="sa-hero__breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ blog.url }}">Story Salon</a>
+    {%- if first_tag_display != blank -%}
+      <span aria-hidden="true">/</span>
+      {{ first_tag_display }}
+    {%- endif -%}
+  </nav>
+
+  {%- if first_tag_display != blank -%}
+    <div class="sa-hero__cat">
+      <span aria-hidden="true">#</span>{{ first_tag_display | replace: ' ', '' }}
+    </div>
+  {%- endif -%}
+
+  <h1 class="sa-hero__title" itemprop="headline">{{ article.title | escape }}</h1>
+
+  <div class="sa-hero__meta">
+    <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+      {{ article.published_at | date: '%B %Y' }}
+    </time>
+    &nbsp;·&nbsp; {{ read_time }}
+  </div>
+
+</section>
+
+{%- comment %} ─── ARTICLE BODY ─── {%- endcomment %}
+<div class="sa-body" itemscope itemtype="https://schema.org/BlogPosting">
+
+  {%- comment %} Sidebar — share {%- endcomment %}
+  <aside class="sa-sidebar" aria-label="Share article">
+    <div class="sa-sidebar__label">Share</div>
+    <div class="sa-sidebar__links">
+      <a
+        href="https://www.instagram.com/"
+        target="_blank"
+        rel="noopener"
+        aria-label="Share on Instagram"
+      >Instagram</a>
+      <a
+        href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url | url_encode }}"
+        target="_blank"
+        rel="noopener"
+        aria-label="Share on Facebook"
+      >Facebook</a>
+      <a
+        href="#"
+        id="ss-copy-link"
+        aria-label="Copy link to clipboard"
+      >Copy link</a>
+    </div>
+  </aside>
+
+  {%- comment %} Main content {%- endcomment %}
+  <div class="sa-content sa-rte" itemprop="articleBody">
+    {{ article.content }}
+
+    {%- comment %} Credits block — uses metafields if set {%- endcomment %}
+    {%- assign has_credits = false -%}
+    {%- if article.metafields.custom.photo_credit.value != blank
+        or article.metafields.custom.styling_credit.value != blank
+        or article.metafields.custom.mua_credit.value != blank
+        or article.user.name != blank -%}
+      {%- assign has_credits = true -%}
+    {%- endif -%}
+
+    {%- if has_credits -%}
+      <div class="sa-credits">
+        {%- if article.user.name != blank -%}
+          Interviewed by {{ article.user.name }}&nbsp;·&nbsp;
+        {%- endif -%}
+        {%- if article.metafields.custom.photo_credit.value != blank -%}
+          Photography by {{ article.metafields.custom.photo_credit.value }}&nbsp;·&nbsp;
+        {%- endif -%}
+        {%- if article.metafields.custom.styling_credit.value != blank -%}
+          Styling by {{ article.metafields.custom.styling_credit.value }}&nbsp;·&nbsp;
+        {%- endif -%}
+        {%- if article.metafields.custom.mua_credit.value != blank -%}
+          MUA &amp; Hair by {{ article.metafields.custom.mua_credit.value }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment %} Aside — worn product {%- endcomment %}
+  <aside class="sa-aside" aria-label="Featured product">
+    {%- if worn_product != blank -%}
+      <a href="{{ worn_product.url }}" class="sa-product-card" aria-label="Shop {{ worn_product.title | escape }}">
+        <div class="sa-product-card__img">
+          {%- if worn_product.featured_image -%}
+            <img
+              src="{{ worn_product.featured_image | image_url: width: 600 }}"
+              alt="{{ worn_product.featured_image.alt | default: worn_product.title | escape }}"
+              width="600"
+              height="600"
+              loading="lazy"
+            />
+          {%- endif -%}
+        </div>
+        <div class="sa-product-card__info">
+          <div class="sa-product-card__label">Worn in this story</div>
+          <div class="sa-product-card__name">{{ worn_product.title | escape }}</div>
+          <div class="sa-product-card__price">From {{ worn_product.price_min | money }}</div>
+        </div>
+        <span class="sa-product-card__cta">Shop now</span>
+      </a>
+    {%- else -%}
+      {%- comment %} Fallback if no metafield set — show first product from section setting {%- endcomment %}
+      {%- assign fallback = section.settings.fallback_product -%}
+      {%- if fallback != blank -%}
+        <a href="{{ fallback.url }}" class="sa-product-card" aria-label="Shop {{ fallback.title | escape }}">
+          <div class="sa-product-card__img">
+            {%- if fallback.featured_image -%}
+              <img
+                src="{{ fallback.featured_image | image_url: width: 600 }}"
+                alt="{{ fallback.featured_image.alt | default: fallback.title | escape }}"
+                width="600" height="600" loading="lazy"
+              />
+            {%- endif -%}
+          </div>
+          <div class="sa-product-card__info">
+            <div class="sa-product-card__label">Worn in the stories</div>
+            <div class="sa-product-card__name">{{ fallback.title | escape }}</div>
+            <div class="sa-product-card__price">From {{ fallback.price_min | money }}</div>
+          </div>
+          <span class="sa-product-card__cta">Shop now</span>
+        </a>
+      {%- endif -%}
+    {%- endif -%}
+  </aside>
+
+</div>
+
+{%- comment %} ─── RELATED ARTICLES ─── {%- endcomment %}
+{%- assign related_articles = blog_obj.articles | where: 'id', article.id | map: 'id' -%}
+<section class="sa-related" aria-label="More stories">
+  <div class="sa-related__header">
+    <h2 class="sa-related__title">More from the Salon</h2>
+    <a href="{{ blog.url }}" class="sa-related__all">View all →</a>
+  </div>
+  <div class="sa-related__grid">
+    {%- assign count = 0 -%}
+    {%- for related in blog_obj.articles -%}
+      {%- unless related.id == article.id -%}
+        {%- if count < 3 -%}
+          {%- assign related_tag = related.tags | first | replace: '-', ' ' | capitalize -%}
+          <a href="{{ related.url }}" class="sa-related-card" aria-label="{{ related.title | escape }}">
+            {%- if related.image -%}
+              <img
+                class="sa-related-card__img"
+                src="{{ related.image | image_url: width: 600 }}"
+                alt="{{ related.image.alt | default: related.title | escape }}"
+                loading="lazy"
+              />
+            {%- else -%}
+              <div class="sa-related-card__img" style="background: linear-gradient(145deg, #1e2228 0%, #0c0e12 100%);"></div>
+            {%- endif -%}
+            <div class="sa-related-card__overlay"></div>
+            <div class="sa-related-card__content">
+              {%- if related_tag != blank -%}
+                <span class="sa-related-card__cat">
+                  <span aria-hidden="true">#</span>{{ related_tag | replace: ' ', '' }}
+                </span>
+              {%- endif -%}
+              <p class="sa-related-card__title">{{ related.title | escape }}</p>
+            </div>
+          </a>
+          {%- assign count = count | plus: 1 -%}
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{%- comment %} ─── SEO SCHEMA ─── {%- endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ article.title | json }},
+  "description": {{ article.excerpt | default: article.content | strip_html | truncate: 160 | json }},
+  "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S' }}",
+  "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S' }}",
+  "author": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ shop.url }}/cdn/shop/files/logo.png"
+    }
+  },
+  "url": "{{ shop.url }}{{ article.url }}",
+  "keywords": {{ article.tags | join: ', ' | json }}
+  {% if article.image %},
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ article.image | image_url: width: 1200 }}"
+  }
+  {% endif %}
+}
+</script>
+
+{%- comment %} ─── COPY LINK JS ─── {%- endcomment %}
+<script>
+  (function () {
+    var btn = document.getElementById('ss-copy-link');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      navigator.clipboard.writeText(window.location.href).then(function () {
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = 'Copy link'; }, 2000);
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Story Salon Article",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Default product (fallback if no metafield set)"
+    },
+    {
+      "type": "product",
+      "id": "fallback_product",
+      "label": "Default 'Worn in this story' product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story Salon Article"
+    }
+  ]
+}
+{% endschema %}

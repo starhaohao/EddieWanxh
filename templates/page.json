@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -105,7 +114,7 @@
           "type": "tile",
           "settings": {
             "image": "shopify://shop_images/LP_-_fabric-transdry_3_4.jpg",
-            "framed": false,
+            "framed": true,
             "frame_shape": "",
             "focal": "object-position:center"
           }
@@ -125,13 +134,13 @@
       ],
       "name": "Gallery Banner",
       "settings": {
-        "eyebrow": "See you again.",
+        "eyebrow": "",
         "title": "Story Salon",
         "title_position": "right",
         "title_vertical": "bottom",
-        "title_size": "Small",
+        "title_size": "Large",
         "title_color": "#ffffff",
-        "heading_font": "archivo_n8",
+        "heading_font": "archivo_i9",
         "body_font": "system_ui_n4",
         "width": "Full width",
         "tile_gap": 0,
@@ -172,7 +181,7 @@
             "card_title": "Earning It Quietly",
             "card_desc": "Sixteen years in F&B, built on unseen work. Validation, he argues, has to come from within — a place no client can reach.",
             "link_text": "Explore",
-            "link": "shopify://pages/story-salon-justin-foo"
+            "link": "https://triiiplestudio.com/pages/story-salon-justin-foo"
           }
         },
         "card_4kcKjN": {
@@ -183,7 +192,7 @@
             "image": "shopify://shop_images/LP_-_barry-001_-_Barry_4_5.jpg",
             "series": "Raw n Uncut",
             "subject_name": "Barry Li",
-            "card_title": "When the Mind Undresses",
+            "card_title": "A Quiet Revolution",
             "card_desc": "A PhD student who once hid his analytical mind. Now it's his time — competence as the most attractive trait.",
             "link_text": "Explore",
             "link": "shopify://pages/story-salon-barry-li"
@@ -211,7 +220,7 @@
             "image": "shopify://shop_images/LP_-_khairul-001_-_Khairul_1_1.jpg",
             "series": "Raw n Uncut",
             "subject_name": "Khairul",
-            "card_title": "When Confidence Finds Its Voice",
+            "card_title": "Embracing the Unexpected",
             "card_desc": "A film creative who hid his hair under caps; now he lets it speak. Weirdness as a trait to nurture, not armour.",
             "link_text": "Explore",
             "link": "shopify://pages/story-salon-khairul"
@@ -242,7 +251,7 @@
             "card_title": "She Translates What You Carry",
             "card_desc": "She turns emotion, heritage and symbolism into something permanent.",
             "link_text": "Explore",
-            "link": "shopify://pages/story-salon-jocelyn-leow"
+            "link": ""
           }
         },
         "card_xCPchq": {
@@ -253,7 +262,7 @@
             "image": "shopify://shop_images/LP_-_rama-001_-_Rama_3_4.jpg",
             "series": "Raw n Uncut",
             "subject_name": "Rama",
-            "card_title": "Nothing to Hide, Everything to Own",
+            "card_title": "Owning His Power",
             "card_desc": "From hiding in oversized clothes to standing boldly in front of the lens. Confidence, redefined as a quiet triumph.",
             "link_text": "Explore",
             "link": "shopify://pages/story-salon-rama"
@@ -278,13 +287,13 @@
           "settings": {
             "category_id": "first",
             "aspect_ratio": "4/5",
-            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_715ffebd-a8fe-43ab-aae3-5e0228472ef6.jpg",
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_13_8a7cf91b-15c5-4b09-8b4e-4967587e5fd6.jpg",
             "series": "The First Layer",
             "subject_name": "Sonia Seraphina",
             "card_title": "Still trying, still her",
             "card_desc": "A tattoo artist at Peonypink. Grungy, messy, controlled-ish — she shows up as herself, and that is the whole point.",
             "link_text": "Explore",
-            "link": "shopify://pages/story-salon-sonia-seraphina"
+            "link": ""
           }
         },
         "card_cYngJP": {
@@ -306,11 +315,11 @@
           "settings": {
             "category_id": "first",
             "aspect_ratio": "1/1",
-            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_12_ef36e761-a4d7-426a-a681-8d4f2fcbb642.jpg",
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_2b31aa0e-e859-4309-963a-3e889ea2549c.jpg",
             "series": "The First Layer",
             "subject_name": "Daphne Tan",
             "card_title": "No Performance, No Mask",
-            "card_desc": "Illustrative, black and grey — what she puts on skin and what she wears carry the same intention.",
+            "card_desc": "Illustrative, black and grey - what she puts on skin and what she wears carry the same\nintention.\",",
             "link_text": "Explore",
             "link": "shopify://pages/story-salon-daphne-tan"
           }
@@ -333,8 +342,8 @@
       ],
       "name": "Journal Feed",
       "settings": {
-        "title": "The First Layer",
-        "subtitle": "Three series, one feed. Different people, different lives..."
+        "title": "not a campaign. not a lookback.\na room where people sit down and say something true.",
+        "subtitle": ""
       }
     },
     "story_feed_q8MBC4": {
@@ -383,7 +392,12 @@
           }
         }
       },
-      "block_order": ["card_gkzVRg", "card_MHjkwY", "card_ENXqeL"],
+      "block_order": [
+        "card_gkzVRg",
+        "card_MHjkwY",
+        "card_ENXqeL"
+      ],
+      "disabled": true,
       "name": "Journal Feed",
       "settings": {
         "title": "Fabric n Fit",
@@ -438,7 +452,12 @@
           }
         }
       },
-      "block_order": ["look_Y6NLU6", "look_HMUEcr", "look_DWktPe", "look_rYgDUw"],
+      "block_order": [
+        "look_Y6NLU6",
+        "look_HMUEcr",
+        "look_DWktPe",
+        "look_rYgDUw"
+      ],
       "name": "Lookbook Gallery",
       "settings": {
         "title": "What They Wear",

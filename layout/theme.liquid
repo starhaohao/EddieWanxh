@@ -7,7 +7,6 @@
     {%- render 'head' -%}
 
     {{ content_for_header }}
-  {% render 'pagefly-app-header' %}
 
 <style>
 /* Mobile header */
@@ -337,6 +336,14 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif !important;
 }
 </style>
+<script src="{{ 'cart-progress.js' | asset_url }}" defer></script>
+
+{% if template == 'index' %}
+  <script>
+    window.location.replace("/pages/sale");
+  </script>
+{% endif %}
+
 </head>
 
   <body
@@ -359,8 +366,7 @@ html {
 
       <main role="main" id="MainContent" class="main-content">
         {%- if template.name == 'collection' -%}
-          {%- section 'section-collection-filter-bar' -%}
-        {%- endif -%}
+                  {%- endif -%}
         {{ content_for_layout }}
       </main>
     </div>

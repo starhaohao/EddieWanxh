@@ -1,0 +1,19 @@
+{% comment %}
+  Drop this section into any collection template to enable quick-add-to-cart on product cards.
+  It loads quick-add.js which layers size buttons / ATC onto the existing grid items on hover.
+  No changes to the base theme collection section are needed.
+{% endcomment %}
+<script src="{{ 'quick-add.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Quick Add to Cart",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    { "name": "Quick Add to Cart" }
+  ],
+  "templates": ["collection", "index", "page"],
+  "limit": 1
+}
+{% endschema %}

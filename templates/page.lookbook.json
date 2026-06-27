@@ -1,31 +1,566 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "lb_banner": { "type": "lookbook-banner", "settings": {} },
-    "lb_strip": { "type": "lookbook-info-strip", "settings": {} },
-    "lb_grid": {
-      "type": "lookbook-product-grid",
+    "lb_banner": {
+      "type": "lookbook-banner",
+      "settings": {
+        "image": "shopify://shop_images/banner-2_e3a0b55f-2020-4e78-a58c-a4ca703ad26f.jpg",
+        "bg_color": "#111214",
+        "eyebrow_color": "#ffffff73",
+        "title_color": "#ffffff",
+        "overlay_strength": 0.1,
+        "title_size": 48,
+        "banner_height": 34,
+        "img_opacity": 0.9,
+        "eyebrow": "Wear it. Own it. Explain nothing.",
+        "title": "Collection"
+      }
+    },
+    "lb_strip": {
+      "type": "lookbook-info-strip",
+      "settings": {
+        "bg_color": "#19222a",
+        "text_color": "#ffffff",
+        "border_color": "#11121414",
+        "left_text": "Buy 3 — 15% OFF. Buy 5 — 25% OFF.  No code needed.",
+        "right_text": ""
+      }
+    },
+    "lookbook_grid_7YfNFL": {
+      "type": "Lookbook-grid",
       "blocks": {
-        "c1": { "type": "card", "settings": { "variant": "product", "name": "Studio Brief", "sku": "TSU-1001", "price": "$39" } },
-        "c2": { "type": "card", "settings": { "variant": "model", "name": "Studio Brief", "sku": "TSU-1001", "price": "$39" } },
-        "c3": { "type": "card", "settings": { "variant": "product", "name": "Boxer Trunk", "sku": "TSU-1003", "price": "$39" } },
-        "c4": { "type": "card", "settings": { "variant": "model", "name": "Boxer Trunk", "sku": "TSU-1003", "price": "$39" } }
+        "card_MVPyC9": {
+          "type": "card",
+          "name": "V Brief_Black",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/V-cotton-spandex-black-2_24e31cbf-9659-485b-a0bc-0666adff8f0f.png",
+            "category": "Briefs",
+            "name": "V Brief",
+            "subtitle": "refined classic.",
+            "sku": "Cotton Spandex",
+            "price": "$17.99",
+            "compare_price": "27.99",
+            "url": "shopify://products/v-cotton-spandex-brief-black",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_gxJtnz": {
+          "type": "card",
+          "name": "X Boxer Trunk_Black",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/5_36e9cfff-1cd2-4d23-9689-6b761329b516.png",
+            "category": "Boxer Trunks",
+            "name": "X Boxer Trunk",
+            "subtitle": "a boldly functional ",
+            "sku": "TransDRY®",
+            "price": "17.99",
+            "compare_price": "31.99",
+            "url": "shopify://products/x-transdry-boxer-trunk-black",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_AKYeha": {
+          "type": "card",
+          "name": "V Brief_White",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/hiph.png",
+            "category": "Briefs",
+            "name": "V Brief",
+            "subtitle": "refined classic.",
+            "sku": "Cotton Spandex",
+            "price": "$17.99",
+            "compare_price": "27.99",
+            "url": "shopify://products/v-cotton-spandex-brief-white",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_Uzcpfi": {
+          "type": "card",
+          "name": "Y Brief_Black",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/Y-Transdry-black-1_d251a03f-2fef-4592-a662-0de4586daa76.png",
+            "category": "Briefs",
+            "name": "Y Brief",
+            "subtitle": "a modern take",
+            "sku": "TransDRY®",
+            "price": "23.99",
+            "compare_price": "31.99",
+            "url": "shopify://products/y-transdry-brief-black",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_AhR4fz": {
+          "type": "card",
+          "name": "W ,black",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/3_57881cc5-d8d7-496e-845a-214be698d6c6.png",
+            "category": "Boxer Trunks",
+            "name": "W Boxer Trunk",
+            "subtitle": "Effortless Style",
+            "sku": "Cotton Spandex",
+            "price": "$14.99",
+            "compare_price": "29.99",
+            "url": "shopify://products/v-cotton-spandex-brief-white",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_ndzf6R": {
+          "type": "card",
+          "name": "W ",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/15.png",
+            "category": "Boxer Trunks",
+            "name": "W Boxer Trunk",
+            "subtitle": "Effortless Style",
+            "sku": "Cotton Spandex",
+            "price": "$14.99",
+            "compare_price": "29.99",
+            "url": "shopify://products/w-cotton-spandex-boxer-trunk-white",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_6wLL7X": {
+          "type": "card",
+          "name": "Y Brief_White",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/2_6d002364-b2e2-4ee5-9205-6fe89d1f59b4.png",
+            "category": "Briefs",
+            "name": "Y Brief",
+            "subtitle": "a modern take",
+            "sku": "TransDRY®",
+            "price": "23.99",
+            "compare_price": "31.99",
+            "url": "shopify://products/y-transdry-brief-white",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_AKHGzk": {
+          "type": "card",
+          "name": "Y Brief_White",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/H-cotton-spandex-black-1_bbf2dabd-eab4-408f-975c-7bbae3726c66.png",
+            "category": "Boxer Trunks",
+            "name": "H Boxer Trunks",
+            "subtitle": "a subtle provocation",
+            "sku": "Cotton Spandex",
+            "price": "16.99",
+            "compare_price": "31.99",
+            "url": "shopify://products/h-cotton-spandex-boxer-trunk-black",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_NJBC4x": {
+          "type": "card",
+          "name": "ED T Grey",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/4_0614ecef-d818-4f26-8eef-a321afd662bb.png",
+            "category": "Tops",
+            "name": "ED T-shirt",
+            "subtitle": "a better fit",
+            "sku": "Cotton Spandex",
+            "price": "25.99",
+            "compare_price": "73.99",
+            "url": "shopify://products/ed-cotton-spandex-t-shirt-heather-grey",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_QgAVBw": {
+          "type": "card",
+          "name": "H boxer trunks_White",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/5_ba16ed41-ddc6-4f4f-9c0f-0c80a9fb5ac2.png",
+            "category": "Boxer Trunks",
+            "name": "H Boxer Trunks",
+            "subtitle": "a subtle provocation",
+            "sku": "Cotton Spandex",
+            "price": "16.99",
+            "compare_price": "31.99",
+            "url": "shopify://products/h-cotton-spandex-boxer-trunk-white",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_wiArCY": {
+          "type": "card",
+          "name": "X Boxer Trunk_Black",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/TSU1007-Wht-1.png",
+            "category": "Boxer Trunks",
+            "name": "X Boxer Trunk",
+            "subtitle": "a boldly functional ",
+            "sku": "TransDRY®",
+            "price": "17.99",
+            "compare_price": "31.99",
+            "url": "shopify://products/x-transdry-boxer-trunk-white",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_MbrnMW": {
+          "type": "card",
+          "name": "Y Brief_Black",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/X_brief.png",
+            "category": "Briefs",
+            "name": "X Brief",
+            "subtitle": "a reveal moment.",
+            "sku": "TransDRY®",
+            "price": "23.99",
+            "compare_price": "31.99",
+            "url": "shopify://products/x-transdry-brief-black",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_rAewNT": {
+          "type": "card",
+          "name": "ED T Grey",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/In_TRIIIPLE_2.png",
+            "category": "Tops",
+            "name": "ED Sleeveless Top",
+            "subtitle": "a new daily rotation",
+            "sku": "Cotton Spandex",
+            "price": "23.99",
+            "compare_price": "73.99",
+            "url": "shopify://products/ed-sleeveless-top-black",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_eP37VW": {
+          "type": "card",
+          "name": "Y Brief_Black",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/TSU1005-White-1.png",
+            "category": "Briefs",
+            "name": "X Brief",
+            "subtitle": "a reveal moment.",
+            "sku": "TransDRY®",
+            "price": "23.99",
+            "compare_price": "31.99",
+            "url": "shopify://products/y-transdry-brief-black",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_9Y7MVM": {
+          "type": "card",
+          "name": "ED T Grey",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/5_a997ff76-2043-4feb-b321-0eed8c8fe4f3.png",
+            "category": "Tops",
+            "name": "ED T-shirt",
+            "subtitle": "a better fit",
+            "sku": "Cotton Spandex",
+            "price": "25.99",
+            "compare_price": "73.99",
+            "url": "shopify://products/ed-t-shirt-white",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_bQGMaA": {
+          "type": "card",
+          "name": "W ",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/14.png",
+            "category": "Socks",
+            "name": "L Socks",
+            "subtitle": "for your daily layering",
+            "sku": "Cotton Spandex",
+            "price": "$10.99",
+            "compare_price": "19.99",
+            "url": "shopify://products/l-socks-pink",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_JHhCPz": {
+          "type": "card",
+          "name": "W ",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/12_c7e56f9c-29ea-4619-a289-9555c854a3fc.png",
+            "category": "Socks",
+            "name": "L Socks",
+            "subtitle": "for your daily layering",
+            "sku": "Cotton Spandex",
+            "price": "$10.99",
+            "compare_price": "19.99",
+            "url": "shopify://products/l-cotton-spandex-socks-copy",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_tR3N37": {
+          "type": "card",
+          "name": "W ",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/25.png",
+            "category": "Socks",
+            "name": "L Socks",
+            "subtitle": "for your daily layering",
+            "sku": "Cotton Spandex",
+            "price": "$10.99",
+            "compare_price": "19.99",
+            "url": "shopify://products/l-socks-heather-grey",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        },
+        "card_EVCUnT": {
+          "type": "card",
+          "name": "W ",
+          "settings": {
+            "variant": "product",
+            "image": "shopify://shop_images/13_5565f0b4-d812-4187-ae56-a591b6280e64.png",
+            "category": "Socks",
+            "name": "L Socks",
+            "subtitle": "for your daily layering",
+            "sku": "Cotton Spandex",
+            "price": "$10.99",
+            "compare_price": "19.99",
+            "url": "shopify://products/l-socks-black",
+            "name_galdeano": true,
+            "text_align": "left",
+            "name_size_override": 20,
+            "show_shop": false,
+            "show_grid_lines": false
+          }
+        }
       },
-      "block_order": ["c1","c2","c3","c4"],
-      "settings": {}
+      "block_order": [
+        "card_MVPyC9",
+        "card_gxJtnz",
+        "card_AKYeha",
+        "card_Uzcpfi",
+        "card_AhR4fz",
+        "card_ndzf6R",
+        "card_6wLL7X",
+        "card_AKHGzk",
+        "card_NJBC4x",
+        "card_QgAVBw",
+        "card_wiArCY",
+        "card_MbrnMW",
+        "card_rAewNT",
+        "card_eP37VW",
+        "card_9Y7MVM",
+        "card_bQGMaA",
+        "card_JHhCPz",
+        "card_tR3N37",
+        "card_EVCUnT"
+      ],
+      "name": "Lookbook Product Grid",
+      "settings": {
+        "show_filters": true,
+        "categories": "Briefs, Boxer Trunks, Tops, Socks, Bundles",
+        "bg_color": "#000000",
+        "card_bg": "#000000",
+        "name_color": "#ffffff",
+        "sku_color": "#fcfcfc",
+        "price_color": "#e47000",
+        "shop_color": "#e47000",
+        "tag_color": "#ffffff",
+        "tag_bg": "#e47000",
+        "grid_line_color": "#e47000",
+        "name_size": 14,
+        "price_size": 12
+      }
     },
     "lb_zoom": {
       "type": "lookbook-detail-zoom",
       "blocks": {
-        "z1": { "type": "zoom", "settings": { "name": "Waistband", "spec": "4cm Jacquard", "zoom_x": 50, "zoom_y": 34, "zoom_scale": 2.1 } },
-        "z2": { "type": "zoom", "settings": { "name": "Fabric", "spec": "TransDRY®", "zoom_x": 50, "zoom_y": 54, "zoom_scale": 2.4 } },
-        "z3": { "type": "zoom", "settings": { "name": "Seam", "spec": "Flatlock stitch", "zoom_x": 38, "zoom_y": 48, "zoom_scale": 2.6 } },
-        "z4": { "type": "zoom", "settings": { "name": "Profile", "spec": "Low-rise contour", "zoom_x": 60, "zoom_y": 42, "zoom_scale": 2.2 } },
-        "z5": { "type": "zoom", "settings": { "name": "Studio Collection · 2025", "spec": "Designed SG · Crafted TH", "zoom_x": 50, "zoom_y": 28, "zoom_scale": 1.4, "full_width": true } }
+        "z1": {
+          "type": "zoom",
+          "settings": {
+            "image": "shopify://shop_images/11EC33D4-E96E-439A-9B7F-A86952515689_L0_001-05_10_2025_8_44_09_AM.jpg",
+            "name": "",
+            "spec": "",
+            "zoom_x": 0,
+            "zoom_y": 0,
+            "zoom_scale": 1,
+            "full_width": false
+          }
+        },
+        "z2": {
+          "type": "zoom",
+          "settings": {
+            "image": "shopify://shop_images/Test_70e714a5-ffd7-4fa4-a315-a3d319a5edbd.png",
+            "name": "",
+            "spec": "",
+            "zoom_x": 0,
+            "zoom_y": 0,
+            "zoom_scale": 1,
+            "full_width": false
+          }
+        },
+        "z3": {
+          "type": "zoom",
+          "settings": {
+            "image": "shopify://shop_images/Test2.png",
+            "name": "",
+            "spec": "",
+            "zoom_x": 0,
+            "zoom_y": 0,
+            "zoom_scale": 1,
+            "full_width": false
+          }
+        },
+        "z4": {
+          "type": "zoom",
+          "settings": {
+            "image": "shopify://shop_images/CFD98D3E-93FA-4EA4-86BA-CD47E404A581_L0_001-05_10_2025_8_44_47_AM.jpg",
+            "name": "",
+            "spec": "",
+            "zoom_x": 60,
+            "zoom_y": 42,
+            "zoom_scale": 2.2,
+            "full_width": false
+          }
+        },
+        "z5": {
+          "type": "zoom",
+          "settings": {
+            "image": "shopify://shop_images/3_4ef971e8-4980-4ffc-b98a-130c8ada8a5d.jpg",
+            "name": "",
+            "spec": "",
+            "zoom_x": 0,
+            "zoom_y": 52,
+            "zoom_scale": 1,
+            "full_width": true
+          }
+        }
       },
-      "block_order": ["z1","z2","z3","z4","z5"],
-      "settings": {}
+      "block_order": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5"
+      ],
+      "settings": {
+        "heading": "Up close.",
+        "meta": "Construction · Fabric",
+        "bg_color": "#fafaf8",
+        "border_color": "#11121414",
+        "title_color": "#111214",
+        "meta_color": "#11121466",
+        "label_bg": "#fafaf8e6",
+        "label_text": "#111214",
+        "label_spec": "#11121466",
+        "title_size": 28
+      }
     },
-    "lb_close": { "type": "lookbook-brand-close", "settings": {} }
+    "lb_close": {
+      "type": "lookbook-brand-close",
+      "settings": {
+        "bg_color": "#111214",
+        "headline_color": "#ffffffa6",
+        "spec_color": "#ffffff33",
+        "cta_bg": "#923531",
+        "cta_text": "#ffffff",
+        "headline_size": 36,
+        "headline": "Engineered underwear. Nothing more.",
+        "spec": "",
+        "cta_label": "Shop the Range",
+        "cta_url": ""
+      }
+    }
   },
-  "order": ["lb_banner","lb_strip","lb_grid","lb_zoom","lb_close"]
+  "order": [
+    "lb_banner",
+    "lb_strip",
+    "lookbook_grid_7YfNFL",
+    "lb_zoom",
+    "lb_close"
+  ]
 }

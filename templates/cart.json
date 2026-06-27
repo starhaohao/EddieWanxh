@@ -1,0 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "cart",
+      "blocks": {
+        "payment_icons_fyeLU7": {
+          "type": "payment-icons",
+          "settings": {
+            "enable_greyscale": true
+          }
+        },
+        "shipping_estimate_AYYBkE": {
+          "type": "shipping-estimate",
+          "settings": {}
+        },
+        "upsell_products_kVQz7w": {
+          "type": "upsell-products",
+          "settings": {
+            "upsell_auto_open": true
+          }
+        },
+        "free-shipping": {
+          "type": "free-shipping",
+          "disabled": true,
+          "settings": {
+            "message": "You are ||amount|| away from free shipping.",
+            "text_font_size": "body-medium",
+            "color_scheme": ""
+          }
+        },
+        "order-note": {
+          "type": "order-note",
+          "disabled": true,
+          "settings": {}
+        },
+        "gift-note": {
+          "type": "gift-note",
+          "settings": {}
+        },
+        "cart-message": {
+          "type": "cart-message",
+          "settings": {
+            "cart_custom_message_text": "<p>Enjoy 15% off for 3 items and 25% off for 5.  No code required.</p>",
+            "text_font_size": "body-small",
+            "text_alignment": "text-left",
+            "cart_custom_message_color": ""
+          }
+        },
+        "checkout-buttons": {
+          "type": "checkout-buttons",
+          "settings": {
+            "enable_additional_buttons": true
+          }
+        }
+      },
+      "block_order": [
+        "payment_icons_fyeLU7",
+        "shipping_estimate_AYYBkE",
+        "upsell_products_kVQz7w",
+        "free-shipping",
+        "order-note",
+        "gift-note",
+        "cart-message",
+        "checkout-buttons"
+      ],
+      "settings": {
+        "text_font_size": "body-medium",
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "padding_top": 32,
+        "padding_bottom": 50
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

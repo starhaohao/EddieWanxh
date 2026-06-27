@@ -1,0 +1,47 @@
+<style>
+  .triiiple-hero { height: 100svh; min-height: 560px; position: relative; display: grid; grid-template-columns: 1fr 1fr; background: var(--ink); }
+  .triiiple-hero img { width: 100%; height: 100%; object-fit: cover; }
+  .triiiple-hero img.left { border-right: 1px solid rgba(255,255,255,0.1); }
+  .triiiple-hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; background: radial-gradient(circle at center, rgba(26,26,26,0.3) 0%, rgba(26,26,26,0) 50%); }
+  .hero-eyebrow { font-family: var(--font-heading); font-size: var(--ts-mini); color: var(--lime); margin-bottom: 8px; }
+  .hero-footer { font-family: var(--font-heading); font-size: var(--ts-mini); margin-top: 12px; }
+  @media (max-width: 640px) {
+    .triiiple-hero { grid-template-columns: 1fr; }
+    .triiiple-hero img.right { display: none; }
+    .triiiple-hero-content { justify-content: flex-end; padding-bottom: 15svh; background: linear-gradient(to top, rgba(26,26,26,0.6) 0%, transparent 50%); }
+  }
+</style>
+
+<section class="triiiple-hero">
+  {% if section.settings.image_1 != blank %}
+    {{ section.settings.image_1 | image_url: width: 1200 | image_tag: class: 'left' }}
+  {% else %}
+    {{ 'lifestyle-1' | placeholder_svg_tag: 'left' }}
+  {% endif %}
+  
+  {% if section.settings.image_2 != blank %}
+    {{ section.settings.image_2 | image_url: width: 1200 | image_tag: class: 'right' }}
+  {% else %}
+    {{ 'lifestyle-2' | placeholder_svg_tag: 'right' }}
+  {% endif %}
+  
+  <div class="triiiple-hero-content triiiple-reveal">
+    {% if section.settings.eyebrow != blank %}<div class="hero-eyebrow">{{ section.settings.eyebrow }}</div>{% endif %}
+    <h1 class="triiiple-heading text-display">{{ section.settings.title }}</h1>
+    {% if section.settings.footer_line != blank %}<div class="hero-footer">{{ section.settings.footer_line }}</div>{% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Campaign Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image_1", "label": "Image 1 (Left/Mobile)" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2 (Right)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SPRING SUMMER 26" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "RAW n UNCUT" },
+    { "type": "text", "id": "footer_line", "label": "Footer Line", "default": "THE NEW TAILORING" }
+  ],
+  "presets": [{ "name": "Campaign Hero" }]
+}
+{% endschema %}

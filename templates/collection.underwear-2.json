@@ -1,0 +1,129 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "collection-image-with-title",
+      "settings": {
+        "show_title": true,
+        "show_description": true,
+        "flex_align": "align--bottom-left",
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "show_text_background": false,
+        "overlay_type": "disabled",
+        "show_image": false,
+        "banner_layout": "overlay",
+        "height": "screen-height-one-third",
+        "mobile_height": "five-fifty-height-hero--mobile",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "content_dual_banner_JjrU7w": {
+      "type": "content-dual-banner",
+      "blocks": {
+        "slide_nJiPCR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/V_Brief.jpg",
+            "eyebrow": "",
+            "title": "Briefs",
+            "heading_size": "Medium",
+            "footer_line": "",
+            "btn_label": "Explore",
+            "btn_link": "shopify://collections/briefs"
+          }
+        },
+        "slide_xExCRb": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/H-Boxer-Trunks-White-1_ed6e24e9-f8bc-4568-be92-650fcdccf893.jpg",
+            "eyebrow": "",
+            "title": "Boxer Trunks",
+            "heading_size": "Medium",
+            "footer_line": "",
+            "btn_label": "Explore",
+            "btn_link": "shopify://collections/boxer-trunks"
+          }
+        }
+      },
+      "block_order": [
+        "slide_nJiPCR",
+        "slide_xExCRb"
+      ],
+      "name": "Dual-Image Banner",
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 3,
+        "width": "Full width",
+        "desktop_height": "1/3 of screen",
+        "mobile_height": "1/3 of screen",
+        "color_scheme": "Scheme 2",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "slider_nav_style": "Circle"
+      }
+    },
+    "subcollections": {
+      "type": "subcollections",
+      "settings": {
+        "subcollection_layout": "grid",
+        "subcollection_description": true,
+        "select_image": "collection",
+        "color_scheme": "scheme-2",
+        "color": "#ffffff",
+        "bg_color": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "collection",
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "inline-closed",
+        "default_open": true,
+        "collection_linklist": "footer",
+        "grid": 3,
+        "grid_mobile": "2",
+        "products_per_page": 16,
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 24
+      }
+    },
+    "section_recent_products_JGCaih": {
+      "type": "section-recent-products",
+      "name": "Recently viewed products",
+      "settings": {
+        "product_recently_limit": 4,
+        "product_recently_minimum": 4,
+        "product_recently_heading": "Viewed",
+        "heading_font_size": "heading-mini",
+        "layout_desktop": "slider",
+        "grid": 3,
+        "rows": 3,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-6",
+        "padding_top": 30,
+        "padding_bottom": 49,
+        "heading_tag": "automatic"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "content_dual_banner_JjrU7w",
+    "subcollections",
+    "main",
+    "section_recent_products_JGCaih"
+  ]
+}

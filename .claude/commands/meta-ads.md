@@ -5,6 +5,7 @@ Use this skill whenever the user asks about Meta (Facebook/Instagram) ads, campa
 ## Account Overview
 
 - **Brand**: First Layer / TRIIIPLE Studio (Singapore premium menswear)
+- **Ad Account ID**: 188848207 (act_188848207)
 - **Budget**: ~$20/day (5-day sprints ~$100)
 - **Strategy**: SG-primary, conversion-focused
 

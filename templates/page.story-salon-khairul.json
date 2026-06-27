@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "campaign_banner_A7TARg": {
@@ -5,22 +14,29 @@
       "blocks": {
         "panel_bUQXCj": {
           "type": "panel",
-          "settings": { "image": "" }
+          "settings": {
+            "image": "shopify://shop_images/LP_-_khairul-001_-_Khairul_1_1.jpg"
+          }
         },
         "panel_QJkqhc": {
           "type": "panel",
-          "settings": { "image": "" }
+          "settings": {
+            "image": "shopify://shop_images/When-Confidence-Finds-Its-Voice-3.jpg"
+          }
         }
       },
-      "block_order": ["panel_bUQXCj", "panel_QJkqhc"],
+      "block_order": [
+        "panel_bUQXCj",
+        "panel_QJkqhc"
+      ],
       "name": "Campaign Banner",
       "settings": {
-        "eyebrow": "The first layer with",
+        "eyebrow": "Raw n Uncut with",
         "title": "Khairul",
         "footer_line": "Controlled chaos. Curious, open, not afraid to get weird — in the best way.",
         "heading_size": "Display",
         "title_ends": "right",
-        "title_font": "rock_salt_n4",
+        "title_font": "quantico_n4",
         "heading_font": "sans_serif_n4",
         "body_font": "mono",
         "auto_rotate": true,
@@ -28,7 +44,7 @@
         "width": "Full width",
         "desktop_height": "650px",
         "mobile_height": "550px",
-        "color_scheme": "Scheme 2",
+        "color_scheme": "Scheme 3",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -44,16 +60,16 @@
             "heading_font_size": "heading-x-small",
             "text": "<p>Khairul is a filmmaker and content creator. He lives behind the lens, directing stories. For TRIIIPLE's first campaign, the spotlight shifted — revealing a layered voice in the conversation around confidence, culture, and self-expression.</p><p></p>",
             "text_font_size": "body-small",
-            "button_text": "",
-            "button_url": "shopify://products/ed-cotton-spandex-t-shirt-black",
+            "button_text": "W Ctton Spandex Boxer Trunks",
+            "button_url": "shopify://products/w-cotton-spandex-boxer-trunk-black",
             "button_type": "btn--white",
-            "button_size": "btn--small",
+            "button_size": "",
             "button_style": "btn--text",
-            "show_arrow": false,
+            "show_arrow": true,
             "show_social_links": true,
             "text_columns": 1,
             "align_text": "text-left",
-            "bg_color": "#19222a",
+            "bg_color": "#923531",
             "color": "#ffffff",
             "heading_tag": "automatic"
           }
@@ -61,7 +77,7 @@
         "image_Bd6W4C": {
           "type": "image",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/Land_Page-mobile-3.png",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -81,7 +97,10 @@
           }
         }
       },
-      "block_order": ["text_YPCiLm", "image_Bd6W4C"],
+      "block_order": [
+        "text_YPCiLm",
+        "image_Bd6W4C"
+      ],
       "name": "Custom section",
       "settings": {
         "borders": true,
@@ -118,7 +137,10 @@
           }
         }
       },
-      "block_order": ["heading_ByJbrU", "text_TUEGNd"],
+      "block_order": [
+        "heading_ByJbrU",
+        "text_TUEGNd"
+      ],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -142,7 +164,7 @@
             "column_width": 100,
             "icon_name": "icon-info-empty",
             "image": "shopify://shop_images/Social_Media_Icon-7.jpg",
-            "icon_size": 35,
+            "icon_size": 20,
             "icon_alignment": "icon--left",
             "icon_color": "",
             "title": "\"My hair. I used to hate its natural growth pattern. Always wore caps to hide it. Now? I play with it. I let it grow wild, experiment with styles, and let it tell its own story.\"",
@@ -158,7 +180,7 @@
             "column_width": 100,
             "icon_name": "icon-info-empty",
             "image": "shopify://shop_images/Social_Media_Icon-7.jpg",
-            "icon_size": 35,
+            "icon_size": 20,
             "icon_alignment": "icon--left",
             "icon_color": "",
             "title": "\"Imagine a young Malay boy — someone who looks like I did — flipping through media and seeing someone like me. That moment of reflection? That's powerful. It tells him: you belong here too.\"",
@@ -174,7 +196,7 @@
             "column_width": 100,
             "icon_name": "icon-info-empty",
             "image": "shopify://shop_images/Social_Media_Icon-7.jpg",
-            "icon_size": 35,
+            "icon_size": 20,
             "icon_alignment": "icon--left",
             "icon_color": "",
             "title": "\"That person who's magnetic in a crowd, but even more compelling in a one-on-one conversation. Curious, open, and not afraid to get weird — in the best way.\"",
@@ -185,7 +207,11 @@
           }
         }
       },
-      "block_order": ["icon_DX3GKC", "icon_QteHwt", "icon_NkMPDM"],
+      "block_order": [
+        "icon_DX3GKC",
+        "icon_QteHwt",
+        "icon_NkMPDM"
+      ],
       "name": "Multi column",
       "settings": {
         "title": "In His Own Words",
@@ -195,7 +221,7 @@
         "align_text": "text-left",
         "width": "wrapper--full-padded",
         "align_columns": "flex-align-top",
-        "layout_mobile": "2",
+        "layout_mobile": "1",
         "color_scheme": "scheme-4",
         "padding_top": 50,
         "padding_bottom": 60,
@@ -208,7 +234,7 @@
         "image_MdxPN9": {
           "type": "image",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/Screenshot_2026-06-03_at_2.28.54_am.png",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -250,7 +276,10 @@
           }
         }
       },
-      "block_order": ["image_MdxPN9", "text_UUncEa"],
+      "block_order": [
+        "image_MdxPN9",
+        "text_UUncEa"
+      ],
       "name": "Custom section",
       "settings": {
         "borders": false,
@@ -287,7 +316,10 @@
           }
         }
       },
-      "block_order": ["heading_q6kVcG", "text_8rxNVe"],
+      "block_order": [
+        "heading_q6kVcG",
+        "text_8rxNVe"
+      ],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -322,11 +354,17 @@
       "blocks": {
         "klaviyo_email_marketing_sms_form_embed_block_ADEw9X": {
           "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
-          "settings": { "formId": "<div class=\"klaviyo-form-U5igv3\"></div>" }
+          "settings": {
+            "formId": "<div class=\"klaviyo-form-U5igv3\"></div>"
+          }
         }
       },
-      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_ADEw9X"],
-      "settings": { "include_margins": false }
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X"
+      ],
+      "settings": {
+        "include_margins": false
+      }
     }
   },
   "order": [

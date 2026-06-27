@@ -1,0 +1,206 @@
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "subheading_option": "vendor",
+            "heading_font_size": "heading-medium",
+            "padding_bottom": 8
+          }
+        },
+        "tab_richtext": {
+          "type": "tab_richtext",
+          "settings": {
+            "show_description": true,
+            "show_read_more": false,
+            "title_1": "Care",
+            "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
+            "title_2": "Shipping",
+            "raw_content_2": "<p>Free shipping on orders over $50 within Singapore. Standard delivery 2–4 business days. International shipping available.</p>",
+            "title_3": "",
+            "raw_content_3": "",
+            "title_4": "",
+            "raw_content_4": "",
+            "title_5": "",
+            "raw_content_5": "",
+            "padding_bottom": 0
+          }
+        },
+        "variants": {
+          "type": "variants",
+          "settings": {
+            "info_page": "t-shirt-sleeveless-top-size-chart",
+            "size_chart_style": "text",
+            "option_font_size": "body-medium",
+            "value_font_size": "body-small",
+            "padding_bottom": 16
+          }
+        },
+        "fit_guide": {
+          "type": "fit-guide",
+          "settings": {
+            "heading": "Fit",
+            "segment_selected": 3,
+            "left_label": "Small",
+            "middle_label": "True to size",
+            "right_label": "Large",
+            "fit_color": "#cdff00",
+            "padding_bottom": 50
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "show_quantity": true,
+            "button_type": "btn--secondary",
+            "button_size": "btn--large",
+            "button_style": "btn--solid",
+            "show_dynamic_checkout": true,
+            "button_type_dynamic": "btn--secondary",
+            "button_size_dynamic": "",
+            "button_style_dynamic": "btn--solid",
+            "show_gift_card_recipient": false,
+            "padding_bottom": 50
+          }
+        },
+        "inventory_countdown": {
+          "type": "inventory_countdown",
+          "settings": {
+            "show_notice": "low-inventory",
+            "max_inventory": 10,
+            "show_inventory_counter": false,
+            "icon_size": 20,
+            "in_stock_color": "#56ad6a",
+            "low_stock_color": "#f79554",
+            "out_of_stock_color": "#721c24",
+            "padding_bottom": 8
+          }
+        },
+        "divider": {
+          "type": "divider",
+          "settings": {
+            "show_line": true,
+            "padding_bottom": 30
+          }
+        },
+        "sharing": {
+          "type": "sharing",
+          "settings": {
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "tab_richtext",
+        "variants",
+        "fit_guide",
+        "buttons",
+        "inventory_countdown",
+        "divider",
+        "sharing"
+      ],
+      "settings": {
+        "product_sticky_enable": true,
+        "variant_image_scroll": true,
+        "show_cart_bar": true,
+        "enable_zoom": true,
+        "enable_video_looping": true,
+        "image_layout": "grid-2",
+        "image_size": "large",
+        "mobile_image_style": "slider",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 61
+      }
+    },
+    "features": {
+      "type": "landing-features-strip",
+      "settings": {
+        "bg_color": "#212529",
+        "border_color": "rgba(255,255,255,0.11)",
+        "cat_color": "#923531",
+        "title_color": "#ffffff",
+        "desc_color": "rgba(255,255,255,0.42)"
+      },
+      "blocks": {
+        "feat-1": { "type": "feature", "settings": { "category": "Shipping", "title": "Free over $50", "description": "SG & MY. 2–4 business days." } },
+        "feat-2": { "type": "feature", "settings": { "category": "Materials", "title": "OEKO-TEX®", "description": "Certified safe for skin." } },
+        "feat-3": { "type": "feature", "settings": { "category": "Returns", "title": "30-Day Policy", "description": "Hassle-free exchanges." } },
+        "feat-4": { "type": "feature", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Crafted in Thailand." } }
+      },
+      "block_order": ["feat-1", "feat-2", "feat-3", "feat-4"]
+    },
+    "testimonials": {
+      "type": "landing-testimonials",
+      "settings": {
+        "bg_color": "#1a1d20",
+        "title_color": "#ffffff",
+        "card_bg": "#212529",
+        "star_color": "#c8a96e",
+        "quote_color": "rgba(255,255,255,0.85)",
+        "who_color": "rgba(255,255,255,0.45)",
+        "heading": "What they say."
+      },
+      "blocks": {
+        "rev-1": { "type": "review", "settings": { "stars": 5, "quote": "The most comfortable underwear I've ever worn. Fabric quality is unreal.", "name": "James T.", "product": "Classic Brief 3-Pack" } },
+        "rev-2": { "type": "review", "settings": { "stars": 5, "quote": "Finally a local brand that gets it. Fits perfectly, feels premium.", "name": "Wei H.", "product": "Boxer Trunk" } },
+        "rev-3": { "type": "review", "settings": { "stars": 5, "quote": "Ordered 5. Will order 5 more. That's all I need to say.", "name": "Raj K.", "product": "Bundle Pack" } },
+        "rev-4": { "type": "review", "settings": { "stars": 5, "quote": "Best basics I've owned. Worth every cent.", "name": "Daniel L.", "product": "Cotton Spandex Brief" } }
+      },
+      "block_order": ["rev-1", "rev-2", "rev-3", "rev-4"]
+    },
+    "luxury-spacing": {
+      "type": "section-luxury-spacing",
+      "settings": {}
+    },
+    "apps": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
+        }
+      },
+      "block_order": ["klaviyo_reviews"],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related": {
+      "type": "related",
+      "blocks": {
+        "related": {
+          "type": "related",
+          "settings": {
+            "product_recommendations_heading": "You may also like"
+          }
+        },
+        "recent": {
+          "type": "recent",
+          "settings": {
+            "product_recently_heading": "Recently viewed"
+          }
+        }
+      },
+      "block_order": ["related", "recent"],
+      "settings": {
+        "enable_tabs": true,
+        "heading_alignment": "text-left",
+        "heading_font_size": "heading-small",
+        "limit": 3,
+        "layout_desktop": "slider",
+        "grid": 2,
+        "rows": 2,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "padding_top": 38,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": ["main", "luxury-spacing", "features", "testimonials", "apps", "related"]
+}

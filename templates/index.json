@@ -1,93 +1,491 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "sale_ticker": {
-      "type": "sale-announcement-ticker",
-      "blocks": {
-        "msg_1": { "type": "message", "settings": { "text": "Buy 3 · 15% Off" } },
-        "msg_2": { "type": "message", "settings": { "text": "Buy 5 · 25% Off" } },
-        "msg_3": { "type": "message", "settings": { "text": "New Customer · 10% Off First Order" } },
-        "msg_4": { "type": "message", "settings": { "text": "Free Shipping Over $50 · SG" } },
-        "msg_5": { "type": "message", "settings": { "text": "Final Stock · No Restock" } },
-        "msg_6": { "type": "message", "settings": { "text": "No Code Needed" } }
-      },
-      "block_order": ["msg_1", "msg_2", "msg_3", "msg_4", "msg_5", "msg_6"],
-      "settings": {}
-    },
-    "sale_hero": {
+    "sale_hero_yttHVg": {
       "type": "sale-hero",
       "blocks": {
-        "ghost_1": { "type": "ghost_cta", "settings": { "label": "Briefs" } },
-        "ghost_2": { "type": "ghost_cta", "settings": { "label": "Boxer Trunks" } },
-        "ghost_3": { "type": "ghost_cta", "settings": { "label": "Tops" } }
+        "ghost_cta_ekeKG4": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Briefs",
+            "url": "shopify://collections/briefs"
+          }
+        },
+        "ghost_cta_aJVMW4": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Boxer Trunks",
+            "url": "shopify://collections/boxer-trunks"
+          }
+        },
+        "ghost_cta_f3RHBG": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Tops",
+            "url": "shopify://collections/tops"
+          }
+        }
       },
-      "block_order": ["ghost_1", "ghost_2", "ghost_3"],
-      "settings": {}
+      "block_order": [
+        "ghost_cta_ekeKG4",
+        "ghost_cta_aJVMW4",
+        "ghost_cta_f3RHBG"
+      ],
+      "name": "Sale Hero",
+      "settings": {
+        "image": "shopify://shop_images/1780115423632.jpg",
+        "hero_height": 100,
+        "overlay_from": "#3b3a38",
+        "overlay_to": "#00000052",
+        "eyebrow": "Final Clearance",
+        "eyebrow_color": "#19222a",
+        "title": "<p>The<br/>Last Run.</p>",
+        "title_size": 120,
+        "subtitle": "<p><span style=\"text-decoration:underline\"><strong>Buy 3</strong></span><span style=\"text-decoration:underline\"> — 15% off</span></p><p><span style=\"text-decoration:underline\"><strong>Buy 5</strong></span><span style=\"text-decoration:underline\"> — 25% off</span></p><p></p><p>No Code Needed.</p><p><br/>Free shipping over $50 · Singapore & Malaysia</p>",
+        "cta_text": "Shop All",
+        "cta_url": "shopify://collections",
+        "cta_bg": "#b0b7be",
+        "cta_text_color": "#282722",
+        "show_urgency": true,
+        "urgency_label": "Status",
+        "urgency_text": "<p>Wear it.</p><p>Own it.</p><p>Explain nothing.</p>"
+      }
     },
-    "sale_tiers": {
-      "type": "sale-tier-strip",
+    "17805931557bc20883": {
+      "type": "apps",
       "blocks": {
-        "tier_1": { "type": "tier", "settings": { "highlight": "15%", "label": "off — 3 items" } },
-        "tier_2": { "type": "tier", "settings": { "highlight": "25%", "label": "off — 5 items" } },
-        "tier_3": { "type": "tier", "settings": { "highlight": "$50+", "label": "free shipping · SG" } }
+        "klaviyo_email_marketing_sms_form_embed_block_M3gHEm": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "<div class=\"klaviyo-form-U5igv3\"></div>"
+          }
+        }
       },
-      "block_order": ["tier_1", "tier_2", "tier_3"],
-      "settings": {}
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_M3gHEm"
+      ],
+      "settings": {
+        "include_margins": false
+      }
     },
-    "sale_collections": {
+    "sale_collection_grid_jyVnfY": {
       "type": "sale-collection-grid",
       "blocks": {
-        "tile_1": { "type": "tile", "settings": { "title": "Briefs" } },
-        "tile_2": { "type": "tile", "settings": { "title": "Boxer Trunks" } },
-        "tile_3": { "type": "tile", "settings": { "title": "Tops" } },
-        "tile_4": { "type": "tile", "settings": { "title": "Socks" } }
+        "tile_QxRApd": {
+          "type": "tile",
+          "settings": {
+            "title": "Briefs",
+            "image": "shopify://shop_images/Y.png",
+            "url": ""
+          }
+        },
+        "tile_Cmm3kT": {
+          "type": "tile",
+          "settings": {
+            "title": "Boxer Trunks",
+            "image": "shopify://shop_images/IG_Post_13thJun-1.png",
+            "url": ""
+          }
+        },
+        "tile_eUpCxx": {
+          "type": "tile",
+          "settings": {
+            "title": "Tops",
+            "image": "shopify://shop_images/TRIIIPLE_STUDIO_SOCIAL_MEDIA_-_10.jpg",
+            "url": "shopify://collections/tops"
+          }
+        },
+        "tile_BgzjfC": {
+          "type": "tile",
+          "settings": {
+            "title": "Socks",
+            "image": "shopify://shop_images/Img_Images_Image_Asset_169_20260517.png",
+            "url": "shopify://collections/socks"
+          }
+        }
       },
-      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4"],
-      "settings": {}
+      "block_order": [
+        "tile_QxRApd",
+        "tile_Cmm3kT",
+        "tile_eUpCxx",
+        "tile_BgzjfC"
+      ],
+      "name": "Sale Collection Grid",
+      "settings": {
+        "heading": "Shop the range.",
+        "bg_color": "#0f0e0b",
+        "heading_color": "#a1abb6",
+        "gap": 3
+      }
     },
-    "sale_pillars": {
+    "sale_pillars_CgTeKh": {
       "type": "sale-pillars",
       "blocks": {
-        "p_1": { "type": "pillar", "settings": { "category": "Technology", "title": "TransDRY®", "description": "Moisture-wicking micro-channel fabric. Stays dry under pressure." } },
-        "p_2": { "type": "pillar", "settings": { "category": "Material", "title": "Cotton Spandex", "description": "72% Pima cotton, 20% modal, 8% elastane. Moves with you." } },
-        "p_3": { "type": "pillar", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Conceived in Singapore. Precision-crafted in Thailand." } },
-        "p_4": { "type": "pillar", "settings": { "category": "Performance", "title": "Made to Move", "description": "Contoured pouch. Double-stitched waistband. Zero ride-up." } }
+        "pillar_DwkajM": {
+          "type": "pillar",
+          "settings": {
+            "category": "Technology",
+            "title": "TransDRY®",
+            "description": "Moisture-wicking micro-channel fabric. Stays dry under pressure."
+          }
+        },
+        "pillar_LEAgGJ": {
+          "type": "pillar",
+          "settings": {
+            "category": "Material",
+            "title": "Cotton Spandex",
+            "description": "Durable mixed with breathable, moves with you."
+          }
+        },
+        "pillar_cczaAc": {
+          "type": "pillar",
+          "settings": {
+            "category": "Origin",
+            "title": "Designed in SG",
+            "description": "Conceived in Singapore. Precision-crafted in Thailand."
+          }
+        },
+        "pillar_FJirYX": {
+          "type": "pillar",
+          "settings": {
+            "category": "Performance",
+            "title": "Made to Move",
+            "description": "Contoured pouch. Double-stitched waistband. Zero ride-up."
+          }
+        }
       },
-      "block_order": ["p_1", "p_2", "p_3", "p_4"],
-      "settings": {}
+      "block_order": [
+        "pillar_DwkajM",
+        "pillar_LEAgGJ",
+        "pillar_cczaAc",
+        "pillar_FJirYX"
+      ],
+      "name": "Sale Pillars",
+      "settings": {
+        "bg_color": "#212529",
+        "border_color": "#ffffff1c",
+        "category_color": "#a1abb6",
+        "title_color": "#ffffff",
+        "desc_color": "#ffffff6b"
+      }
     },
-    "sale_reviews": {
-      "type": "sale-reviews",
+    "section_rich_text_columns_pUkz8q": {
+      "type": "section-rich-text-columns",
       "blocks": {
-        "r_1": { "type": "review", "settings": { "quote": "Best underwear I've owned. Period.", "author": "Marcus T. — Verified buyer", "sku": "Studio Brief · Black · M" } },
-        "r_2": { "type": "review", "settings": { "quote": "Bought 3 packs. Won't go back to anything else.", "author": "James L. — Verified buyer", "sku": "Boxer Trunk · White · L" } },
-        "r_3": { "type": "review", "settings": { "quote": "The fit is surgical. Exactly what I needed.", "author": "Ryan K. — Verified buyer", "sku": "Studio Brief · Black · S" } }
+        "text_KmnhFb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>they tried it, now they can't go back...</p>",
+            "text_font_size": "body-x-small",
+            "position": "left",
+            "padding_bottom": 16
+          }
+        },
+        "heading_d7LnKM": {
+          "type": "heading",
+          "settings": {
+            "title": "Approved by you.",
+            "heading_font_size": "heading-medium",
+            "position": "left",
+            "padding_bottom": 0,
+            "heading_tag": "automatic"
+          }
+        }
       },
-      "block_order": ["r_1", "r_2", "r_3"],
-      "settings": {}
+      "block_order": [
+        "text_KmnhFb",
+        "heading_d7LnKM"
+      ],
+      "name": "Rich text columns",
+      "settings": {
+        "left_column_width": 100,
+        "divider_width": 0,
+        "show_line": false,
+        "right_column_width": 0,
+        "align_text": "text-right",
+        "width": "wrapper--full-padded",
+        "align_text_mobile": "text-left--mobile",
+        "color_scheme": "scheme-3",
+        "padding_top": 74,
+        "padding_bottom": 0
+      }
     },
-    "sale_klaviyo": {
-      "type": "sale-klaviyo",
+    "1779722012095b52aa": {
+      "type": "apps",
       "blocks": {
-        "perk_1": { "type": "perk", "settings": { "text": "No spam" } },
-        "perk_2": { "type": "perk", "settings": { "text": "Unsubscribe anytime" } },
-        "perk_3": { "type": "perk", "settings": { "text": "SG only" } }
+        "klaviyo_reviews_featured_reviews_carousel_BQkmRg": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
+        }
       },
-      "block_order": ["perk_1", "perk_2", "perk_3"],
-      "settings": {}
+      "block_order": [
+        "klaviyo_reviews_featured_reviews_carousel_BQkmRg"
+      ],
+      "settings": {
+        "include_margins": false
+      }
     },
-    "sale_brand_story": {
+    "gallery_banner_hkN4Yr": {
+      "type": "gallery-banner",
+      "blocks": {
+        "tile_KBedqb": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/40.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center top"
+          }
+        },
+        "tile_EAhr7k": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_15.jpg",
+            "framed": true,
+            "frame_shape": "wide",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_pxYrBk": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/LP_-_amos-001_-_Amos_Ashley_Chin_1_1.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_dXjGMD": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Split_Panel_B_Detail___Environment.jpg",
+            "framed": true,
+            "frame_shape": "",
+            "focal": "object-position:right center"
+          }
+        },
+        "tile_L4XNFF": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_iTL3wG": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/In_TRIIIPLE.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_zE9W3V": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/2_777fce3c-442e-4c9b-a78e-ec4101fabd9d.jpg",
+            "framed": true,
+            "frame_shape": "wide",
+            "focal": "object-position:center top"
+          }
+        },
+        "tile_CeBGHt": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/LP_-_peonypink-001_-_PEONYPINK_1_1.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_maJPyk": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/LP_-_khairul-001_-_Khairul_1_1.jpg",
+            "framed": true,
+            "frame_shape": "tall",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_KYjKcV": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/IG_Story_20thJun-3.png",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_G7hgJc": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait.jpg",
+            "framed": false,
+            "frame_shape": "",
+            "focal": "object-position:center"
+          }
+        },
+        "tile_c3eLrL": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/Banner-1_5a5422d7-b064-4cfa-85fa-f6f0bb1124c8.jpg",
+            "framed": true,
+            "frame_shape": "wide",
+            "focal": "object-position:right center"
+          }
+        }
+      },
+      "block_order": [
+        "tile_KBedqb",
+        "tile_EAhr7k",
+        "tile_pxYrBk",
+        "tile_dXjGMD",
+        "tile_L4XNFF",
+        "tile_iTL3wG",
+        "tile_zE9W3V",
+        "tile_CeBGHt",
+        "tile_maJPyk",
+        "tile_KYjKcV",
+        "tile_G7hgJc",
+        "tile_c3eLrL"
+      ],
+      "name": "Gallery Banner",
+      "settings": {
+        "eyebrow": "Welcome",
+        "title": "STORY SALON",
+        "title_position": "right",
+        "title_vertical": "bottom",
+        "title_size": "Display",
+        "title_color": "#ffffff",
+        "heading_font": "lexend_zetta_n7",
+        "body_font": "archivo_narrow_n4",
+        "width": "Full width",
+        "tile_gap": 0,
+        "desktop_columns": "4",
+        "mobile_columns": "3",
+        "tile_aspect": "1/1",
+        "color_scheme": "Scheme 2",
+        "field_color": "#a1fd6e",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_rich_text_9GbfDw": {
+      "type": "section-rich-text",
+      "blocks": {
+        "subheading_jRRAnQ": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Introducing",
+            "padding_bottom": 16
+          }
+        },
+        "heading_4eBhyC": {
+          "type": "heading",
+          "settings": {
+            "title": "Story Salon",
+            "heading_font_size": "heading-medium",
+            "padding_bottom": 24,
+            "heading_tag": "automatic"
+          }
+        },
+        "text_mRtTP8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>not a campaign. not a lookback. </p><p></p><p>a room where people sit down </p><p>and say something true.</p>",
+            "text_font_size": "body-x-small",
+            "padding_bottom": 32
+          }
+        },
+        "buttons_Q3KFbh": {
+          "type": "buttons",
+          "settings": {
+            "button_text": "Explore",
+            "button_url": "shopify://pages/story-salon",
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "subheading_jRRAnQ",
+        "heading_4eBhyC",
+        "text_mRtTP8",
+        "buttons_Q3KFbh"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "align_text": "text-left",
+        "width": "wrapper--full-padded",
+        "color_scheme": "",
+        "overlay_type": "disabled",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "section_rich_text_kVbYMk": {
+      "type": "section-rich-text",
+      "blocks": {
+        "subheading_fbtfPM": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "about us",
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "subheading_fbtfPM"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "align_text": "text-left",
+        "width": "wrapper",
+        "color_scheme": "scheme-3",
+        "overlay_type": "disabled",
+        "padding_top": 60,
+        "padding_bottom": 0
+      }
+    },
+    "sale_brand_story_wyECfr": {
       "type": "sale-brand-story",
-      "settings": {}
+      "name": "Sale Brand Story",
+      "settings": {
+        "bg_color": "#ffffff",
+        "border_color": "#ffffff1c",
+        "eyebrow_color": "#a1abb6",
+        "title_color": "#281818",
+        "body_color": "#ffffff05",
+        "eyebrow": "",
+        "title": "<p>Designed in Singapore.<br/>Crafted in Thailand.</p>",
+        "body": "<p>TRIIIPLE was built on a single premise </p><p>— that underwear should be engineered, </p><p>not just made. Every cut, every stitch, </p><p>every fabric blend is a deliberate decision. </p><p>This is not basics. This is the baseline.</p>",
+        "image": "shopify://shop_images/Banner_2_13thAugl.jpg"
+      }
     }
   },
   "order": [
-    "sale_ticker",
-    "sale_hero",
-    "sale_tiers",
-    "sale_collections",
-    "sale_pillars",
-    "sale_reviews",
-    "sale_klaviyo",
-    "sale_brand_story"
+    "sale_hero_yttHVg",
+    "17805931557bc20883",
+    "sale_collection_grid_jyVnfY",
+    "sale_pillars_CgTeKh",
+    "section_rich_text_columns_pUkz8q",
+    "1779722012095b52aa",
+    "gallery_banner_hkN4Yr",
+    "section_rich_text_9GbfDw",
+    "section_rich_text_kVbYMk",
+    "sale_brand_story_wyECfr"
   ]
 }
