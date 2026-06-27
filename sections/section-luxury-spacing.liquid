@@ -1,0 +1,296 @@
+{% comment %}
+  Luxury spacing overrides — applies to collection and product pages.
+  Add to any collection or product template to get generous negative space,
+  ultra-light typography, and relaxed grid matching a luxury retail standard.
+{% endcomment %}
+<style>
+  /* ─────────────────────────────────────────────────────────────────
+     SHARED — Header
+     ───────────────────────────────────────────────────────────────── */
+  .header__inner,
+  .site-header__inner,
+  [class*="header__main"] {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 64px;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     COLLECTION — Grid layout
+     ───────────────────────────────────────────────────────────────── */
+
+  /* Force 4 columns on desktop with 48px gap */
+  @media only screen and (min-width: 990px) {
+    .template-collection .collection__products .grid,
+    .template-collection .grid-outer .grid,
+    .template-collection .product-grid {
+      --COLUMNS: 4 !important;
+      --gap: 48px !important;
+      --gutter: 48px !important;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      column-gap: 48px !important;
+      row-gap: 0 !important;
+    }
+
+    /* Side padding on grid container */
+    .template-collection .collection__products .grid-outer {
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+      padding-bottom: 64px !important;
+    }
+  }
+
+  /* 2 columns on tablet */
+  @media only screen and (min-width: 750px) and (max-width: 989px) {
+    .template-collection .collection__products .grid,
+    .template-collection .grid-outer .grid {
+      --COLUMNS: 2 !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      column-gap: 24px !important;
+      row-gap: 0 !important;
+    }
+  }
+
+  /* Product card — remove all internal padding/margin from image */
+  .template-collection .product-item {
+    margin: 0;
+  }
+
+  /* Product card info area — tight, precise spacing */
+  .template-collection .product-item__info {
+    padding: 10px 0 20px !important;
+  }
+  @media only screen and (max-width: 749px) {
+    .template-collection .product-item__info {
+      padding: 8px 0 16px !important;
+    }
+  }
+
+  /* Product title — suisse-light equivalent: weight 300, wide tracking, uppercase */
+  .template-collection .product-item__title,
+  .template-collection .product-item__title * {
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    letter-spacing: 2.08px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    margin: 0 0 6px !important;
+  }
+
+  /* Product price */
+  .template-collection .product-item__price,
+  .template-collection .product-item__price__holder,
+  .template-collection .product-item__price * {
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.48px !important;
+    line-height: 1 !important;
+  }
+
+  /* Product vendor / cutline */
+  .template-collection .product-item__cutline {
+    font-size: 10px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.48px !important;
+    margin-bottom: 3px !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     COLLECTION — Filter / category bar
+     ───────────────────────────────────────────────────────────────── */
+  .template-collection .collection__nav {
+    min-height: 32px !important;
+    align-items: center;
+  }
+
+  /* Filter tab links */
+  .template-collection .collection__nav a,
+  .template-collection .collection__nav button,
+  .template-collection .collection__nav .collection__linklist a,
+  .template-collection .linklist a,
+  .template-collection .collection-linklist a {
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    letter-spacing: 1.92px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+  }
+
+  /* Linklist column gap */
+  .template-collection .collection__linklist,
+  .template-collection .linklist {
+    column-gap: 32px !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     COLLECTION — Page heading (H1 banner)
+     ───────────────────────────────────────────────────────────────── */
+  .template-collection .page-heading,
+  .template-collection .collection__heading,
+  .template-collection h1.visually-hidden,
+  .template-collection .collection-image-with-title h1,
+  .template-collection .collection-image-with-title h2 {
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    letter-spacing: 2.08px !important;
+    text-transform: uppercase !important;
+    line-height: 1.4 !important;
+    padding-top: 19px !important;
+    padding-bottom: 19px !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     PRODUCT DETAIL PAGE — Typography & spacing
+     ───────────────────────────────────────────────────────────────── */
+
+  /* Product name H1 */
+  .template-product .product__title,
+  .template-product .product__title h1,
+  .template-product .product-single__title,
+  .template-product .product__title__wrapper h1 {
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    letter-spacing: 2.08px !important;
+    text-transform: uppercase !important;
+    line-height: 1.4 !important;
+    margin-top: 3px !important;
+  }
+
+  /* Price */
+  .template-product .product__price,
+  .template-product .product__price__wrap,
+  .template-product .product__price * {
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.48px !important;
+    line-height: 1.5 !important;
+  }
+  .template-product .product__price__wrap {
+    margin-top: 8px !important;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Colour / option labels */
+  .template-product .selector-wrapper__label,
+  .template-product .selector-label,
+  .template-product .variant-label,
+  .template-product label.label {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    margin-top: 40px !important;
+    display: block;
+  }
+
+  /* Colour swatch gap */
+  .template-product .radio__fieldset--swatches,
+  .template-product .swatch__list,
+  .template-product [class*="swatches"] {
+    gap: 12px !important;
+  }
+
+  /* Description body copy */
+  .template-product .product__description,
+  .template-product .product__description p,
+  .template-product .rte p,
+  .template-product .product-description p {
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.48px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* SKU / reference */
+  .template-product .product__sku,
+  .template-product .product__ref,
+  .template-product [class*="sku"] {
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.48px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Add to Basket / Add to Cart button */
+  .template-product .btn--add-to-cart,
+  .template-product [data-add-to-cart],
+  .template-product .product-form__submit,
+  .template-product product-form .btn,
+  .template-product .product-form .btn--primary,
+  .template-product .product-form .btn--secondary {
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    letter-spacing: 1.92px !important;
+    text-transform: uppercase !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    line-height: 1 !important;
+    padding: 0 16px !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid #111111 !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    max-width: 330px;
+  }
+  .template-product .btn--add-to-cart:hover,
+  .template-product product-form .btn:hover,
+  .template-product .product-form .btn--primary:hover,
+  .template-product .product-form .btn--secondary:hover {
+    background: #111111 !important;
+    color: #ffffff !important;
+  }
+
+  /* Accordion / tab section titles */
+  .template-product .accordion__title,
+  .template-product .tabs__tab,
+  .template-product .tab__title,
+  .template-product .collapsible__title,
+  .template-product [class*="accordion__heading"],
+  .template-product .tab-richtext__tab {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.144px !important;
+    line-height: 1 !important;
+    padding: 12px 30px !important;
+    color: #555555 !important;
+    margin-top: 10px !important;
+    text-transform: none !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     PRODUCT DETAIL — Layout: generous top padding
+     ───────────────────────────────────────────────────────────────── */
+  @media only screen and (min-width: 750px) {
+    .template-product .product,
+    .template-product .featured-product__body,
+    .template-product .product-single {
+      padding-top: 20px !important;
+    }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     SHARED — Remove excessive border-radius for clean luxury feel
+     ───────────────────────────────────────────────────────────────── */
+  .template-collection .btn,
+  .template-collection .badge-box,
+  .template-product .btn,
+  .template-product .badge-box {
+    border-radius: 0 !important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Luxury Spacing",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    { "name": "Luxury Spacing" }
+  ],
+  "templates": ["collection", "product", "index", "page"],
+  "limit": 1
+}
+{% endschema %}
