@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "collection-image-with-title",
+      "settings": {
+        "show_title": true,
+        "show_description": false,
+        "flex_align": "align--bottom-left",
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "show_text_background": false,
+        "overlay_type": "disabled",
+        "show_image": false,
+        "banner_layout": "overlay",
+        "height": "screen-height-one-third",
+        "mobile_height": "five-fifty-height-hero--mobile",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "subcollections": {
+      "type": "subcollections",
+      "settings": {
+        "subcollection_layout": "grid",
+        "subcollection_description": true,
+        "select_image": "collection",
+        "color_scheme": "scheme-2",
+        "color": "#ffffff",
+        "bg_color": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "collection",
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": false,
+        "filter_layout": "inline-closed",
+        "default_open": false,
+        "collection_linklist": "main-menu",
+        "grid": 4,
+        "grid_mobile": "2",
+        "products_per_page": 24,
+        "color_scheme": "scheme-3",
+        "padding_top": 0,
+        "padding_bottom": 24
+      }
+    },
+    "section_recent_products_JGCaih": {
+      "type": "section-recent-products",
+      "name": "Recently viewed products",
+      "settings": {
+        "product_recently_limit": 4,
+        "product_recently_minimum": 4,
+        "product_recently_heading": "Viewed",
+        "heading_font_size": "heading-mini",
+        "layout_desktop": "slider",
+        "grid": 3,
+        "rows": 3,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-6",
+        "padding_top": 30,
+        "padding_bottom": 49,
+        "heading_tag": "automatic"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "subcollections",
+    "main",
+    "section_recent_products_JGCaih"
+  ]
+}

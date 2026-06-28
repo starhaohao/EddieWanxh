@@ -1,0 +1,396 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom-content-3": {
+      "type": "section-custom-content",
+      "blocks": {
+        "text-3-1": {
+          "type": "text",
+          "settings": {
+            "subheading": "About Us",
+            "title": "Who we are",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>TRIIIPLE Studio is a men’s underwear and intimate wear brand redefining comfort, confidence, and self-expression—starting from the first layer. </p>",
+            "text_font_size": "body-small",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "show_social_links": false,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "",
+            "color": "",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "text-3-1"
+      ],
+      "settings": {
+        "borders": false,
+        "gutters": false,
+        "width": "wrapper--full-padded",
+        "height": "screen-height-one-half",
+        "mobile_height": "screen-height-one-half--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom-content-2": {
+      "type": "section-custom-content",
+      "blocks": {
+        "image-2-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/About-us-1.jpg",
+            "title": "",
+            "heading_font_size": "heading-large",
+            "text": "",
+            "text_font_size": "body-medium",
+            "flex_align": "align--middle-center",
+            "show_text_background": false,
+            "bg_color": "",
+            "color": "",
+            "link_text": "",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "heading_tag": "automatic"
+          }
+        },
+        "image-2-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/About-us-2.jpg",
+            "title": "",
+            "heading_font_size": "heading-large",
+            "text": "",
+            "text_font_size": "body-medium",
+            "flex_align": "align--middle-center",
+            "show_text_background": false,
+            "bg_color": "",
+            "color": "",
+            "link_text": "",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "image-2-1",
+        "image-2-2"
+      ],
+      "settings": {
+        "borders": false,
+        "gutters": false,
+        "width": "wrapper--full-padded",
+        "height": "screen-height-full",
+        "mobile_height": "screen-height-one-half--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_custom_content_peRVHk": {
+      "type": "section-custom-content",
+      "blocks": {
+        "text_ayUVy3": {
+          "type": "text",
+          "settings": {
+            "subheading": "",
+            "title": "",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Founded in Singapore and crafted in Asia, we design bold, body-inclusive underwear that merges high-performance fabrics with elevated aesthetics.</p>",
+            "text_font_size": "body-small",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "show_social_links": false,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "",
+            "color": "",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "text_ayUVy3"
+      ],
+      "settings": {
+        "borders": false,
+        "gutters": false,
+        "width": "wrapper--full-padded",
+        "height": "screen-height-one-half",
+        "mobile_height": "screen-height-one-half--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_announcement_QrrUnw": {
+      "type": "section-announcement",
+      "blocks": {
+        "text_Phf6Vw": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>BE SEXXXY</strong></p>",
+            "text_font_size": "body-large",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_gmdGaH": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>BE INIIIMITABLE</strong></p>",
+            "text_font_size": "body-large",
+            "color": "#000000",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_GzCCbD": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>BE BRAAAVE</strong></p>",
+            "text_font_size": "body-large",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        }
+      },
+      "block_order": [
+        "text_Phf6Vw",
+        "text_gmdGaH",
+        "text_GzCCbD"
+      ],
+      "settings": {
+        "slider_speed": 10,
+        "text_alignment": "center",
+        "marquee_speed": 50,
+        "direction": "ticker-rtl",
+        "message_spacing": 35,
+        "show_border": false,
+        "layout": "marquee",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom-content-4": {
+      "type": "section-custom-content",
+      "blocks": {
+        "text-4-1": {
+          "type": "text",
+          "settings": {
+            "subheading": "",
+            "title": "",
+            "heading_font_size": "heading-small",
+            "text": "<p><strong>We craft enduring essentials and reinvented classics</strong></p><p></p><p>—each made with innovative materials that move with you, wick moisture fast, and feel luxuriously soft against the skin. Every piece is designed to support your lifestyle and remain relevant beyond the trend cycle—whether you’re working, resting, or owning the night.</p>",
+            "text_font_size": "body-small",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "show_social_links": false,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "",
+            "color": "",
+            "heading_tag": "automatic"
+          }
+        },
+        "image-4-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/About-us-3.jpg",
+            "title": "",
+            "heading_font_size": "heading-large",
+            "text": "",
+            "text_font_size": "body-medium",
+            "flex_align": "align--middle-center",
+            "show_text_background": false,
+            "bg_color": "",
+            "color": "",
+            "link_text": "",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "text-4-1",
+        "image-4-2"
+      ],
+      "settings": {
+        "borders": false,
+        "gutters": false,
+        "width": "wrapper--full-padded",
+        "height": "screen-height-full",
+        "mobile_height": "screen-height-one-half--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_text_with_products_HYeJPT": {
+      "type": "section-text-with-products",
+      "settings": {
+        "subheading": "",
+        "heading": "It’s foundational. It should empower you to express your edge, your truth, and your individuality.",
+        "width": "wrapper--narrow",
+        "text_font_size_px_desktop": 33,
+        "text_align_desktop": "text-center",
+        "text_font_size_px_mobile": 15,
+        "text_align_mobile": "text-center--mobile",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "subheading": "",
+        "show_title": true,
+        "heading_font_size": "heading-mini",
+        "show_content": true,
+        "text_font_size": "body-medium",
+        "align_text": "text-center",
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    },
+    "custom-content-1": {
+      "type": "section-custom-content",
+      "blocks": {
+        "image-1-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/About-us-4.jpg",
+            "title": "",
+            "heading_font_size": "heading-large",
+            "text": "",
+            "text_font_size": "body-medium",
+            "flex_align": "align--middle-center",
+            "show_text_background": false,
+            "bg_color": "",
+            "color": "",
+            "link_text": "",
+            "link": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "image-1-1"
+      ],
+      "settings": {
+        "borders": false,
+        "gutters": false,
+        "width": "wrapper--full-padded",
+        "height": "screen-height-full",
+        "mobile_height": "screen-height-one-half--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_custom_content_DVYqGX": {
+      "type": "section-custom-content",
+      "blocks": {
+        "text_MKzdFq": {
+          "type": "text",
+          "settings": {
+            "subheading": "",
+            "title": "",
+            "heading_font_size": "heading-small",
+            "text": "<p><strong>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones—with sizes ranging from XS to 2XL.</strong> </p><p></p><p>We believe confidence has no template—every story deserves to be seen, felt, and celebrated. Join our community where self-expression meets comfort, and individuality is always in style.</p>",
+            "text_font_size": "body-small",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "show_social_links": false,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "",
+            "color": "",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "text_MKzdFq"
+      ],
+      "settings": {
+        "borders": false,
+        "gutters": false,
+        "width": "wrapper--full-padded",
+        "height": "screen-height-three-quarters",
+        "mobile_height": "screen-height-one-half--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "custom-content-3",
+    "custom-content-2",
+    "section_custom_content_peRVHk",
+    "section_announcement_QrrUnw",
+    "custom-content-4",
+    "section_text_with_products_HYeJPT",
+    "main",
+    "custom-content-1",
+    "section_custom_content_DVYqGX"
+  ]
+}

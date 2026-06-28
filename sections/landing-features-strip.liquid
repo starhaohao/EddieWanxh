@@ -1,0 +1,118 @@
+{%- liquid
+  assign bg = section.settings.bg_color
+  assign border = section.settings.border_color
+  assign cat_color = section.settings.cat_color
+  assign title_color = section.settings.title_color
+  assign desc_color = section.settings.desc_color
+-%}
+
+<section class="lfs" style="--lfs-bg:{{ bg }};--lfs-bd:{{ border }};--lfs-cat:{{ cat_color }};--lfs-tc:{{ title_color }};--lfs-dc:{{ desc_color }};">
+  <div class="lfs__grid">
+    {%- for block in section.blocks -%}
+      <div class="lfs__card" data-ts-fade style="--ts-delay:{{ forloop.index0 | times: 70 }}ms" {{ block.shopify_attributes }}>
+        <div class="lfs__cat">{{ block.settings.category }}</div>
+        <div class="lfs__title">{{ block.settings.title }}</div>
+        {%- if block.settings.description != blank -%}
+          <div class="lfs__desc">{{ block.settings.description }}</div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  [data-ts-fade] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    transition-delay: var(--ts-delay, 0ms);
+  }
+  [data-ts-fade].ts-visible { opacity: 1; transform: none; }
+
+  .lfs {
+    overflow-x: hidden;
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: 0 40px;
+    background: var(--lfs-bg);
+  }
+  .lfs__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size }}, 1fr);
+    border-top: 1px solid var(--lfs-bd);
+    border-left: 1px solid var(--lfs-bd);
+  }
+  .lfs__card {
+    padding: 28px 24px;
+    border-right: 1px solid var(--lfs-bd);
+    border-bottom: 1px solid var(--lfs-bd);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .lfs__cat {
+    font-family: monospace;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--lfs-cat);
+  }
+  .lfs__title {
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    color: var(--lfs-tc);
+    line-height: 1.2;
+  }
+  .lfs__desc {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+    color: var(--lfs-dc);
+  }
+  @media (max-width: 749px) {
+    .lfs { padding: 0 16px; }
+    .lfs__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .lfs__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Features Strip",
+  "tag": "div",
+  "class": "landing-features-strip-section",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#212529" },
+    { "type": "color", "id": "border_color", "label": "Border", "default": "rgba(255,255,255,0.11)" },
+    { "type": "color", "id": "cat_color", "label": "Category color", "default": "#923531" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#ffffff" },
+    { "type": "color", "id": "desc_color", "label": "Description color", "default": "rgba(255,255,255,0.42)" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "category", "label": "Category label", "default": "Shipping" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Free over $50" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Singapore & Malaysia. 2–4 days." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features Strip",
+      "blocks": [
+        { "type": "feature", "settings": { "category": "Shipping", "title": "Free over $50", "description": "SG & MY. 2–4 business days." } },
+        { "type": "feature", "settings": { "category": "Materials", "title": "OEKO-TEX®", "description": "Certified safe for skin." } },
+        { "type": "feature", "settings": { "category": "Returns", "title": "30-Day Policy", "description": "Hassle-free exchanges." } },
+        { "type": "feature", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Crafted in Thailand." } }
+      ]
+    }
+  ],
+  "templates": ["index", "page"]
+}
+{% endschema %}

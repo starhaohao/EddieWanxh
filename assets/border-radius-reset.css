@@ -1,0 +1,60 @@
+/* TRIIIPLE product grid: color swatch outline */
+.card__swatches .swatch,
+.product-card__swatches .swatch,
+.color-swatch,
+.swatch-input__label,
+.product-card__swatch,
+.card-product__swatch {
+  border: 1px solid #d8d8d8 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+/* Stronger outline for light color swatches */
+.card__swatches .swatch[style*="#fafafa"],
+.card__swatches .swatch[style*="#fff"],
+.card__swatches .swatch[style*="white"],
+.product-card__swatches .swatch[style*="#fafafa"],
+.product-card__swatches .swatch[style*="#fff"],
+.product-card__swatches .swatch[style*="white"],
+.color-swatch[style*="#fafafa"],
+.color-swatch[style*="#fff"],
+.color-swatch[style*="white"],
+.swatch-input__label[style*="#fafafa"],
+.swatch-input__label[style*="#fff"],
+.swatch-input__label[style*="white"] {
+  border: 1px solid #bdbdbd !important;
+}
+
+/* Selected/active swatch outline */
+.card__swatches .swatch.is-active,
+.product-card__swatches .swatch.is-active,
+.color-swatch.is-active,
+.swatch-input__input:checked + .swatch-input__label,
+input:checked + .swatch-input__label {
+  outline: 1px solid #000000;
+  outline-offset: 2px;
+}
+
+/* Force square corners on collection product cards */
+body.template-collection .product-item__image,
+body.template-collection .product-item__bg,
+body.template-collection .product-item__bg__inner,
+body.template-collection .product-item__image img,
+body.template-collection .product-item__bg img,
+body.template-collection .product-item__bg__inner img,
+body.template-collection .card__media,
+body.template-collection .card__media img,
+body.template-collection .product-card-wrapper .media,
+body.template-collection .product-card-wrapper .media img,
+body.template-collection .card-wrapper .media,
+body.template-collection .card-wrapper .media img {
+  border-radius: 0 !important;
+}
+
+body.template-collection .product-item__image,
+body.template-collection .product-item__bg,
+body.template-collection .card__media,
+body.template-collection .product-card-wrapper .media,
+body.template-collection .card-wrapper .media {
+  overflow: hidden;
+}

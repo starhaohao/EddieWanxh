@@ -1,0 +1,190 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "collection-image-with-title",
+      "settings": {
+        "show_title": true,
+        "show_description": true,
+        "flex_align": "align--top-left",
+        "color_scheme": "scheme-2",
+        "show_text_background": false,
+        "overlay_type": "disabled",
+        "show_image": false,
+        "banner_layout": "overlay",
+        "height": "screen-height-one-third",
+        "mobile_height": "screen-height-one-third--mobile",
+        "padding_top": 0,
+        "padding_bottom": 50
+      }
+    },
+    "section_announcement_xzwedz": {
+      "type": "section-announcement",
+      "blocks": {
+        "text_RfAQA9": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>WELCOME</strong></p>",
+            "text_font_size": "body-small",
+            "color": "#cdff00",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_4QCz4N": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>|</strong></p>",
+            "text_font_size": "body-small",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_AXUBmr": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>LASTCALL30</strong></p>",
+            "text_font_size": "body-small",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_383DV9": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>|</strong></p>",
+            "text_font_size": "body-small",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_87VkFg": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>welcome back</strong></p>",
+            "text_font_size": "body-small",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_tReqpw": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>|</strong></p>",
+            "text_font_size": "body-small",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_ihqzDx": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Buy 3 or more</strong></p>",
+            "text_font_size": "body-small",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_9MEMDb": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>|</strong></p>",
+            "text_font_size": "body-small",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        }
+      },
+      "block_order": [
+        "text_RfAQA9",
+        "text_4QCz4N",
+        "text_AXUBmr",
+        "text_383DV9",
+        "text_87VkFg",
+        "text_tReqpw",
+        "text_ihqzDx",
+        "text_9MEMDb"
+      ],
+      "name": "Scrolling text",
+      "settings": {
+        "slider_speed": 13,
+        "text_alignment": "center",
+        "marquee_speed": 50,
+        "direction": "ticker-rtl",
+        "message_spacing": 10,
+        "show_border": false,
+        "layout": "marquee",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "subcollections": {
+      "type": "subcollections",
+      "settings": {
+        "subcollection_layout": "grid",
+        "subcollection_description": false,
+        "select_image": "collection",
+        "color_scheme": "scheme-2",
+        "color": "#ffffff",
+        "bg_color": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "collection",
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "slide-out",
+        "default_open": true,
+        "collection_linklist": "",
+        "grid": 3,
+        "grid_mobile": "2",
+        "products_per_page": 21,
+        "color_scheme": "scheme-fbd4c470-dcb5-45cd-af70-7c3c7a55e46e",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "lookbook_paired_V4pmk4": {
+      "type": "lookbook-paired",
+      "name": "Lookbook Paired",
+      "settings": {
+        "label_1": "The Boxer Trunk",
+        "link_1": "",
+        "product_1": "",
+        "label_2": "The Brief",
+        "link_2": "",
+        "product_2": "",
+        "padding_horizontal": 12,
+        "label_align": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "section_announcement_xzwedz",
+    "subcollections",
+    "main",
+    "lookbook_paired_V4pmk4"
+  ]
+}

@@ -1,0 +1,784 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section_custom_code_WGKwXq": {
+      "type": "section-custom-code",
+      "name": "Custom code",
+      "settings": {
+        "code": "",
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "main": {
+      "type": "product",
+      "blocks": {
+        "title_G4fj9E": {
+          "type": "title",
+          "settings": {
+            "subheading_option": "vendor",
+            "heading_font_size": "heading-medium",
+            "padding_bottom": 8
+          }
+        },
+        "tab_richtext_ffcwgB": {
+          "type": "tab_richtext",
+          "settings": {
+            "show_description": true,
+            "show_read_more": true,
+            "title_1": "",
+            "raw_content_1": "",
+            "title_2": "",
+            "raw_content_2": "",
+            "title_3": "",
+            "raw_content_3": "",
+            "title_4": "",
+            "raw_content_4": "",
+            "title_5": "",
+            "raw_content_5": "",
+            "padding_bottom": 0
+          }
+        },
+        "variants": {
+          "type": "variants",
+          "settings": {
+            "info_page": "t-shirt-sleeveless-top-size-chart",
+            "size_chart_style": "text",
+            "option_font_size": "body-large",
+            "value_font_size": "body-large",
+            "padding_bottom": 16
+          }
+        },
+        "fit_guide_NQPq3f": {
+          "type": "fit-guide",
+          "settings": {
+            "heading": "Fit",
+            "segment_selected": 3,
+            "left_label": "Small",
+            "middle_label": "True to size",
+            "right_label": "Large",
+            "fit_color": "#cdff00",
+            "padding_bottom": 50
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "show_quantity": true,
+            "button_type": "btn--secondary",
+            "button_size": "btn--large",
+            "button_style": "btn--solid",
+            "show_dynamic_checkout": true,
+            "button_type_dynamic": "btn--secondary",
+            "button_size_dynamic": "",
+            "button_style_dynamic": "btn--solid",
+            "show_gift_card_recipient": false,
+            "padding_bottom": 50
+          }
+        },
+        "inventory_countdown": {
+          "type": "inventory_countdown",
+          "settings": {
+            "show_notice": "low-inventory",
+            "max_inventory": 10,
+            "show_inventory_counter": false,
+            "icon_size": 20,
+            "in_stock_color": "#56ad6a",
+            "low_stock_color": "#f79554",
+            "out_of_stock_color": "#721c24",
+            "padding_bottom": 8
+          }
+        },
+        "divider_D4UprF": {
+          "type": "divider",
+          "settings": {
+            "show_line": true,
+            "padding_bottom": 30
+          }
+        },
+        "code_fKkGHR": {
+          "type": "code",
+          "settings": {
+            "code": "",
+            "padding_bottom": 16
+          }
+        },
+        "sharing_GyTtAL": {
+          "type": "sharing",
+          "settings": {
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "title_G4fj9E",
+        "tab_richtext_ffcwgB",
+        "variants",
+        "fit_guide_NQPq3f",
+        "buttons",
+        "inventory_countdown",
+        "divider_D4UprF",
+        "code_fKkGHR",
+        "sharing_GyTtAL"
+      ],
+      "settings": {
+        "product_sticky_enable": true,
+        "variant_image_scroll": true,
+        "show_cart_bar": true,
+        "enable_zoom": true,
+        "enable_video_looping": true,
+        "image_layout": "grid-2",
+        "image_size": "large",
+        "mobile_image_style": "slider",
+        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
+        "padding_top": 0,
+        "padding_bottom": 61
+      }
+    },
+    "section_look_gallery_ePcTQJ": {
+      "type": "section-look-gallery",
+      "blocks": {
+        "image_k8cPEK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1_81f69c5b-34c0-4c90-be77-0b5c6efe44c8.png",
+            "product": "y-transdry-brief-white"
+          }
+        },
+        "image_zMWYc6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5.png",
+            "product": "h-cotton-spandex-boxer-trunk-white"
+          }
+        },
+        "image_EJpxmP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2.png",
+            "product": "y-transdry-brief-white"
+          }
+        },
+        "image_4P3g8V": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/7.png",
+            "product": "v-cotton-spandex-brief-black"
+          }
+        },
+        "image_X7pABy": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8.png",
+            "product": "v-cotton-spandex-brief-black"
+          }
+        },
+        "image_afhzir": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4.png",
+            "product": "x-transdry-boxer-trunk-black"
+          }
+        },
+        "image_HaYJmP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/6.png",
+            "product": "y-transdry-brief-white"
+          }
+        }
+      },
+      "block_order": [
+        "image_k8cPEK",
+        "image_zMWYc6",
+        "image_EJpxmP",
+        "image_4P3g8V",
+        "image_X7pABy",
+        "image_afhzir",
+        "image_HaYJmP"
+      ],
+      "name": "Shop the look: Gallery",
+      "settings": {
+        "featured_type": "image",
+        "featured_image": "shopify://shop_images/3_e30cb8af-e273-4674-b1db-1a8c4a3aea20.png",
+        "featured_product": "l-cotton-spandex-socks-heather-grey",
+        "featured_position": "is-reversed",
+        "image_aspect_ratio": 1.5,
+        "layout_desktop": "slider",
+        "grid": 4,
+        "layout_mobile": "slider",
+        "reverse_blocks": false,
+        "width": "wrapper--full",
+        "color_scheme": "scheme-2",
+        "dot_color": "#fcfcfc",
+        "dot_background": "#923531",
+        "padding_top": 0,
+        "padding_bottom": 100
+      }
+    },
+    "section_dynamic_content_44xTqw": {
+      "type": "section-dynamic-content",
+      "blocks": {
+        "grid_item_jnGHFU": {
+          "type": "_grid-item",
+          "name": "Text",
+          "settings": {
+            "align_text": "text-left",
+            "row_start": 1,
+            "column_start": 15,
+            "column_end": 17,
+            "row_start_mobile": 1,
+            "column_start_mobile": 2,
+            "column_end_mobile": 6,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "icon_FGgTzr": {
+              "type": "icon",
+              "name": "Icon",
+              "settings": {
+                "icon_name": "icon-award",
+                "image": "shopify://shop_images/gesture_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24_1.png",
+                "icon_size": 20,
+                "icon_color": "",
+                "text": "",
+                "text_font_size": "body-medium",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "heading_G3QY3A": {
+              "type": "heading",
+              "settings": {
+                "text": "Singapore \nborn, \nThailand \nCrafted",
+                "heading_font_size": "heading-small",
+                "color": "",
+                "heading_tag": "automatic",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "rich_text_gQWBcK": {
+              "type": "rich-text",
+              "name": "Rich text",
+              "settings": {
+                "text": "<p>A homegrown label, </p><p>consciously produced.</p>",
+                "text_font_size": "body-small",
+                "color": "",
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "image_yVcFRV": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Land_Page-3.png",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_FGgTzr",
+            "heading_G3QY3A",
+            "rich_text_gQWBcK",
+            "image_yVcFRV"
+          ]
+        },
+        "grid_item_Y9FiQP": {
+          "type": "_grid-item",
+          "name": "Text",
+          "settings": {
+            "align_text": "text-left",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 2,
+            "row_start_mobile": 10,
+            "column_start_mobile": 1,
+            "column_end_mobile": 7,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "icon_DqYGRX": {
+              "type": "icon",
+              "name": "Icon",
+              "settings": {
+                "icon_name": "icon-award",
+                "image": "shopify://shop_images/barcode_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24_1.png",
+                "icon_size": 20,
+                "icon_color": "",
+                "text": "",
+                "text_font_size": "body-medium",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "heading_tKLxbk": {
+              "type": "heading",
+              "name": "Heading",
+              "settings": {
+                "text": "Built\nfor \nEverybody.",
+                "heading_font_size": "heading-small",
+                "color": "",
+                "heading_tag": "automatic",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "rich_text_3CKDyh": {
+              "type": "rich-text",
+              "name": "Rich text",
+              "settings": {
+                "text": "<p>Confidence isn't one size. </p><p>Designed to fit from XS to 2XL.</p>",
+                "text_font_size": "body-x-small",
+                "color": "",
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "image_Q6LTFk": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/IG_Story_20thJun-3.png",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_DqYGRX",
+            "heading_tKLxbk",
+            "rich_text_3CKDyh",
+            "image_Q6LTFk"
+          ]
+        },
+        "grid_item_EcypPF": {
+          "type": "_grid-item",
+          "name": "Text",
+          "settings": {
+            "align_text": "text-left",
+            "row_start": 1,
+            "column_start": 15,
+            "column_end": 17,
+            "row_start_mobile": 19,
+            "column_start_mobile": 2,
+            "column_end_mobile": 7,
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "icon_mjh39y": {
+              "type": "icon",
+              "name": "Icon",
+              "settings": {
+                "icon_name": "icon-award",
+                "image": "shopify://shop_images/repartition_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24_1.png",
+                "icon_size": 30,
+                "icon_color": "",
+                "text": "",
+                "text_font_size": "body-medium",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "heading_6VdyBk": {
+              "type": "heading",
+              "settings": {
+                "text": "The Fabric \nComes First",
+                "heading_font_size": "heading-x-small",
+                "color": "",
+                "heading_tag": "automatic",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "rich_text_HaQ63W": {
+              "type": "rich-text",
+              "name": "Rich text",
+              "settings": {
+                "text": "<p>Fabrics formulated for comfort, </p><p>durability, and all-day performance.</p>",
+                "text_font_size": "body-x-small",
+                "color": "",
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "image_FVWG4A": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Banner-1_5a5422d7-b064-4cfa-85fa-f6f0bb1124c8.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_mjh39y",
+            "heading_6VdyBk",
+            "rich_text_HaQ63W",
+            "image_FVWG4A"
+          ]
+        },
+        "grid_item_rkdtmf": {
+          "type": "_grid-item",
+          "name": "Grid item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 1,
+            "column_start": 1,
+            "column_end": 6,
+            "row_start_mobile": 23,
+            "column_start_mobile": 1,
+            "column_end_mobile": 4,
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_KxaKEg": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Image_-_2026-02-01_-_test_1.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_KxaKEg"
+          ]
+        },
+        "grid_item_7kFtB7": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 1,
+            "column_start": 3,
+            "column_end": 5,
+            "row_start_mobile": 1,
+            "column_start_mobile": 6,
+            "column_end_mobile": 9,
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_CXXnPw": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Banner-Socks-1.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_CXXnPw"
+          ]
+        },
+        "grid_item_WfiVhf": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 4,
+            "row_start_mobile": 5,
+            "column_start_mobile": 7,
+            "column_end_mobile": 9,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_wgn4kK": {
+              "type": "image",
+              "name": "Image",
+              "settings": {
+                "image": "shopify://shop_images/98567929-DCE0-4AEA-8200-71D8FB71BE3F.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_wgn4kK"
+          ]
+        },
+        "grid_item_AhcabU": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 4,
+            "row_start_mobile": 7,
+            "column_start_mobile": 6,
+            "column_end_mobile": 3,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_My478V": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/image-1779371469563.png",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_My478V"
+          ]
+        },
+        "grid_item_kBd4tg": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 12,
+            "column_end": 15,
+            "row_start_mobile": 8,
+            "column_start_mobile": 6,
+            "column_end_mobile": 9,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_Fjq34D": {
+              "type": "image",
+              "name": "Image",
+              "settings": {
+                "image": "shopify://shop_images/Image_-_2026-02-10_-_Simple_Minimalist_Photography_Exhibition_Photo_Collage_Instagram_Post.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "image_9FDyrh": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Screenshot_2026-05-31_at_5.20.31_pm.png",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_Fjq34D",
+            "image_9FDyrh"
+          ]
+        },
+        "grid_item_yTwzhP": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 4,
+            "row_start_mobile": 15,
+            "column_start_mobile": 1,
+            "column_end_mobile": 4,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_BkC6RK": {
+              "type": "image",
+              "name": "Image",
+              "settings": {
+                "image": "shopify://shop_images/website-banner-justin-2.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_BkC6RK"
+          ]
+        },
+        "grid_item_inH77L": {
+          "type": "_grid-item",
+          "name": "Grid item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 2,
+            "row_start_mobile": 15,
+            "column_start_mobile": 4,
+            "column_end_mobile": 8,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_tnHWPT": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/TRIIIPLE_Studio_Banner_GroupShot_v2.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_tnHWPT"
+          ]
+        }
+      },
+      "block_order": [
+        "grid_item_jnGHFU",
+        "grid_item_Y9FiQP",
+        "grid_item_EcypPF",
+        "grid_item_rkdtmf",
+        "grid_item_7kFtB7",
+        "grid_item_WfiVhf",
+        "grid_item_AhcabU",
+        "grid_item_kBd4tg",
+        "grid_item_yTwzhP",
+        "grid_item_inH77L"
+      ],
+      "name": "Dynamic content",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "gap_desktop": 0,
+        "gap_mobile": 40,
+        "width": "wrapper--full-padded",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "section_announcement_GRMQe3": {
+      "type": "section-announcement",
+      "blocks": {
+        "text_hwnTC4": {
+          "type": "text",
+          "settings": {
+            "text": "<h6><strong>by you</strong></h6>",
+            "text_font_size": "body-x-small",
+            "color": "#923531",
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          }
+        },
+        "text_cVxJmF": {
+          "type": "text",
+          "settings": {
+            "text": "<h6>APPROVED</h6>",
+            "text_font_size": "body-x-small",
+            "color": "#923531",
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          }
+        }
+      },
+      "block_order": [
+        "text_hwnTC4",
+        "text_cVxJmF"
+      ],
+      "name": "Scrolling text",
+      "settings": {
+        "slider_speed": 20,
+        "text_alignment": "left",
+        "marquee_speed": 50,
+        "direction": "ticker-rtl",
+        "message_spacing": 30,
+        "background_image": "shopify://shop_images/red.png",
+        "show_border": false,
+        "layout": "marquee",
+        "color_scheme": "scheme-2",
+        "padding_top": 19,
+        "padding_bottom": 4
+      }
+    },
+    "1778931413bf791d0a": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_product_reviews_kjLUez": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_product_reviews_kjLUez"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related": {
+      "type": "related",
+      "blocks": {
+        "related": {
+          "type": "related",
+          "settings": {
+            "product_recommendations_heading": "Find out more…"
+          }
+        },
+        "recent": {
+          "type": "recent",
+          "settings": {
+            "product_recently_heading": "Recently viewed"
+          }
+        }
+      },
+      "block_order": [
+        "related",
+        "recent"
+      ],
+      "settings": {
+        "enable_tabs": true,
+        "heading_alignment": "text-left",
+        "heading_font_size": "heading-small",
+        "limit": 3,
+        "layout_desktop": "slider",
+        "grid": 2,
+        "rows": 2,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "padding_top": 38,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "section_custom_code_WGKwXq",
+    "main",
+    "section_look_gallery_ePcTQJ",
+    "section_dynamic_content_44xTqw",
+    "section_announcement_GRMQe3",
+    "1778931413bf791d0a",
+    "related"
+  ]
+}

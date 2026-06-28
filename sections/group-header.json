@@ -1,0 +1,258 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement": {
+      "type": "announcement",
+      "blocks": {
+        "text_A4cKnQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>buy 3 → 15% off · buy 5 → 25% off · free shipping over SGD $50 (Singapore)</p>",
+            "target_url_enabled": true,
+            "target_url": "shopify://collections/boxer-trunks",
+            "target_referrer_enabled": false,
+            "target_referrer": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_Dpc9YJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p><a href=\"/pages/unlock-first-layer-perks\" target=\"_blank\" title=\"Unlock First Layer Perks\"><strong>New customers save 10% with code TRIIIPLE10</strong></a><strong>.</strong></p>",
+            "target_url_enabled": true,
+            "target_url": "shopify://pages/unlock-first-layer-perks",
+            "target_referrer_enabled": false,
+            "target_referrer": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "message_Y6tLRR": {
+          "type": "message",
+          "settings": {
+            "show_wheel": true,
+            "message": "You are ||amount|| away from free shipping.",
+            "target_url_enabled": true,
+            "target_url": "shopify://collections",
+            "target_referrer_enabled": false,
+            "target_referrer": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        }
+      },
+      "block_order": [
+        "text_A4cKnQ",
+        "text_Dpc9YJ",
+        "message_Y6tLRR"
+      ],
+      "settings": {
+        "show_border": true,
+        "layout": "slider",
+        "slider_speed": 5,
+        "text_alignment": "center",
+        "show_arrows": false,
+        "marquee_speed": 100,
+        "message_spacing": 10,
+        "text_font_size": "body-x-small",
+        "color_scheme": "scheme-3",
+        "border_color": "#b61b1b",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "mobile-menu": {
+      "type": "mobile-menu",
+      "blocks": {
+        "menu": {
+          "type": "menu",
+          "settings": {
+            "mobile_menu_linklist": "main-menu",
+            "text_font_size": "body-x-large",
+            "highlight_item": "Sale",
+            "highlight_item_color": "#d02e2e",
+            "padding": true,
+            "padding_bottom": 30
+          }
+        },
+        "divider-2": {
+          "type": "divider",
+          "settings": {
+            "show_line": true,
+            "padding_bottom": 8
+          }
+        },
+        "socials": {
+          "type": "socials",
+          "settings": {
+            "width": "half",
+            "padding_bottom": 50
+          }
+        },
+        "divider-3": {
+          "type": "divider",
+          "settings": {
+            "show_line": true,
+            "padding_bottom": 14
+          }
+        },
+        "localization": {
+          "type": "localization",
+          "settings": {
+            "show_locale_selector": true,
+            "show_locale_code": false,
+            "show_globe_icon": true,
+            "show_country_selector": true,
+            "show_country_name": false,
+            "show_country_flag": true,
+            "width": "full",
+            "pin_to_bottom": true,
+            "padding_bottom": 14
+          }
+        }
+      },
+      "block_order": [
+        "menu",
+        "divider-2",
+        "socials",
+        "divider-3",
+        "localization"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/Frame_77.png",
+        "logo_max_limit": 80,
+        "color_scheme": "scheme-2"
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "image-1": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "position": "1",
+            "image": "shopify://shop_images/Image_-_2026-02-01_-_test_1.jpg",
+            "aspect_ratio": 1,
+            "wide_image": false,
+            "overlay_type": "text",
+            "title": "Shop the Lookbook",
+            "heading_font_size": "heading-medium",
+            "link_text": "",
+            "text_font_size": "body-medium",
+            "link": "",
+            "text_color": "#fcfbf9"
+          }
+        },
+        "image-2": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "position": "2",
+            "aspect_ratio": 1,
+            "wide_image": false,
+            "overlay_type": "text",
+            "title": "Product title",
+            "heading_font_size": "heading-medium",
+            "link_text": "",
+            "text_font_size": "body-medium",
+            "link": "",
+            "text_color": "#fcfbf9"
+          }
+        },
+        "image-4": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "position": "2",
+            "aspect_ratio": 1,
+            "wide_image": false,
+            "overlay_type": "text",
+            "title": "Product title",
+            "heading_font_size": "heading-medium",
+            "link_text": "",
+            "text_font_size": "body-medium",
+            "link": "",
+            "text_color": "#fcfbf9"
+          }
+        },
+        "image-5": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "position": "2",
+            "aspect_ratio": 1,
+            "wide_image": false,
+            "overlay_type": "text",
+            "title": "Product title",
+            "heading_font_size": "heading-medium",
+            "link_text": "",
+            "text_font_size": "body-medium",
+            "link": "",
+            "text_color": "#fcfbf9"
+          }
+        }
+      },
+      "block_order": [
+        "image-1",
+        "image-2",
+        "image-4",
+        "image-5"
+      ],
+      "settings": {
+        "header_sticky": true,
+        "enable_search": false,
+        "header_style": "logo_beside",
+        "show_separator_line": true,
+        "header_border_color": "#7C9BDB",
+        "separator_opacity": 100,
+        "show_icons": true,
+        "icon_as_circle": true,
+        "cart_icon_family": "cart",
+        "logo": "shopify://shop_images/495X80.png",
+        "logo_max_limit": 125,
+        "logo_max_limit_mobile": 85,
+        "main_menu_linklist": "main-menu",
+        "enable_call_to_action": false,
+        "button_text": "Enjoy a 10% discount on your first ownership.",
+        "button_link": "shopify://pages/unlock-first-layer-perks",
+        "button_type": "btn--black",
+        "show_social_icons": true,
+        "secondary_menu_linklist": "",
+        "show_locale_selector": false,
+        "show_locale_code": true,
+        "show_globe_icon": false,
+        "show_country_selector": true,
+        "show_country_name": false,
+        "show_country_flag": false,
+        "highlight_item": "",
+        "highlight_item_color": "#cdff00",
+        "transparent_logo": "shopify://shop_images/495X80_white.png",
+        "transparent_home": true,
+        "transparent_collection": false,
+        "transparent_article": false,
+        "transparent_page": false,
+        "transparent_product_page": false,
+        "transparent_logo_pdp": "shopify://shop_images/495X80.png",
+        "padding_top": 5,
+        "padding_bottom": 5
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "mobile-menu",
+    "header"
+  ]
+}

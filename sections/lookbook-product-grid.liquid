@@ -50,7 +50,17 @@
   .lpg__foot { display:flex; justify-content:space-between; align-items:center; margin-top:5px; }
   .lpg__price { font-size:var(--lpg-ps); letter-spacing:-0.03em; color:var(--lpg-pc); }
   .lpg__shop { font-family:monospace; font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:var(--lpg-shc); }
-  @media (min-width:1024px){ .lpg__grid{ padding:0 80px; } .lpg__img{ aspect-ratio:2/3; } }
+  
+  /* Mobile: 2 columns */
+  @media (max-width:749px) {
+    .lpg__grid { grid-template-columns:repeat(2, 1fr); }
+  }
+  
+  /* Desktop: 4 columns + padding */
+  @media (min-width:1024px) {
+    .lpg__grid { padding:0 80px; }
+    .lpg__img { aspect-ratio:2/3; }
+  }
 </style>
 
 {% schema %}

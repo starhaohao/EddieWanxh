@@ -1,0 +1,283 @@
+{%- comment -%}
+  TRIIIPLE Gallery Banner
+  Full-width editorial tile grid — 5 columns × 2 rows on desktop, 2 × N on mobile.
+  Giant title overlay, anchorable Left/Middle/Right and Top/Center/Bottom.
+  Customizer groups mirror the theme convention (Layout / Desktop / Mobile / Colors / Padding).
+  Dependencies: theme color schemes (Scheme 1/2/3) + Galdeano, Archivo, DM Sans.
+{%- endcomment -%}
+
+{%- style -%}
+  {{ section.settings.heading_font | font_face: font_display: 'swap' }}
+  {{ section.settings.body_font | font_face: font_display: 'swap' }}
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #Gallery-{{ section.id }} {
+    --ink: #1a1a1a;
+    --lime: #cdff00;
+    --crimson: #923531;
+    --font-heading: {{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }};
+    --font-body: {{ section.settings.body_font.family }}, {{ section.settings.body_font.fallback_families }};
+    --font-ui: var(--font-body);
+    --field: {{ section.settings.field_color }};
+    --title-color: {{ section.settings.title_color }};
+
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--field);
+    container-type: inline-size;
+    container-name: gallery;
+  }
+
+  {% if section.settings.width == 'Page width' %}
+    #Gallery-{{ section.id }} { max-width: var(--page-width, 1200px); }
+  {% endif %}
+
+  #Gallery-{{ section.id }}[data-scheme="Scheme 2"] .tg-eyebrow { color: var(--title-color); }
+
+  /* ── Grid ── */
+  #Gallery-{{ section.id }} .tg-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.desktop_columns }}, 1fr);
+    gap: {{ section.settings.tile_gap }}px;
+  }
+  #Gallery-{{ section.id }} .tg-tile {
+    position: relative; overflow: hidden;
+    aspect-ratio: {{ section.settings.tile_aspect }};
+    background: var(--field);
+  }
+  #Gallery-{{ section.id }} .tg-tile img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+  }
+  #Gallery-{{ section.id }} .tg-tile.frame { display: grid; place-items: center; padding: 14% 20%; }
+  #Gallery-{{ section.id }} .tg-tile.frame.tall { padding: 9% 24%; }
+  #Gallery-{{ section.id }} .tg-tile.frame.wide { padding: 24% 12%; }
+  #Gallery-{{ section.id }} .tg-tile.frame img { box-shadow: 0 10px 30px -16px rgba(0,0,0,.5); }
+
+  /* ── Giant title overlay ── */
+  #Gallery-{{ section.id }} .tg-title {
+    position: absolute; left: 0; right: 0; z-index: 15;
+    display: flex; padding: clamp(14px,3cqw,46px) clamp(14px,2.4cqw,44px);
+    pointer-events: none;
+  }
+  #Gallery-{{ section.id }} .tg-title[data-pos="left"]   { justify-content: flex-start; }
+  #Gallery-{{ section.id }} .tg-title[data-pos="middle"] { justify-content: center; }
+  #Gallery-{{ section.id }} .tg-title[data-pos="right"]  { justify-content: flex-end; }
+  #Gallery-{{ section.id }} .tg-title[data-vert="top"]    { top: 0; bottom: auto; align-items: flex-start; }
+  #Gallery-{{ section.id }} .tg-title[data-vert="center"] { top: 0; bottom: 0; align-items: center; }
+  #Gallery-{{ section.id }} .tg-title[data-vert="bottom"] { top: auto; bottom: 0; align-items: flex-end; }
+
+  #Gallery-{{ section.id }} .tg-title__inner { text-align: left; }
+  #Gallery-{{ section.id }} .tg-title[data-pos="middle"] .tg-title__inner { text-align: center; }
+  #Gallery-{{ section.id }} .tg-title[data-pos="right"]  .tg-title__inner { text-align: right; }
+
+  #Gallery-{{ section.id }} .tg-eyebrow {
+    font-family: var(--font-body); font-weight: 600;
+    font-size: clamp(11px, 1.2cqw, 15px); letter-spacing: .2em; text-transform: uppercase;
+    color: var(--title-color); margin-bottom: .5em; opacity: .95; mix-blend-mode: difference;
+  }
+  #Gallery-{{ section.id }} .tg-word {
+    font-family: var(--font-heading); color: var(--title-color);
+    line-height: .8; letter-spacing: -.012em;
+    text-shadow: 0 4px 60px rgba(0,0,0,.22);
+    {% case section.settings.title_size %}
+      {% when 'Small' %}   font-size: clamp(40px, 9cqw, 120px);
+      {% when 'Medium' %}  font-size: clamp(52px, 13cqw, 200px);
+      {% when 'Large' %}   font-size: clamp(60px, 17cqw, 280px);
+      {% else %}           font-size: clamp(64px, 21cqw, 360px);
+    {% endcase %}
+  }
+
+  /* ── Mobile (container ≤ 700px): 2 columns ── */
+  @container gallery (max-width: 700px) {
+    #Gallery-{{ section.id }} .tg-grid { grid-template-columns: repeat({{ section.settings.mobile_columns }}, 1fr); }
+    #Gallery-{{ section.id }} .tg-tile.frame { padding: 16% 22%; }
+    #Gallery-{{ section.id }} .tg-word { font-size: clamp(48px, 30cqw, 150px); }
+    #Gallery-{{ section.id }} .tg-eyebrow { font-size: clamp(10px, 3cqw, 14px); }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <section id="Gallery-{{ section.id }}" data-scheme="{{ section.settings.color_scheme }}">
+
+    <div class="tg-grid">
+      {%- for block in section.blocks -%}
+        <div class="tg-tile {% if block.settings.framed %}frame {{ block.settings.frame_shape }}{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image
+               | image_url: width: 1400
+               | image_tag: loading: 'lazy', sizes: '(max-width: 700px) 50vw, 20vw',
+                 widths: '300,500,700,900,1200,1400',
+                 style: block.settings.focal | default: 'object-position:center' | prepend: '' }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.title != blank or section.settings.eyebrow != blank -%}
+      <div class="tg-title" data-pos="{{ section.settings.title_position }}" data-vert="{{ section.settings.title_vertical }}">
+        <div class="tg-title__inner">
+          {%- if section.settings.eyebrow != blank -%}
+            <div class="tg-eyebrow">{{ section.settings.eyebrow }}</div>
+          {%- endif -%}
+          {%- if section.settings.title != blank -%}
+            <div class="tg-word">{{ section.settings.title }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Gallery Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Title" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "TRIIIPLE — Summer in Rio" },
+    { "type": "text", "id": "title", "label": "Title word", "default": "SS·26" },
+    {
+      "type": "select", "id": "title_position", "label": "Title — horizontal",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select", "id": "title_vertical", "label": "Title — vertical",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "select", "id": "title_size", "label": "Title size",
+      "options": [
+        { "value": "Small", "label": "Small" },
+        { "value": "Medium", "label": "Medium" },
+        { "value": "Large", "label": "Large" },
+        { "value": "Display", "label": "Display" }
+      ],
+      "default": "Display"
+    },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#ffffff" },
+    { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "sans-serif" },
+    { "type": "font_picker", "id": "body_font", "label": "Body font", "default": "sans-serif" },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "width", "label": "Width",
+      "options": [
+        { "value": "Page width", "label": "Page width" },
+        { "value": "Full width", "label": "Full width" }
+      ],
+      "default": "Full width"
+    },
+    { "type": "range", "id": "tile_gap", "min": 0, "max": 20, "step": 1, "unit": "px", "label": "Gap between tiles", "default": 0 },
+
+    { "type": "header", "content": "Desktop" },
+    {
+      "type": "select", "id": "desktop_columns", "label": "Columns per row",
+      "options": [
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" },
+        { "value": "6", "label": "6" }
+      ],
+      "default": "5"
+    },
+
+    { "type": "header", "content": "Mobile" },
+    {
+      "type": "select", "id": "mobile_columns", "label": "Columns per row",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "2"
+    },
+
+    { "type": "header", "content": "Image" },
+    {
+      "type": "select", "id": "tile_aspect", "label": "Tile shape",
+      "options": [
+        { "value": "1/1", "label": "Square" },
+        { "value": "4/5", "label": "Portrait" },
+        { "value": "3/4", "label": "Tall" },
+        { "value": "5/4", "label": "Landscape" }
+      ],
+      "default": "4/5"
+    },
+
+    { "type": "header", "content": "Colors" },
+    {
+      "type": "select", "id": "color_scheme", "label": "Color scheme",
+      "options": [
+        { "value": "Scheme 1", "label": "Scheme 1" },
+        { "value": "Scheme 2", "label": "Scheme 2" },
+        { "value": "Scheme 3", "label": "Scheme 3" }
+      ],
+      "default": "Scheme 2"
+    },
+    { "type": "color", "id": "field_color", "label": "Field (background) color", "default": "#d4d40c" },
+
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Image tile",
+      "limit": 12,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "checkbox", "id": "framed", "label": "Framed inset (float on field)", "default": false },
+        {
+          "type": "select", "id": "frame_shape", "label": "Frame shape (when framed)",
+          "options": [
+            { "value": "", "label": "Standard" },
+            { "value": "tall", "label": "Tall" },
+            { "value": "wide", "label": "Wide" }
+          ],
+          "default": ""
+        },
+        {
+          "type": "select", "id": "focal", "label": "Focal point",
+          "options": [
+            { "value": "object-position:center", "label": "Center" },
+            { "value": "object-position:center top", "label": "Top" },
+            { "value": "object-position:center bottom", "label": "Bottom" },
+            { "value": "object-position:left center", "label": "Left" },
+            { "value": "object-position:right center", "label": "Right" }
+          ],
+          "default": "object-position:center"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gallery Banner",
+      "blocks": [
+        { "type": "tile" }, { "type": "tile" }, { "type": "tile" }, { "type": "tile" }, { "type": "tile" },
+        { "type": "tile" }, { "type": "tile" }, { "type": "tile" }, { "type": "tile" }, { "type": "tile" }
+      ]
+    }
+  ]
+}
+{% endschema %}

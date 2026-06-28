@@ -1,0 +1,284 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "subheading": "",
+        "show_title": true,
+        "heading_font_size": "heading-large",
+        "show_content": true,
+        "text_font_size": "body-medium",
+        "align_text": "text-left",
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    },
+    "double-1": {
+      "type": "section-double",
+      "blocks": {
+        "heading-1-1": {
+          "type": "heading",
+          "settings": {
+            "title": "WHO WE ARE",
+            "heading_font_size": "heading-x-large",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        },
+        "text-1-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>TRIIIPLE STUDIO </strong>was established in 2024 in Singapore as a brand dedicated to redefining intimate apparel.</p>",
+            "text_font_size": "body-medium",
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "heading-1-1",
+        "text-1-1"
+      ],
+      "settings": {
+        "image_1": "shopify://shop_images/Layer_4.jpg",
+        "image_width": "one-half",
+        "text_alignment": "text-left",
+        "layout": "is-reversed",
+        "width": "wrapper--full",
+        "height": "sixty-fifty-height-hero",
+        "mobile_height": "four-fifty-height-hero--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
+    },
+    "announcement": {
+      "type": "section-announcement",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>WHO WE ARE</strong></p>",
+            "text_font_size": "body-small",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        }
+      },
+      "block_order": [
+        "text"
+      ],
+      "settings": {
+        "slider_speed": 5,
+        "text_alignment": "center",
+        "marquee_speed": 100,
+        "direction": "ticker-rtl",
+        "message_spacing": 10,
+        "show_border": false,
+        "layout": "marquee",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "columns": {
+      "type": "section-columns",
+      "blocks": {
+        "image-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Layer5.jpg",
+            "image_shape": "normal",
+            "title": "CONSCIOUSLY CONSTRUCTED",
+            "heading_font_size": "heading-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1,
+            "heading_tag": "automatic"
+          }
+        },
+        "image-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Layer_1_304d93dd-65c9-433b-b278-4060b0c372c5.jpg",
+            "image_shape": "normal",
+            "title": "DIVERSITY & INCLUSIVITY",
+            "heading_font_size": "heading-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1,
+            "heading_tag": "automatic"
+          }
+        },
+        "image-3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Layer_3_9abfdb91-9098-49fd-8e3a-cf5259a8b189.jpg",
+            "image_shape": "normal",
+            "title": "CREATE IN ASIA MADE IN ASIA",
+            "heading_font_size": "heading-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "image-1",
+        "image-2",
+        "image-3"
+      ],
+      "settings": {
+        "title": "",
+        "heading_font_size": "heading-medium",
+        "align_heading": "text-left",
+        "align_text": "text-center",
+        "width": "wrapper--full-padded",
+        "align_columns": "flex-align-top",
+        "layout": "grid",
+        "grid": 3,
+        "layout_mobile": "slider",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    },
+    "double-2": {
+      "type": "section-double",
+      "blocks": {
+        "heading-2-1": {
+          "type": "heading",
+          "settings": {
+            "title": "",
+            "heading_font_size": "heading-x-large",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        },
+        "text-2-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Clothing is more than just a layer on our bodies—it’s a form of self-expression and a canvas for imagination. At TRIIIPLE STUDIO, we are committed to crafting pieces that combine superior quality with innovative textile craftsmanship.</p>",
+            "text_font_size": "body-small",
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "heading-2-1",
+        "text-2-1"
+      ],
+      "settings": {
+        "image_1": "shopify://shop_images/Layer9.jpg",
+        "image_width": "one-half",
+        "text_alignment": "text-left",
+        "layout": "",
+        "width": "wrapper--full",
+        "height": "sixty-fifty-height-hero",
+        "mobile_height": "four-fifty-height-hero--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
+    },
+    "section_double_he33GW": {
+      "type": "section-double",
+      "blocks": {
+        "heading_hy3zmr": {
+          "type": "heading",
+          "settings": {
+            "title": "",
+            "heading_font_size": "heading-x-large",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        },
+        "text_7mRAcp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our designs merge imaginative creativity with sensual elegance, offering a fresh and modern perspective on intimate wear. We believe that clothing is not just about embracing our imperfections but also about expressing individuality, life attitudes, and creative vision. At TRIIIPLE STUDIO, every piece is designed to stand as a unique medium of personal expression and artistry.</p>",
+            "text_font_size": "body-medium",
+            "padding_bottom": 20
+          }
+        }
+      },
+      "block_order": [
+        "heading_hy3zmr",
+        "text_7mRAcp"
+      ],
+      "settings": {
+        "image_1": "shopify://shop_images/Layer9.jpg",
+        "image_width": "one-half",
+        "text_alignment": "text-left",
+        "layout": "is-reversed",
+        "width": "wrapper--full",
+        "height": "sixty-fifty-height-hero",
+        "mobile_height": "four-fifty-height-hero--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
+    },
+    "divider": {
+      "type": "section-divider",
+      "settings": {
+        "show_line": true,
+        "width": "wrapper--full-padded",
+        "color_scheme": "",
+        "padding_top": 31,
+        "padding_bottom": 50
+      }
+    }
+  },
+  "order": [
+    "main",
+    "double-1",
+    "announcement",
+    "columns",
+    "double-2",
+    "section_double_he33GW",
+    "divider"
+  ]
+}

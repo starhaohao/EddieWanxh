@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "campaign_banner_A7TARg": {
@@ -5,14 +14,21 @@
       "blocks": {
         "panel_bUQXCj": {
           "type": "panel",
-          "settings": { "image": "" }
+          "settings": {
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_5_b824b132-ae7e-45c3-b5cb-8edebc683696.jpg"
+          }
         },
         "panel_QJkqhc": {
           "type": "panel",
-          "settings": { "image": "" }
+          "settings": {
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_14_97fa7b06-b63d-4546-8363-67aad756487c.jpg"
+          }
         }
       },
-      "block_order": ["panel_bUQXCj", "panel_QJkqhc"],
+      "block_order": [
+        "panel_bUQXCj",
+        "panel_QJkqhc"
+      ],
       "name": "Campaign Banner",
       "settings": {
         "eyebrow": "The first layer with",
@@ -44,8 +60,8 @@
             "heading_font_size": "heading-x-small",
             "text": "<p>Sonia Seraphina tattoos at Peonypink. Her style is grungy, sketchy, controlled-ish — chaotic with intention. Each piece is a reminder that being seen, however messy, is its own kind of courage.</p><p></p>",
             "text_font_size": "body-small",
-            "button_text": "",
-            "button_url": "shopify://products/ed-cotton-spandex-t-shirt-black",
+            "button_text": "@seraphinks",
+            "button_url": "https://www.instagram.com/seraphinks/",
             "button_type": "btn--white",
             "button_size": "btn--small",
             "button_style": "btn--text",
@@ -53,7 +69,7 @@
             "show_social_links": true,
             "text_columns": 1,
             "align_text": "text-left",
-            "bg_color": "#19222a",
+            "bg_color": "#923531",
             "color": "#ffffff",
             "heading_tag": "automatic"
           }
@@ -61,7 +77,7 @@
         "image_Bd6W4C": {
           "type": "image",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_715ffebd-a8fe-43ab-aae3-5e0228472ef6.jpg",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -81,7 +97,10 @@
           }
         }
       },
-      "block_order": ["text_YPCiLm", "image_Bd6W4C"],
+      "block_order": [
+        "text_YPCiLm",
+        "image_Bd6W4C"
+      ],
       "name": "Custom section",
       "settings": {
         "borders": true,
@@ -118,7 +137,10 @@
           }
         }
       },
-      "block_order": ["heading_ByJbrU", "text_TUEGNd"],
+      "block_order": [
+        "heading_ByJbrU",
+        "text_TUEGNd"
+      ],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -140,8 +162,7 @@
           "type": "icon",
           "settings": {
             "column_width": 100,
-            "icon_name": "icon-info-empty",
-            "image": "shopify://shop_images/Social_Media_Icon-7.jpg",
+            "icon_name": "icon-flare",
             "icon_size": 35,
             "icon_alignment": "icon--left",
             "icon_color": "",
@@ -156,8 +177,7 @@
           "type": "icon",
           "settings": {
             "column_width": 100,
-            "icon_name": "icon-info-empty",
-            "image": "shopify://shop_images/Social_Media_Icon-7.jpg",
+            "icon_name": "icon-flare",
             "icon_size": 35,
             "icon_alignment": "icon--left",
             "icon_color": "",
@@ -172,8 +192,7 @@
           "type": "icon",
           "settings": {
             "column_width": 100,
-            "icon_name": "icon-info-empty",
-            "image": "shopify://shop_images/Social_Media_Icon-7.jpg",
+            "icon_name": "icon-flare",
             "icon_size": 35,
             "icon_alignment": "icon--left",
             "icon_color": "",
@@ -185,7 +204,11 @@
           }
         }
       },
-      "block_order": ["icon_DX3GKC", "icon_QteHwt", "icon_NkMPDM"],
+      "block_order": [
+        "icon_DX3GKC",
+        "icon_QteHwt",
+        "icon_NkMPDM"
+      ],
       "name": "Multi column",
       "settings": {
         "title": "In Her Own Words",
@@ -208,7 +231,7 @@
         "image_MdxPN9": {
           "type": "image",
           "settings": {
-            "image": "",
+            "image": "shopify://shop_images/Hero_Image_4_5_Portrait_13_8a7cf91b-15c5-4b09-8b4e-4967587e5fd6.jpg",
             "title": "",
             "heading_font_size": "heading-large",
             "text": "",
@@ -250,7 +273,10 @@
           }
         }
       },
-      "block_order": ["image_MdxPN9", "text_UUncEa"],
+      "block_order": [
+        "image_MdxPN9",
+        "text_UUncEa"
+      ],
       "name": "Custom section",
       "settings": {
         "borders": false,
@@ -287,7 +313,10 @@
           }
         }
       },
-      "block_order": ["heading_q6kVcG", "text_8rxNVe"],
+      "block_order": [
+        "heading_q6kVcG",
+        "text_8rxNVe"
+      ],
       "name": "Rich text columns",
       "settings": {
         "left_column_width": 100,
@@ -312,7 +341,7 @@
         "cta_url": "shopify://pages/story-salon",
         "show_strip": true,
         "product_1": "ed-cotton-spandex-t-shirt-black",
-        "product_2": "v-cotton-spandex-brief-black",
+        "product_2": "ed-cotton-spandex-t-shirt-heather-grey",
         "product_3": "ed-cotton-spandex-sleeveless-top-white",
         "shop_all_url": "shopify://collections"
       }
@@ -322,11 +351,17 @@
       "blocks": {
         "klaviyo_email_marketing_sms_form_embed_block_ADEw9X": {
           "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
-          "settings": { "formId": "<div class=\"klaviyo-form-U5igv3\"></div>" }
+          "settings": {
+            "formId": "<div class=\"klaviyo-form-U5igv3\"></div>"
+          }
         }
       },
-      "block_order": ["klaviyo_email_marketing_sms_form_embed_block_ADEw9X"],
-      "settings": { "include_margins": false }
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X"
+      ],
+      "settings": {
+        "include_margins": false
+      }
     }
   },
   "order": [

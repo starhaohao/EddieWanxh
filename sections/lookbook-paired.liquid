@@ -1,0 +1,245 @@
+{% comment %} Lookbook Paired — final, matches Broadcast 8.1.1 theme layout {% endcomment %}
+
+{%- assign h_pad = section.settings.padding_horizontal -%}
+{%- assign label_align = section.settings.label_align -%}
+{%- assign pt = section.settings.padding_top -%}
+{%- assign pb = section.settings.padding_bottom -%}
+
+<div class="lookbook-paired" style="padding-top: {{ pt }}px; padding-bottom: {{ pb }}px;">
+  {% for i in (1..2) %}
+    {% assign image_a_key = 'image_' | append: i | append: 'a' %}
+    {% assign image_b_key = 'image_' | append: i | append: 'b' %}
+    {% assign label_key   = 'label_' | append: i %}
+    {% assign link_key    = 'link_'  | append: i %}
+    {% assign product_key = 'product_' | append: i %}
+
+    <div class="lookbook-paired__group">
+
+      <a href="{{ section.settings[link_key] }}" class="lookbook-paired__images" aria-label="{{ section.settings[label_key] | escape }}">
+        <div class="lookbook-paired__image-wrap">
+          {% if section.settings[image_a_key] %}
+            <img
+              src="{{ section.settings[image_a_key] | image_url: width: 800 }}"
+              srcset="{{ section.settings[image_a_key] | image_url: width: 400 }} 400w,
+                      {{ section.settings[image_a_key] | image_url: width: 800 }} 800w"
+              sizes="(max-width: 768px) 50vw, 25vw"
+              alt="{{ section.settings[label_key] | escape }}"
+              loading="lazy"
+              width="800"
+            />
+          {% endif %}
+        </div>
+        <div class="lookbook-paired__image-wrap">
+          {% if section.settings[image_b_key] %}
+            <img
+              src="{{ section.settings[image_b_key] | image_url: width: 800 }}"
+              srcset="{{ section.settings[image_b_key] | image_url: width: 400 }} 400w,
+                      {{ section.settings[image_b_key] | image_url: width: 800 }} 800w"
+              sizes="(max-width: 768px) 50vw, 25vw"
+              alt="{{ section.settings[label_key] | escape }}"
+              loading="lazy"
+              width="800"
+            />
+          {% endif %}
+        </div>
+      </a>
+
+      <div class="lookbook-paired__footer" style="padding-left: {{ h_pad }}px; padding-right: {{ h_pad }}px;">
+        <div class="lookbook-paired__info" style="text-align: {{ label_align }};">
+          <p class="lookbook-paired__label">{{ section.settings[label_key] }}</p>
+          {% if section.settings[product_key] %}
+            <span class="lookbook-paired__price">{{ section.settings[product_key].price | money }}</span>
+          {% endif %}
+        </div>
+        {% if section.settings[link_key] != blank %}
+          <a href="{{ section.settings[link_key] }}" class="lookbook-paired__cta">Shop now</a>
+        {% endif %}
+      </div>
+
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  /* ── outer grid: 2 pairs side by side on ALL screen sizes ── */
+  .lookbook-paired {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%;
+  }
+
+  .lookbook-paired__group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── inner image row: 2 photos side by side per group ── */
+  .lookbook-paired__images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+  }
+
+  .lookbook-paired__image-wrap {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .lookbook-paired__image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .lookbook-paired__images:hover .lookbook-paired__image-wrap img {
+    transform: scale(1.04);
+  }
+
+  /* ── footer: label+price left, CTA right ── */
+  .lookbook-paired__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 24px;
+    gap: 6px;
+  }
+
+  .lookbook-paired__info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  /* ── label — matches Broadcast lookbook-grid label style ── */
+  .lookbook-paired__label {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--color-foreground, #121212);
+  }
+
+  .lookbook-paired__price {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+    color: var(--color-foreground, #121212);
+  }
+
+  /* ── CTA — uses theme button variables ── */
+  .lookbook-paired__cta {
+    display: inline-block;
+    flex-shrink: 0;
+    padding: 10px 20px;
+    background: var(--color-foreground, #121212);
+    color: var(--color-background, #fff);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--pill-radius, 0px);
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .lookbook-paired__cta:hover {
+    opacity: 0.75;
+  }
+
+  /* ── mobile: keep 2 columns, stack footer text ── */
+  @media (max-width: 768px) {
+    .lookbook-paired {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .lookbook-paired__footer {
+      padding-top: 8px;
+      padding-bottom: 16px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .lookbook-paired__label {
+      font-size: 9px;
+    }
+
+    .lookbook-paired__price {
+      font-size: 10px;
+    }
+
+    .lookbook-paired__cta {
+      padding: 6px 12px;
+      font-size: 8px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Lookbook Paired",
+  "settings": [
+    { "type": "image_picker", "id": "image_1a", "label": "Group 1 — Image A" },
+    { "type": "image_picker", "id": "image_1b", "label": "Group 1 — Image B" },
+    { "type": "text",    "id": "label_1",   "label": "Group 1 Label", "default": "The Boxer Trunk" },
+    { "type": "url",     "id": "link_1",    "label": "Group 1 Link" },
+    { "type": "product", "id": "product_1", "label": "Group 1 Product (for price)" },
+
+    { "type": "image_picker", "id": "image_2a", "label": "Group 2 — Image A" },
+    { "type": "image_picker", "id": "image_2b", "label": "Group 2 — Image B" },
+    { "type": "text",    "id": "label_2",   "label": "Group 2 Label", "default": "The Boxer Trunk" },
+    { "type": "url",     "id": "link_2",    "label": "Group 2 Link" },
+    { "type": "product", "id": "product_2", "label": "Group 2 Product (for price)" },
+
+    { "type": "header", "content": "Layout & Spacing" },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Label side padding",
+      "min": 0, "max": 32, "step": 2, "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "label_align",
+      "label": "Label text alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Section top padding",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section bottom padding",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    { "name": "Lookbook Paired" }
+  ]
+}
+{% endschema %}
