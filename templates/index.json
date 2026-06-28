@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "landing-hero": {
@@ -14,8 +23,6 @@
         "title_size": 84,
         "subtitle": "<p>Premium basics for the modern man</p>",
         "show_urgency": false,
-        "urgency_label": "Drops In",
-        "urgency_text": "<p>New drop.<br/>Limited stock.</p>",
         "show_countdown": false,
         "countdown_end": "2025-12-31T23:59:59",
         "cta_text": "Shop Now",
