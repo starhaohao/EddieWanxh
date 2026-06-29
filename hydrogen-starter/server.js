@@ -23,13 +23,25 @@ export default {
       },
     });
 
-    const response = await handleRequest(request);
+    // Safety net: guarantee a response within 15s so Oxygen health checks
+    // don't time out waiting for a hung storefront API fetch.
+    const respond = async () => {
+      const response = await handleRequest(request);
+      if (response.status === 404) {
+        return storefrontRedirect({request, response, storefront}).catch(() => response);
+      }
+      return response;
+    };
 
-    if (response.status === 404) {
-      return storefrontRedirect({request, response, storefront});
-    }
-
-    return response;
+    return Promise.race([
+      respond(),
+      new Promise((resolve) =>
+        setTimeout(
+          () => resolve(new Response('Service Unavailable', {status: 503})),
+          15000,
+        ),
+      ),
+    ]);
   },
 };
 
