@@ -91,6 +91,9 @@ await build({
     'process.version': '"v18.0.0"',
     'process.platform': '"browser"',
   },
+  banner: {
+    js: 'var process=globalThis.process||{env:{NODE_ENV:"production"},browser:true,version:"v18.0.0",platform:"browser",hrtime:function(){return[0,0];},cwd:function(){return"/";},exit:function(){},nextTick:function(f){Promise.resolve().then(f);}};',
+  },
   plugins: [
     {
       name: 'node-built-ins',
