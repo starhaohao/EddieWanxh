@@ -1,4 +1,5 @@
 import {build} from 'esbuild';
+import {nodeModulesPolyfillPlugin} from 'esbuild-plugins-node-modules-polyfill';
 import {mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
@@ -24,6 +25,21 @@ await build({
     'process.version': '"v18.0.0"',
     'process.platform': '"browser"',
   },
+  plugins: [
+    {
+      // Resolve relative imports from dist/server/index.js to absolute paths
+      // so esbuild can find dist/server/assets/* and other siblings
+      name: 'server-assets-resolver',
+      setup(build) {
+        build.onResolve({filter: /^\.\//}, (args) => {
+          if (args.importer && args.importer.includes('dist/server')) {
+            return {path: path.resolve(path.dirname(args.importer), args.path)};
+          }
+        });
+      },
+    },
+    nodeModulesPolyfillPlugin(),
+  ],
   logLevel: 'info',
 });
 
