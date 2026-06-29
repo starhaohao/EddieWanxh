@@ -8,7 +8,7 @@ export default defineConfig({
     alias: {
       '~': path.resolve('./app'),
       stream: 'readable-stream',
-      events: path.resolve('./node_modules/events'),
+      events: path.resolve('./app/shims/events.js'),
     },
   },
   plugins: [
