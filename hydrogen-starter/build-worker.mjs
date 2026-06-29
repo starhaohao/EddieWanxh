@@ -5,7 +5,6 @@ import path from 'node:path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Minimal EventEmitter used as the base for stream stubs
 const EE_IMPL = `
 function EE() { this._e = Object.create(null); }
 EE.prototype.on = EE.prototype.addListener = function(t,f){ (this._e[t]=this._e[t]||[]).push(f); return this; };
@@ -46,6 +45,30 @@ const STUBS = {
     module.exports = EE;
     module.exports.EventEmitter = EE;
   `,
+  'util-stub': `
+    module.exports = {
+      inherits: function(C, P) { C.prototype = Object.create(P.prototype, { constructor: { value: C } }); },
+      inspect: function(v) { return String(v); },
+      format: function(f) { return String(f); },
+      promisify: function(fn) { return function() { var args = Array.prototype.slice.call(arguments); return new Promise(function(resolve, reject) { fn.apply(null, args.concat(function(err, val) { if (err) reject(err); else resolve(val); })); }); }; },
+      debuglog: function() { return function() {}; },
+      deprecate: function(fn) { return fn; },
+      isBuffer: function(v) { return false; },
+      types: { isUint8Array: function(v) { return v instanceof Uint8Array; } },
+    };
+  `,
+  'buffer-stub': `
+    var B = typeof globalThis !== 'undefined' && globalThis.Buffer;
+    if (!B) { B = function Buffer() {}; B.isBuffer = function() { return false; }; B.from = function(v) { return new Uint8Array(typeof v === 'string' ? new TextEncoder().encode(v) : v); }; B.alloc = function(n) { return new Uint8Array(n); }; }
+    module.exports = { Buffer: B };
+    module.exports.Buffer = B;
+  `,
+  'string-decoder-stub': `
+    function StringDecoder(enc) { this.enc = enc || 'utf8'; }
+    StringDecoder.prototype.write = function(buf) { return typeof buf === 'string' ? buf : new TextDecoder(this.enc).decode(buf); };
+    StringDecoder.prototype.end = function(buf) { return buf ? this.write(buf) : ''; };
+    module.exports = { StringDecoder: StringDecoder };
+  `,
   'log-seo-tags-stub': `export default function LogSeoTags() { return null; }`,
 };
 
@@ -68,17 +91,19 @@ await build({
     'process.version': '"v18.0.0"',
     'process.platform': '"browser"',
   },
+  banner: {
+    js: 'var process=globalThis.process||{env:{NODE_ENV:"production"},browser:true,version:"v18.0.0",platform:"browser",hrtime:function(){return[0,0];},cwd:function(){return"/";},exit:function(){},nextTick:function(f){Promise.resolve().then(f);}};',
+  },
   plugins: [
     {
       name: 'node-built-ins',
       setup(build) {
-        // stream: Node.js built-in not available in CF Workers
-        build.onResolve({filter: /^stream$/}, () => ({path: 'stream-stub', namespace: 'stub'}));
-        // events: used by stream internals, not installed as a package
-        build.onResolve({filter: /^events$/}, () => ({path: 'events-stub', namespace: 'stub'}));
-        // log-seo-tags: React.lazy dev-only SEO utility from dist/server/assets/
+        build.onResolve({filter: /^(node:)?stream$/}, () => ({path: 'stream-stub', namespace: 'stub'}));
+        build.onResolve({filter: /^(node:)?events$/}, () => ({path: 'events-stub', namespace: 'stub'}));
+        build.onResolve({filter: /^(node:)?util$/}, () => ({path: 'util-stub', namespace: 'stub'}));
+        build.onResolve({filter: /^(node:)?buffer$/}, () => ({path: 'buffer-stub', namespace: 'stub'}));
+        build.onResolve({filter: /^(node:)?string_decoder$/}, () => ({path: 'string-decoder-stub', namespace: 'stub'}));
         build.onResolve({filter: /log-seo-tags/}, () => ({path: 'log-seo-tags-stub', namespace: 'stub'}));
-
         build.onLoad({filter: /.*/, namespace: 'stub'}, (args) => ({
           contents: STUBS[args.path] || '',
           loader: 'js',
