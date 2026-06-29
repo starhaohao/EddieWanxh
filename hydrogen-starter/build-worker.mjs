@@ -70,6 +70,7 @@ const STUBS = {
     module.exports = { StringDecoder: StringDecoder };
   `,
   'log-seo-tags-stub': `export default function LogSeoTags() { return null; }`,
+  'empty-stub': `module.exports = {};`,
 };
 
 await mkdir('dist/worker', {recursive: true});
@@ -78,9 +79,10 @@ await build({
   entryPoints: ['server.js'],
   bundle: true,
   format: 'esm',
-  platform: 'browser',
+  platform: 'neutral',
   conditions: ['worker', 'browser'],
   outfile: 'dist/worker/index.js',
+  mainFields: ['browser', 'module', 'main'],
   alias: {
     '~': path.join(__dirname, 'app'),
     'virtual:remix/server-build': path.join(__dirname, 'dist/server/index.js'),
@@ -90,6 +92,7 @@ await build({
     'process.browser': 'true',
     'process.version': '"v18.0.0"',
     'process.platform': '"browser"',
+    'global': 'globalThis',
   },
   banner: {
     js: 'var process=globalThis.process||{env:{NODE_ENV:"production"},browser:true,version:"v18.0.0",platform:"browser",hrtime:function(){return[0,0];},cwd:function(){return"/";},exit:function(){},nextTick:function(f){Promise.resolve().then(f);}};',
@@ -98,12 +101,31 @@ await build({
     {
       name: 'node-built-ins',
       setup(build) {
-        build.onResolve({filter: /^(node:)?stream$/}, () => ({path: 'stream-stub', namespace: 'stub'}));
-        build.onResolve({filter: /^(node:)?events$/}, () => ({path: 'events-stub', namespace: 'stub'}));
-        build.onResolve({filter: /^(node:)?util$/}, () => ({path: 'util-stub', namespace: 'stub'}));
-        build.onResolve({filter: /^(node:)?buffer$/}, () => ({path: 'buffer-stub', namespace: 'stub'}));
-        build.onResolve({filter: /^(node:)?string_decoder$/}, () => ({path: 'string-decoder-stub', namespace: 'stub'}));
+        // Catch-all for node: prefixed imports (fires first)
+        build.onResolve({filter: /^node:/}, (args) => {
+          const bare = args.path.replace(/^node:/, '').replace(/\/.*$/, '');
+          const stubKey = bare + '-stub';
+          console.log(`[stub] node: import "${args.path}" → ${stubKey in STUBS ? stubKey : 'empty-stub'}`);
+          return {path: stubKey in STUBS ? stubKey : 'empty-stub', namespace: 'stub'};
+        });
+
+        // Bare built-in names
+        build.onResolve({filter: /^stream$/}, (args) => {
+          console.log(`[stub] bare import "stream" from ${args.importer}`);
+          return {path: 'stream-stub', namespace: 'stub'};
+        });
+        build.onResolve({filter: /^events$/}, () => ({path: 'events-stub', namespace: 'stub'}));
+        build.onResolve({filter: /^util$/}, () => ({path: 'util-stub', namespace: 'stub'}));
+        build.onResolve({filter: /^buffer$/}, () => ({path: 'buffer-stub', namespace: 'stub'}));
+        build.onResolve({filter: /^string_decoder$/}, () => ({path: 'string-decoder-stub', namespace: 'stub'}));
+        build.onResolve({filter: /^(os|path|fs|url|http|https|crypto|zlib|assert|tty|net|dns|child_process|vm|readline|perf_hooks|async_hooks|worker_threads|cluster|module|v8|inspector|timers|querystring|domain)$/}, (args) => {
+          console.log(`[stub] bare node built-in "${args.path}" → empty-stub`);
+          return {path: 'empty-stub', namespace: 'stub'};
+        });
+
+        // log-seo-tags: React.lazy dev utility from dist/server/assets/
         build.onResolve({filter: /log-seo-tags/}, () => ({path: 'log-seo-tags-stub', namespace: 'stub'}));
+
         build.onLoad({filter: /.*/, namespace: 'stub'}, (args) => ({
           contents: STUBS[args.path] || '',
           loader: 'js',
