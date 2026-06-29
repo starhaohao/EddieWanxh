@@ -8,17 +8,15 @@ import path from 'node:path';
 // With ssr.noExternal=true all node_modules are bundled. Some packages check
 // process.env.NODE_ENV at module-init time. We eliminate those references via
 // Vite's `define` (build-time substitution) and also prepend a full process
-// polyfill to the SSR entry chunk for any bare `process` references.
+// polyfill to the SSR entry chunk for any remaining bare `process` references.
 const PROCESS_SHIM =
   'if(typeof globalThis.process==="undefined"){globalThis.process={env:{NODE_ENV:"production"},version:"v18.0.0",versions:{},browser:true,platform:"browser",nextTick:typeof queueMicrotask!=="undefined"?(fn,...a)=>queueMicrotask(()=>fn(...a)):(fn,...a)=>Promise.resolve().then(()=>fn(...a)),hrtime:()=>[0,0]};}';
 
 export default defineConfig({
   define: {
     'process.env.NODE_ENV': '"production"',
-    'process.env': '({"NODE_ENV":"production"})',
     'process.browser': 'true',
     'process.version': '"v18.0.0"',
-    'process.versions': '({})',
     'process.platform': '"browser"',
   },
   resolve: {
