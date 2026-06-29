@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "shopify hydrogen dev",
-    "build": "shopify hydrogen build",
+    "build": "shopify hydrogen build && node build-worker.mjs",
     "preview": "shopify hydrogen preview",
     "typecheck": "tsc --noEmit"
   },
