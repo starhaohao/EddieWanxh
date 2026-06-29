@@ -1,16 +1,6 @@
-// Polyfill process for Oxygen (Cloudflare Workers), which has no Node.js globals.
-// This must run before any bundled package that references `process`.
-if (typeof process === 'undefined') {
-  globalThis.process = {
-    env: {NODE_ENV: 'production'},
-    version: 'v18.0.0',
-    versions: {},
-    browser: true,
-    platform: 'browser',
-    nextTick: (fn, ...args) => setTimeout(() => fn(...args), 0),
-    hrtime: () => [0, 0],
-  };
-}
+// Must be the very first import so the process global is defined before any
+// bundled package's module-initialization code runs in Oxygen (CF Workers).
+import '~/shims/process.js';
 
 import {RemixServer} from '@remix-run/react';
 import {renderToReadableStream} from 'react-dom/server';
