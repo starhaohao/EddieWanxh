@@ -1,5 +1,5 @@
 import {build} from 'esbuild';
-import {mkdir} from 'node:fs/promises';
+import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 
@@ -75,17 +75,25 @@ const STUBS = {
 
 await mkdir('dist/worker', {recursive: true});
 
-await build({
+// Diagnostic: show first imports of dist/server/index.js
+const serverBuildPath = path.join(__dirname, 'dist/server/index.js');
+const serverBuildContent = await readFile(serverBuildPath, 'utf-8');
+const firstLines = serverBuildContent.split('\n').slice(0, 30);
+console.log('=== dist/server/index.js first 30 lines ===');
+console.log(firstLines.join('\n'));
+console.log('=== end server build header ===');
+
+const result = await build({
   entryPoints: ['server.js'],
   bundle: true,
   format: 'esm',
   platform: 'neutral',
   conditions: ['worker', 'browser'],
-  outfile: 'dist/worker/index.js',
+  write: false,
   mainFields: ['browser', 'module', 'main'],
   alias: {
     '~': path.join(__dirname, 'app'),
-    'virtual:remix/server-build': path.join(__dirname, 'dist/server/index.js'),
+    'virtual:remix/server-build': serverBuildPath,
   },
   define: {
     'process.env.NODE_ENV': '"production"',
@@ -101,17 +109,14 @@ await build({
     {
       name: 'node-built-ins',
       setup(build) {
-        // Catch-all for node: prefixed imports (fires first, covers node:stream, node:events, etc.)
         build.onResolve({filter: /^node:/}, (args) => {
           const bare = args.path.replace(/^node:/, '').replace(/\/.*$/, '');
           const stubKey = bare + '-stub';
-          console.log(`[stub] node: import "${args.path}" → ${stubKey in STUBS ? stubKey : 'empty-stub'}`);
+          console.log(`[stub] node: "${args.path}" from ${args.importer}`);
           return {path: stubKey in STUBS ? stubKey : 'empty-stub', namespace: 'stub'};
         });
-
-        // Bare built-in names (no node: prefix)
         build.onResolve({filter: /^stream$/}, (args) => {
-          console.log(`[stub] bare import "stream" from ${args.importer}`);
+          console.log(`[stub] bare "stream" from ${args.importer}`);
           return {path: 'stream-stub', namespace: 'stub'};
         });
         build.onResolve({filter: /^events$/}, () => ({path: 'events-stub', namespace: 'stub'}));
@@ -119,13 +124,10 @@ await build({
         build.onResolve({filter: /^buffer$/}, () => ({path: 'buffer-stub', namespace: 'stub'}));
         build.onResolve({filter: /^string_decoder$/}, () => ({path: 'string-decoder-stub', namespace: 'stub'}));
         build.onResolve({filter: /^(os|path|fs|url|http|https|crypto|zlib|assert|tty|net|dns|child_process|vm|readline|perf_hooks|async_hooks|worker_threads|cluster|module|v8|inspector|timers|querystring|domain)$/}, (args) => {
-          console.log(`[stub] bare node built-in "${args.path}" → empty-stub`);
+          console.log(`[stub] bare built-in "${args.path}"`);
           return {path: 'empty-stub', namespace: 'stub'};
         });
-
-        // log-seo-tags: React.lazy dev utility from dist/server/assets/
         build.onResolve({filter: /log-seo-tags/}, () => ({path: 'log-seo-tags-stub', namespace: 'stub'}));
-
         build.onLoad({filter: /.*/, namespace: 'stub'}, (args) => ({
           contents: STUBS[args.path] || '',
           loader: 'js',
@@ -136,4 +138,43 @@ await build({
   logLevel: 'info',
 });
 
-console.log('Worker bundle created at dist/worker/index.js');
+let outputText = result.outputFiles[0].text;
+
+// Diagnostic: show first lines of output and search for stream imports
+const outFirstLines = outputText.split('\n').slice(0, 30);
+console.log('=== dist/worker/index.js first 30 lines ===');
+console.log(outFirstLines.join('\n'));
+console.log('=== end worker bundle header ===');
+
+const streamImportRE = /^import[^;\n]*["'](?:node:)?stream["']/gm;
+const streamMatches = [...outputText.matchAll(streamImportRE)];
+console.log(`Stream imports remaining in output: ${streamMatches.length}`);
+streamMatches.forEach(m => console.log(`  >> ${m[0]}`));
+
+if (streamMatches.length > 0) {
+  console.log('Post-processing: replacing stream imports with inline stub...');
+  const inlineStreamStub = `(function(){${EE_IMPL}function inherits(C,P){C.prototype=Object.create(P.prototype,{constructor:{value:C}});}function Stream(){EE.call(this);}inherits(Stream,EE);Stream.Readable=function Readable(){Stream.call(this);this.readable=true;};inherits(Stream.Readable,Stream);Stream.Writable=function Writable(){Stream.call(this);this.writable=true;};inherits(Stream.Writable,Stream);Stream.Duplex=function Duplex(){Stream.Readable.call(this);this.writable=true;};inherits(Stream.Duplex,Stream.Readable);Stream.Transform=function Transform(){Stream.Duplex.call(this);};inherits(Stream.Transform,Stream.Duplex);Stream.PassThrough=function PassThrough(){Stream.Transform.call(this);};inherits(Stream.PassThrough,Stream.Transform);Stream.Stream=Stream;Stream.pipeline=function(){var cb=arguments[arguments.length-1];if(typeof cb==='function')cb(null);};return Stream;})()`;
+  outputText = outputText.replace(
+    /^import (\w+) from ["'](?:node:)?stream["'];?$/gm,
+    (_, name) => `var ${name} = ${inlineStreamStub};`
+  );
+  outputText = outputText.replace(
+    /^import \* as (\w+) from ["'](?:node:)?stream["'];?$/gm,
+    (_, name) => `var ${name} = ${inlineStreamStub};`
+  );
+  outputText = outputText.replace(
+    /^import \{([^}]+)\} from ["'](?:node:)?stream["'];?$/gm,
+    (_, names) => {
+      const _s = inlineStreamStub;
+      const parts = names.split(',').map(n => n.trim()).map(n => {
+        const [orig, alias] = n.split(' as ').map(s => s.trim());
+        return alias ? `var ${alias} = _s.${orig}` : `var ${orig} = _s.${orig}`;
+      });
+      return `var _s = ${_s}; ${parts.join('; ')};`;
+    }
+  );
+  console.log('Post-processing done.');
+}
+
+await writeFile('dist/worker/index.js', outputText);
+console.log(`Worker bundle created at dist/worker/index.js (${(outputText.length / 1024).toFixed(1)}kb)`);
