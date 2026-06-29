@@ -22,7 +22,10 @@ export default {
       },
     });
 
-    return handleRequest(request);
+    return handleRequest(request).catch((err) => {
+      console.error(err);
+      return new Response('Internal Server Error', {status: 500});
+    });
   },
 };
 
