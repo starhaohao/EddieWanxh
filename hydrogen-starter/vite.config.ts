@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '~': path.resolve('./app'),
+      stream: 'readable-stream',
     },
   },
   plugins: [
