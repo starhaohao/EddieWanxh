@@ -1,4 +1,4 @@
-import '~/shims/process.js';
+import './app/shims/process.js';
 import {createRequestHandler} from '@shopify/remix-oxygen';
 import {storefrontRedirect} from '@shopify/hydrogen';
 import {createStorefront} from '~/lib/storefront.server';
