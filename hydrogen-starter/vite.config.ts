@@ -8,7 +8,7 @@ export default defineConfig({
     alias: {
       '~': path.resolve('./app'),
       stream: 'readable-stream',
-      events: 'events',
+      events: path.resolve('./node_modules/events'),
     },
   },
   plugins: [
