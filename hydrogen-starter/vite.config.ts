@@ -9,7 +9,7 @@ import path from 'node:path';
 // and drags in stream, buffer, util, events, etc. The fix is to use the
 // browser-compatible react-dom/server.browser.js instead, which has no Node deps.
 //
-// We still alias 'stream' → readable-stream for any other packages that use it,
+// We still alias 'stream' -> readable-stream for any other packages that use it,
 // and keep the events shim and process banner as a safety net.
 const nodePolyfills = {
   'react-dom/server': path.resolve('./node_modules/react-dom/server.browser.js'),
