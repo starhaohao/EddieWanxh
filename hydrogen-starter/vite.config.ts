@@ -15,15 +15,13 @@ const nodePolyfills = {
   inherits: path.resolve('./node_modules/inherits'),
 };
 
-// process is not a module — it's a Node.js global. Cloudflare Workers don't
-// provide it, so we use Vite's define to replace every reference inline.
-const processShim =
-  '({ env: { NODE_ENV: "production" }, version: "v18.0.0", versions: {}, browser: true, platform: "browser", nextTick: function(fn) { var a = Array.prototype.slice.call(arguments, 1); return setTimeout(function() { fn.apply(null, a); }, 0); } })';
+// process is a Node.js global not available in Cloudflare Workers. Vite's
+// define rejects function values, so we inject it via a rollup banner which
+// prepends a var declaration to every output chunk.
+const processBanner =
+  'var process={env:{NODE_ENV:"production"},version:"v18.0.0",versions:{},browser:true,platform:"browser",nextTick:function(fn,a){return setTimeout(function(){fn(a);},0)},hrtime:function(){return[0,0];}};';
 
 export default defineConfig({
-  define: {
-    process: processShim,
-  },
   resolve: {
     alias: {
       '~': path.resolve('./app'),
@@ -43,6 +41,11 @@ export default defineConfig({
   ],
   build: {
     assetsInlineLimit: 0,
+    rollupOptions: {
+      output: {
+        banner: processBanner,
+      },
+    },
   },
   ssr: {
     optimizeDeps: {
