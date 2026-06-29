@@ -1,5 +1,4 @@
 import {createRequestHandler} from '@shopify/remix-oxygen';
-import {storefrontRedirect} from '@shopify/hydrogen';
 import {createStorefront} from '~/lib/storefront.server';
 
 // @ts-ignore
@@ -23,25 +22,7 @@ export default {
       },
     });
 
-    // Safety net: guarantee a response within 15s so Oxygen health checks
-    // don't time out waiting for a hung storefront API fetch.
-    const respond = async () => {
-      const response = await handleRequest(request);
-      if (response.status === 404) {
-        return storefrontRedirect({request, response, storefront}).catch(() => response);
-      }
-      return response;
-    };
-
-    return Promise.race([
-      respond(),
-      new Promise((resolve) =>
-        setTimeout(
-          () => resolve(new Response('Service Unavailable', {status: 503})),
-          15000,
-        ),
-      ),
-    ]);
+    return handleRequest(request);
   },
 };
 
@@ -90,7 +71,6 @@ class HydrogenSession {
 }
 
 function createCookieSessionStorage({cookie}) {
-  // Minimal cookie session implementation for Oxygen worker runtime
   return {
     async getSession(cookieHeader) {
       const data = {};
@@ -113,7 +93,7 @@ function createCookieSessionStorage({cookie}) {
     },
     async commitSession(session) {
       const encoded = encodeURIComponent(btoa(JSON.stringify(session._raw ?? session._data)));
-      const maxAge = 60 * 60 * 24 * 30; // 30 days
+      const maxAge = 60 * 60 * 24 * 30;
       return `${cookie.name}=${encoded}; Path=${cookie.path}; HttpOnly; SameSite=${cookie.sameSite}; Max-Age=${maxAge}`;
     },
   };
