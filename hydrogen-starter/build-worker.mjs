@@ -1,5 +1,4 @@
 import {build} from 'esbuild';
-import {nodeModulesPolyfillPlugin} from 'esbuild-plugins-node-modules-polyfill';
 import {mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
@@ -18,6 +17,9 @@ await build({
   alias: {
     '~': path.join(__dirname, 'app'),
     'virtual:remix/server-build': path.join(__dirname, 'dist/server/index.js'),
+    // stream is a Node.js built-in not available in CF Workers;
+    // readable-stream is the browser-compatible polyfill already in node_modules
+    'stream': 'readable-stream',
   },
   define: {
     'process.env.NODE_ENV': '"production"',
@@ -28,9 +30,7 @@ await build({
   plugins: [
     {
       // log-seo-tags is a React.lazy dev-only SEO logging utility bundled by
-      // Hydrogen into dist/server/assets/. It's not needed in the worker and
-      // the filesystem path can't be read by esbuild via alias resolution.
-      // Stub it out as a no-op so the rest of the bundle succeeds.
+      // Hydrogen into dist/server/assets/. Stub it out as a no-op.
       name: 'stub-dev-modules',
       setup(build) {
         build.onResolve({filter: /log-seo-tags/}, () => ({
@@ -43,7 +43,6 @@ await build({
         }));
       },
     },
-    nodeModulesPolyfillPlugin(),
   ],
   logLevel: 'info',
 });
