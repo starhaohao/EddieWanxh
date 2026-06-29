@@ -3,12 +3,23 @@ import {hydrogen} from '@shopify/hydrogen/vite';
 import {vitePlugin as remix} from '@remix-run/dev';
 import path from 'node:path';
 
+// Oxygen (Cloudflare Workers) has no Node.js built-ins. We alias each
+// built-in module that readable-stream (polyfill for 'stream') depends on
+// to the corresponding npm polyfill package that is already in node_modules.
+const nodePolyfills = {
+  stream: 'readable-stream',
+  events: path.resolve('./app/shims/events.js'),
+  buffer: path.resolve('./node_modules/buffer'),
+  string_decoder: path.resolve('./node_modules/string_decoder'),
+  util: path.resolve('./node_modules/util'),
+  inherits: path.resolve('./node_modules/inherits'),
+};
+
 export default defineConfig({
   resolve: {
     alias: {
       '~': path.resolve('./app'),
-      stream: 'readable-stream',
-      events: path.resolve('./app/shims/events.js'),
+      ...nodePolyfills,
     },
   },
   plugins: [
