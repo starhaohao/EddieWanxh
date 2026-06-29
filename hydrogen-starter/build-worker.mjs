@@ -27,15 +27,20 @@ await build({
   },
   plugins: [
     {
-      // Resolve relative imports from dist/server/index.js to absolute paths
-      // so esbuild can find dist/server/assets/* and other siblings
-      name: 'server-assets-resolver',
+      // log-seo-tags is a React.lazy dev-only SEO logging utility bundled by
+      // Hydrogen into dist/server/assets/. It's not needed in the worker and
+      // the filesystem path can't be read by esbuild via alias resolution.
+      // Stub it out as a no-op so the rest of the bundle succeeds.
+      name: 'stub-dev-modules',
       setup(build) {
-        build.onResolve({filter: /^\.\//}, (args) => {
-          if (args.importer && args.importer.includes('dist/server')) {
-            return {path: path.resolve(path.dirname(args.importer), args.path)};
-          }
-        });
+        build.onResolve({filter: /log-seo-tags/}, () => ({
+          path: 'log-seo-tags-stub',
+          namespace: 'stub',
+        }));
+        build.onLoad({filter: /.*/, namespace: 'stub'}, () => ({
+          contents: 'export default function LogSeoTags() { return null; }',
+          loader: 'js',
+        }));
       },
     },
     nodeModulesPolyfillPlugin(),
