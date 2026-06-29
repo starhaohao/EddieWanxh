@@ -5,11 +5,12 @@ import {createStorefront} from '~/lib/storefront.server';
 export async function loader({context, request}) {
   const storefront = createStorefront({env: context.env, request});
 
-  const {collections} = await storefront.query(FEATURED_COLLECTIONS_QUERY, {
-    variables: {first: 3},
-  });
+  const result = await Promise.race([
+    storefront.query(FEATURED_COLLECTIONS_QUERY, {variables: {first: 3}}),
+    new Promise((resolve) => setTimeout(() => resolve(null), 5000)),
+  ]).catch(() => null);
 
-  return json({collections});
+  return json({collections: result?.collections ?? {nodes: []}});
 }
 
 export default function Index() {
