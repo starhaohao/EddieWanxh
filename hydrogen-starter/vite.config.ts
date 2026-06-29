@@ -3,21 +3,21 @@ import {hydrogen} from '@shopify/hydrogen/vite';
 import {vitePlugin as remix} from '@remix-run/dev';
 import path from 'node:path';
 
-// Oxygen (Cloudflare Workers) has no Node.js built-ins. We alias each
-// built-in module that readable-stream (polyfill for 'stream') depends on
-// to the corresponding npm polyfill package already in node_modules.
+// Oxygen (Cloudflare Workers) has no Node.js built-ins.
+//
+// Root cause: with ssr.noExternal=true, react-dom/server.node.js gets bundled
+// and drags in stream, buffer, util, events, etc. The fix is to use the
+// browser-compatible react-dom/server.browser.js instead, which has no Node deps.
+//
+// We still alias 'stream' → readable-stream for any other packages that use it,
+// and keep the events shim and process banner as a safety net.
 const nodePolyfills = {
+  'react-dom/server': path.resolve('./node_modules/react-dom/server.browser.js'),
   stream: 'readable-stream',
   events: path.resolve('./app/shims/events.js'),
-  buffer: path.resolve('./node_modules/buffer'),
-  string_decoder: path.resolve('./node_modules/string_decoder'),
-  util: path.resolve('./node_modules/util'),
-  inherits: path.resolve('./node_modules/inherits'),
 };
 
-// process is a Node.js global not available in Cloudflare Workers. Vite's
-// define rejects function values, so we inject it via a rollup banner which
-// prepends a var declaration to every output chunk.
+// process is a Node.js global not available in CF Workers. Inject via banner.
 const processBanner =
   'var process={env:{NODE_ENV:"production"},version:"v18.0.0",versions:{},browser:true,platform:"browser",nextTick:function(fn,a){return setTimeout(function(){fn(a);},0)},hrtime:function(){return[0,0];}};';
 
