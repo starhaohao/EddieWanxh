@@ -1,4 +1,3 @@
-import './app/shims/process.js';
 import {createRequestHandler} from '@shopify/remix-oxygen';
 import {storefrontRedirect} from '@shopify/hydrogen';
 import {createStorefront} from '~/lib/storefront.server';
@@ -18,7 +17,7 @@ export default {
 
     const handleRequest = createRequestHandler({
       build: remixBuild,
-      mode: process.env.NODE_ENV,
+      mode: 'production',
       getLoadContext() {
         return {env, session, storefront, waitUntil};
       },

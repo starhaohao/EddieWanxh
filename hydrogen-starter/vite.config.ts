@@ -5,13 +5,22 @@ import path from 'node:path';
 
 // Oxygen (Cloudflare Workers) has no Node.js built-ins.
 //
-// Root cause: with ssr.noExternal=true, react-dom/server.node.js gets bundled
-// and drags in stream, buffer, util, events, etc. The fix is to point
-// react-dom/server at the browser-compatible variant which uses Web Streams API.
-//
-// The process global polyfill lives in app/entry.server.jsx (first line), which
-// guarantees it runs before any bundled package that references `process`.
+// With ssr.noExternal=true all node_modules are bundled. Some packages check
+// process.env.NODE_ENV at module-init time. We eliminate those references via
+// Vite's `define` (build-time substitution) and also prepend a full process
+// polyfill to the SSR entry chunk for any bare `process` references.
+const PROCESS_SHIM =
+  'if(typeof globalThis.process==="undefined"){globalThis.process={env:{NODE_ENV:"production"},version:"v18.0.0",versions:{},browser:true,platform:"browser",nextTick:typeof queueMicrotask!=="undefined"?(fn,...a)=>queueMicrotask(()=>fn(...a)):(fn,...a)=>Promise.resolve().then(()=>fn(...a)),hrtime:()=>[0,0]};}';
+
 export default defineConfig({
+  define: {
+    'process.env.NODE_ENV': '"production"',
+    'process.env': '({"NODE_ENV":"production"})',
+    'process.browser': 'true',
+    'process.version': '"v18.0.0"',
+    'process.versions': '({})',
+    'process.platform': '"browser"',
+  },
   resolve: {
     alias: {
       '~': path.resolve('./app'),
@@ -30,6 +39,14 @@ export default defineConfig({
         v3_throwAbortReason: true,
       },
     }),
+    {
+      name: 'process-shim-ssr',
+      renderChunk(code, chunk) {
+        if (chunk.isEntry && chunk.fileName === 'index.js') {
+          return {code: PROCESS_SHIM + '\n' + code, map: null};
+        }
+      },
+    },
   ],
   build: {
     assetsInlineLimit: 0,
