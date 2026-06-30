@@ -115,7 +115,7 @@
         "title_size": 84,
         "subtitle": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore</p>",
         "cta_text": "Shop All",
-        "cta_url": "shopify://pages/lookbook",
+        "cta_url": "shopify://pages/fabric-and-size-guide",
         "cta_bg": "#344e5c",
         "cta_text_color": "#f1f4f5",
         "show_urgency": true,
