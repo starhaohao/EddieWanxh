@@ -1,0 +1,953 @@
+{%- liquid
+  assign style     = section.settings.card_style
+  assign product   = section.settings.product
+  assign range_tag = section.settings.range_tag
+  assign tagline   = section.settings.tagline
+  assign badge_l   = section.settings.badge_left
+  assign badge_r   = section.settings.badge_right
+  assign trust     = section.settings.trust_text
+  assign stock     = section.settings.stock_nudge
+  assign rating    = section.settings.rating_text
+  assign img_front = section.settings.image_front
+  assign img_back  = section.settings.image_back
+
+  if product != blank
+    assign pname   = product.title
+    assign variant = product.selected_or_first_available_variant
+    assign purl    = product.url
+    if img_front == blank and product.featured_image != blank
+      assign img_front = product.featured_image
+    endif
+  else
+    assign pname = section.settings.product_name
+    assign purl  = section.settings.product_url | default: '#'
+  endif
+
+  if variant != blank and variant.compare_at_price > variant.price
+    assign save_pct = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price
+  endif
+
+  assign swatch_blocks = section.blocks | where: 'type', 'swatch'
+  assign spec_blocks   = section.blocks | where: 'type', 'spec_row'
+-%}
+
+<div class="pc pc--{{ style }}" data-pc-id="{{ section.id }}">
+
+{%- if style == 'a' -%}
+
+  {%- comment -%} ── CARD A: EDITORIAL COLUMN ── {%- endcomment -%}
+  <div class="pc-a">
+    <a href="{{ purl }}" class="pc-a__img">
+      {%- if img_front != blank -%}
+        <img class="pc-a__front" src="{{ img_front | image_url: width: 900 }}" alt="{{ img_front.alt | escape }}" loading="lazy">
+      {%- endif -%}
+      {%- if img_back != blank -%}
+        <img class="pc-a__back" src="{{ img_back | image_url: width: 900 }}" alt="{{ img_back.alt | escape }}" loading="lazy">
+      {%- endif -%}
+      {%- if badge_l != blank -%}<span class="pc__badge pc__badge--l">{{ badge_l }}</span>{%- endif -%}
+      {%- if badge_r != blank -%}<span class="pc__badge pc__badge--r">{{ badge_r }}</span>{%- endif -%}
+    </a>
+    <div class="pc-a__body">
+      {%- if range_tag != blank -%}<p class="pc__range">{{ range_tag }}</p>{%- endif -%}
+      <h2 class="pc__name">{{ pname }}</h2>
+      {%- if tagline != blank -%}<p class="pc__tagline">{{ tagline }}</p>{%- endif -%}
+      <div class="pc__prices">
+        {%- if variant != blank -%}
+          {%- if variant.compare_at_price > variant.price -%}
+            <s class="pc__was">{{ variant.compare_at_price | money }}</s>
+          {%- endif -%}
+          <span class="pc__now">{{ variant.price | money }}</span>
+          {%- if save_pct != blank -%}<span class="pc__save">Save {{ save_pct }}%</span>{%- endif -%}
+        {%- endif -%}
+        {%- if rating != blank -%}<span class="pc__rating">{{ rating }}</span>{%- endif -%}
+      </div>
+      {%- if swatch_blocks.size > 0 or stock != blank -%}
+        <div class="pc__swatches">
+          {%- for block in swatch_blocks -%}
+            <span class="pc__swatch{% if block.settings.active %} is-active{% endif %}"
+                  style="background:{{ block.settings.color }};"
+                  aria-label="{{ block.settings.label | escape }}"
+                  {{ block.shopify_attributes }}></span>
+          {%- endfor -%}
+          {%- if stock != blank -%}<span class="pc__stock">{{ stock }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+    {%- if spec_blocks.size > 0 -%}
+      <div class="pc-a__divider"></div>
+      <div class="pc-a__specs">
+        {%- for block in spec_blocks -%}
+          <div class="pc__spec" {{ block.shopify_attributes }}>
+            <span class="pc__spec-l">{{ block.settings.label }}</span>
+            <span class="pc__spec-v">{{ block.settings.value }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    <div class="pc-a__foot">
+      {%- if trust != blank -%}<span class="pc__trust">{{ trust }}</span>{%- endif -%}
+      <button class="pc__cta" type="button"
+              data-pc-atc
+              data-variant="{% if variant != blank %}{{ variant.id }}{% endif %}"
+              aria-live="polite">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+{%- elsif style == 'b' -%}
+
+  {%- comment -%} ── CARD B: MAGAZINE SPLIT ── {%- endcomment -%}
+  <div class="pc-b">
+    <a href="{{ purl }}" class="pc-b__img">
+      {%- if img_front != blank -%}
+        <img src="{{ img_front | image_url: width: 700 }}" alt="{{ img_front.alt | escape }}" loading="lazy">
+      {%- endif -%}
+      {%- if badge_l != blank -%}<span class="pc__badge pc__badge--l">{{ badge_l }}</span>{%- endif -%}
+      {%- if badge_r != blank -%}<span class="pc__badge pc__badge--r">{{ badge_r }}</span>{%- endif -%}
+    </a>
+    <div class="pc-b__copy">
+      {%- if range_tag != blank -%}<p class="pc__range">{{ range_tag }}</p>{%- endif -%}
+      <h2 class="pc__name">{{ pname }}</h2>
+      {%- if tagline != blank -%}<p class="pc__tagline pc-b__tagline">{{ tagline }}</p>{%- endif -%}
+      <div class="pc__prices">
+        {%- if variant != blank -%}
+          {%- if variant.compare_at_price > variant.price -%}
+            <s class="pc__was">{{ variant.compare_at_price | money }}</s>
+          {%- endif -%}
+          <span class="pc__now">{{ variant.price | money }}</span>
+          {%- if save_pct != blank -%}<span class="pc__save">Save {{ save_pct }}%</span>{%- endif -%}
+        {%- endif -%}
+        {%- if rating != blank -%}<span class="pc__rating">{{ rating }}</span>{%- endif -%}
+      </div>
+      {%- if swatch_blocks.size > 0 or stock != blank -%}
+        <div class="pc__swatches">
+          {%- for block in swatch_blocks -%}
+            <span class="pc__swatch{% if block.settings.active %} is-active{% endif %}"
+                  style="background:{{ block.settings.color }};"
+                  aria-label="{{ block.settings.label | escape }}"
+                  {{ block.shopify_attributes }}></span>
+          {%- endfor -%}
+          {%- if stock != blank -%}<span class="pc__stock">{{ stock }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if spec_blocks.size > 0 -%}
+        <div class="pc-b__specs">
+          {%- for block in spec_blocks -%}
+            <div class="pc__spec" {{ block.shopify_attributes }}>
+              <span class="pc__spec-l">{{ block.settings.label }}</span>
+              <span class="pc__spec-v">{{ block.settings.value }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <div class="pc-b__foot">
+        {%- if trust != blank -%}<span class="pc__trust">{{ trust }}</span>{%- endif -%}
+        <button class="pc__cta pc-b__cta" type="button"
+                data-pc-atc
+                data-variant="{% if variant != blank %}{{ variant.id }}{% endif %}"
+                aria-live="polite">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+{%- elsif style == 'c' -%}
+
+  {%- comment -%} ── CARD C: IMMERSIVE REVEAL ── {%- endcomment -%}
+  <div class="pc-c" data-pc-c>
+    {%- if img_front != blank -%}
+      <div class="pc-c__bg">
+        <img src="{{ img_front | image_url: width: 900 }}" alt="{{ img_front.alt | escape }}" loading="lazy">
+      </div>
+    {%- endif -%}
+    <div class="pc-c__grad"></div>
+    {%- if badge_l != blank -%}<span class="pc__badge pc__badge--l">{{ badge_l }}</span>{%- endif -%}
+    {%- if badge_r != blank -%}<span class="pc__badge pc__badge--r pc__badge--c-r">{{ badge_r }}</span>{%- endif -%}
+    <div class="pc-c__static">
+      {%- if range_tag != blank -%}<p class="pc-c__s-range">{{ range_tag }}</p>{%- endif -%}
+      <h2 class="pc-c__s-name">{{ pname }}</h2>
+      {%- if tagline != blank -%}<p class="pc-c__s-tag">{{ tagline }}</p>{%- endif -%}
+      <span class="pc-c__hint">Tap to see details ↑</span>
+    </div>
+    <div class="pc-c__reveal">
+      {%- if range_tag != blank -%}<p class="pc-c__r-range">{{ range_tag }}</p>{%- endif -%}
+      <h2 class="pc-c__r-name">{{ pname }}</h2>
+      <div class="pc-c__r-prices">
+        {%- if variant != blank -%}
+          {%- if variant.compare_at_price > variant.price -%}
+            <s class="pc-c__was">{{ variant.compare_at_price | money }}</s>
+          {%- endif -%}
+          <span class="pc-c__now">{{ variant.price | money }}</span>
+          {%- if save_pct != blank -%}<span class="pc__save">Save {{ save_pct }}%</span>{%- endif -%}
+        {%- endif -%}
+        {%- if rating != blank -%}<span class="pc-c__rating">{{ rating }}</span>{%- endif -%}
+      </div>
+      {%- if spec_blocks.size > 0 -%}
+        <div class="pc-c__specs">
+          {%- for block in spec_blocks -%}
+            <div class="pc-c__spec" {{ block.shopify_attributes }}>
+              <span class="pc-c__spec-l">{{ block.settings.label }}</span>
+              <span class="pc-c__spec-v">{{ block.settings.value }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if swatch_blocks.size > 0 or stock != blank -%}
+        <div class="pc-c__swatches">
+          {%- for block in swatch_blocks -%}
+            <span class="pc-c__swatch{% if block.settings.active %} is-active{% endif %}"
+                  style="background:{{ block.settings.color }};"
+                  aria-label="{{ block.settings.label | escape }}"
+                  {{ block.shopify_attributes }}></span>
+          {%- endfor -%}
+          {%- if stock != blank -%}<span class="pc-c__stock">{{ stock }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+      <button class="pc-c__cta" type="button"
+              data-pc-atc
+              data-variant="{% if variant != blank %}{{ variant.id }}{% endif %}"
+              aria-live="polite">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+{%- endif -%}
+
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Galdeano&family=IBM+Plex+Sans:wght@400;500&display=swap');
+
+/* ── PRODUCT CARD (prefix: pc) ── */
+
+.pc {
+  --pc-soft:  #FAF8F3;
+  --pc-ink:   #17191C;
+  --pc-white: #FFFFFF;
+  --pc-burg:  #4A1628;
+  --pc-rule:  #D9D4C9;
+  --pc-mid:   #6B6760;
+  --pc-light: #F2EFE8;
+  display: flex;
+  justify-content: center;
+  font-family: 'IBM Plex Sans', monospace;
+}
+
+/* ── Shared: badges ── */
+.pc__badge {
+  position: absolute;
+  font-family: 'IBM Plex Sans', monospace;
+  font-size: 7px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  color: var(--pc-white);
+  z-index: 2;
+}
+.pc__badge--l { left: 10px; top: 10px; background: var(--pc-burg); }
+.pc__badge--r { right: 10px; top: 10px; background: var(--pc-ink); }
+.pc__badge--c-r { background: rgba(23,25,28,.6); border: 1px solid rgba(255,255,255,.18); }
+
+/* ── Shared: text elements (Cards A & B) ── */
+.pc__range {
+  font-family: 'IBM Plex Sans', monospace;
+  font-size: 7px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--pc-mid);
+  margin-bottom: 5px;
+}
+.pc__name {
+  font-family: 'Galdeano', serif;
+  font-size: 26px;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--pc-ink);
+  margin-bottom: 5px;
+}
+.pc__name a { color: inherit; text-decoration: none; }
+.pc__tagline {
+  font-size: 10.5px;
+  color: var(--pc-mid);
+  line-height: 1.55;
+  letter-spacing: -.01em;
+  margin-bottom: 10px;
+}
+.pc__prices {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+.pc__was {
+  font-size: 10px;
+  color: var(--pc-mid);
+  text-decoration: line-through;
+}
+.pc__now {
+  font-size: 14px;
+  font-family: 'IBM Plex Sans', monospace;
+  font-weight: 500;
+  color: var(--pc-ink);
+}
+.pc__save {
+  font-size: 7px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: var(--pc-ink);
+  color: var(--pc-white);
+  padding: 2px 5px;
+}
+.pc__rating {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--pc-mid);
+}
+.pc__swatches {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+.pc__swatch {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--pc-rule);
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.pc__swatch.is-active {
+  border-color: var(--pc-ink);
+  outline: 1px solid var(--pc-ink);
+  outline-offset: 2px;
+}
+.pc__stock {
+  margin-left: auto;
+  font-size: 8.5px;
+  letter-spacing: .06em;
+  color: var(--pc-burg);
+  text-transform: uppercase;
+}
+.pc__spec {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 5px;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--pc-rule);
+}
+.pc__spec:last-child { border-bottom: none; }
+.pc__spec-l {
+  font-size: 7px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--pc-mid);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pc__spec-l::before { content: '◆'; font-size: 5.5px; color: var(--pc-burg); }
+.pc__spec-v {
+  font-size: 10px;
+  color: var(--pc-ink);
+  line-height: 1.45;
+  letter-spacing: -.01em;
+}
+.pc__trust {
+  font-size: 8.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--pc-mid);
+}
+.pc__cta {
+  background: var(--pc-burg);
+  color: var(--pc-white);
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-family: 'IBM Plex Sans', monospace;
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .15s;
+}
+.pc__cta:hover { background: #3a1020; }
+.pc__cta.is-added { background: var(--pc-ink); }
+
+/* ════════════════════════════════════
+   CARD A — EDITORIAL COLUMN
+════════════════════════════════════ */
+.pc-a {
+  background: var(--pc-white);
+  border: 1px solid var(--pc-rule);
+  width: 340px;
+  max-width: 100%;
+}
+.pc-a__img {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  background: var(--pc-light);
+}
+.pc-a__front,
+.pc-a__back {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform .6s ease, opacity .35s ease;
+}
+.pc-a__back { position: absolute; inset: 0; opacity: 0; }
+.pc-a:hover .pc-a__front { opacity: 0; transform: scale(1.03); }
+.pc-a:hover .pc-a__back  { opacity: 1; transform: scale(1.03); }
+.pc-a__body { padding: 14px 14px 0; }
+.pc-a__divider { height: 1px; background: var(--pc-rule); margin: 0 14px 10px; }
+.pc-a__specs { padding: 0 14px; }
+.pc-a__foot {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+@media screen and (max-width: 749px) {
+  .pc-a { width: 100%; }
+  .pc__name { font-size: 24px; }
+  .pc-a__specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 8px;
+  }
+  .pc-a__specs .pc__spec {
+    display: block;
+    grid-template-columns: unset;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--pc-rule);
+  }
+  .pc-a__specs .pc__spec:last-child { border-bottom: none; }
+  .pc-a__specs .pc__spec-l { margin-bottom: 2px; }
+}
+
+/* ════════════════════════════════════
+   CARD B — MAGAZINE SPLIT
+════════════════════════════════════ */
+.pc-b {
+  background: var(--pc-white);
+  border: 1px solid var(--pc-rule);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  width: 620px;
+  max-width: 100%;
+}
+.pc-b__img {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--pc-light);
+}
+.pc-b__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform .5s ease;
+}
+.pc-b:hover .pc-b__img img { transform: scale(1.04); }
+.pc-b__copy {
+  padding: 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+}
+.pc-b__tagline {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--pc-rule);
+  margin-bottom: 12px;
+}
+.pc-b__specs {
+  flex: 1;
+  margin-bottom: 14px;
+}
+.pc-b__specs .pc__spec:first-child { border-top: 1px solid var(--pc-rule); }
+.pc-b__foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pc-b__cta { width: auto; flex: 1; }
+
+@media screen and (max-width: 749px) {
+  .pc-b { grid-template-columns: 1fr; }
+  .pc-b__img { aspect-ratio: 3/4; }
+  .pc-b__copy { padding: 14px 12px 12px; }
+  .pc-b__specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 8px;
+    margin-bottom: 12px;
+  }
+  .pc-b__specs .pc__spec {
+    display: block;
+    grid-template-columns: unset;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--pc-rule);
+  }
+  .pc-b__specs .pc__spec:first-child,
+  .pc-b__specs .pc__spec:nth-child(2) { border-top: 1px solid var(--pc-rule); }
+  .pc-b__specs .pc__spec-l { margin-bottom: 2px; }
+  .pc-b__foot { flex-wrap: wrap; }
+  .pc-b__cta { flex: 1 0 100%; }
+}
+
+/* ════════════════════════════════════
+   CARD C — IMMERSIVE REVEAL
+════════════════════════════════════ */
+.pc-c {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  background: var(--pc-ink);
+  cursor: pointer;
+  width: 340px;
+  max-width: 100%;
+  font-family: 'IBM Plex Sans', monospace;
+}
+.pc-c__bg { position: absolute; inset: 0; }
+.pc-c__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform .7s ease;
+}
+.pc-c:hover .pc-c__bg img { transform: scale(1.06); }
+.pc-c__grad {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 28%, rgba(23,25,28,.5) 58%, rgba(23,25,28,.97) 100%);
+  transition: opacity .4s;
+}
+.pc-c:hover .pc-c__grad { opacity: .92; }
+
+/* Static info (visible by default) */
+.pc-c__static {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 18px;
+  transition: transform .4s cubic-bezier(.22,.68,0,1.2), opacity .3s;
+}
+.pc-c:hover .pc-c__static { transform: translateY(-8px); opacity: 0; }
+.pc-c__s-range {
+  font-size: 7px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(250,248,243,.4);
+  margin-bottom: 5px;
+}
+.pc-c__s-name {
+  font-family: 'Galdeano', serif;
+  font-size: 28px;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--pc-soft);
+  margin-bottom: 5px;
+}
+.pc-c__s-tag {
+  font-size: 10px;
+  color: rgba(250,248,243,.45);
+  line-height: 1.5;
+}
+.pc-c__hint {
+  display: none;
+  font-size: 7px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(250,248,243,.3);
+  margin-top: 8px;
+}
+
+/* Reveal panel (shown on hover/tap) */
+.pc-c__reveal {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 18px;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform .45s cubic-bezier(.22,.68,0,1.2), opacity .35s;
+  background: linear-gradient(to top, rgba(23,25,28,1) 70%, transparent);
+}
+.pc-c:hover .pc-c__reveal { transform: translateY(0); opacity: 1; }
+.pc-c__r-range {
+  font-size: 7px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(250,248,243,.35);
+  margin-bottom: 3px;
+}
+.pc-c__r-name {
+  font-family: 'Galdeano', serif;
+  font-size: 22px;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--pc-soft);
+  margin-bottom: 5px;
+}
+.pc-c__r-prices {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.pc-c__was {
+  font-size: 10px;
+  color: rgba(250,248,243,.3);
+  text-decoration: line-through;
+}
+.pc-c__now {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pc-soft);
+}
+.pc-c__rating {
+  margin-left: auto;
+  font-size: 9.5px;
+  color: rgba(250,248,243,.35);
+}
+.pc-c__specs { margin-bottom: 10px; }
+.pc-c__spec {
+  display: flex;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(250,248,243,.07);
+  align-items: baseline;
+}
+.pc-c__spec:first-child { border-top: 1px solid rgba(250,248,243,.07); }
+.pc-c__spec-l {
+  font-size: 6.5px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: rgba(250,248,243,.3);
+  min-width: 76px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pc-c__spec-l::before { content: '◆'; font-size: 5px; color: var(--pc-burg); }
+.pc-c__spec-v {
+  font-size: 9.5px;
+  color: rgba(250,248,243,.65);
+  line-height: 1.4;
+  letter-spacing: -.01em;
+}
+.pc-c__swatches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.pc-c__swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(250,248,243,.2);
+  cursor: pointer;
+}
+.pc-c__swatch.is-active {
+  border-color: var(--pc-soft);
+  outline: 1px solid var(--pc-soft);
+  outline-offset: 2px;
+}
+.pc-c__stock {
+  margin-left: auto;
+  font-size: 8px;
+  letter-spacing: .06em;
+  color: #e8a0a8;
+  text-transform: uppercase;
+}
+.pc-c__cta {
+  background: var(--pc-soft);
+  color: var(--pc-ink);
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-family: 'IBM Plex Sans', monospace;
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .15s;
+}
+.pc-c__cta:hover { background: #fffdf8; }
+.pc-c__cta.is-added { background: rgba(250,248,243,.8); }
+
+/* Mobile: swap to tap-toggle */
+@media screen and (max-width: 749px) {
+  .pc-c { width: 100%; }
+  .pc-c__hint { display: block; }
+  /* disable hover effects on mobile */
+  .pc-c:hover .pc-c__bg img { transform: none; }
+  .pc-c:hover .pc-c__static { transform: none; opacity: 1; }
+  .pc-c:hover .pc-c__reveal { transform: translateY(100%); opacity: 0; }
+  /* tap-open state */
+  .pc-c.is-open .pc-c__bg img { transform: scale(1.05); }
+  .pc-c.is-open .pc-c__static { opacity: 0; pointer-events: none; }
+  .pc-c.is-open .pc-c__reveal { transform: translateY(0); opacity: 1; }
+  .pc-c__specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 8px;
+  }
+  .pc-c__spec:first-child,
+  .pc-c__spec:nth-child(2) { border-top: 1px solid rgba(250,248,243,.07); }
+}
+</style>
+
+<script>
+(function () {
+  var wrap = document.querySelector('[data-pc-id="{{ section.id }}"]');
+  if (!wrap) return;
+
+  /* ── Add to Cart ── */
+  wrap.querySelectorAll('[data-pc-atc]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var variantId = parseInt(btn.dataset.variant, 10);
+      if (!variantId) return;
+      btn.disabled = true;
+      var orig = btn.textContent.trim();
+      btn.textContent = 'Adding…';
+
+      fetch(window.Shopify.routes.root + 'cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: 1 })
+      })
+      .then(function (r) { return r.json(); })
+      .then(function () {
+        btn.textContent = 'Added ✓';
+        btn.classList.add('is-added');
+        document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true }));
+        setTimeout(function () {
+          btn.textContent = orig;
+          btn.classList.remove('is-added');
+          btn.disabled = false;
+        }, 2200);
+      })
+      .catch(function () {
+        btn.textContent = 'Error — try again';
+        btn.disabled = false;
+      });
+    });
+  });
+
+  /* ── Card C: tap to toggle reveal on mobile ── */
+  var cardC = wrap.querySelector('[data-pc-c]');
+  if (cardC) {
+    cardC.addEventListener('click', function () {
+      if (window.innerWidth <= 749) {
+        cardC.classList.toggle('is-open');
+      }
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Product Card",
+  "settings": [
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "a", "label": "A — Editorial Column (340px)" },
+        { "value": "b", "label": "B — Magazine Split (620px)" },
+        { "value": "c", "label": "C — Immersive Reveal (340px)" }
+      ],
+      "default": "a"
+    },
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Pulls title and pricing automatically"
+    },
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Product name (fallback)",
+      "info": "Used only when no product is selected"
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "Product URL (fallback)"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_front",
+      "label": "Front image",
+      "info": "Overrides the product's featured image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_back",
+      "label": "Back image (hover swap)",
+      "info": "Card A only — shown on hover"
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "range_tag",
+      "label": "Range tag",
+      "placeholder": "SCULPT — Cotton Spandex"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "placeholder": "Support where you need it. Freedom everywhere else."
+    },
+    {
+      "type": "text",
+      "id": "badge_left",
+      "label": "Left badge",
+      "placeholder": "Final Stock"
+    },
+    {
+      "type": "text",
+      "id": "badge_right",
+      "label": "Right badge",
+      "placeholder": "–31%"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating",
+      "placeholder": "★ 4.8"
+    },
+    {
+      "type": "text",
+      "id": "stock_nudge",
+      "label": "Stock nudge",
+      "placeholder": "Only 4 left"
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Trust line",
+      "placeholder": "Designed in Singapore"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "swatch",
+      "name": "Colour swatch",
+      "settings": [
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Colour",
+          "default": "#17191C"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Accessible label",
+          "placeholder": "Black"
+        },
+        {
+          "type": "checkbox",
+          "id": "active",
+          "label": "Default selected",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "spec_row",
+      "name": "Spec row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "placeholder": "Design"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "placeholder": "Structured trunk, tailored contouring."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Card",
+      "settings": {
+        "card_style": "a",
+        "range_tag": "SCULPT — Cotton Spandex",
+        "tagline": "Support where you need it. Freedom everywhere else.",
+        "badge_left": "Final Stock",
+        "badge_right": "–31%",
+        "rating_text": "★ 4.8",
+        "stock_nudge": "Only 4 left",
+        "trust_text": "Designed in Singapore"
+      },
+      "blocks": [
+        {
+          "type": "swatch",
+          "settings": { "color": "#17191C", "label": "Black", "active": true }
+        },
+        {
+          "type": "swatch",
+          "settings": { "color": "#FAFAFA", "label": "White" }
+        },
+        {
+          "type": "swatch",
+          "settings": { "color": "#7A6B61", "label": "Mocha" }
+        },
+        {
+          "type": "spec_row",
+          "settings": { "label": "Design", "value": "Structured trunk, tailored contouring." }
+        },
+        {
+          "type": "spec_row",
+          "settings": { "label": "Fabric", "value": "Soft cotton + spandex, flexible stretch." }
+        },
+        {
+          "type": "spec_row",
+          "settings": { "label": "Performance", "value": "Targeted support, never holds you back." }
+        },
+        {
+          "type": "spec_row",
+          "settings": { "label": "Detail", "value": "Dual-rise: supportive front, shaped back." }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
