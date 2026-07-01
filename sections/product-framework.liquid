@@ -1,0 +1,230 @@
+{%- liquid
+  assign pq   = product.metafields.custom.product_quote.value
+  assign dp   = product.metafields.custom.design_philosophy.value
+  assign aag  = product.metafields.custom.at_a_glance.value
+  assign df   = product.metafields.custom.designed_for.value
+  assign pww  = product.metafields.custom.pairs_well_with.value
+  assign br   = product.metafields.custom.bundle_recommendation.value
+  assign sf   = product.metafields.custom.size_fit.value
+  assign mc   = product.metafields.custom.material_care.value
+
+  assign has_any = false
+  if pq or dp or aag or df or pww or br
+    assign has_any = true
+  endif
+-%}
+
+{%- if has_any -%}
+<div class="pf" data-section-id="{{ section.id }}">
+
+  {%- if pq or dp -%}
+  <div class="pf__identity">
+    {%- if pq -%}
+    <p class="pf__quote">{{ pq }}</p>
+    {%- endif -%}
+    {%- if dp -%}
+    <p class="pf__philosophy">{{ dp }}</p>
+    {%- endif -%}
+  </div>
+  {%- endif -%}
+
+  {%- if aag -%}
+  <details class="pf__disclosure" open>
+    <summary class="pf__disc-header">
+      <span class="pf__disc-label">{{ section.settings.aag_label }}</span>
+      <span class="pf__disc-icon" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </summary>
+    <div class="pf__disc-body">
+      <p class="pf__disc-text">{{ aag | newline_to_br }}</p>
+    </div>
+  </details>
+  {%- endif -%}
+
+  {%- if df or pww or br -%}
+  <div class="pf__grid">
+
+    {%- if df -%}
+    <div class="pf__cell">
+      <p class="pf__cell-label">{{ section.settings.df_label }}</p>
+      <p class="pf__cell-body">{{ df | newline_to_br }}</p>
+    </div>
+    {%- endif -%}
+
+    {%- if pww -%}
+    <div class="pf__cell">
+      <p class="pf__cell-label">{{ section.settings.pww_label }}</p>
+      <p class="pf__cell-body">{{ pww | newline_to_br }}</p>
+    </div>
+    {%- endif -%}
+
+    {%- if br -%}
+    <div class="pf__cell pf__cell--full">
+      <p class="pf__cell-label">{{ section.settings.br_label }}</p>
+      <p class="pf__cell-body">{{ br | newline_to_br }}</p>
+    </div>
+    {%- endif -%}
+
+  </div>
+  {%- endif -%}
+
+</div>
+{%- endif -%}
+
+<style>
+  .pf {
+    --pf-bg:       #1a1d20;
+    --pf-border:   rgba(255,255,255,0.1);
+    --pf-text:     #ffffff;
+    --pf-muted:    rgba(255,255,255,0.42);
+    --pf-accent:   #923531;
+    --pf-mono:     'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--pf-bg);
+    padding: 40px 24px;
+  }
+
+  /* ── Identity block ── */
+  .pf__identity {
+    border-left: 2px solid var(--pf-accent);
+    padding-left: 20px;
+    margin-bottom: 36px;
+  }
+  .pf__quote {
+    font-size: clamp(20px, 4vw, 26px);
+    letter-spacing: -0.03em;
+    color: var(--pf-text);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+  .pf__philosophy {
+    font-family: var(--pf-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--pf-accent);
+    margin: 0;
+  }
+
+  /* ── At a glance disclosure ── */
+  .pf__disclosure {
+    border-top: 1px solid var(--pf-border);
+    border-bottom: 1px solid var(--pf-border);
+    margin-bottom: 32px;
+  }
+  .pf__disc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .pf__disc-header::-webkit-details-marker { display: none; }
+  .pf__disc-label {
+    font-family: var(--pf-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--pf-muted);
+  }
+  .pf__disc-icon {
+    color: var(--pf-muted);
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+  }
+  .pf__disclosure[open] .pf__disc-icon { transform: rotate(180deg); }
+  .pf__disc-body { padding-bottom: 20px; }
+  .pf__disc-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.72);
+    margin: 0;
+  }
+
+  /* ── Framework grid ── */
+  .pf__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--pf-border);
+    border: 1px solid var(--pf-border);
+  }
+  .pf__cell {
+    background: var(--pf-bg);
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pf__cell--full {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--pf-border);
+  }
+  .pf__cell-label {
+    font-family: var(--pf-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--pf-accent);
+    margin: 0;
+  }
+  .pf__cell-body {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.65);
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .pf { padding: 32px 20px; }
+    .pf__grid { grid-template-columns: 1fr; }
+    .pf__cell--full { grid-column: 1; border-top: 1px solid var(--pf-border); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Framework",
+  "tag": "div",
+  "class": "shopify-section--product-framework",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section labels"
+    },
+    {
+      "type": "text",
+      "id": "aag_label",
+      "label": "At a Glance label",
+      "default": "At a Glance"
+    },
+    {
+      "type": "text",
+      "id": "df_label",
+      "label": "Designed For label",
+      "default": "Designed For"
+    },
+    {
+      "type": "text",
+      "id": "pww_label",
+      "label": "Pairs Well With label",
+      "default": "Pairs Well With"
+    },
+    {
+      "type": "text",
+      "id": "br_label",
+      "label": "Bundle Recommendation label",
+      "default": "Bundle Recommendation"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Framework"
+    }
+  ],
+  "templates": ["product"]
+}
+{% endschema %}
