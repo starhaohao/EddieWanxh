@@ -1,0 +1,126 @@
+# Run these against the Admin API (GraphiQL app, or `shopify app` / Admin API
+# explorer) once per store. They are not called from the Hydrogen app itself.
+#
+# Step 1 — define the "sale_hero" metaobject type (run once)
+mutation CreateSaleHeroDefinition {
+  metaobjectDefinitionCreate(
+    definition: {
+      type: "sale_hero"
+      name: "Sale Hero"
+      fieldDefinitions: [
+        {key: "image", name: "Hero image", type: "file_reference"}
+        {key: "hero_height", name: "Height (vh)", type: "number_integer"}
+        {key: "overlay_from", name: "Overlay start", type: "color"}
+        {key: "overlay_to", name: "Overlay end", type: "color"}
+        {key: "eyebrow", name: "Eyebrow", type: "single_line_text_field"}
+        {key: "eyebrow_color", name: "Eyebrow color", type: "color"}
+        {key: "title", name: "Title", type: "rich_text_field"}
+        {key: "title_size", name: "Title max size (px)", type: "number_integer"}
+        {key: "subtitle", name: "Subtitle", type: "rich_text_field"}
+        {key: "cta_text", name: "Primary CTA text", type: "single_line_text_field"}
+        {key: "cta_url", name: "Primary CTA link", type: "url"}
+        {key: "cta_bg", name: "CTA background", type: "color"}
+        {key: "cta_text_color", name: "CTA text color", type: "color"}
+        {key: "show_urgency", name: "Show urgency tag", type: "boolean"}
+        {key: "urgency_label", name: "Urgency label", type: "single_line_text_field"}
+        {key: "urgency_text", name: "Urgency text", type: "rich_text_field"}
+        {key: "ghost_ctas", name: "Ghost CTAs", type: "list.metaobject_reference", validations: [{name: "metaobject_definition_id", value: "GID_OF_SALE_HERO_GHOST_CTA_DEFINITION"}]}
+      ]
+      access: {storefront: PUBLIC_READ}
+      capabilities: {publishable: {enabled: true}}
+    }
+  ) {
+    metaobjectDefinition {
+      id
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+# Step 0 (run before Step 1) — the "sale_hero_ghost_cta" sub-type referenced above
+mutation CreateGhostCtaDefinition {
+  metaobjectDefinitionCreate(
+    definition: {
+      type: "sale_hero_ghost_cta"
+      name: "Sale Hero Ghost CTA"
+      fieldDefinitions: [
+        {key: "label", name: "Label", type: "single_line_text_field"}
+        {key: "url", name: "URL", type: "url"}
+      ]
+      access: {storefront: PUBLIC_READ}
+    }
+  ) {
+    metaobjectDefinition {
+      id
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+# Step 2 — create the ghost CTA entries (repeat per CTA, note each returned id)
+mutation CreateGhostCta {
+  metaobjectCreate(
+    metaobject: {
+      type: "sale_hero_ghost_cta"
+      fields: [
+        {key: "label", value: "Briefs"}
+        {key: "url", value: "shopify://collections/briefs"}
+      ]
+    }
+  ) {
+    metaobject {
+      id
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+
+# Step 3 — create the singleton "home" sale_hero entry, seeded with the live
+# production content from templates/page.sale.json. Replace GID placeholders
+# with the ids returned from Step 2, and MEDIA_GID with the id from a
+# `stagedUploadsCreate`/`fileCreate` for the hero image.
+mutation CreateSaleHeroEntry {
+  metaobjectCreate(
+    metaobject: {
+      type: "sale_hero"
+      handle: "home"
+      fields: [
+        {key: "image", value: "MEDIA_GID"}
+        {key: "hero_height", value: "100"}
+        {key: "overlay_from", value: "#2C0000"}
+        {key: "overlay_to", value: "#1b1b1b52"}
+        {key: "eyebrow", value: "Final Clearance"}
+        {key: "eyebrow_color", value: "#f1f4f5"}
+        {key: "title", value: "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"The\"},{\"type\":\"text\",\"value\":\"Last Run.\"}]}]}"}
+        {key: "title_size", value: "84"}
+        {key: "subtitle", value: "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Buy 3 — 15% off · Buy 5 — 25% off\"},{\"type\":\"text\",\"value\":\"Free shipping over $50 · Singapore\"}]}]}"}
+        {key: "cta_text", value: "Shop All"}
+        {key: "cta_url", value: "shopify://pages/fabric-and-size-guide"}
+        {key: "cta_bg", value: "#344e5c"}
+        {key: "cta_text_color", value: "#f1f4f5"}
+        {key: "show_urgency", value: "true"}
+        {key: "urgency_label", value: "Stock Status"}
+        {key: "urgency_text", value: "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Wear it.\"}]},{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Own it.\"}]},{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Explain nothing.\"}]}]}"}
+        {key: "ghost_ctas", value: "[\"GID_1\",\"GID_2\",\"GID_3\"]"}
+      ]
+    }
+  ) {
+    metaobject {
+      id
+      handle
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
