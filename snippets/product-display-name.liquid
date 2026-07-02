@@ -1,0 +1,19 @@
+{%- comment -%}
+  Resolves the customer-facing product name per FABRIC V2 blueprint §5/§6.
+
+  Source of truth: custom.product_content metaobject -> display_name
+  Fallback:        native Shopify product title
+
+  Accepts:
+  - product: {Object} product (required)
+
+  Usage: {% render 'product-display-name', product: product %}
+{%- endcomment -%}
+{%- liquid
+  assign pc = product.metafields.custom.product_content.value
+  assign resolved_name = product.title | strip_html
+  if pc != blank and pc.display_name.value != blank
+    assign resolved_name = pc.display_name.value | strip_html
+  endif
+  echo resolved_name | escape
+-%}
