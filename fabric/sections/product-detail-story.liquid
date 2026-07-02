@@ -1,0 +1,273 @@
+{% liquid
+  assign detail_count = 0
+  assign feature_count = 0
+  assign size_count = 0
+  assign image_count = 0
+  for block in section.blocks
+    case block.type
+      when 'detail'
+        assign detail_count = detail_count | plus: 1
+      when 'feature'
+        assign feature_count = feature_count | plus: 1
+      when 'size_row'
+        assign size_count = size_count | plus: 1
+      when 'image'
+        if block.settings.image != blank
+          assign image_count = image_count | plus: 1
+        endif
+    endcase
+  endfor
+%}
+
+<section class="triiiple-product-story" style="--story-accent: {{ section.settings.accent_color }}; --story-ink: {{ section.settings.ink_color }};">
+  <div class="triiiple-product-story__inner">
+    {% if detail_count > 0 %}
+      <div class="triiiple-product-story__details">
+        <div class="triiiple-product-story__section-heading">
+          <p>{{ section.settings.details_eyebrow | escape }}</p>
+          <h2>{{ section.settings.details_heading | escape }}</h2>
+        </div>
+        <div class="triiiple-product-story__accordions">
+          {% for block in section.blocks %}
+            {% if block.type == 'detail' %}
+              {% liquid
+                assign detail_content = block.settings.content
+                if block.settings.use_product_description
+                  assign detail_content = product.description
+                endif
+                assign detail_metafield = blank
+                if block.settings.metafield_namespace != blank and block.settings.metafield_key != blank
+                  assign detail_metafield = product.metafields[block.settings.metafield_namespace][block.settings.metafield_key]
+                endif
+              %}
+              <details {% if block.settings.open_by_default %}open{% endif %} {{ block.shopify_attributes }}>
+                <summary><span>{{ block.settings.heading | escape }}</span><span aria-hidden="true">+</span></summary>
+                <div class="triiiple-product-story__detail-body rte">
+                  {% if detail_metafield != blank %}
+                    {{ detail_metafield | metafield_tag }}
+                  {% else %}
+                    {{ detail_content }}
+                  {% endif %}
+                </div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if feature_count > 0 %}
+      <div class="triiiple-product-story__why">
+        <div class="triiiple-product-story__section-heading">
+          <p>{{ section.settings.features_eyebrow | escape }}</p>
+          <h2>{{ section.settings.features_heading | escape }}</h2>
+        </div>
+        <div class="triiiple-product-story__feature-grid">
+          {% for block in section.blocks %}
+            {% if block.type == 'feature' %}
+              <article {{ block.shopify_attributes }}>
+                <span aria-hidden="true">{{ block.settings.symbol | escape }}</span>
+                <h3>{{ block.settings.heading | escape }}</h3>
+                <p>{{ block.settings.text | escape }}</p>
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if size_count > 0 %}
+      <div class="triiiple-product-story__size" id="product-size-guide">
+        <div class="triiiple-product-story__section-heading">
+          <p>{{ section.settings.size_eyebrow | escape }}</p>
+          <h2>{{ section.settings.size_heading | escape }}</h2>
+          {% if section.settings.size_intro != blank %}<div class="rte">{{ section.settings.size_intro }}</div>{% endif %}
+        </div>
+        <div class="triiiple-size-table-wrap">
+          <table class="triiiple-size-table">
+            <thead>
+              <tr>
+                <th scope="col">{{ section.settings.size_label | escape }}</th>
+                <th scope="col">{{ section.settings.waist_cm_label | escape }}</th>
+                <th scope="col">{{ section.settings.waist_in_label | escape }}</th>
+                <th scope="col">{{ section.settings.eu_label | escape }}</th>
+                <th scope="col">{{ section.settings.uk_us_label | escape }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for block in section.blocks %}
+                {% if block.type == 'size_row' %}
+                  <tr {{ block.shopify_attributes }}>
+                    <th scope="row">{{ block.settings.size | escape }}</th>
+                    <td>{{ block.settings.waist_cm | escape }}</td>
+                    <td>{{ block.settings.waist_in | escape }}</td>
+                    <td>{{ block.settings.eu | escape }}</td>
+                    <td>{{ block.settings.uk_us | escape }}</td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% if section.settings.size_note != blank %}<p class="triiiple-product-story__size-note">{{ section.settings.size_note | escape }}</p>{% endif %}
+      </div>
+    {% endif %}
+
+    {% if image_count > 0 %}
+      <div class="triiiple-product-story__editorial">
+        {% for block in section.blocks %}
+          {% if block.type == 'image' and block.settings.image != blank %}
+            <figure {{ block.shopify_attributes }}>
+              <div>
+                {{ block.settings.image | image_url: width: 1400 | image_tag: widths: '500, 750, 1000, 1400', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy', alt: block.settings.heading }}
+              </div>
+              <figcaption><span>{{ block.settings.heading | escape }}</span><span>{{ block.settings.caption | escape }}</span></figcaption>
+            </figure>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .triiiple-product-story { background: #fff; color: var(--story-ink, #17191c); }
+  .triiiple-product-story__inner { width: min(100%, var(--page-width)); margin: 0 auto; padding: clamp(3.5rem, 8vw, 8rem) var(--page-margin); }
+  .triiiple-product-story__details { display: grid; grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr); gap: clamp(2rem, 8vw, 8rem); }
+  .triiiple-product-story__section-heading > p { margin: 0 0 0.75rem; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; }
+  .triiiple-product-story__section-heading h2 { margin: 0; max-width: 12ch; font-family: var(--font-heading--family); font-size: clamp(1rem, 2.5vw, 2.5rem); line-height: 0.94; letter-spacing: -0.035em; }
+  .triiiple-product-story__section-heading .rte { max-width: 34rem; margin-top: 1.25rem; }
+  .triiiple-product-story__accordions { border-top: 1px solid currentColor; }
+  .triiiple-product-story__accordions details { border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent); }
+  .triiiple-product-story__accordions summary { display: flex; justify-content: space-between; gap: 1rem; padding: 1.35rem 0; cursor: pointer; list-style: none; font-size: 1.05rem; }
+  .triiiple-product-story__accordions summary::-webkit-details-marker { display: none; }
+  .triiiple-product-story__accordions details[open] summary span:last-child { transform: rotate(45deg); }
+  .triiiple-product-story__accordions summary span:last-child { transition: transform 180ms ease; }
+  .triiiple-product-story__detail-body { max-width: 44rem; padding: 0 2rem 1.75rem 0; color: color-mix(in srgb, currentColor 72%, transparent); }
+
+  .triiiple-product-story__why { margin-top: clamp(5rem, 11vw, 11rem); padding: clamp(2rem, 6vw, 5rem); color: #fff; background: #17191c; }
+  .triiiple-product-story__why .triiiple-product-story__section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
+  .triiiple-product-story__feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem; border-top: 1px solid #ffffff55; border-inline-end: 1px solid #ffffff2b; }
+  .triiiple-product-story__feature-grid article:last-child { border-inline-end: 0; }
+  .triiiple-product-story__feature-grid article > span { display: block; min-height: 3rem; font-size: 1.4rem; }
+  .triiiple-product-story__feature-grid h3 { margin: 1.5rem 0 0.5rem; font-size: 1rem; }
+  .triiiple-product-story__feature-grid p { margin: 0; color: #ffffffb8; font-size: 0.88rem; }
+
+  .triiiple-product-story__size { display: grid; grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr); gap: clamp(2rem, 8vw, 8rem); margin-top: clamp(5rem, 11vw, 11rem); scroll-margin-top: 7rem; }
+  .triiiple-size-table-wrap { overflow-x: auto; }
+  .triiiple-size-table { width: 100%; border-collapse: collapse; text-align: left; }
+  .triiiple-size-table :is(th, td) { padding: 0.95rem 0.8rem; border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent); white-space: nowrap; }
+  .triiiple-size-table thead th { border-top: 1px solid currentColor; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .triiiple-size-table tbody th { font-weight: 600; }
+  .triiiple-product-story__size-note { grid-column: 2; margin: 0; color: color-mix(in srgb, currentColor 65%, transparent); font-size: 0.82rem; }
+
+  .triiiple-product-story__editorial { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: clamp(5rem, 11vw, 11rem); }
+  .triiiple-product-story__editorial figure { margin: 0; }
+  .triiiple-product-story__editorial figure > div { overflow: hidden; aspect-ratio: 4 / 5; background: #eef0f2; }
+  .triiiple-product-story__editorial img,
+  .triiiple-product-story__editorial svg { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms cubic-bezier(.2,.7,.2,1); }
+  .triiiple-product-story__editorial figure:hover img { transform: scale(1.025); }
+  .triiiple-product-story__editorial figcaption { display: flex; justify-content: space-between; gap: 1rem; padding-top: 0.85rem; font-size: 0.82rem; }
+
+  @media screen and (max-width: 749px) {
+    .triiiple-product-story__inner { padding-inline: 1rem; }
+    .triiiple-product-story__details,
+    .triiiple-product-story__size { grid-template-columns: 1fr; }
+    .triiiple-product-story__why .triiiple-product-story__section-heading { display: grid; }
+    .triiiple-product-story__feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .triiiple-product-story__feature-grid article:nth-child(2n) { border-inline-end: 0; }
+    .triiiple-product-story__size-note { grid-column: 1; }
+    .triiiple-product-story__editorial { grid-template-columns: 1fr; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product detail story",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "details_eyebrow", "label": "Details eyebrow", "default": "Product details" },
+    { "type": "text", "id": "details_heading", "label": "Details heading", "default": "Made for the way you move." },
+    { "type": "text", "id": "features_eyebrow", "label": "Features eyebrow", "default": "Why this works" },
+    { "type": "text", "id": "features_heading", "label": "Features heading", "default": "Less fuss. Better function." },
+    { "type": "text", "id": "size_eyebrow", "label": "Size eyebrow", "default": "Fit reference" },
+    { "type": "text", "id": "size_heading", "label": "Size heading", "default": "Find your size." },
+    { "type": "richtext", "id": "size_intro", "label": "Size introduction", "default": "<p>Use the body measurements below as a starting point. If you sit between sizes, choose based on your preferred level of ease.</p>" },
+    { "type": "text", "id": "size_label", "label": "Size column", "default": "Size" },
+    { "type": "text", "id": "waist_cm_label", "label": "Waist cm column", "default": "Waist (cm)" },
+    { "type": "text", "id": "waist_in_label", "label": "Waist in column", "default": "Waist (in)" },
+    { "type": "text", "id": "eu_label", "label": "EU column", "default": "EU" },
+    { "type": "text", "id": "uk_us_label", "label": "UK / US column", "default": "UK / US" },
+    { "type": "text", "id": "size_note", "label": "Size note", "default": "Tolerance ±2.5 cm. Product fit may vary slightly by fabric and cut." },
+    { "type": "color", "id": "ink_color", "label": "Ink", "default": "#17191c" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#4a1024" }
+  ],
+  "blocks": [
+    {
+      "type": "detail",
+      "name": "Detail accordion",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Description" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Add useful product detail here.</p>" },
+        { "type": "checkbox", "id": "use_product_description", "label": "Use product description", "default": false },
+        { "type": "text", "id": "metafield_namespace", "label": "Metafield namespace" },
+        { "type": "text", "id": "metafield_key", "label": "Metafield key" },
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Performance feature",
+      "settings": [
+        { "type": "text", "id": "symbol", "label": "Symbol", "default": "/" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Everyday comfort" },
+        { "type": "text", "id": "text", "label": "Text", "default": "A focused benefit explained in one useful sentence." }
+      ]
+    },
+    {
+      "type": "size_row",
+      "name": "Size row",
+      "settings": [
+        { "type": "text", "id": "size", "label": "Size", "default": "M" },
+        { "type": "text", "id": "waist_cm", "label": "Waist cm", "default": "69-73" },
+        { "type": "text", "id": "waist_in", "label": "Waist in", "default": "27.2-28.7" },
+        { "type": "text", "id": "eu", "label": "EU", "default": "46-48" },
+        { "type": "text", "id": "uk_us", "label": "UK / US", "default": "30-32" }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Reference image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Fit in motion" },
+        { "type": "text", "id": "caption", "label": "Caption", "default": "Product reference" }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [
+    {
+      "name": "Product detail story",
+      "blocks": [
+        { "type": "detail", "settings": { "heading": "Description", "use_product_description": true, "open_by_default": true } },
+        { "type": "detail", "settings": { "heading": "Size & fit", "metafield_namespace": "custom", "metafield_key": "size_fit", "content": "<p>Add the intended fit, rise, coverage, and model reference.</p>" } },
+        { "type": "detail", "settings": { "heading": "Material & care", "metafield_namespace": "custom", "metafield_key": "material_care", "content": "<p>Add fabric composition and care instructions.</p>" } },
+        { "type": "feature", "settings": { "symbol": "/", "heading": "Moves with you", "text": "Flexible construction follows the body without fighting it." } },
+        { "type": "feature", "settings": { "symbol": "~", "heading": "Breathes easier", "text": "Designed to manage daily heat and moisture." } },
+        { "type": "feature", "settings": { "symbol": "-", "heading": "Smoother seams", "text": "Reduced bulk where comfort matters most." } },
+        { "type": "feature", "settings": { "symbol": "o", "heading": "Built to repeat", "text": "A dependable layer for the weekly rotation." } },
+        { "type": "size_row", "settings": { "size": "XS", "waist_cm": "59–63", "waist_in": "23.2–24.8", "eu": "42–44", "uk_us": "26–28" } },
+        { "type": "size_row", "settings": { "size": "S", "waist_cm": "64–68", "waist_in": "25.2–26.8", "eu": "44–46", "uk_us": "28–30" } },
+        { "type": "size_row", "settings": { "size": "M", "waist_cm": "69–73", "waist_in": "27.2–28.7", "eu": "46–48", "uk_us": "30–32" } },
+        { "type": "size_row", "settings": { "size": "L", "waist_cm": "74–78", "waist_in": "29.1–30.7", "eu": "48–50", "uk_us": "32–34" } },
+        { "type": "size_row", "settings": { "size": "XL", "waist_cm": "79–83", "waist_in": "31.1–32.7", "eu": "50–52", "uk_us": "34–36" } },
+        { "type": "size_row", "settings": { "size": "2XL", "waist_cm": "84–88", "waist_in": "33.1–34.6", "eu": "52–54", "uk_us": "36–38" } },
+        { "type": "image" },
+        { "type": "image", "settings": { "heading": "Fabric up close", "caption": "Material reference" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

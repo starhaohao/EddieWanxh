@@ -1,0 +1,57 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "story_salon": {
+      "type": "story-salon",
+      "name": "Story Salon",
+      "settings": {
+        "hero_image_1": "shopify://shop_images/Amos_Ashley_Chin_-_Split_Panel_B_Detail___Environment.jpg",
+        "hero_image_2": "shopify://shop_images/LP_-_barry-001_-_Barry_4_5.jpg",
+        "hero_image_3": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg",
+        "hero_image_4": "shopify://shop_images/LP_-_rama-001_-_Rama_3_4.jpg",
+        "hero_image_5": "shopify://shop_images/LP_-_peonypink-001_-_PEONYPINK_1_1_1a8393a3-88d8-41d1-a125-9305e836b9aa.jpg",
+        "hero_eyebrow": "The TRIIIPLE Journal",
+        "hero_title": "Story Salon",
+        "hero_lede": "Portraits, process, and the things people say once they are dressed in the first layer.",
+        "intro_heading": "not a campaign. not a lookbook.\na room where people sit down and say something true.",
+        "intro_text": "<p>Story Salon is the editorial room inside TRIIIPLE: conversations, portraits, and the small details that sit between what is worn and what is said.</p>",
+        "all_label": "All",
+        "first_label": "The 1st Layer",
+        "raw_label": "Raw n Uncut",
+        "explore_label": "Explore",
+        "spotlight_heading": "What They Wear",
+        "spotlight_label": "Spotlight",
+        "paper": "#f5f4f1",
+        "ink": "#0f1623",
+        "accent": "#923531"
+      },
+      "blocks": {
+        "justin": { "type": "story", "settings": { "category": "first", "series": "The First Layer", "name": "Justin Foo", "title": "Earning It Quietly", "description": "Sixteen years in F&B, built on unseen work. Validation, he argues, has to come from within - a place no client can reach.", "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg", "link": "/pages/story-salon-justin-foo" } },
+        "barry": { "type": "story", "settings": { "category": "raw", "series": "Raw n Uncut", "name": "Barry Li", "title": "A Quiet Revolution", "description": "A PhD student who once hid his analytical mind. Now it is his time - competence as the most attractive trait.", "image": "shopify://shop_images/LP_-_barry-001_-_Barry_4_5.jpg", "link": "/pages/story-salon-barry-li" } },
+        "peonypink": { "type": "story", "settings": { "category": "first", "series": "The First Layer", "name": "Peonypink", "title": "Carrying It on Their Skin", "description": "A women-led tattoo studio - Jocelyn, Sonia and Daphne. Same first layer, worn loudly and permanently, in ink.", "image": "shopify://shop_images/LP_-_peonypink-001_-_PEONYPINK_1_1.jpg", "link": "/pages/story-salon-peonypink" } },
+        "khairul": { "type": "story", "settings": { "category": "raw", "series": "Raw n Uncut", "name": "Khairul", "title": "Embracing the Unexpected", "description": "A film creative who hid his hair under caps; now he lets it speak. Weirdness as a trait to nurture, not armour.", "image": "shopify://shop_images/LP_-_khairul-001_-_Khairul_1_1.jpg", "link": "/pages/story-salon-khairul" } },
+        "amos": { "type": "story", "settings": { "category": "first", "series": "The First Layer", "name": "Amos A Chin", "title": "Wearing Honesty", "description": "Editor, model, maker. In an industry that rewards a polished surface, he leads with his feelings - and refuses to shrink.", "image": "shopify://shop_images/LP_-_amos-001_-_Amos_Ashley_Chin_1_1.jpg", "link": "/pages/story-salon-amos-a-chin" } },
+        "jocelyn": { "type": "story", "settings": { "category": "first", "series": "The First Layer", "name": "Jocelyn Leow", "title": "She Translates What You Carry", "description": "She turns emotion, heritage and symbolism into something permanent.", "image": "shopify://shop_images/Hero_Image_4_5_Portrait_11_30f020ff-8401-4652-8665-ca7be24ccd48.jpg", "link": "/pages/story-salon" } },
+        "rama": { "type": "story", "settings": { "category": "raw", "series": "Raw n Uncut", "name": "Rama", "title": "Owning His Power", "description": "From hiding in oversized clothes to standing boldly in front of the lens. Confidence, redefined as a quiet triumph.", "image": "shopify://shop_images/LP_-_rama-001_-_Rama_3_4.jpg", "link": "/pages/story-salon-rama" } },
+        "ethan": { "type": "story", "settings": { "category": "first", "series": "The First Layer", "name": "Ethan Cheng", "title": "Moving with quiet confidence", "description": "An interior designer who curates light, proportion and the silence between objects. He does not announce himself - he simply arrives.", "image": "shopify://shop_images/LP_-_ethan-001_-_Ethan_Cheng_4_5.jpg", "link": "/pages/story-salon-ethan-cheng" } },
+        "sonia": { "type": "story", "settings": { "category": "first", "series": "The First Layer", "name": "Sonia Seraphina", "title": "Still trying, still her", "description": "A tattoo artist at Peonypink. Grungy, messy, controlled-ish - she shows up as herself, and that is the whole point.", "image": "shopify://shop_images/Hero_Image_4_5_Portrait_13_8a7cf91b-15c5-4b09-8b4e-4967587e5fd6.jpg", "link": "/pages/story-salon" } },
+        "kris": { "type": "story", "settings": { "category": "first", "series": "The First Layer", "name": "Kris Chaser", "title": "Making Intimacy Visible", "description": "An illustrator in Jakarta drawing queer, unhurried bodies in watercolour and ink. A quiet way of saying: I see you.", "image": "shopify://shop_images/LP_-_kris-001_-_Kris_Chaser_3_4.jpg", "link": "/pages/story-salon-kris-chaser" } },
+        "daphne": { "type": "story", "settings": { "category": "first", "series": "The First Layer", "name": "Daphne Tan", "title": "No Performance, No Mask", "description": "Illustrative, black and grey - what she puts on skin and what she wears carry the same intention.", "image": "shopify://shop_images/Hero_Image_4_5_Portrait_2b31aa0e-e859-4309-963a-3e889ea2549c.jpg", "link": "/pages/story-salon-daphne-tan" } },
+        "wear_kris": { "type": "spotlight", "settings": { "image": "shopify://shop_images/IG_Story_20thJun-3.png", "fabric": "Cotton Spandex", "series": "The First Layer", "person": "Kris Chaser", "product": "L Socks", "link": "/collections/socks" } },
+        "wear_justin": { "type": "spotlight", "settings": { "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg", "fabric": "Cotton Spandex", "series": "The First Layer", "person": "Justin Foo", "product": "ED Sleeveless Top", "link": "/products/ed-cotton-spandex-sleeveless-top-white" } },
+        "wear_amos": { "type": "spotlight", "settings": { "image": "shopify://shop_images/Amos_Ashley_Chin_-_Q_A_Image_3_4_3.jpg", "fabric": "TransDRY", "series": "The First Layer", "person": "Amos A Chin", "product": "X TransDRY Brief", "link": "/products/x-transdry-brief-black" } },
+        "wear_ethan": { "type": "spotlight", "settings": { "image": "shopify://shop_images/Split_Panel_A_3_4_Portrait.jpg", "fabric": "Cotton Spandex", "series": "The First Layer", "person": "Ethan Cheng", "product": "V Brief", "link": "/products/v-cotton-spandex-brief-black" } }
+      },
+      "block_order": ["justin", "barry", "peonypink", "khairul", "amos", "jocelyn", "rama", "ethan", "sonia", "kris", "daphne", "wear_kris", "wear_justin", "wear_amos", "wear_ethan"]
+    }
+  },
+  "order": ["story_salon"]
+}

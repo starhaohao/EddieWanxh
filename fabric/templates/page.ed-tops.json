@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-editorial-landing",
+      "settings": {
+        "eyebrow": "ED Tops",
+        "heading": "Cut for your frame, not a mannequin.",
+        "tagline": "Designed for the body, not the rack.",
+        "intro": "<p>Clean layers with a sharper proportion and a more human fit.</p>",
+        "image_1": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg",
+        "image_2": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg",
+        "primary_label": "Shop ED Tops",
+        "primary_link": "/collections/tops",
+        "secondary_label": "Story Salon",
+        "secondary_link": "/pages/story-salon",
+        "body_eyebrow": "The shape",
+        "body_heading": "Sharper proportion",
+        "body": "<p>Made to sit naturally on the frame, with a line that feels intentional rather than posed.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
+      }
+    }
+  },
+  "order": ["main"]
+}

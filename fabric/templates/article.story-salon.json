@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "story-salon-article",
+      "settings": {
+        "hero_eyebrow": "The TRIIIPLE Journal",
+        "back_label": "Back to Story Salon",
+        "aside_text": "A Story Salon article pairs a portrait with a short editorial note, then keeps the body copy readable and airy.",
+        "related_label": "More in Story Salon",
+        "paper": "#f5f4f1",
+        "ink": "#0f1623",
+        "accent": "#923531"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

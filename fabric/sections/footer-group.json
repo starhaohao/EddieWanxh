@@ -1,0 +1,295 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "section_9FjKrC": {
+      "type": "section",
+      "blocks": {
+        "text_gGJVkz": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Enjoy free socks from us & an additional 10% off.</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.foreground }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "email_signup_TCQELN": {
+          "type": "email-signup",
+          "name": "t:names.email_signup",
+          "settings": {
+            "width": "custom",
+            "custom_width": 100,
+            "heading": "",
+            "heading_text_color": "#ACC8E0",
+            "heading_preset": "h2",
+            "border_style": "all",
+            "input_style": "custom",
+            "border_width": 0,
+            "border_radius": 0,
+            "input_background_color": "{{ settings.color_palette.background }}",
+            "input_text_color": "#000000",
+            "input_border_color": "{{ settings.color_palette.color1 }}",
+            "input_type_preset": "paragraph",
+            "style_class": "button-secondary",
+            "custom_button_background": "{{ settings.color_palette.foreground }}",
+            "custom_button_text": "#2D5F88",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
+            "display_type": "arrow",
+            "label": "unlock 10% off more",
+            "integrated_button": true,
+            "button_type_preset": "paragraph",
+            "padding-block-start": 44,
+            "padding-block-end": 100,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_gGJVkz",
+        "email_signup_TCQELN"
+      ],
+      "name": "t:names.email_signup",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.color2 }}",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 53,
+        "padding-block-end": 0
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu_HADdVb": {
+          "type": "menu",
+          "name": "t:names.menu",
+          "settings": {
+            "menu": "footer",
+            "heading": "Shop",
+            "menu_spacing": 8,
+            "show_as_accordion": false,
+            "accordion_icon": "caret",
+            "accordion_dividers": false,
+            "background_color": "",
+            "text_color": "",
+            "heading_preset": "h4",
+            "link_preset": "h5",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "menu_xJa7q7": {
+          "type": "menu",
+          "name": "t:names.menu",
+          "settings": {
+            "menu": "",
+            "heading": "Customer care",
+            "menu_spacing": 8,
+            "show_as_accordion": false,
+            "accordion_icon": "caret",
+            "accordion_dividers": false,
+            "background_color": "",
+            "text_color": "",
+            "heading_preset": "h4",
+            "link_preset": "h5",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "menu_f9RViT": {
+          "type": "menu",
+          "name": "t:names.menu",
+          "settings": {
+            "menu": "",
+            "heading": "About us",
+            "menu_spacing": 8,
+            "show_as_accordion": false,
+            "accordion_icon": "caret",
+            "accordion_dividers": false,
+            "background_color": "",
+            "text_color": "",
+            "heading_preset": "h4",
+            "link_preset": "h5",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "menu_LhkDcq": {
+          "type": "menu",
+          "name": "t:names.menu",
+          "settings": {
+            "menu": "",
+            "heading": "Connect",
+            "menu_spacing": 8,
+            "show_as_accordion": false,
+            "accordion_icon": "caret",
+            "accordion_dividers": false,
+            "background_color": "",
+            "text_color": "",
+            "heading_preset": "h4",
+            "link_preset": "h5",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "menu_HADdVb",
+        "menu_xJa7q7",
+        "menu_f9RViT",
+        "menu_LhkDcq"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "gap": 0,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "utilities": {
+      "type": "footer-utilities",
+      "blocks": {
+        "copyright": {
+          "type": "footer-copyright",
+          "settings": {
+            "show_powered_by": false,
+            "text_color": "",
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "footer_policy_list_wrEqbN": {
+          "type": "footer-policy-list",
+          "name": "t:names.policy_list",
+          "settings": {
+            "text_color": "",
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "social_links_F94qGb": {
+          "type": "social-links",
+          "name": "t:names.social_media_links",
+          "settings": {
+            "icon_color": "",
+            "facebook_url": "https://www.facebook.com/triiiple.studio",
+            "instagram_url": "https://www.instagram.com/triiiple_studio/",
+            "tiktok_url": "",
+            "threads_url": "",
+            "linkedin_url": "",
+            "bluesky_url": "",
+            "snapchat_url": "",
+            "pinterest_url": "https://www.pinterest.com/triiiple_studio/",
+            "tumblr_url": "",
+            "vimeo_url": "",
+            "custom_url": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "copyright",
+        "footer_policy_list_wrEqbN",
+        "social_links_F94qGb"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "gap": 24,
+        "background_color": "{{ settings.color_palette.background }}",
+        "divider_thickness": 1,
+        "divider_color": "{{ settings.color_palette.color1 }}",
+        "padding-block-start": 24,
+        "padding-block-end": 24
+      }
+    },
+    "mobile_bottom_bar": {
+      "type": "mobile-bottom-bar",
+      "name": "Mobile bottom bar",
+      "settings": {
+        "background_color": "#4B0000",
+        "text_color": "#ffffff",
+        "logo_color": "#4B0000",
+        "bar_height": 72,
+        "menu_label": "Menu",
+        "menu_link": "shopify://pages/shop-all",
+        "account_label": "Account",
+        "instagram_url": "https://www.instagram.com/triiiple_studio/",
+        "facebook_url": "https://www.facebook.com/triiiple.studio",
+        "tiktok_url": "",
+        "pinterest_url": "https://www.pinterest.com/triiiple_studio/"
+      }
+    }
+  },
+  "order": [
+    "section_9FjKrC",
+    "footer",
+    "utilities",
+    "mobile_bottom_bar"
+  ]
+}

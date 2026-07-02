@@ -1,0 +1,377 @@
+{% liquid
+  assign family_count = 0
+  for block in section.blocks
+    if block.type == 'family'
+      assign family_count = family_count | plus: 1
+    endif
+  endfor
+%}
+
+<section
+  class="triiiple-merch"
+  style="--merch-accent: {{ section.settings.accent_color }}; --merch-ink: {{ section.settings.ink_color }}; --merch-paper: {{ section.settings.background_color }};"
+>
+  <div class="triiiple-merch__inner">
+    {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.intro != blank %}
+      <header class="triiiple-merch__header">
+        {% if section.settings.eyebrow != blank %}<p class="triiiple-merch__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}
+        {% if section.settings.intro != blank %}<div class="triiiple-merch__intro rte">{{ section.settings.intro }}</div>{% endif %}
+      </header>
+    {% endif %}
+
+    {% if family_count > 0 %}
+      <nav class="triiiple-merch__nav" aria-label="{{ section.settings.heading | escape }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'family' %}
+            <a href="#family-{{ block.id }}" {{ block.shopify_attributes }}>
+              <span>{{ block.settings.short_title | default: block.settings.heading | escape }}</span>
+              <span aria-hidden="true">&#8595;</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+    {% endif %}
+
+    <div class="triiiple-merch__flow">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'family' %}
+            {% liquid
+              assign featured_collection = block.settings.collection
+              if featured_collection == blank and block.settings.fallback_handle != blank
+                assign featured_collection = collections[block.settings.fallback_handle]
+              endif
+              assign family_image = block.settings.image
+              if family_image == blank
+                assign family_image = featured_collection.image
+              endif
+              if family_image == blank
+                assign family_image = featured_collection.products.first.featured_image
+              endif
+            %}
+            <article
+              id="family-{{ block.id }}"
+              class="triiiple-family triiiple-family--{{ block.settings.layout }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="triiiple-family__lead">
+                <div>
+                  {% if block.settings.eyebrow != blank %}<p class="triiiple-merch__eyebrow">{{ block.settings.eyebrow | escape }}</p>{% endif %}
+                  <h3>{{ block.settings.heading | default: featured_collection.title | escape }}</h3>
+                  {% if block.settings.description != blank %}
+                    <div class="triiiple-family__description rte">{{ block.settings.description }}</div>
+                  {% elsif featured_collection != blank and featured_collection.description != blank %}
+                    <div class="triiiple-family__description rte">{{ featured_collection.description }}</div>
+                  {% endif %}
+                </div>
+                {% if featured_collection != blank %}
+                  <a class="triiiple-text-link" href="{{ featured_collection.url }}">
+                    {{ block.settings.link_label | escape }} <span aria-hidden="true">&#8594;</span>
+                  </a>
+                {% endif %}
+              </div>
+
+              {% if block.settings.show_feature_image and family_image != blank %}
+                <a class="triiiple-family__feature" href="{{ featured_collection.url }}">
+                  {{ family_image | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1800', sizes: '(min-width: 990px) 50vw, 100vw', loading: 'lazy', alt: block.settings.heading }}
+                </a>
+              {% endif %}
+
+              <div class="triiiple-family__products">
+                {% for product in featured_collection.products limit: block.settings.product_limit %}
+                  <a class="triiiple-merch-card" href="{{ product.url }}">
+                    <span class="triiiple-merch-card__media">
+                      {% if product.featured_image != blank %}
+                        {{ product.featured_image | image_url: width: 900 | image_tag: widths: '300, 450, 600, 900', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', alt: product.title }}
+                      {% endif %}
+                      {% if block.settings.badge != blank %}<span class="triiiple-merch-card__badge">{{ block.settings.badge | escape }}</span>{% endif %}
+                    </span>
+                    <span class="triiiple-merch-card__meta">
+                      <span class="triiiple-merch-card__meta-top">
+                        {% if block.settings.eyebrow != blank %}<span class="triiiple-merch-card__eyebrow">{{ block.settings.eyebrow | escape }}</span>{% endif %}
+                        <span class="triiiple-merch-card__title">{{ product.title | escape }}</span>
+                      </span>
+                      <span class="triiiple-merch-card__price">{{ product.price | money }}</span>
+                    </span>
+                    {% if block.settings.details_label != blank %}
+                      <span class="triiiple-merch-card__details">
+                        {{ block.settings.details_label | escape }}
+                      </span>
+                    {% endif %}
+                    <span class="triiiple-merch-card__action">{{ block.settings.product_link_label | escape }}</span>
+                  </a>
+                {% endfor %}
+              </div>
+            </article>
+
+          {% when 'offer' %}
+            <aside
+              class="triiiple-offer"
+              style="--offer-background: {{ block.settings.background_color }}; --offer-text: {{ block.settings.text_color }};"
+              {{ block.shopify_attributes }}
+            >
+              <div>
+                {% if block.settings.eyebrow != blank %}<p class="triiiple-merch__eyebrow">{{ block.settings.eyebrow | escape }}</p>{% endif %}
+                <h3>{{ block.settings.heading | escape }}</h3>
+                {% if block.settings.body != blank %}<div class="rte">{{ block.settings.body }}</div>{% endif %}
+              </div>
+              {% if block.settings.link != blank and block.settings.link_label != blank %}
+                <a href="{{ block.settings.link }}">{{ block.settings.link_label | escape }} <span aria-hidden="true">&#8594;</span></a>
+              {% endif %}
+            </aside>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .triiiple-merch {
+    background: var(--merch-paper, #fff);
+    color: var(--merch-ink, #17191c);
+    padding: clamp(3rem, 7vw, 7rem) var(--page-margin);
+  }
+
+  .triiiple-merch__inner {
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+  }
+
+  .triiiple-merch__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(16rem, 0.7fr);
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .triiiple-merch__header h2,
+  .triiiple-family h3,
+  .triiiple-offer h3 {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    letter-spacing: -0.035em;
+  }
+
+  .triiiple-merch__header h2 { font-size: clamp(1.2rem, 3.5vw, 3.4rem); line-height: 0.92; }
+  .triiiple-family h3 { font-size: clamp(1rem, 2vw, 2.4rem); line-height: 0.95; }
+  .triiiple-offer h3 { max-width: 12ch; font-size: clamp(1rem, 2.5vw, 2.5rem); line-height: 0.94; }
+
+  .triiiple-merch__eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .triiiple-merch__intro { max-width: 38rem; }
+
+  .triiiple-merch__nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-block: 1px solid currentColor;
+    margin-bottom: clamp(4rem, 9vw, 8rem);
+  }
+
+  .triiiple-merch__nav a {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1rem;
+    color: inherit;
+    text-decoration: none;
+    border-inline-end: 1px solid currentColor;
+  }
+
+  .triiiple-merch__nav a:last-child { border-inline-end: 0; }
+  .triiiple-merch__flow { display: grid; gap: clamp(5rem, 10vw, 10rem); }
+  .triiiple-family { scroll-margin-top: 7rem; }
+
+  .triiiple-family__lead {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: 2rem;
+  }
+
+  .triiiple-family__description { max-width: 42rem; margin-top: 1rem; }
+  .triiiple-text-link { color: inherit; white-space: nowrap; text-underline-offset: 0.3em; }
+
+  .triiiple-family__feature {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: #eef0f2;
+    aspect-ratio: 2.2 / 1;
+  }
+
+  .triiiple-family__feature img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+  .triiiple-family__feature:hover img { transform: scale(1.025); }
+
+  .triiiple-family__products {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    background: color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  .triiiple-merch-card {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-width: 0;
+    color: inherit;
+    background: var(--merch-paper, #fff);
+    text-decoration: none;
+  }
+
+  .triiiple-merch-card__media { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 5; background: #f3f4f5; }
+  .triiiple-merch-card__media img,
+  .triiiple-merch-card__media svg { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms cubic-bezier(.2,.7,.2,1); }
+  .triiiple-merch-card:hover .triiiple-merch-card__media img { transform: scale(1.035); }
+
+  .triiiple-merch-card__badge {
+    position: absolute;
+    inset: 0.75rem auto auto 0.75rem;
+    padding: 0.35rem 0.55rem;
+    color: #fff;
+    background: var(--merch-ink, #17191c);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .triiiple-merch-card__meta {
+    display: grid;
+    gap: 0.55rem;
+    min-height: 6.25rem;
+    padding: 1rem 0.75rem 0.5rem;
+  }
+
+  .triiiple-merch-card__meta-top {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .triiiple-merch-card__eyebrow {
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, currentColor 56%, transparent);
+  }
+
+  .triiiple-merch-card__title {
+    font-family: var(--font-heading--family);
+    font-size: clamp(1rem, 1.45vw, 1.15rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .triiiple-merch-card__price {
+    font-size: 0.92rem;
+    color: color-mix(in srgb, currentColor 72%, transparent);
+  }
+
+  .triiiple-merch-card__details {
+    display: block;
+    padding: 0 0.75rem 0.35rem;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: color-mix(in srgb, currentColor 58%, transparent);
+  }
+
+  .triiiple-merch-card__action { display: grid; height: 44px; place-items: center; margin: 0.25rem 0.75rem 1.1rem; padding-inline: 0.75rem; color: #fff; background: var(--merch-accent, #4a1024); text-align: center; }
+
+  .triiiple-offer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 2rem;
+    padding: clamp(2rem, 6vw, 5.5rem);
+    color: var(--offer-text, #fff);
+    background: var(--offer-background, #17191c);
+  }
+
+  .triiiple-offer .rte { max-width: 42rem; margin-top: 1rem; }
+  .triiiple-offer a { padding: 1rem 1.4rem; color: var(--offer-background); background: var(--offer-text); text-decoration: none; white-space: nowrap; }
+
+  @media screen and (max-width: 749px) {
+    .triiiple-merch { padding-inline: 1rem; }
+    .triiiple-merch__header { grid-template-columns: 1fr; }
+    .triiiple-merch__nav { grid-template-columns: 1fr; }
+    .triiiple-merch__nav a { border-inline-end: 0; border-block-end: 1px solid currentColor; }
+    .triiiple-merch__nav a:last-child { border-block-end: 0; }
+    .triiiple-family__lead { display: grid; align-items: start; }
+    .triiiple-family__products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .triiiple-merch-card__meta { min-height: 7rem; }
+    .triiiple-merch-card__title { font-size: clamp(0.96rem, 3.8vw, 1.05rem); }
+    .triiiple-merch-card__details { font-size: 0.73rem; }
+    .triiiple-merch-card__action { padding-inline: 0.4rem; font-size: 0.8rem; }
+    .triiiple-offer { grid-template-columns: 1fr; align-items: start; }
+    .triiiple-offer a { justify-self: start; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection merchandising",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by need" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find your everyday uniform." },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>Move between fits, bundles, and daily layers without losing the thread.</p>" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "ink_color", "label": "Text", "default": "#17191c" },
+    { "type": "color", "id": "accent_color", "label": "Action accent", "default": "#4a1024" }
+  ],
+  "blocks": [
+    {
+      "type": "family",
+      "name": "Product family",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "fallback_handle", "label": "Fallback collection handle" },
+        { "type": "text", "id": "short_title", "label": "Navigation title" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Designed by purpose" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "richtext", "id": "description", "label": "Description" },
+        { "type": "image_picker", "id": "image", "label": "Feature image" },
+        { "type": "checkbox", "id": "show_feature_image", "label": "Show feature image", "default": false },
+        { "type": "text", "id": "badge", "label": "Product badge" },
+        { "type": "text", "id": "details_label", "label": "Manual details line", "default": "Tap for fit details" },
+        { "type": "range", "id": "product_limit", "label": "Products", "min": 2, "max": 4, "step": 1, "default": 4 },
+        { "type": "text", "id": "link_label", "label": "Collection link", "default": "View all" },
+        { "type": "text", "id": "product_link_label", "label": "Product action", "default": "View details" },
+        { "type": "select", "id": "layout", "label": "Layout", "options": [{ "value": "standard", "label": "Standard" }, { "value": "editorial", "label": "Editorial" }], "default": "standard" }
+      ]
+    },
+    {
+      "type": "offer",
+      "name": "Offer callout",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Buy more, save more" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Build the rotation." },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Make the bundle moment useful, direct, and easy to understand.</p>" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Build your pack" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "color", "id": "background_color", "label": "Background", "default": "#17191c" },
+        { "type": "color", "id": "text_color", "label": "Text", "default": "#ffffff" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Collection merchandising",
+      "blocks": [
+        { "type": "family", "settings": { "fallback_handle": "brief", "short_title": "Brief designs", "heading": "Brief designs", "description": "<p>Compare cuts by coverage, support, and the way you move.</p>", "badge": "Core fit", "details_label": "Coverage, rise, and feel at a glance" } },
+        { "type": "offer" },
+        { "type": "family", "settings": { "fallback_handle": "bundles", "short_title": "Bundles", "heading": "Bundles", "description": "<p>Build an easier weekly rotation and save when you buy together.</p>", "badge": "Bundle", "details_label": "Best value for weekly rotation" } },
+        { "type": "family", "settings": { "fallback_handle": "t-shirt-essentials", "short_title": "T-shirt essentials", "heading": "T-shirt essentials", "description": "<p>Clean layers designed to work under everything else.</p>", "badge": "Essential", "details_label": "Made to disappear under clothes" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

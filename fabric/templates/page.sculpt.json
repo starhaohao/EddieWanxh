@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-editorial-landing",
+      "settings": {
+        "eyebrow": "SCULPT",
+        "heading": "SCULPT",
+        "tagline": "Soft that holds its shape.",
+        "intro": "<p>Cotton Spandex for an easier everyday fit.</p>",
+        "image_1": "shopify://shop_images/About-us-3.jpg",
+        "image_2": "shopify://shop_images/About-us-4.jpg",
+        "primary_label": "Shop SCULPT",
+        "primary_link": "/collections/boxer-trunks",
+        "secondary_label": "Size guide",
+        "secondary_link": "/pages/size-guide",
+        "body_eyebrow": "Fit notes",
+        "body_heading": "Soft, steady, balanced.",
+        "body": "<p>V Brief, W Boxer Trunk, and H Boxer Trunk feel slightly more relaxed through the hip and true to size for most.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
+      }
+    }
+  },
+  "order": ["main"]
+}

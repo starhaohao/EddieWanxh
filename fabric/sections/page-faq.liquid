@@ -1,0 +1,341 @@
+{% liquid
+  assign order_count = 0
+  assign service_count = 0
+  assign sizing_count = 0
+
+  for block in section.blocks
+    case block.settings.category
+      when 'order'
+        assign order_count = order_count | plus: 1
+      when 'service'
+        assign service_count = service_count | plus: 1
+      when 'sizing'
+        assign sizing_count = sizing_count | plus: 1
+    endcase
+  endfor
+%}
+
+<section
+  class="triiiple-faq"
+  style="--faq-bg: {{ section.settings.background_color }}; --faq-ink: {{ section.settings.ink_color }}; --faq-accent: {{ section.settings.accent_color }};"
+>
+  <div class="triiiple-faq__inner">
+    <header class="triiiple-faq__hero">
+      <div>
+        {% if section.settings.eyebrow != blank %}<p class="triiiple-faq__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h1>{{ section.settings.heading | escape }}</h1>{% endif %}
+      </div>
+      {% if section.settings.intro != blank %}<div class="triiiple-faq__intro rte">{{ section.settings.intro }}</div>{% endif %}
+    </header>
+
+    <div class="triiiple-faq__grid">
+      <section class="triiiple-faq__column">
+        <header class="triiiple-faq__column-head">
+          <p class="triiiple-faq__eyebrow">{{ section.settings.order_label | escape }}</p>
+          <h2>{{ section.settings.order_heading | escape }}</h2>
+        </header>
+        <div class="triiiple-faq__items">
+          {% for block in section.blocks %}
+            {% if block.settings.category == 'order' %}
+              <details class="triiiple-faq__item" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.question | escape }}</summary>
+                <div class="rte">{{ block.settings.answer }}</div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="triiiple-faq__column">
+        <header class="triiiple-faq__column-head">
+          <p class="triiiple-faq__eyebrow">{{ section.settings.service_label | escape }}</p>
+          <h2>{{ section.settings.service_heading | escape }}</h2>
+        </header>
+        <div class="triiiple-faq__items">
+          {% for block in section.blocks %}
+            {% if block.settings.category == 'service' %}
+              <details class="triiiple-faq__item" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.question | escape }}</summary>
+                <div class="rte">{{ block.settings.answer }}</div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="triiiple-faq__column">
+        <header class="triiiple-faq__column-head">
+          <p class="triiiple-faq__eyebrow">{{ section.settings.sizing_label | escape }}</p>
+          <h2>{{ section.settings.sizing_heading | escape }}</h2>
+        </header>
+        <div class="triiiple-faq__items">
+          {% for block in section.blocks %}
+            {% if block.settings.category == 'sizing' %}
+              <details class="triiiple-faq__item" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.question | escape }}</summary>
+                <div class="rte">{{ block.settings.answer }}</div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+
+    <footer class="triiiple-faq__footer">
+      <div>
+        {% if section.settings.footer_eyebrow != blank %}<p class="triiiple-faq__eyebrow">{{ section.settings.footer_eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.footer_heading != blank %}<h2>{{ section.settings.footer_heading | escape }}</h2>{% endif %}
+      </div>
+      <div class="triiiple-faq__footer-copy">
+        {% if section.settings.footer_body != blank %}<div class="rte">{{ section.settings.footer_body }}</div>{% endif %}
+        {% if section.settings.footer_link != blank and section.settings.footer_label != blank %}
+          <a class="triiiple-faq__button" href="{{ section.settings.footer_link }}">{{ section.settings.footer_label | escape }} <span aria-hidden="true">&#8594;</span></a>
+        {% endif %}
+      </div>
+    </footer>
+  </div>
+</section>
+
+{% stylesheet %}
+  .triiiple-faq {
+    background: var(--faq-bg, #ffffff);
+    color: var(--faq-ink, #17191c);
+  }
+
+  .triiiple-faq__inner {
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem) var(--page-margin) clamp(3rem, 7vw, 7rem);
+  }
+
+  .triiiple-faq__hero,
+  .triiiple-faq__footer {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end;
+  }
+
+  .triiiple-faq__hero {
+    padding-block: clamp(1.5rem, 4vw, 3rem) clamp(2rem, 5vw, 4rem);
+    border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  }
+
+  .triiiple-faq__eyebrow {
+    margin: 0 0 0.8rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.62;
+  }
+
+  .triiiple-faq__hero h1,
+  .triiiple-faq__column-head h2,
+  .triiiple-faq__footer h2 {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+  }
+
+  .triiiple-faq__hero h1 {
+    max-width: 8ch;
+    font-size: clamp(2.2rem, 6vw, 5.6rem);
+  }
+
+  .triiiple-faq__intro {
+    max-width: 40rem;
+    justify-self: end;
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.82;
+  }
+
+  .triiiple-faq__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.2rem, 3vw, 2rem);
+    padding-block: clamp(2rem, 5vw, 4rem);
+  }
+
+  .triiiple-faq__column {
+    min-width: 0;
+    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    background: color-mix(in srgb, var(--faq-bg, #fff) 92%, var(--faq-accent) 8%);
+  }
+
+  .triiiple-faq__column-head {
+    padding: 1.25rem 1.1rem 1rem;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  }
+
+  .triiiple-faq__column-head h2 {
+    font-size: clamp(1.15rem, 2vw, 2rem);
+  }
+
+  .triiiple-faq__items {
+    display: grid;
+  }
+
+  .triiiple-faq__item {
+    border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  .triiiple-faq__item:last-child {
+    border-bottom: 0;
+  }
+
+  .triiiple-faq__item summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-body--family);
+    font-size: 0.94rem;
+    line-height: 1.45;
+  }
+
+  .triiiple-faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .triiiple-faq__item summary::after {
+    content: '+';
+    flex: none;
+    color: currentColor;
+    opacity: 0.7;
+  }
+
+  .triiiple-faq__item[open] summary::after {
+    content: '−';
+  }
+
+  .triiiple-faq__item .rte {
+    padding: 0 1.1rem 1.15rem;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    opacity: 0.84;
+  }
+
+  .triiiple-faq__footer {
+    border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    padding-top: clamp(2rem, 5vw, 4rem);
+  }
+
+  .triiiple-faq__footer-copy {
+    justify-self: end;
+    max-width: 40rem;
+  }
+
+  .triiiple-faq__footer-copy .rte {
+    line-height: 1.8;
+    opacity: 0.82;
+  }
+
+  .triiiple-faq__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.8rem;
+    margin-top: 1.2rem;
+    padding: 0.8rem 1.1rem;
+    color: var(--faq-bg, #fff);
+    background: var(--faq-ink, #17191c);
+    border: 1px solid var(--faq-ink, #17191c);
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 989px) {
+    .triiiple-faq__hero,
+    .triiiple-faq__footer {
+      grid-template-columns: 1fr;
+    }
+
+    .triiiple-faq__intro,
+    .triiiple-faq__footer-copy {
+      justify-self: start;
+    }
+
+    .triiiple-faq__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .triiiple-faq__inner {
+      padding-inline: 1rem;
+    }
+
+    .triiiple-faq__hero h1 {
+      max-width: 10ch;
+      font-size: clamp(2rem, 14vw, 4rem);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Q&A page",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Q&A" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions, answered." },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>Find the essentials on sizing, shipping, returns, and order support. Keep it simple, keep it fast, and keep the first layer covered.</p>" },
+    { "type": "text", "id": "order_label", "label": "Order label", "default": "Order online" },
+    { "type": "text", "id": "order_heading", "label": "Order heading", "default": "Order support" },
+    { "type": "text", "id": "service_label", "label": "Service label", "default": "Customer service" },
+    { "type": "text", "id": "service_heading", "label": "Service heading", "default": "Returns and exchanges" },
+    { "type": "text", "id": "sizing_label", "label": "Sizing label", "default": "Sizing" },
+    { "type": "text", "id": "sizing_heading", "label": "Sizing heading", "default": "Fit reference" },
+    { "type": "text", "id": "footer_eyebrow", "label": "Footer eyebrow", "default": "Need more help?" },
+    { "type": "text", "id": "footer_heading", "label": "Footer heading", "default": "We’ll help you find the right fit." },
+    { "type": "richtext", "id": "footer_body", "label": "Footer body", "default": "<p>If you still need a hand, reach out through the contact page and we’ll get back to you as soon as possible.</p>" },
+    { "type": "text", "id": "footer_label", "label": "Footer button label", "default": "Contact us" },
+    { "type": "url", "id": "footer_link", "label": "Footer button link" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "ink_color", "label": "Ink", "default": "#17191c" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#4a1024" }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "options": [
+            { "value": "order", "label": "Order" },
+            { "value": "service", "label": "Service" },
+            { "value": "sizing", "label": "Sizing" }
+          ],
+          "default": "order"
+        },
+        { "type": "text", "id": "question", "label": "Question", "default": "Do I need an account to place an order online?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>You don’t need to create an account to place an order. We recommend creating one for easier future checkouts, but you can still checkout as a guest.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Q&A page",
+      "blocks": [
+        { "type": "faq_item", "settings": { "category": "order", "question": "Do I need an account to place an order online?", "answer": "<p>You don’t need to create an account to place an order. We recommend creating one for easier future checkouts, but you can still checkout as a guest.</p>" } },
+        { "type": "faq_item", "settings": { "category": "order", "question": "Can I change or cancel my order after I’ve placed it?", "answer": "<p>If you want to change or cancel your order, please contact us as soon as possible. We’ll do our best to help you, but unfortunately, we can’t change or cancel orders once they’ve been shipped.</p>" } },
+        { "type": "faq_item", "settings": { "category": "order", "question": "I didn’t receive an order confirmation.", "answer": "<p>Please contact us and we’ll check everything for you. We also recommend checking your spam inbox.</p>" } },
+        { "type": "faq_item", "settings": { "category": "service", "question": "What is the return policy?", "answer": "<p>Our return policy allows you to return an item within 14 days of receiving it. The product must be returned in its original condition, unwrapped, unwashed, and with all tags attached.</p>" } },
+        { "type": "faq_item", "settings": { "category": "service", "question": "Can I exchange my item?", "answer": "<p>At this time, we are unable to offer exchanges. For hygiene reasons, underwear is non-refundable once opened.</p>" } },
+        { "type": "faq_item", "settings": { "category": "service", "question": "What if my item is the wrong size or damaged?", "answer": "<p>If you received damaged or incorrect-sized items, please contact us with your order number and a photo or video of the item so we can help.</p>" } },
+        { "type": "faq_item", "settings": { "category": "sizing", "question": "What size should I order?", "answer": "<p>Please refer to the size guide on the product page for accurate measurements. If you still need assistance, our team will be happy to guide you in selecting the right size.</p>" } },
+        { "type": "faq_item", "settings": { "category": "sizing", "question": "Where can I find the size guide?", "answer": "<p>You can find our size guide on every product page.</p>" } },
+        { "type": "faq_item", "settings": { "category": "sizing", "question": "How do I know the fit is right?", "answer": "<p>If you sit between sizes, choose based on your preferred level of ease. Fit is meant to feel supportive, clean, and easy to wear all day.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

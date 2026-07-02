@@ -1,0 +1,501 @@
+{% liquid
+  assign image_1 = section.settings.image_1
+  assign image_2 = section.settings.image_2
+%}
+
+<section
+  class="triiiple-size-guide"
+  style="--guide-bg: {{ section.settings.background_color }}; --guide-ink: {{ section.settings.ink_color }}; --guide-accent: {{ section.settings.accent_color }};"
+>
+  <div class="triiiple-size-guide__inner">
+    <header class="triiiple-size-guide__hero">
+      <div class="triiiple-size-guide__copy">
+        {% if section.settings.eyebrow != blank %}<p class="triiiple-size-guide__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h1>{{ section.settings.heading | escape }}</h1>{% endif %}
+        {% if section.settings.intro != blank %}<div class="triiiple-size-guide__intro rte">{{ section.settings.intro }}</div>{% endif %}
+
+        <div class="triiiple-size-guide__notes">
+          <article>
+            <p>Fit note</p>
+            <h2>{{ section.settings.fit_heading | escape }}</h2>
+            <div class="rte">{{ section.settings.fit_body }}</div>
+          </article>
+          <article>
+            <p>How to measure</p>
+            <h2>{{ section.settings.measure_heading | escape }}</h2>
+            <div class="rte">{{ section.settings.measure_body }}</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="triiiple-size-guide__mosaic">
+        <figure class="triiiple-size-guide__frame triiiple-size-guide__frame--large">
+          {% if image_1 != blank %}
+            {{ image_1 | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 48vw, 100vw', loading: 'eager', alt: section.settings.heading }}
+          {% endif %}
+        </figure>
+        <figure class="triiiple-size-guide__frame triiiple-size-guide__frame--small">
+          {% if image_2 != blank %}
+            {{ image_2 | image_url: width: 1200 | image_tag: widths: '400, 700, 900, 1200', sizes: '(min-width: 990px) 24vw, 50vw', loading: 'lazy', alt: section.settings.heading }}
+          {% endif %}
+        </figure>
+      </div>
+    </header>
+
+    <section class="triiiple-size-guide__table-section">
+      <div class="triiiple-size-guide__section-head">
+        {% if section.settings.table_eyebrow != blank %}<p class="triiiple-size-guide__eyebrow">{{ section.settings.table_eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.table_heading != blank %}<h2>{{ section.settings.table_heading | escape }}</h2>{% endif %}
+        {% if section.settings.table_intro != blank %}<div class="triiiple-size-guide__section-copy rte">{{ section.settings.table_intro }}</div>{% endif %}
+      </div>
+
+      <div class="triiiple-size-guide__table-wrap">
+        <table class="triiiple-size-guide__table">
+          <thead>
+            <tr>
+              <th scope="col">{{ section.settings.size_label | escape }}</th>
+              <th scope="col">{{ section.settings.waist_cm_label | escape }}</th>
+              <th scope="col">{{ section.settings.waist_in_label | escape }}</th>
+              <th scope="col">{{ section.settings.eu_label | escape }}</th>
+              <th scope="col">{{ section.settings.uk_us_label | escape }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for block in section.blocks %}
+              {% if block.type == 'size_row' %}
+                <tr {{ block.shopify_attributes }}>
+                  <th scope="row">{{ block.settings.size | escape }}</th>
+                  <td>{{ block.settings.waist_cm | escape }}</td>
+                  <td>{{ block.settings.waist_in | escape }}</td>
+                  <td>{{ block.settings.eu | escape }}</td>
+                  <td>{{ block.settings.uk_us | escape }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="triiiple-size-guide__table-cards" aria-label="{{ section.settings.table_heading | escape }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'size_row' %}
+            <article class="triiiple-size-guide__table-card" {{ block.shopify_attributes }}>
+              <div class="triiiple-size-guide__table-card-head">
+                <span>{{ block.settings.size | escape }}</span>
+              </div>
+              <div class="triiiple-size-guide__table-card-grid">
+                <div class="triiiple-size-guide__table-card-pair">
+                  <span>{{ section.settings.waist_cm_label | escape }}</span>
+                  <strong>{{ block.settings.waist_cm | escape }}</strong>
+                </div>
+                <div class="triiiple-size-guide__table-card-pair">
+                  <span>{{ section.settings.waist_in_label | escape }}</span>
+                  <strong>{{ block.settings.waist_in | escape }}</strong>
+                </div>
+                <div class="triiiple-size-guide__table-card-pair">
+                  <span>{{ section.settings.eu_label | escape }}</span>
+                  <strong>{{ block.settings.eu | escape }}</strong>
+                </div>
+                <div class="triiiple-size-guide__table-card-pair">
+                  <span>{{ section.settings.uk_us_label | escape }}</span>
+                  <strong>{{ block.settings.uk_us | escape }}</strong>
+                </div>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    {% if section.settings.tops_heading != blank or section.settings.tops_body != blank %}
+      <section class="triiiple-size-guide__tops-note">
+        <div class="triiiple-size-guide__section-head">
+          {% if section.settings.tops_eyebrow != blank %}<p class="triiiple-size-guide__eyebrow">{{ section.settings.tops_eyebrow | escape }}</p>{% endif %}
+          {% if section.settings.tops_heading != blank %}<h2>{{ section.settings.tops_heading | escape }}</h2>{% endif %}
+        </div>
+        {% if section.settings.tops_body != blank %}<div class="triiiple-size-guide__section-copy rte">{{ section.settings.tops_body }}</div>{% endif %}
+      </section>
+    {% endif %}
+
+    <section class="triiiple-size-guide__fit-grid">
+      <article class="triiiple-size-guide__fit-card">
+        <p class="triiiple-size-guide__eyebrow">{{ section.settings.signal_eyebrow | escape }}</p>
+        <h2>{{ section.settings.signal_heading | escape }}</h2>
+        <div class="rte">{{ section.settings.signal_body }}</div>
+      </article>
+      <article class="triiiple-size-guide__fit-card">
+        <p class="triiiple-size-guide__eyebrow">{{ section.settings.sculpt_eyebrow | escape }}</p>
+        <h2>{{ section.settings.sculpt_heading | escape }}</h2>
+        <div class="rte">{{ section.settings.sculpt_body }}</div>
+      </article>
+    </section>
+
+    <footer class="triiiple-size-guide__footer">
+      <div>
+        {% if section.settings.footer_eyebrow != blank %}<p class="triiiple-size-guide__eyebrow">{{ section.settings.footer_eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.footer_heading != blank %}<h2>{{ section.settings.footer_heading | escape }}</h2>{% endif %}
+      </div>
+      <div class="triiiple-size-guide__footer-copy">
+        {% if section.settings.footer_body != blank %}<div class="rte">{{ section.settings.footer_body }}</div>{% endif %}
+        {% if section.settings.footer_link != blank and section.settings.footer_label != blank %}
+          <a class="triiiple-size-guide__button" href="{{ section.settings.footer_link }}">{{ section.settings.footer_label | escape }} <span aria-hidden="true">→</span></a>
+        {% endif %}
+      </div>
+    </footer>
+  </div>
+</section>
+
+{% stylesheet %}
+  .triiiple-size-guide {
+    background: var(--guide-bg, #ffffff);
+    color: var(--guide-ink, #17191c);
+  }
+
+  .triiiple-size-guide__inner {
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem) var(--page-margin) clamp(3rem, 7vw, 7rem);
+  }
+
+  .triiiple-size-guide__hero,
+  .triiiple-size-guide__footer {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .triiiple-size-guide__hero {
+    padding-block: clamp(1.5rem, 4vw, 3rem) clamp(2rem, 5vw, 4rem);
+    border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  }
+
+  .triiiple-size-guide__copy,
+  .triiiple-size-guide__table-section,
+  .triiiple-size-guide__fit-grid,
+  .triiiple-size-guide__footer {
+    border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  }
+
+  .triiiple-size-guide__copy {
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .triiiple-size-guide__eyebrow {
+    margin: 0 0 0.8rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.62;
+  }
+
+  .triiiple-size-guide h1,
+  .triiiple-size-guide h2 {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+  }
+
+  .triiiple-size-guide h1 {
+    max-width: 8ch;
+    font-size: clamp(2.2rem, 6vw, 5.6rem);
+  }
+
+  .triiiple-size-guide__intro {
+    max-width: 34rem;
+    margin-top: 1rem;
+    font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+    line-height: 1.8;
+  }
+
+  .triiiple-size-guide__notes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 1.8rem;
+    background: color-mix(in srgb, currentColor 15%, transparent);
+  }
+
+  .triiiple-size-guide__notes article,
+  .triiiple-size-guide__fit-card {
+    padding: 1.2rem 1rem 1.3rem;
+    background: var(--guide-bg, #fff);
+  }
+
+  .triiiple-size-guide__notes p,
+  .triiiple-size-guide__fit-card p {
+    margin: 0 0 0.7rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.62;
+  }
+
+  .triiiple-size-guide__notes h2,
+  .triiiple-size-guide__fit-card h2 {
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+
+  .triiiple-size-guide__mosaic {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: 0.8rem;
+    min-height: clamp(26rem, 48vw, 48rem);
+  }
+
+  .triiiple-size-guide__frame {
+    margin: 0;
+    overflow: hidden;
+    background: #f3f4f5;
+  }
+
+  .triiiple-size-guide__frame--large {
+    grid-row: 1 / span 2;
+  }
+
+  .triiiple-size-guide__frame img,
+  .triiiple-size-guide__frame svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .triiiple-size-guide__table-section {
+    display: grid;
+    grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(2rem, 8vw, 8rem);
+    padding-block: clamp(3rem, 7vw, 6rem);
+  }
+
+  .triiiple-size-guide__section-head h2,
+  .triiiple-size-guide__footer h2 {
+    font-size: clamp(1.6rem, 3.8vw, 3.6rem);
+  }
+
+  .triiiple-size-guide__section-copy,
+  .triiiple-size-guide__footer-copy {
+    max-width: 34rem;
+  }
+
+  .triiiple-size-guide__table-wrap {
+    overflow-x: auto;
+  }
+
+  .triiiple-size-guide__table-cards {
+    display: none;
+  }
+
+  .triiiple-size-guide__table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .triiiple-size-guide__table :is(th, td) {
+    padding: 0.95rem 0.8rem;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    white-space: nowrap;
+  }
+
+  .triiiple-size-guide__table thead th {
+    border-top: 1px solid currentColor;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .triiiple-size-guide__table tbody th {
+    font-weight: 600;
+  }
+
+  .triiiple-size-guide__table-card {
+    padding: 1rem 0;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  }
+
+  .triiiple-size-guide__table-card-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .triiiple-size-guide__table-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem 1rem;
+  }
+
+  .triiiple-size-guide__table-card-pair {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .triiiple-size-guide__table-card-pair span {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.62;
+  }
+
+  .triiiple-size-guide__table-card-pair strong {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .triiiple-size-guide__tops-note {
+    display: grid;
+    grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(2rem, 8vw, 8rem);
+    padding-top: clamp(2rem, 5vw, 3rem);
+    border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  }
+
+  .triiiple-size-guide__fit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: clamp(3rem, 7vw, 6rem);
+    background: color-mix(in srgb, currentColor 15%, transparent);
+  }
+
+  .triiiple-size-guide__fit-card .rte,
+  .triiiple-size-guide__footer-copy .rte {
+    line-height: 1.8;
+    opacity: 0.82;
+  }
+
+  .triiiple-size-guide__footer {
+    padding-top: clamp(2rem, 5vw, 4rem);
+    margin-top: clamp(3rem, 7vw, 6rem);
+  }
+
+  .triiiple-size-guide__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.8rem;
+    margin-top: 1.2rem;
+    padding: 0.8rem 1.1rem;
+    color: var(--guide-bg, #fff);
+    background: var(--guide-ink, #17191c);
+    border: 1px solid var(--guide-ink, #17191c);
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 989px) {
+    .triiiple-size-guide__hero,
+    .triiiple-size-guide__footer,
+    .triiiple-size-guide__table-section,
+    .triiiple-size-guide__tops-note {
+      grid-template-columns: 1fr;
+    }
+
+    .triiiple-size-guide__mosaic {
+      min-height: auto;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .triiiple-size-guide__inner {
+      padding-inline: 1rem;
+    }
+
+    .triiiple-size-guide h1 {
+      max-width: 10ch;
+      font-size: clamp(2rem, 13vw, 4rem);
+    }
+
+    .triiiple-size-guide__notes,
+    .triiiple-size-guide__fit-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .triiiple-size-guide__table-wrap {
+      display: none;
+    }
+
+    .triiiple-size-guide__table-cards {
+      display: grid;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Size guide page",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Size guide" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fits true to body." },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>Measure around your natural waist - just above the hips, snug not tight. If you prefer a looser fit, size up.</p>" },
+    { "type": "image_picker", "id": "image_1", "label": "Primary image" },
+    { "type": "image_picker", "id": "image_2", "label": "Secondary image" },
+    { "type": "text", "id": "fit_heading", "label": "Fit heading", "default": "True to body" },
+    { "type": "richtext", "id": "fit_body", "label": "Fit body", "default": "<p>Signal styles sit closer and more athletic. Sculpt styles feel slightly more relaxed through the hip.</p>" },
+    { "type": "text", "id": "measure_heading", "label": "Measure heading", "default": "Natural waist" },
+    { "type": "richtext", "id": "measure_body", "label": "Measure body", "default": "<p>Wrap the tape just above the hips. Keep it snug, not tight. Measurements may vary ±1 inch (±2.5 cm) due to fabric stretch and manual measurement.</p>" },
+    { "type": "text", "id": "table_eyebrow", "label": "Table eyebrow", "default": "Briefs & boxer trunks" },
+    { "type": "text", "id": "table_heading", "label": "Table heading", "default": "Size chart" },
+    { "type": "richtext", "id": "table_intro", "label": "Table intro", "default": "<p>The chart below is the standard fit reference for the underwear range.</p>" },
+    { "type": "text", "id": "size_label", "label": "Size label", "default": "Size" },
+    { "type": "text", "id": "waist_cm_label", "label": "Waist cm label", "default": "Waist (cm)" },
+    { "type": "text", "id": "waist_in_label", "label": "Waist inch label", "default": "Waist (in)" },
+    { "type": "text", "id": "eu_label", "label": "EU label", "default": "EU" },
+    { "type": "text", "id": "uk_us_label", "label": "UK / US label", "default": "UK / US" },
+    { "type": "text", "id": "tops_eyebrow", "label": "Tops eyebrow", "default": "T-shirts & tops" },
+    { "type": "text", "id": "tops_heading", "label": "Tops heading", "default": "Tee sizes run S to 2XL." },
+    { "type": "richtext", "id": "tops_body", "label": "Tops body", "default": "<p>ED tees and sleeveless tops are offered from S to 2XL. Use the product page size selector for the exact size availability on each colour.</p>" },
+    { "type": "text", "id": "signal_eyebrow", "label": "Signal eyebrow", "default": "Signal" },
+    { "type": "text", "id": "signal_heading", "label": "Signal heading", "default": "TransDRY®" },
+    { "type": "richtext", "id": "signal_body", "label": "Signal body", "default": "<p>Y Brief, X Brief, and X Boxer Trunk sit close to the body with a more athletic shape. Size up if you are between sizes.</p>" },
+    { "type": "text", "id": "sculpt_eyebrow", "label": "Sculpt eyebrow", "default": "Sculpt" },
+    { "type": "text", "id": "sculpt_heading", "label": "Sculpt heading", "default": "Cotton Spandex" },
+    { "type": "richtext", "id": "sculpt_body", "label": "Sculpt body", "default": "<p>V Brief, W Boxer Trunk, and H Boxer Trunk feel soft and slightly more relaxed through the hip. True to size for most.</p>" },
+    { "type": "text", "id": "footer_eyebrow", "label": "Footer eyebrow", "default": "Need help choosing?" },
+    { "type": "text", "id": "footer_heading", "label": "Footer heading", "default": "Use the chart, then follow the feel." },
+    { "type": "richtext", "id": "footer_body", "label": "Footer body", "default": "<p>If you are between sizes, choose the closer fit for Signal or the roomier fit for Sculpt. The product page also carries the same reference.</p>" },
+    { "type": "text", "id": "footer_label", "label": "Footer button label", "default": "Shop all" },
+    { "type": "url", "id": "footer_link", "label": "Footer button link" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "ink_color", "label": "Ink", "default": "#17191c" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#4a1024" }
+  ],
+  "blocks": [
+    {
+      "type": "size_row",
+      "name": "Size row",
+      "settings": [
+        { "type": "text", "id": "size", "label": "Size", "default": "M" },
+        { "type": "text", "id": "waist_cm", "label": "Waist cm", "default": "69–73" },
+        { "type": "text", "id": "waist_in", "label": "Waist in", "default": "27.2–28.7" },
+        { "type": "text", "id": "eu", "label": "EU", "default": "46–48" },
+        { "type": "text", "id": "uk_us", "label": "UK / US", "default": "30–32" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Size guide page",
+      "blocks": [
+        { "type": "size_row", "settings": { "size": "XS", "waist_cm": "59–63", "waist_in": "23.2–24.8", "eu": "42–44", "uk_us": "26–28" } },
+        { "type": "size_row", "settings": { "size": "S", "waist_cm": "64–68", "waist_in": "25.2–26.8", "eu": "44–46", "uk_us": "28–30" } },
+        { "type": "size_row", "settings": { "size": "M", "waist_cm": "69–73", "waist_in": "27.2–28.7", "eu": "46–48", "uk_us": "30–32" } },
+        { "type": "size_row", "settings": { "size": "L", "waist_cm": "74–78", "waist_in": "29.1–30.7", "eu": "48–50", "uk_us": "32–34" } },
+        { "type": "size_row", "settings": { "size": "XL", "waist_cm": "79–83", "waist_in": "31.1–32.7", "eu": "50–52", "uk_us": "34–36" } },
+        { "type": "size_row", "settings": { "size": "2XL", "waist_cm": "84–88", "waist_in": "33.1–34.6", "eu": "52–54", "uk_us": "36–38" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

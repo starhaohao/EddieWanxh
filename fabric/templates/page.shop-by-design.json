@@ -1,0 +1,88 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "shop-hub",
+      "blocks": {
+        "design": {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by design",
+            "title": "Shop by design",
+            "text": "Move by silhouette, cut, and styling direction first.",
+            "link": "/collections/underwear"
+          }
+        },
+        "fabric": {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by fabric",
+            "title": "Shop by fabric",
+            "text": "Browse pieces through the fabric story behind them.",
+            "link": "/pages/shop-by-fabric"
+          }
+        },
+        "all_items": {
+          "type": "destination",
+          "settings": {
+            "label": "All items",
+            "title": "View all items",
+            "text": "See the complete product range in one place.",
+            "link": "/collections/all"
+          }
+        },
+        "size_xs": {
+          "type": "size_row",
+          "settings": {
+            "size": "XS",
+            "chest": "32-34",
+            "waist": "25-27"
+          }
+        },
+        "size_s": {
+          "type": "size_row",
+          "settings": {
+            "size": "S",
+            "chest": "34-36",
+            "waist": "28-30"
+          }
+        },
+        "size_m": {
+          "type": "size_row",
+          "settings": {
+            "size": "M",
+            "chest": "36-38",
+            "waist": "31-33"
+          }
+        }
+      },
+      "block_order": [
+        "design",
+        "fabric",
+        "all_items",
+        "size_xs",
+        "size_s",
+        "size_m"
+      ],
+      "settings": {
+        "eyebrow": "Shop",
+        "heading": "Shop by design.",
+        "description": "<p>Use this page to guide customers toward the design-led collection path and the broader catalog.</p>",
+        "card_cta": "Open page",
+        "guide_eyebrow": "Fit guide",
+        "guide_heading": "Size and fit guide",
+        "guide_text": "<p>Keep the fitting notes visible here so customers can decide before they add to cart.</p>",
+        "background_color": "#ffffff",
+        "text_color": "#0f1623",
+        "accent_color": "#923531"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

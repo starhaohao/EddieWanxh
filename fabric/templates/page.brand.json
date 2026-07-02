@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-editorial-landing",
+      "settings": {
+        "eyebrow": "Brand",
+        "heading": "wear it. own it. explain nothing.",
+        "tagline": "Minimal, editorial, and body-aware.",
+        "intro": "<p>Built to look sharp without trying too hard.</p>",
+        "image_1": "shopify://shop_images/About-us-1.jpg",
+        "image_2": "shopify://shop_images/About-us-2.jpg",
+        "primary_label": "Shop all",
+        "primary_link": "/collections/all",
+        "secondary_label": "Size guide",
+        "secondary_link": "/pages/size-guide",
+        "body_eyebrow": "Brand manifesto",
+        "body_heading": "The first layer",
+        "body": "<p>TRIIIPLE is a point of view: clean lines, considered fit, and a quiet kind of confidence.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
+      }
+    }
+  },
+  "order": ["main"]
+}

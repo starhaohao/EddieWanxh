@@ -1,0 +1,77 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-size-guide",
+      "settings": {
+        "eyebrow": "Size guide",
+        "heading": "Fits true to body.",
+        "intro": "<p>Measure around your natural waist - just above the hips, snug not tight. If you prefer a looser fit, size up.</p>",
+        "image_1": "shopify://shop_images/prod-brief-white.jpg",
+        "image_2": "shopify://shop_images/prod-brief-white_cc1cf1be-0d6a-4430-ab24-bc00d7b51a9b.jpg",
+        "fit_heading": "True to body",
+        "fit_body": "<p>Signal styles sit closer and more athletic. Sculpt styles feel slightly more relaxed through the hip.</p>",
+        "measure_heading": "Natural waist",
+        "measure_body": "<p>Wrap the tape just above the hips. Keep it snug, not tight. Measurements may vary ±1 inch (±2.5 cm) due to fabric stretch and manual measurement.</p>",
+        "table_eyebrow": "Briefs & boxer trunks",
+        "table_heading": "Size chart",
+        "table_intro": "<p>The chart below is the standard fit reference for the underwear range.</p>",
+        "size_label": "Size",
+        "waist_cm_label": "Waist (cm)",
+        "waist_in_label": "Waist (in)",
+        "eu_label": "EU",
+        "uk_us_label": "UK / US",
+        "signal_eyebrow": "Signal",
+        "signal_heading": "TransDRY®",
+        "signal_body": "<p>Y Brief, X Brief, and X Boxer Trunk sit close to the body with a more athletic shape. Size up if you are between sizes.</p>",
+        "sculpt_eyebrow": "Sculpt",
+        "sculpt_heading": "Cotton Spandex",
+        "sculpt_body": "<p>V Brief, W Boxer Trunk, and H Boxer Trunk feel soft and slightly more relaxed through the hip. True to size for most.</p>",
+        "footer_eyebrow": "Need help choosing?",
+        "footer_heading": "Use the chart, then follow the feel.",
+        "footer_body": "<p>If you are between sizes, choose the closer fit for Signal or the roomier fit for Sculpt. The product page also carries the same reference.</p>",
+        "footer_label": "Shop all",
+        "footer_link": "/collections/all",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
+      },
+      "blocks": {
+        "xs": {
+          "type": "size_row",
+          "settings": { "size": "XS", "waist_cm": "59–63", "waist_in": "23.2–24.8", "eu": "42–44", "uk_us": "26–28" }
+        },
+        "s": {
+          "type": "size_row",
+          "settings": { "size": "S", "waist_cm": "64–68", "waist_in": "25.2–26.8", "eu": "44–46", "uk_us": "28–30" }
+        },
+        "m": {
+          "type": "size_row",
+          "settings": { "size": "M", "waist_cm": "69–73", "waist_in": "27.2–28.7", "eu": "46–48", "uk_us": "30–32" }
+        },
+        "l": {
+          "type": "size_row",
+          "settings": { "size": "L", "waist_cm": "74–78", "waist_in": "29.1–30.7", "eu": "48–50", "uk_us": "32–34" }
+        },
+        "xl": {
+          "type": "size_row",
+          "settings": { "size": "XL", "waist_cm": "79–83", "waist_in": "31.1–32.7", "eu": "50–52", "uk_us": "34–36" }
+        },
+        "2xl": {
+          "type": "size_row",
+          "settings": { "size": "2XL", "waist_cm": "84–88", "waist_in": "33.1–34.6", "eu": "52–54", "uk_us": "36–38" }
+        }
+      },
+      "block_order": ["xs", "s", "m", "l", "xl", "2xl"]
+    }
+  },
+  "order": ["main"]
+}

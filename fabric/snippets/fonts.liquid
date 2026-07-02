@@ -1,0 +1,55 @@
+{%- unless settings.type_body_font.system? -%}
+  {{ settings.type_body_font | font_url | preload_tag: as: 'font', type: 'font/woff2', fetchpriority: 'low' }}
+{%- endunless -%}
+{%- unless settings.type_subheading_font.system? -%}
+  {{ settings.type_subheading_font | font_url | preload_tag: as: 'font', type: 'font/woff2', fetchpriority: 'low' }}
+{%- endunless -%}
+{%- unless settings.type_heading_font.system? -%}
+  {{ settings.type_heading_font | font_url | preload_tag: as: 'font', type: 'font/woff2', fetchpriority: 'low' }}
+{%- endunless -%}
+{%- unless settings.type_accent_font.system? -%}
+  {{ settings.type_accent_font | font_url | preload_tag: as: 'font', type: 'font/woff2', fetchpriority: 'low' }}
+{%- endunless -%}
+
+{% comment %} Brand deck fonts live in the theme assets so the storefront can use the exact deck typography. {% endcomment %}
+<style>
+  /* IBM Plex Sans is the single site family; use the available weights consistently. */
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('{{ 'IBMPlexSans-Regular.ttf' | asset_url }}') format('truetype');
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('{{ 'IBMPlexSans-Regular.ttf' | asset_url }}') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('{{ 'IBMPlexSans-Medium.ttf' | asset_url }}') format('truetype');
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('{{ 'IBMPlexSans-SemiBold.ttf' | asset_url }}') format('truetype');
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('{{ 'IBMPlexSans-Bold.ttf' | asset_url }}') format('truetype');
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+  }
+</style>

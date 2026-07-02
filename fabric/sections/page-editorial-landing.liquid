@@ -1,0 +1,228 @@
+{% liquid
+  assign image_1 = section.settings.image_1
+  assign image_2 = section.settings.image_2
+%}
+
+<section
+  class="triiiple-editorial-landing"
+  style="--landing-bg: {{ section.settings.background_color }}; --landing-ink: {{ section.settings.ink_color }}; --landing-accent: {{ section.settings.accent_color }};"
+>
+  <div class="triiiple-editorial-landing__inner">
+    <header class="triiiple-editorial-landing__hero">
+      <div class="triiiple-editorial-landing__copy">
+        {% if section.settings.eyebrow != blank %}<p class="triiiple-editorial-landing__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h1>{{ section.settings.heading | escape }}</h1>{% endif %}
+        {% if section.settings.tagline != blank %}<p class="triiiple-editorial-landing__tagline">{{ section.settings.tagline | escape }}</p>{% endif %}
+        {% if section.settings.intro != blank %}<div class="triiiple-editorial-landing__intro rte">{{ section.settings.intro }}</div>{% endif %}
+
+        <div class="triiiple-editorial-landing__actions">
+          {% if section.settings.primary_label != blank and section.settings.primary_link != blank %}
+            <a class="triiiple-editorial-landing__button triiiple-editorial-landing__button--solid" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label | escape }} <span aria-hidden="true">→</span></a>
+          {% endif %}
+          {% if section.settings.secondary_label != blank and section.settings.secondary_link != blank %}
+            <a class="triiiple-editorial-landing__button" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label | escape }}</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="triiiple-editorial-landing__media">
+        <figure class="triiiple-editorial-landing__frame triiiple-editorial-landing__frame--primary">
+          {% if image_1 != blank %}
+            {{ image_1 | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 52vw, 100vw', loading: 'eager', alt: section.settings.heading }}
+          {% endif %}
+        </figure>
+        {% if image_2 != blank %}
+          <figure class="triiiple-editorial-landing__frame triiiple-editorial-landing__frame--secondary">
+            {{ image_2 | image_url: width: 1200 | image_tag: widths: '400, 700, 900, 1200', sizes: '(min-width: 990px) 26vw, 50vw', loading: 'lazy', alt: section.settings.heading }}
+          </figure>
+        {% endif %}
+      </div>
+    </header>
+
+    {% if section.settings.body_eyebrow != blank or section.settings.body_heading != blank or section.settings.body != blank %}
+      <section class="triiiple-editorial-landing__body">
+        <div>
+          {% if section.settings.body_eyebrow != blank %}<p class="triiiple-editorial-landing__eyebrow">{{ section.settings.body_eyebrow | escape }}</p>{% endif %}
+          {% if section.settings.body_heading != blank %}<h2>{{ section.settings.body_heading | escape }}</h2>{% endif %}
+        </div>
+        {% if section.settings.body != blank %}<div class="triiiple-editorial-landing__body-copy rte">{{ section.settings.body }}</div>{% endif %}
+      </section>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .triiiple-editorial-landing {
+    background: var(--landing-bg, #fff);
+    color: var(--landing-ink, #17191c);
+  }
+
+  .triiiple-editorial-landing__inner {
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem) var(--page-margin) clamp(3rem, 7vw, 7rem);
+  }
+
+  .triiiple-editorial-landing__hero,
+  .triiiple-editorial-landing__body {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .triiiple-editorial-landing__hero {
+    padding-block: clamp(1.5rem, 4vw, 3rem) clamp(2rem, 5vw, 4rem);
+    border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  }
+
+  .triiiple-editorial-landing__copy {
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .triiiple-editorial-landing__eyebrow {
+    margin: 0 0 0.8rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.62;
+  }
+
+  .triiiple-editorial-landing h1,
+  .triiiple-editorial-landing h2 {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+  }
+
+  .triiiple-editorial-landing h1 {
+    max-width: 9ch;
+    font-size: clamp(2.25rem, 6vw, 5.8rem);
+  }
+
+  .triiiple-editorial-landing h2 {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .triiiple-editorial-landing__tagline {
+    margin: 1rem 0 0;
+    font-size: clamp(1rem, 1.7vw, 1.25rem);
+    line-height: 1.5;
+    max-width: 24ch;
+  }
+
+  .triiiple-editorial-landing__intro,
+  .triiiple-editorial-landing__body-copy {
+    max-width: 36rem;
+    margin-top: 1rem;
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    line-height: 1.8;
+    opacity: 0.82;
+  }
+
+  .triiiple-editorial-landing__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
+  }
+
+  .triiiple-editorial-landing__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.8rem;
+    padding: 0.8rem 1.1rem;
+    border: 1px solid currentColor;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .triiiple-editorial-landing__button--solid {
+    color: var(--landing-bg, #fff);
+    background: var(--landing-ink, #17191c);
+    border-color: var(--landing-ink, #17191c);
+  }
+
+  .triiiple-editorial-landing__media {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+    min-height: clamp(28rem, 55vw, 52rem);
+  }
+
+  .triiiple-editorial-landing__frame {
+    margin: 0;
+    overflow: hidden;
+    background: #f3f4f5;
+  }
+
+  .triiiple-editorial-landing__frame--primary {
+    grid-row: 1 / span 2;
+  }
+
+  .triiiple-editorial-landing__frame img,
+  .triiiple-editorial-landing__frame svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .triiiple-editorial-landing__body {
+    padding-block: clamp(2rem, 5vw, 4rem) 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    .triiiple-editorial-landing__hero,
+    .triiiple-editorial-landing__body {
+      grid-template-columns: 1fr;
+    }
+
+    .triiiple-editorial-landing__media {
+      min-height: auto;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .triiiple-editorial-landing__inner {
+      padding-inline: 1rem;
+    }
+
+    .triiiple-editorial-landing h1 {
+      max-width: 10ch;
+      font-size: clamp(2rem, 12vw, 4rem);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Editorial landing page",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "TRIIIPLE" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "wear it. own it. explain nothing." },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "A concise statement for the collection." },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>Minimal, editorial, and body-aware - built to look sharp without trying too hard.</p>" },
+    { "type": "image_picker", "id": "image_1", "label": "Primary image" },
+    { "type": "image_picker", "id": "image_2", "label": "Secondary image" },
+    { "type": "text", "id": "primary_label", "label": "Primary button label", "default": "Shop now" },
+    { "type": "url", "id": "primary_link", "label": "Primary button link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button label", "default": "Size guide" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary button link" },
+    { "type": "text", "id": "body_eyebrow", "label": "Body eyebrow", "default": "The edit" },
+    { "type": "text", "id": "body_heading", "label": "Body heading", "default": "Collection notes" },
+    { "type": "richtext", "id": "body", "label": "Body copy", "default": "<p>Use this page as the entry point for the collection story, fit cues, and related products.</p>" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "ink_color", "label": "Ink", "default": "#17191c" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#4a1024" }
+  ],
+  "presets": [
+    { "name": "Editorial landing page" }
+  ]
+}
+{% endschema %}

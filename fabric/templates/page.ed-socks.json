@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-editorial-landing",
+      "settings": {
+        "eyebrow": "ED Socks",
+        "heading": "Comfort, from the ground up.",
+        "tagline": "The base layer, done properly.",
+        "intro": "<p>Soft, dependable socks that finish the look without shouting.</p>",
+        "image_1": "shopify://shop_images/IG_Story_20thJun-3.png",
+        "image_2": "shopify://shop_images/Split_Panel_A_3_4_Portrait.jpg",
+        "primary_label": "Shop ED Socks",
+        "primary_link": "/collections/socks",
+        "secondary_label": "Story Salon",
+        "secondary_link": "/pages/story-salon",
+        "body_eyebrow": "The base",
+        "body_heading": "Grounded comfort",
+        "body": "<p>Comfort starts below and carries everything else with it.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
+      }
+    }
+  },
+  "order": ["main"]
+}
