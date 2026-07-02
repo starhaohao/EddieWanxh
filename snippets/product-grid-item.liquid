@@ -495,7 +495,10 @@
 
       if on_sale
         assign sale_badge_class = badge_class | append: ' sale-box'
-        assign sale_badge_text = 'products.product.on_sale' | t
+        # Blueprint §5: discount badges show percentage only — never the word "Sale".
+        if current_variant.compare_at_price > 0
+          assign sale_badge_text = current_variant.compare_at_price | minus: current_variant.price | times: 100.00 | divided_by: current_variant.compare_at_price | round | append: '%'
+        endif
       endif
 
       if on_sale and show_saving
@@ -523,17 +526,14 @@
           assign discount = price_difference | money_without_trailing_zeros | append: ' ' | append: cart.currency.iso_code
         endif
 
-        if settings.saving_badge_type == 'percentage' and price_compare > 0
+        # Blueprint §5: always show percentage only (no "Save" / "up to" wording, never "Sale").
+        if price_compare > 0
           assign percent_off = price_difference | times: 1.00 | divided_by: price_compare | times: 100
-          assign discount = percent_off | floor | append: '%'
+          assign discount = percent_off | round | append: '%'
         endif
 
-        if product.variants.size == 1 and price_difference > 0
-          assign sale_badge_text = 'products.product.save_badge_html' | t: discount: discount
-        endif
-
-        if product.variants.size > 1 and price_difference > 0
-          assign sale_badge_text = 'products.product.save_badge_up_to_html' | t: discount: discount
+        if price_difference > 0 and price_compare > 0
+          assign sale_badge_text = discount
         endif
       endif
     endif
@@ -764,7 +764,11 @@
     >
       <div class="product-item__info {{ settings.product_grid_font_size }}">
         <a class="product-link" href="{{ product_url }}" data-product-link="{{ product_url }}">
-          <p class="product-item__title">{{ product.title | strip_html | escape }}</p>
+          <p class="product-item__title">{% render 'product-display-name', product: product %}</p>
+          {%- capture product_item_subtitle -%}{% render 'product-fabric-subtitle', product: product %}{%- endcapture -%}
+          {%- if product_item_subtitle != blank -%}
+            <p class="product-item__subtitle">{{ product_item_subtitle }}</p>
+          {%- endif -%}
 
           <div class="product-item__price__holder{% if has_siblings %} has-siblings{% endif %}">
             {%- if any_sibling_cutline or product_item_cutline != blank -%}
@@ -863,6 +867,15 @@
     padding-right: 8px !important;
     font-size: 11px !important;
     line-height: 1.2 !important;
+  }
+
+  /* Blueprint §5: fabric/technology subtitle under the product name */
+  .product-item__subtitle {
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: rgba(23, 25, 28, 0.60);
   }
   </style>
 {%- endunless -%}
