@@ -18,13 +18,19 @@
   .header__mobile {
     display: flex !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
+    position: relative;
     padding: 0 !important;
     margin: 0 !important;
   }
+  /* CDLP orientation: hamburger left, centred logo, account/cart right */
   .header__mobile .header__logo {
-    order: 1;
+    order: 2;
     flex: 0 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 52%;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -33,7 +39,7 @@
     margin: 0 !important;
   }
   .header__mobile .header__mobile__right {
-    order: 2;
+    order: 3;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -42,7 +48,7 @@
     margin-right: 0 !important;
   }
   .header__mobile .header__mobile__left {
-    order: 3;
+    order: 1;
     display: flex;
     align-items: center;
     margin: 0 !important;
@@ -70,28 +76,41 @@
   }
 }
 
-/* Mobile menu — slide down from top */
+/* CDLP orientation: drawer slides in from the left as a full-height panel */
 @media screen and (max-width: 749px) {
   .drawer.drawer--header {
     top: 0 !important;
     left: 0 !important;
-    right: 0 !important;
+    right: auto !important;
     bottom: 0 !important;
     width: 100% !important;
-    transform: translateY(-100%) !important;
+    transform: translateX(-100%) !important;
   }
   .drawer.drawer--header.is-open {
-    transform: translateY(0) !important;
+    transform: translateX(0) !important;
   }
   .drawer.drawer--header.is-closing {
-    transform: translateY(-100%) !important;
+    transform: translateX(-100%) !important;
   }
   .drawer.drawer--header .drawer__inner {
     width: 100% !important;
     max-width: 100% !important;
-    max-height: 85vh !important;
+    height: 100% !important;
+    max-height: 100% !important;
     overflow-y: auto !important;
   }
+}
+
+/* CDLP orientation: white drawer, left-aligned links, restrained type (blueprint §3) */
+.drawer.drawer--header .drawer__inner { background: #ffffff !important; }
+.drawer.drawer--header .drawer__main-menu,
+.drawer.drawer--header .drawer__menu { text-align: left !important; }
+.drawer.drawer--header .drawer__main-menu a {
+  font-size: clamp(18px, 5vw, 21px) !important;
+  letter-spacing: 0.01em;
+}
+@media screen and (min-width: 750px) {
+  .drawer.drawer--header .drawer__main-menu a { font-size: 21px !important; }
 }
 
 /* Social sticky bottom bar */
