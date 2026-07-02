@@ -766,9 +766,8 @@
         <a class="product-link" href="{{ product_url }}" data-product-link="{{ product_url }}">
           <p class="product-item__title">{% render 'product-display-name', product: product %}</p>
           {%- capture product_item_subtitle -%}{% render 'product-fabric-subtitle', product: product %}{%- endcapture -%}
-          {%- if product_item_subtitle != blank -%}
-            <p class="product-item__subtitle">{{ product_item_subtitle }}</p>
-          {%- endif -%}
+          {%- comment -%} Always render the subtitle line (blank -> nbsp) so prices/swatches align across a row {%- endcomment -%}
+          <p class="product-item__subtitle">{% if product_item_subtitle != blank %}{{ product_item_subtitle }}{% else %}&nbsp;{% endif %}</p>
 
           <div class="product-item__price__holder{% if has_siblings %} has-siblings{% endif %}">
             {%- if any_sibling_cutline or product_item_cutline != blank -%}
@@ -879,3 +878,32 @@
   }
   </style>
 {%- endunless -%}
+
+{% stylesheet %}
+  /* Blueprint §5: keep names/subtitles/prices aligned across every grid row */
+  .product-item__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 2px;
+  }
+  .product-item__subtitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 1.3em; /* reserve one line even when a product has no subtitle */
+  }
+  /* Swatches: never wrap into a messy second row — clip overflow instead */
+  .product-item__swatches__holder {
+    flex-wrap: nowrap;
+    overflow: hidden;
+    min-height: 18px;
+  }
+  @media screen and (max-width: 749px) {
+    .product-item__title { -webkit-line-clamp: 2; }
+    .product-item__subtitle { font-size: 11px; min-height: 1.25em; }
+    .product-item__swatches__holder { min-height: 16px; }
+  }
+{% endstylesheet %}
