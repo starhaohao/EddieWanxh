@@ -99,111 +99,6 @@
         "padding-block-end": 80
       }
     },
-    "collection_merchandising": {
-      "type": "collection-merchandising",
-      "blocks": {
-        "bundles": {
-          "type": "family",
-          "settings": {
-            "collection": "bundles-and-save",
-            "fallback_handle": "bundles",
-            "short_title": "Bundles",
-            "eyebrow": "Better together",
-            "heading": "Bundles",
-            "description": "<p>Build an easier weekly rotation and save when you buy together.</p>",
-            "show_feature_image": false,
-            "badge": "Bundle",
-            "details_label": "Best value for weekly rotation",
-            "product_limit": 4,
-            "link_label": "View all bundles",
-            "product_link_label": "View details",
-            "layout": "standard"
-          }
-        },
-        "bundle_offer": {
-          "type": "offer",
-          "settings": {
-            "eyebrow": "Buy more, save more",
-            "heading": "Build the rotation.",
-            "body": "<p>Create a reliable weekly lineup with bundle pricing that is easy to understand.</p>",
-            "link_label": "Build your pack",
-            "link": "/collections/bundles-and-save",
-            "background_color": "#17191c",
-            "text_color": "#ffffff"
-          }
-        },
-        "brief_designs": {
-          "type": "family",
-          "settings": {
-            "collection": "briefs",
-            "fallback_handle": "brief",
-            "short_title": "Brief designs",
-            "eyebrow": "Designed by purpose",
-            "heading": "Brief designs",
-            "description": "<p>Compare cuts by coverage, support, and the way you move.</p>",
-            "show_feature_image": false,
-            "badge": "Core fit",
-            "details_label": "Coverage, rise, and feel at a glance",
-            "product_limit": 4,
-            "link_label": "View all briefs",
-            "product_link_label": "View details",
-            "layout": "standard"
-          }
-        },
-        "family_84mLkz": {
-          "type": "family",
-          "settings": {
-            "collection": "boxer-trunks",
-            "fallback_handle": "Boxer Trunks",
-            "short_title": "Boxer Trunks",
-            "eyebrow": "Designed by purpose",
-            "heading": "Boxer Trunks",
-            "description": "<p>Reimagined for all-day wear</p>",
-            "show_feature_image": false,
-            "badge": "",
-            "details_label": "Tap for fit details",
-            "product_limit": 4,
-            "link_label": "View all",
-            "product_link_label": "View details",
-            "layout": "editorial"
-          }
-        },
-        "tshirt_essentials": {
-          "type": "family",
-          "settings": {
-            "collection": "essentials",
-            "fallback_handle": "t-shirt-essentials",
-            "short_title": "T-shirt essentials",
-            "eyebrow": "The first layer",
-            "heading": "T-shirt essentials",
-            "description": "<p>Clean, breathable layers designed to work under everything else.</p>",
-            "show_feature_image": false,
-            "badge": "Essential",
-            "details_label": "Made to disappear under clothes",
-            "product_limit": 4,
-            "link_label": "View all essentials",
-            "product_link_label": "View details",
-            "layout": "standard"
-          }
-        }
-      },
-      "block_order": [
-        "bundles",
-        "bundle_offer",
-        "brief_designs",
-        "family_84mLkz",
-        "tshirt_essentials"
-      ],
-      "name": "Shop by product family",
-      "settings": {
-        "eyebrow": "Shop by need",
-        "heading": "Find your everyday uniform.",
-        "intro": "<p>Move between fits, bundles, and daily layers without losing the thread.</p>",
-        "background_color": "#ffffff",
-        "ink_color": "#17191c",
-        "accent_color": "#4a1024"
-      }
-    },
     "main-collection": {
       "type": "main-collection",
       "blocks": {
@@ -279,7 +174,7 @@
                 "custom_width": 100,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
-                "height": "fill",
+                "height": "fit",
                 "custom_height": 100,
                 "background_media": "none",
                 "background_color": "",
@@ -333,7 +228,7 @@
                     "show_sale_price_first": true,
                     "show_installments": false,
                     "show_tax_info": false,
-                    "type_preset": "h6",
+                    "type_preset": "h3",
                     "width": "100%",
                     "alignment": "left",
                     "font": "var(--font-body--family)",
@@ -341,7 +236,7 @@
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
-                    "text_color": "#102b41",
+                    "text_color": "#102B41",
                     "padding-block-start": 6,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -392,6 +287,111 @@
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 0,
         "padding-block-end": 24
+      }
+    },
+    "collection_merchandising": {
+      "type": "collection-merchandising",
+      "blocks": {
+        "family_84mLkz": {
+          "type": "family",
+          "settings": {
+            "collection": "boxer-trunks",
+            "fallback_handle": "Boxer Trunks",
+            "short_title": "Boxer Trunks",
+            "eyebrow": "Designed by purpose",
+            "heading": "Boxer Trunks",
+            "description": "<p>Reimagined for all-day wear</p>",
+            "show_feature_image": false,
+            "badge": "",
+            "details_label": "Tap for fit details",
+            "product_limit": 4,
+            "link_label": "View all",
+            "product_link_label": "View details",
+            "layout": "editorial"
+          }
+        },
+        "bundle_offer": {
+          "type": "offer",
+          "settings": {
+            "eyebrow": "Buy more, save more",
+            "heading": "Build the rotation.",
+            "body": "<p>Create a reliable weekly lineup with bundle pricing that is easy to understand.</p>",
+            "link_label": "Build your pack",
+            "link": "/collections/bundles-and-save",
+            "background_color": "#17191c",
+            "text_color": "#ffffff"
+          }
+        },
+        "brief_designs": {
+          "type": "family",
+          "settings": {
+            "collection": "briefs",
+            "fallback_handle": "brief",
+            "short_title": "Brief designs",
+            "eyebrow": "Designed by purpose",
+            "heading": "Brief designs",
+            "description": "<p>Compare cuts by coverage, support, and the way you move.</p>",
+            "show_feature_image": false,
+            "badge": "Core fit",
+            "details_label": "Coverage, rise, and feel at a glance",
+            "product_limit": 4,
+            "link_label": "View all briefs",
+            "product_link_label": "View details",
+            "layout": "standard"
+          }
+        },
+        "bundles": {
+          "type": "family",
+          "settings": {
+            "collection": "bundles-and-save",
+            "fallback_handle": "bundles",
+            "short_title": "Bundles",
+            "eyebrow": "Better together",
+            "heading": "Bundles",
+            "description": "<p>Build an easier weekly rotation and save when you buy together.</p>",
+            "show_feature_image": false,
+            "badge": "Bundle",
+            "details_label": "Best value for weekly rotation",
+            "product_limit": 4,
+            "link_label": "View all bundles",
+            "product_link_label": "View details",
+            "layout": "standard"
+          }
+        },
+        "tshirt_essentials": {
+          "type": "family",
+          "settings": {
+            "collection": "essentials",
+            "fallback_handle": "t-shirt-essentials",
+            "short_title": "T-shirt essentials",
+            "eyebrow": "The first layer",
+            "heading": "T-shirt essentials",
+            "description": "<p>Clean, breathable layers designed to work under everything else.</p>",
+            "show_feature_image": false,
+            "badge": "Essential",
+            "details_label": "Made to disappear under clothes",
+            "product_limit": 4,
+            "link_label": "View all essentials",
+            "product_link_label": "View details",
+            "layout": "standard"
+          }
+        }
+      },
+      "block_order": [
+        "bundles",
+        "bundle_offer",
+        "brief_designs",
+        "family_84mLkz",
+        "tshirt_essentials"
+      ],
+      "name": "Shop by product family",
+      "settings": {
+        "eyebrow": "Shop by need",
+        "heading": "Find your everyday uniform.",
+        "intro": "<p>Move between fits, bundles, and daily layers without losing the thread.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
       }
     }
   },
