@@ -11,10 +11,8 @@
 
 <section class="lh" style="--lh-h:{{ hero_height }}vh;--lh-ov1:{{ overlay_from }};--lh-ov2:{{ overlay_to }};--lh-eye:{{ eyebrow_color }};--lh-ts:{{ title_size }}px;">
 
-  {%- if bg_type == 'video' and section.settings.video_url != blank -%}
-    <video class="lh__bg" autoplay muted loop playsinline>
-      <source src="{{ section.settings.video_url }}" type="video/mp4">
-    </video>
+  {%- if bg_type == 'video' and section.settings.video != blank -%}
+    {{ section.settings.video | video_tag: class: 'lh__bg', image_size: '2800x', autoplay: true, loop: true, muted: true, controls: false }}
   {%- elsif section.settings.image != blank -%}
     <img class="lh__bg" src="{{ section.settings.image | image_url: width: 2800 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
   {%- else -%}
@@ -278,11 +276,11 @@
       "default": "image",
       "options": [
         { "value": "image", "label": "Image" },
-        { "value": "video", "label": "Video (MP4 URL)" }
+        { "value": "video", "label": "Video" }
       ]
     },
     { "type": "image_picker", "id": "image", "label": "Hero image" },
-    { "type": "text", "id": "video_url", "label": "Video URL (.mp4)", "info": "Direct .mp4 URL for autoplay background video" },
+    { "type": "video", "id": "video", "label": "Hero video", "info": "Uploaded to Shopify (Content ▸ Files). Autoplays muted & looped as the background." },
     { "type": "range", "id": "hero_height", "label": "Height (vh)", "min": 50, "max": 100, "step": 2, "default": 92 },
     { "type": "color", "id": "overlay_from", "label": "Overlay start", "default": "rgba(10,10,10,0.75)" },
     { "type": "color", "id": "overlay_to", "label": "Overlay end", "default": "rgba(10,10,10,0.32)" },
