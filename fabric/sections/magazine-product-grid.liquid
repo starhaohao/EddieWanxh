@@ -1,0 +1,59 @@
+{%- doc -%}
+  Renders a grid of TRIIIPLE "Magazine Split" product cards (Option B) from a
+  chosen collection. Drop it onto any page/collection/home template to preview
+  or use the card layout.
+{%- enddoc -%}
+
+{%- liquid
+  assign coll = section.settings.collection
+  assign limit = section.settings.products_limit
+-%}
+
+<section class="mpg" style="--mpg-gutter: {{ section.settings.padding_block }}px;">
+  {%- if section.settings.heading != blank -%}
+    <header class="mpg__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="mpg__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="mpg__title">{{ section.settings.heading }}</h2>
+    </header>
+  {%- endif -%}
+
+  <div class="mpg__grid">
+    {%- if coll != blank and coll.products_count > 0 -%}
+      {%- for product in coll.products limit: limit -%}
+        {%- render 'product-card-magazine', product: product -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..2) -%}
+        {%- render 'product-card-magazine', product: null -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .mpg { padding-block: var(--mpg-gutter, 48px); padding-inline: var(--page-margin, 20px); }
+  .mpg__head { text-align: center; margin-bottom: 32px; }
+  .mpg__eyebrow { display: block; font-family: 'IBM Plex Sans', sans-serif; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #6B6760; margin-bottom: 8px; }
+  .mpg__title { font-size: clamp(28px, 4vw, 44px); font-weight: 500; letter-spacing: -.02em; color: #17191C; margin: 0; }
+  .mpg__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(440px, 1fr)); gap: 20px; max-width: 1400px; margin-inline: auto; }
+  @media screen and (max-width: 749px) {
+    .mpg__grid { grid-template-columns: 1fr; gap: 16px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Magazine Product Grid",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Collection" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop the range" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_limit", "min": 2, "max": 12, "step": 1, "label": "Products to show", "default": 6 },
+    { "type": "range", "id": "padding_block", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Vertical padding", "default": 48 }
+  ],
+  "presets": [{ "name": "Magazine Product Grid" }]
+}
+{% endschema %}

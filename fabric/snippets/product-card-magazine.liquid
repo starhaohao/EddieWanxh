@@ -1,0 +1,188 @@
+{%- doc -%}
+  TRIIIPLE "Magazine Split" product card (Option B).
+  Landscape on desktop — image left, copy right; stacks vertically on mobile.
+  Renders from a standard product object so it works on collections, search,
+  and featured-product contexts.
+
+  @param {object} product - The product object to render.
+  @param {string} [range_label] - Optional eyebrow label; defaults to product.type then vendor.
+{%- enddoc -%}
+
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign on_sale = false
+  if variant.compare_at_price > variant.price
+    assign on_sale = true
+  endif
+
+  assign eyebrow = range_label | default: product.type
+  if eyebrow == blank
+    assign eyebrow = product.vendor
+  endif
+
+  assign tagline = product.metafields.custom.tagline
+  if tagline == blank
+    assign tagline = product.description | strip_html | truncatewords: 14
+  endif
+
+  # Low-stock nudge: show when the current variant tracks inventory and is running low.
+  assign low_stock = false
+  if variant.inventory_management != blank and variant.inventory_quantity > 0 and variant.inventory_quantity <= 6
+    assign low_stock = true
+  endif
+
+  # Spec rows ("maximum info density"). Only rendered when a value exists;
+  # Origin falls back to the brand's default.
+  assign spec_fabric = product.metafields.custom.fabric
+  assign spec_weight = product.metafields.custom.weight
+  assign spec_fit = product.metafields.custom.fit
+  assign spec_origin = product.metafields.custom.origin | default: 'Designed in Singapore'
+
+  # First option that carries swatch data, for the colour row.
+  assign swatch_option = null
+  for option in product.options_with_values
+    if option.values.first.swatch != blank
+      assign swatch_option = option
+      break
+    endif
+  endfor
+-%}
+
+<article class="tmc">
+  <div class="tmc__img">
+    {%- if product.featured_media -%}
+      <a href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+        {{ product.featured_media | image_url: width: 700 | image_tag:
+          loading: 'lazy',
+          widths: '300, 500, 700',
+          sizes: '(max-width: 749px) 100vw, 220px',
+          alt: product.featured_media.alt | default: product.title
+        }}
+      </a>
+    {%- else -%}
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'tmc__placeholder' }}
+    {%- endif -%}
+
+    {%- if product.tags contains 'New' -%}
+      <span class="tmc__badge tmc__badge--l">New</span>
+    {%- endif -%}
+    {%- if on_sale -%}
+      <span class="tmc__badge tmc__badge--r">Sale</span>
+    {%- endif -%}
+  </div>
+
+  <div class="tmc__copy">
+    {%- if eyebrow != blank -%}
+      <div class="tmc__range">{{ eyebrow }}</div>
+    {%- endif -%}
+
+    <h3 class="tmc__name"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+
+    {%- if tagline != blank -%}
+      <p class="tmc__tagline">{{ tagline }}</p>
+    {%- endif -%}
+
+    <div class="tmc__price">
+      {%- if on_sale -%}
+        <span class="tmc__was">{{ variant.compare_at_price | money }}</span>
+        <span class="tmc__now">{{ variant.price | money }}</span>
+        <span class="tmc__save">Save {{ variant.compare_at_price | minus: variant.price | money }}</span>
+      {%- else -%}
+        <span class="tmc__now">{{ variant.price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- if swatch_option -%}
+      <div class="tmc__swatches">
+        {%- for value in swatch_option.values limit: 5 -%}
+          {%- assign sw = value.swatch -%}
+          <span
+            class="tmc__swatch{% if forloop.first %} tmc__swatch--active{% endif %}"
+            title="{{ value }}"
+            style="{% if sw.image %}background-image:url({{ sw.image | image_url: width: 40 }});{% elsif sw.color %}background-color:{{ sw.color }};{% endif %}"
+          ></span>
+        {%- endfor -%}
+        {%- if low_stock -%}<span class="tmc__nudge">Final stock</span>{%- endif -%}
+      </div>
+    {%- elsif low_stock -%}
+      <div class="tmc__swatches"><span class="tmc__nudge">Final stock</span></div>
+    {%- endif -%}
+
+    <div class="tmc__rows">
+      {%- if spec_fabric != blank -%}
+        <div class="tmc__row"><span class="tmc__rlabel">Fabric</span><span class="tmc__rval">{{ spec_fabric }}</span></div>
+      {%- endif -%}
+      {%- if spec_weight != blank -%}
+        <div class="tmc__row"><span class="tmc__rlabel">Weight</span><span class="tmc__rval">{{ spec_weight }}</span></div>
+      {%- endif -%}
+      {%- if spec_fit != blank -%}
+        <div class="tmc__row"><span class="tmc__rlabel">Fit</span><span class="tmc__rval">{{ spec_fit }}</span></div>
+      {%- endif -%}
+      <div class="tmc__row"><span class="tmc__rlabel">Origin</span><span class="tmc__rval">{{ spec_origin }}</span></div>
+    </div>
+
+    <div class="tmc__bottom">
+      {%- if product.available -%}
+        {%- form 'product', product, class: 'tmc__form' -%}
+          <input type="hidden" name="id" value="{{ variant.id }}">
+          <button type="submit" class="tmc__cta">Add to Cart</button>
+        {%- endform -%}
+      {%- else -%}
+        <a href="{{ product.url }}" class="tmc__cta">Sold Out</a>
+      {%- endif -%}
+    </div>
+  </div>
+</article>
+
+{% stylesheet %}
+  .tmc {
+    --tmc-ink: #17191C;
+    --tmc-burg: #4A1628;
+    --tmc-rule: #D9D4C9;
+    --tmc-mid: #6B6760;
+    --tmc-light: #F2EFE8;
+    --tmc-paper: #FAF8F3;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    background: var(--tmc-paper);
+    border: 1px solid var(--tmc-rule);
+    overflow: hidden;
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  }
+  .tmc__img { position: relative; overflow: hidden; background: var(--tmc-light); }
+  .tmc__img img,
+  .tmc__placeholder { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .5s ease; }
+  .tmc:hover .tmc__img img { transform: scale(1.04); }
+  .tmc__badge { position: absolute; top: 10px; font-size: 7px; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; color: #fff; }
+  .tmc__badge--l { left: 10px; background: var(--tmc-burg); }
+  .tmc__badge--r { right: 10px; background: var(--tmc-ink); }
+  .tmc__copy { padding: 20px 20px 18px; display: flex; flex-direction: column; }
+  .tmc__range { font-size: 8px; letter-spacing: .16em; text-transform: uppercase; color: var(--tmc-mid); margin-bottom: 6px; }
+  .tmc__name { font-size: 28px; font-weight: 500; letter-spacing: -.03em; line-height: 1; color: var(--tmc-ink); margin: 0 0 6px; }
+  .tmc__name a { color: inherit; text-decoration: none; }
+  .tmc__tagline { font-size: 11px; color: var(--tmc-mid); line-height: 1.6; letter-spacing: -.01em; margin: 0 0 12px; padding-bottom: 12px; border-bottom: 1px solid var(--tmc-rule); }
+  .tmc__price { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; }
+  .tmc__was { font-size: 11px; color: var(--tmc-mid); text-decoration: line-through; }
+  .tmc__now { font-size: 15px; font-weight: 500; color: var(--tmc-ink); }
+  .tmc__save { font-size: 8px; letter-spacing: .12em; text-transform: uppercase; background: var(--tmc-ink); color: #fff; padding: 2px 5px; }
+  .tmc__swatches { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; min-height: 14px; }
+  .tmc__swatch { width: 14px; height: 14px; border: 1px solid var(--tmc-rule); background-size: cover; background-position: center; }
+  .tmc__swatch--active { border-color: var(--tmc-ink); outline: 1px solid var(--tmc-ink); outline-offset: 2px; }
+  .tmc__nudge { margin-left: auto; font-size: 9px; letter-spacing: .06em; color: var(--tmc-burg); text-transform: uppercase; }
+  .tmc__rows { flex: 1; margin-bottom: 14px; }
+  .tmc__row { display: grid; grid-template-columns: 82px 1fr; padding: 6px 0; border-bottom: 1px solid var(--tmc-rule); align-items: baseline; }
+  .tmc__row:first-child { border-top: 1px solid var(--tmc-rule); }
+  .tmc__rlabel { font-size: 8px; letter-spacing: .13em; text-transform: uppercase; color: var(--tmc-mid); display: flex; align-items: center; gap: 4px; }
+  .tmc__rlabel::before { content: '\25C6'; font-size: 6px; color: var(--tmc-burg); }
+  .tmc__rval { font-size: 11px; color: var(--tmc-ink); line-height: 1.45; letter-spacing: -.01em; }
+  .tmc__bottom { margin-top: auto; display: flex; align-items: center; gap: 10px; }
+  .tmc__form { flex: 1; display: flex; }
+  .tmc__cta { background: var(--tmc-burg); color: #fff; border: none; flex: 1; width: 100%; padding: 14px; font-family: inherit; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; text-align: center; text-decoration: none; }
+  .tmc__cta:hover { background: #3a1020; }
+
+  @media screen and (max-width: 749px) {
+    .tmc { grid-template-columns: 1fr; }
+    .tmc__img { aspect-ratio: 4 / 5; }
+    .tmc__name { font-size: 24px; }
+  }
+{% endstylesheet %}
