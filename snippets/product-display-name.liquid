@@ -7,7 +7,8 @@
      tokens stripped, leaving the silhouette (e.g. "Y TransDRY Brief White" -> "Y Brief")
   3. Native Shopify product title (final fallback)
 
-  The token list is intentionally editable — extend it as the catalogue grows.
+  Material/technology tokens reflect the actual catalogue (TransDRY and
+  Cotton Spandex only). Extend the colour/token list as the catalogue grows.
 
   Accepts:
   - product: {Object} product (required)
@@ -23,7 +24,7 @@
 
   if resolved_name == blank
     assign derived = product.title | strip_html
-    assign strip_tokens = 'Micromodal,TransDRY®,TransDRY,OEKO-TEX,DryFit,CoolMax,Cotton,Spandex,Modal,Natural,Bamboo,Merino,Wool,Nylon,Elastane,Microfiber,White,Black,Charcoal,Grey,Gray,Navy,Blue,Green,Red,Beige,Olive,Khaki,Brown,Pink,Sand,Stone,®' | split: ','
+    assign strip_tokens = 'TransDRY®,TransDRY,Cotton Spandex,Cotton,Spandex,White,Black,Charcoal,Grey,Gray,Navy,Blue,Green,Red,Beige,Olive,Khaki,Brown,Pink,Sand,Stone,®' | split: ','
     for token in strip_tokens
       assign derived = derived | remove: token
     endfor
