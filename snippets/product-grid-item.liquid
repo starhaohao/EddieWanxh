@@ -843,19 +843,19 @@
     </div>
   </grid-item>
   <style>
-  /* 1. Move the badge container to the top-left */
+  /* Blueprint §5: discount / status badge sits top-right, off the garment */
   .grid-product__badge,
-  .product-badge, 
+  .product-badge,
   .badge-container,
   .product-card__badge-wrapper {
-    bottom: auto !important; 
-    top: 8px !important; 
-    left: 8px !important; 
-    right: auto !important;
+    bottom: auto !important;
+    top: 8px !important;
+    right: 8px !important;
+    left: auto !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 4px !important; 
+    align-items: flex-end !important;
+    gap: 4px !important;
   }
 
   /* 2. Slim down the strip and reduce the side bleeding */
