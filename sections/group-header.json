@@ -85,7 +85,7 @@
             "mobile_menu_linklist": "footer",
             "text_font_size": "body-x-large",
             "highlight_item": "Sale",
-            "highlight_item_color": "#FAEE10",
+            "highlight_item_color": "#faee10",
             "padding": true,
             "padding_bottom": 30
           }
