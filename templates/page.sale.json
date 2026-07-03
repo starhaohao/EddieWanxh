@@ -105,7 +105,7 @@
         "cta_text_color": "#0C0101",
         "show_urgency": true,
         "urgency_label": "Stock Status",
-        "urgency_text": "<p>Wear it.</p><p>Own it. </p><p>Explain nothing.</p>"
+        "urgency_text": "<p><strong>Wear it.</strong></p><p><strong>Own it. </strong></p><p><strong>Explain nothing.</strong></p>"
       }
     },
     "sale_tiers": {
@@ -128,11 +128,11 @@
         ".page-announcement {--ANNOUNCEMENT-HEIGHT-DESKTOP: 28px !important; --ANNOUNCEMENT-HEIGHT-MOBILE: 28px !important;}"
       ],
       "settings": {
-        "bg_color": "#000000",
+        "bg_color": "#FAEE10",
         "border_top_color": "#faee1026",
-        "accent_color": "#faee10",
-        "text_color": "#faee10",
-        "muted_color": "#faee1059",
+        "accent_color": "#1A1A14",
+        "text_color": "#1D1D16",
+        "muted_color": "#9A9A78",
         "highlight_size": 14,
         "badge_text": "No code needed"
       }
