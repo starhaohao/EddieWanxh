@@ -26,6 +26,23 @@
         "padding_bottom": 0
       }
     },
+    "clearance-strip": {
+      "type": "landing-features-strip",
+      "settings": {
+        "bg_color": "#34070B",
+        "border_color": "rgba(255,255,255,0.15)",
+        "cat_color": "#CDFF00",
+        "title_color": "#ffffff",
+        "desc_color": "rgba(255,255,255,0.65)"
+      },
+      "blocks": {
+        "feat-1": { "type": "feature", "settings": { "category": "Offer", "title": "Buy 5, Get 1 Free", "description": "Auto-applied at checkout. No code needed." } },
+        "feat-2": { "type": "feature", "settings": { "category": "Stock", "title": "Final Sizes Only", "description": "Once sold out, they are gone." } },
+        "feat-3": { "type": "feature", "settings": { "category": "Shipping", "title": "Free over $50", "description": "SG & MY. Free intl over $100." } },
+        "feat-4": { "type": "feature", "settings": { "category": "Discount", "title": "Auto-Applied", "description": "No code. Combines with shipping discounts only." } }
+      },
+      "block_order": ["feat-1", "feat-2", "feat-3", "feat-4"]
+    },
     "subcollections": {
       "type": "subcollections",
       "settings": {
@@ -83,6 +100,7 @@
   },
   "order": [
     "hero",
+    "clearance-strip",
     "subcollections",
     "main",
     "section_recent_products_JGCaih"

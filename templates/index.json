@@ -17,16 +17,16 @@
         "hero_height": 92,
         "overlay_from": "rgba(10,10,10,0.75)",
         "overlay_to": "rgba(10,10,10,0.32)",
-        "eyebrow": "New Season",
+        "eyebrow": "Final Clearance",
         "eyebrow_color": "#923531",
         "title": "<p>Wear Less.<br/>Feel More.</p>",
         "title_size": 84,
-        "subtitle": "<p>Premium basics for the modern man</p>",
+        "subtitle": "<p>Buy 5, Get 1 Free — final stock, no restock.</p>",
         "show_urgency": false,
         "show_countdown": false,
         "countdown_end": "2025-12-31T23:59:59",
-        "cta_text": "Shop Now",
-        "cta_url": "/collections",
+        "cta_text": "Shop Final Clearance",
+        "cta_url": "/collections/dead-stocks",
         "cta_bg": "#923531",
         "cta_text_color": "#ffffff"
       },
@@ -49,7 +49,7 @@
       "blocks": {
         "feat-1": { "type": "feature", "settings": { "category": "Shipping", "title": "Free over $50", "description": "SG & MY. 2-4 business days." } },
         "feat-2": { "type": "feature", "settings": { "category": "Materials", "title": "OEKO-TEX", "description": "Certified safe for skin." } },
-        "feat-3": { "type": "feature", "settings": { "category": "Returns", "title": "30-Day Policy", "description": "Hassle-free exchanges." } },
+        "feat-3": { "type": "feature", "settings": { "category": "Returns", "title": "14-Day Returns", "description": "Hassle-free exchanges." } },
         "feat-4": { "type": "feature", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Crafted in Thailand." } }
       },
       "block_order": ["feat-1", "feat-2", "feat-3", "feat-4"]
@@ -68,11 +68,12 @@
         "cta_url": "/collections"
       },
       "blocks": {
+        "coll-clearance": { "type": "collection_card", "settings": { "label": "Final Clearance", "tag": "Buy 5, Get 1 Free", "link": "/collections/dead-stocks" } },
         "coll-1": { "type": "collection_card", "settings": { "label": "Briefs", "tag": "Best Seller", "link": "/collections/briefs" } },
         "coll-2": { "type": "collection_card", "settings": { "label": "Boxer Trunks", "link": "/collections/boxer-trunks" } },
         "coll-3": { "type": "collection_card", "settings": { "label": "Tops", "tag": "New", "link": "/collections/tops" } }
       },
-      "block_order": ["coll-1", "coll-2", "coll-3"]
+      "block_order": ["coll-clearance", "coll-1", "coll-2", "coll-3"]
     },
     "testimonials": {
       "type": "landing-testimonials",
@@ -83,7 +84,7 @@
         "star_color": "#c8a96e",
         "quote_color": "rgba(255,255,255,0.85)",
         "who_color": "rgba(255,255,255,0.45)",
-        "heading": "What they say."
+        "heading": "Worn, Felt, Reviewed"
       },
       "blocks": {
         "rev-1": { "type": "review", "settings": { "stars": 5, "quote": "The most comfortable underwear I've ever worn. Fabric quality is unreal.", "name": "James T.", "product": "Classic Brief 3-Pack" } },

@@ -16,11 +16,10 @@
       "blocks": {
         "text_A4cKnQ": {
           "type": "text",
-          "disabled": true,
           "settings": {
-            "text": "<p>buy 3 → 15% off · buy 5 → 25% off · free shipping over SGD $50 (Singapore)</p>",
+            "text": "<p>Final Clearance: Buy 5, Get 1 Free — auto-applied at checkout. No code needed.</p>",
             "target_url_enabled": true,
-            "target_url": "shopify://collections/boxer-trunks",
+            "target_url": "shopify://collections/dead-stocks",
             "target_referrer_enabled": false,
             "target_referrer": "",
             "target_device_enabled": false,
@@ -60,7 +59,6 @@
         "text_Dpc9YJ",
         "message_Y6tLRR"
       ],
-      "disabled": true,
       "settings": {
         "show_border": false,
         "layout": "slider",
@@ -84,7 +82,7 @@
           "settings": {
             "mobile_menu_linklist": "triiiple-shop",
             "text_font_size": "body-large",
-            "highlight_item": "Up to 80% off, buy 5 get 1 free.",
+            "highlight_item": "Buy 5, Get 1 Free — auto-applied at checkout.",
             "highlight_item_color": "#faee10",
             "padding": true,
             "padding_bottom": 30
@@ -244,7 +242,7 @@
         "highlight_item_color": "#cdff00",
         "transparent_logo": "shopify://shop_images/495X80_white.png",
         "transparent_home": true,
-        "transparent_collection": true,
+        "transparent_collection": false,
         "transparent_article": true,
         "transparent_page": true,
         "transparent_product_page": true,
