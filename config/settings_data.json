@@ -117,6 +117,40 @@
       "color1": "#d9d4c9",
       "color2": "#8a8680",
       "color3": "#FFFFFF"
+    },
+    "color_schemes": {
+      "scheme_1": {
+        "section_text": "#282C2E",
+        "section_bg": "#ffffff",
+        "section_bg_light": "#F7F9FA",
+        "section_bg_gradient": "",
+        "btn_primary_bg": "#AB8C52",
+        "btn_primary_text": "#fff",
+        "btn_primary_border": "#AB8C52",
+        "btn_secondary_bg": "#8191A4",
+        "btn_secondary_text": "#212121",
+        "btn_secondary_border": "#8191A4",
+        "accent": "#E03386",
+        "lines_and_border": "#F3F3F3",
+        "overlay": "#0000004D",
+        "links": "#282C2E"
+      },
+      "scheme_2": {
+        "section_text": "#ffffff",
+        "section_bg": "#1a1a1a",
+        "section_bg_light": "#2a2a2a",
+        "section_bg_gradient": "",
+        "btn_primary_bg": "#AB8C52",
+        "btn_primary_text": "#1a1a1a",
+        "btn_primary_border": "#AB8C52",
+        "btn_secondary_bg": "#8191A4",
+        "btn_secondary_text": "#ffffff",
+        "btn_secondary_border": "#8191A4",
+        "accent": "#E03386",
+        "lines_and_border": "#3a3a3a",
+        "overlay": "#ffffff4D",
+        "links": "#ffffff"
+      }
     }
   },
   "presets": {
