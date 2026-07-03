@@ -1,27 +1,47 @@
 import {json} from '@shopify/remix-oxygen';
 import {useLoaderData, Link} from '@remix-run/react';
-import {createStorefront} from '~/lib/storefront.server';
+import SaleHero from '~/components/SaleHero';
+import {getSaleHero} from '~/lib/sale-hero.server';
 
-export async function loader({context, request}) {
-  const storefront = createStorefront({env: context.env, request});
+const FALLBACK_SALE_HERO = {
+  image: {
+    url: 'https://cdn.shopify.com/s/files/1/placeholder/In_TRIIIPLE_Instagram_Post_45.jpg',
+    altText: 'TRIIIPLE final clearance sale',
+  },
+  heroHeight: 100,
+  overlayFrom: '#2C0000',
+  overlayTo: '#1b1b1b52',
+  eyebrow: 'Final Clearance',
+  eyebrowColor: '#f1f4f5',
+  title: 'The<br/>Last Run.',
+  titleSize: 84,
+  subtitle:
+    '<strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore',
+  ctaText: 'Shop All',
+  ctaUrl: '/pages/fabric-and-size-guide',
+  ctaBg: '#344e5c',
+  ctaTextColor: '#f1f4f5',
+  showUrgency: true,
+  urgencyLabel: 'Stock Status',
+  urgencyText: '<p>Wear it.</p><p>Own it.</p><p>Explain nothing.</p>',
+  ghostCtas: [
+    {label: 'Briefs', url: '/collections/briefs'},
+    {label: 'Boxer Trunks', url: '/collections/boxer-trunks'},
+    {label: 'Essentials', url: '/collections/essentials'},
+  ],
+};
 
-  const {collections} = await storefront.query(FEATURED_COLLECTIONS_QUERY, {
-    variables: {first: 3},
-  });
-
-  return json({collections});
+export async function loader({context}) {
+  const saleHero = (await getSaleHero(context.storefront).catch(() => null)) ?? FALLBACK_SALE_HERO;
+  return json({collections: {nodes: []}, saleHero});
 }
 
 export default function Index() {
-  const {collections} = useLoaderData();
+  const {collections, saleHero} = useLoaderData();
 
   return (
     <div className="home">
-      <section className="home-hero">
-        <h1>TRIIIPLE</h1>
-        <p>Premium menswear basics.</p>
-        <Link to="/collections">Shop All</Link>
-      </section>
+      <SaleHero {...saleHero} />
 
       <section className="home-collections">
         <h2>Featured Collections</h2>
@@ -39,21 +59,3 @@ export default function Index() {
     </div>
   );
 }
-
-const FEATURED_COLLECTIONS_QUERY = `#graphql
-  query FeaturedCollections($first: Int!) {
-    collections(first: $first, sortKey: UPDATED_AT, reverse: true) {
-      nodes {
-        id
-        title
-        handle
-        image {
-          url
-          altText
-          width
-          height
-        }
-      }
-    }
-  }
-`;

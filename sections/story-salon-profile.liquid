@@ -1,0 +1,240 @@
+{%- comment -%}
+  Story Salon reusable renderer (FABRIC V2 blueprint §7 / §9.5).
+
+  Reads a `triiiple_story_profile` metaobject linked from the page or article:
+    page.metafields.custom.story_profile  (page.story-salon templates)
+    article.metafields.custom.story_profile (article.storysalon templates)
+
+  Renders the full editorial rhythm: split-image hero, dark introduction,
+  lead handwritten quote, alternating content modules, worn-in-the-story
+  products, and related stories — so a new subject can be published by
+  filling the metaobject, without hand-assembling theme sections.
+
+  Metaobject definitions still need creating in Shopify; until then this
+  renders a small editor-only prompt instead of breaking the page.
+{%- endcomment -%}
+
+{%- liquid
+  assign story = page.metafields.custom.story_profile.value
+  if story == blank
+    assign story = article.metafields.custom.story_profile.value
+  endif
+
+  assign subject = story.subject_name.value
+  assign eyebrow = story.eyebrow.value | default: section.settings.hero_eyebrow
+-%}
+
+<section class="ss">
+  {%- if story == blank -%}
+    <div class="ss__empty">
+      <p class="ss__empty-title">Story Salon renderer</p>
+      <p class="ss__empty-note">
+        Link a <strong>triiiple_story_profile</strong> metaobject to this page/article
+        (metafield <code>custom.story_profile</code>) to render the story.
+      </p>
+    </div>
+  {%- else -%}
+
+    {%- comment -%} 1. Split-image hero {%- endcomment -%}
+    <header class="ss__hero">
+      <div class="ss__hero-media">
+        {%- if story.hero_image_left.value -%}
+          <figure class="ss__hero-img">{{ story.hero_image_left.value | image_url: width: 1600 | image_tag: sizes: '(max-width: 749px) 100vw, 50vw', widths: '540, 800, 1200, 1600', alt: subject }}</figure>
+        {%- endif -%}
+        {%- if story.hero_image_right.value -%}
+          <figure class="ss__hero-img ss__hero-img--right">{{ story.hero_image_right.value | image_url: width: 1600 | image_tag: sizes: '(max-width: 749px) 100vw, 50vw', widths: '540, 800, 1200, 1600', alt: subject }}</figure>
+        {%- endif -%}
+      </div>
+      <div class="ss__hero-copy">
+        {%- if eyebrow != blank -%}<span class="ss__eyebrow">{{ eyebrow }}</span>{%- endif -%}
+        {%- if subject != blank -%}<h1 class="ss__subject">{{ subject }}</h1>{%- endif -%}
+        {%- if story.dek.value != blank -%}<p class="ss__dek">{{ story.dek.value }}</p>{%- endif -%}
+      </div>
+    </header>
+
+    {%- comment -%} 2. Dark introduction {%- endcomment -%}
+    {%- if story.introduction.value != blank -%}
+      <div class="ss__intro">
+        <div class="ss__intro-inner">{{ story.introduction.value }}</div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} 3. Lead handwritten quote {%- endcomment -%}
+    {%- if story.lead_quote.value != blank -%}
+      <div class="ss__lead">
+        <p class="ss__lead-quote">{{ story.lead_quote.value }}</p>
+        {%- if subject != blank -%}<p class="ss__lead-sign">{{ subject }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} 4. Alternating content modules {%- endcomment -%}
+    {%- if story.content_modules.value != blank -%}
+      <div class="ss__modules">
+        {%- for module in story.content_modules.value -%}
+          {%- render 'story-module', module: module, index: forloop.index -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} 7. Worn in the story {%- endcomment -%}
+    {%- if story.worn_products.value != blank -%}
+      <div class="ss__worn">
+        <h2 class="ss__section-title">{{ section.settings.worn_heading }}</h2>
+        <div class="ss__worn-grid">
+          {%- for wp in story.worn_products.value -%}
+            <a class="ss__card" href="{{ wp.url }}">
+              {%- if wp.featured_media -%}
+                <div class="ss__card-media">{{ wp.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 100vw, 320px', widths: '320, 480, 800', alt: wp.title }}</div>
+              {%- endif -%}
+              <p class="ss__card-name">{% render 'product-display-name', product: wp %}</p>
+              {%- capture wp_sub -%}{% render 'product-fabric-subtitle', product: wp %}{%- endcapture -%}
+              {%- if wp_sub != blank -%}<p class="ss__card-sub">{{ wp_sub }}</p>{%- endif -%}
+              <p class="ss__card-price">{{ wp.price | money }}</p>
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} 8. More stories {%- endcomment -%}
+    {%- if story.related_stories.value != blank -%}
+      <div class="ss__more">
+        <h2 class="ss__section-title">{{ section.settings.related_heading }}</h2>
+        <div class="ss__more-grid">
+          {%- for art in story.related_stories.value -%}
+            <a class="ss__more-item" href="{{ art.url }}">
+              {%- if art.image -%}
+                <div class="ss__more-media">{{ art.image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 100vw, 33vw', widths: '300, 500, 800', alt: art.title }}</div>
+              {%- endif -%}
+              <p class="ss__more-title">{{ art.title }}</p>
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Credits {%- endcomment -%}
+    {%- liquid
+      assign has_credits = false
+      if story.photography_credit.value != blank or story.styling_credit.value != blank or story.mua_credit.value != blank
+        assign has_credits = true
+      endif
+    -%}
+    {%- if has_credits -%}
+      <div class="ss__credits">
+        {%- if story.photography_credit.value != blank -%}<span>Photography — {{ story.photography_credit.value }}</span>{%- endif -%}
+        {%- if story.styling_credit.value != blank -%}<span>Styling — {{ story.styling_credit.value }}</span>{%- endif -%}
+        {%- if story.mua_credit.value != blank -%}<span>Hair &amp; Make-up — {{ story.mua_credit.value }}</span>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+  {%- endif -%}
+</section>
+
+{%- style -%}
+  @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+
+  .ss {
+    --ss-ink: #17191C;
+    --ss-paper: #F2EEE7;
+    --ss-white: #FFFFFF;
+    --ss-navy: #19222A;
+    --ss-soft: rgba(23, 25, 28, 0.60);
+    --ss-hair: rgba(23, 25, 28, 0.10);
+    --ss-pad: clamp(20px, 5vw, 80px);
+    --ss-hand: 'Rock Salt', cursive;
+    --ss-display: 'Galdeano', Georgia, serif;
+    background: var(--ss-paper);
+    color: var(--ss-ink);
+  }
+  .ss__empty { padding: 40px var(--ss-pad); border: 1px dashed var(--ss-hair); text-align: center; }
+  .ss__empty-title { font-family: var(--ss-display); font-size: 22px; margin: 0 0 6px; }
+  .ss__empty-note { color: var(--ss-soft); font-size: 14px; margin: 0; }
+
+  .ss__eyebrow { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ss-soft); margin-bottom: 12px; }
+
+  /* Hero */
+  .ss__hero-media { display: grid; grid-template-columns: 1fr 1fr; }
+  .ss__hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 4 / 5; }
+  .ss__hero-copy { padding: clamp(28px, 5vw, 64px) var(--ss-pad); text-align: center; }
+  .ss__subject { font-family: var(--ss-hand); font-size: clamp(30px, 5vw, 62px); line-height: 1.05; margin: 0 0 16px; font-weight: 400; }
+  .ss__dek { font-size: clamp(15px, 2vw, 17px); line-height: 1.6; max-width: 46ch; margin: 0 auto; color: var(--ss-ink); }
+
+  /* Dark introduction */
+  .ss__intro { background: var(--ss-navy); color: #EDECEA; padding: clamp(40px, 7vw, 96px) var(--ss-pad); }
+  .ss__intro-inner { max-width: 62ch; margin: 0 auto; font-size: clamp(16px, 2vw, 19px); line-height: 1.75; }
+
+  /* Lead handwritten quote */
+  .ss__lead { padding: clamp(48px, 8vw, 110px) var(--ss-pad); text-align: center; }
+  .ss__lead-quote { font-family: var(--ss-hand); font-size: clamp(22px, 3.4vw, 40px); line-height: 1.3; margin: 0 auto 18px; max-width: 22ch; }
+  .ss__lead-sign { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ss-soft); margin: 0; }
+
+  /* Modules */
+  .ssm { padding: clamp(28px, 5vw, 72px) var(--ss-pad); }
+  .ssm--bg-paper { background: var(--ss-paper); color: var(--ss-ink); }
+  .ssm--bg-white { background: var(--ss-white); color: var(--ss-ink); }
+  .ssm--bg-navy { background: var(--ss-navy); color: #EDECEA; }
+  .ssm--full { padding: 0; }
+  .ssm__full img { width: 100%; height: auto; display: block; }
+  .ssm__split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 4vw, 56px); align-items: center; max-width: 1280px; margin: 0 auto; }
+  .ssm--text-image .ssm__split { direction: rtl; }
+  .ssm--text-image .ssm__split > * { direction: ltr; }
+  .ssm__split-media img { width: 100%; height: auto; display: block; }
+  .ss__eyebrow, .ssm__eyebrow { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ss-soft); margin-bottom: 10px; }
+  .ssm__heading { font-family: var(--ss-display); font-size: clamp(24px, 3vw, 40px); line-height: 1.1; margin: 0 0 14px; font-weight: 400; }
+  .ssm__body { font-size: clamp(15px, 1.6vw, 17px); line-height: 1.7; }
+  .ssm__body p { margin: 0 0 1em; }
+  .ssm__quote { max-width: 24ch; margin: 0 auto; text-align: center; }
+  .ssm__quote-text { font-family: var(--ss-display); font-size: clamp(22px, 3vw, 36px); line-height: 1.25; margin: 0 0 12px; }
+  .ssm__quote-cite { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ss-soft); font-style: normal; }
+  .ssm__qa { max-width: 62ch; margin: 0 auto; }
+  .ssm__qa-q { font-family: var(--ss-display); font-size: clamp(18px, 2vw, 24px); margin: 0 0 8px; }
+  .ssm__qa-a { font-size: clamp(15px, 1.6vw, 17px); line-height: 1.7; color: var(--ss-ink); }
+
+  /* Product module */
+  .ssm__product { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 40px); align-items: center; max-width: 900px; margin: 0 auto; text-decoration: none; color: inherit; }
+  .ssm__product-media img { width: 100%; height: auto; display: block; }
+  .ssm__product-name { font-family: var(--ss-display); font-size: clamp(20px, 2.4vw, 30px); margin: 6px 0 2px; }
+  .ssm__product-sub { font-size: 13px; color: var(--ss-soft); margin: 0 0 8px; }
+  .ssm__product-price { font-size: 14px; margin: 0; }
+
+  /* Worn in the story */
+  .ss__worn, .ss__more { padding: clamp(40px, 6vw, 88px) var(--ss-pad); }
+  .ss__section-title { font-family: var(--ss-display); font-size: clamp(24px, 3vw, 40px); text-align: center; margin: 0 0 clamp(24px, 4vw, 48px); font-weight: 400; }
+  .ss__worn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1080px; margin: 0 auto; }
+  .ss__card { text-decoration: none; color: inherit; }
+  .ss__card-media img { width: 100%; height: auto; display: block; }
+  .ss__card-name { font-family: var(--ss-display); font-size: 18px; margin: 10px 0 2px; }
+  .ss__card-sub { font-size: 12px; color: var(--ss-soft); margin: 0 0 4px; }
+  .ss__card-price { font-size: 13px; margin: 0; }
+
+  /* More stories */
+  .ss__more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1080px; margin: 0 auto; }
+  .ss__more-item { text-decoration: none; color: inherit; }
+  .ss__more-media img { width: 100%; height: auto; display: block; }
+  .ss__more-title { font-family: var(--ss-display); font-size: 18px; margin: 10px 0 0; }
+
+  /* Credits */
+  .ss__credits { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 32px var(--ss-pad); border-top: 1px solid var(--ss-hair); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ss-soft); }
+
+  @media screen and (max-width: 749px) {
+    .ss__hero-media { grid-template-columns: 1fr; }
+    .ssm__split, .ssm__product { grid-template-columns: 1fr; }
+    .ssm--text-image .ssm__split { direction: ltr; }
+    .ss__worn-grid, .ss__more-grid { grid-template-columns: 1fr; }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Story Salon Profile",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Reads a triiiple_story_profile metaobject linked to this page/article via the custom.story_profile metafield." },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow (fallback)", "default": "The first layer with" },
+    { "type": "text", "id": "worn_heading", "label": "Worn-in-the-story heading", "default": "Worn in the story" },
+    { "type": "text", "id": "related_heading", "label": "Related-stories heading", "default": "More Story Salon stories" }
+  ],
+  "presets": [{ "name": "Story Salon Profile" }]
+}
+{% endschema %}

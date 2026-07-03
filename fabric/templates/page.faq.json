@@ -1,0 +1,123 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-faq",
+      "settings": {
+        "eyebrow": "Q&A",
+        "heading": "Questions, answered.",
+        "intro": "<p>Find the essentials on sizing, shipping, returns, and order support. Keep it simple, keep it fast, and keep the first layer covered.</p>",
+        "order_label": "Order online",
+        "order_heading": "Order support",
+        "service_label": "Customer service",
+        "service_heading": "Shipping, returns & exchanges",
+        "sizing_label": "Sizing",
+        "sizing_heading": "Fit reference",
+        "footer_eyebrow": "Need more help?",
+        "footer_heading": "We’ll help you find the right fit.",
+        "footer_body": "<p>If you still need a hand, check the full size guide or reach out through the contact page and we’ll get back to you as soon as possible.</p>",
+        "footer_label": "Size guide",
+        "footer_link": "/pages/size-guide",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "category": "order",
+            "question": "Do I need an account to place an order online?",
+            "answer": "<p>You don’t need to create an account to place an order. We recommend creating one for easier future checkouts, but you can still checkout as a guest.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "category": "order",
+            "question": "Can I change or cancel my order after I’ve placed it?",
+            "answer": "<p>If you want to change or cancel your order, please contact us as soon as possible. We’ll do our best to help you, but unfortunately, we can’t change or cancel orders once they’ve been shipped.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "category": "order",
+            "question": "I didn’t receive an order confirmation.",
+            "answer": "<p>Please contact us and we’ll check everything for you. We also recommend checking your spam inbox.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "category": "service",
+            "question": "How does shipping work?",
+            "answer": "<p>Orders are packed as quickly as possible and shipped with tracking once they leave us. Delivery times vary by location. If you need help with a shipment, email <a href=\"mailto:info@triiiplestudio.com\">info@triiiplestudio.com</a>.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "category": "service",
+            "question": "Can I exchange or return sale items?",
+            "answer": "<p>Sale items are final sale and cannot be exchanged or returned. For hygiene reasons, opened underwear is also non-refundable. If you need help with a damaged or incorrect item, email <a href=\"mailto:info@triiiplestudio.com\">info@triiiplestudio.com</a>.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "category": "service",
+            "question": "What if my item is the wrong size or damaged?",
+            "answer": "<p>If your order arrives damaged or incorrect, please email <a href=\"mailto:info@triiiplestudio.com\">info@triiiplestudio.com</a> with your order number and a photo or video so we can help.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq_item",
+          "settings": {
+            "category": "sizing",
+            "question": "What size should I order?",
+            "answer": "<p>Our underwear fits true to body. If you prefer a looser fit, size up. Use the full size guide for the waist, EU, and UK / US reference.</p>"
+          }
+        },
+        "faq_8": {
+          "type": "faq_item",
+          "settings": {
+            "category": "sizing",
+            "question": "Where can I find the size guide?",
+            "answer": "<p>You can find our size guide on every product page and on the dedicated size guide page.</p>"
+          }
+        },
+        "faq_9": {
+          "type": "faq_item",
+          "settings": {
+            "category": "sizing",
+            "question": "How do I know the fit is right?",
+            "answer": "<p>SIGNAL styles are closer and more athletic, while SCULPT styles feel slightly more relaxed. If you sit between sizes, choose based on how close you want the layer to sit.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

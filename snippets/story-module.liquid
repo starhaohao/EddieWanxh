@@ -1,0 +1,95 @@
+{%- comment -%}
+  Renders a single Story Salon content module (triiiple_story_module) per
+  FABRIC V2 blueprint §7 / §9.5. Alternating editorial modules — image-text,
+  text-image, quote, full-image, Q&A, and product.
+
+  Accepts:
+  - module: {Object} a triiiple_story_module metaobject (required)
+  - index:  {Int} position in the sequence, used for alternation fallback
+
+  Typography: Galdeano for headings, Rock Salt for the lead quote (see the
+  parent section), theme sans-serif for body copy.
+{%- endcomment -%}
+
+{%- liquid
+  assign m_type = module.module_type.value | default: 'image-text'
+  assign bg = module.background_style.value | default: 'paper'
+
+  # Alternation fallback when a plain image/text type isn't specified.
+  if m_type == 'auto'
+    assign remainder = index | modulo: 2
+    if remainder == 0
+      assign m_type = 'text-image'
+    else
+      assign m_type = 'image-text'
+    endif
+  endif
+
+  assign m_image = module.image.value
+  assign m_alt = module.image_alt.value | default: module.heading.value | default: 'Story image'
+  assign m_eyebrow = module.eyebrow.value
+  assign m_heading = module.heading.value
+  assign m_body = module.body.value
+  assign m_quote = module.quote.value
+  assign m_question = module.question.value
+  assign m_answer = module.answer.value
+  assign m_product = module.product.value
+-%}
+
+<div class="ssm ssm--{{ m_type }} ssm--bg-{{ bg }}">
+  {%- case m_type -%}
+
+    {%- when 'full-image' -%}
+      {%- if m_image -%}
+        <figure class="ssm__full">
+          {{ m_image | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw', widths: '750, 1100, 1500, 2000, 2400', alt: m_alt }}
+        </figure>
+      {%- endif -%}
+
+    {%- when 'quote' -%}
+      <blockquote class="ssm__quote">
+        {%- if m_quote != blank -%}<p class="ssm__quote-text">{{ m_quote }}</p>{%- endif -%}
+        {%- if m_heading != blank -%}<cite class="ssm__quote-cite">{{ m_heading }}</cite>{%- endif -%}
+      </blockquote>
+
+    {%- when 'Q&A', 'qa' -%}
+      <div class="ssm__qa">
+        {%- if m_question != blank -%}<p class="ssm__qa-q">{{ m_question }}</p>{%- endif -%}
+        {%- if m_answer != blank -%}<div class="ssm__qa-a">{{ m_answer }}</div>{%- endif -%}
+      </div>
+
+    {%- when 'product' -%}
+      {%- if m_product != blank -%}
+        <a class="ssm__product" href="{{ m_product.url }}">
+          {%- if m_product.featured_media -%}
+            <div class="ssm__product-media">
+              {{ m_product.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 100vw, 480px', widths: '360, 540, 800', alt: m_product.title }}
+            </div>
+          {%- endif -%}
+          <div class="ssm__product-info">
+            {%- if m_eyebrow != blank -%}<span class="ssm__eyebrow">{{ m_eyebrow }}</span>{%- endif -%}
+            <p class="ssm__product-name">{% render 'product-display-name', product: m_product %}</p>
+            {%- capture m_sub -%}{% render 'product-fabric-subtitle', product: m_product %}{%- endcapture -%}
+            {%- if m_sub != blank -%}<p class="ssm__product-sub">{{ m_sub }}</p>{%- endif -%}
+            <p class="ssm__product-price">{{ m_product.price | money }}</p>
+          </div>
+        </a>
+      {%- endif -%}
+
+    {%- else -%}
+      {%- comment -%} image-text (default) and text-image {%- endcomment -%}
+      <div class="ssm__split">
+        {%- if m_image -%}
+          <figure class="ssm__split-media">
+            {{ m_image | image_url: width: 1400 | image_tag: loading: 'lazy', sizes: '(max-width: 749px) 100vw, 50vw', widths: '540, 750, 1100, 1400', alt: m_alt }}
+          </figure>
+        {%- endif -%}
+        <div class="ssm__split-text">
+          {%- if m_eyebrow != blank -%}<span class="ssm__eyebrow">{{ m_eyebrow }}</span>{%- endif -%}
+          {%- if m_heading != blank -%}<h3 class="ssm__heading">{{ m_heading }}</h3>{%- endif -%}
+          {%- if m_body != blank -%}<div class="ssm__body">{{ m_body }}</div>{%- endif -%}
+        </div>
+      </div>
+
+  {%- endcase -%}
+</div>
