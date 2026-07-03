@@ -228,7 +228,7 @@
                     "show_sale_price_first": true,
                     "show_installments": false,
                     "show_tax_info": false,
-                    "type_preset": "h5",
+                    "type_preset": "h3",
                     "width": "100%",
                     "alignment": "left",
                     "font": "var(--font-body--family)",
@@ -236,7 +236,7 @@
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
-                    "text_color": "#102b41",
+                    "text_color": "#102B41",
                     "padding-block-start": 6,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -249,7 +249,7 @@
                   "name": "t:names.swatches",
                   "settings": {
                     "product_swatches_alignment": "flex-start",
-                    "product_swatches_alignment_mobile": "flex-end",
+                    "product_swatches_alignment_mobile": "flex-start",
                     "hide_padding": false,
                     "product_swatches_padding_top": 0,
                     "product_swatches_padding_bottom": 0,
@@ -378,10 +378,10 @@
         }
       },
       "block_order": [
-        "family_84mLkz",
+        "bundles",
         "bundle_offer",
         "brief_designs",
-        "bundles",
+        "family_84mLkz",
         "tshirt_essentials"
       ],
       "name": "Shop by product family",
@@ -397,7 +397,7 @@
   },
   "order": [
     "section",
-    "main-collection",
-    "collection_merchandising"
+    "collection_merchandising",
+    "main-collection"
   ]
 }
