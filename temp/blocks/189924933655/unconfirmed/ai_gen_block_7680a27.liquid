@@ -1,6 +1,845 @@
+{% doc %}
+  @prompt
+    A magazine-style editorial layout, combine with my shopify form function
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-editorial-layout-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-editorial-container-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding }}px;
+  }
+
+  .ai-editorial-image-{{ ai_gen_id }} {
+    grid-column: span {{ block.settings.image_columns }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-editorial-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-editorial-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    padding-bottom: {{ block.settings.image_aspect_ratio | times: 100 }}%;
+    background-color: #f4f4f4;
+    position: relative;
+  }
+
+  .ai-editorial-image-placeholder-{{ ai_gen_id }} svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-editorial-content-{{ ai_gen_id }} {
+    grid-column: span {{ block.settings.content_columns }};
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ block.settings.content_alignment }};
+    padding: {{ block.settings.content_padding }}px;
+  }
+
+  .ai-editorial-eyebrow-{{ ai_gen_id }} {
+    font-size: {{ block.settings.eyebrow_size }}px;
+    color: {{ block.settings.eyebrow_color }};
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .ai-editorial-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    font-weight: 500;
+  }
+
+  .ai-editorial-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .ai-editorial-form-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+  }
+
+  .ai-editorial-form-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ai-editorial-form-field-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ai-editorial-form-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.form_label_size }}px;
+    color: {{ block.settings.text_color }};
+    font-weight: 500;
+  }
+
+  .ai-editorial-form-input-{{ ai_gen_id }} {
+    padding: 14px 16px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    background-color: {{ block.settings.input_bg_color }};
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    border-radius: {{ block.settings.input_border_radius }}px;
+    width: 100%;
+  }
+
+  .ai-editorial-form-input-{{ ai_gen_id }}:focus {
+    outline: 2px solid {{ block.settings.input_focus_color }};
+    outline-offset: 2px;
+  }
+
+  .ai-editorial-form-textarea-{{ ai_gen_id }} {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .ai-editorial-form-button-{{ ai_gen_id }} {
+    padding: 16px 32px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: 1px solid {{ block.settings.button_border_color }};
+    font-size: {{ block.settings.button_size }}px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .ai-editorial-form-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  .ai-editorial-success-{{ ai_gen_id }} {
+    padding: 16px;
+    background-color: {{ block.settings.success_bg_color }};
+    color: {{ block.settings.success_text_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: {{ block.settings.text_size }}px;
+  }
+
+  .ai-editorial-error-{{ ai_gen_id }} {
+    padding: 16px;
+    background-color: {{ block.settings.error_bg_color }};
+    color: {{ block.settings.error_text_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: {{ block.settings.text_size }}px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-editorial-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.mobile_gap }}px;
+      padding: {{ block.settings.mobile_padding }}px;
+    }
+
+    .ai-editorial-image-{{ ai_gen_id }} {
+      grid-column: span 1;
+      {% if block.settings.mobile_image_first %}
+        order: -1;
+      {% endif %}
+    }
+
+    .ai-editorial-content-{{ ai_gen_id }} {
+      grid-column: span 1;
+      padding: {{ block.settings.mobile_content_padding }}px;
+    }
+
+    .ai-editorial-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_mobile }}px;
+    }
+
+    .ai-editorial-eyebrow-{{ ai_gen_id }} {
+      font-size: {{ block.settings.eyebrow_size_mobile }}px;
+    }
+
+    .ai-editorial-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-editorial-layout-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-editorial-container-{{ ai_gen_id }}">
+    <div class="ai-editorial-image-{{ ai_gen_id }}">
+      {% if block.settings.image %}
+        <img
+          src="{{ block.settings.image | image_url: width: 1500 }}"
+          alt="{{ block.settings.image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.image.width }}"
+          height="{{ block.settings.image.height }}"
+        >
+      {% else %}
+        <div class="ai-editorial-image-placeholder-{{ ai_gen_id }}">
+          {{ 'hero-apparel-1' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-editorial-content-{{ ai_gen_id }}">
+      {% if block.settings.eyebrow != blank %}
+        <div class="ai-editorial-eyebrow-{{ ai_gen_id }}">
+          {{ block.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-editorial-heading-{{ ai_gen_id }}">
+          {{ block.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if block.settings.text != blank %}
+        <div class="ai-editorial-text-{{ ai_gen_id }}">
+          {{ block.settings.text }}
+        </div>
+      {% endif %}
+
+      <div class="ai-editorial-form-wrapper-{{ ai_gen_id }}">
+        {% form 'contact', id: block.settings.form_id %}
+          <input type="hidden" name="contact[{{ block.settings.form_subject_field }}]" value="{{ block.settings.form_subject }}">
+          
+          <div class="ai-editorial-form-{{ ai_gen_id }}">
+            {% if form.posted_successfully? %}
+              <div 
+                class="ai-editorial-success-{{ ai_gen_id }}"
+                id="ai-editorial-success-{{ ai_gen_id }}"
+              >
+                {{ block.settings.success_message }}
+              </div>
+            {% else %}
+              {% if block.settings.show_name_field %}
+                <div class="ai-editorial-form-field-{{ ai_gen_id }}">
+                  <label 
+                    for="ai-editorial-name-{{ ai_gen_id }}" 
+                    class="ai-editorial-form-label-{{ ai_gen_id }}"
+                  >
+                    {{ block.settings.name_label }}
+                  </label>
+                  <input
+                    type="text"
+                    id="ai-editorial-name-{{ ai_gen_id }}"
+                    name="contact[name]"
+                    class="ai-editorial-form-input-{{ ai_gen_id }}"
+                    value="{{ form.name }}"
+                    {% if block.settings.name_required %}required{% endif %}
+                  >
+                </div>
+              {% endif %}
+
+              <div class="ai-editorial-form-field-{{ ai_gen_id }}">
+                <label 
+                  for="ai-editorial-email-{{ ai_gen_id }}" 
+                  class="ai-editorial-form-label-{{ ai_gen_id }}"
+                >
+                  {{ block.settings.email_label }}
+                </label>
+                <input
+                  type="email"
+                  id="ai-editorial-email-{{ ai_gen_id }}"
+                  name="contact[email]"
+                  class="ai-editorial-form-input-{{ ai_gen_id }}"
+                  value="{{ form.email }}"
+                  autocomplete="email"
+                  {% if form.errors %}
+                    aria-invalid="true"
+                    aria-describedby="ai-editorial-error-{{ ai_gen_id }}"
+                  {% endif %}
+                  required
+                >
+              </div>
+
+              {% if block.settings.show_phone_field %}
+                <div class="ai-editorial-form-field-{{ ai_gen_id }}">
+                  <label 
+                    for="ai-editorial-phone-{{ ai_gen_id }}" 
+                    class="ai-editorial-form-label-{{ ai_gen_id }}"
+                  >
+                    {{ block.settings.phone_label }}
+                  </label>
+                  <input
+                    type="tel"
+                    id="ai-editorial-phone-{{ ai_gen_id }}"
+                    name="contact[phone]"
+                    class="ai-editorial-form-input-{{ ai_gen_id }}"
+                    value="{{ form.phone }}"
+                    autocomplete="tel"
+                    {% if block.settings.phone_required %}required{% endif %}
+                  >
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_message_field %}
+                <div class="ai-editorial-form-field-{{ ai_gen_id }}">
+                  <label 
+                    for="ai-editorial-message-{{ ai_gen_id }}" 
+                    class="ai-editorial-form-label-{{ ai_gen_id }}"
+                  >
+                    {{ block.settings.message_label }}
+                  </label>
+                  <textarea
+                    id="ai-editorial-message-{{ ai_gen_id }}"
+                    name="contact[body]"
+                    class="ai-editorial-form-input-{{ ai_gen_id }} ai-editorial-form-textarea-{{ ai_gen_id }}"
+                    {% if block.settings.message_required %}required{% endif %}
+                  >{{ form.body }}</textarea>
+                </div>
+              {% endif %}
+
+              {% if form.errors %}
+                <div 
+                  class="ai-editorial-error-{{ ai_gen_id }}"
+                  id="ai-editorial-error-{{ ai_gen_id }}"
+                >
+                  {{ form.errors.messages | join: ', ' }}
+                </div>
+              {% endif %}
+
+              <button 
+                type="submit" 
+                class="ai-editorial-form-button-{{ ai_gen_id }}"
+              >
+                {{ block.settings.button_text }}
+              </button>
+            {% endif %}
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Editorial form layout",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "image_columns",
+      "label": "Image width",
+      "min": 4,
+      "max": 8,
+      "step": 1,
+      "unit": "col",
+      "default": 6,
+      "info": "Out of 12 columns"
+    },
+    {
+      "type": "range",
+      "id": "content_columns",
+      "label": "Content width",
+      "min": 4,
+      "max": 8,
+      "step": 1,
+      "unit": "col",
+      "default": 6,
+      "info": "Out of 12 columns"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_image_first",
+      "label": "Show image first on mobile",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Mobile gap",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "label": "Mobile section padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_content_padding",
+      "label": "Mobile content padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "min": 0.5,
+      "max": 2,
+      "step": 0.1,
+      "unit": ":1",
+      "default": 1.2,
+      "info": "Wide to tall"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join our community"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Stay updated with exclusive offers, new arrivals, and insider news.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Form settings"
+    },
+    {
+      "type": "text",
+      "id": "form_id",
+      "label": "Form ID",
+      "info": "Paste your Shopify form ID here"
+    },
+    {
+      "type": "text",
+      "id": "form_subject_field",
+      "label": "Subject field name",
+      "default": "subject"
+    },
+    {
+      "type": "text",
+      "id": "form_subject",
+      "label": "Form subject",
+      "default": "Editorial signup"
+    },
+    {
+      "type": "header",
+      "content": "Form fields"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_name_field",
+      "label": "Show name field",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name label",
+      "default": "Name"
+    },
+    {
+      "type": "checkbox",
+      "id": "name_required",
+      "label": "Name required",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone_field",
+      "label": "Show phone field",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone label",
+      "default": "Phone"
+    },
+    {
+      "type": "checkbox",
+      "id": "phone_required",
+      "label": "Phone required",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_message_field",
+      "label": "Show message field",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message label",
+      "default": "Message"
+    },
+    {
+      "type": "checkbox",
+      "id": "message_required",
+      "label": "Message required",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Submit"
+    },
+    {
+      "type": "richtext",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "<p>Thank you for signing up! We'll be in touch soon.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_mobile",
+      "label": "Eyebrow mobile size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading mobile size",
+      "min": 18,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Text mobile size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "form_label_size",
+      "label": "Form label size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Form style"
+    },
+    {
+      "type": "color",
+      "id": "input_bg_color",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "input_focus_color",
+      "label": "Input focus",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Input border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Messages"
+    },
+    {
+      "type": "color",
+      "id": "success_bg_color",
+      "label": "Success background",
+      "default": "#e8f5e9"
+    },
+    {
+      "type": "color",
+      "id": "success_text_color",
+      "label": "Success text",
+      "default": "#2e7d32"
+    },
+    {
+      "type": "color",
+      "id": "error_bg_color",
+      "label": "Error background",
+      "default": "#ffebee"
+    },
+    {
+      "type": "color",
+      "id": "error_text_color",
+      "label": "Error text",
+      "default": "#c62828"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial form layout"
+    }
+  ]
+}
 {% endschema %}
