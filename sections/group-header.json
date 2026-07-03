@@ -82,9 +82,9 @@
         "menu": {
           "type": "menu",
           "settings": {
-            "mobile_menu_linklist": "footer",
-            "text_font_size": "body-x-large",
-            "highlight_item": "Sale",
+            "mobile_menu_linklist": "triiiple-shop",
+            "text_font_size": "body-large",
+            "highlight_item": "Up to 80% off, buy 5 get 1 free.",
             "highlight_item_color": "#faee10",
             "padding": true,
             "padding_bottom": 30
