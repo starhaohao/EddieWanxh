@@ -45,7 +45,7 @@
           "type": "variants",
           "settings": {
             "info_page": "fabric-and-size-guide",
-            "size_chart_style": "text",
+            "size_chart_style": "ruler",
             "option_font_size": "body-x-small",
             "value_font_size": "body-x-large",
             "padding_bottom": 16
@@ -73,7 +73,7 @@
             "show_dynamic_checkout": true,
             "button_type_dynamic": "btn--secondary",
             "button_size_dynamic": "btn--large",
-            "button_style_dynamic": "btn--solid",
+            "button_style_dynamic": "btn--outline",
             "show_gift_card_recipient": false,
             "padding_bottom": 50
           }
@@ -132,7 +132,7 @@
         "image_layout": "grid-2",
         "image_size": "large",
         "mobile_image_style": "slider",
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
         "padding_top": 0,
         "padding_bottom": 61
       }
