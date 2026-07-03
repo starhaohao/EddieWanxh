@@ -315,6 +315,33 @@ html {
 }
 .klaviyo-form-SKhdji button[type="submit"]:hover { opacity: 0.8 !important; }
 
+/* ── iOS Liquid Glass — Mobile sticky header ── */
+@media screen and (max-width: 749px) {
+  /* Frosted white glass on the header bar */
+  .theme__header {
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    background: rgba(255, 255, 255, 0.72) !important;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06) !important;
+  }
+  /* Clear the color-scheme solid fill so blur can show through */
+  .theme__header [class*="color-scheme"],
+  .theme__header .section-padding {
+    background: transparent !important;
+  }
+
+  /* Dark frosted glass on the announcement bar */
+  .page-announcement {
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    background: rgba(0, 0, 0, 0.55) !important;
+  }
+  .page-announcement [class*="color-scheme"] {
+    background: transparent !important;
+  }
+}
+
 /* Klaviyo popup V3iqKn */
 .klaviyo-form-V3iqKn input::placeholder { color: rgba(255,255,255,0.4) !important; }
 .klaviyo-form-V3iqKn button[type="submit"] {
