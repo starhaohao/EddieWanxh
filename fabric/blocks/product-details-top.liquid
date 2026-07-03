@@ -1,0 +1,124 @@
+{% doc %}
+Renders product details directly below the product header and reviews.
+{% enddoc %}
+
+<div class="product-details-top" {{ block.shopify_attributes }}>
+  {% liquid
+    assign product_resource = closest.product | default: product
+    assign design_family = product_resource.metafields.custom.design_family.value
+    assign material_family = product_resource.metafields.custom.material_family.value
+    assign product_quote = product_resource.metafields.custom.product_quote.value
+    assign design_philosophy = product_resource.metafields.custom.design_philosophy.value
+    assign at_a_glance = product_resource.metafields.custom.at_a_glance
+    if product_quote == blank
+      assign product_quote = block.settings.heading
+    endif
+  %}
+
+  {% if block.settings.eyebrow != blank %}<p class="product-details-top__eyebrow">{{ block.settings.eyebrow | escape }}</p>{% endif %}
+  {% if product_quote != blank %}<h2>{{ product_quote | escape }}</h2>{% endif %}
+
+  {% if design_philosophy != blank %}
+    <div class="product-details-top__philosophy">
+      <span>{{ block.settings.design_philosophy_label | escape }}</span>
+      <strong>{{ design_philosophy | escape }}</strong>
+    </div>
+  {% endif %}
+
+  {% if design_family != blank or material_family != blank %}
+    <div class="product-details-top__identity" aria-label="Product identity">
+      {% if design_family != blank %}
+        <span class="product-details-top__chip">#{{ design_family | escape }}</span>
+      {% endif %}
+      {% if material_family != blank %}
+        <span class="product-details-top__chip">#{{ material_family | escape }}</span>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <details {% if block.settings.open_by_default %}open{% endif %}>
+    <summary><span>{{ block.settings.description_label | escape }}</span><span aria-hidden="true">+</span></summary>
+    <div class="product-details-top__body rte">
+      {% if at_a_glance != blank %}
+        {{ at_a_glance | metafield_tag }}
+      {% elsif closest.product.description != blank %}
+        {{ closest.product.description }}
+      {% else %}
+        {{ block.settings.fallback_description }}
+      {% endif %}
+    </div>
+  </details>
+</div>
+
+{% stylesheet %}
+  .product-details-top { width: 100%; padding-block: 0.25rem 0; }
+  .product-details-top__eyebrow { margin: 0 0 0.55rem; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; }
+  .product-details-top > h2 {
+    margin: 0 0 0.85rem;
+    max-width: 100%;
+    font-family: var(--font-body--family);
+    font-size: clamp(0.92rem, 1.15vw, 1.18rem);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+  }
+  .product-details-top__identity {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 0 0 1rem;
+  }
+  .product-details-top__philosophy {
+    display: grid;
+    gap: 0.3rem;
+    margin: 0 0 1rem;
+  }
+  .product-details-top__philosophy span {
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.58;
+  }
+  .product-details-top__philosophy strong {
+    font-size: 0.96rem;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+  .product-details-top__chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.4rem 0.78rem;
+    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    font-size: 0.82rem;
+    line-height: 1;
+  }
+  .product-details-top details { border-block: 1px solid currentColor; }
+  .product-details-top summary { display: flex; justify-content: space-between; gap: 1rem; padding: 0.9rem 0; cursor: pointer; list-style: none; font-size: 0.94rem; }
+  .product-details-top summary::-webkit-details-marker { display: none; }
+  .product-details-top summary span:last-child { transition: transform 180ms ease; }
+  .product-details-top details[open] summary span:last-child { transform: rotate(45deg); }
+  .product-details-top__body { padding: 0.35rem 0 1.1rem; color: color-mix(in srgb, currentColor 68%, transparent); font-size: 0.88rem; line-height: 1.55; }
+  .product-details-top__body > :first-child { margin-top: 0; }
+  .product-details-top__body > :last-child { margin-bottom: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product details top",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Product details" },
+    { "type": "text", "id": "heading", "label": "Fallback quote", "default": "Made for the way you move." },
+    { "type": "text", "id": "design_philosophy_label", "label": "Design philosophy label", "default": "Design philosophy" },
+    { "type": "text", "id": "description_label", "label": "Description label", "default": "Description" },
+    { "type": "richtext", "id": "fallback_description", "label": "Fallback description", "default": "<p>Add the product description in Shopify admin.</p>" },
+    { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": true }
+  ],
+  "presets": [{ "name": "Product details top", "category": "Product" }]
+}
+{% endschema %}
