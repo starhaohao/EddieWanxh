@@ -18,9 +18,26 @@
     if img_front == blank and product.featured_image != blank
       assign img_front = product.featured_image
     endif
+
+    assign pc_meta = product.metafields.custom.product_content.value
+    if pc_meta != blank
+      assign meta_display_name = pc_meta.display_name.value
+      if meta_display_name != blank
+        assign pname = meta_display_name
+      endif
+      assign meta_quote  = pc_meta.signature_quote.value | strip_html | strip
+      assign meta_design = pc_meta.at_a_glance.value | strip_html | strip
+      assign meta_fabric = pc_meta.fabric_profile.value | strip_html | strip
+      assign meta_perf   = pc_meta.why_youll_love_it.value | strip_html | strip
+      assign meta_detail = pc_meta.size_fit.value | strip_html | strip
+    endif
   else
     assign pname = section.settings.product_name
     assign purl  = section.settings.product_url | default: '#'
+  endif
+
+  if tagline == blank and meta_quote != blank
+    assign tagline = meta_quote
   endif
 
   if variant != blank and variant.compare_at_price > variant.price
@@ -29,6 +46,11 @@
 
   assign swatch_blocks = section.blocks | where: 'type', 'swatch'
   assign spec_blocks   = section.blocks | where: 'type', 'spec_row'
+
+  assign auto_specs = false
+  if spec_blocks.size == 0 and pc_meta != blank
+    assign auto_specs = true
+  endif
 -%}
 
 <div class="pc pc--{{ style }}" data-pc-id="{{ section.id }}">
@@ -82,6 +104,14 @@
             <span class="pc__spec-v">{{ block.settings.value }}</span>
           </div>
         {%- endfor -%}
+      </div>
+    {%- elsif auto_specs -%}
+      <div class="pc-a__divider"></div>
+      <div class="pc-a__specs">
+        {%- if meta_design != blank -%}<div class="pc__spec"><span class="pc__spec-l">Design</span><span class="pc__spec-v">{{ meta_design }}</span></div>{%- endif -%}
+        {%- if meta_fabric != blank -%}<div class="pc__spec"><span class="pc__spec-l">Fabric</span><span class="pc__spec-v">{{ meta_fabric }}</span></div>{%- endif -%}
+        {%- if meta_perf != blank -%}<div class="pc__spec"><span class="pc__spec-l">Performance</span><span class="pc__spec-v">{{ meta_perf }}</span></div>{%- endif -%}
+        {%- if meta_detail != blank -%}<div class="pc__spec"><span class="pc__spec-l">Detail</span><span class="pc__spec-v">{{ meta_detail }}</span></div>{%- endif -%}
       </div>
     {%- endif -%}
     <div class="pc-a__foot">
@@ -140,6 +170,13 @@
             </div>
           {%- endfor -%}
         </div>
+      {%- elsif auto_specs -%}
+        <div class="pc-b__specs">
+          {%- if meta_design != blank -%}<div class="pc__spec"><span class="pc__spec-l">Design</span><span class="pc__spec-v">{{ meta_design }}</span></div>{%- endif -%}
+          {%- if meta_fabric != blank -%}<div class="pc__spec"><span class="pc__spec-l">Fabric</span><span class="pc__spec-v">{{ meta_fabric }}</span></div>{%- endif -%}
+          {%- if meta_perf != blank -%}<div class="pc__spec"><span class="pc__spec-l">Performance</span><span class="pc__spec-v">{{ meta_perf }}</span></div>{%- endif -%}
+          {%- if meta_detail != blank -%}<div class="pc__spec"><span class="pc__spec-l">Detail</span><span class="pc__spec-v">{{ meta_detail }}</span></div>{%- endif -%}
+        </div>
       {%- endif -%}
       <div class="pc-b__foot">
         {%- if trust != blank -%}<span class="pc__trust">{{ trust }}</span>{%- endif -%}
@@ -192,6 +229,13 @@
               <span class="pc-c__spec-v">{{ block.settings.value }}</span>
             </div>
           {%- endfor -%}
+        </div>
+      {%- elsif auto_specs -%}
+        <div class="pc-c__specs">
+          {%- if meta_design != blank -%}<div class="pc-c__spec"><span class="pc-c__spec-l">Design</span><span class="pc-c__spec-v">{{ meta_design }}</span></div>{%- endif -%}
+          {%- if meta_fabric != blank -%}<div class="pc-c__spec"><span class="pc-c__spec-l">Fabric</span><span class="pc-c__spec-v">{{ meta_fabric }}</span></div>{%- endif -%}
+          {%- if meta_perf != blank -%}<div class="pc-c__spec"><span class="pc-c__spec-l">Performance</span><span class="pc-c__spec-v">{{ meta_perf }}</span></div>{%- endif -%}
+          {%- if meta_detail != blank -%}<div class="pc-c__spec"><span class="pc-c__spec-l">Detail</span><span class="pc-c__spec-v">{{ meta_detail }}</span></div>{%- endif -%}
         </div>
       {%- endif -%}
       {%- if swatch_blocks.size > 0 or stock != blank -%}

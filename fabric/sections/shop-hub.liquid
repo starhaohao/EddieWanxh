@@ -1,0 +1,381 @@
+<section
+  class="shop-hub"
+  data-shop-hub
+  style="
+    --shop-bg: {{ section.settings.background_color }};
+    --shop-ink: {{ section.settings.text_color }};
+    --shop-accent: {{ section.settings.accent_color }};
+  "
+>
+  <div class="shop-hub__inner">
+    <header class="shop-hub__hero">
+      {% if section.settings.eyebrow != blank %}
+        <p class="shop-hub__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h1>{{ section.settings.heading | escape }}</h1>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <div class="shop-hub__description rte">{{ section.settings.description }}</div>
+      {% endif %}
+    </header>
+
+    <div class="shop-hub__cards">
+      {% for block in section.blocks %}
+        {% if block.type == 'destination' %}
+          <a class="shop-hub__card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+            {% if block.settings.label != blank %}
+              <span class="shop-hub__card-label">{{ block.settings.label | escape }}</span>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <h2>{{ block.settings.title | escape }}</h2>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <p>{{ block.settings.text | escape }}</p>
+            {% endif %}
+            <span class="shop-hub__card-link">
+              {{ section.settings.card_cta | escape }} <span aria-hidden="true">→</span>
+            </span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="shop-hub__guide">
+      <div class="shop-hub__guide-head">
+        {% if section.settings.guide_eyebrow != blank %}
+          <p class="shop-hub__eyebrow">{{ section.settings.guide_eyebrow | escape }}</p>
+        {% endif %}
+        {% if section.settings.guide_heading != blank %}
+          <h2>{{ section.settings.guide_heading | escape }}</h2>
+        {% endif %}
+        {% if section.settings.guide_text != blank %}
+          <div class="shop-hub__guide-text rte">{{ section.settings.guide_text }}</div>
+        {% endif %}
+      </div>
+
+      <div class="shop-hub__size-grid" aria-label="{{ section.settings.guide_heading | escape }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'size_row' %}
+            <div class="shop-hub__size-row" {{ block.shopify_attributes }}>
+              <strong>{{ block.settings.size | escape }}</strong>
+              <span>{{ block.settings.chest | escape }}</span>
+              <span>{{ block.settings.waist | escape }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .shop-hub {
+    background: var(--shop-bg, #ffffff);
+    color: var(--shop-ink, #0f1623);
+  }
+
+  .shop-hub__inner {
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem) var(--page-margin) clamp(3rem, 7vw, 6rem);
+  }
+
+  .shop-hub__hero {
+    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .shop-hub__eyebrow {
+    margin: 0 0 0.65rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.58;
+  }
+
+  .shop-hub h1,
+  .shop-hub h2 {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+  }
+
+  .shop-hub h1 {
+    max-width: 12ch;
+    font-size: clamp(2.5rem, 6.5vw, 6rem);
+  }
+
+  .shop-hub__description {
+    max-width: 44rem;
+    margin-top: 1rem;
+    font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+    line-height: 1.75;
+    opacity: 0.82;
+  }
+
+  .shop-hub__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .shop-hub__card {
+    display: grid;
+    gap: 0.8rem;
+    padding: clamp(1.15rem, 2.5vw, 1.8rem);
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    min-height: 16rem;
+    background: color-mix(in srgb, var(--shop-bg, #ffffff) 95%, var(--shop-ink, #0f1623) 5%);
+  }
+
+  .shop-hub__cards .shop-hub__card:nth-child(3n) {
+    border-inline-end: 0;
+  }
+
+  .shop-hub__card-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  .shop-hub__card h2 {
+    font-size: clamp(1.25rem, 2.2vw, 2rem);
+  }
+
+  .shop-hub__card p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    opacity: 0.72;
+  }
+
+  .shop-hub__card-link {
+    margin-top: auto;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--shop-accent, #923531);
+  }
+
+  .shop-hub__guide {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 1.5rem;
+    margin-top: clamp(2rem, 5vw, 4rem);
+    padding-top: clamp(1.5rem, 4vw, 2.5rem);
+    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  .shop-hub__guide h2 {
+    font-size: clamp(1.4rem, 2.8vw, 2.6rem);
+  }
+
+  .shop-hub__guide-text {
+    max-width: 34rem;
+    margin-top: 0.9rem;
+    opacity: 0.75;
+  }
+
+  .shop-hub__size-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .shop-hub__size-row {
+    display: grid;
+    grid-template-columns: minmax(4rem, 0.6fr) repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  .shop-hub__size-row strong {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .shop-hub__size-row span {
+    font-size: 0.88rem;
+    opacity: 0.75;
+  }
+
+  @media screen and (max-width: 749px) {
+    .shop-hub__cards,
+    .shop-hub__guide {
+      grid-template-columns: 1fr;
+    }
+
+    .shop-hub__card {
+      min-height: 12rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shop hub",
+  "enabled_on": {
+    "templates": [
+      "page"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find your way in."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Use these pages to shop by design, fabric, or view all items. The size and fit guide lives in the Shop All slot.</p>"
+    },
+    {
+      "type": "text",
+      "id": "card_cta",
+      "label": "Card CTA label",
+      "default": "Open page"
+    },
+    {
+      "type": "text",
+      "id": "guide_eyebrow",
+      "label": "Guide eyebrow",
+      "default": "Fit guide"
+    },
+    {
+      "type": "text",
+      "id": "guide_heading",
+      "label": "Guide heading",
+      "default": "Size and fit guide"
+    },
+    {
+      "type": "richtext",
+      "id": "guide_text",
+      "label": "Guide text",
+      "default": "<p>Keep this page dedicated to measurements, fit notes, and any sizing help customers need before they buy.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#0f1623"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#923531"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "destination",
+      "name": "Destination card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Shop by design"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "A tighter edit of the silhouettes and styles."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "size_row",
+      "name": "Size row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "size",
+          "label": "Size",
+          "default": "XS"
+        },
+        {
+          "type": "text",
+          "id": "chest",
+          "label": "Chest / fit note",
+          "default": "32-34"
+        },
+        {
+          "type": "text",
+          "id": "waist",
+          "label": "Waist / fit note",
+          "default": "25-27"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Shop hub",
+      "blocks": [
+        {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by design",
+            "title": "Shop by design",
+            "text": "Curated by cut, silhouette, and design direction."
+          }
+        },
+        {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by fabric",
+            "title": "Shop by fabric",
+            "text": "Move by material first, then choose the fit."
+          }
+        },
+        {
+          "type": "destination",
+          "settings": {
+            "label": "All items",
+            "title": "View all items",
+            "text": "A full view of the current assortment."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

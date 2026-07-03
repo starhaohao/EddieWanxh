@@ -1,0 +1,654 @@
+{% liquid
+  assign article_excerpt = article.excerpt_or_content | strip_html | strip_newlines | truncate: 220
+  assign related_count = 0
+  assign share_url = request.origin | append: article.url
+%}
+
+<article
+  class="story-salon-article"
+  data-story-salon-article
+  style="
+    --salon-ink: {{ section.settings.ink }};
+    --salon-paper: {{ section.settings.paper }};
+    --salon-accent: {{ section.settings.accent }};
+  "
+>
+  <header class="story-salon-article__hero">
+    <div class="story-salon-article__bar">
+      <a href="{{ blog.url }}" class="story-salon-article__back">
+        <span aria-hidden="true">←</span> {{ section.settings.back_label | escape }}
+      </a>
+      <span>{{ article.published_at | date: '%d %b %Y' }}</span>
+    </div>
+
+    <div class="story-salon-article__hero-grid">
+      <div class="story-salon-article__media">
+        {% if article.image != blank %}
+          {{
+            article.image
+            | image_url: width: 1800
+            | image_tag:
+              widths: '700, 1000, 1400, 1800',
+              sizes: '(min-width: 990px) 52vw, 100vw',
+              loading: 'eager',
+              alt: article.title
+          }}
+        {% else %}
+          <div class="story-salon-article__placeholder"></div>
+        {% endif %}
+      </div>
+
+      <div class="story-salon-article__copy">
+        <p class="story-salon-article__eyebrow">
+          {{ section.settings.hero_eyebrow | escape }}
+        </p>
+        <h1>{{ article.title | escape }}</h1>
+
+        {% if article.tags != blank %}
+          <div class="story-salon-article__tags" aria-label="Story tags">
+            {% for tag in article.tags %}
+              <span>{{ tag | escape }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if article_excerpt != blank %}
+          <p class="story-salon-article__lede">{{ article_excerpt }}</p>
+        {% endif %}
+
+        {% if article.excerpt_or_content != blank %}
+          <div class="story-salon-article__deck rte">
+            {{ article.excerpt_or_content }}
+          </div>
+        {% endif %}
+
+        <div class="story-salon-article__share" data-story-share>
+          <div class="story-salon-article__share-head">
+            <p class="story-salon-article__share-label">{{ section.settings.share_label | escape }}</p>
+            <button
+              type="button"
+              class="story-salon-article__share-button"
+              data-story-share-button
+              data-share-title="{{ article.title | escape }}"
+              data-share-url="{{ share_url | escape }}"
+            >
+              {{ section.settings.share_button_label | escape }}
+            </button>
+          </div>
+
+          <div class="story-salon-article__share-links" aria-label="Social media share links">
+            <a
+              class="story-salon-article__share-link"
+              href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_encode }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on Facebook"
+            >
+              {% render 'icon', icon: 'facebook' %}
+              <span>Facebook</span>
+            </a>
+            <a
+              class="story-salon-article__share-link"
+              href="https://www.pinterest.com/pin/create/button/?url={{ share_url | url_encode }}&description={{ article.title | url_encode }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on Pinterest"
+            >
+              {% render 'icon', icon: 'pinterest' %}
+              <span>Pinterest</span>
+            </a>
+            <a
+              class="story-salon-article__share-link"
+              href="https://wa.me/?text={{ article.title | append: ' ' | append: share_url | url_encode }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on WhatsApp"
+            >
+              {% render 'icon', icon: 'whatsapp' %}
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="story-salon-article__body">
+    <div class="story-salon-article__content">
+      {% if article.content != blank %}
+        <div class="story-salon-article__richtext rte">
+          {{ article.content }}
+        </div>
+      {% endif %}
+    </div>
+
+    <aside class="story-salon-article__aside">
+      <div class="story-salon-article__note">
+        <p class="story-salon-article__note-label">About this story</p>
+        <p>
+          {{ section.settings.aside_text | escape }}
+        </p>
+      </div>
+
+      {% if blog.articles != blank %}
+        <div class="story-salon-article__rail">
+          <p class="story-salon-article__rail-label">{{ section.settings.related_label | escape }}</p>
+
+          {% for related in blog.articles %}
+            {% if related.id != article.id and related_count < 4 %}
+              {% assign related_count = related_count | plus: 1 %}
+              <a class="story-salon-article__related" href="{{ related.url }}">
+                {% if related.image != blank %}
+                  {{
+                    related.image
+                    | image_url: width: 600
+                    | image_tag:
+                      widths: '320, 500, 700',
+                      sizes: '(min-width: 990px) 20vw, 50vw',
+                      loading: 'lazy',
+                      alt: related.title
+                  }}
+                {% endif %}
+                <div>
+                  <p>{{ related.title | escape }}</p>
+                  <span>{{ related.published_at | date: '%d %b %Y' }}</span>
+                </div>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </aside>
+  </div>
+</article>
+
+{% javascript %}
+  document.querySelectorAll('[data-story-share]').forEach((share) => {
+    const button = share.querySelector('[data-story-share-button]');
+
+    if (!button) return;
+
+    button.addEventListener('click', async () => {
+      const shareTitle = button.dataset.shareTitle || document.title;
+      const shareUrl = button.dataset.shareUrl || window.location.href;
+
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: shareTitle,
+            url: shareUrl,
+          });
+          return;
+        }
+
+        await navigator.clipboard.writeText(shareUrl);
+        const label = button.textContent;
+        button.textContent = 'Link copied';
+        window.setTimeout(() => {
+          button.textContent = label;
+        }, 1800);
+      } catch (error) {
+        window.open(shareUrl, '_blank', 'noopener,noreferrer');
+      }
+    });
+  });
+{% endjavascript %}
+
+{% stylesheet %}
+  .story-salon-article {
+    background: var(--salon-paper, #f5f4f1);
+    color: var(--salon-ink, #0f1623);
+  }
+
+  .story-salon-article__hero {
+    background: var(--salon-ink, #0f1623);
+    color: #ffffff;
+  }
+
+  .story-salon-article__bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: clamp(0.9rem, 2vw, 1.2rem) var(--page-margin);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    font-family: var(--font-body--family);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.58);
+  }
+
+  .story-salon-article__back {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .story-salon-article__hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    min-height: clamp(42rem, 80svh, 54rem);
+  }
+
+  .story-salon-article__media {
+    position: relative;
+    overflow: hidden;
+    background: #111827;
+  }
+
+  .story-salon-article__media img,
+  .story-salon-article__placeholder {
+    width: 100%;
+    height: 100%;
+  }
+
+  .story-salon-article__media img {
+    object-fit: cover;
+    filter: saturate(1.08) contrast(1.06) brightness(1.01);
+  }
+
+  .story-salon-article__placeholder {
+    background:
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 11px),
+      linear-gradient(160deg, #1e2840, #0a0f1a);
+  }
+
+  .story-salon-article__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(8, 12, 20, 0.78) 0%, rgba(8, 12, 20, 0.1) 45%, transparent 66%),
+      linear-gradient(to right, rgba(8, 12, 20, 0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+
+  .story-salon-article__copy {
+    display: grid;
+    align-content: end;
+    gap: 1rem;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .story-salon-article__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.58);
+  }
+
+  .story-salon-article__eyebrow::before {
+    content: "";
+    width: 1.2rem;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.36);
+    flex-shrink: 0;
+  }
+
+  .story-salon-article__copy h1 {
+    margin: 0;
+    max-width: 10ch;
+    font-family: var(--font-heading--family);
+    font-size: clamp(2.5rem, 5vw, 5.8rem);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+  }
+
+  .story-salon-article__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .story-salon-article__tags span {
+    padding: 0.45rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    font-family: var(--font-body--family);
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .story-salon-article__lede {
+    margin: 0;
+    max-width: 34ch;
+    font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  .story-salon-article__deck {
+    max-width: 38rem;
+    font-size: 0.95rem;
+    line-height: 1.72;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .story-salon-article__share {
+    display: grid;
+    gap: 1rem;
+    padding-top: 0.25rem;
+  }
+
+  .story-salon-article__share-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .story-salon-article__share-label {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.58);
+  }
+
+  .story-salon-article__share-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    font-family: var(--font-body--family);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+
+  .story-salon-article__share-button:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.24);
+    transform: translateY(-1px);
+  }
+
+  .story-salon-article__share-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .story-salon-article__share-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.72rem 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+  }
+
+  .story-salon-article__share-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+
+  .story-salon-article__share-link svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+
+  .story-salon-article__share-link span {
+    font-family: var(--font-body--family);
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .story-salon-article__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    gap: 0;
+    max-width: var(--page-width);
+    margin: 0 auto;
+  }
+
+  .story-salon-article__content {
+    padding: clamp(2.5rem, 6vw, 6rem) var(--page-margin);
+  }
+
+  .story-salon-article__richtext {
+    max-width: 46rem;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+
+  .story-salon-article__richtext :is(h2, h3) {
+    font-family: var(--font-heading--family);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+    margin-top: 2rem;
+  }
+
+  .story-salon-article__richtext p + p {
+    margin-top: 1rem;
+  }
+
+  .story-salon-article__richtext img {
+    margin: 2rem 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .story-salon-article__aside {
+    border-left: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+    background: color-mix(in srgb, var(--salon-paper, #f5f4f1) 84%, white);
+    padding: clamp(2rem, 5vw, 4rem) var(--page-margin);
+    display: grid;
+    gap: 2rem;
+    align-content: start;
+  }
+
+  .story-salon-article__note {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .story-salon-article__note-label,
+  .story-salon-article__rail-label {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, currentColor 54%, transparent);
+  }
+
+  .story-salon-article__note p:last-child {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: color-mix(in srgb, currentColor 74%, transparent);
+  }
+
+  .story-salon-article__rail {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .story-salon-article__related {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    padding-top: 0.9rem;
+    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  .story-salon-article__related img {
+    width: 96px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background: #dfe1e3;
+  }
+
+  .story-salon-article__related p {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: 1.05rem;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  .story-salon-article__related span {
+    display: block;
+    margin-top: 0.35rem;
+    font-family: var(--font-body--family);
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, currentColor 52%, transparent);
+  }
+
+  @media screen and (max-width: 989px) {
+    .story-salon-article__hero-grid,
+    .story-salon-article__body {
+      grid-template-columns: 1fr;
+    }
+
+    .story-salon-article__copy {
+      border-left: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      min-height: auto;
+    }
+
+    .story-salon-article__aside {
+      border-left: 0;
+      border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .story-salon-article__bar {
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+    }
+
+    .story-salon-article__hero-grid {
+      min-height: auto;
+    }
+
+    .story-salon-article__media {
+      min-height: 28rem;
+    }
+
+    .story-salon-article__copy,
+    .story-salon-article__content,
+    .story-salon-article__aside {
+      padding-inline: 1rem;
+    }
+
+    .story-salon-article__copy h1 {
+      max-width: 12ch;
+      font-size: clamp(2.3rem, 14vw, 4.5rem);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Story Salon article",
+  "enabled_on": {
+    "templates": [
+      "article"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Hero eyebrow",
+      "default": "The TRIIIPLE Journal"
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "Back label",
+      "default": "Back to Story Salon"
+    },
+    {
+      "type": "textarea",
+      "id": "aside_text",
+      "label": "About this story",
+      "default": "A Story Salon article pairs a portrait with a short editorial note, then keeps the body copy readable and airy."
+    },
+    {
+      "type": "text",
+      "id": "related_label",
+      "label": "Related label",
+      "default": "More in Story Salon"
+    },
+    {
+      "type": "text",
+      "id": "share_label",
+      "label": "Share label",
+      "default": "Share on"
+    },
+    {
+      "type": "text",
+      "id": "share_button_label",
+      "label": "Share button label",
+      "default": "Share on"
+    },
+    {
+      "type": "color",
+      "id": "paper",
+      "label": "Paper",
+      "default": "#f5f4f1"
+    },
+    {
+      "type": "color",
+      "id": "ink",
+      "label": "Ink",
+      "default": "#0f1623"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Accent",
+      "default": "#923531"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_blog-post-content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story Salon article"
+    }
+  ]
+}
+{% endschema %}

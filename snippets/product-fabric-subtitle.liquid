@@ -1,0 +1,25 @@
+{%- comment -%}
+  Resolves the product subtitle (fabric / technology) per FABRIC V2 blueprint §5/§6.
+
+  Source of truth: custom.product_content metaobject -> fabric_profile
+  Fallback:        custom.product_content -> signature_quote
+  Final fallback:  none (renders nothing)
+
+  Accepts:
+  - product: {Object} product (required)
+
+  Usage:
+    {%- capture subtitle -%}{% render 'product-fabric-subtitle', product: product %}{%- endcapture -%}
+    {%- if subtitle != blank -%}<p class="...">{{ subtitle }}</p>{%- endif -%}
+{%- endcomment -%}
+{%- liquid
+  assign pc = product.metafields.custom.product_content.value
+  assign resolved_subtitle = ''
+  if pc != blank
+    assign resolved_subtitle = pc.fabric_profile.value | strip_html | strip
+    if resolved_subtitle == blank
+      assign resolved_subtitle = pc.signature_quote.value | strip_html | strip
+    endif
+  endif
+  echo resolved_subtitle | escape
+-%}

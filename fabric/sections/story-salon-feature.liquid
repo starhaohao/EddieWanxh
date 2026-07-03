@@ -1,0 +1,301 @@
+{% liquid
+  assign featured_article = section.settings.article
+%}
+
+<section
+  class="story-salon-feature"
+  data-story-salon-feature
+  style="
+    --feature-bg: {{ section.settings.background_color }};
+    --feature-ink: {{ section.settings.text_color }};
+    --feature-accent: {{ section.settings.accent_color }};
+  "
+>
+  <div class="story-salon-feature__inner">
+    <div class="story-salon-feature__panel">
+      <div class="story-salon-feature__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="story-salon-feature__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2>{{ section.settings.heading | escape }}</h2>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <div class="story-salon-feature__text rte">{{ section.settings.text }}</div>
+        {% endif %}
+        {% if section.settings.link_label != blank and section.settings.link != blank %}
+          <a class="story-salon-feature__link" href="{{ section.settings.link }}">
+            {{ section.settings.link_label | escape }} <span aria-hidden="true">→</span>
+          </a>
+        {% endif %}
+      </div>
+
+      <a class="story-salon-feature__article" href="{{ featured_article.url | default: section.settings.link }}">
+        {% if featured_article != blank and featured_article.image != blank %}
+          {{
+            featured_article.image
+            | image_url: width: 1600
+            | image_tag:
+              widths: '500, 800, 1100, 1600',
+              sizes: '(min-width: 990px) 48vw, 100vw',
+              loading: 'lazy',
+              alt: featured_article.title
+          }}
+        {% elsif section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              widths: '500, 800, 1100, 1600',
+              sizes: '(min-width: 990px) 48vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.heading
+          }}
+        {% endif %}
+
+        <div class="story-salon-feature__overlay">
+          {% if featured_article != blank %}
+            <span class="story-salon-feature__kicker">{{ section.settings.article_label | escape }}</span>
+            <strong>{{ featured_article.title | escape }}</strong>
+            {% if featured_article.excerpt_or_content != blank %}
+              <p>{{ featured_article.excerpt_or_content | strip_html | strip_newlines | truncate: 120 }}</p>
+            {% endif %}
+          {% else %}
+            <span class="story-salon-feature__kicker">{{ section.settings.article_label | escape }}</span>
+            <strong>{{ section.settings.placeholder_title | escape }}</strong>
+            <p>{{ section.settings.placeholder_text | escape }}</p>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .story-salon-feature {
+    background: var(--feature-bg, #ffffff);
+    color: var(--feature-ink, #0f1623);
+  }
+
+  .story-salon-feature__inner {
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem) var(--page-margin) clamp(3rem, 7vw, 6rem);
+  }
+
+  .story-salon-feature__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: 1rem;
+    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .story-salon-feature__content {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+    padding-right: clamp(0rem, 1vw, 1rem);
+  }
+
+  .story-salon-feature__eyebrow {
+    margin: 0;
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.58;
+  }
+
+  .story-salon-feature h2 {
+    margin: 0;
+    max-width: 10ch;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(2.2rem, 6vw, 5.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+
+  .story-salon-feature__text {
+    max-width: 34rem;
+    font-size: 0.98rem;
+    line-height: 1.75;
+    opacity: 0.8;
+  }
+
+  .story-salon-feature__link {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: fit-content;
+    color: var(--feature-accent, #923531);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .story-salon-feature__article {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    min-height: clamp(28rem, 52vw, 44rem);
+    background: #dfe1e3;
+  }
+
+  .story-salon-feature__article img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.12) contrast(1.08) brightness(1.02);
+    transform: scale(1.01);
+  }
+
+  .story-salon-feature__article::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 30%, rgb(255 255 255 / 0.14), transparent 42%),
+      linear-gradient(to top, rgb(15 11 8 / 0.58), transparent 58%);
+    mix-blend-mode: screen;
+    opacity: 0.92;
+  }
+
+  .story-salon-feature__overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 1;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    color: #ffffff;
+  }
+
+  .story-salon-feature__kicker {
+    display: block;
+    margin-bottom: 0.55rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .story-salon-feature__overlay strong {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-size: clamp(1.6rem, 3vw, 3rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    max-width: 12ch;
+  }
+
+  .story-salon-feature__overlay p {
+    margin: 0.75rem 0 0;
+    max-width: 34rem;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    opacity: 0.82;
+  }
+
+  @media screen and (max-width: 989px) {
+    .story-salon-feature__panel {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Story Salon feature",
+  "enabled_on": {
+    "templates": [
+      "index",
+      "page"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Story Salon"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One story, featured."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Use this section to spotlight a single Story Salon article on the landing page.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "View Story Salon"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "article_label",
+      "label": "Article label",
+      "default": "Featured story"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_title",
+      "label": "Placeholder title",
+      "default": "Add a featured Story Salon post"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Placeholder text",
+      "default": "Select an article in the theme editor to show the story preview here."
+    },
+    {
+      "type": "article",
+      "id": "article",
+      "label": "Featured article"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fallback image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#0f1623"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#923531"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story Salon feature"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "edm-signup",
+      "settings": {
+        "eyebrow": "Preferences",
+        "heading": "Choose how you hear from TRIIIPLE.",
+        "description": "<p>This page is the on-site version of the EDM sign-out idea: keep the parts you want, pause the rest, and stay in control of your inbox.</p>",
+        "benefits_label": "Choose what stays",
+        "benefit_1": "Drop alerts only",
+        "benefit_2": "Story Salon updates",
+        "benefit_3": "No promo emails",
+        "form_heading": "Update your email settings",
+        "form_text": "Use these links to manage your Klaviyo preferences or unsubscribe completely.",
+        "button_label": "Sign up",
+        "mode": "sign-out",
+        "primary_button_label": "Manage preferences",
+        "primary_button_url": "https://www.klaviyo.com/",
+        "secondary_button_label": "Unsubscribe",
+        "secondary_button_url": "https://www.klaviyo.com/",
+        "note": "Replace the placeholder URLs with your real Klaviyo preference and unsubscribe links.",
+        "tag_label": "EDM Signup",
+        "background_color": "#ffffff",
+        "text_color": "#0f1623",
+        "accent_color": "#923531"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

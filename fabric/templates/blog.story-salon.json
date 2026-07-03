@@ -1,0 +1,34 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "story-salon-blog",
+      "settings": {
+        "hero_eyebrow": "The TRIIIPLE Journal",
+        "hero_title": "Story Salon",
+        "hero_lede": "Portraits, process, and the things people say once they are dressed in the first layer.",
+        "cta_label": "Read the archive",
+        "intro_heading": "not a campaign. not a lookbook.\na room where people sit down and say something true.",
+        "intro_text": "<p>Story Salon is the editorial room inside TRIIIPLE: conversations, portraits, and the small details that sit between what is worn and what is said.</p>",
+        "all_label": "All",
+        "first_label": "The 1st Layer",
+        "raw_label": "Raw n Uncut",
+        "explore_label": "Explore",
+        "paper": "#f5f4f1",
+        "ink": "#0f1623",
+        "accent": "#923531"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,81 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "shop-hub",
+      "blocks": {
+        "design": {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by design",
+            "title": "Shop by design",
+            "text": "Move back to the design-led edit.",
+            "link": "/pages/shop-by-design"
+          }
+        },
+        "fabric": {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by fabric",
+            "title": "Shop by fabric",
+            "text": "Compare products by fabric and feel.",
+            "link": "/pages/shop-by-fabric"
+          }
+        },
+        "all_items": {
+          "type": "destination",
+          "settings": {
+            "label": "All items",
+            "title": "View all items",
+            "text": "Go back to the full catalog.",
+            "link": "/collections/all"
+          }
+        },
+        "size_xs": {
+          "type": "size_row",
+          "settings": { "size": "XS", "chest": "32-34", "waist": "25-27" }
+        },
+        "size_s": {
+          "type": "size_row",
+          "settings": { "size": "S", "chest": "34-36", "waist": "28-30" }
+        },
+        "size_m": {
+          "type": "size_row",
+          "settings": { "size": "M", "chest": "36-38", "waist": "31-33" }
+        },
+        "size_l": {
+          "type": "size_row",
+          "settings": { "size": "L", "chest": "38-40", "waist": "34-36" }
+        }
+      },
+      "block_order": [
+        "design",
+        "fabric",
+        "all_items",
+        "size_xs",
+        "size_s",
+        "size_m",
+        "size_l"
+      ],
+      "settings": {
+        "eyebrow": "Fit",
+        "heading": "Size and fit guide.",
+        "description": "<p>Use Shop All as the size guide page so it works as a helpful reference instead of another product listing.</p>",
+        "card_cta": "Open page",
+        "guide_eyebrow": "Fit guide",
+        "guide_heading": "Find your size",
+        "guide_text": "<p>Place your measurements beside the fit notes so customers can move quickly from browsing to buying.</p>",
+        "background_color": "#ffffff",
+        "text_color": "#0f1623",
+        "accent_color": "#923531"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
