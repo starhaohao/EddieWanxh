@@ -68,10 +68,10 @@
         "cta_url": "/collections"
       },
       "blocks": {
-        "coll-clearance": { "type": "collection_card", "settings": { "label": "Final Clearance", "tag": "Buy 5, Get 1 Free", "link": "/collections/dead-stock-clearance" } },
-        "coll-1": { "type": "collection_card", "settings": { "label": "Briefs", "tag": "Best Seller", "link": "/collections/briefs" } },
-        "coll-2": { "type": "collection_card", "settings": { "label": "Boxer Trunks", "link": "/collections/boxer-trunks" } },
-        "coll-3": { "type": "collection_card", "settings": { "label": "Tops", "tag": "New", "link": "/collections/tops" } }
+        "coll-clearance": { "type": "collection_card", "settings": { "label": "Final Clearance", "tag": "Buy 5, Get 1 Free", "sub": "Dead stock. Final sizes. No restock.", "link": "/collections/dead-stock-clearance" } },
+        "coll-1": { "type": "collection_card", "settings": { "label": "Briefs", "tag": "Best Seller", "sub": "Clean support. Close comfort.", "link": "/collections/briefs" } },
+        "coll-2": { "type": "collection_card", "settings": { "label": "Boxer Trunks", "sub": "More coverage. Still close.", "link": "/collections/boxer-trunks" } },
+        "coll-3": { "type": "collection_card", "settings": { "label": "Tops", "tag": "New", "sub": "Everyday tops, made closer.", "link": "/collections/tops" } }
       },
       "block_order": ["coll-clearance", "coll-1", "coll-2", "coll-3"]
     },
