@@ -19,7 +19,7 @@
           "settings": {
             "text": "<p>Final Clearance: Buy 5, Get 1 Free — auto-applied at checkout. No code needed.</p>",
             "target_url_enabled": true,
-            "target_url": "shopify://collections/dead-stocks",
+            "target_url": "shopify://collections/dead-stock-clearance",
             "target_referrer_enabled": false,
             "target_referrer": "",
             "target_device_enabled": false,
