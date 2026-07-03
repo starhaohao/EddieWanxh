@@ -1,0 +1,393 @@
+{% liquid
+  assign about_image_1 = section.settings.image_1
+  assign about_image_2 = section.settings.image_2
+  assign about_image_3 = section.settings.image_3
+  assign about_image_4 = section.settings.image_4
+%}
+
+<section
+  class="triiiple-about"
+  style="--about-bg: {{ section.settings.background_color }}; --about-ink: {{ section.settings.ink_color }}; --about-accent: {{ section.settings.accent_color }};"
+>
+  <div class="triiiple-about__inner">
+    <header class="triiiple-about__hero">
+      <div class="triiiple-about__copy">
+        {% if section.settings.eyebrow != blank %}<p class="triiiple-about__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h1>{{ section.settings.heading | escape }}</h1>{% endif %}
+        {% if section.settings.intro != blank %}<div class="triiiple-about__intro rte">{{ section.settings.intro }}</div>{% endif %}
+        <div class="triiiple-about__actions">
+          {% if section.settings.primary_link != blank and section.settings.primary_label != blank %}
+            <a class="triiiple-about__button triiiple-about__button--solid" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label | escape }} <span aria-hidden="true">&#8594;</span></a>
+          {% endif %}
+          {% if section.settings.secondary_link != blank and section.settings.secondary_label != blank %}
+            <a class="triiiple-about__button" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label | escape }}</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="triiiple-about__mosaic">
+        {% if about_image_1 != blank %}
+          <figure class="triiiple-about__frame triiiple-about__frame--primary">
+            {{ about_image_1 | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1800', sizes: '(min-width: 990px) 52vw, 100vw', loading: 'eager', alt: section.settings.heading }}
+          </figure>
+        {% endif %}
+        {% if about_image_2 != blank %}
+          <figure class="triiiple-about__frame triiiple-about__frame--secondary">
+            {{ about_image_2 | image_url: width: 1200 | image_tag: widths: '400, 700, 1000, 1200', sizes: '(min-width: 990px) 26vw, 50vw', loading: 'eager', alt: section.settings.heading }}
+          </figure>
+        {% endif %}
+        {% if about_image_3 != blank %}
+          <figure class="triiiple-about__frame triiiple-about__frame--tertiary">
+            {{ about_image_3 | image_url: width: 1200 | image_tag: widths: '400, 700, 1000, 1200', sizes: '(min-width: 990px) 26vw, 50vw', loading: 'lazy', alt: section.settings.heading }}
+          </figure>
+        {% endif %}
+      </div>
+    </header>
+
+    <section class="triiiple-about__manifesto">
+      <div>
+        {% if section.settings.manifesto_eyebrow != blank %}<p class="triiiple-about__eyebrow">{{ section.settings.manifesto_eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.manifesto_heading != blank %}<h2>{{ section.settings.manifesto_heading | escape }}</h2>{% endif %}
+      </div>
+      {% if section.settings.manifesto_body != blank %}<div class="triiiple-about__manifesto-body rte">{{ section.settings.manifesto_body }}</div>{% endif %}
+    </section>
+
+    <section class="triiiple-about__principles">
+      <div class="triiiple-about__section-head">
+        {% if section.settings.principles_eyebrow != blank %}<p class="triiiple-about__eyebrow">{{ section.settings.principles_eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.principles_heading != blank %}<h2>{{ section.settings.principles_heading | escape }}</h2>{% endif %}
+      </div>
+
+      <div class="triiiple-about__principles-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'principle' %}
+            <article class="triiiple-about__principle" {{ block.shopify_attributes }}>
+              {% if block.settings.kicker != blank %}<p class="triiiple-about__principle-kicker">{{ block.settings.kicker | escape }}</p>{% endif %}
+              {% if block.settings.heading != blank %}<h3>{{ block.settings.heading | escape }}</h3>{% endif %}
+              {% if block.settings.body != blank %}<div class="rte">{{ block.settings.body }}</div>{% endif %}
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="triiiple-about__closing">
+      <div class="triiiple-about__closing-copy">
+        {% if section.settings.closing_eyebrow != blank %}<p class="triiiple-about__eyebrow">{{ section.settings.closing_eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.closing_heading != blank %}<h2>{{ section.settings.closing_heading | escape }}</h2>{% endif %}
+        {% if section.settings.closing_body != blank %}<div class="rte">{{ section.settings.closing_body }}</div>{% endif %}
+      </div>
+
+      <div class="triiiple-about__closing-media">
+        {% if about_image_4 != blank %}
+          {{ about_image_4 | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1800', sizes: '(min-width: 990px) 40vw, 100vw', loading: 'lazy', alt: section.settings.closing_heading }}
+        {% endif %}
+      </div>
+    </section>
+  </div>
+</section>
+
+{% stylesheet %}
+  .triiiple-about {
+    background: var(--about-bg, #ffffff);
+    color: var(--about-ink, #17191c);
+  }
+
+  .triiiple-about__inner {
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem) var(--page-margin) clamp(3rem, 7vw, 7rem);
+  }
+
+  .triiiple-about__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+    padding-block: clamp(1.5rem, 4vw, 3rem) clamp(2rem, 5vw, 4rem);
+  }
+
+  .triiiple-about__copy,
+  .triiiple-about__manifesto,
+  .triiiple-about__principles,
+  .triiiple-about__closing {
+    border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  }
+
+  .triiiple-about__copy {
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .triiiple-about__eyebrow {
+    margin: 0 0 0.8rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.62;
+  }
+
+  .triiiple-about__copy h1,
+  .triiiple-about__manifesto h2,
+  .triiiple-about__section-head h2,
+  .triiiple-about__closing h2,
+  .triiiple-about__principle h3 {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+  }
+
+  .triiiple-about__copy h1 {
+    max-width: 9ch;
+    font-size: clamp(2.2rem, 6vw, 5.8rem);
+  }
+
+  .triiiple-about__intro {
+    max-width: 33rem;
+    margin-top: 1.1rem;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    line-height: 1.75;
+  }
+
+  .triiiple-about__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
+  }
+
+  .triiiple-about__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.8rem;
+    padding: 0.8rem 1.1rem;
+    border: 1px solid currentColor;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .triiiple-about__button--solid {
+    color: var(--about-bg, #fff);
+    background: var(--about-ink, #17191c);
+    border-color: var(--about-ink, #17191c);
+  }
+
+  .triiiple-about__mosaic {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+    min-height: clamp(28rem, 54vw, 50rem);
+  }
+
+  .triiiple-about__frame {
+    margin: 0;
+    overflow: hidden;
+    background: #f3f3f3;
+  }
+
+  .triiiple-about__frame--primary {
+    grid-row: 1 / span 2;
+  }
+
+  .triiiple-about__frame img,
+  .triiiple-about__closing-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .triiiple-about__manifesto {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding-block: clamp(2rem, 5vw, 4rem);
+  }
+
+  .triiiple-about__manifesto h2,
+  .triiiple-about__section-head h2,
+  .triiiple-about__closing h2 {
+    font-size: clamp(1.6rem, 3.8vw, 3.6rem);
+  }
+
+  .triiiple-about__manifesto-body {
+    max-width: 36rem;
+    justify-self: end;
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.82;
+  }
+
+  .triiiple-about__principles,
+  .triiiple-about__closing {
+    padding-block: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .triiiple-about__section-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: 1.4rem;
+  }
+
+  .triiiple-about__principles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    background: color-mix(in srgb, currentColor 15%, transparent);
+  }
+
+  .triiiple-about__principle {
+    min-width: 0;
+    padding: 1.3rem 1.1rem 1.5rem;
+    background: var(--about-bg, #fff);
+  }
+
+  .triiiple-about__principle-kicker {
+    margin: 0 0 0.9rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  .triiiple-about__principle h3 {
+    font-size: clamp(1.05rem, 1.8vw, 1.7rem);
+  }
+
+  .triiiple-about__principle .rte {
+    margin-top: 0.8rem;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    opacity: 0.74;
+  }
+
+  .triiiple-about__closing {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(1.2rem, 4vw, 3rem);
+    align-items: center;
+  }
+
+  .triiiple-about__closing-copy .rte {
+    max-width: 36rem;
+    margin-top: 1rem;
+    line-height: 1.8;
+    opacity: 0.8;
+  }
+
+  .triiiple-about__closing-media {
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: #f3f3f3;
+  }
+
+  @media screen and (max-width: 989px) {
+    .triiiple-about__hero,
+    .triiiple-about__manifesto,
+    .triiiple-about__closing {
+      grid-template-columns: 1fr;
+    }
+
+    .triiiple-about__mosaic {
+      min-height: 26rem;
+    }
+
+    .triiiple-about__manifesto-body {
+      justify-self: start;
+    }
+
+    .triiiple-about__principles-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .triiiple-about__inner {
+      padding-inline: 1rem;
+    }
+
+    .triiiple-about__copy h1 {
+      max-width: 11ch;
+      font-size: clamp(2rem, 14vw, 4rem);
+    }
+
+    .triiiple-about__mosaic {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      min-height: auto;
+    }
+
+    .triiiple-about__frame--primary {
+      grid-row: auto;
+      aspect-ratio: 4 / 5;
+    }
+
+    .triiiple-about__frame--secondary,
+    .triiiple-about__frame--tertiary {
+      aspect-ratio: 4 / 5;
+    }
+
+    .triiiple-about__principles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "About us page",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "About us" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Who we are" },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>TRIIIPLE Studio is a men’s underwear and intimate wear brand redefining comfort, confidence, and self-expression - starting from the first layer.</p>" },
+    { "type": "text", "id": "primary_label", "label": "Primary button label", "default": "Shop all" },
+    { "type": "url", "id": "primary_link", "label": "Primary button link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button label", "default": "Story Salon" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary button link" },
+    { "type": "image_picker", "id": "image_1", "label": "Hero image 1" },
+    { "type": "image_picker", "id": "image_2", "label": "Hero image 2" },
+    { "type": "image_picker", "id": "image_3", "label": "Hero image 3" },
+    { "type": "image_picker", "id": "image_4", "label": "Closing image" },
+    { "type": "text", "id": "manifesto_eyebrow", "label": "Manifesto eyebrow", "default": "Why this works" },
+    { "type": "text", "id": "manifesto_heading", "label": "Manifesto heading", "default": "Engineered, not just made." },
+    { "type": "richtext", "id": "manifesto_body", "label": "Manifesto body", "default": "<p>Founded in Singapore and crafted in Asia, we design bold, body-inclusive underwear that merges high-performance fabrics with elevated aesthetics. Every cut is deliberate. Every layer is meant to be felt.</p>" },
+    { "type": "text", "id": "principles_eyebrow", "label": "Principles eyebrow", "default": "Product details" },
+    { "type": "text", "id": "principles_heading", "label": "Principles heading", "default": "The baseline." },
+    { "type": "text", "id": "closing_eyebrow", "label": "Closing eyebrow", "default": "The first layer" },
+    { "type": "text", "id": "closing_heading", "label": "Closing heading", "default": "Built for bodies that do more." },
+    { "type": "richtext", "id": "closing_body", "label": "Closing body", "default": "<p>We craft enduring essentials and reinvented classics - each made with innovative materials that move with you, wick moisture fast, and feel luxuriously soft against the skin.</p><p>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones, with sizes ranging from XS to 2XL.</p>" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "ink_color", "label": "Ink", "default": "#17191c" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#4a1024" }
+  ],
+  "blocks": [
+    {
+      "type": "principle",
+      "name": "Principle",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Kicker", "default": "Comfort" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "First layer confidence" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Designed to feel clean, supportive, and easy enough to forget - until it matters.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "About us page",
+      "blocks": [
+        { "type": "principle", "settings": { "kicker": "Fit", "heading": "Made to move", "body": "<p>Patterned for comfort, built to stay put, and refined enough for everyday wear.</p>" } },
+        { "type": "principle", "settings": { "kicker": "Fabric", "heading": "Performance first", "body": "<p>Moisture-wicking, soft-touch fabrics that stay relevant beyond the trend cycle.</p>" } },
+        { "type": "principle", "settings": { "kicker": "Design", "heading": "Measured confidence", "body": "<p>Minimal, editorial, and body-aware - built to look sharp without trying too hard.</p>" } },
+        { "type": "principle", "settings": { "kicker": "Range", "heading": "All bodies welcome", "body": "<p>Sizes from XS to 2XL, because confidence should never come in one shape.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

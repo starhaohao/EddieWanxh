@@ -10,7 +10,7 @@
 
   Pulls LIVE data: cart items, subtotal, and a back-to-checkout link.
   Upload logo + 3 social icons in Settings → Files and paste URLs below.
-  Free-shipping threshold is set to S$130 — change `threshold` (in cents)
+  Free-shipping threshold is set to S$50 — change `threshold` (in cents)
   if yours differs.
 ══════════════════════════════════════════════════════════════════
 {%- endcomment -%}
@@ -25,7 +25,7 @@
 {%- assign fd = "Galdeano, 'Helvetica Neue', Helvetica, Arial, sans-serif" -%}
 
 {%- comment -%} free-shipping maths {%- endcomment -%}
-{%- assign threshold = 13000 -%}
+{%- assign threshold = 5000 -%}
 {%- assign sub = checkout.subtotal_price -%}
 {%- assign remaining = threshold | minus: sub -%}
 {%- assign pct = sub | times: 100 | divided_by: threshold -%}

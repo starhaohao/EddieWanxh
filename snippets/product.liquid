@@ -769,7 +769,16 @@
                       {%- endif -%}
 
                       {%- if on_sale and product.available and block.settings.sale_badge -%}
-                        <span class="badge-box sale-box">{{ 'products.product.on_sale' | t }}</span>
+                        {%- liquid
+                          # Blueprint §5: percentage only, never the word "Sale".
+                          assign pct_compare = current_variant.compare_at_price
+                          if pct_compare == blank or pct_compare == 0
+                            assign pct_compare = product.compare_at_price
+                          endif
+                        -%}
+                        {%- if pct_compare > 0 -%}
+                          <span class="badge-box sale-box">{{ pct_compare | minus: current_variant.price | times: 100.00 | divided_by: pct_compare | round }}%</span>
+                        {%- endif -%}
                       {%- endif -%}
 
                       {% for i in (1..3) %}

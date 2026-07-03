@@ -7,6 +7,9 @@
   assign shop_color = section.settings.shop_color
   assign name_size = section.settings.name_size
   assign price_size = section.settings.price_size
+  assign grid_line_color = section.settings.grid_line_color
+
+  assign cat_list = section.settings.categories | split: ','
 -%}
 <div class="lpg" style="--lpg-bg:{{ bg }};--lpg-cb:{{ card_bg }};--lpg-nc:{{ name_color }};--lpg-sc:{{ sku_color }};--lpg-pc:{{ price_color }};--lpg-shc:{{ shop_color }};--lpg-ns:{{ name_size }}px;--lpg-ps:{{ price_size }}px;">
   <div class="lpg__grid">
@@ -14,7 +17,7 @@
       <a class="lpg__card lpg__card--{{ block.settings.variant }}" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
         <div class="lpg__img">
           {%- if block.settings.image != blank -%}
-            <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
+            {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300,600,900,1200', sizes: '(min-width:1024px) 22vw, (min-width:750px) 25vw, 50vw' }}
           {%- endif -%}
         </div>
         {%- if block.settings.variant == 'product' -%}
@@ -75,7 +78,11 @@
     { "type":"color","id":"sku_color","label":"SKU color","default":"rgba(17,18,20,0.4)" },
     { "type":"color","id":"price_color","label":"Price color","default":"#111214" },
     { "type":"color","id":"shop_color","label":"Shop link color","default":"rgba(17,18,20,0.4)" },
-    { "type":"range","id":"name_size","label":"Name size (px)","min":12,"max":24,"step":1,"default":15 },
+    { "type":"color","id":"tag_color","label":"Category tag color","default":"#FFFFFF" },
+    { "type":"color","id":"tag_bg","label":"Category tag background","default":"rgba(17,18,20,0.65)" },
+    { "type":"color","id":"grid_line_color","label":"Grid line color (when card grid lines are on)","default":"rgba(17,18,20,0.12)" },
+    { "type":"header","content":"Type" },
+    { "type":"range","id":"name_size","label":"Default name size (px)","min":12,"max":32,"step":1,"default":15 },
     { "type":"range","id":"price_size","label":"Price size (px)","min":12,"max":24,"step":1,"default":15 }
   ],
   "blocks":[
@@ -102,6 +109,6 @@
       ]
     }
   ],
-  "templates":["page"]
+  "enabled_on": { "templates": ["page"] }
 }
 {% endschema %}

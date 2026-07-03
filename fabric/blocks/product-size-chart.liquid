@@ -1,0 +1,324 @@
+{% doc %}
+Renders a closed-by-default product size chart below the variant picker.
+{% enddoc %}
+
+{% liquid
+  assign design_family = product.metafields.custom.design_family.value
+  assign is_top_size_guide = false
+  if design_family == 'ED Tops'
+    assign is_top_size_guide = true
+  endif
+  if product.title contains 'T-shirt'
+    assign is_top_size_guide = true
+  endif
+  if product.title contains 'Sleeveless Top'
+    assign is_top_size_guide = true
+  endif
+%}
+
+<details class="product-size-chart" {{ block.shopify_attributes }}>
+  <summary>
+    <span>{{ block.settings.heading | escape }}</span>
+    <span class="product-size-chart__icon" aria-hidden="true">+</span>
+  </summary>
+  <div class="product-size-chart__content">
+    {% if block.settings.intro != blank %}<div class="rte">{{ block.settings.intro }}</div>{% endif %}
+    <div class="product-size-chart__table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{{ block.settings.size_label | escape }}</th>
+            <th scope="col">{{ block.settings.waist_cm_label | escape }}</th>
+            <th scope="col">{{ block.settings.waist_in_label | escape }}</th>
+            <th scope="col">{{ block.settings.eu_label | escape }}</th>
+            <th scope="col">{{ block.settings.uk_us_label | escape }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% unless is_top_size_guide %}
+            <tr>
+              <th scope="row">{{ block.settings.size_1 | escape }}</th>
+              <td>{{ block.settings.waist_cm_1 | escape }}</td>
+              <td>{{ block.settings.waist_in_1 | escape }}</td>
+              <td>{{ block.settings.eu_1 | escape }}</td>
+              <td>{{ block.settings.uk_us_1 | escape }}</td>
+            </tr>
+          {% endunless %}
+          <tr>
+            <th scope="row">{{ block.settings.size_2 | escape }}</th>
+            <td>{{ block.settings.waist_cm_2 | escape }}</td>
+            <td>{{ block.settings.waist_in_2 | escape }}</td>
+            <td>{{ block.settings.eu_2 | escape }}</td>
+            <td>{{ block.settings.uk_us_2 | escape }}</td>
+          </tr>
+          <tr>
+            <th scope="row">{{ block.settings.size_3 | escape }}</th>
+            <td>{{ block.settings.waist_cm_3 | escape }}</td>
+            <td>{{ block.settings.waist_in_3 | escape }}</td>
+            <td>{{ block.settings.eu_3 | escape }}</td>
+            <td>{{ block.settings.uk_us_3 | escape }}</td>
+          </tr>
+          <tr>
+            <th scope="row">{{ block.settings.size_4 | escape }}</th>
+            <td>{{ block.settings.waist_cm_4 | escape }}</td>
+            <td>{{ block.settings.waist_in_4 | escape }}</td>
+            <td>{{ block.settings.eu_4 | escape }}</td>
+            <td>{{ block.settings.uk_us_4 | escape }}</td>
+          </tr>
+          <tr>
+            <th scope="row">{{ block.settings.size_5 | escape }}</th>
+            <td>{{ block.settings.waist_cm_5 | escape }}</td>
+            <td>{{ block.settings.waist_in_5 | escape }}</td>
+            <td>{{ block.settings.eu_5 | escape }}</td>
+            <td>{{ block.settings.uk_us_5 | escape }}</td>
+          </tr>
+          <tr>
+            <th scope="row">{{ block.settings.size_6 | escape }}</th>
+            <td>{{ block.settings.waist_cm_6 | escape }}</td>
+            <td>{{ block.settings.waist_in_6 | escape }}</td>
+            <td>{{ block.settings.eu_6 | escape }}</td>
+            <td>{{ block.settings.uk_us_6 | escape }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="product-size-chart__mobile-list" aria-label="{{ block.settings.heading | escape }}">
+      {% unless is_top_size_guide %}
+        <article class="product-size-chart__card">
+          <div class="product-size-chart__card-head">
+            <span class="product-size-chart__card-size">{{ block.settings.size_1 | escape }}</span>
+          </div>
+          <div class="product-size-chart__card-grid">
+            <div class="product-size-chart__pair">
+              <span>{{ block.settings.waist_cm_label | escape }}</span>
+              <strong>{{ block.settings.waist_cm_1 | escape }}</strong>
+            </div>
+            <div class="product-size-chart__pair">
+              <span>{{ block.settings.waist_in_label | escape }}</span>
+              <strong>{{ block.settings.waist_in_1 | escape }}</strong>
+            </div>
+            <div class="product-size-chart__pair">
+              <span>{{ block.settings.eu_label | escape }}</span>
+              <strong>{{ block.settings.eu_1 | escape }}</strong>
+            </div>
+            <div class="product-size-chart__pair">
+              <span>{{ block.settings.uk_us_label | escape }}</span>
+              <strong>{{ block.settings.uk_us_1 | escape }}</strong>
+            </div>
+          </div>
+        </article>
+      {% endunless %}
+      <article class="product-size-chart__card">
+        <div class="product-size-chart__card-head">
+          <span class="product-size-chart__card-size">{{ block.settings.size_2 | escape }}</span>
+        </div>
+        <div class="product-size-chart__card-grid">
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_cm_label | escape }}</span>
+            <strong>{{ block.settings.waist_cm_2 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_in_label | escape }}</span>
+            <strong>{{ block.settings.waist_in_2 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.eu_label | escape }}</span>
+            <strong>{{ block.settings.eu_2 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.uk_us_label | escape }}</span>
+            <strong>{{ block.settings.uk_us_2 | escape }}</strong>
+          </div>
+        </div>
+      </article>
+      <article class="product-size-chart__card">
+        <div class="product-size-chart__card-head">
+          <span class="product-size-chart__card-size">{{ block.settings.size_3 | escape }}</span>
+        </div>
+        <div class="product-size-chart__card-grid">
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_cm_label | escape }}</span>
+            <strong>{{ block.settings.waist_cm_3 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_in_label | escape }}</span>
+            <strong>{{ block.settings.waist_in_3 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.eu_label | escape }}</span>
+            <strong>{{ block.settings.eu_3 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.uk_us_label | escape }}</span>
+            <strong>{{ block.settings.uk_us_3 | escape }}</strong>
+          </div>
+        </div>
+      </article>
+      <article class="product-size-chart__card">
+        <div class="product-size-chart__card-head">
+          <span class="product-size-chart__card-size">{{ block.settings.size_4 | escape }}</span>
+        </div>
+        <div class="product-size-chart__card-grid">
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_cm_label | escape }}</span>
+            <strong>{{ block.settings.waist_cm_4 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_in_label | escape }}</span>
+            <strong>{{ block.settings.waist_in_4 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.eu_label | escape }}</span>
+            <strong>{{ block.settings.eu_4 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.uk_us_label | escape }}</span>
+            <strong>{{ block.settings.uk_us_4 | escape }}</strong>
+          </div>
+        </div>
+      </article>
+      <article class="product-size-chart__card">
+        <div class="product-size-chart__card-head">
+          <span class="product-size-chart__card-size">{{ block.settings.size_5 | escape }}</span>
+        </div>
+        <div class="product-size-chart__card-grid">
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_cm_label | escape }}</span>
+            <strong>{{ block.settings.waist_cm_5 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_in_label | escape }}</span>
+            <strong>{{ block.settings.waist_in_5 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.eu_label | escape }}</span>
+            <strong>{{ block.settings.eu_5 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.uk_us_label | escape }}</span>
+            <strong>{{ block.settings.uk_us_5 | escape }}</strong>
+          </div>
+        </div>
+      </article>
+      <article class="product-size-chart__card">
+        <div class="product-size-chart__card-head">
+          <span class="product-size-chart__card-size">{{ block.settings.size_6 | escape }}</span>
+        </div>
+        <div class="product-size-chart__card-grid">
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_cm_label | escape }}</span>
+            <strong>{{ block.settings.waist_cm_6 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.waist_in_label | escape }}</span>
+            <strong>{{ block.settings.waist_in_6 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.eu_label | escape }}</span>
+            <strong>{{ block.settings.eu_6 | escape }}</strong>
+          </div>
+          <div class="product-size-chart__pair">
+            <span>{{ block.settings.uk_us_label | escape }}</span>
+            <strong>{{ block.settings.uk_us_6 | escape }}</strong>
+          </div>
+        </div>
+      </article>
+    </div>
+    {% if block.settings.note != blank %}<p class="product-size-chart__note">{{ block.settings.note | escape }}</p>{% endif %}
+  </div>
+</details>
+
+{% stylesheet %}
+  .product-size-chart { width: 100%; border-block: 1px solid color-mix(in srgb, currentColor 22%, transparent); }
+  .product-size-chart summary { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; cursor: pointer; list-style: none; font-size: 0.78rem; letter-spacing: 0.13em; text-transform: uppercase; }
+  .product-size-chart summary::-webkit-details-marker { display: none; }
+  .product-size-chart__icon { transition: transform 180ms ease; }
+  .product-size-chart[open] .product-size-chart__icon { transform: rotate(45deg); }
+  .product-size-chart__content { padding: 0.5rem 0 1.5rem; }
+  .product-size-chart__content > .rte { max-width: 34rem; margin-bottom: 1.25rem; font-size: 0.88rem; }
+  .product-size-chart__table-wrap { overflow-x: auto; }
+  .product-size-chart__mobile-list { display: none; }
+  .product-size-chart table { width: 100%; border-collapse: collapse; text-align: left; }
+  .product-size-chart :is(th, td) { padding: 0.8rem 0.6rem; border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent); white-space: nowrap; }
+  .product-size-chart thead th { border-top: 1px solid currentColor; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .product-size-chart tbody th { font-weight: 600; }
+  .product-size-chart__card {
+    padding: 0.95rem 0;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+  .product-size-chart__card-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .product-size-chart__card-size {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .product-size-chart__card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem 1rem;
+  }
+  .product-size-chart__pair span {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.62;
+  }
+  .product-size-chart__pair strong {
+    display: block;
+    font-size: 0.94rem;
+    font-weight: 500;
+    line-height: 1.35;
+    white-space: normal;
+  }
+  .product-size-chart__note { margin: 1rem 0 0; font-size: 0.76rem; line-height: 1.5; opacity: 0.62; }
+
+  @media screen and (max-width: 749px) {
+    .product-size-chart__table-wrap {
+      display: none;
+    }
+
+    .product-size-chart__mobile-list {
+      display: block;
+    }
+
+    .product-size-chart__content > .rte {
+      max-width: none;
+    }
+
+    .product-size-chart :is(th, td) {
+      white-space: normal;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product size chart",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Size chart" },
+    { "type": "richtext", "id": "intro", "label": "Introduction", "default": "<p>Fits true to body. If you prefer a looser fit, size up. Measure around your natural waist just above the hips, snug not tight.</p>" },
+    { "type": "text", "id": "size_label", "label": "Size label", "default": "Size" },
+    { "type": "text", "id": "waist_cm_label", "label": "Waist cm label", "default": "Waist (cm)" },
+    { "type": "text", "id": "waist_in_label", "label": "Waist inch label", "default": "Waist (in)" },
+    { "type": "text", "id": "eu_label", "label": "EU label", "default": "EU" },
+    { "type": "text", "id": "uk_us_label", "label": "UK / US label", "default": "UK / US" },
+    { "type": "header", "content": "Rows" },
+    { "type": "text", "id": "size_1", "label": "Size 1", "default": "XS" }, { "type": "text", "id": "waist_cm_1", "label": "Waist cm 1", "default": "59–63" }, { "type": "text", "id": "waist_in_1", "label": "Waist inch 1", "default": "23.2–24.8" }, { "type": "text", "id": "eu_1", "label": "EU 1", "default": "42–44" }, { "type": "text", "id": "uk_us_1", "label": "UK / US 1", "default": "26–28" },
+    { "type": "text", "id": "size_2", "label": "Size 2", "default": "S" }, { "type": "text", "id": "waist_cm_2", "label": "Waist cm 2", "default": "64–68" }, { "type": "text", "id": "waist_in_2", "label": "Waist inch 2", "default": "25.2–26.8" }, { "type": "text", "id": "eu_2", "label": "EU 2", "default": "44–46" }, { "type": "text", "id": "uk_us_2", "label": "UK / US 2", "default": "28–30" },
+    { "type": "text", "id": "size_3", "label": "Size 3", "default": "M" }, { "type": "text", "id": "waist_cm_3", "label": "Waist cm 3", "default": "69–73" }, { "type": "text", "id": "waist_in_3", "label": "Waist inch 3", "default": "27.2–28.7" }, { "type": "text", "id": "eu_3", "label": "EU 3", "default": "46–48" }, { "type": "text", "id": "uk_us_3", "label": "UK / US 3", "default": "30–32" },
+    { "type": "text", "id": "size_4", "label": "Size 4", "default": "L" }, { "type": "text", "id": "waist_cm_4", "label": "Waist cm 4", "default": "74–78" }, { "type": "text", "id": "waist_in_4", "label": "Waist inch 4", "default": "29.1–30.7" }, { "type": "text", "id": "eu_4", "label": "EU 4", "default": "48–50" }, { "type": "text", "id": "uk_us_4", "label": "UK / US 4", "default": "32–34" },
+    { "type": "text", "id": "size_5", "label": "Size 5", "default": "XL" }, { "type": "text", "id": "waist_cm_5", "label": "Waist cm 5", "default": "79–83" }, { "type": "text", "id": "waist_in_5", "label": "Waist inch 5", "default": "31.1–32.7" }, { "type": "text", "id": "eu_5", "label": "EU 5", "default": "50–52" }, { "type": "text", "id": "uk_us_5", "label": "UK / US 5", "default": "34–36" },
+    { "type": "text", "id": "size_6", "label": "Size 6", "default": "2XL" }, { "type": "text", "id": "waist_cm_6", "label": "Waist cm 6", "default": "84–88" }, { "type": "text", "id": "waist_in_6", "label": "Waist inch 6", "default": "33.1–34.6" }, { "type": "text", "id": "eu_6", "label": "EU 6", "default": "52–54" }, { "type": "text", "id": "uk_us_6", "label": "UK / US 6", "default": "36–38" },
+    { "type": "text", "id": "note", "label": "Note", "default": "Tolerance ±2.5 cm. Product fit may vary slightly by fabric and cut." }
+  ],
+  "presets": [{ "name": "Product size chart", "category": "Product" }]
+}
+{% endschema %}

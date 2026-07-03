@@ -1,0 +1,246 @@
+<section
+  class="triiiple-landing-banner"
+  style="--strip-bg: {{ section.settings.strip_background }}; --strip-text: {{ section.settings.strip_text }}; --media-bg: {{ section.settings.media_background }}; --panel-bg: {{ section.settings.panel_background }}; --panel-text: {{ section.settings.panel_text }};"
+>
+  <div class="triiiple-landing-banner__strip">
+    <header class="triiiple-landing-banner__header">
+      <div>
+        {% if section.settings.strip_eyebrow != blank %}<p class="triiiple-landing-banner__eyebrow">{{ section.settings.strip_eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.strip_heading != blank %}<h2>{{ section.settings.strip_heading | escape }}</h2>{% endif %}
+      </div>
+      {% if section.settings.strip_link != blank and section.settings.strip_link_label != blank %}
+        <a href="{{ section.settings.strip_link }}">{{ section.settings.strip_link_label | escape }} <span aria-hidden="true">&#8594;</span></a>
+      {% endif %}
+    </header>
+
+    <div class="triiiple-landing-banner__benefits">
+      {% for block in section.blocks %}
+        <article {{ block.shopify_attributes }}>
+          {% if block.settings.symbol != blank %}<span aria-hidden="true">{{ block.settings.symbol | escape }}</span>{% endif %}
+          <h3>{{ block.settings.heading | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="triiiple-landing-banner__campaign">
+    <div class="triiiple-landing-banner__media">
+      {% if section.settings.image_1 != blank %}
+        <div class="triiiple-landing-banner__image triiiple-landing-banner__image--one">
+          {{ section.settings.image_1 | image_url: width: 1400 | image_tag: widths: '500, 800, 1100, 1400', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy', alt: section.settings.heading }}
+        </div>
+      {% endif %}
+      {% if section.settings.image_2 != blank %}
+        <div class="triiiple-landing-banner__image triiiple-landing-banner__image--two">
+          {{ section.settings.image_2 | image_url: width: 1400 | image_tag: widths: '500, 800, 1100, 1400', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'lazy', alt: section.settings.heading }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="triiiple-landing-banner__content">
+      <div>
+        {% if section.settings.eyebrow != blank %}<p class="triiiple-landing-banner__eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}
+        {% if section.settings.body != blank %}<div class="rte">{{ section.settings.body }}</div>{% endif %}
+        {% if section.settings.price != blank %}<p class="triiiple-landing-banner__price">{{ section.settings.price | escape }}</p>{% endif %}
+        {% if section.settings.button_link != blank and section.settings.button_label != blank %}
+          <a class="triiiple-landing-banner__button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }} <span aria-hidden="true">&#8594;</span></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .triiiple-landing-banner {
+    width: 100%;
+    background: var(--strip-bg, #17191c);
+  }
+
+  .triiiple-landing-banner__strip {
+    padding: clamp(2.5rem, 5vw, 5rem) var(--page-margin);
+    color: var(--strip-text, #fff);
+    background: var(--strip-bg, #17191c);
+  }
+
+  .triiiple-landing-banner__header,
+  .triiiple-landing-banner__benefits {
+    width: min(100%, var(--page-width));
+    margin-inline: auto;
+  }
+
+  .triiiple-landing-banner__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    padding-bottom: clamp(2rem, 4vw, 3.5rem);
+    border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  .triiiple-landing-banner__eyebrow {
+    margin: 0 0 0.65rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.62;
+  }
+
+  .triiiple-landing-banner__header h2,
+  .triiiple-landing-banner__content h2 {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+  }
+
+  .triiiple-landing-banner__header h2 { font-size: clamp(1.25rem, 2.8vw, 2.5rem); }
+  .triiiple-landing-banner__header a { color: inherit; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; text-underline-offset: 0.35em; }
+
+  .triiiple-landing-banner__benefits {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding-top: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .triiiple-landing-banner__benefits article > span { display: block; min-height: 2.5rem; opacity: 0.6; }
+  .triiiple-landing-banner__benefits h3 { margin: 0 0 0.55rem; font-family: var(--font-body--family); font-size: 0.95rem; font-weight: 500; }
+  .triiiple-landing-banner__benefits p { margin: 0; max-width: 22rem; font-size: 0.82rem; line-height: 1.55; opacity: 0.55; }
+
+  .triiiple-landing-banner__campaign {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: clamp(34rem, 66vw, 62rem);
+  }
+
+  .triiiple-landing-banner__media {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    overflow: hidden;
+    background: var(--media-bg, #650b05);
+  }
+
+  .triiiple-landing-banner__image {
+    display: grid;
+    min-height: 0;
+    place-items: center;
+    padding: clamp(1.5rem, 4vw, 4rem);
+    overflow: hidden;
+  }
+
+  .triiiple-landing-banner__image img {
+    width: min(78%, 36rem);
+    height: 100%;
+    object-fit: contain;
+    transform: perspective(1000px) rotateX(10deg) rotateY(-15deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    filter: drop-shadow(0 1.5rem 2.5rem rgb(0 0 0 / 0.22));
+    transition: transform 600ms cubic-bezier(.2,.7,.2,1);
+  }
+
+  .triiiple-landing-banner__image:hover img { transform: perspective(1000px) rotateX(7deg) rotateY(-10deg) scale(1.025); }
+
+  .triiiple-landing-banner__content {
+    display: grid;
+    place-items: center;
+    padding: clamp(3rem, 9vw, 9rem);
+    color: var(--panel-text, #fff);
+    background: var(--panel-bg, #17191c);
+  }
+
+  .triiiple-landing-banner__content > div { width: min(100%, 30rem); }
+  .triiiple-landing-banner__content h2 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+  .triiiple-landing-banner__content .rte { margin-top: 1.25rem; opacity: 0.62; }
+  .triiiple-landing-banner__price { margin: 0.5rem 0 0; font-family: var(--font-heading--family); font-size: clamp(1.2rem, 2.2vw, 2rem); }
+
+  .triiiple-landing-banner__button {
+    display: inline-flex;
+    gap: 1rem;
+    justify-content: space-between;
+    min-width: 12rem;
+    margin-top: 2rem;
+    padding: 1rem 1.4rem;
+    color: var(--panel-bg, #17191c);
+    background: var(--panel-text, #fff);
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .triiiple-landing-banner__benefits article,
+    .triiiple-landing-banner__content > div {
+      animation: triiiple-banner-rise 650ms both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 30%;
+    }
+  }
+
+  @keyframes triiiple-banner-rise {
+    from { opacity: 0; transform: translateY(1rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media screen and (max-width: 749px) {
+    .triiiple-landing-banner__strip { padding-inline: 1rem; }
+    .triiiple-landing-banner__header { align-items: start; }
+    .triiiple-landing-banner__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .triiiple-landing-banner__campaign { grid-template-columns: 1fr; min-height: auto; }
+    .triiiple-landing-banner__media { min-height: 36rem; }
+    .triiiple-landing-banner__content { min-height: 28rem; padding: 3rem 1.5rem; place-items: center start; }
+    .triiiple-landing-banner__image { padding: 1.5rem; }
+    .triiiple-landing-banner__image img { width: min(80%, 22rem); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Benefit strip and banner",
+  "enabled_on": { "templates": ["index", "page"] },
+  "settings": [
+    { "type": "text", "id": "strip_eyebrow", "label": "Strip eyebrow", "default": "Why it works" },
+    { "type": "text", "id": "strip_heading", "label": "Strip heading", "default": "Built for Singapore." },
+    { "type": "text", "id": "strip_link_label", "label": "Strip link label", "default": "Learn more" },
+    { "type": "url", "id": "strip_link", "label": "Strip link" },
+    { "type": "color", "id": "strip_background", "label": "Strip background", "default": "#17191c" },
+    { "type": "color", "id": "strip_text", "label": "Strip text", "default": "#ffffff" },
+    { "type": "header", "content": "Campaign banner" },
+    { "type": "image_picker", "id": "image_1", "label": "Top product image" },
+    { "type": "image_picker", "id": "image_2", "label": "Bottom product image" },
+    { "type": "color", "id": "media_background", "label": "Media background", "default": "#650b05" },
+    { "type": "color", "id": "panel_background", "label": "Content background", "default": "#17191c" },
+    { "type": "color", "id": "panel_text", "label": "Content text", "default": "#ffffff" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Buy more, save more" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Starter Pack" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>3 pairs. Any colours.</p>" },
+    { "type": "text", "id": "price", "label": "Price", "default": "S$165" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Build your pack" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "symbol", "label": "Symbol", "default": "..." },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "TransDRY" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Pulls sweat away the second it forms." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Benefit strip and banner",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit", "settings": { "symbol": ">>>", "heading": "4-Way Stretch", "text": "Moves with you. Stays in shape." } },
+        { "type": "benefit", "settings": { "symbol": "Y", "heading": "Flat Seams", "text": "No friction. No irritation. All day." } },
+        { "type": "benefit", "settings": { "symbol": "))", "heading": "True Fit", "text": "Engineered for the way bodies move." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
