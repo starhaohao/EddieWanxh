@@ -19,9 +19,9 @@
             "title_1": "Care",
             "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
             "title_2": "Shipping",
-            "raw_content_2": "<p>Free shipping on orders over $50 within Singapore. Standard delivery 2–4 business days. International shipping available.</p>",
-            "title_3": "",
-            "raw_content_3": "",
+            "raw_content_2": "<p>Free shipping over $50 for SG &amp; MY. Free international shipping over $100. Available for email subscribers. Standard delivery 2–4 business days.</p>",
+            "title_3": "Final Clearance",
+            "raw_content_3": "<p><strong>Buy 5, Get 1 Free</strong> on selected final clearance styles. Auto-applied at checkout — no code needed.</p><p>Offer combines with shipping discounts only.</p>",
             "title_4": "",
             "raw_content_4": "",
             "title_5": "",
@@ -143,7 +143,7 @@
         "star_color": "#c8a96e",
         "quote_color": "rgba(255,255,255,0.85)",
         "who_color": "rgba(255,255,255,0.45)",
-        "heading": "What they say."
+        "heading": "Worn, Felt, Reviewed"
       },
       "blocks": {
         "rev-1": { "type": "review", "settings": { "stars": 5, "quote": "The most comfortable underwear I've ever worn. Fabric quality is unreal.", "name": "James T.", "product": "Classic Brief 3-Pack" } },

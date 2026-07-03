@@ -17,9 +17,9 @@
         "text_A4cKnQ": {
           "type": "text",
           "settings": {
-            "text": "<p>buy 3 → 15% off · buy 5 → 25% off · free shipping over SGD $50 (Singapore)</p>",
+            "text": "<p>Final Clearance: Buy 5, Get 1 Free — auto-applied at checkout. No code needed.</p>",
             "target_url_enabled": true,
-            "target_url": "shopify://collections/boxer-trunks",
+            "target_url": "shopify://collections/dead-stock-clearance",
             "target_referrer_enabled": false,
             "target_referrer": "",
             "target_device_enabled": false,
