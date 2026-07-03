@@ -36,13 +36,31 @@
         <span data-zoom-caption>{{ 'home_page.onboarding.product_title' | t }}</span>
       {%- else -%}
         {%- unless is_title_linked -%}
-          <span data-zoom-caption>{{ product.title | strip_html }}</span>
+          <span data-zoom-caption>{% render 'product-display-name', product: product %}</span>
         {%- else -%}
           <a href="{{ product.url }}">
-            <span data-zoom-caption>{{ product.title | strip_html }}</span>
+            <span data-zoom-caption>{% render 'product-display-name', product: product %}</span>
           </a>
         {%- endunless -%}
       {%- endif -%}
     </h1>
+
+    {%- unless onboarding_product -%}
+      {%- capture product_subtitle -%}{% render 'product-fabric-subtitle', product: product %}{%- endcapture -%}
+      {%- if product_subtitle != blank -%}
+        <p class="product__subtitle">{{ product_subtitle }}</p>
+      {%- endif -%}
+    {%- endunless -%}
   </div>
 </div>
+
+{%- style -%}
+  /* Blueprint §6: fabric/technology subtitle, visually separate from the product title */
+  .product__subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0;
+    color: rgba(23, 25, 28, 0.60);
+  }
+{%- endstyle -%}

@@ -1,0 +1,123 @@
+{%- comment -%}
+  EDM / email signup (FABRIC V2 blueprint §4.2).
+  Posts to Shopify's native customer form (creates a marketing subscriber) —
+  no third-party embed required. Designed to sit directly below the banner:
+  paper background, one heading, one sentence, one email field with the arrow
+  button kept inside the input border and a 44px tap target.
+{%- endcomment -%}
+
+{%- liquid
+  assign uid = section.id
+  assign field_id = 'edm-email-' | append: uid
+  assign form_id = 'edm-form-' | append: uid
+-%}
+
+<section class="edm" style="--edm-pad: {{ section.settings.padding_block }}px;">
+  <div class="edm__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="edm__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtext != blank -%}
+      <p class="edm__subtext">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+
+    {%- form 'customer', id: form_id, class: 'edm__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter, prospect">
+      <label class="edm__label" for="{{ field_id }}">{{ section.settings.placeholder }}</label>
+      <div class="edm__row">
+        <input
+          type="email"
+          name="contact[email]"
+          id="{{ field_id }}"
+          class="edm__input"
+          value="{% if form.email %}{{ form.email }}{% endif %}"
+          placeholder="{{ section.settings.placeholder }}"
+          autocomplete="email"
+          autocapitalize="off"
+          autocorrect="off"
+          required
+        >
+        <button type="submit" class="edm__btn" aria-label="{{ section.settings.button_label }}">
+          <span aria-hidden="true">&#8594;</span>
+        </button>
+      </div>
+
+      {%- if form.posted_successfully? -%}
+        <p class="edm__msg edm__msg--ok">{{ section.settings.success_text }}</p>
+      {%- elsif form.errors -%}
+        <p class="edm__msg edm__msg--err">{{ form.errors.translated_fields.email | default: 'email' | capitalize }} {{ form.errors.messages.email | default: 'is invalid.' }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{%- style -%}
+  .edm {
+    --edm-ink: #17191C;
+    --edm-paper: #F2EEE7;
+    --edm-hair: rgba(23, 25, 28, 0.28);
+    --edm-soft: rgba(23, 25, 28, 0.60);
+    background: var(--edm-paper);
+    color: var(--edm-ink);
+    padding: var(--edm-pad, 48px) clamp(20px, 5vw, 64px);
+  }
+  .edm__inner { max-width: 520px; margin: 0 auto; text-align: center; }
+  .edm__heading { font-family: 'Galdeano', Georgia, serif; font-size: clamp(24px, 3.4vw, 36px); line-height: 1.1; margin: 0 0 10px; font-weight: 400; }
+  .edm__subtext { font-size: 15px; line-height: 1.6; color: var(--edm-soft); margin: 0 0 20px; }
+  .edm__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Single continuous row: bordered wrapper, arrow inside the border */
+  .edm__row {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--edm-hair);
+    background: #fff;
+    overflow: hidden;
+  }
+  .edm__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    padding: 0 16px;
+    height: 48px;
+    font-size: 16px; /* >=16px prevents iOS zoom-on-focus */
+    color: var(--edm-ink);
+    font-family: inherit;
+  }
+  .edm__input:focus { outline: none; }
+  .edm__input::placeholder { color: var(--edm-soft); }
+  .edm__btn {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px; /* 44px+ tap target */
+    border: 0;
+    background: var(--edm-ink);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .edm__btn:hover { opacity: 0.85; }
+  .edm__msg { margin: 12px 0 0; font-size: 13px; }
+  .edm__msg--ok { color: var(--edm-ink); }
+  .edm__msg--err { color: #923531; }
+
+  .edm__row:focus-within { border-color: var(--edm-ink); }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "EDM Signup",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Join the list" },
+    { "type": "text", "id": "subtext", "label": "Sentence", "default": "First access to drops, restocks and Story Salon." },
+    { "type": "text", "id": "placeholder", "label": "Field placeholder", "default": "Email address" },
+    { "type": "text", "id": "button_label", "label": "Button aria-label", "default": "Sign up" },
+    { "type": "text", "id": "success_text", "label": "Success message", "default": "You’re in — welcome to First Layer." },
+    { "type": "range", "id": "padding_block", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Vertical padding", "default": 48 }
+  ],
+  "presets": [{ "name": "EDM Signup" }]
+}
+{% endschema %}

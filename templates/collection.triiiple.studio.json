@@ -55,7 +55,7 @@
       "blocks": {
         "feat-1": { "type": "feature", "settings": { "category": "Shipping", "title": "Free over $50", "description": "SG & MY. 2–4 business days." } },
         "feat-2": { "type": "feature", "settings": { "category": "Materials", "title": "OEKO-TEX®", "description": "Certified safe for skin." } },
-        "feat-3": { "type": "feature", "settings": { "category": "Returns", "title": "30-Day Policy", "description": "Hassle-free exchanges." } },
+        "feat-3": { "type": "feature", "settings": { "category": "Returns", "title": "14-Day Returns", "description": "Within 14 days of delivery." } },
         "feat-4": { "type": "feature", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Crafted in Thailand." } }
       },
       "block_order": ["feat-1", "feat-2", "feat-3", "feat-4"]
