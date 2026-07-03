@@ -1,0 +1,76 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "shop-hub",
+      "blocks": {
+        "design": {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by design",
+            "title": "Shop by design",
+            "text": "Go deeper by silhouette and style direction.",
+            "link": "/pages/shop-by-design"
+          }
+        },
+        "fabric": {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by fabric",
+            "title": "Shop by fabric",
+            "text": "Switch into the material-first view.",
+            "link": "/pages/shop-by-fabric"
+          }
+        },
+        "all_items": {
+          "type": "destination",
+          "settings": {
+            "label": "All items",
+            "title": "View all items",
+            "text": "Open the full assortment here.",
+            "link": "/collections/all"
+          }
+        },
+        "size_xs": {
+          "type": "size_row",
+          "settings": { "size": "XS", "chest": "32-34", "waist": "25-27" }
+        },
+        "size_s": {
+          "type": "size_row",
+          "settings": { "size": "S", "chest": "34-36", "waist": "28-30" }
+        },
+        "size_m": {
+          "type": "size_row",
+          "settings": { "size": "M", "chest": "36-38", "waist": "31-33" }
+        }
+      },
+      "block_order": [
+        "all_items",
+        "design",
+        "fabric",
+        "size_xs",
+        "size_s",
+        "size_m"
+      ],
+      "settings": {
+        "eyebrow": "Catalog",
+        "heading": "All items.",
+        "description": "<p>This is the full-store landing page. Use it as the gateway to the complete catalog.</p>",
+        "card_cta": "Open page",
+        "guide_eyebrow": "Fit guide",
+        "guide_heading": "Size and fit guide",
+        "guide_text": "<p>Keep it available from the all-items page so customers can check their size quickly.</p>",
+        "background_color": "#ffffff",
+        "text_color": "#0f1623",
+        "accent_color": "#923531"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

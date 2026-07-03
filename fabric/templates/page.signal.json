@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-editorial-landing",
+      "settings": {
+        "eyebrow": "SIGNAL",
+        "heading": "SIGNAL",
+        "tagline": "Stay dry. Stay sharp.",
+        "intro": "<p>TransDRY® fit system for a closer athletic feel.</p>",
+        "image_1": "shopify://shop_images/prod-brief-white.jpg",
+        "image_2": "shopify://shop_images/prod-brief-white_cc1cf1be-0d6a-4430-ab24-bc00d7b51a9b.jpg",
+        "primary_label": "Shop SIGNAL",
+        "primary_link": "/collections/briefs",
+        "secondary_label": "Size guide",
+        "secondary_link": "/pages/size-guide",
+        "body_eyebrow": "Fit notes",
+        "body_heading": "Close, clean, dry.",
+        "body": "<p>Y Brief, X Brief, and X Boxer Trunk sit close to the body and move like an athletic layer.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
+      }
+    }
+  },
+  "order": ["main"]
+}

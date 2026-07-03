@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-about-us",
+      "settings": {
+        "eyebrow": "About us",
+        "heading": "Who we are",
+        "intro": "<p>TRIIIPLE Studio is a men’s underwear and intimate wear brand built around a sharper idea of comfort: clean lines, considered fit, and a quiet kind of confidence.</p>",
+        "primary_label": "Shop all",
+        "primary_link": "/collections/all",
+        "secondary_label": "Story Salon",
+        "secondary_link": "/pages/story-salon",
+        "image_1": "shopify://shop_images/About-us-1.jpg",
+        "image_2": "shopify://shop_images/About-us-2.jpg",
+        "image_3": "shopify://shop_images/About-us-3.jpg",
+        "image_4": "shopify://shop_images/About-us-4.jpg",
+        "manifesto_eyebrow": "Why this works",
+        "manifesto_heading": "Engineered, not just made.",
+        "manifesto_body": "<p>Founded in Singapore and crafted in Asia, we design body-aware underwear that feels urban, timeless, and calm on the skin. Every cut is deliberate. Every layer is meant to work quietly.</p>",
+        "principles_eyebrow": "Product details",
+        "principles_heading": "The baseline.",
+        "closing_eyebrow": "The first layer",
+        "closing_heading": "Built for bodies that do more.",
+        "closing_body": "<p>We craft enduring essentials and reworked classics - each made with materials that move with you, wick moisture fast, and feel refined against the skin.</p><p>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones, with sizes ranging from XS to 2XL.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
+      },
+      "blocks": {
+        "principle_1": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Fit",
+            "heading": "Made to move",
+            "body": "<p>Patterned for comfort, built to stay put, and refined enough for everyday wear.</p>"
+          }
+        },
+        "principle_2": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Fabric",
+            "heading": "Performance first",
+            "body": "<p>Moisture-wicking, soft-touch fabrics that stay relevant beyond the trend cycle.</p>"
+          }
+        },
+        "principle_3": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Design",
+            "heading": "Measured confidence",
+            "body": "<p>Minimal, editorial, and body-aware - built to look sharp without trying too hard.</p>"
+          }
+        },
+        "principle_4": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Range",
+            "heading": "All bodies welcome",
+            "body": "<p>Sizes from XS to 2XL, because confidence should never come in one shape.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "principle_1",
+        "principle_2",
+        "principle_3",
+        "principle_4"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-editorial-landing",
+      "settings": {
+        "eyebrow": "Clearance",
+        "heading": "Last run. No restock. When it's gone, it's gone.",
+        "tagline": "Final runs only.",
+        "intro": "<p>Pieces here are moving out of the rotation and will not come back.</p>",
+        "image_1": "shopify://shop_images/fathers-day-edm-bundle-black-boxer-brief-set.jpg",
+        "image_2": "shopify://shop_images/Untitled-1-Recovered.png",
+        "primary_label": "Shop the archive",
+        "primary_link": "/collections/all",
+        "secondary_label": "About us",
+        "secondary_link": "/pages/about-us",
+        "body_eyebrow": "Last run",
+        "body_heading": "No restock",
+        "body": "<p>When a piece is gone, it stays gone.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
+      }
+    }
+  },
+  "order": ["main"]
+}

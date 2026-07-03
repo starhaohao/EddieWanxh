@@ -1,0 +1,386 @@
+# =============================================================================
+# TRIIIPLE — Metaobject Definitions v1.0
+# Shopify Admin GraphQL — metaobjectDefinitionCreate mutations
+# =============================================================================
+#
+# HOW TO RUN
+#   1. Install the "Shopify GraphiQL App" (or use the Admin API in a dev tool).
+#   2. Set API version to a recent stable (e.g. 2025-07).
+#   3. Paste and run each named operation below ONE AT A TIME.
+#      (GraphiQL runs a single named operation per execution.)
+#
+# ASSUMPTIONS (change any before running)
+#   - Design Features / Trust Badges / Product Highlights = 3 SEPARATE defs.
+#   - Recommended Pairing = list.product_reference (links real products).
+#   - All defs are storefront-readable (so the theme can render them) and
+#     publishable (Active/Draft), matching your current store.
+#   - Icons are image files (file_type_options restricted to ["Image"]).
+#   - Story Salon already exists → NOT recreated (see STEP 0 to verify fields).
+#   - Fabric = align existing "Fabric Profile" → see FABRIC section at bottom.
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# STEP 0 — DISCOVERY: list existing definitions + their IDs, types, fields.
+# Run this first. Use it to (a) confirm handles aren't already taken and
+# (b) grab the Fabric Profile / Story Salon / FAQ definition IDs.
+# -----------------------------------------------------------------------------
+query ListMetaobjectDefinitions {
+  metaobjectDefinitions(first: 50) {
+    edges {
+      node {
+        id
+        name
+        type
+        fieldDefinitions {
+          key
+          name
+          type { name }
+        }
+      }
+    }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 1. PRODUCT PHILOSOPHY  ⭐  (type: product_philosophy)
+# -----------------------------------------------------------------------------
+mutation CreateProductPhilosophy {
+  metaobjectDefinitionCreate(definition: {
+    name: "Product Philosophy"
+    type: "product_philosophy"
+    displayNameKey: "product_name"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "collection_code",     name: "Collection Code",     type: "single_line_text_field" }
+      { key: "product_name",        name: "Product Name",        type: "single_line_text_field" }
+      { key: "design_philosophy",   name: "Design Philosophy",   type: "single_line_text_field" }
+      { key: "signature_quote",     name: "Signature Quote",     type: "single_line_text_field" }
+      { key: "at_a_glance",         name: "At a Glance",         type: "multi_line_text_field" }
+      { key: "designed_for",        name: "Designed For",        type: "single_line_text_field" }
+      { key: "why_youll_love_it",   name: "Why You'll Love It",  type: "rich_text_field" }
+      { key: "recommended_pairing", name: "Recommended Pairing", type: "list.product_reference" }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 2. DESIGN FEATURES  (type: design_feature)
+# -----------------------------------------------------------------------------
+mutation CreateDesignFeature {
+  metaobjectDefinitionCreate(definition: {
+    name: "Design Features"
+    type: "design_feature"
+    displayNameKey: "title"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "title",       name: "Title",       type: "single_line_text_field" }
+      { key: "description",  name: "Description", type: "multi_line_text_field" }
+      { key: "icon",         name: "Icon",        type: "file_reference",
+        validations: [{ name: "file_type_options", value: "[\"Image\"]" }] }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 3. BUNDLE SYSTEM  (type: bundle)
+# -----------------------------------------------------------------------------
+mutation CreateBundle {
+  metaobjectDefinitionCreate(definition: {
+    name: "Bundle System"
+    type: "bundle"
+    displayNameKey: "bundle_name"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "bundle_name",  name: "Bundle Name",  type: "single_line_text_field" }
+      { key: "headline",     name: "Headline",     type: "single_line_text_field" }
+      { key: "description",  name: "Description",  type: "multi_line_text_field" }
+      { key: "promotion",    name: "Promotion",    type: "single_line_text_field" }
+      { key: "button_label", name: "Button Label", type: "single_line_text_field" }
+      { key: "button_url",   name: "Button URL",   type: "url" }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 4. TRUST BADGES  (type: trust_badge)
+# -----------------------------------------------------------------------------
+mutation CreateTrustBadge {
+  metaobjectDefinitionCreate(definition: {
+    name: "Trust Badges"
+    type: "trust_badge"
+    displayNameKey: "title"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "title",       name: "Title",       type: "single_line_text_field" }
+      { key: "description",  name: "Description", type: "multi_line_text_field" }
+      { key: "icon",         name: "Icon",        type: "file_reference",
+        validations: [{ name: "file_type_options", value: "[\"Image\"]" }] }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 5. HOMEPAGE BLOCKS  (type: homepage_block)
+# -----------------------------------------------------------------------------
+mutation CreateHomepageBlock {
+  metaobjectDefinitionCreate(definition: {
+    name: "Homepage Blocks"
+    type: "homepage_block"
+    displayNameKey: "headline"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "headline",   name: "Headline",   type: "single_line_text_field" }
+      { key: "subheading", name: "Subheading", type: "single_line_text_field" }
+      { key: "body",       name: "Body",       type: "rich_text_field" }
+      { key: "cta_label",  name: "CTA Label",  type: "single_line_text_field" }
+      { key: "cta_url",    name: "CTA URL",    type: "url" }
+      { key: "image",      name: "Image",      type: "file_reference",
+        validations: [{ name: "file_type_options", value: "[\"Image\"]" }] }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 6. PRODUCT HIGHLIGHTS  (type: product_highlight)
+# -----------------------------------------------------------------------------
+mutation CreateProductHighlight {
+  metaobjectDefinitionCreate(definition: {
+    name: "Product Highlights"
+    type: "product_highlight"
+    displayNameKey: "headline"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "headline",    name: "Headline",    type: "single_line_text_field" }
+      { key: "description", name: "Description", type: "multi_line_text_field" }
+      { key: "icon",        name: "Icon",        type: "file_reference",
+        validations: [{ name: "file_type_options", value: "[\"Image\"]" }] }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 7. PRODUCT LIFESTYLE  (type: product_lifestyle)
+# -----------------------------------------------------------------------------
+mutation CreateProductLifestyle {
+  metaobjectDefinitionCreate(definition: {
+    name: "Product Lifestyle"
+    type: "product_lifestyle"
+    displayNameKey: "name"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "name", name: "Name", type: "single_line_text_field" }
+      { key: "icon", name: "Icon", type: "file_reference",
+        validations: [{ name: "file_type_options", value: "[\"Image\"]" }] }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 8. BRAND STATEMENTS  ⭐  (type: brand_statement)
+# Multilingual copy stored as explicit fields per language.
+# -----------------------------------------------------------------------------
+mutation CreateBrandStatement {
+  metaobjectDefinitionCreate(definition: {
+    name: "Brand Statements"
+    type: "brand_statement"
+    displayNameKey: "title"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "title",               name: "Title",               type: "single_line_text_field" }
+      { key: "english",             name: "English",             type: "multi_line_text_field" }
+      { key: "simplified_chinese",  name: "Simplified Chinese",  type: "multi_line_text_field" }
+      { key: "traditional_chinese", name: "Traditional Chinese", type: "multi_line_text_field" }
+      { key: "japanese",            name: "Japanese",            type: "multi_line_text_field" }
+      { key: "korean",              name: "Korean",              type: "multi_line_text_field" }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 9. LOCALIZATION DICTIONARY  ⭐  (type: localization_entry)
+# -----------------------------------------------------------------------------
+mutation CreateLocalizationEntry {
+  metaobjectDefinitionCreate(definition: {
+    name: "Localization Dictionary"
+    type: "localization_entry"
+    displayNameKey: "english"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "english",             name: "English",             type: "single_line_text_field" }
+      { key: "simplified_chinese",  name: "Simplified Chinese",  type: "single_line_text_field" }
+      { key: "traditional_chinese", name: "Traditional Chinese", type: "single_line_text_field" }
+      { key: "japanese",            name: "Japanese",            type: "single_line_text_field" }
+      { key: "korean",              name: "Korean",              type: "single_line_text_field" }
+      { key: "status",              name: "Status",              type: "single_line_text_field",
+        validations: [{ name: "choices", value: "[\"Approved\",\"Draft\",\"Review\"]" }] }
+      { key: "notes",               name: "Notes",               type: "multi_line_text_field" }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 10. COLLECTION STORY  (type: collection_story)
+# NOTE: You already have a "Collection" definition — run STEP 0 first and
+# confirm this new handle doesn't clash. If "Collection" IS meant to be this,
+# skip the create and use metaobjectDefinitionUpdate instead.
+# -----------------------------------------------------------------------------
+mutation CreateCollectionStory {
+  metaobjectDefinitionCreate(definition: {
+    name: "Collection Story"
+    type: "collection_story"
+    displayNameKey: "headline"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "collection", name: "Collection", type: "collection_reference" }
+      { key: "headline",   name: "Headline",   type: "single_line_text_field" }
+      { key: "body",       name: "Body",       type: "rich_text_field" }
+      { key: "cta_label",  name: "CTA Label",  type: "single_line_text_field" }
+      { key: "cta_url",    name: "CTA URL",    type: "url" }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# -----------------------------------------------------------------------------
+# 11. FAQ  (type: faq)
+# NOTE: "Question & Answer Pairs" entries already appear in your store.
+# Run STEP 0 — if that IS your FAQ store, skip this and align it instead.
+# -----------------------------------------------------------------------------
+mutation CreateFaq {
+  metaobjectDefinitionCreate(definition: {
+    name: "FAQ"
+    type: "faq"
+    displayNameKey: "question"
+    access: { storefront: PUBLIC_READ }
+    capabilities: { publishable: { enabled: true } }
+    fieldDefinitions: [
+      { key: "question", name: "Question", type: "single_line_text_field" }
+      { key: "answer",   name: "Answer",   type: "rich_text_field" }
+      { key: "category", name: "Category", type: "single_line_text_field" }
+      { key: "order",    name: "Order",    type: "number_integer" }
+    ]
+  }) {
+    metaobjectDefinition { id name type }
+    userErrors { field message code }
+  }
+}
+
+
+# =============================================================================
+# FABRIC — ALIGN EXISTING "Fabric Profile" → target "Fabric" schema
+# =============================================================================
+# The existing "Fabric Profile" was created by the Claude Connector App, so its
+# type handle may be app-namespaced (e.g. app--123--fabric_profile) and its
+# fields may be locked. Two paths:
+#
+#   PATH A (recommended if editable): rename + add missing fields in place.
+#     1. Get its ID + current field keys from STEP 0.
+#     2. Fill in <FABRIC_PROFILE_DEFINITION_ID> below and run.
+#     3. Only include fieldDefinitions you need to CREATE (omit ones that exist).
+#
+#   PATH B (if app-owned / locked): create a clean "fabric" def (uncomment the
+#     CreateFabric mutation) and migrate the 1 existing entry manually.
+# -----------------------------------------------------------------------------
+
+# PATH A — update in place
+mutation AlignFabricProfile {
+  metaobjectDefinitionUpdate(
+    id: "<FABRIC_PROFILE_DEFINITION_ID>"
+    definition: {
+      name: "Fabric"
+      access: { storefront: PUBLIC_READ }
+      fieldDefinitions: [
+        # Keep/rename existing ones as needed; below are the CREATE ops.
+        # Remove any whose key already exists to avoid "key taken" errors.
+        { create: { key: "fabric_name",       name: "Fabric Name",       type: "single_line_text_field" } }
+        { create: { key: "short_description",  name: "Short Description", type: "single_line_text_field" } }
+        { create: { key: "full_description",   name: "Full Description",  type: "multi_line_text_field" } }
+        { create: { key: "key_benefits",       name: "Key Benefits",      type: "list.single_line_text_field" } }
+        { create: { key: "composition",        name: "Composition",       type: "multi_line_text_field" } }
+        { create: { key: "care_notes",         name: "Care Notes",        type: "multi_line_text_field" } }
+      ]
+    }
+  ) {
+    metaobjectDefinition { id name type fieldDefinitions { key name } }
+    userErrors { field message code }
+  }
+}
+
+# PATH B — create fresh (uncomment if Fabric Profile is locked)
+# mutation CreateFabric {
+#   metaobjectDefinitionCreate(definition: {
+#     name: "Fabric"
+#     type: "fabric"
+#     displayNameKey: "fabric_name"
+#     access: { storefront: PUBLIC_READ }
+#     capabilities: { publishable: { enabled: true } }
+#     fieldDefinitions: [
+#       { key: "fabric_name",      name: "Fabric Name",       type: "single_line_text_field" }
+#       { key: "short_description", name: "Short Description", type: "single_line_text_field" }
+#       { key: "full_description",  name: "Full Description",  type: "multi_line_text_field" }
+#       { key: "key_benefits",      name: "Key Benefits",      type: "list.single_line_text_field" }
+#       { key: "composition",       name: "Composition",       type: "multi_line_text_field" }
+#       { key: "care_notes",        name: "Care Notes",        type: "multi_line_text_field" }
+#     ]
+#   }) {
+#     metaobjectDefinition { id name type }
+#     userErrors { field message code }
+#   }
+# }
+
+# =============================================================================
+# AFTER RUNNING: Care Instructions → fold its copy into Fabric.care_notes,
+# then deprecate that definition (Golden Rule: no duplicated copy).
+# Story Salon already exists — verify its 7 fields against the spec via STEP 0.
+# =============================================================================
