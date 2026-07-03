@@ -1,103 +1,37 @@
-// Minimal EventEmitter shim for Oxygen (Cloudflare Workers) compatibility.
-// Node's built-in 'events' module is unavailable in Oxygen; this covers the
-// subset used by readable-stream (which is aliased from the 'stream' built-in).
-class EventEmitter {
-  constructor() {
-    this._events = Object.create(null);
-    this._maxListeners = 10;
-  }
+// Minimal EventEmitter shim for Cloudflare Workers / Oxygen
 
-  setMaxListeners(n) {
-    this._maxListeners = n;
-    return this;
-  }
-
-  getMaxListeners() {
-    return this._maxListeners;
-  }
-
-  on(event, fn) {
-    if (!this._events[event]) this._events[event] = [];
-    this._events[event].push(fn);
-    return this;
-  }
-
-  addListener(event, fn) {
-    return this.on(event, fn);
-  }
-
-  once(event, fn) {
-    const wrapper = (...args) => {
-      fn.apply(this, args);
-      this.off(event, wrapper);
-    };
-    wrapper._original = fn;
-    return this.on(event, wrapper);
-  }
-
-  off(event, fn) {
-    if (this._events[event]) {
-      this._events[event] = this._events[event].filter(
-        (f) => f !== fn && f._original !== fn,
-      );
-    }
-    return this;
-  }
-
-  removeListener(event, fn) {
-    return this.off(event, fn);
-  }
-
-  removeAllListeners(event) {
-    if (event) {
-      delete this._events[event];
-    } else {
-      this._events = Object.create(null);
-    }
-    return this;
-  }
-
-  emit(event, ...args) {
-    const listeners = this._events[event];
-    if (!listeners || listeners.length === 0) return false;
-    listeners.slice().forEach((fn) => fn.apply(this, args));
-    return true;
-  }
-
-  listeners(event) {
-    return (this._events[event] || []).map((f) => f._original || f);
-  }
-
-  rawListeners(event) {
-    return this._events[event] || [];
-  }
-
-  listenerCount(event) {
-    return (this._events[event] || []).length;
-  }
-
-  eventNames() {
-    return Object.keys(this._events);
-  }
-
-  prependListener(event, fn) {
-    if (!this._events[event]) this._events[event] = [];
-    this._events[event].unshift(fn);
-    return this;
-  }
-
-  prependOnceListener(event, fn) {
-    const wrapper = (...args) => {
-      fn.apply(this, args);
-      this.off(event, wrapper);
-    };
-    wrapper._original = fn;
-    return this.prependListener(event, wrapper);
-  }
+export function EventEmitter() {
+  this._events = {};
 }
+EventEmitter.prototype.on = function (ev, fn) {
+  if (!this._events[ev]) this._events[ev] = [];
+  this._events[ev].push(fn);
+  return this;
+};
+EventEmitter.prototype.once = function (ev, fn) {
+  var self = this;
+  function wrap() { self.off(ev, wrap); fn.apply(this, arguments); }
+  wrap._orig = fn;
+  return this.on(ev, wrap);
+};
+EventEmitter.prototype.off = function (ev, fn) {
+  if (!this._events[ev]) return this;
+  this._events[ev] = this._events[ev].filter(function (f) { return f !== fn && f._orig !== fn; });
+  return this;
+};
+EventEmitter.prototype.removeListener = EventEmitter.prototype.off;
+EventEmitter.prototype.addListener = EventEmitter.prototype.on;
+EventEmitter.prototype.emit = function (ev) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  var fns = (this._events[ev] || []).slice();
+  for (var i = 0; i < fns.length; i++) fns[i].apply(this, args);
+  return fns.length > 0;
+};
+EventEmitter.prototype.removeAllListeners = function (ev) {
+  if (ev) delete this._events[ev]; else this._events = {};
+  return this;
+};
+EventEmitter.prototype.listeners = function (ev) { return (this._events[ev] || []).slice(); };
+EventEmitter.prototype.setMaxListeners = function () { return this; };
 
-EventEmitter.EventEmitter = EventEmitter;
-EventEmitter.defaultMaxListeners = 10;
-
-export {EventEmitter};
-export default EventEmitter;
+export default {EventEmitter};
