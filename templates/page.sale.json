@@ -59,9 +59,9 @@
       ],
       "disabled": true,
       "settings": {
-        "bg_color": "#34070b",
-        "text_color": "#ffffff",
-        "dot_color": "#00000080",
+        "bg_color": "#000000",
+        "text_color": "#faee10",
+        "dot_color": "rgba(250,238,16,0.2)",
         "speed": 60,
         "bar_height": 28,
         "font_size": 9
@@ -95,13 +95,13 @@
         "overlay_from": "rgba(0,0,0,0)",
         "overlay_to": "#00000000",
         "eyebrow": "Final Clearance",
-        "eyebrow_color": "#FFFFFF",
+        "eyebrow_color": "#faee10",
         "title": "",
         "title_size": 120,
         "subtitle": "<p>Buy 5, Get 1 Free — auto-applied at checkout.<br/>Dead stock styles, final sizes. No code needed.</p>",
         "cta_text": "Shop All",
         "cta_url": "shopify://collections/dead-stock-clearance",
-        "cta_bg": "#C8DAE0",
+        "cta_bg": "#faee10",
         "cta_text_color": "#000000",
         "show_urgency": true,
         "urgency_label": "Stock Status",
@@ -128,11 +128,11 @@
         ".page-announcement {--ANNOUNCEMENT-HEIGHT-DESKTOP: 28px !important; --ANNOUNCEMENT-HEIGHT-MOBILE: 28px !important;}"
       ],
       "settings": {
-        "bg_color": "#1b3a49",
-        "border_top_color": "#000000",
-        "accent_color": "#f2bd7e",
-        "text_color": "#fcfcfc",
-        "muted_color": "#dfdfdf6b",
+        "bg_color": "#000000",
+        "border_top_color": "rgba(250,238,16,0.15)",
+        "accent_color": "#faee10",
+        "text_color": "#faee10",
+        "muted_color": "rgba(250,238,16,0.35)",
         "highlight_size": 14,
         "badge_text": "No code needed"
       }
@@ -150,8 +150,8 @@
             "text_font_size": "body-medium",
             "flex_align": "align--bottom-left",
             "show_text_background": true,
-            "bg_color": "#ffffff",
-            "color": "#000000",
+            "bg_color": "#000000",
+            "color": "#faee10",
             "overlay_type": "disabled",
             "link_text": "10% OFF",
             "link": "shopify://pages/unlock-first-layer-perks",
@@ -194,7 +194,7 @@
         "width": "wrapper--full",
         "height": "three-fifty-height-hero",
         "mobile_height": "screen-height-one-half--mobile",
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -284,7 +284,7 @@
         "collection_HgNMcY",
         "collection_YEY4Gq"
       ],
-      "name": "Tab collections",
+      "name": "Tab collections (sale page)",
       "settings": {
         "show_product_count": true,
         "title": "",
@@ -297,7 +297,7 @@
         "grid": 4,
         "rows": 3,
         "layout_mobile": "slider",
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "padding_top": 0,
         "padding_bottom": 0,
         "heading_tag": "automatic"
@@ -308,12 +308,12 @@
       "settings": {
         "heading": "They approved",
         "meta_text": "4.9 · 214 reviews",
-        "bg_color": "#ffffff",
-        "title_color": "#2d4256",
-        "card_bg": "#000000",
-        "star_color": "#8a9eb1",
+        "bg_color": "#0a0a0a",
+        "title_color": "#faee10",
+        "card_bg": "#1a1a1a",
+        "star_color": "#faee10",
         "quote_color": "#ffffff",
-        "who_color": "#babdc1"
+        "who_color": "rgba(255,255,255,0.45)"
       }
     },
     "section_double_irX3c4": {
@@ -351,7 +351,7 @@
         "height": "screen-height-three-quarters",
         "mobile_height": "screen-height-one-half--mobile",
         "reverse_blocks": false,
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "padding_top": 0,
         "padding_bottom": 0,
         "show_placeholder": true
@@ -375,11 +375,11 @@
     "sale_brand_story": {
       "type": "sale-brand-story",
       "settings": {
-        "bg_color": "#ffffff",
-        "border_color": "#ffffff1c",
-        "eyebrow_color": "#ff8b00",
-        "title_color": "#000000",
-        "body_color": "#d9d9d96b",
+        "bg_color": "#000000",
+        "border_color": "rgba(250,238,16,0.1)",
+        "eyebrow_color": "#faee10",
+        "title_color": "#faee10",
+        "body_color": "rgba(255,255,255,0.55)",
         "eyebrow": "The Studio",
         "title": "<p>Designed in Singapore.<br/>Crafted in Thailand.</p>",
         "body": "<p>TRIIIPLE was built on a single premise</p><p>— that underwear should be engineered, </p><p>not just made. Every cut, every stitch, </p><p>every fabric blend is a deliberate decision.</p><p> This is not basics. This is the baseline.</p>",

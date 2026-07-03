@@ -15,7 +15,7 @@
         "show_title": true,
         "show_description": false,
         "flex_align": "align--bottom-left",
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "color_scheme": "",
         "show_text_background": false,
         "overlay_type": "disabled",
         "show_image": false,
@@ -32,8 +32,8 @@
         "subcollection_layout": "grid",
         "subcollection_description": true,
         "select_image": "product",
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
-        "color": "#ffffff",
+        "color_scheme": "",
+        "color": "#000000",
         "bg_color": "",
         "padding_top": 20,
         "padding_bottom": 20
@@ -46,7 +46,9 @@
         ".product-item__image img { border-radius: 0 !important; }",
         ".product-item__bg { border-radius: 0 !important; }",
         ".product-item__bg img { border-radius: 0 !important; }",
-        ".card__media, .card__media img, .card-wrapper .media, .card-wrapper .media img, .product-card-wrapper .media, .product-card-wrapper .media img { border-radius: 0 !important; }"
+        ".card__media, .card__media img, .card-wrapper .media, .card-wrapper .media img, .product-card-wrapper .media, .product-card-wrapper .media img { border-radius: 0 !important; }",
+        ".badge, .badge--sale, .badge--soldout, .product-label, .product-item__badge, .product__badge, .on-sale { background: #CDFF00 !important; color: #000000 !important; border-color: #CDFF00 !important; }",
+        ".facets__checkbox:checked + label, .active-facets__button, .active-facets__button-inner { background: #CDFF00 !important; color: #000 !important; border-color: #CDFF00 !important; }"
       ],
       "settings": {
         "enable_sort": false,
@@ -57,7 +59,7 @@
         "grid": 3,
         "grid_mobile": "2",
         "products_per_page": 24,
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "color_scheme": "",
         "padding_top": 0,
         "padding_bottom": 60
       }
@@ -74,7 +76,7 @@
         "grid": 3,
         "rows": 3,
         "layout_mobile": "slider",
-        "color_scheme": "scheme-2",
+        "color_scheme": "",
         "padding_top": 30,
         "padding_bottom": 49,
         "heading_tag": "automatic"
