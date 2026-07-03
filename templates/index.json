@@ -41,22 +41,20 @@
       ],
       "settings": {
         "bg_type": "image",
-        "image": "shopify://shop_images/x.jpg",
-        "hero_height": 50,
-        "overlay_from": "#0a0a0abf",
-        "overlay_to": "#0a0a0a52",
-        "eyebrow": "New Season",
+        "image": "shopify://shop_images/1780115423632.jpg",
+        "hero_height": 92,
+        "overlay_from": "rgba(10,10,10,0.75)",
+        "overlay_to": "rgba(10,10,10,0.32)",
+        "eyebrow": "Final Clearance",
         "eyebrow_color": "#923531",
         "title": "<p>Wear Less.<br/>Feel More.</p>",
-        "title_size": 120,
-        "subtitle": "<p>Premium basics for the modern man</p>",
-        "show_urgency": true,
-        "urgency_label": "Drops In",
-        "urgency_text": "<p>New drop.<br/>Limited stock.</p>",
+        "title_size": 84,
+        "subtitle": "<p>Buy 5, get 1 free — final stock, no restock.</p>",
+        "show_urgency": false,
         "show_countdown": false,
         "countdown_end": "2025-12-31T23:59:59",
-        "cta_text": "Shop Now",
-        "cta_url": "/collections",
+        "cta_text": "Shop Final Clearance",
+        "cta_url": "/collections/dead-stock-clearance",
         "cta_bg": "#923531",
         "cta_text_color": "#ffffff"
       }
@@ -229,9 +227,9 @@
         "title_color": "#ffffff",
         "card_bg": "#212529",
         "star_color": "#c8a96e",
-        "quote_color": "#ffffffd9",
-        "who_color": "#ffffff73",
-        "heading": "What they say."
+        "quote_color": "rgba(255,255,255,0.85)",
+        "who_color": "rgba(255,255,255,0.45)",
+        "heading": "Worn, Felt, Reviewed"
       }
     }
   },
