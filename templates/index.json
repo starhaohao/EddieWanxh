@@ -43,16 +43,16 @@
       "settings": {
         "image": "shopify://shop_images/Untitled-4.png",
         "hero_height": 92,
-        "overlay_from": "rgba(10,10,10,0.75)",
-        "overlay_to": "rgba(10,10,10,0.32)",
+        "overlay_from": "#0a0a0abf",
+        "overlay_to": "#0a0a0a52",
         "eyebrow": "Final Clearance",
-        "eyebrow_color": "#7C9BDB",
+        "eyebrow_color": "#7c9bdb",
         "title": "<p>The<br/>Last Run.</p>",
         "title_size": 84,
         "subtitle": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore</p>",
         "cta_text": "Shop All",
         "cta_url": "",
-        "cta_bg": "#7C9BDB",
+        "cta_bg": "#7c9bdb",
         "cta_text_color": "#ffffff",
         "show_urgency": true,
         "urgency_label": "Stock Status",
@@ -67,7 +67,7 @@
       "type": "landing-edm-signup",
       "name": "EDM Signup",
       "settings": {
-        "layout": "centered",
+        "layout": "inline",
         "background": "ink",
         "eyebrow": "First Layer",
         "heading": "Join the list",
@@ -75,7 +75,7 @@
         "placeholder": "Email address",
         "button_label": "Sign up",
         "success_text": "You’re in — welcome to First Layer.",
-        "padding_block": 96
+        "padding_block": 0
       }
     },
     "homepage-social": {
@@ -196,10 +196,10 @@
         "meta_text": "4.9 · 214 reviews",
         "bg_color": "#ffffff",
         "title_color": "#000000",
-        "card_bg": "#161616",
+        "card_bg": "#CECECE",
         "star_color": "#8b8506",
-        "quote_color": "#deddc4",
-        "who_color": "#ffffff80"
+        "quote_color": "#000000",
+        "who_color": "#868686"
       }
     },
     "homepage-brand-story": {
@@ -207,12 +207,12 @@
       "settings": {
         "bg_color": "#000000",
         "border_color": "#000000",
-        "eyebrow_color": "#6a6501",
-        "title_color": "#f4e922",
+        "eyebrow_color": "#DFDCA6",
+        "title_color": "#FFF200",
         "body_color": "#fff300",
-        "eyebrow": "The Studio",
+        "eyebrow": "about us",
         "title": "<h4><strong>Designed in Singapore.<br/>Crafted in Thailand.</strong></h4>",
-        "body": "<p>TRIIIPLE was built on a single premise — that underwear should be engineered, not just made. Every cut, every stitch, every fabric blend is a deliberate decision. This is not basics. This is the baseline.</p>",
+        "body": "<p>TRIIPLE was built on a single premise: underwear should be engineered, not simply made.  Every cut stitch and fabric blend is a deliberate decision. This isn’t basics; this is the baseline.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
     },
@@ -343,6 +343,37 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "17832063756556c805": {
+      "type": "_blocks",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
@@ -354,6 +385,7 @@
     "homepage-brand-story",
     "178318995400e552a5",
     "1783191335366c4e20",
-    "17831923402a78ad89"
+    "17831923402a78ad89",
+    "17832063756556c805"
   ]
 }

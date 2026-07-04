@@ -73,13 +73,6 @@
             "padding_bottom": 14
           }
         },
-        "divider_7gD9R4": {
-          "type": "divider",
-          "settings": {
-            "show_line": true,
-            "padding_bottom": 14
-          }
-        },
         "divider-2": {
           "type": "divider",
           "settings": {
@@ -151,7 +144,6 @@
       },
       "block_order": [
         "text_Xk6mkM",
-        "divider_7gD9R4",
         "divider-2",
         "collection_YFLFHW",
         "collection_MbExyg",
