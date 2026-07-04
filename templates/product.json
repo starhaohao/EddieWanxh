@@ -20,6 +20,23 @@
         "padding_bottom": 0
       }
     },
+    "17831992207e1ea4f3": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_fgHUEh": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": ""
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_fgHUEh"
+      ],
+      "settings": {
+        "include_margins": false
+      }
+    },
     "main": {
       "type": "product",
       "blocks": {
@@ -66,15 +83,15 @@
           "source": "{{ product.metafields.custom.product_content.value }}",
           "settings": {
             "show_quantity": true,
-            "button_type": "btn--primary",
-            "button_size": "btn--large",
-            "button_style": "btn--solid",
-            "show_dynamic_checkout": false,
-            "button_type_dynamic": "btn--secondary",
+            "button_type": "btn--black",
+            "button_size": "btn--small",
+            "button_style": "btn--outline",
+            "show_dynamic_checkout": true,
+            "button_type_dynamic": "btn--black",
             "button_size_dynamic": "btn--large",
-            "button_style_dynamic": "btn--solid",
+            "button_style_dynamic": "btn--outline",
             "show_gift_card_recipient": false,
-            "padding_bottom": 32
+            "padding_bottom": 50
           }
         },
         "inventory_countdown": {
@@ -97,13 +114,6 @@
             "padding_bottom": 30
           }
         },
-        "code_fKkGHR": {
-          "type": "code",
-          "settings": {
-            "code": "",
-            "padding_bottom": 16
-          }
-        },
         "sharing_GyTtAL": {
           "type": "sharing",
           "settings": {
@@ -119,7 +129,6 @@
         "buttons",
         "inventory_countdown",
         "divider_D4UprF",
-        "code_fKkGHR",
         "sharing_GyTtAL"
       ],
       "settings": {
@@ -129,9 +138,9 @@
         "enable_zoom": true,
         "enable_video_looping": true,
         "image_layout": "grid-2",
-        "image_size": "large",
-        "mobile_image_style": "thumbs",
-        "color_scheme": "scheme-1",
+        "image_size": "stretch",
+        "mobile_image_style": "slider",
+        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
         "padding_top": 16,
         "padding_bottom": 40
       }
@@ -515,6 +524,7 @@
   },
   "order": [
     "section_custom_code_WGKwXq",
+    "17831992207e1ea4f3",
     "main",
     "product_detail_story_nAMcGg",
     "product-framework",
