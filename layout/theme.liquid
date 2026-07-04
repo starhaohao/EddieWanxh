@@ -364,7 +364,10 @@
         font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif !important;
       }
     </style>
-    <script src="{{ 'cart-progress.js' | asset_url }}" defer></script>
+    <script {% comment %}
+      Temporarily bypassed missing asset error for cart-progress script
+      <script src="{{ 'cart-progress.js' | asset_url }}" defer></script>
+    {% endcomment %} defer></script>
   </head>
 
   <body
