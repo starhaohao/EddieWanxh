@@ -10,6 +10,7 @@
 {
   "content": {
     "product_badge_sale": "Sale",
+    "product_badge_save": "Save",
     "item_count": {
       "one": "{{ count }} item",
       "other": "{{ count }} items"
