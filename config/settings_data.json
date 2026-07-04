@@ -53,7 +53,7 @@
     "button_large": 8,
     "grid_style": "compact",
     "dots_style": "line",
-    "icon_style": "1.5",
+    "icon_style": "1",
     "show_image_gray_bg": "behind",
     "animations_enable": true,
     "parallax_enable": true,

@@ -64,15 +64,31 @@
     "mobile-menu": {
       "type": "mobile-menu",
       "blocks": {
+        "text_Xk6mkM": {
+          "type": "text",
+          "settings": {
+            "text": "Free shipping on orders over $100",
+            "align_text": "text-left",
+            "text_font_size": "body-large",
+            "padding_bottom": 14
+          }
+        },
+        "divider_7gD9R4": {
+          "type": "divider",
+          "settings": {
+            "show_line": true,
+            "padding_bottom": 14
+          }
+        },
         "menu_columns_kah6YG": {
           "type": "menu-columns",
           "settings": {
             "mobile_menu_linklist": "triiiple-shop",
-            "text_font_size": "body-x-small",
-            "highlight_item": "Sale",
+            "text_font_size": "body-x-large",
+            "highlight_item": "",
             "highlight_item_color": "#d02e2e",
             "padding": true,
-            "padding_bottom": 26
+            "padding_bottom": 0
           }
         },
         "divider-2": {
@@ -82,11 +98,26 @@
             "padding_bottom": 8
           }
         },
-        "socials": {
-          "type": "socials",
+        "collection_YFLFHW": {
+          "type": "collection",
           "settings": {
-            "width": "half",
-            "padding_bottom": 50
+            "collection": "bundles-xl-2xl-clearance",
+            "image_width": 50,
+            "text_font_size": "body-large",
+            "bg_color": "",
+            "padding": true,
+            "padding_bottom": 14
+          }
+        },
+        "collection_MbExyg": {
+          "type": "collection",
+          "settings": {
+            "collection": "bundles-xs-s-clearance",
+            "image_width": 50,
+            "text_font_size": "body-large",
+            "bg_color": "",
+            "padding": true,
+            "padding_bottom": 14
           }
         },
         "divider-3": {
@@ -94,6 +125,13 @@
           "settings": {
             "show_line": true,
             "padding_bottom": 14
+          }
+        },
+        "socials": {
+          "type": "socials",
+          "settings": {
+            "width": "half",
+            "padding_bottom": 50
           }
         },
         "localization": {
@@ -112,14 +150,17 @@
         }
       },
       "block_order": [
+        "text_Xk6mkM",
+        "divider_7gD9R4",
         "menu_columns_kah6YG",
         "divider-2",
-        "socials",
+        "collection_YFLFHW",
+        "collection_MbExyg",
         "divider-3",
+        "socials",
         "localization"
       ],
       "settings": {
-        "logo": "shopify://shop_images/Frame_77.png",
         "logo_max_limit": 80,
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a"
       }
@@ -202,7 +243,7 @@
       "settings": {
         "header_sticky": true,
         "enable_search": true,
-        "header_style": "logo_beside",
+        "header_style": "drawer",
         "show_separator_line": true,
         "header_border_color": "#7c9bdb",
         "separator_opacity": 100,
@@ -213,7 +254,7 @@
         "logo_max_limit": 125,
         "logo_max_limit_mobile": 85,
         "main_menu_linklist": "triiiple-shop",
-        "enable_call_to_action": false,
+        "enable_call_to_action": true,
         "button_text": "Enjoy a 10% discount on your first ownership.",
         "button_link": "shopify://pages/unlock-first-layer-perks",
         "button_type": "btn--black",
