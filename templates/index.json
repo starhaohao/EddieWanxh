@@ -9,53 +9,94 @@
  */
 {
   "sections": {
-    "homepage-clearance": {
-      "type": "sale-hero",
+    "1783189421bb97f669": {
+      "type": "_blocks",
       "blocks": {
-        "ghost_cta_xP4BdY": {
-          "type": "ghost_cta",
+        "ai_gen_block_1ede56f_LXrhp6": {
+          "type": "ai_gen_block_1ede56f",
           "settings": {
-            "label": "XL/2XL Clearance",
-            "url": "shopify://collections/bundles-xl-2xl-clearance"
-          }
-        },
-        "ghost_cta_EMwr9V": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "XS/S Clearance",
-            "url": "shopify://collections/bundles-xs-s-clearance"
-          }
-        },
-        "ghost_cta_Kb8ihY": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "Briefs",
-            "url": ""
-          }
+            "background_image": "shopify://shop_images/Untitled-4.png",
+            "zoom_start": 1.3,
+            "zoom_end": 1,
+            "mobile_height": 50,
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.3,
+            "heading": "The last stock edit",
+            "subheading": "Essential styles, up to 80%off.",
+            "text_color": "#F4E922",
+            "content_max_width": 1200,
+            "desktop_vertical_alignment": "center",
+            "desktop_horizontal_alignment": "flex-start",
+            "desktop_text_alignment": "left",
+            "mobile_vertical_alignment": "flex-end",
+            "mobile_horizontal_alignment": "flex-start",
+            "mobile_text_alignment": "left",
+            "heading_font": "sans_serif_n4",
+            "heading_size_desktop": 38,
+            "heading_size_mobile": 32,
+            "heading_line_height_desktop": 1.2,
+            "heading_line_height_mobile": 1.2,
+            "heading_letter_spacing": 0,
+            "heading_uppercase": false,
+            "subheading_font": "sans_serif_n4",
+            "subheading_size_desktop": 14,
+            "subheading_size_mobile": 13,
+            "subheading_line_height_desktop": 1.5,
+            "subheading_line_height_mobile": 1.5,
+            "subheading_letter_spacing": 0,
+            "subheading_uppercase": false,
+            "text_shadow_x": 0,
+            "text_shadow_y": 0,
+            "text_shadow_blur": 0,
+            "text_shadow_color": "#000000",
+            "button_text": "Shop now",
+            "button_link": "shopify://collections/dead-stock-clearance",
+            "button_font": "sans_serif_n4",
+            "button_font_size_desktop": 16,
+            "button_font_size_mobile": 14,
+            "button_padding_desktop": 16,
+            "button_padding_mobile": 12,
+            "button_letter_spacing": 0,
+            "button_uppercase": false,
+            "button_bg_color": "#F1F1F0",
+            "button_text_color": "#000000",
+            "button_hover_bg_color": "#161501",
+            "button_border_radius": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "ghost_cta_xP4BdY",
-        "ghost_cta_EMwr9V",
-        "ghost_cta_Kb8ihY"
+        "ai_gen_block_1ede56f_LXrhp6"
       ],
       "settings": {
-        "image": "shopify://shop_images/92536197-D5A2-4BA4-BD13-20A35FE353E8_L0_001-02_02_2026_7_56_58_PM.jpg",
-        "hero_height": 100,
-        "overlay_from": "#000000d1",
-        "overlay_to": "#0000008c",
-        "eyebrow": "Final Clearance",
-        "eyebrow_color": "#cdff00",
-        "title": "<p>Dead Stock.<br/>Final Sizes.</p>",
-        "title_size": 72,
-        "subtitle": "<p>Buy 5, Get 1 Free — no restock, no second chance.</p>",
-        "cta_text": "Shop Final Clearance",
-        "cta_url": "/collections/dead-stock-clearance",
-        "cta_bg": "#cdff00",
-        "cta_text_color": "#000000",
-        "show_urgency": true,
-        "urgency_label": "Stock Status",
-        "urgency_text": "<p>Final stock.<br/>No restock.</p>"
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "features-strip": {
@@ -65,11 +106,33 @@
     "homepage-newsletter": {
       "type": "section-newsletter",
       "blocks": {
+        "nl-text": {
+          "type": "text",
+          "settings": {
+            "subheading": "WELCOME",
+            "title": "You come first.",
+            "heading_font_size": "heading-medium",
+            "text": "<p>Join the circle. First to know, first extra 10% OFF.</p>",
+            "text_font_size": "body-medium",
+            "text_columns": 1,
+            "align_text": "text-left",
+            "button_text": "Subscribe",
+            "button_url": "shopify://pages/unlock-first-layer-perks",
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--outline",
+            "show_arrow": false,
+            "show_social_links": true,
+            "bg_color": "#FFF300",
+            "color": "#161501",
+            "heading_tag": "automatic"
+          }
+        },
         "nl-image": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Banner_2_13thAugl__Original.jpg",
-            "title": "additional 10% discount and a free gift?",
+            "image": "shopify://shop_images/01ABE7BB-EB35-48A1-826E-E26C5CCEB84D_Original.jpg",
+            "title": "",
             "heading_font_size": "heading-x-small",
             "text": "",
             "text_font_size": "body-x-small",
@@ -86,33 +149,11 @@
             "show_arrow": true,
             "heading_tag": "automatic"
           }
-        },
-        "nl-text": {
-          "type": "text",
-          "settings": {
-            "subheading": "join us",
-            "title": "You come first.",
-            "heading_font_size": "heading-medium",
-            "text": "<p>Join the First Layer circle. First to know, first to shop.</p>",
-            "text_font_size": "body-small",
-            "text_columns": 1,
-            "align_text": "text-left",
-            "button_text": "Subscribe",
-            "button_url": "shopify://pages/unlock-first-layer-perks",
-            "button_type": "btn--black",
-            "button_size": "btn--large",
-            "button_style": "btn--solid",
-            "show_arrow": false,
-            "show_social_links": true,
-            "bg_color": "#161501",
-            "color": "#f4ea22",
-            "heading_tag": "automatic"
-          }
         }
       },
       "block_order": [
-        "nl-image",
-        "nl-text"
+        "nl-text",
+        "nl-image"
       ],
       "name": "Newsletter",
       "settings": {
@@ -180,18 +221,18 @@
       ],
       "settings": {
         "heading": "Worn in the wild.",
-        "heading_font_size": "heading-medium",
-        "text": "<p>Tag us @triiiple_studio</p>",
+        "heading_font_size": "heading-small",
+        "text": "<p>Tag us @<a href=\"https://www.instagram.com/triiiple_studio/\" target=\"_blank\" title=\"https://www.instagram.com/triiiple_studio/\">triiiple_studio</a></p>",
         "text_font_size": "body-small",
-        "align_text": "text-center",
+        "align_text": "text-left",
         "width": "wrapper--full",
         "aspect_ratio": 1.5,
         "layout_desktop": "slider",
         "blocks_per_row": 4,
         "layout_mobile": "slider",
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
-        "padding_top": 50,
-        "padding_bottom": 100,
+        "padding_top": 33,
+        "padding_bottom": 0,
         "heading_tag": "automatic"
       }
     },
@@ -261,14 +302,101 @@
         "body": "<p>TRIIIPLE was built on a single premise — that underwear should be engineered, not just made. Every cut, every stitch, every fabric blend is a deliberate decision. This is not basics. This is the baseline.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
+    },
+    "178318995400e552a5": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_203b961_AzVdaJ": {
+          "type": "ai_gen_block_203b961",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_203b961_AzVdaJ"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "1783191335366c4e20": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_fed5b37_PTHz9R": {
+          "type": "ai_gen_block_fed5b37",
+          "settings": {
+            "spacing_between_cards": 16,
+            "custom_css": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_fed5b37_PTHz9R"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
-    "homepage-clearance",
+    "1783189421bb97f669",
     "features-strip",
     "homepage-newsletter",
     "homepage-social",
     "homepage-reviews",
-    "homepage-brand-story"
+    "homepage-brand-story",
+    "178318995400e552a5",
+    "1783191335366c4e20"
   ]
 }

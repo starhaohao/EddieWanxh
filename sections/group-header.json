@@ -14,18 +14,6 @@
     "announcement": {
       "type": "announcement",
       "blocks": {
-        "text_A4cKnQ": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Final Clearance: Buy 5, Get 1 Free — auto-applied at checkout. No code needed.</p>",
-            "target_url_enabled": true,
-            "target_url": "shopify://collections/dead-stock-clearance",
-            "target_referrer_enabled": false,
-            "target_referrer": "",
-            "target_device_enabled": false,
-            "target_device": "mobile"
-          }
-        },
         "text_Dpc9YJ": {
           "type": "text",
           "disabled": true,
@@ -55,7 +43,6 @@
         }
       },
       "block_order": [
-        "text_A4cKnQ",
         "text_Dpc9YJ",
         "message_Y6tLRR"
       ],
@@ -222,7 +209,7 @@
         "show_icons": true,
         "icon_as_circle": true,
         "cart_icon_family": "cart",
-        "logo": "shopify://shop_images/495X80.png",
+        "logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "logo_max_limit": 125,
         "logo_max_limit_mobile": 85,
         "main_menu_linklist": "triiiple-shop",
