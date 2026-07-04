@@ -80,17 +80,6 @@
             "padding_bottom": 14
           }
         },
-        "menu_columns_kah6YG": {
-          "type": "menu-columns",
-          "settings": {
-            "mobile_menu_linklist": "triiiple-shop",
-            "text_font_size": "body-x-large",
-            "highlight_item": "",
-            "highlight_item_color": "#d02e2e",
-            "padding": true,
-            "padding_bottom": 0
-          }
-        },
         "divider-2": {
           "type": "divider",
           "settings": {
@@ -127,6 +116,17 @@
             "padding_bottom": 14
           }
         },
+        "menu_tdWJdx": {
+          "type": "menu",
+          "settings": {
+            "mobile_menu_linklist": "triiiple-shop-copy",
+            "text_font_size": "body-large",
+            "highlight_item": "Sale",
+            "highlight_item_color": "#d02e2e",
+            "padding": true,
+            "padding_bottom": 14
+          }
+        },
         "socials": {
           "type": "socials",
           "settings": {
@@ -152,11 +152,11 @@
       "block_order": [
         "text_Xk6mkM",
         "divider_7gD9R4",
-        "menu_columns_kah6YG",
         "divider-2",
         "collection_YFLFHW",
         "collection_MbExyg",
         "divider-3",
+        "menu_tdWJdx",
         "socials",
         "localization"
       ],

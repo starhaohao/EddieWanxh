@@ -48,21 +48,10 @@
         "note": "No spam. Just the useful stuff.",
         "tag_label": "EDM Signup",
         "image": "shopify://shop_images/x.jpg",
-        "background_color": "#E8E151",
+        "image_2": "shopify://shop_images/x-trunks-white.png",
+        "background_color": "#e8e151",
         "text_color": "#0f1623",
-        "accent_color": "#FFFFFF"
-      }
-    },
-    "faq-second": {
-      "type": "section-accordion-group",
-      "settings": {
-        "heading_font_size": "heading-medium",
-        "question_font_size": "heading-small",
-        "width": "wrapper",
-        "columns": "1",
-        "color_scheme": "",
-        "padding_top": 50,
-        "padding_bottom": 50
+        "accent_color": "#ffffff"
       }
     },
     "page_about_us_CWYgpx": {
@@ -128,7 +117,7 @@
         "closing_eyebrow": "The first layer",
         "closing_heading": "Built for bodies that do more.",
         "closing_body": "<p>We craft enduring essentials and reinvented classics - each made with innovative materials that move with you, wick moisture fast, and feel luxuriously soft against the skin.</p><p>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones, with sizes ranging from XS to 2XL.</p>",
-        "background_color": "#F4E922",
+        "background_color": "#f4e922",
         "ink_color": "#17191c",
         "accent_color": "#4a1024"
       }
@@ -137,7 +126,6 @@
   "order": [
     "main",
     "edm_signup_FVarX6",
-    "faq-second",
     "page_about_us_CWYgpx"
   ]
 }

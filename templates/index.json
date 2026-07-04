@@ -24,7 +24,7 @@
             "overlay_opacity": 0.3,
             "heading": "The last stock edit",
             "subheading": "Essential styles, up to 80%off.",
-            "text_color": "#F4E922",
+            "text_color": "#f4e922",
             "content_max_width": 400,
             "desktop_vertical_alignment": "center",
             "desktop_horizontal_alignment": "flex-start",
@@ -59,7 +59,7 @@
             "button_padding_mobile": 12,
             "button_letter_spacing": 0,
             "button_uppercase": false,
-            "button_bg_color": "#F1F1F0",
+            "button_bg_color": "#f1f1f0",
             "button_text_color": "#000000",
             "button_hover_bg_color": "#161501",
             "button_border_radius": 0
@@ -71,15 +71,15 @@
         "ai_gen_block_1ede56f_LXrhp6"
       ],
       "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
+        "content_direction": "row",
+        "vertical_on_mobile": false,
+        "horizontal_alignment": "flex-end",
+        "vertical_alignment": "flex-start",
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
+        "gap": 0,
+        "section_width": "full-width",
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
@@ -102,68 +102,6 @@
     "features-strip": {
       "type": "landing-features-strip",
       "settings": {}
-    },
-    "homepage-newsletter": {
-      "type": "section-newsletter",
-      "blocks": {
-        "nl-text": {
-          "type": "text",
-          "settings": {
-            "subheading": "WELCOME",
-            "title": "You come first.",
-            "heading_font_size": "heading-medium",
-            "text": "<p>Join the circle. First to know, first extra 10% OFF.</p>",
-            "text_font_size": "body-medium",
-            "text_columns": 1,
-            "align_text": "text-left",
-            "button_text": "Subscribe",
-            "button_url": "shopify://pages/unlock-first-layer-perks",
-            "button_type": "btn--black",
-            "button_size": "",
-            "button_style": "btn--outline",
-            "show_arrow": false,
-            "show_social_links": false,
-            "bg_color": "#FFF300",
-            "color": "#161501",
-            "heading_tag": "automatic"
-          }
-        },
-        "nl-image": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/01ABE7BB-EB35-48A1-826E-E26C5CCEB84D_Original.jpg",
-            "title": "",
-            "heading_font_size": "heading-x-small",
-            "text": "",
-            "text_font_size": "body-x-small",
-            "flex_align": "align--bottom-center",
-            "show_text_background": false,
-            "bg_color": "#f4ea22",
-            "color": "#161501",
-            "overlay_type": "disabled",
-            "link_text": "",
-            "link": "shopify://pages/unlock-first-layer-perks",
-            "button_type": "btn--black",
-            "button_size": "btn--small",
-            "button_style": "btn--outline",
-            "show_arrow": true,
-            "heading_tag": "automatic"
-          }
-        }
-      },
-      "block_order": [
-        "nl-text",
-        "nl-image"
-      ],
-      "name": "Newsletter",
-      "settings": {
-        "width": "wrapper--full",
-        "height": "three-fifty-height-hero",
-        "mobile_height": "screen-height-one-half--mobile",
-        "color_scheme": "scheme-2",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
     },
     "homepage-social": {
       "type": "section-social-videos",
@@ -281,10 +219,10 @@
       "settings": {
         "heading": "Worn. Felt. Reviewed.",
         "meta_text": "4.9 · 214 reviews",
-        "bg_color": "#0a0a0a",
-        "title_color": "#f4ea22",
+        "bg_color": "#FFFFFF",
+        "title_color": "#000000",
         "card_bg": "#161616",
-        "star_color": "#f4ea22",
+        "star_color": "#8B8506",
         "quote_color": "#deddc4",
         "who_color": "#ffffff80"
       }
@@ -295,8 +233,8 @@
         "bg_color": "#000000",
         "border_color": "#000000",
         "eyebrow_color": "#6a6501",
-        "title_color": "#F4E922",
-        "body_color": "#FFF300",
+        "title_color": "#f4e922",
+        "body_color": "#fff300",
         "eyebrow": "The Studio",
         "title": "<h4><strong>Designed in Singapore.<br/>Crafted in Thailand.</strong></h4>",
         "body": "<p>TRIIIPLE was built on a single premise — that underwear should be engineered, not just made. Every cut, every stitch, every fabric blend is a deliberate decision. This is not basics. This is the baseline.</p>",
@@ -435,7 +373,6 @@
   "order": [
     "1783189421bb97f669",
     "features-strip",
-    "homepage-newsletter",
     "homepage-social",
     "homepage-reviews",
     "homepage-brand-story",
