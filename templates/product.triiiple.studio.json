@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -9,6 +18,14 @@
             "subheading_option": "vendor",
             "heading_font_size": "heading-medium",
             "padding_bottom": 8
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "text_font_size": "body-large",
+            "show_shipping_policy": true,
+            "padding_bottom": 12
           }
         },
         "tab_richtext": {
@@ -95,6 +112,7 @@
       },
       "block_order": [
         "title",
+        "price",
         "tab_richtext",
         "variants",
         "fit_guide",
@@ -116,42 +134,6 @@
         "padding_top": 0,
         "padding_bottom": 61
       }
-    },
-    "features": {
-      "type": "landing-features-strip",
-      "settings": {
-        "bg_color": "#212529",
-        "border_color": "rgba(255,255,255,0.11)",
-        "cat_color": "#923531",
-        "title_color": "#ffffff",
-        "desc_color": "rgba(255,255,255,0.42)"
-      },
-      "blocks": {
-        "feat-1": { "type": "feature", "settings": { "category": "Shipping", "title": "Free over $50", "description": "SG & MY. 2–4 business days." } },
-        "feat-2": { "type": "feature", "settings": { "category": "Materials", "title": "OEKO-TEX®", "description": "Certified safe for skin." } },
-        "feat-3": { "type": "feature", "settings": { "category": "Returns", "title": "30-Day Policy", "description": "Hassle-free exchanges." } },
-        "feat-4": { "type": "feature", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Crafted in Thailand." } }
-      },
-      "block_order": ["feat-1", "feat-2", "feat-3", "feat-4"]
-    },
-    "testimonials": {
-      "type": "landing-testimonials",
-      "settings": {
-        "bg_color": "#1a1d20",
-        "title_color": "#ffffff",
-        "card_bg": "#212529",
-        "star_color": "#c8a96e",
-        "quote_color": "rgba(255,255,255,0.85)",
-        "who_color": "rgba(255,255,255,0.45)",
-        "heading": "What they say."
-      },
-      "blocks": {
-        "rev-1": { "type": "review", "settings": { "stars": 5, "quote": "The most comfortable underwear I've ever worn. Fabric quality is unreal.", "name": "James T.", "product": "Classic Brief 3-Pack" } },
-        "rev-2": { "type": "review", "settings": { "stars": 5, "quote": "Finally a local brand that gets it. Fits perfectly, feels premium.", "name": "Wei H.", "product": "Boxer Trunk" } },
-        "rev-3": { "type": "review", "settings": { "stars": 5, "quote": "Ordered 5. Will order 5 more. That's all I need to say.", "name": "Raj K.", "product": "Bundle Pack" } },
-        "rev-4": { "type": "review", "settings": { "stars": 5, "quote": "Best basics I've owned. Worth every cent.", "name": "Daniel L.", "product": "Cotton Spandex Brief" } }
-      },
-      "block_order": ["rev-1", "rev-2", "rev-3", "rev-4"]
     },
     "product-framework": {
       "type": "product-framework",
@@ -206,5 +188,5 @@
       }
     }
   },
-  "order": ["main", "product-framework", "luxury-spacing", "features", "testimonials", "apps", "related"]
+  "order": ["main", "product-framework", "luxury-spacing", "apps", "related"]
 }
