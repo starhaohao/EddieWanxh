@@ -10361,6 +10361,7 @@ product-siblings {
   display: block;
   margin-bottom: 4px;
   color: var(--text-light);
+  opacity: 0.6;
 }
 .has-siblings .product-item__cutline {
   flex: 0 1 auto;

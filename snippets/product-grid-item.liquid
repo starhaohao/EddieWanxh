@@ -44,6 +44,15 @@
 
   assign desktop_swatches_limit = 5
   assign mobile_swatches_limit = 3
+  assign product_title_downcase = product.title | strip_html | escape | downcase
+  assign product_handle_downcase = product.handle | downcase
+
+  assign is_bundle_product = false
+  if product_title_downcase contains 'bundle' or product_title_downcase contains 'pack' or product_title_downcase contains 'set'
+    assign is_bundle_product = true
+  elsif product_handle_downcase contains 'bundle' or product_handle_downcase contains 'pack' or product_handle_downcase contains 'set'
+    assign is_bundle_product = true
+  endif
 
   if columns_desktop == 0
     assign columns_desktop = 4
@@ -357,8 +366,20 @@
                 endif
 
                 assign sib_cutline = sib_product.metafields.theme.cutline | strip_html
+                assign sib_title_downcase = sib_product.title | strip_html | escape | downcase
+                assign sib_handle_downcase = sib_product.handle | downcase
                 assign sib_color = sib_product.metafields.theme.sibling_color.value | default: sib_product.metafields.theme.sibling_colour.value | default: sib_product.metafields.theme.siblings_color.value | default: sib_product.metafields.theme.siblings_colour.value | default: sib_product.metafields.theme.siblings_colors.value | default: sib_product.metafields.theme.siblings_colours.value
                 assign swatch_color = sib_color | handle
+
+                if sib_cutline == blank
+                  if sib_title_downcase contains 'bundle' or sib_title_downcase contains 'pack' or sib_title_downcase contains 'set' or sib_handle_downcase contains 'bundle' or sib_handle_downcase contains 'pack' or sib_handle_downcase contains 'set'
+                    assign sib_cutline = 'TransDRY + Cotton Spandex'
+                  elsif sib_handle_downcase contains 'transdry'
+                    assign sib_cutline = 'TransDRY'
+                  elsif sib_handle_downcase contains 'cotton-spandex' or sib_handle_downcase contains 'cotton_spandex' or sib_title_downcase contains 'cotton spandex'
+                    assign sib_cutline = 'Cotton Spandex'
+                  endif
+                endif
 
                 if sib_cutline != blank
                   assign any_sibling_cutline = true
@@ -528,12 +549,44 @@
           assign discount = percent_off | floor | append: '%'
         endif
 
+        if price_compare > 0
+          assign percent_off = price_difference | times: 1.00 | divided_by: price_compare | times: 100 | floor
+          assign sale_badge_text = percent_off | append: '%'
+        endif
+
         if product.variants.size == 1 and price_difference > 0
           assign sale_badge_text = 'products.product.save_badge_html' | t: discount: discount
         endif
 
         if product.variants.size > 1 and price_difference > 0
           assign sale_badge_text = 'products.product.save_badge_up_to_html' | t: discount: discount
+        endif
+
+        if price_compare > 0
+          assign sale_badge_text = percent_off | append: '%'
+        endif
+      elsif on_sale
+        assign price = current_variant.price
+        assign price_compare = current_variant.compare_at_price
+        assign price_difference = price_compare | minus: price
+
+        for option in product.options_with_values
+          for value in option.values
+            if value.variant.available and value.variant.compare_at_price > value.variant.price
+              assign variant_price_difference = value.variant.compare_at_price | minus: value.variant.price
+
+              if variant_price_difference > price_difference
+                assign price = value.variant.price
+                assign price_compare = value.variant.compare_at_price
+                assign price_difference = price_compare | minus: price
+              endif
+            endif
+          endfor
+        endfor
+
+        if price_compare > 0 and price_difference > 0
+          assign percent_off = price_difference | times: 1.00 | divided_by: price_compare | times: 100 | floor
+          assign sale_badge_text = percent_off | append: '%'
         endif
       endif
     endif
@@ -599,12 +652,19 @@
 {%- liquid
   capture product_item_cutline
     if settings.show_cutline and product.metafields.theme.cutline != blank and product.metafields.theme.cutline.type == 'single_line_text_field'
-      assign product_title_downcase = product.title | strip_html | escape | downcase
       assign cutline_downcase = product.metafields.theme.cutline.value | downcase
 
       unless product_title_downcase contains cutline_downcase
         echo product.metafields.theme.cutline.value
       endunless
+    elsif settings.show_cutline
+      if is_bundle_product
+        echo 'TransDRY + Cotton Spandex'
+      elsif product_handle_downcase contains 'transdry'
+        echo 'TransDRY'
+      elsif product_handle_downcase contains 'cotton-spandex' or product_handle_downcase contains 'cotton_spandex' or product_title_downcase contains 'cotton spandex'
+        echo 'Cotton Spandex'
+      endif
     endif
   endcapture
 
