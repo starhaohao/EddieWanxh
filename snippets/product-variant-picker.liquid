@@ -12,8 +12,6 @@
 {%- liquid
   assign form_style = settings.form_style
   assign enable_size_chart = enable_size_chart | default: false
-  assign show_size_chart = false
-  assign has_size_option = false
   assign tags_string = product.tags | join: ','
   assign size_separator = '_size_'
   assign specific_pages = ''
@@ -56,7 +54,6 @@
   -%}
 
   {%- if translation_string_size contains option_name -%}
-    {%- assign has_size_option = true -%}
     {%- assign show_size_link_separated = false -%}
   {%- endif -%}
 {%- endfor -%}
@@ -90,11 +87,10 @@
   {%- if enable_size_chart -%}
     {%- if block.settings.info_page != blank or specific_pages != '' -%}
       {%- liquid
-        assign show_size_chart = true
         assign specific_pages_arr = specific_pages | split: ','
       -%}
 
-      {%- render 'stylesheet', name: 'tabs.css' -%}
+      {%- render 'stylesheet', name: 'tabs.css', async: true, inline: false, blocking: false -%}
       <style>
         .selector-wrapper--size .radio__legend__label {
           width: 100%;
@@ -108,11 +104,12 @@
           min-height: auto;
           min-width: auto;
           margin-left: auto;
-          padding: 0;
-          border: 0;
-          background: transparent;
-          color: #fff !important;
-          border-radius: 0;
+          padding: 8px 10px;
+          border: 1px solid rgba(23, 25, 28, 0.22);
+          background: rgba(255, 255, 255, 0.9);
+          color: #17191c !important;
+          border-radius: 2px;
+          box-shadow: 0 1px 0 rgba(23, 25, 28, 0.04);
           text-decoration: none;
           text-transform: uppercase;
           letter-spacing: 0.12em;
@@ -126,7 +123,7 @@
         .size-chart-pill,
         .size-chart-pill .radio__legend__link__label,
         .size-chart-pill .btn-size-chart {
-          color: #fff !important;
+          color: #17191c !important;
         }
 
         .size-chart-pill .btn-size-chart {
@@ -156,7 +153,9 @@
 
         @media (hover: hover) {
           .size-chart-pill:hover {
-            color: rgba(255, 255, 255, 0.72) !important;
+            color: #ffffff !important;
+            background: #17191c;
+            border-color: #17191c;
           }
         }
       </style>
@@ -366,7 +365,6 @@
                 </fieldset>
               {%- elsif picker_type == 'button' -%}
                 {%- liquid
-                  assign current_value = current_variant.options[forloop.index0]
                   capture radio_fieldset_class
                     echo 'radio__fieldset'
 
