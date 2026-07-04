@@ -9,99 +9,38 @@
  */
 {
   "sections": {
-    "1783189421bb97f669": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_1ede56f_LXrhp6": {
-          "type": "ai_gen_block_1ede56f",
-          "settings": {
-            "background_image": "shopify://shop_images/Untitled-4.png",
-            "zoom_start": 1.3,
-            "zoom_end": 1,
-            "mobile_height": 50,
-            "show_overlay": false,
-            "overlay_color": "#000000",
-            "overlay_opacity": 0.3,
-            "heading": "The last stock edit",
-            "subheading": "Essential styles, up to 80%off.",
-            "text_color": "#f4e922",
-            "content_max_width": 400,
-            "desktop_vertical_alignment": "center",
-            "desktop_horizontal_alignment": "flex-start",
-            "desktop_text_alignment": "left",
-            "mobile_vertical_alignment": "flex-end",
-            "mobile_horizontal_alignment": "flex-start",
-            "mobile_text_alignment": "left",
-            "heading_font": "caveat_n4",
-            "heading_size_desktop": 38,
-            "heading_size_mobile": 32,
-            "heading_line_height_desktop": 1.2,
-            "heading_line_height_mobile": 1.2,
-            "heading_letter_spacing": 0,
-            "heading_uppercase": false,
-            "subheading_font": "sans_serif_n4",
-            "subheading_size_desktop": 14,
-            "subheading_size_mobile": 13,
-            "subheading_line_height_desktop": 1.5,
-            "subheading_line_height_mobile": 1.5,
-            "subheading_letter_spacing": 0,
-            "subheading_uppercase": false,
-            "text_shadow_x": 0,
-            "text_shadow_y": 0,
-            "text_shadow_blur": 0,
-            "text_shadow_color": "#000000",
-            "button_text": "Shop now",
-            "button_link": "shopify://collections/dead-stock-clearance",
-            "button_font": "sans_serif_n4",
-            "button_font_size_desktop": 16,
-            "button_font_size_mobile": 14,
-            "button_padding_desktop": 16,
-            "button_padding_mobile": 12,
-            "button_letter_spacing": 0,
-            "button_uppercase": false,
-            "button_bg_color": "#f1f1f0",
-            "button_text_color": "#000000",
-            "button_hover_bg_color": "#161501",
-            "button_border_radius": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_1ede56f_LXrhp6"
-      ],
+    "triiiple_split_P9FVYC": {
+      "type": "triiiple-split",
+      "name": "Asymmetric Split",
       "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": false,
-        "horizontal_alignment": "flex-end",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "full-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "bg_color": "paper-2",
+        "reverse": false,
+        "image": "shopify://shop_images/Untitled-4.png",
+        "caption": "SALE",
+        "title": "FINAL CLEARANCE",
+        "text": "Everyday essentials made easier to shop before they’re gone.",
+        "link_label": "Explore",
+        "link_url": "shopify://collections/dead-stock-clearance"
       }
     },
     "features-strip": {
       "type": "landing-features-strip",
       "settings": {}
+    },
+    "landing_edm_signup_39bzd6": {
+      "type": "landing-edm-signup",
+      "name": "EDM Signup",
+      "settings": {
+        "layout": "inline",
+        "background": "white",
+        "eyebrow": "First Layer",
+        "heading": "Join the list",
+        "subtext": "First access to drops, restocks and Story Salon.",
+        "placeholder": "Email address",
+        "button_label": "Sign up",
+        "success_text": "You’re in — welcome to First Layer.",
+        "padding_block": 96
+      }
     },
     "homepage-social": {
       "type": "section-social-videos",
@@ -219,10 +158,10 @@
       "settings": {
         "heading": "Worn. Felt. Reviewed.",
         "meta_text": "4.9 · 214 reviews",
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "title_color": "#000000",
         "card_bg": "#161616",
-        "star_color": "#8B8506",
+        "star_color": "#8b8506",
         "quote_color": "#deddc4",
         "who_color": "#ffffff80"
       }
@@ -371,8 +310,9 @@
     }
   },
   "order": [
-    "1783189421bb97f669",
+    "triiiple_split_P9FVYC",
     "features-strip",
+    "landing_edm_signup_39bzd6",
     "homepage-social",
     "homepage-reviews",
     "homepage-brand-story",
