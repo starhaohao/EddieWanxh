@@ -21,6 +21,19 @@
     padding-left: {{ section.settings.padding_left }}px;
     padding-right: {{ section.settings.padding_right }}px;
   }
+  #shopify-section-{{ section.id }} .edm__input,
+  #shopify-section-{{ section.id }} .edm__input::placeholder {
+    color: {{ section.settings.input_color | color_modify: 'alpha', section.settings.input_opacity | divided_by: 100.0 }};
+  }
+  #shopify-section-{{ section.id }} .edm__heading,
+  #shopify-section-{{ section.id }} .edm__subtext,
+  #shopify-section-{{ section.id }} .edm__eyebrow,
+  #shopify-section-{{ section.id }} .edm__submit {
+    color: {{ section.settings.font_color | color_modify: 'alpha', section.settings.font_opacity | divided_by: 100.0 }};
+  }
+  #shopify-section-{{ section.id }} .edm__field {
+    border-bottom-color: {{ section.settings.font_color | color_modify: 'alpha', section.settings.font_opacity | divided_by: 100.0 | times: 0.3 }};
+  }
 {% endstyle %}
 
 <section class="edm edm--{{ layout }}" id="edm-{{ uid }}">
@@ -73,8 +86,6 @@
 {%- style -%}
   .edm {
     --edm-ink: #17191C;
-    --edm-paper: #F2EEE7;
-    --edm-white: #FFFFFF;
     --edm-soft: rgba(23, 25, 28, 0.55);
     --edm-hair: rgba(23, 25, 28, 0.22);
     color: var(--edm-ink);
@@ -85,7 +96,7 @@
     display: block;
     font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
     font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--edm-soft); margin-bottom: 18px;
+    margin-bottom: 18px;
   }
   .edm__heading {
     font-family: var(--font-heading-family);
@@ -97,7 +108,7 @@
     margin: 0 0 14px;
     text-wrap: balance;
   }
-  .edm__subtext { font-size: 15px; line-height: 1.65; color: var(--edm-soft); margin: 0 auto 34px; max-width: 44ch; }
+  .edm__subtext { font-size: 15px; line-height: 1.65; margin: 0 auto 34px; max-width: 44ch; }
 
   .edm__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .edm__field {
@@ -109,12 +120,11 @@
   .edm__field:focus-within { border-color: currentColor; }
   .edm__input {
     flex: 1 1 auto; min-width: 0; border: 0; background: transparent; padding: 0;
-    font-family: inherit; font-size: 16px; color: inherit; letter-spacing: 0.01em; height: 28px;
+    font-family: inherit; font-size: 16px; letter-spacing: 0.01em; height: 28px;
   }
   .edm__input:focus { outline: none; }
-  .edm__input::placeholder { color: var(--edm-soft); }
   .edm__submit {
-    flex: 0 0 auto; border: 0; background: transparent; color: inherit; cursor: pointer;
+    flex: 0 0 auto; border: 0; background: transparent; cursor: pointer;
     font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
     display: inline-flex; align-items: center; gap: 8px; padding: 0;
@@ -123,7 +133,7 @@
   .edm__submit:hover { opacity: 0.55; }
   .edm__arrow { transition: transform 0.25s ease; }
   .edm__submit:hover .edm__arrow { transform: translateX(4px); }
-  .edm__msg { margin: 16px 0 0; font-size: 13px; letter-spacing: 0.02em; color: var(--edm-soft); }
+  .edm__msg { margin: 16px 0 0; font-size: 13px; letter-spacing: 0.02em; }
   .edm__msg--err { color: #923531; }
 
   /* Inline — slim band to sit between content sections */
@@ -161,10 +171,40 @@
       "default": "centered"
     },
     {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
       "type": "color",
       "id": "bg_color",
       "label": "Background color",
       "default": "#F2EEE7"
+    },
+    {
+      "type": "color",
+      "id": "font_color",
+      "label": "Font color (heading, subtext, eyebrow, button)",
+      "default": "#17191C"
+    },
+    {
+      "type": "range",
+      "id": "font_opacity",
+      "label": "Font opacity",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "input_color",
+      "label": "Email input text color",
+      "default": "#17191C"
+    },
+    {
+      "type": "range",
+      "id": "input_opacity",
+      "label": "Email input opacity",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "default": 100
     },
     {
       "type": "header",
