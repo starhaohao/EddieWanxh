@@ -9,11 +9,11 @@
  */
 {
   "current": {
-    "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
-    "menu_bg_color": "#ffffff",
-    "header_link": "{{ shop.brand.colors.primary[0].background }}",
+    "color_scheme": "scheme-2",
+    "menu_bg_color": "#161501",
+    "header_link": "{{ shop.brand.colors.primary[1].background }}",
     "submenu_bg_color": "{{ shop.brand.colors.primary[0].foreground }}",
-    "submenu_link_color": "#19222a",
+    "submenu_link_color": "#F1F1F0",
     "menu_transparent_color": "{{ shop.brand.colors.secondary[0].background }}",
     "sale_color": "#FAEE10",
     "type_nav_font": "covered_by_your_grace_n4",

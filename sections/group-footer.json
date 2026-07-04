@@ -17,9 +17,9 @@
         "footer-1": {
           "type": "linklist",
           "settings": {
-            "linklist": "footer",
+            "linklist": "triiiple-customer-care",
             "title": "",
-            "heading_font_size": "heading-mini",
+            "heading_font_size": "heading-medium",
             "column_width": 33,
             "enable_accordion": false
           }
@@ -40,8 +40,8 @@
     "supporting-menu": {
       "type": "section-supporting-menu",
       "settings": {
-        "linklist": "footer",
-        "text_font_size": "body-x-small",
+        "linklist": "triiiple-connect",
+        "text_font_size": "body-medium",
         "footer_payment_enable": true,
         "enable_greyscale": true,
         "show_locale_selector": true,
@@ -50,7 +50,7 @@
         "show_country_selector": true,
         "show_country_name": true,
         "show_country_flag": false,
-        "color_scheme": "scheme-7",
+        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
         "padding_top": 30,
         "padding_bottom": 100
       }

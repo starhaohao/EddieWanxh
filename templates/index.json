@@ -122,7 +122,7 @@
             "button_size": "",
             "button_style": "btn--outline",
             "show_arrow": false,
-            "show_social_links": true,
+            "show_social_links": false,
             "bg_color": "#FFF300",
             "color": "#161501",
             "heading_tag": "automatic"
@@ -292,13 +292,13 @@
     "homepage-brand-story": {
       "type": "sale-brand-story",
       "settings": {
-        "bg_color": "#ffffff",
+        "bg_color": "#000000",
         "border_color": "#000000",
         "eyebrow_color": "#6a6501",
-        "title_color": "#000000",
-        "body_color": "#ffffff",
+        "title_color": "#F4E922",
+        "body_color": "#FFF300",
         "eyebrow": "The Studio",
-        "title": "<p>Designed in Singapore.<br/>Crafted in Thailand.</p>",
+        "title": "<h4><strong>Designed in Singapore.<br/>Crafted in Thailand.</strong></h4>",
         "body": "<p>TRIIIPLE was built on a single premise — that underwear should be engineered, not just made. Every cut, every stitch, every fabric blend is a deliberate decision. This is not basics. This is the baseline.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
