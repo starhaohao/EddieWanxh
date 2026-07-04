@@ -80,7 +80,7 @@
         "menu_columns_kah6YG": {
           "type": "menu-columns",
           "settings": {
-            "mobile_menu_linklist": "main-menu",
+            "mobile_menu_linklist": "triiiple-shop",
             "text_font_size": "body-x-small",
             "highlight_item": "Sale",
             "highlight_item_color": "#d02e2e",
@@ -214,7 +214,7 @@
       ],
       "settings": {
         "header_sticky": true,
-        "enable_search": false,
+        "enable_search": true,
         "header_style": "logo_beside",
         "show_separator_line": true,
         "header_border_color": "#7c9bdb",
@@ -225,7 +225,7 @@
         "logo": "shopify://shop_images/495X80.png",
         "logo_max_limit": 125,
         "logo_max_limit_mobile": 85,
-        "main_menu_linklist": "main-menu",
+        "main_menu_linklist": "triiiple-shop",
         "enable_call_to_action": false,
         "button_text": "Enjoy a 10% discount on your first ownership.",
         "button_link": "shopify://pages/unlock-first-layer-perks",
@@ -239,7 +239,7 @@
         "show_country_name": false,
         "show_country_flag": false,
         "highlight_item": "Final Clearance",
-        "highlight_item_color": "#cdff00",
+        "highlight_item_color": "#F4E922",
         "transparent_logo": "shopify://shop_images/495X80_white.png",
         "transparent_home": true,
         "transparent_collection": false,

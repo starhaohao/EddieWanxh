@@ -68,7 +68,8 @@
         "collection_card_JQkYGm": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "dead-stock-clearance",
+            "image": "shopify://shop_images/x.jpg",
             "label": "",
             "tag": "",
             "sub": "",
@@ -89,6 +90,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "boxer-trunks",
+            "image": "shopify://shop_images/Untitled-1-Recovered.png",
             "label": "Boxer Trunks",
             "tag": "",
             "sub": "More coverage. Still close.",
@@ -99,6 +101,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "tops",
+            "image": "shopify://shop_images/Untitled_design_2.png",
             "label": "Tops",
             "tag": "Buy 5 get 1 free",
             "sub": "Everyday tops, made closer.",
@@ -113,10 +116,10 @@
         "coll-3"
       ],
       "settings": {
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "border_color": "#ffffff1c",
         "text_color": "#000000",
-        "sub_color": "#B4B4B4",
+        "sub_color": "#b4b4b4",
         "eyebrow": "Collections",
         "heading": "",
         "columns": 4,
@@ -137,8 +140,8 @@
             "text_font_size": "body-x-small",
             "flex_align": "align--middle-center",
             "show_text_background": false,
-            "bg_color": "#F4EA22",
-            "color": "#F4EA22",
+            "bg_color": "#f4ea22",
+            "color": "#f4ea22",
             "overlay_type": "disabled",
             "link_text": "Join the list",
             "link": "shopify://pages/unlock-first-layer-perks",
@@ -167,7 +170,7 @@
             "show_arrow": false,
             "show_social_links": true,
             "bg_color": "#161501",
-            "color": "#F4EA22",
+            "color": "#f4ea22",
             "heading_tag": "automatic"
           }
         }
@@ -303,21 +306,21 @@
         "heading": "Worn. Felt. Reviewed.",
         "meta_text": "4.9 · 214 reviews",
         "bg_color": "#0a0a0a",
-        "title_color": "#F4EA22",
+        "title_color": "#f4ea22",
         "card_bg": "#161616",
-        "star_color": "#F4EA22",
-        "quote_color": "#DEDDC4",
+        "star_color": "#f4ea22",
+        "quote_color": "#deddc4",
         "who_color": "#ffffff80"
       }
     },
     "homepage-brand-story": {
       "type": "sale-brand-story",
       "settings": {
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "border_color": "#000000",
-        "eyebrow_color": "#6A6501",
+        "eyebrow_color": "#6a6501",
         "title_color": "#000000",
-        "body_color": "#FFFFFF",
+        "body_color": "#ffffff",
         "eyebrow": "The Studio",
         "title": "<p>Designed in Singapore.<br/>Crafted in Thailand.</p>",
         "body": "<p>TRIIIPLE was built on a single premise — that underwear should be engineered, not just made. Every cut, every stitch, every fabric blend is a deliberate decision. This is not basics. This is the baseline.</p>",
