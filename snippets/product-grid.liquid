@@ -58,7 +58,7 @@
           Product grid card loop renders here
         {% endcomment %}
         {% for product in products %}
-          {% render 'product-card', product: product %}
+          {% render 'product-card', product: product, children: blank %}
         {% endfor %}
       </ul>
     {% endif %}
