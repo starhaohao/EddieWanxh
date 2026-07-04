@@ -77,15 +77,15 @@
     "mobile-menu": {
       "type": "mobile-menu",
       "blocks": {
-        "menu": {
-          "type": "menu",
+        "menu_columns_kah6YG": {
+          "type": "menu-columns",
           "settings": {
-            "mobile_menu_linklist": "triiiple-shop",
-            "text_font_size": "body-large",
-            "highlight_item": "Buy 5, Get 1 Free — auto-applied at checkout.",
-            "highlight_item_color": "#faee10",
+            "mobile_menu_linklist": "main-menu",
+            "text_font_size": "body-x-small",
+            "highlight_item": "Sale",
+            "highlight_item_color": "#d02e2e",
             "padding": true,
-            "padding_bottom": 30
+            "padding_bottom": 26
           }
         },
         "divider-2": {
@@ -125,7 +125,7 @@
         }
       },
       "block_order": [
-        "menu",
+        "menu_columns_kah6YG",
         "divider-2",
         "socials",
         "divider-3",
@@ -134,7 +134,7 @@
       "settings": {
         "logo": "shopify://shop_images/Frame_77.png",
         "logo_max_limit": 80,
-        "color_scheme": "scheme-2"
+        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a"
       }
     },
     "header": {
