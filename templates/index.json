@@ -74,8 +74,7 @@
         "subtext": "First access to drops, restocks and Story Salon.",
         "placeholder": "Email address",
         "button_label": "Sign up",
-        "success_text": "You’re in — welcome to First Layer.",
-        "padding_block": 0
+        "success_text": "You’re in — welcome to First Layer."
       }
     },
     "homepage-social": {
@@ -136,7 +135,7 @@
         "heading": "Worn in the wild.",
         "heading_font_size": "heading-small",
         "text": "<p>Tag us @<a href=\"https://www.instagram.com/triiiple_studio/\" target=\"_blank\" title=\"https://www.instagram.com/triiiple_studio/\">triiiple_studio</a></p>",
-        "text_font_size": "body-small",
+        "text_font_size": "body-medium",
         "align_text": "text-left",
         "width": "wrapper--full",
         "aspect_ratio": 1.5,
@@ -144,9 +143,9 @@
         "blocks_per_row": 4,
         "layout_mobile": "slider",
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
-        "padding_top": 33,
+        "padding_top": 0,
         "padding_bottom": 0,
-        "heading_tag": "automatic"
+        "heading_tag": "h4"
       }
     },
     "homepage-reviews": {
