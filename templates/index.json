@@ -9,18 +9,54 @@
  */
 {
   "sections": {
-    "triiiple_split_P9FVYC": {
-      "type": "triiiple-split",
-      "name": "Asymmetric Split",
+    "sale_hero_8Vwb7N": {
+      "type": "sale-hero",
+      "blocks": {
+        "ghost_cta_zRnaVy": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Briefs",
+            "url": ""
+          }
+        },
+        "ghost_cta_XRkDR4": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Boxer Trunks",
+            "url": ""
+          }
+        },
+        "ghost_cta_KCETby": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Tops",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "ghost_cta_zRnaVy",
+        "ghost_cta_XRkDR4",
+        "ghost_cta_KCETby"
+      ],
+      "name": "Sale Hero",
       "settings": {
-        "bg_color": "paper-2",
-        "reverse": false,
         "image": "shopify://shop_images/Untitled-4.png",
-        "caption": "SALE",
-        "title": "FINAL CLEARANCE",
-        "text": "Everyday essentials made easier to shop before they’re gone.",
-        "link_label": "Explore",
-        "link_url": "shopify://collections/dead-stock-clearance"
+        "hero_height": 92,
+        "overlay_from": "rgba(10,10,10,0.75)",
+        "overlay_to": "rgba(10,10,10,0.32)",
+        "eyebrow": "Final Clearance",
+        "eyebrow_color": "#923531",
+        "title": "<p>The<br/>Last Run.</p>",
+        "title_size": 84,
+        "subtitle": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore</p>",
+        "cta_text": "Shop All",
+        "cta_url": "",
+        "cta_bg": "#923531",
+        "cta_text_color": "#ffffff",
+        "show_urgency": true,
+        "urgency_label": "Stock Status",
+        "urgency_text": "<p>Final stock.<br/>No restock.</p>"
       }
     },
     "features-strip": {
@@ -310,7 +346,7 @@
     }
   },
   "order": [
-    "triiiple_split_P9FVYC",
+    "sale_hero_8Vwb7N",
     "features-strip",
     "landing_edm_signup_39bzd6",
     "homepage-social",
