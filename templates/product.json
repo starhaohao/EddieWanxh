@@ -64,7 +64,18 @@
         "buttons": {
           "type": "buttons",
           "source": "{{ product.metafields.custom.product_content.value }}",
-          "settings": {}
+          "settings": {
+            "show_quantity": true,
+            "button_type": "btn--primary",
+            "button_size": "btn--large",
+            "button_style": "btn--solid",
+            "show_dynamic_checkout": false,
+            "button_type_dynamic": "btn--secondary",
+            "button_size_dynamic": "btn--large",
+            "button_style_dynamic": "btn--solid",
+            "show_gift_card_recipient": false,
+            "padding_bottom": 32
+          }
         },
         "inventory_countdown": {
           "type": "inventory_countdown",
@@ -121,8 +132,8 @@
         "image_size": "large",
         "mobile_image_style": "thumbs",
         "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 61
+        "padding_top": 16,
+        "padding_bottom": 40
       }
     },
     "product_detail_story_nAMcGg": {
@@ -296,7 +307,7 @@
       ],
       "name": "Product detail story",
       "settings": {
-        "details_eyebrow": "Product details",
+        "details_eyebrow": "{{ product.metafields.custom.product_content.value.design_philosophy.value }}",
         "details_heading": "Made for the way you move.",
         "features_eyebrow": "Why this works",
         "features_heading": "Less fuss. Better function.",

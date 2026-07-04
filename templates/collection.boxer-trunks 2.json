@@ -13,7 +13,7 @@
       "type": "collection-image-with-title",
       "settings": {
         "show_title": true,
-        "show_description": false,
+        "show_description": true,
         "flex_align": "align--bottom-left",
         "color_scheme": "scheme-1",
         "show_text_background": false,
@@ -43,7 +43,7 @@
       "type": "collection",
       "custom_css": [],
       "settings": {
-        "enable_sort": false,
+        "enable_sort": true,
         "enable_filters": true,
         "filter_layout": "inline-open",
         "default_open": true,
