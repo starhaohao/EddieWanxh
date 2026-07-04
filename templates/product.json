@@ -23,39 +23,31 @@
     "main": {
       "type": "product",
       "blocks": {
-        "title_G4fj9E": {
-          "type": "title",
+        "siblings_6i4tiy": {
+          "type": "siblings",
           "settings": {
-            "subheading_option": "vendor",
-            "heading_font_size": "heading-medium",
-            "padding_bottom": 8
+            "siblings_collection": "{{ product.metafields.custom.style.value.tagline.value }}",
+            "sibling_color": "{{ product.metafields.custom.design_family.value }}{{ product.metafields.custom.material_family.value }}",
+            "option_font_size": "body-medium",
+            "value_font_size": "body-x-small",
+            "padding_bottom": 16
           }
         },
-        "tab_richtext_ffcwgB": {
-          "type": "tab_richtext",
+        "title_eabA4E": {
+          "type": "title",
           "settings": {
-            "show_description": true,
-            "show_read_more": true,
-            "title_1": "",
-            "raw_content_1": "",
-            "title_2": "",
-            "raw_content_2": "",
-            "title_3": "",
-            "raw_content_3": "",
-            "title_4": "",
-            "raw_content_4": "",
-            "title_5": "",
-            "raw_content_5": "",
-            "padding_bottom": 0
+            "subheading_option": "collection",
+            "heading_font_size": "heading-small",
+            "padding_bottom": 8
           }
         },
         "variants": {
           "type": "variants",
           "settings": {
-            "info_page": "t-shirt-sleeveless-top-size-chart",
-            "size_chart_style": "text",
-            "option_font_size": "body-large",
-            "value_font_size": "body-large",
+            "info_page": "fabric-and-size-guide",
+            "size_chart_style": "ruler",
+            "option_font_size": "body-x-small",
+            "value_font_size": "body-x-large",
             "padding_bottom": 16
           }
         },
@@ -75,13 +67,13 @@
           "type": "buttons",
           "settings": {
             "show_quantity": true,
-            "button_type": "btn--secondary",
+            "button_type": "btn--black",
             "button_size": "btn--large",
             "button_style": "btn--solid",
             "show_dynamic_checkout": true,
             "button_type_dynamic": "btn--secondary",
-            "button_size_dynamic": "",
-            "button_style_dynamic": "btn--solid",
+            "button_size_dynamic": "btn--large",
+            "button_style_dynamic": "btn--outline",
             "show_gift_card_recipient": false,
             "padding_bottom": 50
           }
@@ -121,8 +113,8 @@
         }
       },
       "block_order": [
-        "title_G4fj9E",
-        "tab_richtext_ffcwgB",
+        "siblings_6i4tiy",
+        "title_eabA4E",
         "variants",
         "fit_guide_NQPq3f",
         "buttons",
@@ -140,7 +132,7 @@
         "image_layout": "grid-2",
         "image_size": "large",
         "mobile_image_style": "slider",
-        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
+        "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
         "padding_top": 0,
         "padding_bottom": 61
       }

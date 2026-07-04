@@ -1,5 +1,5 @@
 {%- style -%}
-  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=DM+Sans:wght@400;500&family=Galdeano&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=DM+Sans:wght@400;500&display=swap');
 
   :root {
     --paper: {{ section.settings.color_paper }};
@@ -9,30 +9,33 @@
     --lime: {{ section.settings.color_lime }};
     --crimson: {{ section.settings.color_crimson }};
 
-    --font-heading: 'Galdeano', serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-ui: 'Archivo', sans-serif;
+    --font-heading: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    --font-ui: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+
+    --track-tight: -0.02em;
+    --track-wide: 0.16em;
 
     --gut: clamp(18px, 4.5vw, 72px);
-    
-    --ts-mini: clamp(16px, 3vw, 20px);
-    --ts-small: clamp(22px, 4vw, 30px);
-    --ts-medium: clamp(24px, 5vw, 40px);
-    --ts-large: clamp(32px, 6vw, 50px);
-    --ts-xlarge: clamp(40px, 7vw, 64px);
-    --ts-display: clamp(45px, 8vw, 94px);
+
+    --ts-mini: clamp(15px, 2.6vw, 18px);
+    --ts-small: clamp(20px, 3.4vw, 26px);
+    --ts-medium: clamp(22px, 4vw, 34px);
+    --ts-large: clamp(28px, 5vw, 44px);
+    --ts-xlarge: clamp(34px, 6vw, 54px);
+    --ts-display: clamp(40px, 7vw, 74px);
   }
 
   /* Shared Typography Classes */
   .triiiple-cap { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
   .triiiple-cap.on-dark { color: rgba(255, 255, 255, 0.82); }
-  .triiiple-heading { font-family: var(--font-heading); line-height: 0.94; letter-spacing: -0.01em; font-weight: 400; text-wrap: balance; margin: 0; }
+  .triiiple-heading { font-family: var(--font-heading); line-height: 1.02; letter-spacing: var(--track-tight); font-weight: 500; text-wrap: balance; margin: 0; }
   .text-display { font-size: var(--ts-display); }
   .text-xlarge { font-size: var(--ts-xlarge); }
   .text-large { font-size: var(--ts-large); }
   .text-medium { font-size: var(--ts-medium); }
   
-  .triiiple-link { font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid currentColor; padding-bottom: 2px; transition: gap 0.3s ease; text-decoration: none; color: inherit; }
+  .triiiple-link { font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid currentColor; padding-bottom: 2px; transition: gap 0.3s ease; text-decoration: none; color: inherit; }
   .triiiple-link:hover { gap: 12px; }
 
   /* Scroll Reveal */
@@ -62,12 +65,12 @@
 {
   "name": "TRIIIPLE Globals",
   "settings": [
-    { "type": "color", "id": "color_paper", "label": "Paper", "default": "#ece8df" },
-    { "type": "color", "id": "color_paper_2", "label": "Paper 2", "default": "#e3dec5" },
-    { "type": "color", "id": "color_ink", "label": "Ink", "default": "#1a1a1a" },
-    { "type": "color", "id": "color_muted", "label": "Muted", "default": "#8a8377" },
-    { "type": "color", "id": "color_lime", "label": "Lime", "default": "#cdff00" },
-    { "type": "color", "id": "color_crimson", "label": "Crimson", "default": "#923531" }
+    { "type": "color", "id": "color_paper", "label": "Paper", "default": "#f3f1eb" },
+    { "type": "color", "id": "color_paper_2", "label": "Paper 2", "default": "#e7e3d8" },
+    { "type": "color", "id": "color_ink", "label": "Ink", "default": "#161514" },
+    { "type": "color", "id": "color_muted", "label": "Muted", "default": "#8c867a" },
+    { "type": "color", "id": "color_lime", "label": "Accent (muted)", "default": "#9a9488" },
+    { "type": "color", "id": "color_crimson", "label": "Accent 2", "default": "#8c574b" }
   ],
   "presets": [{ "name": "TRIIIPLE Globals" }]
 }

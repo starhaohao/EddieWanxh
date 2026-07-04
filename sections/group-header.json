@@ -28,6 +28,7 @@
         },
         "text_Dpc9YJ": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p><a href=\"/pages/unlock-first-layer-perks\" target=\"_blank\" title=\"Unlock First Layer Perks\"><strong>New customers save 10% with code TRIIIPLE10</strong></a><strong>.</strong></p>",
             "target_url_enabled": true,
@@ -40,6 +41,7 @@
         },
         "message_Y6tLRR": {
           "type": "message",
+          "disabled": true,
           "settings": {
             "show_wheel": true,
             "message": "You are ||amount|| away from free shipping.",
@@ -58,7 +60,7 @@
         "message_Y6tLRR"
       ],
       "settings": {
-        "show_border": true,
+        "show_border": false,
         "layout": "slider",
         "slider_speed": 5,
         "text_alignment": "center",
@@ -78,10 +80,10 @@
         "menu": {
           "type": "menu",
           "settings": {
-            "mobile_menu_linklist": "main-menu",
-            "text_font_size": "body-x-large",
-            "highlight_item": "Sale",
-            "highlight_item_color": "#d02e2e",
+            "mobile_menu_linklist": "triiiple-shop",
+            "text_font_size": "body-large",
+            "highlight_item": "Buy 5, Get 1 Free — auto-applied at checkout.",
+            "highlight_item_color": "#faee10",
             "padding": true,
             "padding_bottom": 30
           }
@@ -215,7 +217,7 @@
         "enable_search": false,
         "header_style": "logo_beside",
         "show_separator_line": true,
-        "header_border_color": "#7C9BDB",
+        "header_border_color": "#7c9bdb",
         "separator_opacity": 100,
         "show_icons": true,
         "icon_as_circle": true,
@@ -236,14 +238,14 @@
         "show_country_selector": true,
         "show_country_name": false,
         "show_country_flag": false,
-        "highlight_item": "",
+        "highlight_item": "Final Clearance",
         "highlight_item_color": "#cdff00",
         "transparent_logo": "shopify://shop_images/495X80_white.png",
         "transparent_home": true,
         "transparent_collection": false,
-        "transparent_article": false,
-        "transparent_page": false,
-        "transparent_product_page": false,
+        "transparent_article": true,
+        "transparent_page": true,
+        "transparent_product_page": true,
         "transparent_logo_pdp": "shopify://shop_images/495X80.png",
         "padding_top": 5,
         "padding_bottom": 5

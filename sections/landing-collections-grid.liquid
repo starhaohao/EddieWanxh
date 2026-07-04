@@ -39,7 +39,12 @@
           {%- endif -%}
         </div>
         <div class="lcg__caption">
-          <span class="lcg__name">{{ label }}</span>
+          <div class="lcg__caption-text">
+            <span class="lcg__name">{{ label }}</span>
+            {%- if block.settings.sub != blank -%}
+              <span class="lcg__sub">{{ block.settings.sub }}</span>
+            {%- endif -%}
+          </div>
           <span class="lcg__arrow">→</span>
         </div>
       </a>
@@ -142,10 +147,21 @@
     justify-content: space-between;
     padding: 14px 0 0;
   }
+  .lcg__caption-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
   .lcg__name {
     font-size: 14px;
     letter-spacing: -0.01em;
     color: var(--lcg-tc);
+  }
+  .lcg__sub {
+    font-size: 11px;
+    color: var(--lcg-sc);
+    letter-spacing: 0.01em;
+    line-height: 1.4;
   }
   .lcg__arrow {
     font-size: 14px;
@@ -188,6 +204,7 @@
         { "type": "image_picker", "id": "image", "label": "Override image" },
         { "type": "text", "id": "label", "label": "Override label" },
         { "type": "text", "id": "tag", "label": "Badge", "info": "e.g. New, Best Seller" },
+        { "type": "text", "id": "sub", "label": "Caption / subtitle" },
         { "type": "url", "id": "link", "label": "Override link" }
       ]
     }

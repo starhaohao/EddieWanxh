@@ -11,34 +11,6 @@
   "sections": {
     "landing-hero": {
       "type": "landing-hero",
-      "blocks": {
-        "ghost-briefs": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "Briefs",
-            "url": "/collections/briefs"
-          }
-        },
-        "ghost-trunks": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "Boxer Trunks",
-            "url": "/collections/boxer-trunks"
-          }
-        },
-        "ghost-tops": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "Tops",
-            "url": "/collections/tops"
-          }
-        }
-      },
-      "block_order": [
-        "ghost-briefs",
-        "ghost-trunks",
-        "ghost-tops"
-      ],
       "settings": {
         "bg_type": "image",
         "image": "shopify://shop_images/1780115423632.jpg",
@@ -49,7 +21,7 @@
         "eyebrow_color": "#923531",
         "title": "<p>Wear Less.<br/>Feel More.</p>",
         "title_size": 84,
-        "subtitle": "<p>Buy 5, get 1 free — final stock, no restock.</p>",
+        "subtitle": "<p>Buy 5, Get 1 Free — final stock, no restock.</p>",
         "show_urgency": false,
         "show_countdown": false,
         "countdown_end": "2025-12-31T23:59:59",
@@ -57,186 +29,209 @@
         "cta_url": "/collections/dead-stock-clearance",
         "cta_bg": "#923531",
         "cta_text_color": "#ffffff"
-      }
+      },
+      "blocks": {
+        "ghost-briefs": { "type": "ghost_cta", "settings": { "label": "Briefs", "url": "/collections/briefs" } },
+        "ghost-trunks": { "type": "ghost_cta", "settings": { "label": "Boxer Trunks", "url": "/collections/boxer-trunks" } },
+        "ghost-tops": { "type": "ghost_cta", "settings": { "label": "Tops", "url": "/collections/tops" } }
+      },
+      "block_order": ["ghost-briefs", "ghost-trunks", "ghost-tops"]
     },
     "features-strip": {
       "type": "landing-features-strip",
-      "blocks": {
-        "feat-1": {
-          "type": "feature",
-          "settings": {
-            "category": "Shipping",
-            "title": "Free over $50",
-            "description": "SG & MY. 2-4 business days."
-          }
-        },
-        "feat-2": {
-          "type": "feature",
-          "settings": {
-            "category": "Materials",
-            "title": "OEKO-TEX",
-            "description": "Certified safe for skin."
-          }
-        },
-        "feat-3": {
-          "type": "feature",
-          "settings": {
-            "category": "Returns",
-            "title": "30-Day Policy",
-            "description": "Hassle-free exchanges."
-          }
-        },
-        "feat-4": {
-          "type": "feature",
-          "settings": {
-            "category": "Origin",
-            "title": "Designed in SG",
-            "description": "Crafted in Thailand."
-          }
-        },
-        "feature_tBF6p6": {
-          "type": "feature",
-          "settings": {
-            "category": "Shipping",
-            "title": "Free over $50",
-            "description": "Singapore & Malaysia. 2–4 days."
-          }
-        }
-      },
-      "block_order": [
-        "feat-1",
-        "feat-2",
-        "feat-3",
-        "feat-4",
-        "feature_tBF6p6"
-      ],
       "settings": {
         "bg_color": "#212529",
-        "border_color": "#ffffff1c",
+        "border_color": "rgba(255,255,255,0.11)",
         "cat_color": "#923531",
         "title_color": "#ffffff",
-        "desc_color": "#ffffff6b"
-      }
+        "desc_color": "rgba(255,255,255,0.42)"
+      },
+      "blocks": {
+        "feat-1": { "type": "feature", "settings": { "category": "Shipping", "title": "Free over $50", "description": "SG & MY. 2-4 business days." } },
+        "feat-2": { "type": "feature", "settings": { "category": "Materials", "title": "OEKO-TEX", "description": "Certified safe for skin." } },
+        "feat-3": { "type": "feature", "settings": { "category": "Returns", "title": "14-Day Returns", "description": "Hassle-free exchanges." } },
+        "feat-4": { "type": "feature", "settings": { "category": "Origin", "title": "Designed in SG", "description": "Crafted in Thailand." } }
+      },
+      "block_order": ["feat-1", "feat-2", "feat-3", "feat-4"]
     },
     "collections-grid": {
       "type": "landing-collections-grid",
-      "blocks": {
-        "coll-1": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "briefs",
-            "label": "Briefs",
-            "tag": "Best Seller",
-            "link": "/collections/briefs"
-          }
-        },
-        "coll-2": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "tops",
-            "label": "Boxer Trunks",
-            "tag": "",
-            "link": "/collections/boxer-trunks"
-          }
-        },
-        "collection_card_hAU9x8": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "boxer-trunks",
-            "label": "",
-            "tag": "",
-            "link": ""
-          }
-        },
-        "coll-3": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "socks",
-            "label": "Tops",
-            "tag": "New",
-            "link": "/collections/tops"
-          }
-        }
-      },
-      "block_order": [
-        "coll-1",
-        "coll-2",
-        "collection_card_hAU9x8",
-        "coll-3"
-      ],
-      "settings": {
-        "bg_color": "#FFFFFF",
-        "border_color": "#ffffff1c",
-        "text_color": "#ffffff",
-        "sub_color": "#ffffff6b",
-        "eyebrow": "Shop by Category",
-        "heading": "Collections",
-        "columns": 4,
-        "cta_text": "View All",
-        "cta_url": "/collections"
-      }
-    },
-    "testimonials": {
-      "type": "landing-testimonials",
-      "blocks": {
-        "rev-1": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "The most comfortable underwear I've ever worn. Fabric quality is unreal.",
-            "name": "James T.",
-            "product": "Classic Brief 3-Pack"
-          }
-        },
-        "rev-2": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "Finally a local brand that gets it. Fits perfectly, feels premium.",
-            "name": "Wei H.",
-            "product": "Boxer Trunk"
-          }
-        },
-        "rev-3": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "Ordered 5. Will order 5 more. That's all I need to say.",
-            "name": "Raj K.",
-            "product": "Bundle Pack"
-          }
-        },
-        "rev-4": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "Best basics I've owned. Worth every cent.",
-            "name": "Daniel L.",
-            "product": "Cotton Spandex Brief"
-          }
-        }
-      },
-      "block_order": [
-        "rev-1",
-        "rev-2",
-        "rev-3",
-        "rev-4"
-      ],
       "settings": {
         "bg_color": "#1a1d20",
+        "border_color": "rgba(255,255,255,0.11)",
+        "text_color": "#ffffff",
+        "sub_color": "rgba(255,255,255,0.42)",
+        "eyebrow": "Shop by Category",
+        "heading": "Collections",
+        "columns": 3,
+        "cta_text": "View All",
+        "cta_url": "/collections"
+      },
+      "blocks": {
+        "coll-clearance": { "type": "collection_card", "settings": { "label": "Final Clearance", "tag": "Buy 5, Get 1 Free", "sub": "Dead stock. Final sizes. No restock.", "link": "/collections/dead-stock-clearance" } },
+        "coll-1": { "type": "collection_card", "settings": { "label": "Briefs", "tag": "Best Seller", "sub": "Clean support. Close comfort.", "link": "/collections/briefs" } },
+        "coll-2": { "type": "collection_card", "settings": { "label": "Boxer Trunks", "sub": "More coverage. Still close.", "link": "/collections/boxer-trunks" } },
+        "coll-3": { "type": "collection_card", "settings": { "label": "Tops", "tag": "New", "sub": "Everyday tops, made closer.", "link": "/collections/tops" } }
+      },
+      "block_order": ["coll-clearance", "coll-1", "coll-2", "coll-3"]
+    },
+    "homepage-reviews": {
+      "type": "sale-reviews",
+      "settings": {
+        "heading": "Worn. Felt. Reviewed.",
+        "meta_text": "4.9 · 214 reviews",
+        "bg_color": "#0a0a0a",
+        "title_color": "#CDFF00",
+        "card_bg": "#161616",
+        "star_color": "#CDFF00",
+        "quote_color": "#ffffff",
+        "who_color": "rgba(255,255,255,0.5)"
+      },
+      "blocks": {
+        "rev-1": { "type": "review", "settings": { "quote": "Best underwear I've owned. Period.", "author": "Marcus T. — Verified buyer", "sku": "Studio Brief · Black · M" } },
+        "rev-2": { "type": "review", "settings": { "quote": "Bought 3 packs. Won't go back to anything else.", "author": "James L. — Verified buyer", "sku": "Boxer Trunk · White · L" } },
+        "rev-3": { "type": "review", "settings": { "quote": "The fit is surgical. Exactly what I needed.", "author": "Ryan K. — Verified buyer", "sku": "Studio Brief · Black · S" } },
+        "rev-4": { "type": "review", "settings": { "quote": "Finally a local brand that delivers on quality. Worth every cent.", "author": "Wei H. — Verified buyer", "sku": "Boxer Trunk · Navy · M" } }
+      },
+      "block_order": ["rev-1", "rev-2", "rev-3", "rev-4"]
+    },
+    "homepage-brand-story": {
+      "type": "sale-brand-story",
+      "settings": {
+        "bg_color": "#111111",
+        "border_color": "rgba(205,255,0,0.15)",
+        "eyebrow_color": "#CDFF00",
         "title_color": "#ffffff",
-        "card_bg": "#212529",
-        "star_color": "#c8a96e",
-        "quote_color": "rgba(255,255,255,0.85)",
-        "who_color": "rgba(255,255,255,0.45)",
-        "heading": "Worn, Felt, Reviewed"
+        "body_color": "rgba(255,255,255,0.6)",
+        "eyebrow": "The Studio",
+        "title": "<p>Designed in Singapore.<br>Crafted in Thailand.</p>",
+        "body": "<p>TRIIIPLE was built on a single premise — that underwear should be engineered, not just made. Every cut, every stitch, every fabric blend is a deliberate decision. This is not basics. This is the baseline.</p>"
       }
+    },
+    "homepage-newsletter": {
+      "type": "section-newsletter",
+      "blocks": {
+        "nl-image": {
+          "type": "image",
+          "settings": {
+            "title": "Stay in the loop.",
+            "heading_font_size": "heading-small",
+            "text": "<p>Get early access to drops, exclusive offers, and <span style=\"text-decoration:underline\">10% off your first order</span>.</p>",
+            "text_font_size": "body-medium",
+            "flex_align": "align--bottom-left",
+            "show_text_background": true,
+            "bg_color": "#0a0a0a",
+            "color": "#CDFF00",
+            "overlay_type": "disabled",
+            "link_text": "Join the list",
+            "link": "shopify://pages/unlock-first-layer-perks",
+            "button_type": "btn--black",
+            "button_size": "btn--small",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "heading_tag": "automatic"
+          }
+        },
+        "nl-text": {
+          "type": "text",
+          "settings": {
+            "subheading": "Email",
+            "title": "You come first.",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Join the First Layer circle. First to know, first to shop.</p>",
+            "text_font_size": "body-medium",
+            "text_columns": 1,
+            "align_text": "text-center",
+            "button_text": "Subscribe",
+            "button_url": "shopify://pages/unlock-first-layer-perks",
+            "button_type": "btn--black",
+            "button_size": "btn--large",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "show_social_links": false,
+            "bg_color": "",
+            "color": "",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": ["nl-image", "nl-text"],
+      "name": "Newsletter",
+      "settings": {
+        "width": "wrapper--full",
+        "height": "three-fifty-height-hero",
+        "mobile_height": "screen-height-one-half--mobile",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "homepage-social": {
+      "type": "section-social-videos",
+      "blocks": {
+        "vid-1": { "type": "video", "settings": { "badge_text": "@firstlayerco" } },
+        "vid-2": { "type": "video", "settings": { "badge_text": "@firstlayerco" } },
+        "vid-3": { "type": "video", "settings": { "badge_text": "@firstlayerco" } },
+        "vid-4": { "type": "video", "settings": { "badge_text": "@firstlayerco" } }
+      },
+      "block_order": ["vid-1", "vid-2", "vid-3", "vid-4"],
+      "settings": {
+        "heading": "Worn in the wild.",
+        "heading_font_size": "heading-medium",
+        "text": "<p>Tag us @firstlayerco</p>",
+        "text_font_size": "body-small",
+        "align_text": "text-center",
+        "width": "wrapper--full-padded",
+        "aspect_ratio": 0.8,
+        "layout_desktop": "grid",
+        "blocks_per_row": 4,
+        "color_scheme": "scheme-2",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    },
+    "homepage-story-salon": {
+      "type": "story-salon-teaser",
+      "name": "Story Salon Blog",
+      "settings": {
+        "label": "Story Salon",
+        "tagline": "Where fashion meets fiction.",
+        "cta_label": "Explore Story Salon",
+        "cta_url": "shopify://pages/story-salon",
+        "show_strip": false
+      }
+    },
+    "homepage-clearance": {
+      "type": "sale-hero",
+      "settings": {
+        "hero_height": 60,
+        "overlay_from": "rgba(0,0,0,0.82)",
+        "overlay_to": "rgba(0,0,0,0.55)",
+        "eyebrow": "Final Clearance",
+        "eyebrow_color": "#CDFF00",
+        "title": "<p>Dead Stock.<br>Final Sizes.</p>",
+        "title_size": 72,
+        "subtitle": "<p>Buy 5, Get 1 Free — no restock, no second chance.</p>",
+        "cta_text": "Shop Final Clearance",
+        "cta_url": "/collections/dead-stock-clearance",
+        "cta_bg": "#CDFF00",
+        "cta_text_color": "#000000",
+        "show_urgency": false
+      },
+      "blocks": {},
+      "block_order": []
     }
   },
   "order": [
     "landing-hero",
-    "collections-grid",
     "features-strip",
-    "testimonials"
+    "collections-grid",
+    "homepage-reviews",
+    "homepage-brand-story",
+    "homepage-newsletter",
+    "homepage-social",
+    "homepage-story-salon",
+    "homepage-clearance"
   ]
 }
