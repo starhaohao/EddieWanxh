@@ -1,0 +1,66 @@
+{% comment %}
+  TRIIIPLE Studio - Product Grid Layout Fix
+  Bypasses missing translation keys for empty states
+{% endcomment %}
+
+<div 
+  class="
+    grid main-collection-grid
+    {%- if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}
+    {%- if section.settings.product_grid_width == 'full-width' %} collection-wrapper--full-width{% endif %}
+    {%- if section.settings.full_width_on_mobile == true %} collection-wrapper--full-width-on-mobile{% endif %}
+    spacing-style
+  "
+  style="
+    --grid--margin--mobile: 0 {% if section.settings.product_grid_width == 'centered' and section.settings.full_width_on_mobile == false %}var(--margin-lg){% else %}0{% endif %};
+    --grid-column--desktop: var(--{% if section.settings.product_grid_width == 'centered' %}centered{% else %}full-width{% endif %});
+    --grid-column--mobile: var(--{% if section.settings.full_width_on_mobile %}full-width{% else %}{% if section.settings.product_grid_width == 'centered' %}centered{% else %}full-width{% endif %}{% endif %});
+    --padding-inline-start: {{ section.settings.padding-inline-start }}px;
+    --padding-inline-end: {{ section.settings.padding-inline-end }}px;
+  "
+>
+  <div 
+    style="
+      grid-column: var(--full-width);
+      --product-grid-gap-mobile: {{ section.settings.columns_gap_vertical | at_most: 12 }}px {{ section.settings.columns_gap_horizontal | at_most: 12 }}px;
+      --product-grid-gap-desktop: {{ section.settings.columns_gap_vertical }}px {{ section.settings.columns_gap_horizontal }}px;
+      container-type: inline-size;
+      container-name: product-grid;
+    "
+  >
+    {% if products.size == 0 %}
+      <div class="main-collection-grid__empty">
+        <h2 class="main-collection-grid__empty-title h2">
+          No products found
+        </h2>
+        <p>
+          Try using fewer filters or <a href="{{ collection.url }}" class="main-collection-grid__empty-link">clear all</a>.
+        </p>
+      </div>
+    {% else %}
+      {% if enable_infinite_scroll %}
+        <span ref="viewMorePrevious"></span>
+      {% endif %}
+      {% if title %}
+        <h4 class="main-collection-grid__title">{{ title }}</h4>
+      {% endif %}
+      <ul 
+        class="product-grid product-grid--{{ section.id }} product-grid--{{ section.settings.layout_type }} {% if section.settings.mobile_product_card_size == 'large' %}product-grid-mobile--large{% endif %}"
+        data-testid="product-grid"
+        product-grid-view="default"
+        ref="grid"
+        role="list"
+        data-last-page="{{ paginate.pages }}"
+        data-product-card-size="{{ section.settings.product_card_size }}"
+        style="--mobile-columns: {% if section.settings.mobile_product_card_size == 'large' %}1{% else %}2{% endif %};"
+      >
+        {% comment %}
+          Product grid card loop renders here
+        {% endcomment %}
+        {% for product in products %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
