@@ -54,6 +54,15 @@
     assign is_bundle_product = true
   endif
 
+  assign derived_material_label = blank
+  if is_bundle_product
+    assign derived_material_label = 'TransDRY + Cotton Spandex'
+  elsif product_handle_downcase contains 'transdry'
+    assign derived_material_label = 'TransDRY'
+  elsif product_handle_downcase contains 'cotton-spandex' or product_handle_downcase contains 'cotton_spandex' or product_title_downcase contains 'cotton spandex'
+    assign derived_material_label = 'Cotton Spandex'
+  endif
+
   if columns_desktop == 0
     assign columns_desktop = 4
   endif
@@ -495,6 +504,13 @@
         endif
 
         assign custom_badge_class = badge_class | append: ' custom-box'
+
+        if derived_material_label != blank
+          assign custom_badge_downcase = custom_badge_text | downcase
+          if custom_badge_downcase contains 'transdry' or custom_badge_downcase contains 'cotton spandex' or custom_badge_downcase contains 'cotton-spandex'
+            assign custom_badge_text = blank
+          endif
+        endif
       endif
 
       if settings.show_automatic_new_badge and preorder == false
@@ -510,7 +526,7 @@
         assign new_badge_class = badge_class | append: ' new-box'
       endif
 
-      if product.compare_at_price > product.price and settings.sale_tags_enable
+      if product.compare_at_price > product.price
         assign on_sale = true
       endif
 
@@ -657,14 +673,8 @@
       unless product_title_downcase contains cutline_downcase
         echo product.metafields.theme.cutline.value
       endunless
-    elsif settings.show_cutline
-      if is_bundle_product
-        echo 'TransDRY + Cotton Spandex'
-      elsif product_handle_downcase contains 'transdry'
-        echo 'TransDRY'
-      elsif product_handle_downcase contains 'cotton-spandex' or product_handle_downcase contains 'cotton_spandex' or product_title_downcase contains 'cotton spandex'
-        echo 'Cotton Spandex'
-      endif
+    elsif derived_material_label != blank
+      echo derived_material_label
     endif
   endcapture
 
