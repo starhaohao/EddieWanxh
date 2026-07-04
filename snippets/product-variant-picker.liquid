@@ -161,14 +161,14 @@
       </style>
 
       <popup-component>
-        <a
-          href="{{ info_page.url }}"
+        <button
+          type="button"
           data-popup-open
           class="radio__legend__link size-chart-pill body-x-small{% if product.has_only_default_variant %} size-popup-link{% endif %}{% if size_style == 'text' or show_size_link_separated %} text-link{% endif %}"
           aria-label="{{ 'general.size_chart.title' | t }}"
         >
           {{ size_button }}
-        </a>
+        </button>
 
         <dialog class="product-modal" aria-hidden="true" inert data-scroll-lock-required>
           <form method="dialog">
