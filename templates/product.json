@@ -41,6 +41,13 @@
             "padding_bottom": 8
           }
         },
+        "description_dYYWrz": {
+          "type": "description",
+          "settings": {
+            "show_read_more": true,
+            "padding_bottom": 0
+          }
+        },
         "variants": {
           "type": "variants",
           "settings": {
@@ -115,6 +122,7 @@
       "block_order": [
         "siblings_6i4tiy",
         "title_eabA4E",
+        "description_dYYWrz",
         "variants",
         "fit_guide_NQPq3f",
         "buttons",
@@ -132,9 +140,9 @@
         "image_layout": "grid-2",
         "image_size": "large",
         "mobile_image_style": "slider",
-        "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
+        "color_scheme": "scheme-fbd4c470-dcb5-45cd-af70-7c3c7a55e46e",
         "padding_top": 0,
-        "padding_bottom": 61
+        "padding_bottom": 0
       }
     },
     "section_look_gallery_ePcTQJ": {
