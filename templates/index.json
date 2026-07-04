@@ -62,71 +62,6 @@
       "type": "landing-features-strip",
       "settings": {}
     },
-    "collections-grid": {
-      "type": "landing-collections-grid",
-      "blocks": {
-        "collection_card_JQkYGm": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "dead-stock-clearance",
-            "image": "shopify://shop_images/x.jpg",
-            "label": "",
-            "tag": "",
-            "sub": "",
-            "link": ""
-          }
-        },
-        "coll-1": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "briefs",
-            "label": "Briefs",
-            "tag": "Best Seller",
-            "sub": "Clean support. Close comfort.",
-            "link": "/collections/briefs"
-          }
-        },
-        "coll-2": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "boxer-trunks",
-            "image": "shopify://shop_images/Untitled-1-Recovered.png",
-            "label": "Boxer Trunks",
-            "tag": "",
-            "sub": "More coverage. Still close.",
-            "link": "/collections/boxer-trunks"
-          }
-        },
-        "coll-3": {
-          "type": "collection_card",
-          "settings": {
-            "collection": "tops",
-            "image": "shopify://shop_images/Untitled_design_2.png",
-            "label": "Tops",
-            "tag": "Buy 5 get 1 free",
-            "sub": "Everyday tops, made closer.",
-            "link": "/collections/tops"
-          }
-        }
-      },
-      "block_order": [
-        "collection_card_JQkYGm",
-        "coll-1",
-        "coll-2",
-        "coll-3"
-      ],
-      "settings": {
-        "bg_color": "#ffffff",
-        "border_color": "#ffffff1c",
-        "text_color": "#000000",
-        "sub_color": "#b4b4b4",
-        "eyebrow": "Collections",
-        "heading": "",
-        "columns": 4,
-        "cta_text": "View All",
-        "cta_url": "shopify://collections"
-      }
-    },
     "homepage-newsletter": {
       "type": "section-newsletter",
       "blocks": {
@@ -136,14 +71,14 @@
             "image": "shopify://shop_images/Banner_2_13thAugl__Original.jpg",
             "title": "additional 10% discount and a free gift?",
             "heading_font_size": "heading-x-small",
-            "text": "<p>Get early access to drops, exclusive offers, and <span style=\"text-decoration:underline\">10% off your first order</span>.</p>",
+            "text": "",
             "text_font_size": "body-x-small",
-            "flex_align": "align--middle-center",
+            "flex_align": "align--bottom-center",
             "show_text_background": false,
             "bg_color": "#f4ea22",
-            "color": "#f4ea22",
+            "color": "#161501",
             "overlay_type": "disabled",
-            "link_text": "Join the list",
+            "link_text": "",
             "link": "shopify://pages/unlock-first-layer-perks",
             "button_type": "btn--black",
             "button_size": "btn--small",
@@ -331,7 +266,6 @@
   "order": [
     "homepage-clearance",
     "features-strip",
-    "collections-grid",
     "homepage-newsletter",
     "homepage-social",
     "homepage-reviews",
