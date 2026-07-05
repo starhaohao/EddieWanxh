@@ -98,9 +98,14 @@
         }
 
         .size-chart-pill {
+          -webkit-appearance: none;
+          appearance: none;
           display: inline-flex;
+          flex: 0 0 auto;
           align-items: center;
           justify-content: center;
+          width: auto;
+          max-width: fit-content;
           min-height: auto;
           min-width: auto;
           margin-left: auto;
@@ -118,12 +123,18 @@
           font-weight: 600;
           line-height: 1;
           white-space: nowrap;
+          cursor: pointer;
         }
 
         .size-chart-pill,
         .size-chart-pill .radio__legend__link__label,
         .size-chart-pill .btn-size-chart {
           color: #17191c !important;
+        }
+
+        .size-chart-pill .radio__legend__link__label {
+          display: inline;
+          white-space: nowrap;
         }
 
         .size-chart-pill .btn-size-chart {
