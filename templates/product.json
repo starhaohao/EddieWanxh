@@ -15,8 +15,8 @@
         "title": {
           "type": "title",
           "settings": {
-            "subheading_option": "vendor",
-            "heading_font_size": "heading-medium",
+            "subheading_option": "none",
+            "heading_font_size": "heading-x-large",
             "padding_bottom": 8
           }
         },
@@ -137,7 +137,14 @@
     },
     "product-framework": {
       "type": "product-framework",
-      "settings": {}
+      "settings": {
+        "aag_label": "At a Glance",
+        "df_label": "Designed For",
+        "sf_label": "Size & Fit",
+        "mc_label": "Material & Care",
+        "pww_label": "Pairs Well With",
+        "br_label": "Bundle Recommendation"
+      }
     },
     "luxury-spacing": {
       "type": "section-luxury-spacing",

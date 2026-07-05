@@ -15,29 +15,29 @@
         "focus_link_1": {
           "type": "nav_link",
           "settings": {
-            "label": "New arrivals",
-            "link": ""
+            "label": "TransDRY®",
+            "link": "shopify://collections/fabric-transdry"
           }
         },
         "focus_link_2": {
           "type": "nav_link",
           "settings": {
-            "label": "Best sellers",
-            "link": ""
+            "label": "Cotton Spandex",
+            "link": "shopify://collections/fabric-cotton-spandex"
           }
         },
         "focus_link_3": {
           "type": "nav_link",
           "settings": {
             "label": "Bundles",
-            "link": ""
+            "link": "shopify://collections/bundles-and-save"
           }
         },
         "focus_link_4": {
           "type": "nav_link",
           "settings": {
             "label": "Size guide",
-            "link": ""
+            "link": "shopify://pages/fabric-and-size-guide"
           }
         }
       },
@@ -49,12 +49,11 @@
       ],
       "settings": {
         "eyebrow": "Curated Collection",
-        "accent_label": "Product Focus Layout",
+        "accent_label": "",
         "intro": "<p>Use this collection template when you want the page to feel more editorial at the top and more product-led below, with clean filtering and a sharper visual rhythm.</p>",
         "cta_label": "Shop the edit",
         "cta_link": "",
         "use_collection_image": true,
-        "image": "",
         "panel_label": "Browse",
         "padding_top": 0,
         "padding_bottom": 0
@@ -63,11 +62,11 @@
     "main": {
       "type": "collection",
       "custom_css": [
-        ".collection__nav { position: sticky; top: var(--header-padding, 0px); z-index: 11; background: rgb(var(--bg)); border-bottom: 1px solid rgba(var(--text), 0.08); margin-bottom: 18px; }",
-        ".collection__nav .popout__toggle, .collection__nav .popout { min-height: 48px; }",
-        ".grid-outer .grid { row-gap: 30px; }",
-        ".product-item__title { text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }",
-        ".product-item__price { font-size: 12px; }"
+        ".collection__nav {position: sticky; top: var(--header-padding, 0px); z-index: 11; background: rgb(var(--bg)); border-bottom: 1px solid rgba(var(--text), 0.08); margin-bottom: 18px;}",
+        ".collection__nav .popout__toggle,.collection__nav .popout {min-height: 48px;}",
+        ".grid-outer .grid {row-gap: 30px;}",
+        ".product-item__title {text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px;}",
+        ".product-item__price {font-size: 12px;}"
       ],
       "settings": {
         "enable_sort": true,
