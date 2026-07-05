@@ -77,6 +77,8 @@
           {%- render 'icon-question' -%}
         </span>
         <span class="radio__legend__link__label">Find size</span>
+      {%- else -%}
+        <span class="radio__legend__link__label">Find size</span>
     {%- endcase -%}
   {%- else -%}
     <span class="radio__legend__link__label">
@@ -136,7 +138,10 @@
         }
 
         .size-chart-pill .radio__legend__link__label {
-          display: inline;
+          display: inline-block;
+          flex: 0 0 auto;
+          width: auto;
+          min-width: 0;
           white-space: nowrap;
         }
 

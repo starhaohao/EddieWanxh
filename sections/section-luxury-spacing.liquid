@@ -187,11 +187,14 @@
     flex-wrap: wrap !important;
     gap: 10px !important;
   }
-  .template-product .price__regular,
+  .template-product .price:not(.price--on-sale) .price__regular,
   .template-product .price-item--sale,
   .template-product .price-item--regular {
     display: inline-flex !important;
     align-items: center;
+  }
+  .template-product .price--on-sale .price__regular {
+    display: none !important;
   }
   .template-product .price--on-sale .price-item--regular {
     opacity: 0.52 !important;
