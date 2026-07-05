@@ -73,13 +73,13 @@
         "enable_filters": true,
         "filter_layout": "slide-out",
         "default_open": true,
-        "collection_linklist": "",
+        "collection_linklist": "triiiple-shop",
         "grid": 4,
         "grid_mobile": "2",
         "products_per_page": 24,
         "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
-        "padding_top": 18,
-        "padding_bottom": 40
+        "padding_top": 100,
+        "padding_bottom": 100
       }
     },
     "section_recent_products_product_focus": {
