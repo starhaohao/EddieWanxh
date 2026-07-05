@@ -1,4 +1,5 @@
 {% liquid
+  assign color_scheme = 'color-' | append: section.settings.color_scheme
   assign eyebrow = section.settings.eyebrow
   assign title = collection.title
   assign description = collection.description
@@ -18,7 +19,12 @@
   endif
 %}
 
-<section class="pfh" style="--pfh-pt: {{ section.settings.padding_top }}px; --pfh-pb: {{ section.settings.padding_bottom }}px;">
+<section
+  class="pfh section-padding {{ color_scheme }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-product-focus-hero"
+  style="--pfh-pt: {{ section.settings.padding_top }}px; --pfh-pb: {{ section.settings.padding_bottom }}px;"
+>
   <div class="pfh__shell">
     <div class="pfh__intro">
       {% if eyebrow != blank %}
@@ -99,8 +105,8 @@
 <style>
   .pfh {
     padding: var(--pfh-pt) 0 var(--pfh-pb);
-    background: rgb(var(--text));
-    color: rgb(var(--bg));
+    background: rgb(var(--bg));
+    color: rgb(var(--text));
   }
 
   .pfh a {
@@ -131,7 +137,8 @@
   .pfh__accent,
   .pfh__panel-kicker,
   .pfh__link {
-    font-size: 11px;
+    font-family: var(--FONT-STACK-NAV);
+    font-size: max(11px, var(--font-body-x-small));
     line-height: 1.2;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -149,9 +156,10 @@
   }
 
   .pfh__title {
+    font-family: var(--FONT-STACK-HEADING);
     margin: 0;
     max-width: 10ch;
-    font-size: clamp(2.4rem, 6vw, 5.8rem);
+    font-size: clamp(2.4rem, 6vw, max(5rem, var(--font-heading-large)));
     line-height: 0.95;
     letter-spacing: -0.04em;
     text-transform: uppercase;
@@ -163,11 +171,12 @@
   }
 
   .pfh__copy {
+    font-family: var(--FONT-STACK-BODY);
     margin-top: 28px;
     max-width: 52ch;
-    font-size: 15px;
+    font-size: var(--font-body-medium);
     line-height: 1.65;
-    color: rgba(var(--bg), 0.82);
+    color: rgba(var(--text), 0.78);
   }
 
   .pfh__copy p {
@@ -175,6 +184,8 @@
   }
 
   .pfh__cta {
+    font-family: var(--BTN-FONT-STACK);
+    font-size: var(--font-body-x-small);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -182,26 +193,26 @@
     min-width: 154px;
     margin-top: 30px;
     padding: 12px 18px;
-    border: 1px solid rgba(var(--bg), 0.28);
+    border: 1px solid rgba(var(--text), 0.28);
     text-decoration: none;
     transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
   }
 
   .pfh__cta:hover {
-    background: rgb(var(--bg));
-    color: rgb(var(--text));
-    border-color: rgb(var(--bg));
+    background: rgb(var(--text));
+    color: rgb(var(--bg));
+    border-color: rgb(var(--text));
   }
 
   .pfh__rail {
     display: grid;
     grid-template-rows: minmax(0, 1fr) auto;
-    border-left: 1px solid rgba(var(--bg), 0.18);
+    border-left: 1px solid rgba(var(--text), 0.18);
   }
 
   .pfh__image-wrap {
     min-height: 320px;
-    background: rgba(var(--bg), 0.06);
+    background: rgba(var(--text), 0.06);
   }
 
   .pfh__image {
@@ -213,7 +224,7 @@
   }
 
   .pfh__panel {
-    border-top: 1px solid rgba(var(--bg), 0.18);
+    border-top: 1px solid rgba(var(--text), 0.18);
     padding: 20px var(--outer) 22px;
   }
 
@@ -228,7 +239,7 @@
     align-items: center;
     min-height: 34px;
     padding: 0 12px;
-    border: 1px solid rgba(var(--bg), 0.16);
+    border: 1px solid rgba(var(--text), 0.16);
     text-decoration: none;
     opacity: 0.88;
     transition: opacity 160ms ease, border-color 160ms ease, transform 160ms ease;
@@ -236,7 +247,7 @@
 
   .pfh__link:hover {
     opacity: 1;
-    border-color: rgba(var(--bg), 0.5);
+    border-color: rgba(var(--text), 0.5);
     transform: translateY(-1px);
   }
 
@@ -272,6 +283,12 @@
 {
   "name": "Collection Focus Hero",
   "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
     {
       "type": "text",
       "id": "eyebrow",

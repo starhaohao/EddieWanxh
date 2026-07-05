@@ -48,13 +48,13 @@
         "focus_link_4"
       ],
       "settings": {
-        "eyebrow": "Curated Collection",
+        "eyebrow": "Shop by",
         "accent_label": "",
         "intro": "<p>Use this collection template when you want the page to feel more editorial at the top and more product-led below, with clean filtering and a sharper visual rhythm.</p>",
         "cta_label": "Shop the edit",
         "cta_link": "",
         "use_collection_image": true,
-        "panel_label": "Browse",
+        "panel_label": "",
         "padding_top": 0,
         "padding_bottom": 0
       }

@@ -18,10 +18,10 @@
         "color_scheme": "scheme-1",
         "show_text_background": false,
         "overlay_type": "disabled",
-        "show_image": false,
-        "banner_layout": "overlay",
-        "height": "two-fifty-height-hero",
-        "mobile_height": "two-fifty-height-hero--mobile",
+        "show_image": true,
+        "banner_layout": "inline",
+        "height": "three-fifty-height-hero",
+        "mobile_height": "three-fifty-height-hero--mobile",
         "padding_top": 0,
         "padding_bottom": 0
       }
