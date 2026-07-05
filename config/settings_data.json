@@ -73,7 +73,7 @@
     "share_twitter": false,
     "share_pinterest": true,
     "enable_infinity_scroll": false,
-    "product_grid_font_size": "body-medium",
+    "product_grid_font_size": "body-small",
     "product_grid_center": false,
     "overlay_text": false,
     "show_recently_viewed_indicator": false,
