@@ -112,7 +112,7 @@
         "menu_tdWJdx": {
           "type": "menu",
           "settings": {
-            "mobile_menu_linklist": "triiiple-shop-copy",
+            "mobile_menu_linklist": "triiiple-shop",
             "text_font_size": "body-large",
             "highlight_item": "Sale",
             "highlight_item_color": "#d02e2e",
@@ -153,6 +153,7 @@
         "localization"
       ],
       "settings": {
+        "logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "logo_max_limit": 80,
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a"
       }
