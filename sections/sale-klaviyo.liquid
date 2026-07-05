@@ -3,11 +3,16 @@
   assign input_bg = section.settings.input_bg
   assign border = section.settings.border_color
   assign accent = section.settings.accent_color
+  assign button_text = section.settings.button_text_color
   assign title_color = section.settings.title_color
   assign sub_color = section.settings.sub_color
+  assign label_color = section.settings.label_color
+  assign input_text = section.settings.input_text_color
+  assign placeholder = section.settings.placeholder_color
+  assign perk_color = section.settings.perk_text_color
 -%}
 
-<section class="sk" style="--sk-bg:{{ bg }};--sk-ib:{{ input_bg }};--sk-bd:{{ border }};--sk-accent:{{ accent }};--sk-tc:{{ title_color }};--sk-sc:{{ sub_color }};">
+<section class="sk" style="--sk-bg:{{ bg }};--sk-ib:{{ input_bg }};--sk-bd:{{ border }};--sk-accent:{{ accent }};--sk-btn-tc:{{ button_text }};--sk-tc:{{ title_color }};--sk-sc:{{ sub_color }};--sk-lc:{{ label_color }};--sk-itc:{{ input_text }};--sk-ph:{{ placeholder }};--sk-perk:{{ perk_color }};">
   <div class="sk__left">
     <div class="sk__eyebrow">{{ section.settings.eyebrow }}</div>
     <h2 class="sk__title">{{ section.settings.title }}</h2>
@@ -21,7 +26,7 @@
       <div class="sk__input-label">{{ section.settings.email_label }}</div>
       <div class="sk__row">
         <input class="sk__input" type="email" placeholder="{{ section.settings.email_placeholder }}">
-        <button class="sk__btn" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
+        <button class="sk__btn">{{ section.settings.btn_text }}</button>
       </div>
     </div>
     {%- if section.settings.show_sms -%}
@@ -30,7 +35,7 @@
       <div class="sk__input-label">{{ section.settings.sms_label }}</div>
       <div class="sk__row">
         <input class="sk__input" type="tel" placeholder="{{ section.settings.sms_placeholder }}">
-        <button class="sk__btn" style="background:{{ accent }};">{{ section.settings.btn_text }}</button>
+        <button class="sk__btn">{{ section.settings.btn_text }}</button>
       </div>
     </div>
     {%- endif -%}
@@ -57,8 +62,8 @@
     align-items: center;
   }
   .sk__eyebrow {
-    font-family: monospace;
-    font-size: 9px;
+    font-family: var(--FONT-STACK-NAV);
+    font-size: max(9px, var(--font-body-x-small));
     text-transform: uppercase;
     letter-spacing: 0.18em;
     color: var(--sk-accent);
@@ -74,15 +79,20 @@
     background: var(--sk-accent);
   }
   .sk__title {
-    font-size: clamp(32px, 3.2vw, 52px);
+    font-family: var(--FONT-STACK-HEADING);
+    font-size: clamp(32px, 3.2vw, max(52px, var(--font-heading-large)));
     letter-spacing: -0.04em;
     line-height: 1.0;
     color: var(--sk-tc);
     margin-bottom: 14px;
     font-weight: 400;
   }
+  .sk__title p {
+    margin: 0;
+  }
   .sk__sub {
-    font-size: 13px;
+    font-family: var(--FONT-STACK-BODY);
+    font-size: var(--font-body-small);
     line-height: 1.7;
     color: var(--sk-sc);
     max-width: 360px;
@@ -92,8 +102,8 @@
     align-items: center;
     gap: 8px;
     margin-top: 20px;
-    font-family: monospace;
-    font-size: 9px;
+    font-family: var(--FONT-STACK-NAV);
+    font-size: max(9px, var(--font-body-x-small));
     text-transform: uppercase;
     letter-spacing: 0.16em;
     color: var(--sk-accent);
@@ -109,11 +119,11 @@
   }
   .sk__right { display: flex; flex-direction: column; gap: 12px; }
   .sk__input-label {
-    font-family: monospace;
-    font-size: 9px;
+    font-family: var(--FONT-STACK-NAV);
+    font-size: max(9px, var(--font-body-x-small));
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: var(--sk-sc);
+    color: var(--sk-lc);
     margin-bottom: 4px;
   }
   .sk__row { display: flex; }
@@ -122,18 +132,20 @@
     background: var(--sk-ib);
     border: 1px solid var(--sk-bd);
     border-right: none;
-    color: var(--sk-tc);
+    color: var(--sk-itc);
     padding: 14px 18px;
-    font-size: 13px;
+    font-family: var(--FONT-STACK-BODY);
+    font-size: var(--font-body-small);
     outline: none;
   }
-  .sk__input::placeholder { color: var(--sk-sc); }
+  .sk__input::placeholder { color: var(--sk-ph); }
   .sk__btn {
+    background: var(--sk-accent);
     border: none;
-    color: #fff;
+    color: var(--sk-btn-tc);
     padding: 14px 22px;
-    font-family: monospace;
-    font-size: 9px;
+    font-family: var(--BTN-FONT-STACK);
+    font-size: max(9px, var(--font-body-x-small));
     text-transform: uppercase;
     letter-spacing: 0.16em;
     cursor: pointer;
@@ -146,8 +158,8 @@
     align-items: center;
     gap: 12px;
     color: var(--sk-sc);
-    font-family: monospace;
-    font-size: 9px;
+    font-family: var(--FONT-STACK-NAV);
+    font-size: max(9px, var(--font-body-x-small));
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -162,11 +174,11 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-family: monospace;
-    font-size: 9px;
+    font-family: var(--FONT-STACK-NAV);
+    font-size: max(9px, var(--font-body-x-small));
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.28);
+    color: var(--sk-perk);
   }
   .sk__perk-dot {
     width: 3px; height: 3px;
@@ -188,8 +200,13 @@
     { "type": "color", "id": "input_bg", "label": "Input background", "default": "#212529" },
     { "type": "color", "id": "border_color", "label": "Border color", "default": "rgba(255,255,255,0.11)" },
     { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#923531" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#ffffff" },
     { "type": "color", "id": "title_color", "label": "Title color", "default": "#ffffff" },
     { "type": "color", "id": "sub_color", "label": "Subtitle color", "default": "rgba(255,255,255,0.42)" },
+    { "type": "color", "id": "label_color", "label": "Field label color", "default": "rgba(255,255,255,0.42)" },
+    { "type": "color", "id": "input_text_color", "label": "Input text color", "default": "#ffffff" },
+    { "type": "color", "id": "placeholder_color", "label": "Placeholder color", "default": "rgba(255,255,255,0.42)" },
+    { "type": "color", "id": "perk_text_color", "label": "Perk text color", "default": "rgba(255,255,255,0.28)" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Customer Offer" },
     { "type": "richtext", "id": "title", "label": "Title", "default": "<p>10% off<br>your first order.</p>" },
     { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Sign up via email or SMS and your discount lands instantly. Plus early access to drops, restocks, and sale alerts." },
