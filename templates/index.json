@@ -15,22 +15,22 @@
         "ghost_cta_zRnaVy": {
           "type": "ghost_cta",
           "settings": {
-            "label": "Briefs",
-            "url": ""
+            "label": "XS/S Clearance",
+            "url": "shopify://collections/bundles-xs-s-clearance"
           }
         },
         "ghost_cta_XRkDR4": {
           "type": "ghost_cta",
           "settings": {
-            "label": "Boxer Trunks",
-            "url": ""
+            "label": "XL/2XL Clearance",
+            "url": "shopify://collections/bundles-xl-2xl-clearance"
           }
         },
         "ghost_cta_KCETby": {
           "type": "ghost_cta",
           "settings": {
-            "label": "Tops",
-            "url": ""
+            "label": "explore more",
+            "url": "shopify://collections/frontpage"
           }
         }
       },
@@ -51,7 +51,7 @@
         "title_size": 84,
         "subtitle": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore</p>",
         "cta_text": "Shop All",
-        "cta_url": "",
+        "cta_url": "https://www.triiiplestudio.com/collections/dead-stock-clearance",
         "cta_bg": "#7c9bdb",
         "cta_text_color": "#ffffff",
         "show_urgency": true,
