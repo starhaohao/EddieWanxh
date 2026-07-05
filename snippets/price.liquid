@@ -28,6 +28,14 @@
   assign price_max = product.price_max
   assign available = target.available | default: false
 
+  if compare_at_price == blank or compare_at_price <= price
+    if product.compare_at_price_max > price
+      assign compare_at_price = product.compare_at_price_max
+    elsif product.compare_at_price > price
+      assign compare_at_price = product.compare_at_price
+    endif
+  endif
+
   if compare_at_price > price
     assign is_on_sale = true
   endif
