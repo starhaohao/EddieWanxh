@@ -9,64 +9,54 @@
  */
 {
   "sections": {
-    "section_custom_code_WGKwXq": {
-      "type": "section-custom-code",
-      "name": "Custom code",
-      "settings": {
-        "code": "",
-        "width": "wrapper",
-        "color_scheme": "",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "17831992207e1ea4f3": {
-      "type": "apps",
-      "blocks": {
-        "klaviyo_email_marketing_sms_form_embed_block_fgHUEh": {
-          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
-          "settings": {
-            "formId": ""
-          }
-        }
-      },
-      "block_order": [
-        "klaviyo_email_marketing_sms_form_embed_block_fgHUEh"
-      ],
-      "settings": {
-        "include_margins": false
-      }
-    },
     "main": {
       "type": "product",
       "blocks": {
-        "title_Pde4Xc": {
+        "title": {
           "type": "title",
           "settings": {
-            "subheading_option": "none",
-            "heading_font_size": "heading-x-large",
+            "subheading_option": "vendor",
+            "heading_font_size": "heading-medium",
             "padding_bottom": 8
           }
         },
-        "price_t6WmH2": {
+        "price": {
           "type": "price",
           "settings": {
-            "text_font_size": "body-x-large",
+            "text_font_size": "body-large",
             "show_shipping_policy": true,
             "padding_bottom": 12
+          }
+        },
+        "tab_richtext": {
+          "type": "tab_richtext",
+          "settings": {
+            "show_description": true,
+            "show_read_more": false,
+            "title_1": "Care",
+            "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
+            "title_2": "Shipping",
+            "raw_content_2": "<p>Free shipping on orders over $50 within Singapore. Standard delivery 2–4 business days. International shipping available.</p>",
+            "title_3": "",
+            "raw_content_3": "",
+            "title_4": "",
+            "raw_content_4": "",
+            "title_5": "",
+            "raw_content_5": "",
+            "padding_bottom": 0
           }
         },
         "variants": {
           "type": "variants",
           "settings": {
-            "info_page": "{{ product.metafields.custom.size_chart.value }}",
-            "size_chart_style": "ruler",
-            "option_font_size": "body-x-small",
-            "value_font_size": "body-x-large",
+            "info_page": "t-shirt-sleeveless-top-size-chart",
+            "size_chart_style": "text",
+            "option_font_size": "body-medium",
+            "value_font_size": "body-small",
             "padding_bottom": 16
           }
         },
-        "fit_guide_NQPq3f": {
+        "fit_guide": {
           "type": "fit-guide",
           "settings": {
             "heading": "Fit",
@@ -80,16 +70,15 @@
         },
         "buttons": {
           "type": "buttons",
-          "source": "{{ product.metafields.custom.product_content.value }}",
           "settings": {
             "show_quantity": true,
-            "button_type": "btn--black",
-            "button_size": "btn--small",
-            "button_style": "btn--outline",
-            "show_dynamic_checkout": true,
-            "button_type_dynamic": "btn--black",
-            "button_size_dynamic": "btn--large",
-            "button_style_dynamic": "btn--outline",
+            "button_type": "btn--secondary",
+            "button_size": "btn--large",
+            "button_style": "btn--solid",
+            "show_dynamic_checkout": false,
+            "button_type_dynamic": "btn--secondary",
+            "button_size_dynamic": "",
+            "button_style_dynamic": "btn--solid",
             "show_gift_card_recipient": false,
             "padding_bottom": 50
           }
@@ -107,14 +96,14 @@
             "padding_bottom": 8
           }
         },
-        "divider_D4UprF": {
+        "divider": {
           "type": "divider",
           "settings": {
             "show_line": true,
             "padding_bottom": 30
           }
         },
-        "sharing_GyTtAL": {
+        "sharing": {
           "type": "sharing",
           "settings": {
             "padding_bottom": 0
@@ -122,14 +111,15 @@
         }
       },
       "block_order": [
-        "title_Pde4Xc",
-        "price_t6WmH2",
+        "title",
+        "price",
+        "tab_richtext",
         "variants",
-        "fit_guide_NQPq3f",
+        "fit_guide",
         "buttons",
         "inventory_countdown",
-        "divider_D4UprF",
-        "sharing_GyTtAL"
+        "divider",
+        "sharing"
       ],
       "settings": {
         "product_sticky_enable": true,
@@ -138,211 +128,16 @@
         "enable_zoom": true,
         "enable_video_looping": true,
         "image_layout": "grid-2",
-        "image_size": "stretch",
+        "image_size": "large",
         "mobile_image_style": "slider",
-        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
-        "padding_top": 16,
-        "padding_bottom": 40
-      }
-    },
-    "product_detail_story_nAMcGg": {
-      "type": "product-detail-story",
-      "blocks": {
-        "image_ctwtVy": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/banner_e2fdfa8a-f62b-408e-84df-04304537f888.jpg",
-            "heading": "",
-            "caption": ""
-          }
-        },
-        "detail_FT4rX3": {
-          "type": "detail",
-          "settings": {
-            "heading": "Description",
-            "content": "<p>Add useful product detail here.</p>",
-            "use_product_description": true,
-            "metafield_namespace": "",
-            "metafield_key": "",
-            "open_by_default": true
-          }
-        },
-        "detail_Ye4QTK": {
-          "type": "detail",
-          "settings": {
-            "heading": "Size & fit",
-            "content": "<p>Add the intended fit, rise, coverage, and model reference.</p>",
-            "use_product_description": false,
-            "metafield_namespace": "custom",
-            "metafield_key": "size_fit",
-            "open_by_default": false
-          }
-        },
-        "detail_YWbjNh": {
-          "type": "detail",
-          "settings": {
-            "heading": "Material & care",
-            "content": "<p>Add fabric composition and care instructions.</p>",
-            "use_product_description": false,
-            "metafield_namespace": "custom",
-            "metafield_key": "material_care",
-            "open_by_default": false
-          }
-        },
-        "feature_GrBLcb": {
-          "type": "feature",
-          "settings": {
-            "symbol": "/",
-            "heading": "Moves with you",
-            "text": "Flexible construction follows the body without fighting it."
-          }
-        },
-        "feature_eGnaG4": {
-          "type": "feature",
-          "settings": {
-            "symbol": "~",
-            "heading": "Breathes easier",
-            "text": "Designed to manage daily heat and moisture."
-          }
-        },
-        "feature_wifTTJ": {
-          "type": "feature",
-          "settings": {
-            "symbol": "-",
-            "heading": "Smoother seams",
-            "text": "Reduced bulk where comfort matters most."
-          }
-        },
-        "feature_wDR6xf": {
-          "type": "feature",
-          "settings": {
-            "symbol": "o",
-            "heading": "Built to repeat",
-            "text": "A dependable layer for the weekly rotation."
-          }
-        },
-        "size_row_kWartN": {
-          "type": "size_row",
-          "settings": {
-            "size": "XS",
-            "waist_cm": "59–63",
-            "waist_in": "23.2–24.8",
-            "eu": "42–44",
-            "uk_us": "26–28"
-          }
-        },
-        "size_row_peix9Q": {
-          "type": "size_row",
-          "settings": {
-            "size": "S",
-            "waist_cm": "64–68",
-            "waist_in": "25.2–26.8",
-            "eu": "44–46",
-            "uk_us": "28–30"
-          }
-        },
-        "size_row_La6pJp": {
-          "type": "size_row",
-          "settings": {
-            "size": "M",
-            "waist_cm": "69–73",
-            "waist_in": "27.2–28.7",
-            "eu": "46–48",
-            "uk_us": "30–32"
-          }
-        },
-        "size_row_Mj8MwG": {
-          "type": "size_row",
-          "settings": {
-            "size": "L",
-            "waist_cm": "74–78",
-            "waist_in": "29.1–30.7",
-            "eu": "48–50",
-            "uk_us": "32–34"
-          }
-        },
-        "size_row_6ix7cC": {
-          "type": "size_row",
-          "settings": {
-            "size": "XL",
-            "waist_cm": "79–83",
-            "waist_in": "31.1–32.7",
-            "eu": "50–52",
-            "uk_us": "34–36"
-          }
-        },
-        "size_row_m8eeUq": {
-          "type": "size_row",
-          "settings": {
-            "size": "2XL",
-            "waist_cm": "84–88",
-            "waist_in": "33.1–34.6",
-            "eu": "52–54",
-            "uk_us": "36–38"
-          }
-        },
-        "image_4j7Xct": {
-          "type": "image",
-          "settings": {
-            "heading": "Fit in motion",
-            "caption": "Product reference"
-          }
-        },
-        "image_ic6XBU": {
-          "type": "image",
-          "settings": {
-            "heading": "Fabric up close",
-            "caption": "Material reference"
-          }
-        }
-      },
-      "block_order": [
-        "image_ctwtVy",
-        "detail_FT4rX3",
-        "detail_Ye4QTK",
-        "detail_YWbjNh",
-        "feature_GrBLcb",
-        "feature_eGnaG4",
-        "feature_wifTTJ",
-        "feature_wDR6xf",
-        "size_row_kWartN",
-        "size_row_peix9Q",
-        "size_row_La6pJp",
-        "size_row_Mj8MwG",
-        "size_row_6ix7cC",
-        "size_row_m8eeUq",
-        "image_4j7Xct",
-        "image_ic6XBU"
-      ],
-      "name": "Product detail story",
-      "settings": {
-        "details_eyebrow": "{{ product.metafields.custom.product_content.value.design_philosophy.value }}",
-        "details_heading": "Made for the way you move.",
-        "features_eyebrow": "Why this works",
-        "features_heading": "Less fuss. Better function.",
-        "size_eyebrow": "Fit reference",
-        "size_heading": "Find your size.",
-        "size_intro": "<p>Use the body measurements below as a starting point. If you sit between sizes, choose based on your preferred level of ease.</p>",
-        "size_label": "Size",
-        "waist_cm_label": "Waist (cm)",
-        "waist_in_label": "Waist (in)",
-        "eu_label": "EU",
-        "uk_us_label": "UK / US",
-        "size_note": "Tolerance ±2.5 cm. Product fit may vary slightly by fabric and cut.",
-        "ink_color": "#17191c",
-        "accent_color": "#4a1024"
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 61
       }
     },
     "product-framework": {
       "type": "product-framework",
-      "settings": {
-        "aag_label": "At a Glance",
-        "df_label": "Designed For",
-        "sf_label": "Size & Fit",
-        "mc_label": "Material & Care",
-        "pww_label": "Pairs Well With",
-        "br_label": "Bundle Recommendation"
-      }
+      "settings": {}
     },
     "luxury-spacing": {
       "type": "section-luxury-spacing",
@@ -427,6 +222,459 @@
         "dot_background": "#923531",
         "padding_top": 0,
         "padding_bottom": 100
+      }
+    },
+    "section_dynamic_content_44xTqw": {
+      "type": "section-dynamic-content",
+      "blocks": {
+        "grid_item_jnGHFU": {
+          "type": "_grid-item",
+          "name": "Text",
+          "settings": {
+            "align_text": "text-left",
+            "row_start": 1,
+            "column_start": 15,
+            "column_end": 17,
+            "row_start_mobile": 1,
+            "column_start_mobile": 2,
+            "column_end_mobile": 6,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "icon_FGgTzr": {
+              "type": "icon",
+              "name": "Icon",
+              "settings": {
+                "icon_name": "icon-award",
+                "image": "shopify://shop_images/gesture_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24_1.png",
+                "icon_size": 20,
+                "icon_color": "",
+                "text": "",
+                "text_font_size": "body-medium",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "heading_G3QY3A": {
+              "type": "heading",
+              "settings": {
+                "text": "Singapore \nborn, \nThailand \nCrafted",
+                "heading_font_size": "heading-small",
+                "color": "",
+                "heading_tag": "automatic",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "rich_text_gQWBcK": {
+              "type": "rich-text",
+              "name": "Rich text",
+              "settings": {
+                "text": "<p>A homegrown label, </p><p>consciously produced.</p>",
+                "text_font_size": "body-small",
+                "color": "",
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "image_yVcFRV": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Land_Page-3.png",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_FGgTzr",
+            "heading_G3QY3A",
+            "rich_text_gQWBcK",
+            "image_yVcFRV"
+          ]
+        },
+        "grid_item_Y9FiQP": {
+          "type": "_grid-item",
+          "name": "Text",
+          "settings": {
+            "align_text": "text-left",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 2,
+            "row_start_mobile": 10,
+            "column_start_mobile": 1,
+            "column_end_mobile": 7,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "icon_DqYGRX": {
+              "type": "icon",
+              "name": "Icon",
+              "settings": {
+                "icon_name": "icon-award",
+                "image": "shopify://shop_images/barcode_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24_1.png",
+                "icon_size": 20,
+                "icon_color": "",
+                "text": "",
+                "text_font_size": "body-medium",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "heading_tKLxbk": {
+              "type": "heading",
+              "name": "Heading",
+              "settings": {
+                "text": "Built\nfor \nEverybody.",
+                "heading_font_size": "heading-small",
+                "color": "",
+                "heading_tag": "automatic",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "rich_text_3CKDyh": {
+              "type": "rich-text",
+              "name": "Rich text",
+              "settings": {
+                "text": "<p>Confidence isn't one size. </p><p>Designed to fit from XS to 2XL.</p>",
+                "text_font_size": "body-x-small",
+                "color": "",
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "image_Q6LTFk": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/IG_Story_20thJun-3.png",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_DqYGRX",
+            "heading_tKLxbk",
+            "rich_text_3CKDyh",
+            "image_Q6LTFk"
+          ]
+        },
+        "grid_item_EcypPF": {
+          "type": "_grid-item",
+          "name": "Text",
+          "settings": {
+            "align_text": "text-left",
+            "row_start": 1,
+            "column_start": 15,
+            "column_end": 17,
+            "row_start_mobile": 19,
+            "column_start_mobile": 2,
+            "column_end_mobile": 7,
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "icon_mjh39y": {
+              "type": "icon",
+              "name": "Icon",
+              "settings": {
+                "icon_name": "icon-award",
+                "image": "shopify://shop_images/repartition_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24_1.png",
+                "icon_size": 30,
+                "icon_color": "",
+                "text": "",
+                "text_font_size": "body-medium",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "heading_6VdyBk": {
+              "type": "heading",
+              "settings": {
+                "text": "The Fabric \nComes First",
+                "heading_font_size": "heading-x-small",
+                "color": "",
+                "heading_tag": "automatic",
+                "padding_bottom": 8
+              },
+              "blocks": {}
+            },
+            "rich_text_HaQ63W": {
+              "type": "rich-text",
+              "name": "Rich text",
+              "settings": {
+                "text": "<p>Fabrics formulated for comfort, </p><p>durability, and all-day performance.</p>",
+                "text_font_size": "body-x-small",
+                "color": "",
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "image_FVWG4A": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Banner-1_5a5422d7-b064-4cfa-85fa-f6f0bb1124c8.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_mjh39y",
+            "heading_6VdyBk",
+            "rich_text_HaQ63W",
+            "image_FVWG4A"
+          ]
+        },
+        "grid_item_rkdtmf": {
+          "type": "_grid-item",
+          "name": "Grid item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 1,
+            "column_start": 1,
+            "column_end": 6,
+            "row_start_mobile": 23,
+            "column_start_mobile": 1,
+            "column_end_mobile": 4,
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_KxaKEg": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Image_-_2026-02-01_-_test_1.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_KxaKEg"
+          ]
+        },
+        "grid_item_7kFtB7": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 1,
+            "column_start": 3,
+            "column_end": 5,
+            "row_start_mobile": 1,
+            "column_start_mobile": 6,
+            "column_end_mobile": 9,
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_CXXnPw": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Banner-Socks-1.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_CXXnPw"
+          ]
+        },
+        "grid_item_WfiVhf": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 4,
+            "row_start_mobile": 5,
+            "column_start_mobile": 7,
+            "column_end_mobile": 9,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_wgn4kK": {
+              "type": "image",
+              "name": "Image",
+              "settings": {
+                "image": "shopify://shop_images/98567929-DCE0-4AEA-8200-71D8FB71BE3F.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_wgn4kK"
+          ]
+        },
+        "grid_item_AhcabU": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 4,
+            "row_start_mobile": 7,
+            "column_start_mobile": 6,
+            "column_end_mobile": 3,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_My478V": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/image-1779371469563.png",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_My478V"
+          ]
+        },
+        "grid_item_kBd4tg": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 12,
+            "column_end": 15,
+            "row_start_mobile": 8,
+            "column_start_mobile": 6,
+            "column_end_mobile": 9,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_Fjq34D": {
+              "type": "image",
+              "name": "Image",
+              "settings": {
+                "image": "shopify://shop_images/Image_-_2026-02-10_-_Simple_Minimalist_Photography_Exhibition_Photo_Collage_Instagram_Post.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "image_9FDyrh": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/Screenshot_2026-05-31_at_5.20.31_pm.png",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_Fjq34D",
+            "image_9FDyrh"
+          ]
+        },
+        "grid_item_yTwzhP": {
+          "type": "_grid-item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 4,
+            "row_start_mobile": 15,
+            "column_start_mobile": 1,
+            "column_end_mobile": 4,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_BkC6RK": {
+              "type": "image",
+              "name": "Image",
+              "settings": {
+                "image": "shopify://shop_images/website-banner-justin-2.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_BkC6RK"
+          ]
+        },
+        "grid_item_inH77L": {
+          "type": "_grid-item",
+          "name": "Grid item",
+          "settings": {
+            "align_text": "text-center",
+            "row_start": 3,
+            "column_start": 1,
+            "column_end": 2,
+            "row_start_mobile": 15,
+            "column_start_mobile": 4,
+            "column_end_mobile": 8,
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          },
+          "blocks": {
+            "image_tnHWPT": {
+              "type": "image",
+              "settings": {
+                "image": "shopify://shop_images/TRIIIPLE_Studio_Banner_GroupShot_v2.jpg",
+                "link": "",
+                "image_width": 100,
+                "padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_tnHWPT"
+          ]
+        }
+      },
+      "block_order": [
+        "grid_item_jnGHFU",
+        "grid_item_Y9FiQP",
+        "grid_item_EcypPF",
+        "grid_item_rkdtmf",
+        "grid_item_7kFtB7",
+        "grid_item_WfiVhf",
+        "grid_item_AhcabU",
+        "grid_item_kBd4tg",
+        "grid_item_yTwzhP",
+        "grid_item_inH77L"
+      ],
+      "name": "Dynamic content",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "gap_desktop": 0,
+        "gap_mobile": 40,
+        "width": "wrapper--full-padded",
+        "padding_top": 50,
+        "padding_bottom": 50
       }
     },
     "section_announcement_GRMQe3": {
@@ -523,13 +771,11 @@
     }
   },
   "order": [
-    "section_custom_code_WGKwXq",
-    "17831992207e1ea4f3",
     "main",
-    "product_detail_story_nAMcGg",
     "product-framework",
     "luxury-spacing",
     "section_look_gallery_ePcTQJ",
+    "section_dynamic_content_44xTqw",
     "section_announcement_GRMQe3",
     "1778931413bf791d0a",
     "related"
