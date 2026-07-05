@@ -1,4 +1,20 @@
 {%- assign onboarding_product = onboarding_product | default: false -%}
+{%- liquid
+  assign derived_material_label = blank
+
+  unless onboarding_product
+    assign product_handle_downcase = product.handle | downcase
+    assign product_title_downcase = product.title | strip_html | escape | downcase
+
+    if product_handle_downcase contains 'bundle' or product_title_downcase contains 'bundle' or product_title_downcase contains 'pack' or product_title_downcase contains 'set'
+      assign derived_material_label = 'TransDRY + Cotton Spandex'
+    elsif product_handle_downcase contains 'transdry'
+      assign derived_material_label = 'TransDRY'
+    elsif product_handle_downcase contains 'cotton-spandex' or product_handle_downcase contains 'cotton_spandex' or product_title_downcase contains 'cotton spandex'
+      assign derived_material_label = 'Cotton Spandex'
+    endif
+  endunless
+-%}
 
 {%- render 'stylesheet', name: 'breadcrumbs.css' -%}
 
@@ -44,5 +60,9 @@
         {%- endunless -%}
       {%- endif -%}
     </h1>
+
+    {%- if derived_material_label != blank -%}
+      <p class="product__title__material">{{ derived_material_label }}</p>
+    {%- endif -%}
   </div>
 </div>

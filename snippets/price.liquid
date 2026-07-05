@@ -79,6 +79,9 @@
   endif
 
   assign sale_badge = settings.sale_badge
+  if template.name == 'product'
+    assign sale_badge = true
+  endif
 
   if settings.final_sale or product.metafields.theme.final_sale.type == 'boolean' and product.metafields.theme.final_sale.value == true
     assign final_sale = true
