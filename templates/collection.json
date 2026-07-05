@@ -15,29 +15,29 @@
         "focus_link_1": {
           "type": "nav_link",
           "settings": {
-            "label": "TransDRY®",
-            "link": "shopify://collections/fabric-transdry"
+            "label": "Fabric: TransDRY",
+            "link": "/collections/fabric-transdry"
           }
         },
         "focus_link_2": {
           "type": "nav_link",
           "settings": {
-            "label": "Cotton Spandex",
-            "link": "shopify://collections/fabric-cotton-spandex"
+            "label": "Fabric: Cotton Spandex",
+            "link": "/collections/fabric-cotton-spandex"
           }
         },
         "focus_link_3": {
           "type": "nav_link",
           "settings": {
-            "label": "Bundles",
-            "link": "shopify://collections/bundles-and-save"
+            "label": "Design: Briefs",
+            "link": "/collections/briefs"
           }
         },
         "focus_link_4": {
           "type": "nav_link",
           "settings": {
-            "label": "Size guide",
-            "link": "shopify://pages/fabric-and-size-guide"
+            "label": "Design: Boxer Trunks",
+            "link": "/collections/boxer-trunks"
           }
         }
       },
@@ -48,13 +48,14 @@
         "focus_link_4"
       ],
       "settings": {
-        "eyebrow": "",
-        "accent_label": "",
-        "intro": "<p>Use this collection template when you want the page to feel more editorial at the top and more product-led below, with clean filtering and a sharper visual rhythm.</p>",
-        "cta_label": "Shop the edit",
-        "cta_link": "",
+        "eyebrow": "Underwear Collection",
+        "accent_label": "Shop by Fabric and Design",
+        "intro": "<p>The fabric comes first. Explore TRIIIPLE underwear by performance fabric or by silhouette, with easier entry points for how it feels and how it fits.</p>",
+        "cta_label": "Fabric & Size Guide",
+        "cta_link": "/pages/fabric-and-size-guide",
         "use_collection_image": true,
-        "panel_label": "",
+        "image": "",
+        "panel_label": "Shop by",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -62,24 +63,24 @@
     "main": {
       "type": "collection",
       "custom_css": [
-        ".collection__nav {position: sticky; top: var(--header-padding, 0px); z-index: 11; background: rgb(var(--bg)); border-bottom: 1px solid rgba(var(--text), 0.08); margin-bottom: 18px;}",
-        ".collection__nav .popout__toggle,.collection__nav .popout {min-height: 48px;}",
-        ".grid-outer .grid {row-gap: 30px;}",
-        ".product-item__title {text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px;}",
-        ".product-item__price {font-size: 12px;}"
+        ".collection__nav { position: sticky; top: var(--header-padding, 0px); z-index: 11; background: rgb(var(--bg)); border-bottom: 1px solid rgba(var(--text), 0.08); margin-bottom: 18px; }",
+        ".collection__nav .popout__toggle, .collection__nav .popout { min-height: 48px; }",
+        ".grid-outer .grid { row-gap: 30px; }",
+        ".product-item__title { text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }",
+        ".product-item__price { font-size: 12px; }"
       ],
       "settings": {
         "enable_sort": true,
         "enable_filters": true,
         "filter_layout": "slide-out",
         "default_open": true,
-        "collection_linklist": "triiiple-shop",
+        "collection_linklist": "",
         "grid": 4,
         "grid_mobile": "2",
         "products_per_page": 24,
         "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
-        "padding_top": 100,
-        "padding_bottom": 100
+        "padding_top": 18,
+        "padding_bottom": 40
       }
     },
     "section_recent_products_product_focus": {
