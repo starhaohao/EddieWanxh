@@ -5439,6 +5439,36 @@ img.fit-cover {
   object-fit: cover;
 }
 
+/* Global image/media corner reset */
+.image-wrapper,
+.image-wrapper img,
+.product-item__image,
+.product-item__image .product-link,
+.product-item__bg,
+.product-item__bg__inner,
+.product-item__bg__sibling,
+.product-item__bg__under,
+.product-item__bg__slide,
+.product__photo,
+.product__photo .image-wrapper,
+.product__photo img,
+.deferred-media,
+.deferred-media__poster,
+.deferred-media img,
+.deferred-media video,
+.deferred-media iframe,
+.deferred-media model-viewer,
+.hero__media,
+.hero__image,
+.product-upsell__image__thumb,
+.product-upsell__image__thumb .image-wrapper,
+.product-quick-add__images .product__photo,
+.product-quick-add__images .deferred-media,
+.product-quick-add__content,
+.product-modal__notification {
+  border-radius: 0 !important;
+}
+
 /* === snippets/hero.liquid === */
 .image__hero__frame {
   flex: 1;
