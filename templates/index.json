@@ -331,7 +331,7 @@
         "klaviyo_reviews_featured_reviews_carousel_TxFdhK"
       ],
       "settings": {
-        "include_margins": false
+        "include_margins": true
       }
     },
     "homepage-brand-story": {
