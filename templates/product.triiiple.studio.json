@@ -50,7 +50,7 @@
           "type": "variants",
           "settings": {
             "info_page": "t-shirt-sleeveless-top-size-chart",
-            "size_chart_style": "text",
+            "size_chart_style": "question",
             "option_font_size": "body-medium",
             "value_font_size": "body-small",
             "padding_bottom": 16
@@ -127,17 +127,24 @@
         "show_cart_bar": true,
         "enable_zoom": true,
         "enable_video_looping": true,
-        "image_layout": "grid-2",
-        "image_size": "large",
+        "image_layout": "stacked",
+        "image_size": "stretch",
         "mobile_image_style": "slider",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
         "padding_top": 0,
         "padding_bottom": 61
       }
     },
     "product-framework": {
       "type": "product-framework",
-      "settings": {}
+      "settings": {
+        "aag_label": "At a Glance",
+        "df_label": "Designed For",
+        "sf_label": "Size & Fit",
+        "mc_label": "Material & Care",
+        "pww_label": "Pairs Well With",
+        "br_label": "Bundle Recommendation"
+      }
     },
     "luxury-spacing": {
       "type": "section-luxury-spacing",
@@ -151,7 +158,9 @@
           "settings": {}
         }
       },
-      "block_order": ["klaviyo_reviews"],
+      "block_order": [
+        "klaviyo_reviews"
+      ],
       "settings": {
         "include_margins": true
       }
@@ -172,7 +181,10 @@
           }
         }
       },
-      "block_order": ["related", "recent"],
+      "block_order": [
+        "related",
+        "recent"
+      ],
       "settings": {
         "enable_tabs": true,
         "heading_alignment": "text-left",
@@ -188,5 +200,11 @@
       }
     }
   },
-  "order": ["main", "product-framework", "luxury-spacing", "apps", "related"]
+  "order": [
+    "main",
+    "product-framework",
+    "luxury-spacing",
+    "apps",
+    "related"
+  ]
 }

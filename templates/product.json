@@ -23,11 +23,11 @@
         "variants": {
           "type": "variants",
           "settings": {
-            "info_page": "{{ product.metafields.custom.size_chart.value }}",
+            "info_page": "fabric-and-size-guide",
             "size_chart_style": "ruler",
-            "option_font_size": "body-medium",
-            "value_font_size": "body-medium",
-            "padding_bottom": 16
+            "option_font_size": "body-x-small",
+            "value_font_size": "body-x-small",
+            "padding_bottom": 0
           }
         },
         "fit_guide": {
@@ -140,18 +140,18 @@
           "type": "detail",
           "settings": {
             "heading": "Description",
-            "content": "<p>Add useful product detail here.</p>",
-            "use_product_description": true,
+            "content": "{{ product.description }}",
+            "use_product_description": false,
             "metafield_namespace": "{{ product.title }}",
             "metafield_key": "{{ product.title }}",
-            "open_by_default": true
+            "open_by_default": false
           }
         },
         "detail_Uj948r": {
           "type": "detail",
           "settings": {
             "heading": "Size & fit",
-            "content": "<p>Add the intended fit, rise, coverage, and model reference.</p>",
+            "content": "<p>{{ product.metafields.custom.fit_guide.value.fit_label.value }}</p><p>{{ product.metafields.custom.fit_guide.value.size_up_advice.value }}</p><p>{{ product.metafields.custom.fit_guide.value.model_info.value }}</p><p></p>",
             "use_product_description": false,
             "metafield_namespace": "custom",
             "metafield_key": "size_fit",
