@@ -12,13 +12,6 @@
     "sale_hero_8Vwb7N": {
       "type": "sale-hero",
       "blocks": {
-        "ghost_cta_6pdcgb": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "Briefs",
-            "url": ""
-          }
-        },
         "ghost_cta_zRnaVy": {
           "type": "ghost_cta",
           "settings": {
@@ -42,7 +35,6 @@
         }
       },
       "block_order": [
-        "ghost_cta_6pdcgb",
         "ghost_cta_zRnaVy",
         "ghost_cta_XRkDR4",
         "ghost_cta_KCETby"
@@ -77,14 +69,14 @@
       "settings": {
         "layout": "inline",
         "bg_color": "#0254b2",
-        "font_color": "#ffffff",
+        "font_color": "#FFFFFF",
         "font_opacity": 100,
-        "input_color": "#ffffff",
-        "input_opacity": 50,
-        "padding_top": 56,
-        "padding_bottom": 40,
-        "padding_left": 20,
-        "padding_right": 20,
+        "input_color": "#F9ED2E",
+        "input_opacity": 75,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 28,
+        "padding_right": 28,
         "eyebrow": "AN ADDTIONAL 10% OFF",
         "heading": "WELCOME",
         "subtext": "",
