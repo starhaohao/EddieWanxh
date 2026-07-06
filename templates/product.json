@@ -23,7 +23,7 @@
         "price": {
           "type": "price",
           "settings": {
-            "text_font_size": "body-large",
+            "text_font_size": "body-medium",
             "show_shipping_policy": true,
             "padding_bottom": 12
           }
@@ -50,7 +50,7 @@
           "type": "variants",
           "settings": {
             "info_page": "t-shirt-sleeveless-top-size-chart",
-            "size_chart_style": "text",
+            "size_chart_style": "question",
             "option_font_size": "body-medium",
             "value_font_size": "body-small",
             "padding_bottom": 16
@@ -74,11 +74,11 @@
             "upsell_product": "pair-with-socks",
             "upsell_product_list": [],
             "show_available_upsell_only": false,
-            "layout": "stacked",
+            "layout": "slider",
             "autoplay": false,
             "autoplay_speed": 8,
-            "bg_color": "",
-            "padding_bottom": 24
+            "bg_color": "#000000",
+            "padding_bottom": 50
           }
         },
         "buttons": {
@@ -151,7 +151,14 @@
     },
     "product-framework": {
       "type": "product-framework",
-      "settings": {}
+      "settings": {
+        "aag_label": "At a Glance",
+        "df_label": "Designed For",
+        "sf_label": "Size & Fit",
+        "mc_label": "Material & Care",
+        "pww_label": "Pairs Well With",
+        "br_label": "Bundle Recommendation"
+      }
     },
     "luxury-spacing": {
       "type": "section-luxury-spacing",
