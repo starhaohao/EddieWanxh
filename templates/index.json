@@ -12,6 +12,13 @@
     "sale_hero_8Vwb7N": {
       "type": "sale-hero",
       "blocks": {
+        "ghost_cta_6pdcgb": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Briefs",
+            "url": ""
+          }
+        },
         "ghost_cta_zRnaVy": {
           "type": "ghost_cta",
           "settings": {
@@ -29,12 +36,13 @@
         "ghost_cta_KCETby": {
           "type": "ghost_cta",
           "settings": {
-            "label": "explore more",
+            "label": "Shop all",
             "url": "shopify://collections/shop-all"
           }
         }
       },
       "block_order": [
+        "ghost_cta_6pdcgb",
         "ghost_cta_zRnaVy",
         "ghost_cta_XRkDR4",
         "ghost_cta_KCETby"
@@ -46,12 +54,12 @@
         "overlay_from": "#0a0a0abf",
         "overlay_to": "#0a0a0a52",
         "eyebrow": "Final Clearance",
-        "eyebrow_color": "#7C9BDB",
+        "eyebrow_color": "#7c9bdb",
         "title": "<p>The<br/>Last Run.</p>",
         "title_size": 84,
         "subtitle": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore</p>",
-        "cta_text": "Shop All",
-        "cta_url": "https://www.triiiplestudio.com/collections/dead-stock-clearance",
+        "cta_text": "Stock Clearance",
+        "cta_url": "shopify://collections/dead-stock-clearance",
         "cta_bg": "#7c9bdb",
         "cta_text_color": "#ffffff",
         "show_urgency": true,
