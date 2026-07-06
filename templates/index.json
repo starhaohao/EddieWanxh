@@ -65,6 +65,7 @@
     },
     "landing_edm_signup_39bzd6": {
       "type": "landing-edm-signup",
+      "custom_css": [],
       "name": "EDM Signup",
       "settings": {
         "layout": "inline",
@@ -260,57 +261,62 @@
         "heading_tag": "h4"
       }
     },
-    "homepage-reviews": {
-      "type": "sale-reviews",
+    "section_text_with_products_f6FLnY": {
+      "type": "section-text-with-products",
       "blocks": {
-        "rev-1": {
-          "type": "review",
+        "product_CGNCnL": {
+          "type": "product",
           "settings": {
-            "quote": "Best underwear I've owned. Period.",
-            "author": "Marcus T. — Verified buyer",
-            "sku": "Studio Brief · Black · M"
+            "product": "y-transdry-brief-white",
+            "image": "shopify://shop_images/Img_Images_Image_Asset_162_20260517.png",
+            "image_position": 1,
+            "aspect_ratio": 1.5,
+            "width": 230,
+            "mobile_aspect_ratio": 1.4,
+            "mobile_width": 100
           }
         },
-        "rev-2": {
-          "type": "review",
+        "image_qBGiyr": {
+          "type": "image",
           "settings": {
-            "quote": "Bought 3 packs. Won't go back to anything else.",
-            "author": "James L. — Verified buyer",
-            "sku": "Boxer Trunk · White · L"
+            "image": "shopify://shop_images/fathers-day-edm-blue-grey-socks-closeup_94542577-d5e2-4ce1-85f5-f829fa1a2dab.png",
+            "image_position": 1,
+            "aspect_ratio": 1,
+            "width": 80,
+            "mobile_aspect_ratio": 1.5,
+            "mobile_width": 80
           }
         },
-        "rev-3": {
-          "type": "review",
+        "collection_NAcxMd": {
+          "type": "collection",
           "settings": {
-            "quote": "The fit is surgical. Exactly what I needed.",
-            "author": "Ryan K. — Verified buyer",
-            "sku": "Studio Brief · Black · S"
-          }
-        },
-        "rev-4": {
-          "type": "review",
-          "settings": {
-            "quote": "Finally a local brand that delivers on quality. Worth every cent.",
-            "author": "Wei H. — Verified buyer",
-            "sku": "Boxer Trunk · Navy · M"
+            "collection": "tops",
+            "image_position": 7,
+            "aspect_ratio": 0.8,
+            "width": 140,
+            "mobile_aspect_ratio": 1,
+            "mobile_width": 180
           }
         }
       },
       "block_order": [
-        "rev-1",
-        "rev-2",
-        "rev-3",
-        "rev-4"
+        "product_CGNCnL",
+        "image_qBGiyr",
+        "collection_NAcxMd"
       ],
+      "name": "Text with products",
       "settings": {
-        "heading": "Worn. Felt. Reviewed.",
-        "meta_text": "4.9 · 214 reviews",
-        "bg_color": "#ffffff",
-        "title_color": "#000000",
-        "card_bg": "#cecece",
-        "star_color": "#8b8506",
-        "quote_color": "#000000",
-        "who_color": "#868686"
+        "subheading": "",
+        "heading": "worn, felt, reviewed!",
+        "image_border_radius": 50,
+        "width": "wrapper",
+        "text_font_size_px_desktop": 100,
+        "text_align_desktop": "text-center",
+        "text_font_size_px_mobile": 82,
+        "text_align_mobile": "text-left--mobile",
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 0
       }
     },
     "1783340164f0cedf2a": {
@@ -331,15 +337,46 @@
     "homepage-brand-story": {
       "type": "sale-brand-story",
       "settings": {
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "border_color": "#000000",
-        "eyebrow_color": "#dfdca6",
+        "eyebrow_color": "#868233",
         "title_color": "#fff200",
         "body_color": "#fff300",
         "eyebrow": "about us",
         "title": "<h4><strong>Designed in Singapore.<br/>Crafted in Thailand.</strong></h4>",
         "body": "<p>TRIIPLE believes your first layer should be engineered, not just made. Every stitch and fabric choice is intentional—this is the baseline, not basics.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
+      }
+    },
+    "178335972050caff83": {
+      "type": "_blocks",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     }
   },
@@ -349,8 +386,9 @@
     "landing_edm_signup_39bzd6",
     "section_tab_collections_Cc4J84",
     "homepage-social",
-    "homepage-reviews",
+    "section_text_with_products_f6FLnY",
     "1783340164f0cedf2a",
-    "homepage-brand-story"
+    "homepage-brand-story",
+    "178335972050caff83"
   ]
 }
