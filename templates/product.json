@@ -147,18 +147,6 @@
         "padding_bottom": 61
       }
     },
-    "triiiple_globals_tfDVye": {
-      "type": "triiiple-globals",
-      "name": "TRIIIPLE Globals",
-      "settings": {
-        "color_paper": "#ece8df",
-        "color_paper_2": "#e3dec5",
-        "color_ink": "#1a1a1a",
-        "color_muted": "#8a8377",
-        "color_lime": "#cdff00",
-        "color_crimson": "#923531"
-      }
-    },
     "1783337414500645f8": {
       "type": "apps",
       "blocks": {
@@ -171,7 +159,7 @@
         "klaviyo_reviews_product_reviews_4Wfp6k"
       ],
       "settings": {
-        "include_margins": true
+        "include_margins": false
       }
     },
     "product-framework": {
@@ -818,7 +806,6 @@
   },
   "order": [
     "main",
-    "triiiple_globals_tfDVye",
     "1783337414500645f8",
     "product-framework",
     "luxury-spacing",
