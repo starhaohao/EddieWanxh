@@ -23,7 +23,7 @@
         "price": {
           "type": "price",
           "settings": {
-            "text_font_size": "body-x-large",
+            "text_font_size": "body-medium",
             "show_shipping_policy": true,
             "padding_bottom": 12
           }
@@ -133,6 +133,18 @@
         "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
         "padding_top": 0,
         "padding_bottom": 61
+      }
+    },
+    "triiiple_globals_tfDVye": {
+      "type": "triiiple-globals",
+      "name": "TRIIIPLE Globals",
+      "settings": {
+        "color_paper": "#ece8df",
+        "color_paper_2": "#e3dec5",
+        "color_ink": "#1a1a1a",
+        "color_muted": "#8a8377",
+        "color_lime": "#cdff00",
+        "color_crimson": "#923531"
       }
     },
     "product-framework": {
@@ -779,6 +791,7 @@
   },
   "order": [
     "main",
+    "triiiple_globals_tfDVye",
     "product-framework",
     "luxury-spacing",
     "section_look_gallery_ePcTQJ",
