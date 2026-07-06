@@ -23,31 +23,6 @@
           "type": "title",
           "settings": {}
         },
-        "description_fjRQkw": {
-          "type": "description",
-          "settings": {
-            "show_read_more": true,
-            "padding_bottom": 0
-          }
-        },
-        "tab_richtext": {
-          "type": "tab_richtext",
-          "settings": {
-            "show_description": true,
-            "show_read_more": true,
-            "title_1": "Care",
-            "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
-            "title_2": "Shipping",
-            "raw_content_2": "<p>Free shipping on orders over $50 within Singapore. Standard delivery 2–4 business days. International shipping available.</p>",
-            "title_3": "",
-            "raw_content_3": "",
-            "title_4": "",
-            "raw_content_4": "",
-            "title_5": "",
-            "raw_content_5": "",
-            "padding_bottom": 0
-          }
-        },
         "variants": {
           "type": "variants",
           "settings": {
@@ -70,20 +45,29 @@
             "padding_bottom": 50
           }
         },
+        "bundle_save_mUr6Ep": {
+          "type": "bundle-save",
+          "disabled": true,
+          "settings": {
+            "bundle_product": "l-socks-pink",
+            "bundle_product_list": [
+              "l-socks-black",
+              "l-cotton-spandex-socks-copy",
+              "l-socks-heather-grey"
+            ],
+            "bundle_title": "Pair with socks ;)",
+            "show_available_bundle_only": false,
+            "layout": "slider",
+            "autoplay": false,
+            "autoplay_speed": 8,
+            "bg_color": "",
+            "padding_bottom": 16
+          }
+        },
         "buttons": {
           "type": "buttons",
-          "settings": {
-            "show_quantity": true,
-            "button_type": "btn--secondary",
-            "button_size": "btn--large",
-            "button_style": "btn--outline",
-            "show_dynamic_checkout": true,
-            "button_type_dynamic": "btn--white",
-            "button_size_dynamic": "btn--large",
-            "button_style_dynamic": "btn--outline",
-            "show_gift_card_recipient": false,
-            "padding_bottom": 50
-          }
+          "source": "{{ product.metafields.custom.product_content.value }}",
+          "settings": {}
         },
         "inventory_countdown": {
           "type": "inventory_countdown",
@@ -115,26 +99,18 @@
             "bg_color": "",
             "padding_bottom": 16
           }
-        },
-        "sharing": {
-          "type": "sharing",
-          "settings": {
-            "padding_bottom": 0
-          }
         }
       },
       "block_order": [
         "divider",
         "title",
-        "description_fjRQkw",
-        "tab_richtext",
         "variants",
         "fit_guide",
+        "bundle_save_mUr6Ep",
         "buttons",
         "inventory_countdown",
         "divider_gCnKPy",
-        "complementary_products_xTibkN",
-        "sharing"
+        "complementary_products_xTibkN"
       ],
       "settings": {
         "product_sticky_enable": true,
@@ -144,10 +120,189 @@
         "enable_video_looping": true,
         "image_layout": "thumbnails",
         "image_size": "stretch",
-        "mobile_image_style": "thumbs",
+        "mobile_image_style": "slider",
         "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
         "padding_top": 60,
-        "padding_bottom": 60
+        "padding_bottom": 0
+      }
+    },
+    "product_detail_story_ecRDK7": {
+      "type": "product-detail-story",
+      "blocks": {
+        "detail_3eaE4G": {
+          "type": "detail",
+          "settings": {
+            "heading": "Description",
+            "content": "<p>Add useful product detail here.</p>",
+            "use_product_description": true,
+            "metafield_namespace": "{{ product.title }}",
+            "metafield_key": "{{ product.title }}",
+            "open_by_default": true
+          }
+        },
+        "detail_Uj948r": {
+          "type": "detail",
+          "settings": {
+            "heading": "Size & fit",
+            "content": "<p>Add the intended fit, rise, coverage, and model reference.</p>",
+            "use_product_description": false,
+            "metafield_namespace": "custom",
+            "metafield_key": "size_fit",
+            "open_by_default": false
+          }
+        },
+        "detail_YQHMzN": {
+          "type": "detail",
+          "settings": {
+            "heading": "Material & care",
+            "content": "<p>Add fabric composition and care instructions.</p>",
+            "use_product_description": false,
+            "metafield_namespace": "custom",
+            "metafield_key": "material_care",
+            "open_by_default": false
+          }
+        },
+        "feature_MJUpit": {
+          "type": "feature",
+          "settings": {
+            "symbol": "/",
+            "heading": "Moves with you",
+            "text": "Flexible construction follows the body without fighting it."
+          }
+        },
+        "feature_V3ryRi": {
+          "type": "feature",
+          "settings": {
+            "symbol": "~",
+            "heading": "Breathes easier",
+            "text": "Designed to manage daily heat and moisture."
+          }
+        },
+        "feature_Y7mddh": {
+          "type": "feature",
+          "settings": {
+            "symbol": "-",
+            "heading": "Smoother seams",
+            "text": "Reduced bulk where comfort matters most."
+          }
+        },
+        "feature_UjyDpD": {
+          "type": "feature",
+          "settings": {
+            "symbol": "o",
+            "heading": "Built to repeat",
+            "text": "A dependable layer for the weekly rotation."
+          }
+        },
+        "size_row_q47fBD": {
+          "type": "size_row",
+          "settings": {
+            "size": "XS",
+            "waist_cm": "59–63",
+            "waist_in": "23.2–24.8",
+            "eu": "42–44",
+            "uk_us": "26–28"
+          }
+        },
+        "size_row_GBNnLE": {
+          "type": "size_row",
+          "settings": {
+            "size": "S",
+            "waist_cm": "64–68",
+            "waist_in": "25.2–26.8",
+            "eu": "44–46",
+            "uk_us": "28–30"
+          }
+        },
+        "size_row_TWLr4d": {
+          "type": "size_row",
+          "settings": {
+            "size": "M",
+            "waist_cm": "69–73",
+            "waist_in": "27.2–28.7",
+            "eu": "46–48",
+            "uk_us": "30–32"
+          }
+        },
+        "size_row_7pzJKn": {
+          "type": "size_row",
+          "settings": {
+            "size": "L",
+            "waist_cm": "74–78",
+            "waist_in": "29.1–30.7",
+            "eu": "48–50",
+            "uk_us": "32–34"
+          }
+        },
+        "size_row_pCHnw6": {
+          "type": "size_row",
+          "settings": {
+            "size": "XL",
+            "waist_cm": "79–83",
+            "waist_in": "31.1–32.7",
+            "eu": "50–52",
+            "uk_us": "34–36"
+          }
+        },
+        "size_row_Kwqnqk": {
+          "type": "size_row",
+          "settings": {
+            "size": "2XL",
+            "waist_cm": "84–88",
+            "waist_in": "33.1–34.6",
+            "eu": "52–54",
+            "uk_us": "36–38"
+          }
+        },
+        "image_n7xnAb": {
+          "type": "image",
+          "settings": {
+            "heading": "Fit in motion",
+            "caption": "Product reference"
+          }
+        },
+        "image_Hzi9QU": {
+          "type": "image",
+          "settings": {
+            "heading": "Fabric up close",
+            "caption": "Material reference"
+          }
+        }
+      },
+      "block_order": [
+        "detail_3eaE4G",
+        "detail_Uj948r",
+        "detail_YQHMzN",
+        "feature_MJUpit",
+        "feature_V3ryRi",
+        "feature_Y7mddh",
+        "feature_UjyDpD",
+        "size_row_q47fBD",
+        "size_row_GBNnLE",
+        "size_row_TWLr4d",
+        "size_row_7pzJKn",
+        "size_row_pCHnw6",
+        "size_row_Kwqnqk",
+        "image_n7xnAb",
+        "image_Hzi9QU"
+      ],
+      "name": "Product detail story",
+      "settings": {
+        "details_eyebrow": "",
+        "details_heading": "Made for the way you move.",
+        "features_eyebrow": "Why this works",
+        "features_heading": "Less fuss. Better function.",
+        "size_eyebrow": "Fit reference",
+        "size_heading": "Find your size.",
+        "size_intro": "<p>Use the body measurements below as a starting point. If you sit between sizes, choose based on your preferred level of ease.</p>",
+        "size_label": "Size",
+        "waist_cm_label": "Waist (cm)",
+        "waist_in_label": "Waist (in)",
+        "eu_label": "EU",
+        "uk_us_label": "UK / US",
+        "size_note": "Tolerance ±2.5 cm. Product fit may vary slightly by fabric and cut.",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
       }
     },
     "1783337414500645f8": {
@@ -170,15 +325,11 @@
       "settings": {
         "aag_label": "At a Glance",
         "df_label": "Designed For",
-        "sf_label": "Size & Fit",
+        "sf_label": "Size & Fit{{ product.metafields.shopify.size | metafield_text: field: 'label' }}",
         "mc_label": "Material & Care",
-        "pww_label": "Pairs Well With",
-        "br_label": "Bundle Recommendation"
+        "pww_label": "{{ product.metafields[\"shopify--discovery--product_recommendation\"].related_products_display.value }}",
+        "br_label": "{{ product.metafields[\"shopify--discovery--product_search_boost\"].queries | metafield_text }}"
       }
-    },
-    "luxury-spacing": {
-      "type": "section-luxury-spacing",
-      "settings": {}
     },
     "section_look_gallery_ePcTQJ": {
       "type": "section-look-gallery",
@@ -306,15 +457,6 @@
     },
     "1778931413bf791d0a": {
       "type": "apps",
-      "blocks": {
-        "klaviyo_reviews_product_reviews_kjLUez": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "klaviyo_reviews_product_reviews_kjLUez"
-      ],
       "settings": {
         "include_margins": false
       }
@@ -356,9 +498,9 @@
   },
   "order": [
     "main",
+    "product_detail_story_ecRDK7",
     "1783337414500645f8",
     "product-framework",
-    "luxury-spacing",
     "section_look_gallery_ePcTQJ",
     "section_announcement_GRMQe3",
     "1778931413bf791d0a",
