@@ -260,21 +260,6 @@
         "heading_tag": "h4"
       }
     },
-    "1783342590317aebf3": {
-      "type": "apps",
-      "blocks": {
-        "klaviyo_reviews_featured_reviews_carousel_Bk8ChH": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "klaviyo_reviews_featured_reviews_carousel_Bk8ChH"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
     "homepage-reviews": {
       "type": "sale-reviews",
       "blocks": {
@@ -328,10 +313,25 @@
         "who_color": "#868686"
       }
     },
+    "1783340164f0cedf2a": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_featured_reviews_carousel_TxFdhK": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_featured_reviews_carousel_TxFdhK"
+      ],
+      "settings": {
+        "include_margins": false
+      }
+    },
     "homepage-brand-story": {
       "type": "sale-brand-story",
       "settings": {
-        "bg_color": "#ffffff",
+        "bg_color": "#FFFFFF",
         "border_color": "#000000",
         "eyebrow_color": "#dfdca6",
         "title_color": "#fff200",
@@ -341,165 +341,6 @@
         "body": "<p>TRIIPLE believes your first layer should be engineered, not just made. Every stitch and fabric choice is intentional—this is the baseline, not basics.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
-    },
-    "178318995400e552a5": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_203b961_AzVdaJ": {
-          "type": "ai_gen_block_203b961",
-          "settings": {},
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_203b961_AzVdaJ"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "1783191335366c4e20": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_fed5b37_PTHz9R": {
-          "type": "ai_gen_block_fed5b37",
-          "settings": {
-            "spacing_between_cards": 16,
-            "custom_css": ""
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_fed5b37_PTHz9R"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "17831923402a78ad89": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_3f498fd_WmLcbD": {
-          "type": "ai_gen_block_3f498fd",
-          "settings": {
-            "item_spacing": 8
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_3f498fd_WmLcbD"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "17832063756556c805": {
-      "type": "_blocks",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
     }
   },
   "order": [
@@ -508,12 +349,8 @@
     "landing_edm_signup_39bzd6",
     "section_tab_collections_Cc4J84",
     "homepage-social",
-    "1783342590317aebf3",
     "homepage-reviews",
-    "homepage-brand-story",
-    "178318995400e552a5",
-    "1783191335366c4e20",
-    "17831923402a78ad89",
-    "17832063756556c805"
+    "1783340164f0cedf2a",
+    "homepage-brand-story"
   ]
 }
