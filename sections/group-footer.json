@@ -19,16 +19,16 @@
           "settings": {
             "linklist": "triiiple-about",
             "title": "Wear it. Own it. Explain nothing.",
-            "heading_font_size": "heading-x-large",
+            "heading_font_size": "heading-large",
             "column_width": 100,
-            "enable_accordion": true
+            "enable_accordion": false
           }
         },
         "social_yqkA6e": {
           "type": "social",
           "settings": {
-            "title": "find us",
-            "heading_font_size": "heading-large",
+            "title": "find us at",
+            "heading_font_size": "heading-medium",
             "text": "",
             "column_width": 33,
             "enable_follow_on_shop": true,
@@ -62,7 +62,7 @@
         "show_country_name": true,
         "show_country_flag": false,
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
-        "padding_top": 47,
+        "padding_top": 0,
         "padding_bottom": 100
       }
     }
