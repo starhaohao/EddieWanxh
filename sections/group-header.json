@@ -67,7 +67,7 @@
         "text_Xk6mkM": {
           "type": "text",
           "settings": {
-            "text": "Free shipping on orders over $100",
+            "text": "Wear it. Own it. Explain nothing.",
             "align_text": "text-left",
             "text_font_size": "body-large",
             "padding_bottom": 14
@@ -113,7 +113,7 @@
           "type": "menu",
           "settings": {
             "mobile_menu_linklist": "triiiple-shop",
-            "text_font_size": "body-large",
+            "text_font_size": "body-medium",
             "highlight_item": "Sale",
             "highlight_item_color": "#d02e2e",
             "padding": true,
@@ -154,7 +154,7 @@
       ],
       "settings": {
         "logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
-        "logo_max_limit": 40,
+        "logo_max_limit": 110,
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a"
       }
     },
