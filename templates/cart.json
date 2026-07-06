@@ -86,7 +86,7 @@
         "title": "add on",
         "collection": "essentials",
         "side_margin": 20,
-        "card_size": "calc(45% - 12px)",
+        "card_size": "calc(20% - 12px)",
         "card_size_mobile": "calc(88% - 12px)"
       }
     }
