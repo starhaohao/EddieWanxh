@@ -78,9 +78,21 @@
         "padding_top": 32,
         "padding_bottom": 50
       }
+    },
+    "triiiple_shop_strip_BGDH8a": {
+      "type": "triiiple-shop-strip",
+      "name": "Shop Strip",
+      "settings": {
+        "title": "add on",
+        "collection": "essentials",
+        "side_margin": 20,
+        "card_size": "calc(45% - 12px)",
+        "card_size_mobile": "calc(88% - 12px)"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "triiiple_shop_strip_BGDH8a"
   ]
 }
