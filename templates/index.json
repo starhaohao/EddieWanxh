@@ -30,7 +30,7 @@
           "type": "ghost_cta",
           "settings": {
             "label": "explore more",
-            "url": "shopify://collections/frontpage"
+            "url": "shopify://collections/shop-all"
           }
         }
       },
