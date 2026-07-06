@@ -456,6 +456,9 @@
                         assign fallback_product_list = block.settings.upsell_product_list
                         assign show_available_only = block.settings.show_available_upsell_only
                         assign block_title = 'products.general.upsell_title' | t
+                        if fallback_product != blank and fallback_product.handle == 'pair-with-socks'
+                          assign block_title = 'Complete your first layer'
+                        endif
                         assign block_class = 'upsell-products'
                         assign wrapper_class = 'product__upsell'
                         assign title_class = 'product-upsell__holder__title'

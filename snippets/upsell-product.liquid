@@ -7,6 +7,8 @@
   assign is_product_block = is_product_block | default: false
   assign promo_socks_handle = 'pair-with-socks'
   assign is_promo_socks_offer = false
+  assign promo_socks_display_title = 'Add L Cotton Spandex Socks'
+  assign promo_socks_info_line = 'Choose 1 colour only. Limited to 1 pair per transaction. Valid with any product purchase.'
 
   if upsell_product == blank
     assign show_upsell = false
@@ -135,7 +137,13 @@
             {%- endif -%}
           {%- else -%}
             <a href="{{ upsell_product.url }}" class="product-upsell__link">
-              <p class="product-upsell__title h3">{{ upsell_product.title | strip_html }}</p>
+              <p class="product-upsell__title h3">
+                {% if is_promo_socks_offer %}
+                  {{ promo_socks_display_title }}
+                {% else %}
+                  {{ upsell_product.title | strip_html }}
+                {% endif %}
+              </p>
 
               {%- unless sibling_color == blank or upsell_product.title contains sibling_color -%}
                 <p class="product-upsell__variant-title h4">{{ 'general.siblings.label' | t }}: {{ sibling_color }}</p>
@@ -195,7 +203,7 @@
 
               {%- if is_promo_socks_offer -%}
                 <p class="product-upsell__description body-x-small">
-                  Choose 1 colour only. Valid with any other product in cart.
+                  {{ promo_socks_info_line }}
                 </p>
               {%- endif -%}
             </a>
