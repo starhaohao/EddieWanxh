@@ -119,6 +119,12 @@
           "settings": {
             "padding_bottom": 0
           }
+        },
+        "klaviyo_reviews_average_rating_tej69L": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/average-rating/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {
+            "product": "{{product}}"
+          }
         }
       },
       "block_order": [
@@ -131,7 +137,8 @@
         "inventory_countdown",
         "divider",
         "complementary_products_xTibkN",
-        "sharing"
+        "sharing",
+        "klaviyo_reviews_average_rating_tej69L"
       ],
       "settings": {
         "product_sticky_enable": true,
