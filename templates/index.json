@@ -83,27 +83,13 @@
           "settings": {
             "text": "<p>Considered pairings. Better value.</p>",
             "text_font_size": "body-x-small",
-            "padding_bottom": 8
-          }
-        },
-        "button_gFTUXr": {
-          "type": "button",
-          "settings": {
-            "link_text": "Explore more",
-            "link": "shopify://collections/bundles-and-save",
-            "button_type": "btn--black",
-            "button_size": "btn--large",
-            "button_style": "btn--solid",
-            "show_arrow": true,
-            "full_width": false,
             "padding_bottom": 0
           }
         }
       },
       "block_order": [
         "heading_VUtNMe",
-        "text_xFjcXF",
-        "button_gFTUXr"
+        "text_xFjcXF"
       ],
       "name": "Image banner",
       "settings": {
