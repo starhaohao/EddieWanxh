@@ -234,7 +234,7 @@
       ],
       "settings": {
         "header_sticky": true,
-        "enable_search": true,
+        "enable_search": false,
         "header_style": "logo_beside",
         "show_separator_line": true,
         "header_border_color": "#7c9bdb",
