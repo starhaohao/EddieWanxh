@@ -32,7 +32,7 @@
             "title": "Wear it. Own it. Explain nothing.",
             "heading_font_size": "heading-medium",
             "column_width": 50,
-            "enable_accordion": false
+            "enable_accordion": true
           }
         }
       },
@@ -62,7 +62,7 @@
         "show_country_name": true,
         "show_country_flag": false,
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
-        "padding_top": 0,
+        "padding_top": 22,
         "padding_bottom": 100
       }
     }
