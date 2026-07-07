@@ -14,31 +14,31 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "social_yqkA6e": {
+          "type": "social",
+          "settings": {
+            "title": "",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Find us at</p>",
+            "column_width": 40,
+            "enable_follow_on_shop": false,
+            "enable_accordion": false
+          }
+        },
         "footer-1": {
           "type": "linklist",
           "settings": {
             "linklist": "triiiple-about",
             "title": "Wear it. Own it. Explain nothing.",
-            "heading_font_size": "heading-large",
-            "column_width": 100,
-            "enable_accordion": false
-          }
-        },
-        "social_yqkA6e": {
-          "type": "social",
-          "settings": {
-            "title": "find us at",
             "heading_font_size": "heading-medium",
-            "text": "",
-            "column_width": 33,
-            "enable_follow_on_shop": true,
+            "column_width": 50,
             "enable_accordion": false
           }
         }
       },
       "block_order": [
-        "footer-1",
-        "social_yqkA6e"
+        "social_yqkA6e",
+        "footer-1"
       ],
       "settings": {
         "logo_image_width": 70,
