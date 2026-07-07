@@ -1,0 +1,181 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "shop-hub",
+      "blocks": {
+        "fabric": {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by fabric",
+            "title": "Shop by fabric",
+            "text": "Move through the range by fabric first.",
+            "link": "/collections/all"
+          }
+        },
+        "design": {
+          "type": "destination",
+          "settings": {
+            "label": "Shop by design",
+            "title": "Shop by design",
+            "text": "Jump back to the silhouette-led edit.",
+            "link": "/pages/shop-by-design"
+          }
+        },
+        "all_items": {
+          "type": "destination",
+          "settings": {
+            "label": "All items",
+            "title": "View all items",
+            "text": "Browse the whole store in one sweep.",
+            "link": "/collections/all"
+          }
+        },
+        "size_xs": {
+          "type": "size_row",
+          "settings": {
+            "size": "XS",
+            "chest": "32-34",
+            "waist": "25-27"
+          }
+        },
+        "size_s": {
+          "type": "size_row",
+          "settings": {
+            "size": "S",
+            "chest": "34-36",
+            "waist": "28-30"
+          }
+        },
+        "size_m": {
+          "type": "size_row",
+          "settings": {
+            "size": "M",
+            "chest": "36-38",
+            "waist": "31-33"
+          }
+        },
+        "size_row_rWfCnh": {
+          "type": "size_row",
+          "settings": {
+            "size": "XS",
+            "chest": "32-34",
+            "waist": "25-27"
+          }
+        },
+        "size_row_ibVNh6": {
+          "type": "size_row",
+          "settings": {
+            "size": "XS",
+            "chest": "32-34",
+            "waist": "25-27"
+          }
+        },
+        "size_row_Gz3ELT": {
+          "type": "size_row",
+          "settings": {
+            "size": "XS",
+            "chest": "32-34",
+            "waist": "25-27"
+          }
+        }
+      },
+      "block_order": [
+        "fabric",
+        "design",
+        "all_items",
+        "size_xs",
+        "size_s",
+        "size_m",
+        "size_row_rWfCnh",
+        "size_row_ibVNh6",
+        "size_row_Gz3ELT"
+      ],
+      "settings": {
+        "eyebrow": "Shop",
+        "heading": "Shop by fabric.",
+        "description": "<p>Lead with the material story and let the collection path follow from there.</p>",
+        "card_cta": "Open page",
+        "guide_eyebrow": "Fit guide",
+        "guide_heading": "Size and fit guide",
+        "guide_text": "<p>Keep sizing visible for customers comparing fabrics and cuts.</p>",
+        "background_color": "#ffffff",
+        "text_color": "#0f1623",
+        "accent_color": "#923531"
+      }
+    },
+    "landing_benefit_banner_GT8fLU": {
+      "type": "landing-benefit-banner",
+      "blocks": {
+        "benefit_hHDrFd": {
+          "type": "benefit",
+          "settings": {
+            "symbol": "...",
+            "heading": "TransDRY",
+            "text": "Pulls sweat away the second it forms."
+          }
+        },
+        "benefit_w4TwPz": {
+          "type": "benefit",
+          "settings": {
+            "symbol": ">>>",
+            "heading": "4-Way Stretch",
+            "text": "Moves with you. Stays in shape."
+          }
+        },
+        "benefit_JkqH7g": {
+          "type": "benefit",
+          "settings": {
+            "symbol": "Y",
+            "heading": "Flat Seams",
+            "text": "No friction. No irritation. All day."
+          }
+        },
+        "benefit_PNFXkM": {
+          "type": "benefit",
+          "settings": {
+            "symbol": "))",
+            "heading": "True Fit",
+            "text": "Engineered for the way bodies move."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_hHDrFd",
+        "benefit_w4TwPz",
+        "benefit_JkqH7g",
+        "benefit_PNFXkM"
+      ],
+      "name": "Benefit strip and banner",
+      "settings": {
+        "strip_eyebrow": "Why it works",
+        "strip_heading": "Built for Singapore.",
+        "strip_link_label": "Learn more",
+        "strip_link": "",
+        "strip_background": "#17191c",
+        "strip_text": "#ffffff",
+        "media_background": "#650b05",
+        "panel_background": "#17191c",
+        "panel_text": "#ffffff",
+        "eyebrow": "Buy more, save more",
+        "heading": "The Starter Pack",
+        "body": "<p>3 pairs. Any colours.</p>",
+        "price": "S$165",
+        "button_label": "Build your pack",
+        "button_link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "landing_benefit_banner_GT8fLU"
+  ]
+}
