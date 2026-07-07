@@ -30,10 +30,10 @@
       "type": "landing-edm-signup",
       "settings": {
         "layout": "inline",
-        "bg_color": "#F6FA0D",
-        "font_color": "#17191c",
+        "bg_color": "#000000",
+        "font_color": "#F6FA0D",
         "font_opacity": 100,
-        "input_color": "#1157C0",
+        "input_color": "#94A8C5",
         "input_opacity": 100,
         "padding_top": 96,
         "padding_bottom": 96,
@@ -42,14 +42,102 @@
         "eyebrow": "First Layer",
         "heading": "Join First Layer",
         "subtext": "Unlock 10% off your first order, early access to drops, and member-only perks.",
-        "placeholder": "Email address",
+        "placeholder": "Your Email address",
         "button_label": "Unlock perks",
         "success_text": "Welcome to First Layer — your 10% is on the way."
+      }
+    },
+    "section_hero_mqDrCG": {
+      "type": "section-hero",
+      "name": "Image banner",
+      "settings": {
+        "image_1": "shopify://shop_images/y-trasndry-2.png",
+        "image_2": "shopify://shop_images/Banner-1_5a5422d7-b064-4cfa-85fa-f6f0bb1124c8.jpg",
+        "link": "",
+        "width": "wrapper--full",
+        "height": "screen-height-full",
+        "flex_align_desktop": "align--middle-center-desktop",
+        "content_width": 50,
+        "mobile_image": "shopify://shop_images/Banner-1_5a5422d7-b064-4cfa-85fa-f6f0bb1124c8.jpg",
+        "mobile_height": "screen-height-three-quarters--mobile",
+        "flex_align_mobile": "align--middle-center-mobile",
+        "color_scheme": "",
+        "show_text_background": false,
+        "overlay_type": "disabled",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
+    },
+    "page_about_us_arrWFx": {
+      "type": "page-about-us",
+      "blocks": {
+        "principle_GCa6jq": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Fit",
+            "heading": "Made to move",
+            "body": "<p>Patterned for comfort, built to stay put, and refined enough for everyday wear.</p>"
+          }
+        },
+        "principle_MfkpCg": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Fabric",
+            "heading": "Performance first",
+            "body": "<p>Moisture-wicking, soft-touch fabrics that stay relevant beyond the trend cycle.</p>"
+          }
+        },
+        "principle_PiimLa": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Design",
+            "heading": "Measured confidence",
+            "body": "<p>Minimal, editorial, and body-aware - built to look sharp without trying too hard.</p>"
+          }
+        },
+        "principle_b3EgTp": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Range",
+            "heading": "All bodies welcome",
+            "body": "<p>Sizes from XS to 2XL, because confidence should never come in one shape.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "principle_GCa6jq",
+        "principle_MfkpCg",
+        "principle_PiimLa",
+        "principle_b3EgTp"
+      ],
+      "name": "About us page",
+      "settings": {
+        "eyebrow": "About us",
+        "heading": "Who we are",
+        "intro": "<p>TRIIIPLE Studio is a men’s underwear and intimate wear brand redefining comfort, confidence, and self-expression - starting from the first layer.</p>",
+        "primary_label": "Shop all",
+        "primary_link": "",
+        "secondary_label": "Story Salon",
+        "secondary_link": "",
+        "manifesto_eyebrow": "Why this works",
+        "manifesto_heading": "Engineered, not just made.",
+        "manifesto_body": "<p>Founded in Singapore and crafted in Asia, we design bold, body-inclusive underwear that merges high-performance fabrics with elevated aesthetics. Every cut is deliberate. Every layer is meant to be felt.</p>",
+        "principles_eyebrow": "Product details",
+        "principles_heading": "The baseline.",
+        "closing_eyebrow": "The first layer",
+        "closing_heading": "Built for bodies that do more.",
+        "closing_body": "<p>We craft enduring essentials and reinvented classics - each made with innovative materials that move with you, wick moisture fast, and feel luxuriously soft against the skin.</p><p>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones, with sizes ranging from XS to 2XL.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
       }
     }
   },
   "order": [
     "main",
-    "signup"
+    "signup",
+    "section_hero_mqDrCG",
+    "page_about_us_arrWFx"
   ]
 }
