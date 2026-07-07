@@ -15,28 +15,28 @@
         "focus_link_1": {
           "type": "nav_link",
           "settings": {
-            "label": "Fabric: TransDRY",
+            "label": "TransDRY",
             "link": "/collections/fabric-transdry"
           }
         },
         "focus_link_2": {
           "type": "nav_link",
           "settings": {
-            "label": "Fabric: Cotton Spandex",
+            "label": "Cotton Spandex",
             "link": "/collections/fabric-cotton-spandex"
           }
         },
         "focus_link_3": {
           "type": "nav_link",
           "settings": {
-            "label": "Design: Briefs",
+            "label": "Briefs",
             "link": "/collections/briefs"
           }
         },
         "focus_link_4": {
           "type": "nav_link",
           "settings": {
-            "label": "Design: Boxer Trunks",
+            "label": "Boxer Trunks",
             "link": "/collections/boxer-trunks"
           }
         }
@@ -48,13 +48,13 @@
         "focus_link_4"
       ],
       "settings": {
+        "color_scheme": "",
         "eyebrow": "Underwear Collection",
         "accent_label": "Shop by Fabric and Design",
         "intro": "<p>The fabric comes first. Explore TRIIIPLE underwear by performance fabric or by silhouette, with easier entry points for how it feels and how it fits.</p>",
         "cta_label": "Fabric & Size Guide",
         "cta_link": "/pages/fabric-and-size-guide",
         "use_collection_image": true,
-        "image": "",
         "panel_label": "Shop by",
         "padding_top": 0,
         "padding_bottom": 0
@@ -62,13 +62,7 @@
     },
     "main": {
       "type": "collection",
-      "custom_css": [
-        ".collection__nav { position: sticky; top: var(--header-padding, 0px); z-index: 11; background: rgb(var(--bg)); border-bottom: 1px solid rgba(var(--text), 0.08); margin-bottom: 18px; }",
-        ".collection__nav .popout__toggle, .collection__nav .popout { min-height: 48px; }",
-        ".grid-outer .grid { row-gap: 30px; }",
-        ".product-item__title { text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }",
-        ".product-item__price { font-size: 12px; }"
-      ],
+      "custom_css": [],
       "settings": {
         "enable_sort": true,
         "enable_filters": true,
