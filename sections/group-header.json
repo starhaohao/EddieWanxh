@@ -168,13 +168,13 @@
             "image": "shopify://shop_images/Brief_Menu-x-brief.jpg",
             "aspect_ratio": 1.2,
             "wide_image": true,
-            "overlay_type": "text",
+            "overlay_type": "disabled",
             "title": "{{ metaobjects.menu_cetegory.briefs.name.value }}",
             "heading_font_size": "heading-small",
             "link_text": "{{ metaobjects.menu_cetegory.briefs.one_line_description.value }}",
             "text_font_size": "body-small",
             "link": "shopify://collections/briefs",
-            "text_color": "#FFFFFF"
+            "text_color": "#ffffff"
           }
         },
         "image-1": {
@@ -184,7 +184,7 @@
             "image": "shopify://shop_images/Trunks_Menu-x-brief.jpg",
             "aspect_ratio": 1.2,
             "wide_image": true,
-            "overlay_type": "text",
+            "overlay_type": "disabled",
             "title": "{{ metaobjects.menu_cetegory[\"boxer-trunks\"].name.value }}",
             "heading_font_size": "heading-medium",
             "link_text": "{{ metaobjects.menu_cetegory[\"boxer-trunks\"].one_line_description.value }}",
@@ -200,7 +200,7 @@
             "image": "shopify://shop_images/Tops_Menu-x-brief.jpg",
             "aspect_ratio": 1.2,
             "wide_image": false,
-            "overlay_type": "text",
+            "overlay_type": "disabled",
             "title": "{{ metaobjects.menu_cetegory.tops.name.value }}",
             "heading_font_size": "heading-small",
             "link_text": "{{ metaobjects.menu_cetegory.tops.one_line_description.value }}",
@@ -216,7 +216,7 @@
             "image": "shopify://shop_images/Socks_Menu-x-brief.jpg",
             "aspect_ratio": 1.2,
             "wide_image": false,
-            "overlay_type": "text",
+            "overlay_type": "disabled",
             "title": "{{ metaobjects.menu_cetegory.socks.name.value }}",
             "heading_font_size": "heading-small",
             "link_text": "{{ metaobjects.menu_cetegory.socks.one_line_description.value }}",
