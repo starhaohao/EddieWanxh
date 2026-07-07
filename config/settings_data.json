@@ -202,18 +202,18 @@
       },
       "scheme-2": {
         "settings": {
-          "section_text": "#E2E2E2",
+          "section_text": "#EEF0F2",
           "section_bg": "#000000",
-          "section_bg_light": "#F1F1F000",
+          "section_bg_light": "#ADADAD82",
           "section_bg_gradient": "",
-          "btn_primary_bg": "#FCFCFC00",
+          "btn_primary_bg": "rgba(0,0,0,0)",
           "btn_primary_text": "#000000",
-          "btn_primary_border": "#00000000",
-          "btn_secondary_bg": "#FFFFFF00",
+          "btn_primary_border": "rgba(0,0,0,0)",
+          "btn_secondary_bg": "rgba(0,0,0,0)",
           "btn_secondary_text": "#000000",
-          "btn_secondary_border": "#E4E4E400",
-          "accent": "#F6FA0D",
-          "lines_and_border": "#F6FA0D",
+          "btn_secondary_border": "rgba(0,0,0,0)",
+          "accent": "#f6fa0d",
+          "lines_and_border": "#f6fa0d",
           "overlay": "#6b0d09",
           "links": "#9c5f5c"
         }
