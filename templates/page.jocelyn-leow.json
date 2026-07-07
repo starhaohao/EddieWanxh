@@ -345,23 +345,6 @@
         "product_3": "ed-cotton-spandex-sleeveless-top-white",
         "shop_all_url": "shopify://collections"
       }
-    },
-    "178029763221aa94f5": {
-      "type": "apps",
-      "blocks": {
-        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X": {
-          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
-          "settings": {
-            "formId": "<div class=\"klaviyo-form-U5igv3\"></div>"
-          }
-        }
-      },
-      "block_order": [
-        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X"
-      ],
-      "settings": {
-        "include_margins": false
-      }
     }
   },
   "order": [
@@ -371,7 +354,6 @@
     "section_multicolumn_jydc97",
     "section_custom_content_AVnnp4",
     "section_rich_text_columns_HwPbhH",
-    "story_salon_teaser_bT9RDn",
-    "178029763221aa94f5"
+    "story_salon_teaser_bT9RDn"
   ]
 }
