@@ -39,6 +39,9 @@
         "ghost_cta_XRkDR4",
         "ghost_cta_KCETby"
       ],
+      "custom_css": [
+        "/* Make last word of banner heading yellow */.banner__heading .last-word {color: #ffd700;}"
+      ],
       "name": "Sale Hero",
       "settings": {
         "image": "shopify://shop_images/Landing_Page.jpg",
@@ -48,7 +51,7 @@
         "eyebrow": "Final Clearance",
         "eyebrow_color": "#7c9bdb",
         "title": "<p>The<br/>Last Run.</p>",
-        "title_size": 84,
+        "title_size": 120,
         "subtitle": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore</p>",
         "cta_text": "Stock Clearance",
         "cta_url": "shopify://collections/dead-stock-clearance",
@@ -62,6 +65,65 @@
     "features-strip": {
       "type": "landing-features-strip",
       "settings": {}
+    },
+    "section_hero_ALw4gQ": {
+      "type": "section-hero",
+      "blocks": {
+        "heading_VUtNMe": {
+          "type": "heading",
+          "settings": {
+            "title": "THE BUNDLE EDIT.",
+            "heading_font_size": "heading-x-large",
+            "heading_tag": "h4",
+            "padding_bottom": 8
+          }
+        },
+        "text_xFjcXF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Considered pairings. Better value. Final stock.</p>",
+            "text_font_size": "body-small",
+            "padding_bottom": 8
+          }
+        },
+        "button_gFTUXr": {
+          "type": "button",
+          "settings": {
+            "link_text": "Explore more",
+            "link": "shopify://collections/bundles-and-save",
+            "button_type": "btn--secondary",
+            "button_size": "btn--large",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "full_width": true,
+            "padding_bottom": 8
+          }
+        }
+      },
+      "block_order": [
+        "heading_VUtNMe",
+        "text_xFjcXF",
+        "button_gFTUXr"
+      ],
+      "name": "Image banner",
+      "settings": {
+        "image_1": "shopify://shop_images/Untitled-1.jpg",
+        "image_2": "shopify://shop_images/x-brief.jpg",
+        "link": "shopify://collections/bundles-and-save",
+        "width": "wrapper--full",
+        "height": "image-height",
+        "flex_align_desktop": "align--middle-center-desktop",
+        "content_width": 50,
+        "mobile_image": "shopify://shop_images/Untitled-1.jpg",
+        "mobile_height": "image-height--mobile",
+        "flex_align_mobile": "align--middle-center-mobile",
+        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
+        "show_text_background": false,
+        "overlay_type": "disabled",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
     },
     "landing_edm_signup_39bzd6": {
       "type": "landing-edm-signup",
@@ -383,6 +445,7 @@
   "order": [
     "sale_hero_8Vwb7N",
     "features-strip",
+    "section_hero_ALw4gQ",
     "landing_edm_signup_39bzd6",
     "section_tab_collections_Cc4J84",
     "homepage-social",
