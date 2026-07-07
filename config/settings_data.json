@@ -212,8 +212,8 @@
           "btn_secondary_bg": "#FFFFFF00",
           "btn_secondary_text": "#000000",
           "btn_secondary_border": "#E4E4E400",
-          "accent": "#000000",
-          "lines_and_border": "#c0c0c0",
+          "accent": "#F6FA0D",
+          "lines_and_border": "#F6FA0D",
           "overlay": "#6b0d09",
           "links": "#9c5f5c"
         }
