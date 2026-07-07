@@ -262,7 +262,7 @@
         "logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "logo_max_limit": 130,
         "logo_max_limit_mobile": 95,
-        "main_menu_linklist": "triiiple-shop",
+        "main_menu_linklist": "main-menu",
         "enable_call_to_action": true,
         "button_text": "Enjoy a 10% discount on your first ownership.",
         "button_link": "shopify://pages/unlock-first-layer-perks",
