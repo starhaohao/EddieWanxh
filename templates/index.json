@@ -73,16 +73,16 @@
           "type": "heading",
           "settings": {
             "title": "THE BUNDLE EDIT.",
-            "heading_font_size": "heading-x-large",
-            "heading_tag": "h4",
-            "padding_bottom": 8
+            "heading_font_size": "heading-x-small",
+            "heading_tag": "automatic",
+            "padding_bottom": 0
           }
         },
         "text_xFjcXF": {
           "type": "text",
           "settings": {
-            "text": "<p>Considered pairings. Better value. Final stock.</p>",
-            "text_font_size": "body-small",
+            "text": "<p>Considered pairings. Better value.</p>",
+            "text_font_size": "body-x-small",
             "padding_bottom": 8
           }
         },
@@ -91,12 +91,12 @@
           "settings": {
             "link_text": "Explore more",
             "link": "shopify://collections/bundles-and-save",
-            "button_type": "btn--secondary",
+            "button_type": "btn--black",
             "button_size": "btn--large",
             "button_style": "btn--solid",
-            "show_arrow": false,
-            "full_width": true,
-            "padding_bottom": 8
+            "show_arrow": true,
+            "full_width": false,
+            "padding_bottom": 0
           }
         }
       },
@@ -111,14 +111,14 @@
         "image_2": "shopify://shop_images/x-brief.jpg",
         "link": "shopify://collections/bundles-and-save",
         "width": "wrapper--full",
-        "height": "image-height",
-        "flex_align_desktop": "align--middle-center-desktop",
-        "content_width": 50,
+        "height": "screen-height-full",
+        "flex_align_desktop": "align--bottom-left-desktop",
+        "content_width": 100,
         "mobile_image": "shopify://shop_images/Untitled-1.jpg",
         "mobile_height": "image-height--mobile",
-        "flex_align_mobile": "align--middle-center-mobile",
+        "flex_align_mobile": "align--top-right-mobile",
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
-        "show_text_background": false,
+        "show_text_background": true,
         "overlay_type": "disabled",
         "padding_top": 0,
         "padding_bottom": 0,
@@ -134,7 +134,7 @@
         "bg_color": "#0254b2",
         "font_color": "#ffffff",
         "font_opacity": 100,
-        "input_color": "#f9ed2e",
+        "input_color": "#1CF644",
         "input_opacity": 95,
         "padding_top": 20,
         "padding_bottom": 20,
