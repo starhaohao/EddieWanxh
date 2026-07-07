@@ -36,7 +36,7 @@
         "footer_line": "Editor. Model. Maker. An industry of surfaces — he insists on something more.",
         "heading_size": "Display",
         "title_ends": "right",
-        "title_font": "rock_salt_n4",
+        "title_font": "covered_by_your_grace_n4",
         "heading_font": "sans_serif_n4",
         "body_font": "mono",
         "auto_rotate": true,
@@ -57,20 +57,20 @@
           "settings": {
             "subheading": "on honesty",
             "title": "In an industry of surfaces, he insists on feeling everything.",
-            "heading_font_size": "heading-x-small",
+            "heading_font_size": "heading-small",
             "text": "<p>Amos works across editing, modelling, and making. The industry asks for a polished exterior; he offers something harder to achieve — authenticity, worn plainly and without apology.</p><p></p>",
             "text_font_size": "body-small",
-            "button_text": "X Brief",
+            "button_text": "X TransDRY® Brief",
             "button_url": "shopify://products/x-transdry-brief-black",
-            "button_type": "btn--white",
-            "button_size": "btn--small",
+            "button_type": "btn--black",
+            "button_size": "",
             "button_style": "btn--text",
             "show_arrow": true,
             "show_social_links": true,
             "text_columns": 1,
             "align_text": "text-left",
             "bg_color": "#c0d9f0",
-            "color": "#ffffff",
+            "color": "#000000",
             "heading_tag": "automatic"
           }
         },
@@ -345,23 +345,6 @@
         "product_3": "v-cotton-spandex-brief-black",
         "shop_all_url": "shopify://collections"
       }
-    },
-    "178029763221aa94f5": {
-      "type": "apps",
-      "blocks": {
-        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X": {
-          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
-          "settings": {
-            "formId": "<div class=\"klaviyo-form-U5igv3\"></div>"
-          }
-        }
-      },
-      "block_order": [
-        "klaviyo_email_marketing_sms_form_embed_block_ADEw9X"
-      ],
-      "settings": {
-        "include_margins": false
-      }
     }
   },
   "order": [
@@ -371,7 +354,6 @@
     "section_multicolumn_jydc97",
     "section_custom_content_AVnnp4",
     "section_rich_text_columns_HwPbhH",
-    "story_salon_teaser_bT9RDn",
-    "178029763221aa94f5"
+    "story_salon_teaser_bT9RDn"
   ]
 }
