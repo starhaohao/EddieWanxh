@@ -17,7 +17,7 @@
     "menu_transparent_color": "{{ shop.brand.colors.secondary[0].background }}",
     "sale_color": "#B86565",
     "type_nav_font": "covered_by_your_grace_n4",
-    "nav_font_size": 10,
+    "nav_font_size": 15,
     "nav_letter_spacing": -25,
     "type_nav_caps": false,
     "type_base_font": "sans_serif_n4",
