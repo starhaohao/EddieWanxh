@@ -49,8 +49,8 @@
         "variants": {
           "type": "variants",
           "settings": {
-            "info_page": "t-shirt-sleeveless-top-size-chart",
-            "size_chart_style": "question",
+            "info_page": "size-guide",
+            "size_chart_style": "ruler",
             "option_font_size": "body-medium",
             "value_font_size": "body-small",
             "padding_bottom": 16
