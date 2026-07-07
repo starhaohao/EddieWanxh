@@ -241,7 +241,7 @@
         "header_border_color": "#7c9bdb",
         "separator_opacity": 100,
         "show_icons": true,
-        "icon_as_circle": false,
+        "icon_as_circle": true,
         "cart_icon_family": "bag",
         "logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "logo_max_limit": 130,

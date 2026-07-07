@@ -41,8 +41,8 @@
       ],
       "name": "Sale Hero",
       "settings": {
-        "image": "shopify://shop_images/Untitled-4.png",
-        "hero_height": 92,
+        "image": "shopify://shop_images/Landing_Page.jpg",
+        "hero_height": 100,
         "overlay_from": "#0a0a0abf",
         "overlay_to": "#0a0a0a52",
         "eyebrow": "Final Clearance",
