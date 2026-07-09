@@ -756,6 +756,88 @@
         "include_margins": true
       }
     },
+    "selection_showcase_product": {
+      "type": "selection-showcase",
+      "blocks": {
+        "card_briefs": {
+          "type": "selection_card",
+          "settings": {
+            "name": "Briefs",
+            "subtitle": "Everyday essentials",
+            "link": "shopify://collections/briefs"
+          }
+        },
+        "card_trunks": {
+          "type": "selection_card",
+          "settings": {
+            "name": "Boxer Trunks",
+            "subtitle": "Modern comfort",
+            "link": "shopify://collections/boxer-trunks"
+          }
+        },
+        "card_tops": {
+          "type": "selection_card",
+          "settings": {
+            "name": "Tops",
+            "subtitle": "Layering perfection",
+            "link": "shopify://collections/tops"
+          }
+        }
+      },
+      "block_order": [
+        "card_briefs",
+        "card_trunks",
+        "card_tops"
+      ],
+      "settings": {
+        "eyebrow": "Our Selection",
+        "title": "Explore Our Range",
+        "description": "<p>Discover more essentials from our curated collection.</p>",
+        "bg_color": "#ffffff",
+        "text_color": "#17191c",
+        "accent_color": "#4a1024"
+      }
+    },
+    "selection_options_product": {
+      "type": "selection-options",
+      "blocks": {
+        "design_options": {
+          "type": "option_group",
+          "settings": {
+            "label": "Design",
+            "options": "Classic, Modern, Minimal",
+            "description": "Choose your preferred style"
+          }
+        },
+        "fabric_options": {
+          "type": "option_group",
+          "settings": {
+            "label": "Fabric",
+            "options": "Moisture-wicking, Soft-touch, Premium",
+            "description": "Select your material preference"
+          }
+        },
+        "size_options": {
+          "type": "option_group",
+          "settings": {
+            "label": "Size Range",
+            "badge": "XS-2XL",
+            "options": "XS, S, M, L, XL, 2XL",
+            "description": "All bodies welcome"
+          }
+        }
+      },
+      "block_order": [
+        "design_options",
+        "fabric_options",
+        "size_options"
+      ],
+      "settings": {
+        "title": "Our Selection Options",
+        "bg_color": "#ffffff",
+        "text_color": "#17191c"
+      }
+    },
     "related": {
       "type": "related",
       "blocks": {
@@ -799,6 +881,8 @@
     "section_dynamic_content_44xTqw",
     "section_announcement_GRMQe3",
     "1778931413bf791d0a",
+    "selection_showcase_product",
+    "selection_options_product",
     "related"
   ]
 }
