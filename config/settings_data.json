@@ -95,7 +95,7 @@
     "show_cutline": false,
     "cutline_color": "#F9ED2E",
     "form_style": "modern",
-    "show_lines": false,
+    "show_lines": true,
     "show_labels": false,
     "variant_boxes": false,
     "sale_badge": false,
