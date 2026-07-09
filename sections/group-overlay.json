@@ -38,9 +38,76 @@
       "settings": {
         "include_margins": false
       }
+    },
+    "custom_liquid_FFb3y3": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "",
+        "background_color": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "blocks_LJxrCn": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_fed5b37_6ywPWf": {
+          "type": "ai_gen_block_fed5b37",
+          "name": "Collections grid fix",
+          "settings": {
+            "spacing_between_cards": 0,
+            "custom_css": ""
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_07344f2_aD3pDN": {
+          "type": "ai_gen_block_07344f2",
+          "settings": {
+            "apply_to_all_galleries": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_fed5b37_6ywPWf",
+        "ai_gen_block_07344f2_aD3pDN"
+      ],
+      "name": "Remove gallery gaps",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 35
+      }
     }
   },
   "order": [
-    "178342074450ddcdc7"
+    "178342074450ddcdc7",
+    "custom_liquid_FFb3y3",
+    "blocks_LJxrCn"
   ]
 }
