@@ -18,7 +18,7 @@
           <p class="story-salon-feature__eyebrow">{{ section.settings.eyebrow | escape }}</p>
         {% endif %}
         {% if section.settings.heading != blank %}
-          <h2>{{ section.settings.heading | escape }}</h2>
+          <h2 class="story-salon-feature__heading">{{ section.settings.heading | escape }}</h2>
         {% endif %}
         {% if section.settings.text != blank %}
           <div class="story-salon-feature__text rte">{{ section.settings.text }}</div>
@@ -89,7 +89,7 @@
   .story-salon-feature__panel {
     display: grid;
     grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
-    gap: 2rem;
+    gap: 2.5rem;
     border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
     padding-top: clamp(1.5rem, 4vw, 3rem);
   }
@@ -97,7 +97,7 @@
   .story-salon-feature__content {
     display: grid;
     align-content: start;
-    gap: 1.5rem;
+    gap: 1.25rem;
     padding-right: clamp(0rem, 1vw, 1rem);
   }
 
@@ -109,14 +109,15 @@
     opacity: 0.58;
   }
 
-  .story-salon-feature h2 {
+  .story-salon-feature__heading {
     margin: 0;
     max-width: 14ch;
     font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
-    font-size: clamp(2.2rem, 6vw, 5.5rem);
+    font-weight: var(--font-heading--weight, 800);
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
     line-height: 0.95;
     letter-spacing: -0.03em;
+    text-transform: uppercase;
   }
 
   .story-salon-feature__text {
