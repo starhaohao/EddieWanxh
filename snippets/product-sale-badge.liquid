@@ -1,0 +1,27 @@
+{%- comment -%}
+  Renders a corner sale percentage badge on product cards
+
+  Accepts:
+  - product: {Object} Product object (required)
+  - show_discount_badge: {Boolean} Whether to show the badge (required)
+  - badge_position: {String} Position of badge - top-left, top-right, bottom-left, bottom-right (optional, default: top-right)
+
+  Usage:
+  {% render 'product-sale-badge', product: product, show_discount_badge: settings.show_discount_badge, badge_position: settings.discount_badge_position %}
+{%- endcomment -%}
+
+{%- liquid
+  assign compare_at_price = product.compare_at_price
+  assign price = product.price
+  assign discount_percentage = 0
+
+  if compare_at_price > price
+    assign discount_percentage = compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round
+  endif
+-%}
+
+{%- if show_discount_badge and discount_percentage > 0 -%}
+  <div class="product-item__sale-badge product-item__sale-badge--{{ badge_position | default: 'top-right' }}">
+    <span class="product-item__discount-text">{{ discount_percentage }}%</span>
+  </div>
+{%- endif -%}

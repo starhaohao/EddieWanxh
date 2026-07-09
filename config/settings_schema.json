@@ -1021,6 +1021,28 @@
       },
       {
         "type": "header",
+        "content": "Discount badge on product cards"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_discount_badge",
+        "label": "Show discount percentage badge",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "discount_badge_position",
+        "label": "Badge position",
+        "options": [
+          { "value": "top-right", "label": "Top right" },
+          { "value": "top-left", "label": "Top left" },
+          { "value": "bottom-right", "label": "Bottom right" },
+          { "value": "bottom-left", "label": "Bottom left" }
+        ],
+        "default": "top-right"
+      },
+      {
+        "type": "header",
         "content": "Variant image",
         "info": "Show an image with your size or custom variant. Works best when form style is set to classic. [Learn more](https://broadcast.presidiocreative.com/products/product-pages/variant-images)"
       },

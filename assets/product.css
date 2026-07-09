@@ -3,6 +3,43 @@ product-sticky {
   display: block;
 }
 
+/* Sale badge on product cards */
+.product-item__sale-badge {
+  position: absolute;
+  background-color: var(--COLOR-TEXT);
+  color: var(--COLOR-BG);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  z-index: 2;
+}
+
+.product-item__sale-badge--top-right {
+  top: 12px;
+  right: 12px;
+}
+
+.product-item__sale-badge--top-left {
+  top: 12px;
+  left: 12px;
+}
+
+.product-item__sale-badge--bottom-right {
+  bottom: 12px;
+  right: 12px;
+}
+
+.product-item__sale-badge--bottom-left {
+  bottom: 12px;
+  left: 12px;
+}
+
+.product-item__image {
+  position: relative;
+}
+
 @media only screen and (min-width: 750px) {
   .product__page {
     display: grid;

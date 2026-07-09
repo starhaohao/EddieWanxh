@@ -824,6 +824,8 @@
         {%- endif -%}
       </a>
 
+      {%- render 'product-sale-badge', product: product, show_discount_badge: settings.show_discount_badge, badge_position: settings.discount_badge_position -%}
+
       {{ over_image_content }}
     </div>
 
