@@ -233,7 +233,7 @@
         "image-4"
       ],
       "settings": {
-        "header_sticky": true,
+        "header_sticky": false,
         "enable_search": false,
         "header_style": "logo_beside",
         "show_separator_line": true,
@@ -242,7 +242,7 @@
         "show_icons": true,
         "icon_as_circle": false,
         "cart_icon_family": "bag",
-        "logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
+        "logo": "shopify://shop_images/TRIIIPLE-logo-white.png",
         "logo_max_limit": 130,
         "logo_max_limit_mobile": 95,
         "main_menu_linklist": "main-menu",
@@ -259,7 +259,7 @@
         "show_country_name": true,
         "show_country_flag": false,
         "highlight_item": "SALE",
-        "highlight_item_color": "#ED813E",
+        "highlight_item_color": "#ed813e",
         "transparent_logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "transparent_home": true,
         "transparent_collection": true,
