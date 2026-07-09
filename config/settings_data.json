@@ -119,7 +119,7 @@
     "sale_bg_color": "#e47000",
     "sale_text_color": "#fcfcfc",
     "show_custom_badge": true,
-    "badge_bg_color": "#F9ED2E",
+    "badge_bg_color": "#ED813E",
     "badge_text_color": "#000000",
     "show_sold_out_badge": false,
     "show_automatic_new_badge": false,
