@@ -64,6 +64,7 @@
     },
     "features-strip": {
       "type": "landing-features-strip",
+      "disabled": true,
       "settings": {}
     },
     "section_hero_ALw4gQ": {
