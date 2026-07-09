@@ -12,17 +12,17 @@
     "hero": {
       "type": "collection-image-with-title",
       "settings": {
-        "show_title": true,
+        "show_title": false,
         "show_description": true,
-        "flex_align": "align--bottom-left",
-        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
-        "show_text_background": true,
+        "flex_align": "align--middle-left",
+        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
+        "show_text_background": false,
         "overlay_type": "disabled",
-        "show_image": true,
-        "banner_layout": "overlay",
-        "height": "three-fifty-height-hero",
-        "mobile_height": "three-fifty-height-hero--mobile",
-        "padding_top": 0,
+        "show_image": false,
+        "banner_layout": "inline",
+        "height": "screen-height-one-third",
+        "mobile_height": "screen-height-one-half--mobile",
+        "padding_top": 50,
         "padding_bottom": 0
       }
     },
@@ -51,7 +51,7 @@
         "grid": 4,
         "grid_mobile": "2",
         "products_per_page": 24,
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
         "padding_top": 0,
         "padding_bottom": 60
       }
