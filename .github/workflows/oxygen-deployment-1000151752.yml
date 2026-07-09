@@ -1,5 +1,12 @@
 name: Storefront 1000151752
-on: [push]
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'hydrogen-starter/**'
+      - '.github/workflows/oxygen-deployment-1000151752.yml'
 
 permissions:
   contents: read
