@@ -3,217 +3,142 @@
 %}
 
 <section
-  class="story-salon-feature"
+  class="ssf"
   data-story-salon-feature
   style="
-    --feature-bg: {{ section.settings.background_color }};
-    --feature-ink: {{ section.settings.text_color }};
-    --feature-accent: {{ section.settings.accent_color }};
+    --ssf-bg: {{ section.settings.background_color }};
+    --ssf-ink: {{ section.settings.text_color }};
+    --ssf-accent: {{ section.settings.accent_color }};
   "
 >
-  <div class="story-salon-feature__inner">
-    <div class="story-salon-feature__panel">
-      <div class="story-salon-feature__content">
-        {% if section.settings.eyebrow != blank %}
-          <p class="story-salon-feature__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-        {% endif %}
-        {% if section.settings.heading != blank %}
-          <h2 class="story-salon-feature__heading">{{ section.settings.heading | escape }}</h2>
-        {% endif %}
-        {% if section.settings.text != blank %}
-          <div class="story-salon-feature__text rte">{{ section.settings.text }}</div>
-        {% endif %}
-        {% if section.settings.link_label != blank and section.settings.link != blank %}
-          <a class="story-salon-feature__link" href="{{ section.settings.link }}">
-            {{ section.settings.link_label | escape }} <span aria-hidden="true">→</span>
-          </a>
-        {% endif %}
-      </div>
-
-      <a class="story-salon-feature__article" href="{{ featured_article.url | default: section.settings.link }}">
-        {% if featured_article != blank and featured_article.image != blank %}
-          {{
-            featured_article.image
-            | image_url: width: 1600
-            | image_tag:
-              widths: '500, 800, 1100, 1600',
-              sizes: '(min-width: 990px) 48vw, 100vw',
-              loading: 'lazy',
-              alt: featured_article.title
-          }}
-        {% elsif section.settings.image != blank %}
-          {{
-            section.settings.image
-            | image_url: width: 1600
-            | image_tag:
-              widths: '500, 800, 1100, 1600',
-              sizes: '(min-width: 990px) 48vw, 100vw',
-              loading: 'lazy',
-              alt: section.settings.heading
-          }}
-        {% endif %}
-
-        <div class="story-salon-feature__overlay">
-          {% if featured_article != blank %}
-            <span class="story-salon-feature__kicker">{{ section.settings.article_label | escape }}</span>
-            <strong>{{ featured_article.title | escape }}</strong>
-            {% if featured_article.excerpt_or_content != blank %}
-              <p>{{ featured_article.excerpt_or_content | strip_html | strip_newlines | truncate: 120 }}</p>
-            {% endif %}
-          {% else %}
-            <span class="story-salon-feature__kicker">{{ section.settings.article_label | escape }}</span>
-            <strong>{{ section.settings.placeholder_title | escape }}</strong>
-            <p>{{ section.settings.placeholder_text | escape }}</p>
-          {% endif %}
-        </div>
+  <div class="ssf__content">
+    {% if section.settings.eyebrow != blank %}
+      <p class="ssf__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="ssf__heading">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <div class="ssf__text">{{ section.settings.text }}</div>
+    {% endif %}
+    {% if section.settings.link_label != blank and section.settings.link != blank %}
+      <a class="ssf__link" href="{{ section.settings.link }}">
+        {{ section.settings.link_label | escape }} <span aria-hidden="true">→</span>
       </a>
-    </div>
+    {% endif %}
   </div>
+
+  <a class="ssf__image" href="{{ featured_article.url | default: section.settings.link }}">
+    {% if featured_article != blank and featured_article.image != blank %}
+      {{
+        featured_article.image
+        | image_url: width: 1600
+        | image_tag:
+          widths: '500, 800, 1100, 1600',
+          sizes: '(min-width: 990px) 48vw, 100vw',
+          loading: 'lazy',
+          alt: featured_article.title
+      }}
+    {% elsif section.settings.image != blank %}
+      {{
+        section.settings.image
+        | image_url: width: 1600
+        | image_tag:
+          widths: '500, 800, 1100, 1600',
+          sizes: '(min-width: 990px) 48vw, 100vw',
+          loading: 'lazy',
+          alt: section.settings.heading
+      }}
+    {% endif %}
+  </a>
 </section>
 
-{% stylesheet %}
-  .story-salon-feature {
-    background: var(--feature-bg, #ffffff);
-    color: var(--feature-ink, #0f1623);
-  }
-
-  .story-salon-feature__inner {
-    width: 100%;
-    max-width: var(--page-width);
-    margin: 0 auto;
-    padding-left: var(--page-margin);
-    padding-right: var(--page-margin);
-    padding-top: clamp(2rem, 4vw, 4rem);
-    padding-bottom: clamp(3rem, 7vw, 6rem);
-  }
-
-  .story-salon-feature__panel {
+<style>
+  .ssf {
+    overflow-x: hidden;
+    box-sizing: border-box;
+    max-width: 100%;
+    background: var(--ssf-bg);
+    border-top: 1px solid color-mix(in srgb, var(--ssf-ink) 12%, transparent);
+    padding: 72px 40px;
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: clamp(2rem, 5vw, 4rem);
-    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
-    padding-top: clamp(1.5rem, 4vw, 3rem);
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 80px;
+    align-items: center;
   }
 
-  .story-salon-feature__content {
-    display: grid;
-    align-content: start;
-    gap: 1.5rem;
-  }
-
-  .story-salon-feature__eyebrow {
+  .ssf__eyebrow {
     margin: 0;
-    font-size: 0.66rem;
-    letter-spacing: 0.2em;
+    font-family: monospace;
+    font-size: 9px;
     text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ssf-ink);
     opacity: 0.58;
+    margin-bottom: 16px;
   }
 
-  .story-salon-feature__heading {
+  .ssf__heading {
     margin: 0;
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight, 800);
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
+    font-size: 36px;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--ssf-ink);
+    margin-bottom: 20px;
+    font-weight: 400;
   }
 
-  .story-salon-feature__text {
-    font-size: 0.98rem;
+  .ssf__text {
+    font-size: 13px;
     line-height: 1.75;
+    color: var(--ssf-ink);
     opacity: 0.8;
+    max-width: 380px;
   }
 
-  .story-salon-feature__link {
+  .ssf__link {
     display: inline-flex;
     gap: 0.5rem;
     align-items: center;
     width: fit-content;
-    color: var(--feature-accent, #923531);
+    color: var(--ssf-accent);
     text-decoration: none;
     font-size: 0.72rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin-top: 0.5rem;
+    margin-top: 16px;
   }
 
-  .story-salon-feature__article {
+  .ssf__image {
     position: relative;
     overflow: hidden;
     display: block;
     color: inherit;
     text-decoration: none;
-    min-height: clamp(28rem, 52vw, 44rem);
+    width: 100%;
+    aspect-ratio: 4/3;
     background: #dfe1e3;
   }
 
-  .story-salon-feature__article img {
+  .ssf__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: saturate(1.12) contrast(1.08) brightness(1.02);
-    transform: scale(1.01);
-  }
-
-  .story-salon-feature__article::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at 50% 30%, rgb(255 255 255 / 0.14), transparent 42%),
-      linear-gradient(to top, rgb(15 11 8 / 0.58), transparent 58%);
-    mix-blend-mode: screen;
-    opacity: 0.92;
-  }
-
-  .story-salon-feature__overlay {
-    position: absolute;
-    inset: auto 0 0 0;
-    z-index: 1;
-    padding: clamp(1.2rem, 3vw, 2rem);
-    color: #ffffff;
-  }
-
-  .story-salon-feature__kicker {
     display: block;
-    margin-bottom: 0.55rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    opacity: 0.72;
   }
 
-  .story-salon-feature__overlay strong {
-    display: block;
-    font-family: var(--font-heading--family);
-    font-size: clamp(1.6rem, 3vw, 3rem);
-    line-height: 0.92;
-    letter-spacing: -0.03em;
-    max-width: 12ch;
-  }
-
-  .story-salon-feature__overlay p {
-    margin: 0.75rem 0 0;
-    max-width: 34rem;
-    font-size: 0.9rem;
-    line-height: 1.65;
-    opacity: 0.82;
-  }
-
-  @media screen and (max-width: 989px) {
-    .story-salon-feature__inner {
-      padding-left: var(--page-margin);
-      padding-right: var(--page-margin);
-    }
-    
-    .story-salon-feature__panel {
+  @media (max-width: 989px) {
+    .ssf {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 32px;
+      padding: 48px 16px;
+    }
+
+    .ssf__heading {
+      font-size: 28px;
     }
   }
-{% endstylesheet %}
+</style>
 
 {% schema %}
 {
@@ -253,24 +178,6 @@
       "type": "url",
       "id": "link",
       "label": "Link"
-    },
-    {
-      "type": "text",
-      "id": "article_label",
-      "label": "Article label",
-      "default": "Featured story"
-    },
-    {
-      "type": "text",
-      "id": "placeholder_title",
-      "label": "Placeholder title",
-      "default": "Add a featured Story Salon post"
-    },
-    {
-      "type": "text",
-      "id": "placeholder_text",
-      "label": "Placeholder text",
-      "default": "Select an article in the theme editor to show the story preview here."
     },
     {
       "type": "article",
