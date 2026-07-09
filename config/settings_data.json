@@ -111,7 +111,7 @@
     "sibling_style": "swatch",
     "collection_swatch_style": "grid",
     "swatch_color_list": "Black: #000000\nWhite: #fafafa\nDusty Blue: #6686A8\nPink: #D8A3AE\nHeather Grey: #BAB8B6\nNavy: #252F3F\nBlank: blank.png",
-    "badge_font_size": "body-medium",
+    "badge_font_size": "body-x-small",
     "badge_alignment": "align--top-right",
     "sale_tags_enable": false,
     "show_saving_badge": true,
@@ -474,18 +474,18 @@
         "settings": {
           "section_text": "#000000",
           "section_bg": "#F1F4F5",
-          "section_bg_light": "#000000E3",
+          "section_bg_light": "#F1F4F591",
           "section_bg_gradient": "",
-          "btn_primary_bg": "#444444",
-          "btn_primary_text": "#000000",
-          "btn_primary_border": "#020303",
+          "btn_primary_bg": "#7C9BDB",
+          "btn_primary_text": "#F1F4F5",
+          "btn_primary_border": "#00000091",
           "btn_secondary_bg": "#F1F4F5",
           "btn_secondary_text": "#000000",
           "btn_secondary_border": "#e47000",
-          "accent": "#c2c2c2",
+          "accent": "#FFFFFF",
           "lines_and_border": "#004367",
-          "overlay": "#cdcdcd",
-          "links": "#020303"
+          "overlay": "#CDCDCD30",
+          "links": "#F0F1F3"
         }
       },
       "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a": {
