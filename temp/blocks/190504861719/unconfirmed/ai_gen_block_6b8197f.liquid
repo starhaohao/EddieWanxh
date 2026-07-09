@@ -1,6 +1,154 @@
+{% doc %}
+  @prompt
+    When the user scrolls down the page, change the header navigation text/font color to white. The header should detect scroll position and apply a CSS class that switches the link and logo text color to white dynamically using JavaScript.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-header-scroll-controller-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .header__logo,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .header__menu-item,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .header__link,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .navlink,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .navtext,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .header__icon,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .header__cart-count,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .site-header__logo,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .site-nav__link,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .site-header__icon,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled a,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled svg,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled span {
+    color: {{ block.settings.scroll_text_color }} !important;
+    fill: {{ block.settings.scroll_text_color }} !important;
+  }
+
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .header__logo svg,
+  .ai-header-scroll-controller-{{ ai_gen_id }}.scrolled .site-header__logo svg {
+    fill: {{ block.settings.scroll_text_color }} !important;
+  }
+{% endstyle %}
+
+<header-scroll-controller-{{ ai_gen_id }}
+  class="ai-header-scroll-controller-{{ ai_gen_id }}"
+  data-scroll-threshold="{{ block.settings.scroll_threshold }}"
+  {{ block.shopify_attributes }}
+>
+</header-scroll-controller-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class HeaderScrollController{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.scrollThreshold = parseInt(this.dataset.scrollThreshold) || 50;
+        this.header = null;
+      }
+
+      connectedCallback() {
+        this.findHeader();
+        if (this.header) {
+          this.setupScrollListener();
+        }
+      }
+
+      findHeader() {
+        const selectors = [
+          'header',
+          '.header',
+          '.site-header',
+          '[data-section-type="header"]',
+          '#shopify-section-header'
+        ];
+
+        for (const selector of selectors) {
+          const element = document.querySelector(selector);
+          if (element) {
+            this.header = element;
+            break;
+          }
+        }
+      }
+
+      setupScrollListener() {
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              this.handleScroll();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+
+        this.handleScroll();
+      }
+
+      handleScroll() {
+        const scrollPosition = window.scrollY || window.pageYOffset;
+
+        if (scrollPosition > this.scrollThreshold) {
+          this.classList.add('scrolled');
+          if (this.header) {
+            this.header.classList.add('scrolled');
+          }
+        } else {
+          this.classList.remove('scrolled');
+          if (this.header) {
+            this.header.classList.remove('scrolled');
+          }
+        }
+      }
+
+      disconnectedCallback() {
+        window.removeEventListener('scroll', this.handleScroll);
+      }
+    }
+
+    customElements.define('header-scroll-controller-{{ ai_gen_id }}', HeaderScrollController{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Header scroll color",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Scroll behavior"
+    },
+    {
+      "type": "paragraph",
+      "content": "This block changes the header navigation text and logo color to white when scrolling down the page."
+    },
+    {
+      "type": "range",
+      "id": "scroll_threshold",
+      "label": "Scroll distance",
+      "min": 10,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "scroll_text_color",
+      "label": "Scrolled text color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header scroll color"
+    }
+  ]
+}
 {% endschema %}
