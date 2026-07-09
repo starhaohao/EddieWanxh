@@ -62,6 +62,29 @@
         "urgency_text": "<p>Final stock.<br/>No restock.</p>"
       }
     },
+    "landing_edm_signup_39bzd6": {
+      "type": "landing-edm-signup",
+      "custom_css": [],
+      "name": "EDM Signup",
+      "settings": {
+        "layout": "centered",
+        "bg_color": "#0254b2",
+        "font_color": "#ffffff",
+        "font_opacity": 100,
+        "input_color": "#1cf644",
+        "input_opacity": 95,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 28,
+        "padding_right": 28,
+        "eyebrow": "",
+        "heading": "WELCOME",
+        "subtext": "AN ADDTIONAL 10% OFF",
+        "placeholder": "Email address",
+        "button_label": "Sign up",
+        "success_text": "You’re in — welcome to First Layer."
+      }
+    },
     "features-strip": {
       "type": "landing-features-strip",
       "disabled": true,
@@ -110,29 +133,6 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "show_placeholder": true
-      }
-    },
-    "landing_edm_signup_39bzd6": {
-      "type": "landing-edm-signup",
-      "custom_css": [],
-      "name": "EDM Signup",
-      "settings": {
-        "layout": "inline",
-        "bg_color": "#0254b2",
-        "font_color": "#ffffff",
-        "font_opacity": 100,
-        "input_color": "#1cf644",
-        "input_opacity": 95,
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "padding_left": 28,
-        "padding_right": 28,
-        "eyebrow": "",
-        "heading": "WELCOME",
-        "subtext": "AN ADDTIONAL 10% OFF",
-        "placeholder": "Email address",
-        "button_label": "Sign up",
-        "success_text": "You’re in — welcome to First Layer."
       }
     },
     "section_tab_collections_Cc4J84": {
@@ -363,15 +363,30 @@
         "text_align_desktop": "text-center",
         "text_font_size_px_mobile": 67,
         "text_align_mobile": "text-center--mobile",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
         "padding_top": 10,
         "padding_bottom": 10
+      }
+    },
+    "178359954937ab782c": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_featured_reviews_carousel_DBTGYV": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_featured_reviews_carousel_DBTGYV"
+      ],
+      "settings": {
+        "include_margins": true
       }
     },
     "homepage-brand-story": {
       "type": "sale-brand-story",
       "settings": {
-        "bg_color": "#383838",
+        "bg_color": "#FFFFFF",
         "border_color": "#000000",
         "eyebrow_color": "#868233",
         "title_color": "#fff200",
@@ -420,7 +435,7 @@
           "type": "ai_gen_block_6b8197f",
           "settings": {
             "scroll_threshold": 10,
-            "scroll_text_color": "#0099CC"
+            "scroll_text_color": "#0099cc"
           },
           "blocks": {}
         }
@@ -460,12 +475,13 @@
   },
   "order": [
     "sale_hero_8Vwb7N",
+    "landing_edm_signup_39bzd6",
     "features-strip",
     "section_hero_ALw4gQ",
-    "landing_edm_signup_39bzd6",
     "section_tab_collections_Cc4J84",
     "homepage-social",
     "section_text_with_products_f6FLnY",
+    "178359954937ab782c",
     "homepage-brand-story",
     "1783598576dfbeb45d",
     "1783598626bd47c487"
