@@ -244,6 +244,23 @@ html {
   .product-item__image,
   .lookbook-grid__image { border-radius: 14px; }
 }
+/* Product media — full-bleed edge-to-edge on mobile (no side gutter, no rounded corners) */
+@media screen and (max-width: 749px) {
+  body.template-product .product-single__photos,
+  body.template-product .product__slides {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 0;
+  }
+  body.template-product .product-single__photos img,
+  body.template-product .product__slides img,
+  body.template-product .product-single__photos .image img {
+    border-radius: 0 !important;
+  }
+}
+
 @media screen and (max-width: 749px) {
   body.template-index .slideshow .hero__content {
     width: calc(100% - (var(--outer) * 2)) !important;
