@@ -14,10 +14,10 @@
       "settings": {
         "show_title": false,
         "show_description": true,
-        "flex_align": "align--middle-left",
+        "flex_align": "align--top-left",
         "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
         "show_text_background": false,
-        "overlay_type": "disabled",
+        "overlay_type": "opacity",
         "show_image": false,
         "banner_layout": "inline",
         "height": "screen-height-one-third",
@@ -51,7 +51,7 @@
         "grid": 4,
         "grid_mobile": "2",
         "products_per_page": 24,
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
         "padding_top": 0,
         "padding_bottom": 0
       }
