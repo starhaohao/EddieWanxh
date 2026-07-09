@@ -11,51 +11,6 @@
     --ssf-accent: {{ section.settings.accent_color }};
   "
 >
-  <div class="ssf__top">
-    <div class="ssf__content">
-      {% if section.settings.eyebrow != blank %}
-        <p class="ssf__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      {% endif %}
-      {% if section.settings.heading != blank %}
-        <a href="{{ featured_article.url | default: section.settings.link }}" class="ssf__heading-link">
-          <h2 class="ssf__heading">{{ section.settings.heading | escape }}</h2>
-        </a>
-      {% endif %}
-      {% if section.settings.text != blank %}
-        <div class="ssf__text">{{ section.settings.text }}</div>
-      {% endif %}
-      {% if section.settings.link_label != blank and section.settings.link != blank %}
-        <a class="ssf__link" href="{{ section.settings.link }}">
-          {{ section.settings.link_label | escape }} <span aria-hidden="true">→</span>
-        </a>
-      {% endif %}
-    </div>
-
-    <div class="ssf__preview">
-      {% if featured_article != blank and featured_article.image != blank %}
-        {{
-          featured_article.image
-          | image_url: width: 800
-          | image_tag:
-            widths: '500, 800',
-            sizes: '(min-width: 990px) 48vw, 100vw',
-            loading: 'lazy',
-            alt: featured_article.title
-        }}
-      {% elsif section.settings.image != blank %}
-        {{
-          section.settings.image
-          | image_url: width: 800
-          | image_tag:
-            widths: '500, 800',
-            sizes: '(min-width: 990px) 48vw, 100vw',
-            loading: 'lazy',
-            alt: section.settings.heading
-        }}
-      {% endif %}
-    </div>
-  </div>
-
   <a class="ssf__image" href="{{ featured_article.url | default: section.settings.link }}">
     {% if featured_article != blank and featured_article.image != blank %}
       {{
@@ -102,88 +57,6 @@
     max-width: 100%;
     background: var(--ssf-bg);
     color: var(--ssf-ink);
-  }
-
-  .ssf__top {
-    border-top: 1px solid color-mix(in srgb, var(--ssf-ink) 12%, transparent);
-    padding: 72px 40px;
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .ssf__content {
-    display: grid;
-    align-content: start;
-    gap: 1.5rem;
-  }
-
-  .ssf__eyebrow {
-    margin: 0;
-    font-family: monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--ssf-ink);
-    opacity: 0.58;
-    margin-bottom: 16px;
-  }
-
-  .ssf__heading-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-
-  .ssf__heading-link:hover .ssf__heading {
-    color: var(--ssf-accent);
-  }
-
-  .ssf__heading {
-    margin: 0;
-    font-size: 36px;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    color: var(--ssf-ink);
-    margin-bottom: 20px;
-    font-weight: 400;
-    transition: color 0.3s ease;
-  }
-
-  .ssf__text {
-    font-size: 13px;
-    line-height: 1.75;
-    color: var(--ssf-ink);
-    opacity: 0.8;
-    max-width: 380px;
-  }
-
-  .ssf__link {
-    display: inline-flex;
-    gap: 0.5rem;
-    align-items: center;
-    width: fit-content;
-    color: var(--ssf-accent);
-    text-decoration: none;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-top: 16px;
-  }
-
-  .ssf__preview {
-    width: 100%;
-    aspect-ratio: 4/3;
-    overflow: hidden;
-    background: #dfe1e3;
-  }
-
-  .ssf__preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
   }
 
   .ssf__image {
@@ -250,18 +123,6 @@
     line-height: 1.65;
     opacity: 0.82;
   }
-
-  @media (max-width: 989px) {
-    .ssf__top {
-      grid-template-columns: 1fr;
-      gap: 32px;
-      padding: 48px 16px;
-    }
-
-    .ssf__heading {
-      font-size: 28px;
-    }
-  }
 </style>
 
 {% schema %}
@@ -274,35 +135,6 @@
     ]
   },
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Story Salon"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "One story, featured."
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text",
-      "default": "<p>Use this section to spotlight a single Story Salon article on the landing page.</p>"
-    },
-    {
-      "type": "text",
-      "id": "link_label",
-      "label": "Link label",
-      "default": "View Story Salon"
-    },
-    {
-      "type": "url",
-      "id": "link",
-      "label": "Link"
-    },
     {
       "type": "text",
       "id": "article_label",
@@ -330,6 +162,11 @@
       "type": "image_picker",
       "id": "image",
       "label": "Fallback image"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
     },
     {
       "type": "color",
