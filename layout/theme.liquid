@@ -133,7 +133,22 @@
   fill: none !important;
 }
 .social-bar-prefooter-wrap { position: relative; }
-[data-site-container] { padding-bottom: var(--HEADER-HEIGHT-MOBILE, 64px); }
+[data-site-container] {
+  padding-bottom: var(--HEADER-HEIGHT-MOBILE, 64px);
+  padding-top: var(--HEADER-HEIGHT-MOBILE, 64px);
+}
+.header-sections {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: #000000;
+  transition: background-color 0.3s ease;
+}
+.header-sections.is-scrolled {
+  background-color: rgba(0, 0, 0, 0.7);
+}
 
 /* Social bar — currency + account on right */
 .social-sticky-bar__utils {
@@ -414,6 +429,20 @@ html {
         });
       }, { threshold: 0 });
       observer.observe(wrap);
+    })();
+
+    // Header scroll transparency: solid black at top, semi-transparent when scrolling
+    (function() {
+      var headerSections = document.querySelector('.header-sections');
+      if (!headerSections) return;
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 10) {
+          headerSections.classList.add('is-scrolled');
+        } else {
+          headerSections.classList.remove('is-scrolled');
+        }
+      });
     })();
     </script>
 

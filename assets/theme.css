@@ -3617,6 +3617,8 @@ body * {
   --padding-bottom: var(--PB);
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bottom);
+  padding-left: var(--outer);
+  padding-right: var(--outer);
 }
 @media only screen and (min-width: 750px) and (max-width: 989px) {
   .section-padding {
