@@ -396,6 +396,88 @@
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
     },
+    "selection_showcase_landing": {
+      "type": "selection-showcase",
+      "blocks": {
+        "card_briefs": {
+          "type": "selection_card",
+          "settings": {
+            "name": "Briefs",
+            "subtitle": "Everyday essentials",
+            "link": "shopify://collections/briefs"
+          }
+        },
+        "card_trunks": {
+          "type": "selection_card",
+          "settings": {
+            "name": "Boxer Trunks",
+            "subtitle": "Modern comfort",
+            "link": "shopify://collections/boxer-trunks"
+          }
+        },
+        "card_tops": {
+          "type": "selection_card",
+          "settings": {
+            "name": "Tops",
+            "subtitle": "Layering perfection",
+            "link": "shopify://collections/tops"
+          }
+        }
+      },
+      "block_order": [
+        "card_briefs",
+        "card_trunks",
+        "card_tops"
+      ],
+      "settings": {
+        "eyebrow": "Our Selection",
+        "title": "Choose Your Style",
+        "description": "<p>Explore our curated collection of premium essentials designed for your lifestyle.</p>",
+        "bg_color": "#ffffff",
+        "text_color": "#17191c",
+        "accent_color": "#4a1024"
+      }
+    },
+    "selection_options_landing": {
+      "type": "selection-options",
+      "blocks": {
+        "design_options": {
+          "type": "option_group",
+          "settings": {
+            "label": "Design",
+            "options": "Classic, Modern, Minimal",
+            "description": "Choose your preferred style"
+          }
+        },
+        "fabric_options": {
+          "type": "option_group",
+          "settings": {
+            "label": "Fabric",
+            "options": "Moisture-wicking, Soft-touch, Premium",
+            "description": "Select your material preference"
+          }
+        },
+        "size_options": {
+          "type": "option_group",
+          "settings": {
+            "label": "Size Range",
+            "badge": "XS-2XL",
+            "options": "XS, S, M, L, XL, 2XL",
+            "description": "All bodies welcome"
+          }
+        }
+      },
+      "block_order": [
+        "design_options",
+        "fabric_options",
+        "size_options"
+      ],
+      "settings": {
+        "title": "Our Selection Options",
+        "bg_color": "#ffffff",
+        "text_color": "#17191c"
+      }
+    },
     "178335972050caff83": {
       "type": "_blocks",
       "settings": {
@@ -438,6 +520,8 @@
     "section_text_with_products_f6FLnY",
     "1783340164f0cedf2a",
     "homepage-brand-story",
+    "selection_showcase_landing",
+    "selection_options_landing",
     "178335972050caff83"
   ]
 }
