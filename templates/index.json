@@ -368,21 +368,6 @@
         "padding_bottom": 10
       }
     },
-    "1783340164f0cedf2a": {
-      "type": "apps",
-      "blocks": {
-        "klaviyo_reviews_featured_reviews_carousel_TxFdhK": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "klaviyo_reviews_featured_reviews_carousel_TxFdhK"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
     "homepage-brand-story": {
       "type": "sale-brand-story",
       "settings": {
@@ -396,80 +381,6 @@
         "body": "<p>TRIIPLE believes your first layer should be engineered, not just made. Every stitch and fabric choice is intentional—this is the baseline, not basics.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
-    },
-    "178335972050caff83": {
-      "type": "_blocks",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "178357778466df3ad5": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_07344f2_PUGTbd": {
-          "type": "ai_gen_block_07344f2",
-          "settings": {
-            "apply_to_all_galleries": true
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_07344f2_PUGTbd"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
     }
   },
   "order": [
@@ -480,9 +391,6 @@
     "section_tab_collections_Cc4J84",
     "homepage-social",
     "section_text_with_products_f6FLnY",
-    "1783340164f0cedf2a",
-    "homepage-brand-story",
-    "178335972050caff83",
-    "178357778466df3ad5"
+    "homepage-brand-story"
   ]
 }
