@@ -26,6 +26,128 @@
         "padding_bottom": 0
       }
     },
+    "section_multicolumn_yJEQ4T": {
+      "type": "section-multicolumn",
+      "blocks": {
+        "image_overlay_d3XgTL": {
+          "type": "image-overlay",
+          "settings": {
+            "column_width": 33,
+            "image": "shopify://shop_images/250309_-_TRIIIPLE10707.jpg",
+            "image_width": 80,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1.4,
+            "image_shape": "normal",
+            "title": "",
+            "heading_font_size": "heading-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "alignment": "align--bottom-right-desktop",
+            "button_text": "BOXER TRUNKS",
+            "button_url": "shopify://collections/boxer-trunks",
+            "button_type": "btn--white",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "color": "#01384A",
+            "overlay_type": "disabled",
+            "heading_tag": "h6"
+          }
+        },
+        "image_overlay_UNCQB9": {
+          "type": "image-overlay",
+          "settings": {
+            "column_width": 33,
+            "image": "shopify://shop_images/Untitled-3.png",
+            "image_width": 80,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1.4,
+            "image_shape": "normal",
+            "title": "",
+            "heading_font_size": "heading-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "alignment": "align--middle-center-desktop",
+            "button_text": "BRIEFS",
+            "button_url": "shopify://collections/briefs",
+            "button_type": "btn--white",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "color": "#01384A",
+            "overlay_type": "disabled",
+            "heading_tag": "h6"
+          }
+        },
+        "image_overlay_8FyQTY": {
+          "type": "image-overlay",
+          "settings": {
+            "column_width": 33,
+            "image": "shopify://shop_images/fathers-day-edm-grey-socks-bed-lifestyle.jpg",
+            "image_width": 80,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1.4,
+            "image_shape": "normal",
+            "title": "",
+            "heading_font_size": "heading-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "alignment": "align--middle-center-desktop",
+            "button_text": "SOCKS",
+            "button_url": "shopify://collections/socks",
+            "button_type": "btn--white",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "color": "#01384A",
+            "overlay_type": "disabled",
+            "heading_tag": "h6"
+          }
+        },
+        "image_overlay_Ug3VLx": {
+          "type": "image-overlay",
+          "settings": {
+            "column_width": 33,
+            "image": "shopify://shop_images/ED-Tee-Heathergrey.jpg",
+            "image_width": 80,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1.4,
+            "image_shape": "normal",
+            "title": "",
+            "heading_font_size": "heading-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "alignment": "align--middle-center-desktop",
+            "button_text": "TOPS",
+            "button_url": "shopify://collections/tops",
+            "button_type": "btn--white",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "color": "#01384A",
+            "overlay_type": "disabled",
+            "heading_tag": "h6"
+          }
+        }
+      },
+      "block_order": [
+        "image_overlay_d3XgTL",
+        "image_overlay_UNCQB9",
+        "image_overlay_8FyQTY",
+        "image_overlay_Ug3VLx"
+      ],
+      "name": "Multi column",
+      "settings": {
+        "title": "",
+        "heading_font_size": "heading-medium",
+        "description": "",
+        "align_heading": "text-left",
+        "align_text": "text-left",
+        "width": "wrapper",
+        "align_columns": "flex-align-center",
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-9b3afd14-67ff-4f68-a798-655d45b5f34b",
+        "padding_top": 0,
+        "padding_bottom": 52,
+        "heading_tag": "h5"
+      }
+    },
     "subcollections": {
       "type": "subcollections",
       "settings": {
@@ -77,6 +199,7 @@
   },
   "order": [
     "hero",
+    "section_multicolumn_yJEQ4T",
     "subcollections",
     "main",
     "section_recent_products_JGCaih"

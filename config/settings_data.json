@@ -81,7 +81,7 @@
     "product_grid_font_size": "body-x-small",
     "product_grid_center": true,
     "overlay_text": false,
-    "show_recently_viewed_indicator": false,
+    "show_recently_viewed_indicator": true,
     "image_hover_enable": false,
     "image_hover_limit": 2,
     "product_grid_aspect_ratio": 1.2,
