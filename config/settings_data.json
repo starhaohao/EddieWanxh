@@ -84,7 +84,7 @@
     "show_recently_viewed_indicator": false,
     "image_hover_enable": false,
     "image_hover_limit": 2,
-    "product_grid_aspect_ratio": 1.4,
+    "product_grid_aspect_ratio": 1.2,
     "quickview_enable": false,
     "show_gift_card_recipient": false,
     "quick_add_text_color": "#C9C9C9",
