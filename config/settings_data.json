@@ -112,7 +112,7 @@
     "collection_swatch_style": "grid",
     "swatch_color_list": "Black: #000000\nWhite: #fafafa\nDusty Blue: #6686A8\nPink: #D8A3AE\nHeather Grey: #BAB8B6\nNavy: #252F3F\nBlank: blank.png",
     "badge_font_size": "body-x-small",
-    "badge_alignment": "align--bottom-right",
+    "badge_alignment": "align--top-left",
     "sale_tags_enable": false,
     "show_saving_badge": true,
     "saving_badge_type": "percentage",
