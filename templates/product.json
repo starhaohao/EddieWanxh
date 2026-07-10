@@ -32,7 +32,7 @@
           "type": "tab_richtext",
           "settings": {
             "show_description": true,
-            "show_read_more": false,
+            "show_read_more": true,
             "title_1": "Care",
             "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
             "title_2": "Shipping",
@@ -88,7 +88,7 @@
             "button_type": "btn--secondary",
             "button_size": "btn--large",
             "button_style": "btn--solid",
-            "show_dynamic_checkout": false,
+            "show_dynamic_checkout": true,
             "button_type_dynamic": "btn--secondary",
             "button_size_dynamic": "",
             "button_style_dynamic": "btn--solid",
