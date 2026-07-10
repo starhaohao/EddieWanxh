@@ -32,7 +32,7 @@
         "image_overlay_d3XgTL": {
           "type": "image-overlay",
           "settings": {
-            "column_width": 33,
+            "column_width": 20,
             "image": "shopify://shop_images/250309_-_TRIIIPLE10707.jpg",
             "image_width": 80,
             "image_aspect_ratio": 1.2,
@@ -56,7 +56,7 @@
         "image_overlay_UNCQB9": {
           "type": "image-overlay",
           "settings": {
-            "column_width": 33,
+            "column_width": 20,
             "image": "shopify://shop_images/Untitled-3.png",
             "image_width": 80,
             "image_aspect_ratio": 1.2,
@@ -66,7 +66,7 @@
             "heading_font_size": "heading-small",
             "text": "",
             "text_font_size": "body-medium",
-            "alignment": "align--middle-center-desktop",
+            "alignment": "align--bottom-right-desktop",
             "button_text": "BRIEFS",
             "button_url": "shopify://collections/briefs",
             "button_type": "btn--white",
@@ -80,7 +80,7 @@
         "image_overlay_8FyQTY": {
           "type": "image-overlay",
           "settings": {
-            "column_width": 33,
+            "column_width": 20,
             "image": "shopify://shop_images/fathers-day-edm-grey-socks-bed-lifestyle.jpg",
             "image_width": 80,
             "image_aspect_ratio": 1.2,
@@ -90,7 +90,7 @@
             "heading_font_size": "heading-small",
             "text": "",
             "text_font_size": "body-medium",
-            "alignment": "align--middle-center-desktop",
+            "alignment": "align--bottom-right-desktop",
             "button_text": "SOCKS",
             "button_url": "shopify://collections/socks",
             "button_type": "btn--white",
@@ -104,7 +104,7 @@
         "image_overlay_Ug3VLx": {
           "type": "image-overlay",
           "settings": {
-            "column_width": 33,
+            "column_width": 20,
             "image": "shopify://shop_images/ED-Tee-Heathergrey.jpg",
             "image_width": 80,
             "image_aspect_ratio": 1.2,
@@ -114,7 +114,7 @@
             "heading_font_size": "heading-small",
             "text": "",
             "text_font_size": "body-medium",
-            "alignment": "align--middle-center-desktop",
+            "alignment": "align--bottom-right-desktop",
             "button_text": "TOPS",
             "button_url": "shopify://collections/tops",
             "button_type": "btn--white",
@@ -139,7 +139,7 @@
         "description": "",
         "align_heading": "text-left",
         "align_text": "text-left",
-        "width": "wrapper",
+        "width": "wrapper--full-padded",
         "align_columns": "flex-align-center",
         "layout_mobile": "slider",
         "color_scheme": "scheme-9b3afd14-67ff-4f68-a798-655d45b5f34b",
