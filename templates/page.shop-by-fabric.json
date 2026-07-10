@@ -111,71 +111,9 @@
         "text_color": "#0f1623",
         "accent_color": "#923531"
       }
-    },
-    "landing_benefit_banner_GT8fLU": {
-      "type": "landing-benefit-banner",
-      "blocks": {
-        "benefit_hHDrFd": {
-          "type": "benefit",
-          "settings": {
-            "symbol": "...",
-            "heading": "TransDRY",
-            "text": "Pulls sweat away the second it forms."
-          }
-        },
-        "benefit_w4TwPz": {
-          "type": "benefit",
-          "settings": {
-            "symbol": ">>>",
-            "heading": "4-Way Stretch",
-            "text": "Moves with you. Stays in shape."
-          }
-        },
-        "benefit_JkqH7g": {
-          "type": "benefit",
-          "settings": {
-            "symbol": "Y",
-            "heading": "Flat Seams",
-            "text": "No friction. No irritation. All day."
-          }
-        },
-        "benefit_PNFXkM": {
-          "type": "benefit",
-          "settings": {
-            "symbol": "))",
-            "heading": "True Fit",
-            "text": "Engineered for the way bodies move."
-          }
-        }
-      },
-      "block_order": [
-        "benefit_hHDrFd",
-        "benefit_w4TwPz",
-        "benefit_JkqH7g",
-        "benefit_PNFXkM"
-      ],
-      "name": "Benefit strip and banner",
-      "settings": {
-        "strip_eyebrow": "Why it works",
-        "strip_heading": "Built for Singapore.",
-        "strip_link_label": "Learn more",
-        "strip_link": "",
-        "strip_background": "#17191c",
-        "strip_text": "#ffffff",
-        "media_background": "#650b05",
-        "panel_background": "#17191c",
-        "panel_text": "#ffffff",
-        "eyebrow": "Buy more, save more",
-        "heading": "The Starter Pack",
-        "body": "<p>3 pairs. Any colours.</p>",
-        "price": "S$165",
-        "button_label": "Build your pack",
-        "button_link": ""
-      }
     }
   },
   "order": [
-    "main",
-    "landing_benefit_banner_GT8fLU"
+    "main"
   ]
 }
