@@ -55,7 +55,14 @@
   endif
 
   assign derived_material_label = blank
-  if is_bundle_product
+
+  # Prefer the backend "Product content" metaobject Material Family (same source as
+  # the product page), so the card subtitle matches the admin. Fall back to the
+  # keyword-derived label when the field is empty.
+  assign pc_meta = product.metafields.custom.product_content.value
+  if pc_meta != blank and pc_meta.material_family.value != blank
+    assign derived_material_label = pc_meta.material_family.value
+  elsif is_bundle_product
     assign derived_material_label = 'TransDRY + Cotton Spandex'
   elsif product_handle_downcase contains 'transdry'
     assign derived_material_label = 'TransDRY'
