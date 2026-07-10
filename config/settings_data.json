@@ -89,7 +89,7 @@
     "show_gift_card_recipient": false,
     "quick_add_text_color": "#ff5f00",
     "quick_add_mobile_style": "button",
-    "quickview_hide_mobile": true,
+    "quickview_hide_mobile": false,
     "show_siblings": false,
     "show_grid_swatches": false,
     "show_cutline": false,
