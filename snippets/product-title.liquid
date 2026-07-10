@@ -1,17 +1,34 @@
 {%- assign onboarding_product = onboarding_product | default: false -%}
 {%- liquid
   assign derived_material_label = blank
+  assign display_title = product.title
 
   unless onboarding_product
     assign product_handle_downcase = product.handle | downcase
     assign product_title_downcase = product.title | strip_html | escape | downcase
 
-    if product_handle_downcase contains 'bundle' or product_title_downcase contains 'bundle' or product_title_downcase contains 'pack' or product_title_downcase contains 'set'
-      assign derived_material_label = 'TransDRY + Cotton Spandex'
-    elsif product_handle_downcase contains 'transdry'
-      assign derived_material_label = 'TransDRY'
-    elsif product_handle_downcase contains 'cotton-spandex' or product_handle_downcase contains 'cotton_spandex' or product_title_downcase contains 'cotton spandex'
-      assign derived_material_label = 'Cotton Spandex'
+    # Align the product page name/material with the backend "Product content"
+    # metaobject (custom.product_content) — the same source the product cards use,
+    # so the admin Display Name / Material Family drive what's shown on-site.
+    assign pc_meta = product.metafields.custom.product_content.value
+    if pc_meta != blank
+      if pc_meta.display_name.value != blank
+        assign display_title = pc_meta.display_name.value
+      endif
+      if pc_meta.material_family.value != blank
+        assign derived_material_label = pc_meta.material_family.value
+      endif
+    endif
+
+    # Fallback material label (keyword-derived) when the metaobject has none
+    if derived_material_label == blank
+      if product_handle_downcase contains 'bundle' or product_title_downcase contains 'bundle' or product_title_downcase contains 'pack' or product_title_downcase contains 'set'
+        assign derived_material_label = 'TransDRY + Cotton Spandex'
+      elsif product_handle_downcase contains 'transdry'
+        assign derived_material_label = 'TransDRY'
+      elsif product_handle_downcase contains 'cotton-spandex' or product_handle_downcase contains 'cotton_spandex' or product_title_downcase contains 'cotton spandex'
+        assign derived_material_label = 'Cotton Spandex'
+      endif
     endif
   endunless
 -%}
@@ -52,10 +69,10 @@
         <span data-zoom-caption>{{ 'home_page.onboarding.product_title' | t }}</span>
       {%- else -%}
         {%- unless is_title_linked -%}
-          <span data-zoom-caption>{{ product.title | strip_html }}</span>
+          <span data-zoom-caption>{{ display_title | strip_html }}</span>
         {%- else -%}
           <a href="{{ product.url }}">
-            <span data-zoom-caption>{{ product.title | strip_html }}</span>
+            <span data-zoom-caption>{{ display_title | strip_html }}</span>
           </a>
         {%- endunless -%}
       {%- endif -%}
