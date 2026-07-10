@@ -69,8 +69,8 @@
           "type": "tile",
           "settings": {
             "image": "shopify://shop_images/1_d15cc441-a5d7-4d08-927f-8c16b3c29454.jpg",
-            "framed": true,
-            "frame_shape": "",
+            "framed": false,
+            "frame_shape": "tall",
             "focal": "object-position:center"
           }
         },
@@ -148,7 +148,7 @@
         "mobile_columns": "2",
         "tile_aspect": "5/4",
         "color_scheme": "Scheme 2",
-        "field_color": "#923531",
+        "field_color": "#73FF00",
         "padding_top": 0,
         "padding_bottom": 0
       }
