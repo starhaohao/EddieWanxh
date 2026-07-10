@@ -125,7 +125,7 @@
         "flex_align_desktop": "align--bottom-left-desktop",
         "content_width": 100,
         "mobile_image": "shopify://shop_images/Untitled-1.jpg",
-        "mobile_height": "screen-height-one-half--mobile",
+        "mobile_height": "image-height--mobile",
         "flex_align_mobile": "align--bottom-left-mobile",
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
         "show_text_background": true,
