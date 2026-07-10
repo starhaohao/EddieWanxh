@@ -1,0 +1,350 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "subheading_option": "vendor",
+            "heading_font_size": "heading-medium",
+            "padding_bottom": 8
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "text_font_size": "body-medium",
+            "show_shipping_policy": true,
+            "padding_bottom": 12
+          }
+        },
+        "tab_richtext": {
+          "type": "tab_richtext",
+          "settings": {
+            "show_description": true,
+            "show_read_more": false,
+            "title_1": "Care",
+            "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
+            "title_2": "Shipping",
+            "raw_content_2": "<p>Free shipping on orders over $50 within Singapore. Standard delivery 2–4 business days. International shipping available.</p>",
+            "title_3": "",
+            "raw_content_3": "",
+            "title_4": "",
+            "raw_content_4": "",
+            "title_5": "",
+            "raw_content_5": "",
+            "padding_bottom": 0
+          }
+        },
+        "variants": {
+          "type": "variants",
+          "settings": {
+            "info_page": "tops-size-guide",
+            "size_chart_style": "ruler",
+            "option_font_size": "body-medium",
+            "value_font_size": "body-medium",
+            "padding_bottom": 18
+          }
+        },
+        "fit_guide": {
+          "type": "fit-guide",
+          "settings": {
+            "heading": "Fit",
+            "segment_selected": 3,
+            "left_label": "Small",
+            "middle_label": "True to size",
+            "right_label": "Large",
+            "fit_color": "#cdff00",
+            "padding_bottom": 50
+          }
+        },
+        "upsell": {
+          "type": "upsell",
+          "settings": {
+            "upsell_product": "pair-with-socks",
+            "upsell_product_list": [],
+            "show_available_upsell_only": false,
+            "layout": "slider",
+            "autoplay": false,
+            "autoplay_speed": 8,
+            "bg_color": "#fafafa",
+            "padding_bottom": 50
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "show_quantity": true,
+            "button_type": "btn--secondary",
+            "button_size": "btn--large",
+            "button_style": "btn--solid",
+            "show_dynamic_checkout": false,
+            "button_type_dynamic": "btn--secondary",
+            "button_size_dynamic": "",
+            "button_style_dynamic": "btn--solid",
+            "show_gift_card_recipient": false,
+            "padding_bottom": 50
+          }
+        },
+        "inventory_countdown": {
+          "type": "inventory_countdown",
+          "settings": {
+            "show_notice": "low-inventory",
+            "max_inventory": 10,
+            "show_inventory_counter": false,
+            "icon_size": 20,
+            "in_stock_color": "#56ad6a",
+            "low_stock_color": "#f79554",
+            "out_of_stock_color": "#721c24",
+            "padding_bottom": 8
+          }
+        },
+        "divider": {
+          "type": "divider",
+          "settings": {
+            "show_line": true,
+            "padding_bottom": 30
+          }
+        },
+        "sharing": {
+          "type": "sharing",
+          "settings": {
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "tab_richtext",
+        "variants",
+        "fit_guide",
+        "upsell",
+        "buttons",
+        "inventory_countdown",
+        "divider",
+        "sharing"
+      ],
+      "settings": {
+        "product_sticky_enable": true,
+        "variant_image_scroll": false,
+        "show_cart_bar": true,
+        "enable_zoom": true,
+        "enable_video_looping": true,
+        "image_layout": "thumbnails",
+        "image_size": "stretch",
+        "mobile_image_style": "thumbs",
+        "color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "product-framework": {
+      "type": "product-framework",
+      "settings": {
+        "aag_label": "At a Glance",
+        "df_label": "Designed For",
+        "sf_label": "Size & Fit",
+        "mc_label": "Material & Care",
+        "pww_label": "Pairs Well With",
+        "br_label": "Bundle Recommendation"
+      }
+    },
+    "luxury-spacing": {
+      "type": "section-luxury-spacing",
+      "settings": {}
+    },
+    "section_look_gallery_ePcTQJ": {
+      "type": "section-look-gallery",
+      "blocks": {
+        "image_k8cPEK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1_81f69c5b-34c0-4c90-be77-0b5c6efe44c8.png",
+            "product": "y-transdry-brief-white"
+          }
+        },
+        "image_zMWYc6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5.png",
+            "product": "h-cotton-spandex-boxer-trunk-white"
+          }
+        },
+        "image_EJpxmP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2.png",
+            "product": "y-transdry-brief-white"
+          }
+        },
+        "image_4P3g8V": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/7.png",
+            "product": "v-cotton-spandex-brief-black"
+          }
+        },
+        "image_X7pABy": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8.png",
+            "product": "v-cotton-spandex-brief-black"
+          }
+        },
+        "image_afhzir": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4.png",
+            "product": "x-transdry-boxer-trunk-black"
+          }
+        },
+        "image_HaYJmP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/6.png",
+            "product": "y-transdry-brief-white"
+          }
+        }
+      },
+      "block_order": [
+        "image_k8cPEK",
+        "image_zMWYc6",
+        "image_EJpxmP",
+        "image_4P3g8V",
+        "image_X7pABy",
+        "image_afhzir",
+        "image_HaYJmP"
+      ],
+      "name": "Shop the look: Gallery",
+      "settings": {
+        "featured_type": "image",
+        "featured_image": "shopify://shop_images/3_e30cb8af-e273-4674-b1db-1a8c4a3aea20.png",
+        "featured_product": "l-cotton-spandex-socks-heather-grey",
+        "featured_position": "is-reversed",
+        "image_aspect_ratio": 1.5,
+        "layout_desktop": "slider",
+        "grid": 4,
+        "layout_mobile": "slider",
+        "reverse_blocks": true,
+        "width": "wrapper--full",
+        "color_scheme": "scheme-3",
+        "dot_color": "#201e1e",
+        "dot_background": "#9235316e",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_announcement_GRMQe3": {
+      "type": "section-announcement",
+      "blocks": {
+        "text_hwnTC4": {
+          "type": "text",
+          "settings": {
+            "text": "<h6><strong>By You</strong></h6>",
+            "text_font_size": "body-x-small",
+            "color": "#050000",
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          }
+        },
+        "text_cVxJmF": {
+          "type": "text",
+          "settings": {
+            "text": "<h6>APPROVED</h6>",
+            "text_font_size": "body-x-small",
+            "color": "#0a0a0a",
+            "target_device_enabled": true,
+            "target_device": "mobile"
+          }
+        }
+      },
+      "block_order": [
+        "text_hwnTC4",
+        "text_cVxJmF"
+      ],
+      "name": "Scrolling text",
+      "settings": {
+        "slider_speed": 20,
+        "text_alignment": "center",
+        "marquee_speed": 50,
+        "direction": "ticker-rtl",
+        "message_spacing": 30,
+        "background_image": "shopify://shop_images/IMG_6183.png",
+        "show_border": false,
+        "layout": "marquee",
+        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
+        "padding_top": 19,
+        "padding_bottom": 4
+      }
+    },
+    "1778931413bf791d0a": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_product_reviews_kjLUez": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_product_reviews_kjLUez"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related": {
+      "type": "related",
+      "blocks": {
+        "related": {
+          "type": "related",
+          "settings": {
+            "product_recommendations_heading": "Find out more…"
+          }
+        },
+        "recent": {
+          "type": "recent",
+          "settings": {
+            "product_recently_heading": "Recently viewed"
+          }
+        }
+      },
+      "block_order": [
+        "related",
+        "recent"
+      ],
+      "settings": {
+        "enable_tabs": true,
+        "heading_alignment": "text-left",
+        "heading_font_size": "heading-small",
+        "limit": 3,
+        "layout_desktop": "slider",
+        "grid": 2,
+        "rows": 2,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "padding_top": 38,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product-framework",
+    "luxury-spacing",
+    "section_look_gallery_ePcTQJ",
+    "section_announcement_GRMQe3",
+    "1778931413bf791d0a",
+    "related"
+  ]
+}
