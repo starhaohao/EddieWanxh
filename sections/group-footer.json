@@ -30,7 +30,7 @@
           "settings": {
             "linklist": "triiiple-about",
             "title": "Wear it. Own it. Explain nothing.",
-            "heading_font_size": "heading-medium",
+            "heading_font_size": "heading-large",
             "column_width": 50,
             "enable_accordion": true
           }
