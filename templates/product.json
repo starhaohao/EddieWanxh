@@ -325,15 +325,15 @@
       ],
       "settings": {
         "enable_tabs": true,
-        "heading_alignment": "text-left",
+        "heading_alignment": "text-center",
         "heading_font_size": "heading-small",
-        "limit": 3,
+        "limit": 4,
         "layout_desktop": "slider",
         "grid": 2,
         "rows": 2,
         "layout_mobile": "slider",
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
-        "padding_top": 38,
+        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
+        "padding_top": 100,
         "padding_bottom": 100
       }
     }
