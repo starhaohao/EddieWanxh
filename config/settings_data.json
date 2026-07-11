@@ -10,8 +10,8 @@
 {
   "current": {
     "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
-    "menu_bg_color": "#FFFFFF",
-    "header_link": "#01384A",
+    "menu_bg_color": "#050404",
+    "header_link": "#F6F6F6",
     "submenu_bg_color": "{{ shop.brand.colors.secondary[1].background }}",
     "submenu_link_color": "{{ shop.brand.colors.primary[0].foreground }}",
     "menu_transparent_color": "{{ shop.brand.colors.secondary[0].background }}",
@@ -78,7 +78,7 @@
     "share_twitter": false,
     "share_pinterest": true,
     "enable_infinity_scroll": false,
-    "product_grid_font_size": "body-x-small",
+    "product_grid_font_size": "body-small",
     "product_grid_center": true,
     "overlay_text": false,
     "show_recently_viewed_indicator": true,
@@ -89,7 +89,7 @@
     "show_gift_card_recipient": false,
     "quick_add_text_color": "#C9C9C9",
     "quick_add_mobile_style": "mini_button",
-    "quickview_hide_mobile": true,
+    "quickview_hide_mobile": false,
     "show_siblings": false,
     "show_grid_swatches": false,
     "show_cutline": false,
