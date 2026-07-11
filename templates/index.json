@@ -52,7 +52,7 @@
         "eyebrow_color": "#7c9bdb",
         "title": "<p>The </p><p>Last          Run.</p>",
         "title_size": 120,
-        "subtitle": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore</p>",
+        "subtitle": "<h4><span style=\"text-decoration:underline\"><strong>Buy 3 — 15% off · Buy 5 — 25% off</strong></span><strong><br/></strong>Free shipping over $50 · Singapore</h4>",
         "cta_text": "Stock Clearance",
         "cta_url": "shopify://collections/dead-stock-clearance",
         "cta_bg": "#7c9bdb",
