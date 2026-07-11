@@ -259,7 +259,7 @@
         "show_country_name": true,
         "show_country_flag": false,
         "highlight_item": "Final Clearance",
-        "highlight_item_color": "#EEEE3B",
+        "highlight_item_color": "#eeee3b",
         "transparent_logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "transparent_home": false,
         "transparent_collection": false,
