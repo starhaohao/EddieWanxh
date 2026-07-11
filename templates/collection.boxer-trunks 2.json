@@ -12,7 +12,7 @@
     "hero": {
       "type": "collection-image-with-title",
       "settings": {
-        "show_title": false,
+        "show_title": true,
         "show_description": true,
         "flex_align": "align--top-left",
         "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
@@ -22,7 +22,7 @@
         "banner_layout": "inline",
         "height": "screen-height-one-third",
         "mobile_height": "screen-height-one-half--mobile",
-        "padding_top": 50,
+        "padding_top": 0,
         "padding_bottom": 0
       }
     },
@@ -48,7 +48,7 @@
             "button_type": "btn--white",
             "button_style": "btn--solid",
             "show_arrow": true,
-            "color": "#01384A",
+            "color": "#01384a",
             "overlay_type": "disabled",
             "heading_tag": "h6"
           }
@@ -72,7 +72,7 @@
             "button_type": "btn--white",
             "button_style": "btn--solid",
             "show_arrow": true,
-            "color": "#01384A",
+            "color": "#01384a",
             "overlay_type": "disabled",
             "heading_tag": "h6"
           }
@@ -96,7 +96,7 @@
             "button_type": "btn--white",
             "button_style": "btn--solid",
             "show_arrow": true,
-            "color": "#01384A",
+            "color": "#01384a",
             "overlay_type": "disabled",
             "heading_tag": "h6"
           }
@@ -120,7 +120,7 @@
             "button_type": "btn--white",
             "button_style": "btn--solid",
             "show_arrow": true,
-            "color": "#01384A",
+            "color": "#01384a",
             "overlay_type": "disabled",
             "heading_tag": "h6"
           }
@@ -144,7 +144,7 @@
         "layout_mobile": "slider",
         "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
         "padding_top": 0,
-        "padding_bottom": 52,
+        "padding_bottom": 28,
         "heading_tag": "h5"
       }
     },
