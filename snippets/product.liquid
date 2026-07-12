@@ -193,12 +193,19 @@
             data-fader-mobile
           {% endif %}
         >
-          {%- if product_family_badge != blank or product_material_badge != blank -%}
+          {%- assign show_media_sale_badge = false -%}
+          {%- if on_sale and product.available and sale_percent != blank and settings.sale_tags_enable -%}
+            {%- assign show_media_sale_badge = true -%}
+          {%- endif -%}
+          {%- if product_family_badge != blank or product_material_badge != blank or show_media_sale_badge -%}
             <div class="product__media-badges {{ settings.badge_font_size }}" aria-label="Product details">
               {%- if product_family_badge != blank -%}
                 <span class="badge-box category-box product__media-badge product__media-badge--left">
                   {{ product_family_badge }}
                 </span>
+              {%- endif -%}
+              {%- if show_media_sale_badge -%}
+                <span class="badge-box sale-box product__media-badge product__media-badge--sale">{{ sale_percent }}%</span>
               {%- endif -%}
               {%- if product_material_badge != blank -%}
                 <span class="badge-box product__media-badge product__media-badge--right">
