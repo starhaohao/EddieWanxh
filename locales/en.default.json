@@ -8,6 +8,15 @@
  * ------------------------------------------------------------
  */
 {
+  "actions": {
+    "sort": "Sort by"
+  },
+  "content": {
+    "item_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    }
+  },
   "general": {
     "swatches": {
       "color": "Color, Colour"
