@@ -7,8 +7,21 @@
 -%}
 
 <section class="sh" style="--sh-h:{{ hero_height }}vh;--sh-ov1:{{ overlay_from }};--sh-ov2:{{ overlay_to }};--sh-eye:{{ eyebrow_color }};--sh-ts:{{ title_size }}px;">
-  {%- if section.settings.image != blank -%}
-    <img class="sh__img" src="{{ section.settings.image | image_url: width: 2400 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
+  {%- liquid
+    assign hero_image = section.settings.image
+    assign hero_image_mobile = section.settings.mobile_image
+    assign hero_image_fallback = hero_image | default: hero_image_mobile
+  -%}
+  {%- if hero_image_fallback != blank -%}
+    <picture class="sh__picture">
+      {%- if hero_image_mobile != blank -%}
+        <source
+          media="(max-width: 749px)"
+          srcset="{{ hero_image_mobile | image_url: width: 1200 }} 1x, {{ hero_image_mobile | image_url: width: 2000 }} 2x"
+        >
+      {%- endif -%}
+      <img class="sh__img" src="{{ hero_image_fallback | image_url: width: 2400 }}" alt="{{ hero_image_fallback.alt | escape }}" loading="eager">
+    </picture>
   {%- else -%}
     <div class="sh__img sh__img--placeholder"></div>
   {%- endif -%}
@@ -49,6 +62,10 @@
     height: var(--sh-h);
     min-height: 500px;
     overflow: hidden;
+  }
+  .sh__picture {
+    display: block;
+    width: 100%; height: 100%;
   }
   .sh__img {
     width: 100%; height: 100%;
@@ -178,6 +195,7 @@
   "class": "sale-hero-section",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Hero image (mobile)", "info": "Optional. Shown on screens 749px and below. Falls back to the desktop hero image when empty." },
     { "type": "range", "id": "hero_height", "label": "Height (vh)", "min": 50, "max": 100, "step": 2, "default": 92 },
     { "type": "color", "id": "overlay_from", "label": "Overlay start", "default": "rgba(10,10,10,0.75)" },
     { "type": "color", "id": "overlay_to", "label": "Overlay end", "default": "rgba(10,10,10,0.32)" },
