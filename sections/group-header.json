@@ -80,24 +80,13 @@
             "padding_bottom": 8
           }
         },
-        "collection_YFLFHW": {
-          "type": "collection",
+        "menu_columns_Ag8FFi": {
+          "type": "menu-columns",
           "settings": {
-            "collection": "bundles-xl-2xl-clearance",
-            "image_width": 50,
+            "mobile_menu_linklist": "customer-account-main-menu",
             "text_font_size": "body-large",
-            "bg_color": "",
-            "padding": true,
-            "padding_bottom": 14
-          }
-        },
-        "collection_MbExyg": {
-          "type": "collection",
-          "settings": {
-            "collection": "bundles-xs-s-clearance",
-            "image_width": 50,
-            "text_font_size": "body-large",
-            "bg_color": "",
+            "highlight_item": "Sale",
+            "highlight_item_color": "#d02e2e",
             "padding": true,
             "padding_bottom": 14
           }
@@ -106,6 +95,54 @@
           "type": "divider",
           "settings": {
             "show_line": true,
+            "padding_bottom": 14
+          }
+        },
+        "collection_cecGL6": {
+          "type": "collection",
+          "settings": {
+            "collection": "briefs",
+            "image": "shopify://shop_images/x-brief-black.png",
+            "image_width": 30,
+            "text_font_size": "body-medium",
+            "bg_color": "",
+            "padding": false,
+            "padding_bottom": 14
+          }
+        },
+        "collection_r3LyAC": {
+          "type": "collection",
+          "settings": {
+            "collection": "boxer-trunks",
+            "image": "shopify://shop_images/x-trunk-white.png",
+            "image_width": 30,
+            "text_font_size": "body-medium",
+            "bg_color": "",
+            "padding": false,
+            "padding_bottom": 14
+          }
+        },
+        "collection_WAeEXg": {
+          "type": "collection",
+          "settings": {
+            "collection": "essentials",
+            "image": "shopify://shop_images/ed-socks-dusty-blue_01bb8d7b-4601-4204-9dac-26b379c4c49b.png",
+            "image_width": 30,
+            "text_font_size": "body-medium",
+            "bg_color": "",
+            "padding": false,
+            "padding_bottom": 14
+          }
+        },
+        "collection_6TG747": {
+          "type": "collection",
+          "settings": {
+            "collection": "bundles-and-save",
+            "image": "shopify://shop_images/Untitled-1_0eac97bd-ed17-424a-a681-de23b01ceaac.png",
+            "image_width": 30,
+            "text_font_size": "body-medium",
+            "bg_color": "",
+            "padding": false,
             "padding_bottom": 14
           }
         },
@@ -145,9 +182,12 @@
       "block_order": [
         "text_Xk6mkM",
         "divider-2",
-        "collection_YFLFHW",
-        "collection_MbExyg",
+        "menu_columns_Ag8FFi",
         "divider-3",
+        "collection_cecGL6",
+        "collection_r3LyAC",
+        "collection_WAeEXg",
+        "collection_6TG747",
         "menu_tdWJdx",
         "socials",
         "localization"
