@@ -85,7 +85,7 @@
             "collection": "socks",
             "fallback_handle": "Socks",
             "short_title": "Socks",
-            "eyebrow": "Designed for your layer",
+            "eyebrow": "Designed for layering",
             "heading": "Socks",
             "description": "{{ block.settings.collection.description }}",
             "show_feature_image": false,
