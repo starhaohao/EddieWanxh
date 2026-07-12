@@ -223,6 +223,36 @@
 
       --swatch-size: var(--swatch-size-product);
     }
+
+    /* Badge overlay: this theme ships no base `.product__media-badges`
+       rule, so pin the container over the top-left of the product image
+       instead of letting it sit in normal flow (which pushed a white band
+       above the image on mobile). */
+    #MainProduct--{{ section.id }} product-images {
+      position: relative;
+      display: block;
+    }
+    #MainProduct--{{ section.id }} .product__media-badges {
+      position: absolute;
+      top: 16px;
+      left: 12px;
+      right: 12px;
+      z-index: 4;
+      margin: 0;
+      display: flex;
+      flex-flow: row wrap;
+      gap: 6px;
+      width: auto;
+      pointer-events: none;
+    }
+    @media screen and (max-width: 749px) {
+      #MainProduct--{{ section.id }} .product__media-badges {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        gap: 5px;
+      }
+    }
   {%- endstyle -%}
 
   <{{ wrapper_tag }} class="product__wrapper {{ product_wrapper_modifier }}" data-product>
@@ -240,27 +270,15 @@
         >
           {%- if product_family_badge != blank or product_material_badge != blank or product_material_badge_2 != blank or on_sale -%}
             {%- comment -%}
-              TEMP PATCH — badge vertical offset + direction.
-              The real `.product__media-badges` rule lives in base CSS
-              (not available here), so this is a scoped override that wins
-              via inline style + !important without touching that file.
-              Tune the two values below directly; once the base CSS file is
-              shared, this can move into a proper customizer setting.
-                --triiiple-badge-offset-top : distance from top of image
-                --triiiple-badge-direction  : row (category left, material
-                                              right) | row-reverse (flip)
+              Badge overlay. This theme has NO base .product__media-badges
+              rule, so the container is positioned by the scoped CSS in the
+              section style block above (absolute, top-left of the image).
+              Only the neon fill token is passed inline here.
             {%- endcomment -%}
             <div
               class="product__media-badges {{ settings.badge_font_size }}"
               aria-label="Product details"
-              style="
-                --triiiple-badge-offset-top: 64px;
-                --triiiple-badge-direction: row;
-                --triiiple-neon: #EFFF00;
-                top: var(--triiiple-badge-offset-top) !important;
-                margin-top: var(--triiiple-badge-offset-top);
-                flex-direction: var(--triiiple-badge-direction);
-              "
+              style="--triiiple-neon: #EFFF00;"
             >
               {%- if product_family_badge != blank -%}
                 <span
