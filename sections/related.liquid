@@ -81,6 +81,24 @@
 
 <script src="{{ 'related-products.js' | asset_url }}" defer="defer"></script>
 
+{% style %}
+  /* Force a white background on the "Find out more / Recently viewed"
+     section (its assigned color scheme resolves to a cream fallback). */
+  #shopify-section-{{ section.id }},
+  #RelatedProducts--{{ section.id }},
+  #RelatedProducts--{{ section.id }} .tabs-wrapper {
+    --COLOR-BG: #ffffff;
+    --COLOR-BG-BRIGHTER: #ffffff;
+    background-color: #ffffff !important;
+  }
+  /* Klaviyo product-reviews app section (id from templates/product.json). */
+  #shopify-section-1778931413bf791d0a,
+  #shopify-section-1778931413bf791d0a > * {
+    --COLOR-BG: #ffffff;
+    background-color: #ffffff !important;
+  }
+{% endstyle %}
+
 <related-products
   class="related__wrapper {{ color_scheme }}"
   id="RelatedProducts--{{ section.id }}"

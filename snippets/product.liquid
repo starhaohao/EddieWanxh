@@ -364,6 +364,29 @@
     /* Sale badge inset per spec (keeps the brand neon pill styling) */
     #MainProduct--{{ section.id }} .product__media-badges { top: 24px; left: 24px; }
 
+    /* Media badges: halve the pill height (thinner than the base badge-box).
+       Border thickness is halved to 1px inline on the spans themselves. */
+    #MainProduct--{{ section.id }} .product__media-badge {
+      --padding-vertical: 0.22rem;
+      padding-top: 0.22rem;
+      padding-bottom: 0.22rem;
+      line-height: 1;
+    }
+
+    /* Below desktop (<=989px): stack the page and make the media full-bleed
+       edge-to-edge, overriding the theme's gutter-based margins. */
+    @media only screen and (max-width: 989px) {
+      #MainProduct--{{ section.id }} .product__page {
+        display: block !important;
+      }
+      #MainProduct--{{ section.id }} .product__images {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin-left: calc(50% - 50vw) !important;
+        margin-right: calc(50% - 50vw) !important;
+      }
+    }
+
     /* ================= MOBILE (<=749px): unified stack ================= */
     @media only screen and (max-width: 749px) {
       /* Media column keeps the theme's edge-to-edge 3:4 treatment. */
@@ -423,7 +446,7 @@
               {%- if product_family_badge != blank -%}
                 <span
                   class="badge-box category-box product__media-badge product__media-badge--left"
-                  style="border: 2px solid #000 !important; color: #000 !important;"
+                  style="border: 1px solid #000 !important; color: #000 !important;"
                 >
                   {{ product_family_badge }}
                 </span>
@@ -434,7 +457,7 @@
                   class="badge-box sale-box product__media-badge product__media-badge--left"
                   style="
                     background-color: var(--triiiple-neon) !important;
-                    border: 2px solid #000 !important;
+                    border: 1px solid #000 !important;
                     color: #000 !important;
                   "
                 >
@@ -444,7 +467,7 @@
               {%- if product_material_badge != blank -%}
                 <span
                   class="badge-box product__media-badge product__media-badge--right"
-                  style="border: 2px solid #000 !important; color: #000 !important;"
+                  style="border: 1px solid #000 !important; color: #000 !important;"
                 >
                   {{ product_material_badge }}
                 </span>
@@ -452,7 +475,7 @@
               {%- if product_material_badge_2 != blank -%}
                 <span
                   class="badge-box product__media-badge product__media-badge--right"
-                  style="border: 2px solid #000 !important; color: #000 !important;"
+                  style="border: 1px solid #000 !important; color: #000 !important;"
                 >
                   {{ product_material_badge_2 }}
                 </span>
@@ -1048,14 +1071,14 @@
                       {{ block_style }}
                     >
                       {%- if badge != '' and block.settings.product_badges -%}
-                        <span class="badge-box" style="border: 2px solid #000 !important; color: #000 !important;">{{ badge }}</span>
+                        <span class="badge-box" style="border: 1px solid #000 !important; color: #000 !important;">{{ badge }}</span>
                       {%- endif -%}
 
                       {%- if preorder and product.available and block.settings.product_badges -%}
                         <span
                           class="badge-box preorder-box"
                           data-preorder-badge
-                          style="border: 2px solid #000 !important; color: #000 !important;"
+                          style="border: 1px solid #000 !important; color: #000 !important;"
                         >
                           {{- 'products.product.pre_order' | t -}}
                         </span>
@@ -1066,7 +1089,7 @@
                           class="badge-box sale-box"
                           style="
                             background-color: var(--triiiple-neon, #EFFF00) !important;
-                            border: 2px solid #000 !important;
+                            border: 1px solid #000 !important;
                             color: #000 !important;
                           "
                         >{{ sale_percent }}%</span>
@@ -1077,7 +1100,7 @@
                         {% assign badge = block.settings[key] %}
 
                         {% if badge != blank %}
-                          <span class="badge-box custom-box" style="border: 2px solid #000 !important; color: #000 !important;">{{ badge }}</span>
+                          <span class="badge-box custom-box" style="border: 1px solid #000 !important; color: #000 !important;">{{ badge }}</span>
                         {% endif %}
                       {% endfor %}
                     </div>
