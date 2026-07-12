@@ -661,16 +661,6 @@
     visibility: hidden !important;
     pointer-events: none !important;
   }
-
-  .promo-socks-rule {
-    margin-top: 10px;
-    color: #923531;
-  }
-
-  .product-upsell__btn[disabled][data-promo-socks-disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
 </style>
 
 <script>
@@ -746,7 +736,6 @@
         mobileMenuType: {{ settings.mobile_menu_type | json }},
         atcButtonShowPrice: {{ settings.atc_show_product_price | json }},
         productPageSticky: false,
-        promoSocksHandle: 'pair-with-socks',
       },
       sliderArrows: {
         prev: '<button type="button" class="slider__button slider__button--prev" data-button-arrow data-button-prev>' + {{ 'general.pagination.prev' | t | json }} + '</button>',
@@ -779,7 +768,6 @@
 <!-- Theme Javascript ============================================================== -->
 <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'promo-socks-guard.js' | asset_url }}" defer="defer"></script>
 
 {%- if settings.parallax_enable -%}
   <script src="{{ 'rellax.js' | asset_url }}" defer="defer"></script>

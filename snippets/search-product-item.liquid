@@ -37,6 +37,81 @@
   endif
 
   assign sizes = '(min-width: 1400px) calc((80vw - 100px) * 0.75 / 4), (min-width: 750px) calc(1100px * 0.75 / 3), 50px'
+  assign product_display_name = product.title | strip_html | strip
+  assign pc_meta = product.metafields.custom.product_content.value
+  assign direct_display_name = product.metafields.custom.display_name.value | strip_html | strip
+  if direct_display_name != blank
+    assign product_display_name = direct_display_name
+  endif
+  if pc_meta != blank
+    assign meta_display_name = pc_meta.display_name.value | strip_html | strip
+    if direct_display_name == blank and meta_display_name != blank
+      assign product_display_name = meta_display_name
+    endif
+  endif
+
+  assign title_material = product.metafields.theme.cutline.value | strip_html | strip
+  if title_material != blank
+    assign product_display_name = product_display_name | replace: title_material, '' | replace: 'TransDRY®', '' | replace: 'TRANSDRY®', '' | replace: 'TransDRY', '' | replace: 'TRANSDRY', '' | replace: '  ', ' ' | strip
+  endif
+
+  assign product_card_source = product.type | append: ' ' | append: product.handle | append: ' ' | append: product.title | append: ' ' | append: product.tags | downcase
+  assign is_bundle_product = false
+  if product_card_source contains 'bundle'
+    assign is_bundle_product = true
+  endif
+
+  assign derived_material_label = product.metafields.theme.cutline.value | strip_html | strip
+  assign normalized_material_label = derived_material_label | downcase | remove: '®' | strip
+  if normalized_material_label contains 'transdry'
+    assign derived_material_label = 'TransDRY®'
+  else
+    assign derived_material_label = derived_material_label | upcase
+  endif
+
+  capture product_item_cutline
+    if is_bundle_product
+      assign bundle_product_single = product.metafields.theme.bundle
+      assign bundle_product_list = product.metafields.theme.bundle_list
+      assign bundle_name_count = 0
+
+      if bundle_product_single.value != nil and bundle_product_single.type == 'product_reference'
+        assign included_product = bundle_product_single.value
+        assign included_name = included_product.metafields.custom.product_content.value.display_name.value | default: included_product.title | strip_html | strip
+        assign included_material = included_product.metafields.theme.cutline.value | strip_html | strip
+        if included_material != blank
+          assign included_name = included_name | replace: included_material, '' | replace: 'TransDRY®', '' | replace: 'TRANSDRY®', '' | replace: 'TransDRY', '' | replace: 'TRANSDRY', '' | replace: '  ', ' ' | strip
+        endif
+        if included_name != blank
+          echo included_name
+          assign bundle_name_count = bundle_name_count | plus: 1
+        endif
+      endif
+
+      if bundle_product_list.value != nil and bundle_product_list.type == 'list.product_reference'
+        for included_product in bundle_product_list.value
+          assign included_name = included_product.metafields.custom.product_content.value.display_name.value | default: included_product.title | strip_html | strip
+          assign included_material = included_product.metafields.theme.cutline.value | strip_html | strip
+          if included_material != blank
+            assign included_name = included_name | replace: included_material, '' | replace: 'TransDRY®', '' | replace: 'TRANSDRY®', '' | replace: 'TransDRY', '' | replace: 'TRANSDRY', '' | replace: '  ', ' ' | strip
+          endif
+          if included_name != blank
+            if bundle_name_count > 0
+              echo ' · '
+            endif
+            echo included_name
+            assign bundle_name_count = bundle_name_count | plus: 1
+          endif
+        endfor
+      endif
+
+      if bundle_name_count == 0
+        echo derived_material_label
+      endif
+    else
+      echo derived_material_label
+    endif
+  endcapture
 -%}
 
 {%- unless hidden_product -%}
@@ -122,8 +197,16 @@
       <div class="product-information">
         <div class="product-item__info {{ settings.product_grid_font_size }}">
           <p class="product-item__title">
-            {{ product.title | strip_html }}
+            {{ product_display_name | escape }}
           </p>
+
+          {%- if product_item_cutline != blank -%}
+            <p class="product-item__material product-item__cutline" data-product-material>
+              <span class="product-item__material-value">
+                {{ product_item_cutline }}
+              </span>
+            </p>
+          {%- endif -%}
 
           {%- render 'product-grid-price', product: product, current_variant: current_variant -%}
         </div>

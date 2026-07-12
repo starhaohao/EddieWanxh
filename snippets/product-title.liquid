@@ -1,34 +1,89 @@
 {%- assign onboarding_product = onboarding_product | default: false -%}
 {%- liquid
   assign derived_material_label = blank
-  assign display_title = product.title
+  assign display_title = product.title | strip_html
 
   unless onboarding_product
-    assign product_handle_downcase = product.handle | downcase
-    assign product_title_downcase = product.title | strip_html | escape | downcase
-
-    # Align the product page name/material with the backend "Product content"
-    # metaobject (custom.product_content) — the same source the product cards use,
-    # so the admin Display Name / Material Family drive what's shown on-site.
+    # Align the product page name/material with the collection and predictive-search
+    # cards. Line 1 is the display name with the material stripped out; line 2 is the
+    # normalized material (TransDRY® keeps its casing and ®, everything else upper-cased),
+    # or — for bundles — the list of included product names.
     assign pc_meta = product.metafields.custom.product_content.value
+    assign direct_display_name = product.metafields.custom.display_name.value | strip_html | strip
+
+    if direct_display_name != blank
+      assign display_title = direct_display_name
+    endif
+
     if pc_meta != blank
-      if pc_meta.display_name.value != blank
-        assign display_title = pc_meta.display_name.value
-      endif
-      if pc_meta.material_family.value != blank
-        assign derived_material_label = pc_meta.material_family.value
+      assign meta_display_name = pc_meta.display_name.value | strip_html | strip
+      if direct_display_name == blank and meta_display_name != blank
+        assign display_title = meta_display_name
       endif
     endif
 
-    # Fallback material label (keyword-derived) when the metaobject has none
-    if derived_material_label == blank
-      if product_handle_downcase contains 'bundle' or product_title_downcase contains 'bundle' or product_title_downcase contains 'pack' or product_title_downcase contains 'set'
-        assign derived_material_label = 'TransDRY + Cotton Spandex'
-      elsif product_handle_downcase contains 'transdry'
-        assign derived_material_label = 'TransDRY'
-      elsif product_handle_downcase contains 'cotton-spandex' or product_handle_downcase contains 'cotton_spandex' or product_title_downcase contains 'cotton spandex'
-        assign derived_material_label = 'Cotton Spandex'
+    # Strip the material out of the display name so it only appears on the second line
+    assign title_material = product.metafields.theme.cutline.value | strip_html | strip
+    if title_material != blank
+      assign display_title = display_title | replace: title_material, '' | replace: 'TransDRY®', '' | replace: 'TRANSDRY®', '' | replace: 'TransDRY', '' | replace: 'TRANSDRY', '' | replace: '  ', ' ' | strip
+    endif
+
+    # Material label — same source and normalization as the cards (theme.cutline)
+    assign product_card_source = product.type | append: ' ' | append: product.handle | append: ' ' | append: product.title | append: ' ' | append: product.tags | downcase
+    assign is_bundle_product = false
+    if product_card_source contains 'bundle'
+      assign is_bundle_product = true
+    endif
+
+    assign derived_material_label = product.metafields.theme.cutline.value | strip_html | strip
+    assign normalized_material_label = derived_material_label | downcase | remove: '®' | strip
+    if normalized_material_label contains 'transdry'
+      assign derived_material_label = 'TransDRY®'
+    else
+      assign derived_material_label = derived_material_label | upcase
+    endif
+
+    # Bundles: the second line lists the included product names instead of the material
+    capture bundle_cutline
+      if is_bundle_product
+        assign bundle_product_single = product.metafields.theme.bundle
+        assign bundle_product_list = product.metafields.theme.bundle_list
+        assign bundle_name_count = 0
+
+        if bundle_product_single.value != nil and bundle_product_single.type == 'product_reference'
+          assign included_product = bundle_product_single.value
+          assign included_name = included_product.metafields.custom.product_content.value.display_name.value | default: included_product.title | strip_html | strip
+          assign included_material = included_product.metafields.theme.cutline.value | strip_html | strip
+          if included_material != blank
+            assign included_name = included_name | replace: included_material, '' | replace: 'TransDRY®', '' | replace: 'TRANSDRY®', '' | replace: 'TransDRY', '' | replace: 'TRANSDRY', '' | replace: '  ', ' ' | strip
+          endif
+          if included_name != blank
+            echo included_name
+            assign bundle_name_count = bundle_name_count | plus: 1
+          endif
+        endif
+
+        if bundle_product_list.value != nil and bundle_product_list.type == 'list.product_reference'
+          for included_product in bundle_product_list.value
+            assign included_name = included_product.metafields.custom.product_content.value.display_name.value | default: included_product.title | strip_html | strip
+            assign included_material = included_product.metafields.theme.cutline.value | strip_html | strip
+            if included_material != blank
+              assign included_name = included_name | replace: included_material, '' | replace: 'TransDRY®', '' | replace: 'TRANSDRY®', '' | replace: 'TransDRY', '' | replace: 'TRANSDRY', '' | replace: '  ', ' ' | strip
+            endif
+            if included_name != blank
+              if bundle_name_count > 0
+                echo ' · '
+              endif
+              echo included_name
+              assign bundle_name_count = bundle_name_count | plus: 1
+            endif
+          endfor
+        endif
       endif
+    endcapture
+
+    if is_bundle_product and bundle_cutline != blank
+      assign derived_material_label = bundle_cutline
     endif
   endunless
 -%}
