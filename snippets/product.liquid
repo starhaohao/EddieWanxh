@@ -10,6 +10,15 @@
   assign mobile_image_style = section.settings.mobile_image_style
   assign featured_media = current_variant.featured_media | default: product.featured_media
   assign featured_media_aspect_ratio = featured_media.aspect_ratio | default: 1
+  comment
+    TEMP PATCH — taller product image.
+    The image container height follows this ratio (width / height), so a
+    smaller number = taller image. The photo's own natural ratio was making
+    the container short, leaving a big gap before the vendor/title text.
+    0.75 = 3:4 portrait. Try 0.7 for even taller, or remove this override
+    entirely to go back to each photo's natural ratio.
+  endcomment
+  assign featured_media_aspect_ratio = 0.75
   assign is_title_linked = true
   if template.name == 'product' and featured_product == false
     assign is_title_linked = false
@@ -123,7 +132,6 @@
 
   assign product_badge_source = product.type | append: ' ' | append: product.handle | append: ' ' | append: product.title | append: ' ' | append: product_tags | downcase
   assign product_family_badge = ''
-  assign product_material_badge = ''
 
   if product_badge_source contains 'bundle'
     assign product_family_badge = 'Bundle'
@@ -139,15 +147,52 @@
     assign product_family_badge = 'Top'
   endif
 
-  assign product_material_badge = product.metafields.theme.cutline.value | strip_html | strip
-  if product_material_badge != blank
-    assign normalized_material_badge = product_material_badge | downcase | remove: '®' | strip
-    if normalized_material_badge contains 'transdry'
+  comment
+    Material badge(s), shown on ALL products from theme.cutline.
+    A cutline naming both fabrics splits into two badges:
+    COTTON SPANDEX + TransDRY®. Same normalization used everywhere:
+    contains 'transdry' -> 'TransDRY®'; anything else -> UPPERCASE.
+  endcomment
+  assign product_material_badge = ''
+  assign product_material_badge_2 = ''
+  assign raw_cutline = product.metafields.theme.cutline.value | strip_html | strip
+  assign normalized_cutline = raw_cutline | downcase | remove: '®' | strip
+
+  if raw_cutline != blank
+    assign has_transdry = false
+    assign has_cotton = false
+    if normalized_cutline contains 'transdry'
+      assign has_transdry = true
+    endif
+    if normalized_cutline contains 'cotton' or normalized_cutline contains 'spandex'
+      assign has_cotton = true
+    endif
+
+    if has_transdry and has_cotton
+      assign product_material_badge = 'COTTON SPANDEX'
+      assign product_material_badge_2 = 'TransDRY®'
+    elsif has_transdry
       assign product_material_badge = 'TransDRY®'
     else
-      assign product_material_badge = product_material_badge | upcase
+      assign product_material_badge = raw_cutline | upcase
     endif
   endif
+
+  comment
+    Line 2 under the title. Single products only: the material label.
+    Bundles get their Line 2 (included product names) inside product-title
+    via product_content / bundle_list, so leave title_material blank for them.
+  endcomment
+  assign title_material = ''
+  unless product_badge_source contains 'bundle'
+    if normalized_cutline contains 'transdry' and normalized_cutline contains 'cotton'
+      assign title_material = 'COTTON SPANDEX & TransDRY®'
+    elsif normalized_cutline contains 'transdry'
+      assign title_material = 'TransDRY®'
+    elsif raw_cutline != blank
+      assign title_material = raw_cutline | upcase
+    endif
+  endunless
 
   assign color_scheme = 'color-' | append: section.settings.color_scheme
 -%}
@@ -193,23 +238,65 @@
             data-fader-mobile
           {% endif %}
         >
-          {%- assign show_media_sale_badge = false -%}
-          {%- if on_sale and product.available and sale_percent != blank and settings.sale_tags_enable -%}
-            {%- assign show_media_sale_badge = true -%}
-          {%- endif -%}
-          {%- if product_family_badge != blank or product_material_badge != blank or show_media_sale_badge -%}
-            <div class="product__media-badges {{ settings.badge_font_size }}" aria-label="Product details">
+          {%- if product_family_badge != blank or product_material_badge != blank or product_material_badge_2 != blank or on_sale -%}
+            {%- comment -%}
+              TEMP PATCH — badge vertical offset + direction.
+              The real `.product__media-badges` rule lives in base CSS
+              (not available here), so this is a scoped override that wins
+              via inline style + !important without touching that file.
+              Tune the two values below directly; once the base CSS file is
+              shared, this can move into a proper customizer setting.
+                --triiiple-badge-offset-top : distance from top of image
+                --triiiple-badge-direction  : row (category left, material
+                                              right) | row-reverse (flip)
+            {%- endcomment -%}
+            <div
+              class="product__media-badges {{ settings.badge_font_size }}"
+              aria-label="Product details"
+              style="
+                --triiiple-badge-offset-top: 64px;
+                --triiiple-badge-direction: row;
+                --triiiple-neon: #EFFF00;
+                top: var(--triiiple-badge-offset-top) !important;
+                margin-top: var(--triiiple-badge-offset-top);
+                flex-direction: var(--triiiple-badge-direction);
+              "
+            >
               {%- if product_family_badge != blank -%}
-                <span class="badge-box category-box product__media-badge product__media-badge--left">
+                <span
+                  class="badge-box category-box product__media-badge product__media-badge--left"
+                  style="border: 2px solid #000 !important; color: #000 !important;"
+                >
                   {{ product_family_badge }}
                 </span>
               {%- endif -%}
-              {%- if show_media_sale_badge -%}
-                <span class="badge-box sale-box product__media-badge product__media-badge--sale">{{ sale_percent }}%</span>
+              {%- comment -%} Sale %: percentage only, never the word "Sale". Shows whenever marked down. {%- endcomment -%}
+              {%- if on_sale and product.available and sale_percent != blank -%}
+                <span
+                  class="badge-box sale-box product__media-badge product__media-badge--left"
+                  style="
+                    background-color: var(--triiiple-neon) !important;
+                    border: 2px solid #000 !important;
+                    color: #000 !important;
+                  "
+                >
+                  {{ sale_percent }}%
+                </span>
               {%- endif -%}
               {%- if product_material_badge != blank -%}
-                <span class="badge-box product__media-badge product__media-badge--right">
+                <span
+                  class="badge-box product__media-badge product__media-badge--right"
+                  style="border: 2px solid #000 !important; color: #000 !important;"
+                >
                   {{ product_material_badge }}
+                </span>
+              {%- endif -%}
+              {%- if product_material_badge_2 != blank -%}
+                <span
+                  class="badge-box product__media-badge product__media-badge--right"
+                  style="border: 2px solid #000 !important; color: #000 !important;"
+                >
+                  {{ product_material_badge_2 }}
                 </span>
               {%- endif -%}
             </div>
@@ -455,7 +542,8 @@
                       block: block,
                       block_style: block_style,
                       is_title_linked: is_title_linked,
-                      onboarding_product: onboarding_product
+                      onboarding_product: onboarding_product,
+                      title_material: title_material
                     -%}
 
                   {%- when 'price' -%}
@@ -802,17 +890,28 @@
                       {{ block_style }}
                     >
                       {%- if badge != '' and block.settings.product_badges -%}
-                        <span class="badge-box">{{ badge }}</span>
+                        <span class="badge-box" style="border: 2px solid #000 !important; color: #000 !important;">{{ badge }}</span>
                       {%- endif -%}
 
                       {%- if preorder and product.available and block.settings.product_badges -%}
-                        <span class="badge-box preorder-box" data-preorder-badge>
+                        <span
+                          class="badge-box preorder-box"
+                          data-preorder-badge
+                          style="border: 2px solid #000 !important; color: #000 !important;"
+                        >
                           {{- 'products.product.pre_order' | t -}}
                         </span>
                       {%- endif -%}
 
                       {%- if on_sale and product.available and block.settings.sale_badge -%}
-                        <span class="badge-box sale-box">{{ sale_percent }}%</span>
+                        <span
+                          class="badge-box sale-box"
+                          style="
+                            background-color: var(--triiiple-neon, #EFFF00) !important;
+                            border: 2px solid #000 !important;
+                            color: #000 !important;
+                          "
+                        >{{ sale_percent }}%</span>
                       {%- endif -%}
 
                       {% for i in (1..3) %}
@@ -820,7 +919,7 @@
                         {% assign badge = block.settings[key] %}
 
                         {% if badge != blank %}
-                          <span class="badge-box custom-box">{{ badge }}</span>
+                          <span class="badge-box custom-box" style="border: 2px solid #000 !important; color: #000 !important;">{{ badge }}</span>
                         {% endif %}
                       {% endfor %}
                     </div>

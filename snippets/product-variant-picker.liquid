@@ -12,16 +12,56 @@
 {%- liquid
   assign form_style = settings.form_style
   assign enable_size_chart = enable_size_chart | default: false
+  assign show_size_chart = false
+  assign has_size_option = false
   assign tags_string = product.tags | join: ','
+  assign product_handle_downcase = product.handle | downcase
+  assign product_title_downcase = product.title | downcase
+  assign product_type_downcase = product.type | downcase
+  assign product_tags_downcase = tags_string | downcase
   assign size_separator = '_size_'
   assign specific_pages = ''
   assign show_size_link_separated = true
   assign uniq_id = 'product-' | append: product.id | append: '-' | append: product.handle
   assign size_style = block.settings.size_chart_style
+  assign tops_size_page = pages['t-shirt-sleeveless-top-size-chart']
+  assign underwear_size_page = pages['size-guide-v2']
 
   if block.settings.info_page != blank
     assign size_translation = 'general.size_chart.size' | t
     assign info_page = pages[block.settings.info_page]
+  endif
+
+  assign is_tops_product = false
+  assign is_underwear_family = false
+  if product_handle_downcase contains 't-shirt'
+    assign is_tops_product = true
+  elsif product_handle_downcase contains 'sleeveless-top'
+    assign is_tops_product = true
+  elsif product_title_downcase contains 't-shirt'
+    assign is_tops_product = true
+  elsif product_title_downcase contains 'sleeveless top'
+    assign is_tops_product = true
+  elsif product_tags_downcase contains 'tank top'
+    assign is_tops_product = true
+  elsif product_tags_downcase contains 'top'
+    assign is_tops_product = true
+  endif
+
+  if product_type_downcase contains 'underwear'
+    assign is_underwear_family = true
+  elsif product_handle_downcase contains 'brief'
+    assign is_underwear_family = true
+  elsif product_handle_downcase contains 'boxer-trunk'
+    assign is_underwear_family = true
+  elsif product_handle_downcase contains 'bundle' and is_tops_product == false
+    assign is_underwear_family = true
+  endif
+
+  if is_tops_product and tops_size_page != blank
+    assign info_page = tops_size_page
+  elsif is_underwear_family and underwear_size_page != blank
+    assign info_page = underwear_size_page
   endif
 
   if tags_string contains size_separator
@@ -54,6 +94,7 @@
   -%}
 
   {%- if translation_string_size contains option_name -%}
+    {%- assign has_size_option = true -%}
     {%- assign show_size_link_separated = false -%}
   {%- endif -%}
 {%- endfor -%}
@@ -63,26 +104,22 @@
     {%- case size_style -%}
       {%- when 'text' -%}
         <span class="radio__legend__link__label">
-          Find size
+          {{- 'general.size_chart.title' | t -}}
         </span>
 
       {%- when 'ruler' -%}
-        <span class="btn-size-chart" aria-hidden="true">
+        <span class="btn-size-chart">
           {%- render 'icon-ruler' -%}
         </span>
-        <span class="radio__legend__link__label">Find size</span>
 
       {%- when 'question' -%}
-        <span class="btn-size-chart" aria-hidden="true">
+        <span class="btn-size-chart">
           {%- render 'icon-question' -%}
         </span>
-        <span class="radio__legend__link__label">Find size</span>
-      {%- else -%}
-        <span class="radio__legend__link__label">Find size</span>
     {%- endcase -%}
   {%- else -%}
     <span class="radio__legend__link__label">
-      Find size
+      {{- 'general.size_chart.title' | t -}}
     </span>
   {%- endunless -%}
 {%- endcapture -%}
@@ -91,10 +128,11 @@
   {%- if enable_size_chart -%}
     {%- if block.settings.info_page != blank or specific_pages != '' -%}
       {%- liquid
+        assign show_size_chart = true
         assign specific_pages_arr = specific_pages | split: ','
       -%}
 
-      {%- render 'stylesheet', name: 'tabs.css', async: true, inline: false, blocking: false -%}
+      {%- render 'stylesheet', name: 'tabs.css' -%}
       <style>
         .selector-wrapper--size .radio__legend__label {
           width: 100%;
@@ -102,47 +140,31 @@
         }
 
         .size-chart-pill {
-          -webkit-appearance: none;
-          appearance: none;
           display: inline-flex;
-          flex: 0 0 auto;
           align-items: center;
           justify-content: center;
-          width: auto;
-          max-width: fit-content;
           min-height: auto;
           min-width: auto;
           margin-left: auto;
-          gap: 6px;
-          padding: 7px 10px;
-          border: 1px solid rgba(23, 25, 28, 0.22);
-          background: rgba(255, 255, 255, 0.9);
-          color: #17191c !important;
-          border-radius: 2px;
-          box-shadow: none;
+          padding: 0;
+          border: 0;
+          background: transparent;
+          color: #fff !important;
+          border-radius: 0;
           text-decoration: none;
           text-transform: uppercase;
-          letter-spacing: 0.14em;
+          letter-spacing: 0.12em;
           font-family: inherit;
-          font-size: 10px;
-          font-weight: 500;
+          font-size: 11px;
+          font-weight: 600;
           line-height: 1;
           white-space: nowrap;
-          cursor: pointer;
         }
 
         .size-chart-pill,
         .size-chart-pill .radio__legend__link__label,
         .size-chart-pill .btn-size-chart {
-          color: #17191c !important;
-        }
-
-        .size-chart-pill .radio__legend__link__label {
-          display: inline-block;
-          flex: 0 0 auto;
-          width: auto;
-          min-width: 0;
-          white-space: nowrap;
+          color: #fff !important;
         }
 
         .size-chart-pill .btn-size-chart {
@@ -150,15 +172,10 @@
           min-width: auto;
           padding: 0;
           border-radius: 0;
-          display: inline-flex;
-          align-items: center;
         }
 
         .size-chart-pill .icon {
           fill: currentColor;
-          stroke: currentColor;
-          width: 13px;
-          height: 13px;
         }
 
         .selector-wrapper--size .radio__legend__link.size-chart-pill {
@@ -177,22 +194,20 @@
 
         @media (hover: hover) {
           .size-chart-pill:hover {
-            color: #ffffff !important;
-            background: #17191c;
-            border-color: #17191c;
+            color: rgba(255, 255, 255, 0.72) !important;
           }
         }
       </style>
 
       <popup-component>
-        <button
-          type="button"
+        <a
+          href="{{ info_page.url }}"
           data-popup-open
           class="radio__legend__link size-chart-pill body-x-small{% if product.has_only_default_variant %} size-popup-link{% endif %}{% if size_style == 'text' or show_size_link_separated %} text-link{% endif %}"
           aria-label="{{ 'general.size_chart.title' | t }}"
         >
           {{ size_button }}
-        </button>
+        </a>
 
         <dialog class="product-modal" aria-hidden="true" inert data-scroll-lock-required>
           <form method="dialog">
@@ -389,6 +404,7 @@
                 </fieldset>
               {%- elsif picker_type == 'button' -%}
                 {%- liquid
+                  assign current_value = current_variant.options[forloop.index0]
                   capture radio_fieldset_class
                     echo 'radio__fieldset'
 

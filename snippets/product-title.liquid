@@ -1,94 +1,47 @@
-{%- assign onboarding_product = onboarding_product | default: false -%}
 {%- liquid
-  assign derived_material_label = blank
-  assign display_title = product.title | strip_html
+  assign onboarding_product = onboarding_product | default: false
+  assign title_material = title_material | default: blank
+  assign product_display_name = product.title | strip_html
+  assign product_subheading = blank
 
-  unless onboarding_product
-    # Align the product page name/material with the collection and predictive-search
-    # cards. Line 1 is the display name with the material stripped out; line 2 is the
-    # normalized material (TransDRY® keeps its casing and ®, everything else upper-cased),
-    # or — for bundles — the list of included product names.
-    assign pc_meta = product.metafields.custom.product_content.value
+  if onboarding_product == false and product != blank
+    assign product_content = product.metafields.custom.product_content.value
+
+    comment
+      Prefer the clean Display Name metafield, then product_content, then title.
+    endcomment
     assign direct_display_name = product.metafields.custom.display_name.value | strip_html | strip
-
     if direct_display_name != blank
-      assign display_title = direct_display_name
-    endif
-
-    if pc_meta != blank
-      assign meta_display_name = pc_meta.display_name.value | strip_html | strip
-      if direct_display_name == blank and meta_display_name != blank
-        assign display_title = meta_display_name
+      assign product_display_name = direct_display_name
+    elsif product_content != blank
+      assign meta_display_name = product_content.display_name.value | strip_html | strip
+      if meta_display_name != blank
+        assign product_display_name = meta_display_name
       endif
     endif
 
-    # Strip the material out of the display name so it only appears on the second line
-    assign title_material = product.metafields.theme.cutline.value | strip_html | strip
+    comment
+      Line 2 (subheading):
+      - Single product: the material label passed in as title_material.
+      - Bundle: title_material is blank, so fall back to product_content
+        (fabric_profile / signature_quote) as before.
+    endcomment
     if title_material != blank
-      assign display_title = display_title | replace: title_material, '' | replace: 'TransDRY®', '' | replace: 'TRANSDRY®', '' | replace: 'TransDRY', '' | replace: 'TRANSDRY', '' | replace: '  ', ' ' | strip
-    endif
+      assign product_subheading = title_material
+    elsif product_content != blank
+      assign meta_fabric_profile = product_content.fabric_profile.value | strip_html | strip
+      assign meta_signature_quote = product_content.signature_quote.value | strip_html | strip
 
-    # Material label — same source and normalization as the cards (theme.cutline)
-    assign product_card_source = product.type | append: ' ' | append: product.handle | append: ' ' | append: product.title | append: ' ' | append: product.tags | downcase
-    assign is_bundle_product = false
-    if product_card_source contains 'bundle'
-      assign is_bundle_product = true
-    endif
-
-    assign derived_material_label = product.metafields.theme.cutline.value | strip_html | strip
-    assign normalized_material_label = derived_material_label | downcase | remove: '®' | strip
-    if normalized_material_label contains 'transdry'
-      assign derived_material_label = 'TransDRY®'
-    else
-      assign derived_material_label = derived_material_label | upcase
-    endif
-
-    # Bundles: the second line lists the included product names instead of the material
-    capture bundle_cutline
-      if is_bundle_product
-        assign bundle_product_single = product.metafields.theme.bundle
-        assign bundle_product_list = product.metafields.theme.bundle_list
-        assign bundle_name_count = 0
-
-        if bundle_product_single.value != nil and bundle_product_single.type == 'product_reference'
-          assign included_product = bundle_product_single.value
-          assign included_name = included_product.metafields.custom.product_content.value.display_name.value | default: included_product.title | strip_html | strip
-          assign included_material = included_product.metafields.theme.cutline.value | strip_html | strip
-          if included_material != blank
-            assign included_name = included_name | replace: included_material, '' | replace: 'TransDRY®', '' | replace: 'TRANSDRY®', '' | replace: 'TransDRY', '' | replace: 'TRANSDRY', '' | replace: '  ', ' ' | strip
-          endif
-          if included_name != blank
-            echo included_name
-            assign bundle_name_count = bundle_name_count | plus: 1
-          endif
-        endif
-
-        if bundle_product_list.value != nil and bundle_product_list.type == 'list.product_reference'
-          for included_product in bundle_product_list.value
-            assign included_name = included_product.metafields.custom.product_content.value.display_name.value | default: included_product.title | strip_html | strip
-            assign included_material = included_product.metafields.theme.cutline.value | strip_html | strip
-            if included_material != blank
-              assign included_name = included_name | replace: included_material, '' | replace: 'TransDRY®', '' | replace: 'TRANSDRY®', '' | replace: 'TransDRY', '' | replace: 'TRANSDRY', '' | replace: '  ', ' ' | strip
-            endif
-            if included_name != blank
-              if bundle_name_count > 0
-                echo ' · '
-              endif
-              echo included_name
-              assign bundle_name_count = bundle_name_count | plus: 1
-            endif
-          endfor
-        endif
+      if meta_fabric_profile != blank
+        assign product_subheading = meta_fabric_profile
+      elsif meta_signature_quote != blank
+        assign product_subheading = meta_signature_quote
       endif
-    endcapture
-
-    if is_bundle_product and bundle_cutline != blank
-      assign derived_material_label = bundle_cutline
     endif
-  endunless
+  endif
 -%}
 
-{%- render 'stylesheet', name: 'breadcrumbs.css' -%}
+{{ 'breadcrumbs.css' | asset_url | stylesheet_tag }}
 
 <div
   class="product__block product__head block-padding"
@@ -118,23 +71,23 @@
       {% render 'breadcrumbs', breadcrumbs_modifier: 'breadcrumbs--no-padding product__breadcrumbs' %}
   {%- endcase -%}
 
-  <div class="product__title__wrapper" {{ block.shopify_attributes }}>
+  <div class="product__title__wrapper{% if product_subheading != blank %} product__title__wrapper--with-subtitle{% endif %}" {{ block.shopify_attributes }}>
     <h1 class="product__title {{ block.settings.heading_font_size | default: 'heading-small' }}">
       {%- if onboarding_product -%}
         <span data-zoom-caption>{{ 'home_page.onboarding.product_title' | t }}</span>
       {%- else -%}
         {%- unless is_title_linked -%}
-          <span data-zoom-caption>{{ display_title | strip_html }}</span>
+          <span data-zoom-caption>{{ product_display_name | escape }}</span>
         {%- else -%}
           <a href="{{ product.url }}">
-            <span data-zoom-caption>{{ display_title | strip_html }}</span>
+            <span data-zoom-caption>{{ product_display_name | escape }}</span>
           </a>
         {%- endunless -%}
       {%- endif -%}
     </h1>
 
-    {%- if derived_material_label != blank -%}
-      <p class="product__title__material">{{ derived_material_label }}</p>
+    {%- if product_subheading != blank -%}
+      <p class="product__subheading">{{ product_subheading | escape }}</p>
     {%- endif -%}
   </div>
 </div>
