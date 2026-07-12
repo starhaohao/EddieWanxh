@@ -255,6 +255,146 @@
     }
   {%- endstyle -%}
 
+  {%- comment -%}
+    CDLP-style dimension retrofit. Scoped to this product section only.
+    Enforces a 50/50 desktop split with a centered 480px text column, the
+    editorial type scale, 48px size squares, a full-width black Add-to-Bag,
+    styled accordions, and mobile spacing + a 64px sticky cart-bar. The
+    media gallery is intentionally left to the theme's own product.css
+    (already flush / full-height cover on desktop, edge-to-edge 3:4 on
+    mobile). Prices keep the brand neon-yellow treatment, so no price
+    colors are set here.
+  {%- endcomment -%}
+  {%- style -%}
+    /* ================= DESKTOP (>=990px): 50/50 split ================= */
+    @media only screen and (min-width: 990px) {
+      #MainProduct--{{ section.id }} .product__page {
+        grid-template-columns: 50% 50%;
+        gap: 0;
+      }
+
+      /* Right: 480px content column with generous padding.
+         The media column deliberately keeps the theme's tuned flush /
+         full-height stacked-cover treatment from product.css — overriding
+         it here would clamp the stacked gallery to one viewport height. */
+      #MainProduct--{{ section.id }} .product__content {
+        padding: 40px;
+      }
+      #MainProduct--{{ section.id }} .product__content .form__width {
+        max-width: 480px;
+        width: 100%;
+        margin: 0 auto;
+      }
+    }
+    /* Wider right gutter on large screens (spec: 40–80px) */
+    @media only screen and (min-width: 1400px) {
+      #MainProduct--{{ section.id }} .product__content { padding: 40px 80px; }
+    }
+
+    /* ================= Editorial type scale ================= */
+    #MainProduct--{{ section.id }} .product__breadcrumbs {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+    #MainProduct--{{ section.id }} .product__title {
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      margin-bottom: 8px;
+    }
+    #MainProduct--{{ section.id }} .product__price__wrap,
+    #MainProduct--{{ section.id }} .product__price {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0;
+      margin-bottom: 32px;
+    }
+
+    /* ================= Size selector: 48px squares ================= */
+    #MainProduct--{{ section.id }} .radio__button label {
+      min-width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      border: 1px solid #E5E5E5;
+      transition: background-color 0.2s ease;
+    }
+    @media (hover: hover) {
+      #MainProduct--{{ section.id }} .radio__button label:hover {
+        background-color: #F0F0F0;
+      }
+    }
+
+    /* ================= Add to Bag: full-width black, 56px =================
+       Scoped to the main submit button so upsell / quick-add buttons that
+       may render inside the product section are left untouched. */
+    #MainProduct--{{ section.id }} .product__submit__item [data-add-to-cart] {
+      width: 100%;
+      height: 56px;
+      min-height: 56px;
+      background: #000;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 32px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    #MainProduct--{{ section.id }} .product__submit__item [data-add-to-cart]:not([disabled]):hover {
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+
+    /* ================= Accordions ================= */
+    #MainProduct--{{ section.id }} .accordion {
+      border-top: 1px solid #E5E5E5;
+    }
+    #MainProduct--{{ section.id }} .accordion__title {
+      padding: 16px 0;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Sale badge inset per spec (keeps the brand neon pill styling) */
+    #MainProduct--{{ section.id }} .product__media-badges { top: 24px; left: 24px; }
+
+    /* ================= MOBILE (<=749px): unified stack ================= */
+    @media only screen and (max-width: 749px) {
+      /* Media column keeps the theme's edge-to-edge 3:4 treatment. */
+      #MainProduct--{{ section.id }} .product__content {
+        padding: 24px 16px 120px 16px;
+      }
+      #MainProduct--{{ section.id }} .product__title {
+        font-size: 20px;
+        letter-spacing: -0.01em;
+      }
+      #MainProduct--{{ section.id }} .product__price__wrap,
+      #MainProduct--{{ section.id }} .product__price {
+        margin-bottom: 24px;
+      }
+      #MainProduct--{{ section.id }} .radio__button label {
+        min-width: 44px;
+        height: 44px;
+      }
+      #MainProduct--{{ section.id }} .product__media-badges { top: 16px; left: 16px; }
+    }
+
+    /* Mobile sticky Add-to-Bag: the theme's own cart-bar, sized to spec */
+    @media only screen and (max-width: 749px) {
+      .cart-bar {
+        min-height: 64px;
+        padding-bottom: env(safe-area-inset-bottom);
+        z-index: 50;
+      }
+    }
+  {%- endstyle -%}
+
   <{{ wrapper_tag }} class="product__wrapper {{ product_wrapper_modifier }}" data-product>
     <div class="{% if featured_product %}{{ section.settings.width }}{% else %}product__wrapper__inner{% endif %}">
       <div class="product__page">
