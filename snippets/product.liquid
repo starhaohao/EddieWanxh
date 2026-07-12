@@ -127,13 +127,6 @@
 
   if product_badge_source contains 'bundle'
     assign product_family_badge = 'Bundle'
-    assign product_material_badge = product.metafields.theme.cutline.value | strip_html | strip
-    assign normalized_material_badge = product_material_badge | downcase | remove: '®' | strip
-    if normalized_material_badge contains 'transdry'
-      assign product_material_badge = 'TransDRY®'
-    else
-      assign product_material_badge = product_material_badge | upcase
-    endif
   elsif product_badge_source contains 'boxer' or product_badge_source contains 'trunk'
     assign product_family_badge = 'Boxer Trunks'
   elsif product_badge_source contains 'brief'
@@ -144,6 +137,16 @@
     assign product_family_badge = 'T-Shirt'
   elsif product_badge_source contains 'sleeveless' or product_badge_source contains 'top'
     assign product_family_badge = 'Top'
+  endif
+
+  assign product_material_badge = product.metafields.theme.cutline.value | strip_html | strip
+  if product_material_badge != blank
+    assign normalized_material_badge = product_material_badge | downcase | remove: '®' | strip
+    if normalized_material_badge contains 'transdry'
+      assign product_material_badge = 'TransDRY®'
+    else
+      assign product_material_badge = product_material_badge | upcase
+    endif
   endif
 
   assign color_scheme = 'color-' | append: section.settings.color_scheme
