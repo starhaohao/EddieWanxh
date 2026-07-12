@@ -32,11 +32,11 @@
         "image_overlay_d3XgTL": {
           "type": "image-overlay",
           "settings": {
-            "column_width": 20,
+            "column_width": 25,
             "image": "shopify://shop_images/250309_-_TRIIIPLE10707.jpg",
-            "image_width": 80,
-            "image_aspect_ratio": 1.2,
-            "mobile_image_aspect_ratio": 1.4,
+            "image_width": 100,
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1.5,
             "image_shape": "normal",
             "title": "",
             "heading_font_size": "heading-small",
@@ -49,18 +49,18 @@
             "button_style": "btn--solid",
             "show_arrow": true,
             "color": "#01384a",
-            "overlay_type": "disabled",
+            "overlay_type": "text",
             "heading_tag": "h6"
           }
         },
         "image_overlay_UNCQB9": {
           "type": "image-overlay",
           "settings": {
-            "column_width": 20,
+            "column_width": 25,
             "image": "shopify://shop_images/Untitled-3.png",
-            "image_width": 80,
-            "image_aspect_ratio": 1.2,
-            "mobile_image_aspect_ratio": 1.4,
+            "image_width": 100,
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1.5,
             "image_shape": "normal",
             "title": "",
             "heading_font_size": "heading-small",
@@ -80,11 +80,11 @@
         "image_overlay_8FyQTY": {
           "type": "image-overlay",
           "settings": {
-            "column_width": 20,
+            "column_width": 25,
             "image": "shopify://shop_images/fathers-day-edm-grey-socks-bed-lifestyle.jpg",
-            "image_width": 80,
-            "image_aspect_ratio": 1.2,
-            "mobile_image_aspect_ratio": 1.4,
+            "image_width": 100,
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1.5,
             "image_shape": "normal",
             "title": "",
             "heading_font_size": "heading-small",
@@ -104,11 +104,11 @@
         "image_overlay_Ug3VLx": {
           "type": "image-overlay",
           "settings": {
-            "column_width": 20,
+            "column_width": 25,
             "image": "shopify://shop_images/ED-Tee-Heathergrey.jpg",
-            "image_width": 80,
-            "image_aspect_ratio": 1.2,
-            "mobile_image_aspect_ratio": 1.4,
+            "image_width": 100,
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1.5,
             "image_shape": "normal",
             "title": "",
             "heading_font_size": "heading-small",
@@ -140,11 +140,11 @@
         "align_heading": "text-left",
         "align_text": "text-left",
         "width": "wrapper--full-padded",
-        "align_columns": "flex-align-center",
+        "align_columns": "flex-align-top",
         "layout_mobile": "slider",
         "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
         "padding_top": 0,
-        "padding_bottom": 28,
+        "padding_bottom": 20,
         "heading_tag": "h5"
       }
     },
