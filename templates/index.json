@@ -293,77 +293,19 @@
       ],
       "settings": {
         "heading": "Worn in the wild.",
-        "heading_font_size": "heading-x-large",
+        "heading_font_size": "heading-medium",
         "text": "<p>Tag us @<a href=\"https://www.instagram.com/triiiple_studio/\" target=\"_blank\" title=\"https://www.instagram.com/triiiple_studio/\">triiiple_studio</a></p>",
         "text_font_size": "body-medium",
         "align_text": "text-left",
         "width": "wrapper--full",
-        "aspect_ratio": 1.4,
+        "aspect_ratio": 1.1,
         "layout_desktop": "slider",
         "blocks_per_row": 4,
         "layout_mobile": "slider",
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
         "padding_top": 17,
-        "padding_bottom": 0,
+        "padding_bottom": 20,
         "heading_tag": "h4"
-      }
-    },
-    "section_text_with_products_f6FLnY": {
-      "type": "section-text-with-products",
-      "blocks": {
-        "product_CGNCnL": {
-          "type": "product",
-          "settings": {
-            "product": "y-transdry-brief-white",
-            "image": "shopify://shop_images/Img_Images_Image_Asset_162_20260517.png",
-            "image_position": 1,
-            "aspect_ratio": 1.5,
-            "width": 300,
-            "mobile_aspect_ratio": 1.4,
-            "mobile_width": 70
-          }
-        },
-        "image_qBGiyr": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/fathers-day-edm-blue-grey-socks-closeup_94542577-d5e2-4ce1-85f5-f829fa1a2dab.png",
-            "image_position": 29,
-            "aspect_ratio": 1.5,
-            "width": 300,
-            "mobile_aspect_ratio": 1.5,
-            "mobile_width": 50
-          }
-        },
-        "collection_NAcxMd": {
-          "type": "collection",
-          "settings": {
-            "collection": "tops",
-            "image_position": 2,
-            "aspect_ratio": 1.5,
-            "width": 300,
-            "mobile_aspect_ratio": 1.5,
-            "mobile_width": 60
-          }
-        }
-      },
-      "block_order": [
-        "product_CGNCnL",
-        "image_qBGiyr",
-        "collection_NAcxMd"
-      ],
-      "name": "Text with products",
-      "settings": {
-        "subheading": "",
-        "heading": "worn, felt, reviewed!",
-        "image_border_radius": 49,
-        "width": "wrapper--narrow",
-        "text_font_size_px_desktop": 100,
-        "text_align_desktop": "text-left",
-        "text_font_size_px_mobile": 55,
-        "text_align_mobile": "text-left--mobile",
-        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
-        "padding_top": 100,
-        "padding_bottom": 0
       }
     },
     "178359954937ab782c": {
@@ -493,7 +435,6 @@
     "section_hero_ALw4gQ",
     "section_tab_collections_Cc4J84",
     "homepage-social",
-    "section_text_with_products_f6FLnY",
     "178359954937ab782c",
     "homepage-brand-story",
     "story_salon_feature_TfLYkW",

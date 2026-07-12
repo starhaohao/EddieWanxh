@@ -28,7 +28,7 @@
     "type_sub_uppercase": false,
     "subheading_size_desktop": 16,
     "subheading_size_mobile": 12,
-    "type_header_font": "covered_by_your_grace_n4",
+    "type_header_font": "sans_serif_n4",
     "heading_letter_spacing": -25,
     "type_header_uppercase": true,
     "heading_mini": 13,
@@ -523,14 +523,32 @@
           "section_bg_gradient": "",
           "btn_primary_bg": "#f6fa0d",
           "btn_primary_text": "#ffffff",
-          "btn_primary_border": "#FFFFFF",
+          "btn_primary_border": "#ffffff",
           "btn_secondary_bg": "#f6fa0d",
           "btn_secondary_text": "#000000c4",
           "btn_secondary_border": "#1cf644",
-          "accent": "#FFFFFF",
+          "accent": "#ffffff",
           "lines_and_border": "#061923",
           "overlay": "#000000",
           "links": "#020303"
+        }
+      },
+      "scheme-black": {
+        "settings": {
+          "section_text": "#ffffff",
+          "section_bg": "#000000",
+          "section_bg_light": "#1a1a1a",
+          "section_bg_gradient": "",
+          "btn_primary_bg": "#000000",
+          "btn_primary_text": "#000000",
+          "btn_primary_border": "#ffffff",
+          "btn_secondary_bg": "#cdff00",
+          "btn_secondary_text": "#000000",
+          "btn_secondary_border": "#cdff00",
+          "accent": "#ffffff",
+          "lines_and_border": "#ffffff",
+          "overlay": "#000000",
+          "links": "#cdff00"
         }
       }
     }

@@ -23,7 +23,7 @@
         "price": {
           "type": "price",
           "settings": {
-            "text_font_size": "body-medium",
+            "text_font_size": "body-x-large",
             "show_shipping_policy": true,
             "padding_bottom": 12
           }
