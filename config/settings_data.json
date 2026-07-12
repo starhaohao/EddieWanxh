@@ -523,11 +523,11 @@
           "section_bg_gradient": "",
           "btn_primary_bg": "#f6fa0d",
           "btn_primary_text": "#ffffff",
-          "btn_primary_border": "#adadade0",
+          "btn_primary_border": "#FFFFFF",
           "btn_secondary_bg": "#f6fa0d",
           "btn_secondary_text": "#000000c4",
           "btn_secondary_border": "#1cf644",
-          "accent": "#c2c2c2",
+          "accent": "#FFFFFF",
           "lines_and_border": "#061923",
           "overlay": "#000000",
           "links": "#020303"

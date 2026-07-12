@@ -39,9 +39,7 @@
         "ghost_cta_XRkDR4",
         "ghost_cta_KCETby"
       ],
-      "custom_css": [
-        "/* Make last word of banner heading yellow */.banner__heading .last-word {color: #ffd700;}"
-      ],
+      "custom_css": [],
       "name": "Sale Hero",
       "settings": {
         "image": "shopify://shop_images/Landing_Page.jpg",
