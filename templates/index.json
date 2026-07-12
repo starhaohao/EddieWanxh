@@ -384,7 +384,7 @@
     "homepage-brand-story": {
       "type": "sale-brand-story",
       "settings": {
-        "bg_color": "#ffffff",
+        "bg_color": "#000000",
         "border_color": "#000000",
         "eyebrow_color": "#868233",
         "title_color": "#fff200",
