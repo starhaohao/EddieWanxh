@@ -9,6 +9,28 @@
  */
 {
   "sections": {
+    "gateway_hero": {
+      "type": "gateway-hero",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "micro_label": "FINAL STOCK", "title": "Y TRANSDRY® BRIEF", "price": "FROM $15.99 SGD", "cta_text": "SHOP THE DESIGN" } },
+        "slide_2": { "type": "slide", "settings": { "micro_label": "EVERYDAY", "title": "V COTTON SPANDEX BRIEF", "price": "FROM $11.99 SGD", "cta_text": "SHOP THE DESIGN" } },
+        "slide_3": { "type": "slide", "settings": { "micro_label": "SHAPE", "title": "BOXER TRUNKS", "price": "FROM $12.99 SGD", "cta_text": "SHOP BOXER TRUNKS" } },
+        "slide_4": { "type": "slide", "settings": { "micro_label": "LAYERS", "title": "ESSENTIALS", "price": "TOPS COLLECTION", "cta_text": "SHOP TOPS" } },
+        "slide_5": { "type": "slide", "settings": { "micro_label": "FINAL STOCK", "title": "XL / 2XL CLEARANCE", "price": "WHILE STOCK LASTS", "cta_text": "SHOP CLEARANCE" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3", "slide_4", "slide_5"],
+      "settings": {
+        "autoplay": true,
+        "autoplay_interval": 5000,
+        "aria_label": "Campaign highlights",
+        "cta_text": "SHOP THE DESIGN",
+        "left_label_1": "UNDERWEAR",
+        "left_label_2": "TOPS",
+        "right_label_1": "BUNDLES",
+        "right_label_2": "FINAL SALE",
+        "rail_bg": "#0F0F0F"
+      }
+    },
     "sale_hero_8Vwb7N": {
       "type": "sale-hero",
       "blocks": {
@@ -429,6 +451,7 @@
     }
   },
   "order": [
+    "gateway_hero",
     "sale_hero_8Vwb7N",
     "landing_edm_signup_39bzd6",
     "features-strip",
