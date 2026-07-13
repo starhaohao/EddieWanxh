@@ -17,15 +17,20 @@
   assign interval = section.settings.autoplay_interval | default: 5000
   assign cta_default = section.settings.cta_text | default: 'SHOP THE DESIGN'
   assign uid = 'GatewayHero-' | append: section.id
+  assign image_ratio = section.settings.image_ratio | default: '1080 / 1350'
+  assign is_fill = false
+  if image_ratio == 'viewport'
+    assign is_fill = true
+  endif
 -%}
 
 <section
-  class="gh"
+  class="gh{% if is_fill %} gh--fill{% endif %}"
   id="{{ uid }}"
   data-gh-root
   data-gh-autoplay="{{ autoplay }}"
   data-gh-interval="{{ interval }}"
-  style="--gh-rail-bg: {{ rail_bg }};"
+  style="--gh-rail-bg: {{ rail_bg }};{% unless is_fill %} --gh-ratio: {{ image_ratio }};{% endunless %}"
   aria-roledescription="carousel"
   aria-label="{{ section.settings.aria_label | default: 'Campaign highlights' | escape }}"
 >
@@ -139,6 +144,10 @@
   #{{ uid }} .gh__inner {
     display: grid;
     grid-template-columns: var(--gh-rail) 1fr var(--gh-rail);
+    align-items: stretch;
+  }
+  /* Full-viewport option: height drives the layout instead of the ratio. */
+  #{{ uid }}.gh--fill .gh__inner {
     height: calc(100vh - var(--header-height, 80px));
     height: calc(100svh - var(--header-height, 80px));
     min-height: 480px;
@@ -201,6 +210,14 @@
     position: relative;
     overflow: hidden;
     background: var(--gh-rail-bg, #0F0F0F);
+    /* Central image locked to the chosen ratio (default 1080x1350 = 4:5),
+       never taller than one viewport. object-fit:cover handles overflow. */
+    aspect-ratio: var(--gh-ratio, 1080 / 1350);
+    max-height: calc(100svh - var(--header-height, 80px));
+  }
+  #{{ uid }}.gh--fill .gh__stage {
+    aspect-ratio: auto;
+    max-height: none;
   }
   #{{ uid }} .gh__track {
     list-style: none;
@@ -381,6 +398,15 @@
   "tag": "section",
   "class": "gateway-hero-section",
   "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "1080 / 1350", "options": [
+      { "value": "1080 / 1350", "label": "Portrait 1080 x 1350 (4:5)" },
+      { "value": "2 / 3", "label": "Portrait 2:3" },
+      { "value": "3 / 4", "label": "Portrait 3:4" },
+      { "value": "1 / 1", "label": "Square 1:1" },
+      { "value": "viewport", "label": "Full viewport height" }
+    ] },
+
     { "type": "header", "content": "Behaviour" },
     { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
     { "type": "range", "id": "autoplay_interval", "min": 3000, "max": 8000, "step": 500, "unit": "ms", "label": "Autoplay interval", "default": 5000 },
