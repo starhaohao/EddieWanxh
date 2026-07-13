@@ -504,7 +504,6 @@
         "slide_4",
         "slide_5"
       ],
-      "disabled": true,
       "settings": {
         "image_ratio": "viewport",
         "image_ratio_desktop": "3 / 2",
@@ -521,7 +520,7 @@
         "right_label_2": "FINAL SALE",
         "right_link_2": "shopify://collections/additional-15-off",
         "slide_metaobjects": [],
-        "rail_bg": "#DFD000"
+        "rail_bg": "#000000"
       }
     }
   },
