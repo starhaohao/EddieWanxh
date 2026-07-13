@@ -45,77 +45,73 @@
     {%- comment -%} CENTRAL STAGE {%- endcomment -%}
     <div class="gh__stage" data-gh-stage role="group" aria-label="Campaign slides">
       <ul class="gh__track" id="{{ uid }}-track" data-gh-track>
-        {%- for block in section.blocks -%}
-          {%- if block.type != 'slide' -%}{%- continue -%}{%- endif -%}
-          {%- liquid
-            assign img = block.settings.image
-            assign focal = img.presentation.focal_point | default: 'center'
-            assign slide_link = block.settings.link | default: '#'
-            assign cta_text = block.settings.cta_text | default: cta_default
-          -%}
-          <li
-            class="gh__slide"
-            data-gh-slide
-            {{ block.shopify_attributes }}
-            role="group"
-            aria-roledescription="slide"
-            aria-label="{{ forloop.index }} of {{ section.blocks.size }}"
-            {% unless forloop.first %}aria-hidden="true"{% endunless %}
-          >
-            <a class="gh__slide-link" href="{{ slide_link }}" {% unless forloop.first %}tabindex="-1"{% endunless %}>
-              {%- if img != blank -%}
-                <img
-                  class="gh__img"
-                  src="{{ img | image_url: width: 900 }}"
-                  srcset="{{ img | image_url: width: 480 }} 480w, {{ img | image_url: width: 720 }} 720w, {{ img | image_url: width: 900 }} 900w, {{ img | image_url: width: 1280 }} 1280w, {{ img | image_url: width: 1600 }} 1600w"
-                  sizes="(min-width: 990px) calc(100vw - 88px), calc(100vw - 88px)"
-                  width="{{ img.width }}"
-                  height="{{ img.height }}"
-                  alt="{{ img.alt | default: block.settings.title | escape }}"
-                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                  {% if forloop.first %}fetchpriority="high"{% else %}fetchpriority="low"{% endif %}
-                  decoding="async"
-                  style="object-position: {{ focal }};"
-                >
-              {%- else -%}
-                <div class="gh__img gh__img--placeholder">{{ 'lifestyle-1' | placeholder_svg_tag: 'gh__placeholder-svg' }}</div>
-              {%- endif -%}
+        {%- liquid
+          # Metaobject-sourced slides render first, then manual slide blocks.
+          assign mo_slides = section.settings.slide_metaobjects.value
+          assign mo_count = 0
+          if mo_slides != blank
+            assign mo_count = mo_slides.size
+          endif
+          assign slide_blocks = section.blocks | where: 'type', 'slide'
+          assign total_slides = mo_count | plus: slide_blocks.size
+          assign gi = 0
+        -%}
 
-              <div class="gh__caption">
-                {%- if block.settings.micro_label != blank -%}
-                  <p class="gh__micro">{{ block.settings.micro_label }}</p>
-                {%- endif -%}
-                {%- if block.settings.title != blank -%}
-                  <p class="gh__title h3">{{ block.settings.title }}</p>
-                {%- endif -%}
-                {%- if block.settings.price != blank -%}
-                  <p class="gh__price">{{ block.settings.price }}</p>
-                {%- endif -%}
-                {%- if cta_text != blank -%}
-                  <span class="gh__cta btn btn--solid btn--primary">
-                    {{ cta_text }}
-                    <svg viewBox="0 0 14 14" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
-                  </span>
-                {%- endif -%}
-              </div>
-            </a>
-          </li>
+        {%- if mo_slides != blank -%}
+          {%- for mo in mo_slides -%}
+            {%- liquid
+              assign mo_img = mo.image.value
+              assign mo_img = mo_img.preview_image | default: mo_img
+              assign mo_focal = mo_img.presentation.focal_point | default: 'center'
+
+              assign mo_link_raw = mo.link.value
+              assign mo_link = mo_link_raw.url | default: mo_link_raw | default: '#'
+
+              assign mo_micro = mo.micro_label.value | default: mo.kicker.value
+              assign mo_title = mo.title.value | default: mo.name.value | default: mo.system.handle
+              assign mo_price = mo.price.value | default: mo.price_line.value
+              assign mo_cta = mo.cta_text.value | default: cta_default
+
+              assign gh_first = false
+              if gi == 0
+                assign gh_first = true
+              endif
+              assign gh_pos = gi | plus: 1
+            -%}
+            {%- render 'gateway-hero-slide',
+              image: mo_img, focal: mo_focal, link: mo_link,
+              micro: mo_micro, title: mo_title, price: mo_price, cta: mo_cta,
+              is_first: gh_first, position: gh_pos, total: total_slides -%}
+            {%- assign gi = gi | plus: 1 -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- for block in slide_blocks -%}
+          {%- liquid
+            assign b_img = block.settings.image
+            assign b_focal = b_img.presentation.focal_point | default: 'center'
+            assign b_cta = block.settings.cta_text | default: cta_default
+
+            assign gh_first = false
+            if gi == 0
+              assign gh_first = true
+            endif
+            assign gh_pos = gi | plus: 1
+          -%}
+          {%- render 'gateway-hero-slide',
+            image: b_img, focal: b_focal, link: block.settings.link,
+            micro: block.settings.micro_label, title: block.settings.title,
+            price: block.settings.price, cta: b_cta,
+            is_first: gh_first, position: gh_pos, total: total_slides,
+            attrs: block.shopify_attributes -%}
+          {%- assign gi = gi | plus: 1 -%}
         {%- endfor -%}
 
-        {%- if section.blocks.size == 0 -%}
-          <li class="gh__slide" data-gh-slide>
-            <div class="gh__slide-link">
-              <div class="gh__img gh__img--placeholder">{{ 'lifestyle-2' | placeholder_svg_tag: 'gh__placeholder-svg' }}</div>
-              <div class="gh__caption">
-                <p class="gh__micro">FINAL STOCK</p>
-                <p class="gh__title h3">Y TRANSDRY® BRIEF</p>
-                <p class="gh__price">FROM $15.99 SGD</p>
-                <span class="gh__cta btn btn--solid btn--primary">SHOP THE DESIGN
-                  <svg viewBox="0 0 14 14" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
-                </span>
-              </div>
-            </div>
-          </li>
+        {%- if total_slides == 0 -%}
+          {%- render 'gateway-hero-slide',
+            image: blank, link: '#', micro: 'FINAL STOCK',
+            title: 'Y TRANSDRY® BRIEF', price: 'FROM $15.99 SGD',
+            cta: 'SHOP THE DESIGN', is_first: true, position: 1, total: 1 -%}
         {%- endif -%}
       </ul>
     </div>
@@ -402,6 +398,10 @@
     { "type": "url", "id": "right_link_1", "label": "Link 1" },
     { "type": "text", "id": "right_label_2", "label": "Label 2", "default": "FINAL SALE" },
     { "type": "url", "id": "right_link_2", "label": "Link 2" },
+
+    { "type": "header", "content": "Slides from metaobjects (optional)" },
+    { "type": "paragraph", "content": "Pick entries from a 'Gateway slide' metaobject to auto-populate slides. Metaobject slides render before any manual Slide blocks below. Create a metaobject definition of type gateway_slide with fields: image (image), title (single line text), micro_label (single line text), price (single line text), link (URL, or a product/collection reference), cta_text (single line text)." },
+    { "type": "metaobject_list", "id": "slide_metaobjects", "label": "Metaobject slides", "metaobject_type": "gateway_slide" },
 
     { "type": "header", "content": "Colours" },
     { "type": "color", "id": "rail_bg", "label": "Rail background", "default": "#0F0F0F" }
