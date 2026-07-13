@@ -5,13 +5,13 @@
 
 /* Design tokens */
 .mpo {
-  --mpo-bg:         #212529;
+  --mpo-bg:         #ffffffff;
   --mpo-raised:     #2c3035;
-  --mpo-border:     rgba(255, 255, 255, 0.12);
-  --mpo-text:       #fff;
+  --mpo-border:     rgba(0, 0, 0, 0.12);
+  --mpo-text:       #000000ff;
   --mpo-muted:      rgba(255, 255, 255, 0.45);
-  --mpo-crimson:    #923531;
-  --mpo-crimson-h:  #7d2e2a;
+  --mpo-crimson:    #fbff0fff;
+  --mpo-crimson-h:  #e8e8e8ff;
   --mpo-mono:       'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .mpo__tier:last-child       { border-bottom: none; }
-.mpo__tier:hover:not(.is-on) { background: rgba(255, 255, 255, 0.02); }
+.mpo__tier:hover:not(.is-on) { background: rgba(0, 0, 0, 0.02); }
 
 .mpo__tier.is-on {
   background:       var(--mpo-raised);
