@@ -52,6 +52,51 @@ https://flickity.metafizzy.co
   left: 0;
 }
 
+/* 1. Remove the box around Final Sale and make the font red */
+.product__badge, 
+.badge, 
+.product-badge {
+  background: transparent !important;
+  border: none !important;
+  color: red !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 2. Add a strikethrough to the before price & keep prices on the same row */
+.product__price, 
+.price,
+.price__container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.product__price--compare, 
+.price-item--regular, 
+.compare-at-price {
+  text-decoration: line-through !important;
+}
+
+/* 3. Put Quantity and Add to Cart on separate rows */
+.product-form__controls, 
+.product-form__buttons, 
+.product__form-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+  width: 100% !important;
+}
+
+.product-form__quantity, 
+.quantity-wrapper,
+.product__quantity {
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+
 /* draggable */
 .flickity-enabled.is-draggable {
   -webkit-tap-highlight-color: transparent;
