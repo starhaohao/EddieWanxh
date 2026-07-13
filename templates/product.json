@@ -28,10 +28,17 @@
             "padding_bottom": 0
           }
         },
+        "description_QwjMiM": {
+          "type": "description",
+          "settings": {
+            "show_read_more": true,
+            "padding_bottom": 16
+          }
+        },
         "tab_richtext": {
           "type": "tab_richtext",
           "settings": {
-            "show_description": true,
+            "show_description": false,
             "show_read_more": true,
             "title_1": "Care",
             "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
@@ -114,6 +121,7 @@
       "block_order": [
         "title",
         "price",
+        "description_QwjMiM",
         "tab_richtext",
         "variants",
         "upsell",
