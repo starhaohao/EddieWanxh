@@ -24,28 +24,6 @@
     }
   {%- endstyle -%}
 
-  {%- style -%}
-    /* Top collection picture: half height, full-bleed edge-to-edge (no
-       side gutter), no gaps between cards, and no vertical section gap. */
-    #Subcollections--{{ section.id }} {
-      --PT: 0px;
-      --PB: 0px;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    #Subcollections--{{ section.id }} .grid-outer {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    #Subcollections--{{ section.id }} .grid {
-      --gap: 0px;
-      gap: 0 !important;
-    }
-    #Subcollections--{{ section.id }} .subcollection__item {
-      height: 150px !important;
-    }
-  {%- endstyle -%}
-
 {%- render 'stylesheet', name: 'subcollections.css', inline: true -%}
 
   <section

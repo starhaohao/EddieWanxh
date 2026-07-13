@@ -33,23 +33,6 @@
     --PT: {{ section.settings.padding_top }}px;
     --PB: {{ section.settings.padding_bottom }}px;
   }
-
-  /* Recently viewed: no vertical section gap, images full-bleed, but keep
-     the heading text padded. */
-  #RecentProducts--{{ section.id }} {
-    --PT: 0px;
-    --PB: 0px;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  #RecentProducts--{{ section.id }} .grid-outer {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  #RecentProducts--{{ section.id }} .grid__heading-holder {
-    padding-left: var(--outer);
-    padding-right: var(--outer);
-  }
 {%- endstyle -%}
 
 <script src="{{ 'related-products.js' | asset_url }}" defer="defer"></script>
