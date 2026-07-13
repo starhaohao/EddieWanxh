@@ -18,6 +18,10 @@
   assign cta_default = section.settings.cta_text | default: 'SHOP THE DESIGN'
   assign uid = 'GatewayHero-' | append: section.id
   assign image_ratio = section.settings.image_ratio | default: '1080 / 1350'
+  assign image_ratio_desktop = section.settings.image_ratio_desktop | default: '16 / 9'
+  if image_ratio_desktop == 'match'
+    assign image_ratio_desktop = image_ratio
+  endif
   assign is_fill = false
   if image_ratio == 'viewport'
     assign is_fill = true
@@ -30,7 +34,7 @@
   data-gh-root
   data-gh-autoplay="{{ autoplay }}"
   data-gh-interval="{{ interval }}"
-  style="--gh-rail-bg: {{ rail_bg }};{% unless is_fill %} --gh-ratio: {{ image_ratio }};{% endunless %}"
+  style="--gh-rail-bg: {{ rail_bg }};{% unless is_fill %} --gh-ratio: {{ image_ratio }}; --gh-ratio-desktop: {{ image_ratio_desktop }};{% endunless %}"
   aria-roledescription="carousel"
   aria-label="{{ section.settings.aria_label | default: 'Campaign highlights' | escape }}"
 >
@@ -309,6 +313,9 @@
   @media only screen and (min-width: 990px) {
     #{{ uid }} .gh { --gh-rail: 52px; }
     #{{ uid }} .gh__rail-label { font-size: 11px; }
+    /* Landscape on desktop (default 16:9); portrait stays on mobile. */
+    #{{ uid }} .gh__stage { aspect-ratio: var(--gh-ratio-desktop, 16 / 9); }
+    #{{ uid }}.gh--fill .gh__stage { aspect-ratio: auto; }
   }
 </style>
 
@@ -399,12 +406,20 @@
   "class": "gateway-hero-section",
   "settings": [
     { "type": "header", "content": "Layout" },
-    { "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "1080 / 1350", "options": [
+    { "type": "select", "id": "image_ratio", "label": "Image ratio (mobile)", "default": "1080 / 1350", "options": [
       { "value": "1080 / 1350", "label": "Portrait 1080 x 1350 (4:5)" },
       { "value": "2 / 3", "label": "Portrait 2:3" },
       { "value": "3 / 4", "label": "Portrait 3:4" },
       { "value": "1 / 1", "label": "Square 1:1" },
       { "value": "viewport", "label": "Full viewport height" }
+    ] },
+    { "type": "select", "id": "image_ratio_desktop", "label": "Image ratio (desktop)", "default": "16 / 9", "options": [
+      { "value": "16 / 9", "label": "Landscape 16:9" },
+      { "value": "3 / 2", "label": "Landscape 3:2" },
+      { "value": "2 / 1", "label": "Landscape 2:1" },
+      { "value": "4 / 3", "label": "Landscape 4:3" },
+      { "value": "1 / 1", "label": "Square 1:1" },
+      { "value": "match", "label": "Match mobile ratio" }
     ] },
 
     { "type": "header", "content": "Behaviour" },
