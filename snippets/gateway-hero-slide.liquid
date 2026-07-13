@@ -14,10 +14,15 @@
   - position  {Int}     1-based index (for aria-label)
   - total     {Int}     total slide count (for aria-label)
   - attrs     {String}  optional block.shopify_attributes
+  - micro_as_badge {Boolean} render the micro label as a bordered badge chip
 {%- endcomment -%}
 {%- liquid
   assign focal = focal | default: 'center'
   assign link = link | default: '#'
+  assign micro_class = 'gh__micro'
+  if micro_as_badge
+    assign micro_class = 'gh__micro gh__micro--badge'
+  endif
 -%}
 <li
   class="gh__slide"
@@ -49,7 +54,7 @@
 
     <div class="gh__caption">
       {%- if micro != blank -%}
-        <p class="gh__micro">{{ micro }}</p>
+        <p class="{{ micro_class }}">{{ micro }}</p>
       {%- endif -%}
       {%- if title != blank -%}
         <p class="gh__title h3">{{ title }}</p>

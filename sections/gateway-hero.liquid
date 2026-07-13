@@ -26,6 +26,43 @@
   if image_ratio == 'viewport'
     assign is_fill = true
   endif
+
+  assign cta_bg = section.settings.cta_bg | default: '#FFE600'
+  assign cta_text_color = section.settings.cta_text_color | default: '#000000'
+  assign cta_size = section.settings.cta_size | default: 'compact'
+  # compact = the halved-height treatment (22px min-height, 4px/16px padding)
+  assign cta_fs = 12
+  assign cta_py = 4
+  assign cta_px = 16
+  assign cta_height = 22
+  case cta_size
+    when 'compact'
+      assign cta_fs = 12
+      assign cta_py = 4
+      assign cta_px = 16
+      assign cta_height = 22
+    when 'small'
+      assign cta_fs = 11
+      assign cta_py = 4
+      assign cta_px = 14
+      assign cta_height = 22
+    when 'medium'
+      assign cta_fs = 12
+      assign cta_py = 8
+      assign cta_px = 16
+      assign cta_height = 32
+    when 'large'
+      assign cta_fs = 14
+      assign cta_py = 12
+      assign cta_px = 22
+      assign cta_height = 44
+  endcase
+
+  assign micro_as_badge = section.settings.micro_as_badge
+  assign badge_height = section.settings.badge_height | default: 20
+  assign badge_bg = section.settings.badge_bg | default: 'rgba(0,0,0,0)'
+  assign badge_border = section.settings.badge_border | default: '#ffffff'
+  assign badge_text = section.settings.badge_text | default: '#ffffff'
 -%}
 
 <section
@@ -34,7 +71,20 @@
   data-gh-root
   data-gh-autoplay="{{ autoplay }}"
   data-gh-interval="{{ interval }}"
-  style="--gh-rail-bg: {{ rail_bg }};{% unless is_fill %} --gh-ratio: {{ image_ratio }}; --gh-ratio-desktop: {{ image_ratio_desktop }};{% endunless %}"
+  style="
+    --gh-rail-bg: {{ rail_bg }};
+    {%- unless is_fill %} --gh-ratio: {{ image_ratio }}; --gh-ratio-desktop: {{ image_ratio_desktop }};{% endunless %}
+    --gh-cta-bg: {{ cta_bg }};
+    --gh-cta-text: {{ cta_text_color }};
+    --gh-cta-fs: {{ cta_fs }}px;
+    --gh-cta-py: {{ cta_py }}px;
+    --gh-cta-px: {{ cta_px }}px;
+    --gh-cta-height: {{ cta_height }}px;
+    --gh-badge-height: {{ badge_height }}px;
+    --gh-badge-bg: {{ badge_bg }};
+    --gh-badge-border: {{ badge_border }};
+    --gh-badge-text: {{ badge_text }};
+  "
   aria-roledescription="carousel"
   aria-label="{{ section.settings.aria_label | default: 'Campaign highlights' | escape }}"
 >
@@ -90,6 +140,7 @@
             {%- render 'gateway-hero-slide',
               image: mo_img, focal: mo_focal, link: mo_link,
               micro: mo_micro, title: mo_title, price: mo_price, cta: mo_cta,
+              micro_as_badge: micro_as_badge,
               is_first: gh_first, position: gh_pos, total: total_slides -%}
             {%- assign gi = gi | plus: 1 -%}
           {%- endfor -%}
@@ -111,6 +162,7 @@
             image: b_img, focal: b_focal, link: block.settings.link,
             micro: block.settings.micro_label, title: block.settings.title,
             price: block.settings.price, cta: b_cta,
+            micro_as_badge: micro_as_badge,
             is_first: gh_first, position: gh_pos, total: total_slides,
             attrs: block.shopify_attributes -%}
           {%- assign gi = gi | plus: 1 -%}
@@ -120,7 +172,8 @@
           {%- render 'gateway-hero-slide',
             image: blank, link: '#', micro: 'FINAL STOCK',
             title: 'Y TRANSDRY® BRIEF', price: 'FROM $15.99 SGD',
-            cta: 'SHOP THE DESIGN', is_first: true, position: 1, total: 1 -%}
+            cta: 'SHOP THE DESIGN', micro_as_badge: micro_as_badge,
+            is_first: true, position: 1, total: 1 -%}
         {%- endif -%}
       </ul>
     </div>
@@ -280,6 +333,18 @@
     line-height: 1;
     opacity: 0.92;
   }
+  /* Badge treatment for the micro label: bordered chip, adjustable height. */
+  #{{ uid }} .gh__micro--badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--gh-badge-height, 20px);
+    padding: 0 8px;
+    border: 1px solid var(--gh-badge-border, #ffffff);
+    background-color: var(--gh-badge-bg, transparent);
+    color: var(--gh-badge-text, #ffffff);
+    opacity: 1;
+  }
   #{{ uid }} .gh__title {
     margin: 0;
     text-transform: uppercase;
@@ -300,10 +365,18 @@
     gap: 8px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    font-size: 12px;
     line-height: 1;
-    padding: 12px 16px;
-    min-height: 44px;
+    box-shadow: none !important;
+    font-size: var(--gh-cta-fs, 12px);
+    padding: var(--gh-cta-py, 4px) var(--gh-cta-px, 16px);
+    min-height: var(--gh-cta-height, 22px);
+    background-color: var(--gh-cta-bg, #FFE600) !important;
+    color: var(--gh-cta-text, #000000) !important;
+    border-color: var(--gh-cta-bg, #FFE600) !important;
+  }
+  #{{ uid }} .gh__cta.btn::after {
+    background-color: var(--gh-cta-bg, #FFE600) !important;
+    opacity: 1 !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -445,7 +518,24 @@
     { "type": "metaobject_list", "id": "slide_metaobjects", "label": "Metaobject slides", "metaobject_type": "gateway_slide" },
 
     { "type": "header", "content": "Colours" },
-    { "type": "color", "id": "rail_bg", "label": "Rail background", "default": "#0F0F0F" }
+    { "type": "color", "id": "rail_bg", "label": "Rail background", "default": "#0F0F0F" },
+
+    { "type": "header", "content": "CTA button" },
+    { "type": "color", "id": "cta_bg", "label": "Button background", "default": "#FFE600" },
+    { "type": "color", "id": "cta_text_color", "label": "Button text", "default": "#000000" },
+    { "type": "select", "id": "cta_size", "label": "Button size", "default": "compact", "options": [
+      { "value": "small", "label": "Small (22px)" },
+      { "value": "compact", "label": "Compact (22px, tighter width)" },
+      { "value": "medium", "label": "Medium (32px)" },
+      { "value": "large", "label": "Large (44px)" }
+    ] },
+
+    { "type": "header", "content": "Micro label / badge" },
+    { "type": "checkbox", "id": "micro_as_badge", "label": "Style micro label as a bordered badge", "default": true },
+    { "type": "range", "id": "badge_height", "min": 14, "max": 40, "step": 1, "unit": "px", "label": "Badge height", "default": 20 },
+    { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "rgba(0,0,0,0)", "alpha": true },
+    { "type": "color", "id": "badge_border", "label": "Badge border", "default": "#ffffff" },
+    { "type": "color", "id": "badge_text", "label": "Badge text", "default": "#ffffff" }
   ],
   "blocks": [
     {
