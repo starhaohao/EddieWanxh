@@ -97,6 +97,44 @@ https://flickity.metafizzy.co
   margin-bottom: 10px;
 }
 
+/* 1. Add middle line (strikethrough) to the $73.99 compare price */
+.compare-at-price, 
+.price__compare, 
+.product-price__compare, 
+[data-compare-price] {
+  text-decoration: line-through !important;
+}
+
+/* 2. Remove the box around Final sale and the question mark */
+.product__badge, 
+.badge, 
+.product-badge, 
+.badge--sale {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* 3. Force Quantity and Add to Cart onto 2 separate rows */
+.product-form__buttons, 
+.product-form__controls, 
+.product-form__submit-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  gap: 15px !important;
+}
+
+.product-form__quantity, 
+.quantity,
+.quantity-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-bottom: 5px !important;
+}
+
 /* draggable */
 .flickity-enabled.is-draggable {
   -webkit-tap-highlight-color: transparent;
