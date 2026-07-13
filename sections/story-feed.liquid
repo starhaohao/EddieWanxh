@@ -23,7 +23,7 @@
 
   .journal__cards { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 0; row-gap: 0; align-items: stretch; }
   @media (min-width: 900px) { .journal__cards { grid-template-columns: repeat(4, 1fr); } }
-  @media (max-width: 749px) { .journal__cards { row-gap: clamp(24px, 5vw, 34px); } }
+  @media (max-width: 749px) { .journal__cards { row-gap: 0; } }
 
   .jcard { position: relative; display: flex; flex-direction: column; text-decoration: none; border-right: 1px solid #0f1623; }
   .jcard:nth-child(2n) { border-right: none; }
