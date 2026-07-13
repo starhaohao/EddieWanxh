@@ -225,7 +225,7 @@
         "heading_font_size": "heading-x-large",
         "text": "",
         "text_font_size": "body-x-small",
-        "layout": "inline",
+        "layout": "stacked",
         "layout_desktop": "slider",
         "product_limit": 5,
         "grid": 4,
