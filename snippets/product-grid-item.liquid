@@ -956,4 +956,23 @@
       </div>
     </div>
   </grid-item>
+
+  {%- comment -%}
+    Match the product-page media badges: same halved height, 1px black
+    border, centered label. Keeps the theme's neon badge background/text.
+  {%- endcomment -%}
+  <style>
+    .product-item .badge-box {
+      --padding-vertical: 0.22rem;
+      padding-top: 0.22rem;
+      padding-bottom: 0.22rem;
+      line-height: 1;
+      border: 1px solid #000;
+      color: #000;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  </style>
 {%- endunless -%}

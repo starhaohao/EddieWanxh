@@ -364,13 +364,34 @@
     /* Sale badge inset per spec (keeps the brand neon pill styling) */
     #MainProduct--{{ section.id }} .product__media-badges { top: 24px; left: 24px; }
 
-    /* Media badges: halve the pill height (thinner than the base badge-box).
-       Border thickness is halved to 1px inline on the spans themselves. */
+    /* Media badges: halve the pill height (thinner than the base badge-box)
+       and center the label both axes. Border thinned to 1px inline. Same
+       padding/border used on the collection card badges so they match. */
     #MainProduct--{{ section.id }} .product__media-badge {
       --padding-vertical: 0.22rem;
       padding-top: 0.22rem;
       padding-bottom: 0.22rem;
       line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Before + after price on one row (was stacking on mobile). */
+    #MainProduct--{{ section.id }} .price__sale {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    /* Halve the empty mobile thumbnail-strip gap before the vendor/title. */
+    @media only screen and (max-width: 749px) {
+      #MainProduct--{{ section.id }} .product__thumbs {
+        min-height: 42px;
+        margin: 5px 0;
+      }
     }
 
     /* Below desktop (<=989px): stack the page and make the media full-bleed
