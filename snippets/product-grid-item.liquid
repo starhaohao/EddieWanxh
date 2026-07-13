@@ -974,5 +974,35 @@
       justify-content: center;
       text-align: center;
     }
+
+    /* Center the title, material line, and price as one stacked, centered
+       block so the price lines up under the design name. */
+    .product-item__info {
+      text-align: center;
+    }
+    .product-item__price__holder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-item__price,
+    .product-item__price .price {
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Material line under the design name: the theme paints this with a
+       transparent cutline color (#A8795100 = alpha 0), so force a visible
+       color. Single products show the fabric; bundles show included names. */
+    .product-item__material,
+    .product-item__cutline {
+      color: inherit !important;
+      opacity: 0.65;
+    }
+
+    /* Give product rows ~3x the vertical breathing room (row gap only). */
+    .grid:has(.grid-item.product-item) {
+      row-gap: calc(var(--gap, 16px) * 3);
+    }
   </style>
 {%- endunless -%}
