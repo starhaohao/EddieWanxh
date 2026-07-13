@@ -430,6 +430,16 @@
     "gateway_hero": {
       "type": "gateway-hero",
       "blocks": {
+        "slide_kMhbWX": {
+          "type": "slide",
+          "settings": {
+            "micro_label": "FINAL STOCK",
+            "title": "Y TRANSDRY® BRIEF",
+            "price": "FROM $15.99 SGD",
+            "link": "",
+            "cta_text": ""
+          }
+        },
         "slide_1": {
           "type": "slide",
           "settings": {
@@ -486,12 +496,14 @@
         }
       },
       "block_order": [
+        "slide_kMhbWX",
         "slide_1",
         "slide_2",
         "slide_3",
         "slide_4",
         "slide_5"
       ],
+      "disabled": true,
       "settings": {
         "image_ratio": "viewport",
         "image_ratio_desktop": "3 / 2",
@@ -508,7 +520,7 @@
         "right_label_2": "FINAL SALE",
         "right_link_2": "shopify://collections/additional-15-off",
         "slide_metaobjects": [],
-        "rail_bg": "#0f0f0f"
+        "rail_bg": "#DFD000"
       }
     }
   },
