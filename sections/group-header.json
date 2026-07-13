@@ -73,24 +73,6 @@
             "padding_bottom": 14
           }
         },
-        "divider-2": {
-          "type": "divider",
-          "settings": {
-            "show_line": true,
-            "padding_bottom": 8
-          }
-        },
-        "menu_columns_Ag8FFi": {
-          "type": "menu-columns",
-          "settings": {
-            "mobile_menu_linklist": "customer-account-main-menu",
-            "text_font_size": "body-large",
-            "highlight_item": "Sale",
-            "highlight_item_color": "#d02e2e",
-            "padding": true,
-            "padding_bottom": 14
-          }
-        },
         "divider-3": {
           "type": "divider",
           "settings": {
@@ -146,6 +128,13 @@
             "padding_bottom": 14
           }
         },
+        "divider-2": {
+          "type": "divider",
+          "settings": {
+            "show_line": true,
+            "padding_bottom": 8
+          }
+        },
         "menu_tdWJdx": {
           "type": "menu",
           "settings": {
@@ -157,11 +146,27 @@
             "padding_bottom": 14
           }
         },
-        "socials": {
-          "type": "socials",
+        "menu_columns_Ag8FFi": {
+          "type": "menu-columns",
           "settings": {
-            "width": "half",
-            "padding_bottom": 50
+            "mobile_menu_linklist": "customer-account-main-menu",
+            "text_font_size": "body-large",
+            "highlight_item": "Sale",
+            "highlight_item_color": "#d02e2e",
+            "padding": true,
+            "padding_bottom": 14
+          }
+        },
+        "button_78QqWh": {
+          "type": "button",
+          "settings": {
+            "button_text": "Story Salon",
+            "button_url": "shopify://pages/story-salon",
+            "button_type": "btn--white",
+            "button_size": "btn--large",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "padding_bottom": 14
           }
         },
         "localization": {
@@ -177,20 +182,28 @@
             "pin_to_bottom": true,
             "padding_bottom": 14
           }
+        },
+        "socials": {
+          "type": "socials",
+          "settings": {
+            "width": "half",
+            "padding_bottom": 50
+          }
         }
       },
       "block_order": [
         "text_Xk6mkM",
-        "divider-2",
-        "menu_columns_Ag8FFi",
         "divider-3",
         "collection_cecGL6",
         "collection_r3LyAC",
         "collection_WAeEXg",
         "collection_6TG747",
+        "divider-2",
         "menu_tdWJdx",
-        "socials",
-        "localization"
+        "menu_columns_Ag8FFi",
+        "button_78QqWh",
+        "localization",
+        "socials"
       ],
       "settings": {
         "logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
