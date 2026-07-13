@@ -8,7 +8,7 @@
 {%- liquid
   assign base_price = product.selected_or_first_available_variant.price
   assign t1_qty   = section.settings.tier1_qty
-  assign t1_disc  = section.settings.tier1_discount
+  assign _t1_disc = section.settings.tier1_discount
   assign t2_qty   = section.settings.tier2_qty
   assign t2_disc  = section.settings.tier2_discount
   assign t3_qty   = section.settings.tier3_qty
@@ -23,7 +23,7 @@
 
     {%- comment -%} ── TIER 1 ── {%- endcomment -%}
     {%- assign t1_total  = base_price | times: t1_qty -%}
-    {%- assign t1_saving = 0 -%}
+    {%- assign _t1_saving = 0 -%}
     <label class="mpo__tier{% if section.settings.default_tier == 1 %} is-on{% endif %}"
            data-qty="{{ t1_qty }}"
            data-total="{{ t1_total | money }}"
@@ -455,6 +455,8 @@
       "name": "Multi-Pack Offer"
     }
   ],
-  "templates": ["product"]
+  "enabled_on": {
+    "templates": ["product"]
+  }
 }
 {% endschema %}
