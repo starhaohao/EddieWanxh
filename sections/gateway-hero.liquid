@@ -1,0 +1,435 @@
+{%- comment -%}
+  Gateway Hero — mobile-first editorial hero carousel with fixed black side
+  rails, adapted to the TRIIIPLE theme. Prefix: .gh
+
+  - Three-column layout: left rail (44px) / campaign image / right rail (44px).
+  - Rails carry rotated white category labels + prev/next chevrons and stay
+    fixed while the central image slides.
+  - Each slide links to its own product/collection with an HTML caption + CTA.
+  - CTA reuses the theme's primary button (.btn--solid.btn--primary), squared.
+  - Vanilla JS carousel: swipe, chevrons, keyboard, autoplay w/ pause on
+    interaction, honours prefers-reduced-motion.
+{%- endcomment -%}
+
+{%- liquid
+  assign rail_bg = section.settings.rail_bg | default: '#0F0F0F'
+  assign autoplay = section.settings.autoplay
+  assign interval = section.settings.autoplay_interval | default: 5000
+  assign cta_default = section.settings.cta_text | default: 'SHOP THE DESIGN'
+  assign uid = 'GatewayHero-' | append: section.id
+-%}
+
+<section
+  class="gh"
+  id="{{ uid }}"
+  data-gh-root
+  data-gh-autoplay="{{ autoplay }}"
+  data-gh-interval="{{ interval }}"
+  style="--gh-rail-bg: {{ rail_bg }};"
+  aria-roledescription="carousel"
+  aria-label="{{ section.settings.aria_label | default: 'Campaign highlights' | escape }}"
+>
+  <div class="gh__inner">
+
+    {%- comment -%} LEFT RAIL — category links + previous chevron {%- endcomment -%}
+    <nav class="gh__rail gh__rail--left" aria-label="Left navigation">
+      <div class="gh__rail-links gh__rail-links--flip">
+        <a class="gh__rail-label" href="{{ section.settings.left_link_1 | default: '#' }}">{{ section.settings.left_label_1 | default: 'UNDERWEAR' }}</a>
+        <a class="gh__rail-label" href="{{ section.settings.left_link_2 | default: '#' }}">{{ section.settings.left_label_2 | default: 'TOPS' }}</a>
+      </div>
+      <button type="button" class="gh__chev" data-gh-prev aria-label="Previous slide" aria-controls="{{ uid }}-track">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>
+      </button>
+    </nav>
+
+    {%- comment -%} CENTRAL STAGE {%- endcomment -%}
+    <div class="gh__stage" data-gh-stage role="group" aria-label="Campaign slides">
+      <ul class="gh__track" id="{{ uid }}-track" data-gh-track>
+        {%- for block in section.blocks -%}
+          {%- if block.type != 'slide' -%}{%- continue -%}{%- endif -%}
+          {%- liquid
+            assign img = block.settings.image
+            assign focal = img.presentation.focal_point | default: 'center'
+            assign slide_link = block.settings.link | default: '#'
+            assign cta_text = block.settings.cta_text | default: cta_default
+          -%}
+          <li
+            class="gh__slide"
+            data-gh-slide
+            {{ block.shopify_attributes }}
+            role="group"
+            aria-roledescription="slide"
+            aria-label="{{ forloop.index }} of {{ section.blocks.size }}"
+            {% unless forloop.first %}aria-hidden="true"{% endunless %}
+          >
+            <a class="gh__slide-link" href="{{ slide_link }}" {% unless forloop.first %}tabindex="-1"{% endunless %}>
+              {%- if img != blank -%}
+                <img
+                  class="gh__img"
+                  src="{{ img | image_url: width: 900 }}"
+                  srcset="{{ img | image_url: width: 480 }} 480w, {{ img | image_url: width: 720 }} 720w, {{ img | image_url: width: 900 }} 900w, {{ img | image_url: width: 1280 }} 1280w, {{ img | image_url: width: 1600 }} 1600w"
+                  sizes="(min-width: 990px) calc(100vw - 88px), calc(100vw - 88px)"
+                  width="{{ img.width }}"
+                  height="{{ img.height }}"
+                  alt="{{ img.alt | default: block.settings.title | escape }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  {% if forloop.first %}fetchpriority="high"{% else %}fetchpriority="low"{% endif %}
+                  decoding="async"
+                  style="object-position: {{ focal }};"
+                >
+              {%- else -%}
+                <div class="gh__img gh__img--placeholder">{{ 'lifestyle-1' | placeholder_svg_tag: 'gh__placeholder-svg' }}</div>
+              {%- endif -%}
+
+              <div class="gh__caption">
+                {%- if block.settings.micro_label != blank -%}
+                  <p class="gh__micro">{{ block.settings.micro_label }}</p>
+                {%- endif -%}
+                {%- if block.settings.title != blank -%}
+                  <p class="gh__title h3">{{ block.settings.title }}</p>
+                {%- endif -%}
+                {%- if block.settings.price != blank -%}
+                  <p class="gh__price">{{ block.settings.price }}</p>
+                {%- endif -%}
+                {%- if cta_text != blank -%}
+                  <span class="gh__cta btn btn--solid btn--primary">
+                    {{ cta_text }}
+                    <svg viewBox="0 0 14 14" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+                  </span>
+                {%- endif -%}
+              </div>
+            </a>
+          </li>
+        {%- endfor -%}
+
+        {%- if section.blocks.size == 0 -%}
+          <li class="gh__slide" data-gh-slide>
+            <div class="gh__slide-link">
+              <div class="gh__img gh__img--placeholder">{{ 'lifestyle-2' | placeholder_svg_tag: 'gh__placeholder-svg' }}</div>
+              <div class="gh__caption">
+                <p class="gh__micro">FINAL STOCK</p>
+                <p class="gh__title h3">Y TRANSDRY® BRIEF</p>
+                <p class="gh__price">FROM $15.99 SGD</p>
+                <span class="gh__cta btn btn--solid btn--primary">SHOP THE DESIGN
+                  <svg viewBox="0 0 14 14" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+                </span>
+              </div>
+            </div>
+          </li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    {%- comment -%} RIGHT RAIL — category links + next chevron {%- endcomment -%}
+    <nav class="gh__rail gh__rail--right" aria-label="Right navigation">
+      <div class="gh__rail-links">
+        <a class="gh__rail-label" href="{{ section.settings.right_link_1 | default: '#' }}">{{ section.settings.right_label_1 | default: 'BUNDLES' }}</a>
+        <a class="gh__rail-label" href="{{ section.settings.right_link_2 | default: '#' }}">{{ section.settings.right_label_2 | default: 'FINAL SALE' }}</a>
+      </div>
+      <button type="button" class="gh__chev" data-gh-next aria-label="Next slide" aria-controls="{{ uid }}-track">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg>
+      </button>
+    </nav>
+
+  </div>
+</section>
+
+<style>
+  #{{ uid }}.gh {
+    --gh-rail: 44px;
+    display: block;
+    background: var(--gh-rail-bg, #0F0F0F);
+  }
+  #{{ uid }} .gh__inner {
+    display: grid;
+    grid-template-columns: var(--gh-rail) 1fr var(--gh-rail);
+    height: calc(100vh - var(--header-height, 80px));
+    height: calc(100svh - var(--header-height, 80px));
+    min-height: 480px;
+  }
+
+  /* ---- Rails (fixed while slides change) ---- */
+  #{{ uid }} .gh__rail {
+    position: relative;
+    background: var(--gh-rail-bg, #0F0F0F);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: var(--gh-rail);
+    z-index: 2;
+  }
+  #{{ uid }} .gh__rail-links {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+  #{{ uid }} .gh__rail-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.86;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+  #{{ uid }} .gh__rail-links--flip .gh__rail-label { transform: rotate(180deg); }
+  #{{ uid }} .gh__rail-label:hover,
+  #{{ uid }} .gh__rail-label:focus-visible { opacity: 1; }
+
+  #{{ uid }} .gh__chev {
+    flex: 0 0 auto;
+    width: var(--gh-rail);
+    min-width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 6px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #{{ uid }} .gh__chev:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+
+  /* ---- Stage / slides ---- */
+  #{{ uid }} .gh__stage {
+    position: relative;
+    overflow: hidden;
+    background: var(--gh-rail-bg, #0F0F0F);
+  }
+  #{{ uid }} .gh__track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100%;
+    transform: translateX(0);
+    transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  #{{ uid }} .gh__slide {
+    flex: 0 0 100%;
+    position: relative;
+    height: 100%;
+  }
+  #{{ uid }} .gh__slide-link {
+    display: block;
+    position: relative;
+    height: 100%;
+    text-decoration: none;
+    color: #fff;
+  }
+  #{{ uid }} .gh__img,
+  #{{ uid }} .gh__img--placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  #{{ uid }} .gh__placeholder-svg { width: 100%; height: 100%; object-fit: cover; background: #1a1a1a; }
+
+  /* ---- Caption (HTML text; text-shadow keeps contrast, no image gradient) ---- */
+  #{{ uid }} .gh__caption {
+    position: absolute;
+    left: clamp(14px, 4vw, 22px);
+    right: clamp(14px, 4vw, 22px);
+    bottom: clamp(16px, 4vw, 24px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    color: #fff;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+    z-index: 2;
+  }
+  #{{ uid }} .gh__micro {
+    margin: 0;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    opacity: 0.92;
+  }
+  #{{ uid }} .gh__title {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: clamp(32px, 9vw, 36px);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+  }
+  #{{ uid }} .gh__price {
+    margin: 0;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+  }
+  #{{ uid }} .gh__cta.btn {
+    border-radius: 0 !important;
+    margin-top: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 12px;
+    line-height: 1;
+    padding: 12px 16px;
+    min-height: 44px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #{{ uid }} .gh__track { transition: none; }
+  }
+
+  @media only screen and (min-width: 990px) {
+    #{{ uid }} .gh { --gh-rail: 52px; }
+    #{{ uid }} .gh__rail-label { font-size: 11px; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('{{ uid }}');
+    if (!root || root.dataset.ghInit === '1') return;
+    root.dataset.ghInit = '1';
+
+    var track = root.querySelector('[data-gh-track]');
+    var stage = root.querySelector('[data-gh-stage]');
+    var slides = Array.prototype.slice.call(root.querySelectorAll('[data-gh-slide]'));
+    var prevBtns = Array.prototype.slice.call(root.querySelectorAll('[data-gh-prev]'));
+    var nextBtns = Array.prototype.slice.call(root.querySelectorAll('[data-gh-next]'));
+    var count = slides.length;
+    if (!track || count === 0) return;
+
+    var index = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var autoplay = root.dataset.ghAutoplay === 'true';
+    var interval = parseInt(root.dataset.ghInterval, 10) || 5000;
+    var timer = null;
+    var resumeTimer = null;
+
+    function render() {
+      track.style.transform = 'translateX(' + (-index * 100) + '%)';
+      slides.forEach(function (s, i) {
+        var current = i === index;
+        s.setAttribute('aria-hidden', current ? 'false' : 'true');
+        var link = s.querySelector('a.gh__slide-link');
+        if (link) link.tabIndex = current ? 0 : -1;
+      });
+    }
+    function go(i) { index = (i % count + count) % count; render(); }
+    function next() { go(index + 1); }
+    function prev() { go(index - 1); }
+
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function play() {
+      if (!autoplay || reduce || count < 2) return;
+      stop();
+      timer = setInterval(next, interval);
+    }
+    function pause() {
+      stop();
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(play, Math.max(interval, 4000));
+    }
+
+    prevBtns.forEach(function (b) { b.addEventListener('click', function () { prev(); pause(); }); });
+    nextBtns.forEach(function (b) { b.addEventListener('click', function () { next(); pause(); }); });
+
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { prev(); pause(); }
+      else if (e.key === 'ArrowRight') { next(); pause(); }
+    });
+
+    // Touch swipe
+    var startX = 0, startY = 0, tracking = false;
+    stage.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX; startY = e.touches[0].clientY; tracking = true; stop();
+    }, { passive: true });
+    stage.addEventListener('touchend', function (e) {
+      if (!tracking) return;
+      tracking = false;
+      var dx = e.changedTouches[0].clientX - startX;
+      var dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
+      pause();
+    }, { passive: true });
+
+    // Pause autoplay on hover / focus within
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', play);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', play);
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : play(); });
+
+    render();
+    play();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Gateway Hero",
+  "tag": "section",
+  "class": "gateway-hero-section",
+  "settings": [
+    { "type": "header", "content": "Behaviour" },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "range", "id": "autoplay_interval", "min": 3000, "max": 8000, "step": 500, "unit": "ms", "label": "Autoplay interval", "default": 5000 },
+    { "type": "text", "id": "aria_label", "label": "Accessible section label", "default": "Campaign highlights" },
+    { "type": "text", "id": "cta_text", "label": "Default CTA text", "default": "SHOP THE DESIGN" },
+
+    { "type": "header", "content": "Left rail" },
+    { "type": "text", "id": "left_label_1", "label": "Label 1", "default": "UNDERWEAR" },
+    { "type": "url", "id": "left_link_1", "label": "Link 1" },
+    { "type": "text", "id": "left_label_2", "label": "Label 2", "default": "TOPS" },
+    { "type": "url", "id": "left_link_2", "label": "Link 2" },
+
+    { "type": "header", "content": "Right rail" },
+    { "type": "text", "id": "right_label_1", "label": "Label 1", "default": "BUNDLES" },
+    { "type": "url", "id": "right_link_1", "label": "Link 1" },
+    { "type": "text", "id": "right_label_2", "label": "Label 2", "default": "FINAL SALE" },
+    { "type": "url", "id": "right_link_2", "label": "Link 2" },
+
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "rail_bg", "label": "Rail background", "default": "#0F0F0F" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Campaign image", "info": "Portrait works best. Set the focal point on the image so the product/waistband stays visible when cropped." },
+        { "type": "text", "id": "micro_label", "label": "Micro label", "default": "FINAL STOCK" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Y TRANSDRY® BRIEF" },
+        { "type": "text", "id": "price", "label": "Price line", "default": "FROM $15.99 SGD" },
+        { "type": "url", "id": "link", "label": "Slide link", "info": "Link to the exact product PDP or matched collection shown." },
+        { "type": "text", "id": "cta_text", "label": "CTA text (optional override)" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Gateway Hero",
+      "blocks": [
+        { "type": "slide", "settings": { "micro_label": "FINAL STOCK", "title": "Y TRANSDRY® BRIEF", "price": "FROM $15.99 SGD" } },
+        { "type": "slide", "settings": { "micro_label": "EVERYDAY", "title": "V COTTON SPANDEX BRIEF", "price": "FROM $11.99 SGD" } },
+        { "type": "slide", "settings": { "micro_label": "SHAPE", "title": "BOXER TRUNKS", "price": "FROM $12.99 SGD" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
