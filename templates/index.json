@@ -9,89 +9,6 @@
  */
 {
   "sections": {
-    "gateway_hero": {
-      "type": "gateway-hero",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/y-trasndry.png",
-            "micro_label": "FINAL STOCK",
-            "title": "Y TRANSDRY® BRIEF",
-            "price": "FROM $15.99 SGD",
-            "link": "",
-            "cta_text": "SHOP THE DESIGN"
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/V-cotton-spandex-black-2.png",
-            "micro_label": "EVERYDAY",
-            "title": "V COTTON SPANDEX BRIEF",
-            "price": "FROM $11.99 SGD",
-            "link": "",
-            "cta_text": "SHOP THE DESIGN"
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Untitled-1-Recovered.png",
-            "micro_label": "SHAPE",
-            "title": "BOXER TRUNKS",
-            "price": "FROM $12.99 SGD",
-            "link": "",
-            "cta_text": "SHOP BOXER TRUNKS"
-          }
-        },
-        "slide_4": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/trunks.jpg",
-            "micro_label": "LAYERS",
-            "title": "ESSENTIALS",
-            "price": "TOPS COLLECTION",
-            "link": "",
-            "cta_text": "SHOP TOPS"
-          }
-        },
-        "slide_5": {
-          "type": "slide",
-          "settings": {
-            "micro_label": "FINAL STOCK",
-            "title": "XL / 2XL CLEARANCE",
-            "price": "WHILE STOCK LASTS",
-            "link": "",
-            "cta_text": "SHOP CLEARANCE"
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2",
-        "slide_3",
-        "slide_4",
-        "slide_5"
-      ],
-      "disabled": true,
-      "settings": {
-        "autoplay": true,
-        "autoplay_interval": 5000,
-        "aria_label": "Campaign highlights",
-        "cta_text": "SHOP THE DESIGN",
-        "left_label_1": "UNDERWEAR",
-        "left_link_1": "",
-        "left_label_2": "TOPS",
-        "left_link_2": "",
-        "right_label_1": "BUNDLES",
-        "right_link_1": "",
-        "right_label_2": "FINAL SALE",
-        "right_link_2": "",
-        "slide_metaobjects": [],
-        "rail_bg": "#0f0f0f"
-      }
-    },
     "sale_hero_8Vwb7N": {
       "type": "sale-hero",
       "blocks": {
@@ -509,10 +426,93 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "gateway_hero": {
+      "type": "gateway-hero",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/y-trasndry.png",
+            "micro_label": "TransDRY®",
+            "title": "Y BRIEF",
+            "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
+            "link": "shopify://products/the-trunk-lover",
+            "cta_text": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/V-cotton-spandex-black-2.png",
+            "micro_label": "EVERYDAY",
+            "title": "V COTTON SPANDEX BRIEF",
+            "price": "FROM $11.99 SGD",
+            "link": "",
+            "cta_text": "SHOP THE DESIGN"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Untitled-1-Recovered.png",
+            "micro_label": "SHAPE",
+            "title": "BOXER TRUNKS",
+            "price": "FROM $12.99 SGD",
+            "link": "",
+            "cta_text": "SHOP BOXER TRUNKS"
+          }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/trunks.jpg",
+            "micro_label": "LAYERS",
+            "title": "ESSENTIALS",
+            "price": "TOPS COLLECTION",
+            "link": "",
+            "cta_text": "SHOP TOPS"
+          }
+        },
+        "slide_5": {
+          "type": "slide",
+          "settings": {
+            "micro_label": "FINAL STOCK",
+            "title": "XL / 2XL CLEARANCE",
+            "price": "WHILE STOCK LASTS",
+            "link": "",
+            "cta_text": "SHOP CLEARANCE"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3",
+        "slide_4",
+        "slide_5"
+      ],
+      "settings": {
+        "image_ratio": "viewport",
+        "image_ratio_desktop": "3 / 2",
+        "autoplay": false,
+        "autoplay_interval": 5000,
+        "aria_label": "Campaign highlights",
+        "cta_text": "SHOP THE DESIGN",
+        "left_label_1": "UNDERWEAR",
+        "left_link_1": "shopify://collections/underwear",
+        "left_label_2": "Our Hero",
+        "left_link_2": "shopify://products/y-transdry-brief-white",
+        "right_label_1": "BUNDLES",
+        "right_link_1": "shopify://collections/bundles-and-save",
+        "right_label_2": "FINAL SALE",
+        "right_link_2": "shopify://collections/additional-15-off",
+        "slide_metaobjects": [],
+        "rail_bg": "#0f0f0f"
+      }
     }
   },
   "order": [
-    "gateway_hero",
     "sale_hero_8Vwb7N",
     "landing_edm_signup_39bzd6",
     "features-strip",
@@ -523,6 +523,7 @@
     "homepage-brand-story",
     "story_salon_feature_TfLYkW",
     "1783598576dfbeb45d",
-    "1783598626bd47c487"
+    "1783598626bd47c487",
+    "gateway_hero"
   ]
 }
