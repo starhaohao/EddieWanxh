@@ -15,7 +15,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "subheading_option": "vendor",
+            "subheading_option": "none",
             "heading_font_size": "heading-medium",
             "padding_bottom": 8
           }
@@ -23,7 +23,7 @@
         "price": {
           "type": "price",
           "settings": {
-            "text_font_size": "body-x-large",
+            "text_font_size": "body-x-small",
             "show_shipping_policy": true,
             "padding_bottom": 12
           }
@@ -50,22 +50,10 @@
           "type": "variants",
           "settings": {
             "info_page": "size-guide",
-            "size_chart_style": "ruler",
+            "size_chart_style": "question",
             "option_font_size": "body-medium",
             "value_font_size": "body-medium",
             "padding_bottom": 18
-          }
-        },
-        "fit_guide": {
-          "type": "fit-guide",
-          "settings": {
-            "heading": "Fit",
-            "segment_selected": 3,
-            "left_label": "Small",
-            "middle_label": "True to size",
-            "right_label": "Large",
-            "fit_color": "#cdff00",
-            "padding_bottom": 50
           }
         },
         "upsell": {
@@ -128,7 +116,6 @@
         "price",
         "tab_richtext",
         "variants",
-        "fit_guide",
         "upsell",
         "buttons",
         "inventory_countdown",
@@ -144,7 +131,7 @@
         "image_layout": "thumbnails",
         "image_size": "stretch",
         "mobile_image_style": "thumbs",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -288,19 +275,19 @@
         "padding_bottom": 4
       }
     },
-    "1778931413bf791d0a": {
+    "17839006012bbaa0d2": {
       "type": "apps",
       "blocks": {
-        "klaviyo_reviews_product_reviews_kjLUez": {
+        "klaviyo_reviews_product_reviews_QNYYBb": {
           "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
           "settings": {}
         }
       },
       "block_order": [
-        "klaviyo_reviews_product_reviews_kjLUez"
+        "klaviyo_reviews_product_reviews_QNYYBb"
       ],
       "settings": {
-        "include_margins": true
+        "include_margins": false
       }
     },
     "related": {
@@ -344,7 +331,7 @@
     "luxury-spacing",
     "section_look_gallery_ePcTQJ",
     "section_announcement_GRMQe3",
-    "1778931413bf791d0a",
+    "17839006012bbaa0d2",
     "related"
   ]
 }
