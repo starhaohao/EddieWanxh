@@ -95,7 +95,7 @@
         "slide_5"
       ],
       "settings": {
-        "image_ratio": "3 / 4",
+        "image_ratio": "9 / 16",
         "image_ratio_desktop": "16 / 9",
         "autoplay": true,
         "autoplay_interval": 5000,
@@ -129,9 +129,9 @@
         "layout": "inline",
         "text_alignment": "left",
         "bg_color": "#0254b2",
-        "font_color": "#DFE4EA",
+        "font_color": "#dfe4ea",
         "font_opacity": 100,
-        "input_color": "#FFC72D",
+        "input_color": "#ffc72d",
         "input_opacity": 95,
         "eyebrow_size": 8,
         "heading_size": 20,
