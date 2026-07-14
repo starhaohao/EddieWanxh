@@ -91,7 +91,7 @@
       "settings": {
         "image_ratio": "3 / 4",
         "image_ratio_desktop": "16 / 9",
-        "autoplay": false,
+        "autoplay": true,
         "autoplay_interval": 5000,
         "aria_label": "Campaign highlights",
         "cta_text": "SHOP THE DESIGN",
@@ -107,7 +107,7 @@
         "rail_bg": "#000000",
         "cta_bg": "#ffe600",
         "cta_text_color": "#000000",
-        "cta_size": "compact",
+        "cta_size": "small",
         "micro_as_badge": true,
         "badge_height": 20,
         "badge_bg": "rgba(0,0,0,0)",
