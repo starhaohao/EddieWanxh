@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "color_scheme": "scheme-9b3afd14-67ff-4f68-a798-655d45b5f34b",
+    "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
     "menu_bg_color": "#050404",
     "header_link": "#F6F6F6",
     "submenu_bg_color": "{{ shop.brand.colors.secondary[1].background }}",
@@ -204,7 +204,7 @@
           "btn_secondary_text": "#000000",
           "btn_secondary_border": "#cdff00",
           "accent": "#c2c2c2",
-          "lines_and_border": "#0619230A",
+          "lines_and_border": "#0619230a",
           "overlay": "#000000",
           "links": "#020303"
         }
