@@ -2,7 +2,7 @@
   EDM / email signup (FABRIC V2 blueprint §4.2).
   Posts to Shopify's native customer form (creates a marketing subscriber).
   Layout updated: Inline layout spans full width (text left, button right).
-  Customizable typography sizes added.
+  Customizable typography sizes added (including eyebrow).
 {%- endcomment -%}
 
 {%- liquid
@@ -129,7 +129,7 @@
   .edm__eyebrow {
     display: block;
     font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 11px;
+    font-size: {{ section.settings.eyebrow_size }}px;
     letter-spacing: 0.24em;
     text-transform: uppercase;
     margin: 0;
@@ -381,6 +381,16 @@
     {
       "type": "header",
       "content": "Typography Sizes"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 11
     },
     {
       "type": "range",
