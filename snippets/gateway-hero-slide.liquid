@@ -5,6 +5,9 @@
   Accepts:
   - image     {Object}  image/media object (or blank -> placeholder)
   - focal     {String}  object-position, e.g. "50% 30%" (default 'center')
+  - focal_desktop {String} optional desktop-only object-position override,
+                            for when one focal point can't serve both the
+                            tall mobile crop and the wide desktop crop
   - link      {String}  slide href (default '#')
   - micro     {String}  monospace micro label
   - title     {String}  headline
@@ -18,6 +21,7 @@
 {%- endcomment -%}
 {%- liquid
   assign focal = focal | default: 'center'
+  assign focal_desktop = focal_desktop | default: focal
   assign link = link | default: '#'
   assign micro_class = 'gh__micro'
   if micro_as_badge
@@ -46,7 +50,7 @@
         loading="{% if is_first %}eager{% else %}lazy{% endif %}"
         {% if is_first %}fetchpriority="high"{% else %}fetchpriority="low"{% endif %}
         decoding="async"
-        style="object-position: {{ focal }};"
+        style="--gh-focal-mobile: {{ focal }}; --gh-focal-desktop: {{ focal_desktop }}; object-position: var(--gh-focal-mobile);"
       >
     {%- else -%}
       <div class="gh__img gh__img--placeholder">{{ 'lifestyle-1' | placeholder_svg_tag: 'gh__placeholder-svg' }}</div>

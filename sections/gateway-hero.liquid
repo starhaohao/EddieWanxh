@@ -153,6 +153,7 @@
           {%- liquid
             assign b_img = block.settings.image
             assign b_focal = b_img.presentation.focal_point | default: 'center'
+            assign b_focal_desktop = block.settings.focal_desktop
             assign b_cta = block.settings.cta_text | default: cta_default
 
             assign gh_first = false
@@ -162,7 +163,7 @@
             assign gh_pos = gi | plus: 1
           -%}
           {%- render 'gateway-hero-slide',
-            image: b_img, focal: b_focal, link: block.settings.link,
+            image: b_img, focal: b_focal, focal_desktop: b_focal_desktop, link: block.settings.link,
             micro: block.settings.micro_label, title: block.settings.title,
             price: block.settings.price, cta: b_cta,
             micro_as_badge: micro_as_badge,
@@ -405,6 +406,10 @@
     /* Landscape on desktop (default 16:9); portrait stays on mobile. */
     #{{ uid }} .gh__stage { aspect-ratio: var(--gh-ratio-desktop, 16 / 9); }
     #{{ uid }}.gh--fill .gh__stage { aspect-ratio: auto; }
+    /* Desktop crop is a very different shape from mobile (landscape vs
+       tall portrait), so a single focal point often can't serve both —
+       use the per-slide desktop override here when one is set. */
+    #{{ uid }} .gh__img { object-position: var(--gh-focal-desktop, var(--gh-focal-mobile, center)); }
   }
 </style>
 
@@ -560,6 +565,7 @@
       "name": "Slide",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Campaign image", "info": "Portrait works best. Set the focal point on the image so the product/waistband stays visible when cropped." },
+        { "type": "text", "id": "focal_desktop", "label": "Desktop focal point override (optional)", "info": "e.g. \"70% 30%\". The image's own focal point is used on mobile; if the wide desktop crop looks off-center, set a separate position here — one focal point often can't serve both a tall mobile crop and a wide desktop crop." },
         { "type": "text", "id": "micro_label", "label": "Micro label", "default": "FINAL STOCK" },
         { "type": "text", "id": "title", "label": "Title", "default": "Y TRANSDRY® BRIEF" },
         { "type": "text", "id": "price", "label": "Price line", "default": "FROM $15.99 SGD" },
