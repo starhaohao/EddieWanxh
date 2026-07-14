@@ -1,12 +1,15 @@
 {%- comment -%}
-  Gateway Hero — mobile-first editorial hero carousel with fixed black side
-  rails, adapted to the TRIIIPLE theme. Prefix: .gh
+  Gateway Hero — mobile-first editorial hero carousel, edge-to-edge image
+  with a transparent overlay navigation rail on each side. Prefix: .gh
 
-  - Three-column layout: left rail (44px) / campaign image / right rail (44px).
-  - Rails carry rotated white category labels + prev/next chevrons and stay
-    fixed while the central image slides.
+  - The campaign image runs true full width (no solid side columns). Two
+    transparent overlay rails (44px touch-target wide) float on top of it
+    at the left/right edges, carrying rotated white category labels +
+    prev/next chevrons; only those elements are clickable, the rest of the
+    rail strip passes clicks through to the image link beneath.
   - Each slide links to its own product/collection with an HTML caption + CTA.
-  - CTA reuses the theme's primary button (.btn--solid.btn--primary), squared.
+  - CTA reuses the theme's primary button (.btn--solid.btn--primary), squared,
+    with adjustable color/size via section settings.
   - Vanilla JS carousel: swipe, chevrons, keyboard, autoplay w/ pause on
     interaction, honours prefers-reduced-motion.
 {%- endcomment -%}
@@ -199,9 +202,7 @@
     background: var(--gh-rail-bg, #0F0F0F);
   }
   #{{ uid }} .gh__inner {
-    display: grid;
-    grid-template-columns: var(--gh-rail) 1fr var(--gh-rail);
-    align-items: stretch;
+    position: relative;
   }
   /* Full-viewport option: height drives the layout instead of the ratio. */
   #{{ uid }}.gh--fill .gh__inner {
@@ -210,16 +211,25 @@
     min-height: 480px;
   }
 
-  /* ---- Rails (fixed while slides change) ---- */
+  /* ---- Rails: transparent overlay pinned to each edge, floating on top
+     of the image (not a solid side column) so the photo runs true
+     edge-to-edge. Only the label links / chevron button are interactive;
+     the strip itself passes clicks through to the image link beneath. ---- */
   #{{ uid }} .gh__rail {
-    position: relative;
-    background: var(--gh-rail-bg, #0F0F0F);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--gh-rail);
+    min-width: 44px;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    min-width: var(--gh-rail);
-    z-index: 2;
+    align-items: center;
+    background: transparent;
+    z-index: 3;
+    pointer-events: none;
   }
+  #{{ uid }} .gh__rail--left { left: 0; }
+  #{{ uid }} .gh__rail--right { right: 0; }
   #{{ uid }} .gh__rail-links {
     flex: 1 1 auto;
     display: flex;
@@ -227,6 +237,7 @@
     align-items: center;
     justify-content: center;
     gap: 22px;
+    pointer-events: auto;
   }
   #{{ uid }} .gh__rail-label {
     writing-mode: vertical-rl;
@@ -237,7 +248,8 @@
     line-height: 1;
     color: #fff;
     text-decoration: none;
-    opacity: 0.86;
+    opacity: 0.92;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
     transition: opacity 0.2s ease;
     white-space: nowrap;
   }
@@ -257,7 +269,9 @@
     border: 0;
     color: #fff;
     cursor: pointer;
-    margin-bottom: 6px;
+    margin-bottom: 18px;
+    filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.6));
+    pointer-events: auto;
     -webkit-tap-highlight-color: transparent;
   }
   #{{ uid }} .gh__chev:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
@@ -313,8 +327,10 @@
   /* ---- Caption (HTML text; text-shadow keeps contrast, no image gradient) ---- */
   #{{ uid }} .gh__caption {
     position: absolute;
-    left: clamp(14px, 4vw, 22px);
-    right: clamp(14px, 4vw, 22px);
+    /* Cleared past the overlay rails so the CTA/text never sit under the
+       vertical labels or chevrons at the image edges. */
+    left: calc(var(--gh-rail, 44px) + clamp(6px, 2vw, 12px));
+    right: calc(var(--gh-rail, 44px) + clamp(6px, 2vw, 12px));
     bottom: clamp(16px, 4vw, 24px);
     display: flex;
     flex-direction: column;
@@ -518,7 +534,7 @@
     { "type": "metaobject_list", "id": "slide_metaobjects", "label": "Metaobject slides", "metaobject_type": "gateway_slide" },
 
     { "type": "header", "content": "Colours" },
-    { "type": "color", "id": "rail_bg", "label": "Rail background", "default": "#0F0F0F" },
+    { "type": "color", "id": "rail_bg", "label": "Image backdrop (shows behind loading/placeholder image)", "default": "#0F0F0F", "info": "The side rails are a transparent overlay on the image, not a solid bar — this color only shows briefly behind the photo while it loads." },
 
     { "type": "header", "content": "CTA button" },
     { "type": "color", "id": "cta_bg", "label": "Button background", "default": "#FFE600" },
