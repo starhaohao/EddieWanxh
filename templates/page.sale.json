@@ -195,7 +195,7 @@
       "type": "section-collection",
       "name": "Featured collection",
       "settings": {
-        "featured_collection": "view-all-newview-all-new",
+        "featured_collection": "view-all-new",
         "heading": "Best Sellers",
         "heading_font_size": "heading-small",
         "description": "",
