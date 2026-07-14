@@ -89,7 +89,7 @@
         "slide_5"
       ],
       "settings": {
-        "image_ratio": "1080 / 1350",
+        "image_ratio": "2 / 3",
         "image_ratio_desktop": "16 / 9",
         "autoplay": false,
         "autoplay_interval": 5000,
@@ -136,107 +136,6 @@
         "placeholder": "Email address",
         "button_label": "Sign up",
         "success_text": "You’re in — welcome to First Layer."
-      }
-    },
-    "sale_hero_8Vwb7N": {
-      "type": "sale-hero",
-      "blocks": {
-        "ghost_cta_zRnaVy": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "XS/S Clearance",
-            "url": "shopify://collections/bundles-xs-s-clearance"
-          }
-        },
-        "ghost_cta_XRkDR4": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "XL/2XL Clearance",
-            "url": "shopify://collections/bundles-xl-2xl-clearance"
-          }
-        },
-        "ghost_cta_KCETby": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "Shop all",
-            "url": "shopify://collections/shop-all"
-          }
-        }
-      },
-      "block_order": [
-        "ghost_cta_zRnaVy",
-        "ghost_cta_XRkDR4",
-        "ghost_cta_KCETby"
-      ],
-      "custom_css": [],
-      "name": "Sale Hero",
-      "settings": {
-        "image": "shopify://shop_images/Landing_Page.jpg",
-        "hero_height": 100,
-        "overlay_from": "#0a0a0abf",
-        "overlay_to": "#0a0a0a52",
-        "eyebrow": "Final Clearance",
-        "eyebrow_color": "#7c9bdb",
-        "title": "<p>The </p><p>Last          Run.</p>",
-        "title_size": 120,
-        "subtitle": "<p><span style=\"text-decoration:underline\"><strong>Buy 3 — 15% off · Buy 5 — 25% off</strong></span><strong><br/></strong>Free shipping over $50 · Singapore</p>",
-        "cta_text": "Stock Clearance",
-        "cta_url": "shopify://collections/dead-stock-clearance",
-        "cta_bg": "#7c9bdb",
-        "cta_text_color": "#ffffff",
-        "show_urgency": true,
-        "urgency_label": "Stock Status",
-        "urgency_text": "<p>Final stock.<br/>No restock.</p>"
-      }
-    },
-    "features-strip": {
-      "type": "landing-features-strip",
-      "disabled": true,
-      "settings": {}
-    },
-    "section_hero_ALw4gQ": {
-      "type": "section-hero",
-      "blocks": {
-        "heading_VUtNMe": {
-          "type": "heading",
-          "settings": {
-            "title": "THE BUNDLE EDIT.",
-            "heading_font_size": "heading-x-small",
-            "heading_tag": "automatic",
-            "padding_bottom": 0
-          }
-        },
-        "text_xFjcXF": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Considered pairings. Better value.</p>",
-            "text_font_size": "body-x-small",
-            "padding_bottom": 0
-          }
-        }
-      },
-      "block_order": [
-        "heading_VUtNMe",
-        "text_xFjcXF"
-      ],
-      "name": "Image banner",
-      "settings": {
-        "image_1": "shopify://shop_images/Untitled-1.jpg",
-        "image_2": "shopify://shop_images/x-brief.jpg",
-        "link": "shopify://collections/bundles-and-save",
-        "width": "wrapper--full",
-        "height": "screen-height-three-quarters",
-        "flex_align_desktop": "align--bottom-left-desktop",
-        "content_width": 100,
-        "mobile_image": "shopify://shop_images/Untitled-1.jpg",
-        "mobile_height": "image-height--mobile",
-        "flex_align_mobile": "align--bottom-left-mobile",
-        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
-        "show_text_background": true,
-        "overlay_type": "disabled",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "show_placeholder": false
       }
     },
     "section_tab_collections_Cc4J84": {
@@ -341,6 +240,107 @@
         "padding_top": 40,
         "padding_bottom": 40,
         "heading_tag": "automatic"
+      }
+    },
+    "sale_hero_8Vwb7N": {
+      "type": "sale-hero",
+      "blocks": {
+        "ghost_cta_zRnaVy": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "XS/S Clearance",
+            "url": "shopify://collections/bundles-xs-s-clearance"
+          }
+        },
+        "ghost_cta_XRkDR4": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "XL/2XL Clearance",
+            "url": "shopify://collections/bundles-xl-2xl-clearance"
+          }
+        },
+        "ghost_cta_KCETby": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Shop all",
+            "url": "shopify://collections/shop-all"
+          }
+        }
+      },
+      "block_order": [
+        "ghost_cta_zRnaVy",
+        "ghost_cta_XRkDR4",
+        "ghost_cta_KCETby"
+      ],
+      "custom_css": [],
+      "name": "Sale Hero",
+      "settings": {
+        "image": "shopify://shop_images/Landing_Page.jpg",
+        "hero_height": 100,
+        "overlay_from": "#0a0a0abf",
+        "overlay_to": "#0a0a0a52",
+        "eyebrow": "Final Clearance",
+        "eyebrow_color": "#7c9bdb",
+        "title": "<p>The </p><p>Last          Run.</p>",
+        "title_size": 120,
+        "subtitle": "<p><span style=\"text-decoration:underline\"><strong>Buy 3 — 15% off · Buy 5 — 25% off</strong></span><strong><br/></strong>Free shipping over $50 · Singapore</p>",
+        "cta_text": "Stock Clearance",
+        "cta_url": "shopify://collections/dead-stock-clearance",
+        "cta_bg": "#7c9bdb",
+        "cta_text_color": "#ffffff",
+        "show_urgency": true,
+        "urgency_label": "Stock Status",
+        "urgency_text": "<p>Final stock.<br/>No restock.</p>"
+      }
+    },
+    "features-strip": {
+      "type": "landing-features-strip",
+      "disabled": true,
+      "settings": {}
+    },
+    "section_hero_ALw4gQ": {
+      "type": "section-hero",
+      "blocks": {
+        "heading_VUtNMe": {
+          "type": "heading",
+          "settings": {
+            "title": "THE BUNDLE EDIT.",
+            "heading_font_size": "heading-x-small",
+            "heading_tag": "automatic",
+            "padding_bottom": 0
+          }
+        },
+        "text_xFjcXF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Considered pairings. Better value.</p>",
+            "text_font_size": "body-x-small",
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "heading_VUtNMe",
+        "text_xFjcXF"
+      ],
+      "name": "Image banner",
+      "settings": {
+        "image_1": "shopify://shop_images/Untitled-1.jpg",
+        "image_2": "shopify://shop_images/x-brief.jpg",
+        "link": "shopify://collections/bundles-and-save",
+        "width": "wrapper--full",
+        "height": "screen-height-three-quarters",
+        "flex_align_desktop": "align--bottom-left-desktop",
+        "content_width": 100,
+        "mobile_image": "shopify://shop_images/Untitled-1.jpg",
+        "mobile_height": "image-height--mobile",
+        "flex_align_mobile": "align--bottom-left-mobile",
+        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
+        "show_text_background": true,
+        "overlay_type": "disabled",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": false
       }
     },
     "homepage-social": {
