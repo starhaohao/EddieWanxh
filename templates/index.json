@@ -128,7 +128,7 @@
       "settings": {
         "layout": "centered",
         "bg_color": "#0254b2",
-        "font_color": "#ffffff",
+        "font_color": "#FFFFFF",
         "font_opacity": 100,
         "input_color": "#1cf644",
         "input_opacity": 95,
@@ -154,7 +154,7 @@
             "featured_collection": "briefs",
             "show_image": true,
             "align_with_product_images": false,
-            "image": "shopify://shop_images/y-trasndry-2.png",
+            "image": "shopify://shop_images/9.jpg",
             "overlay_type": "disabled",
             "description": "",
             "color": "",
