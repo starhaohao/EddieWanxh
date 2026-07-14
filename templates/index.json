@@ -17,6 +17,7 @@
           "source": "{{ metaobjects.gateway_slide[\"stock-sale\"] }}",
           "settings": {
             "image": "{{ metaobjects.gateway_slide[\"stock-sale\"].desktop_image.value }}",
+            "focal_desktop": "",
             "micro_label": "{{ metaobjects.gateway_slide[\"stock-sale\"].destination_type.value }}",
             "title": "{{ metaobjects.gateway_slide[\"stock-sale\"].title.value }}",
             "price": "{{ metaobjects.gateway_slide[\"stock-sale\"].analytics_label.value }}",
@@ -28,6 +29,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/2_c6133a58-2b31-4160-85db-75a83d3e7cd2.jpg",
+            "focal_desktop": "",
             "micro_label": "FINAL STOCK",
             "title": "Y TRANSDRY® BRIEF",
             "price": "FROM $15.99 SGD",
@@ -39,6 +41,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/6_2a44df0f-7692-4ef7-a165-57fc699055a5.jpg",
+            "focal_desktop": "",
             "micro_label": "{{ metaobjects.fabric_profile[\"cotton-spandex\"].fabric_name.value }}",
             "title": "{{ metaobjects.triiiple_product_content[\"v-brief\"].display_name.value }}",
             "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
@@ -50,6 +53,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/Untitled-1-Recovered.png",
+            "focal_desktop": "",
             "micro_label": "SHAPE",
             "title": "BOXER TRUNKS",
             "price": "FROM $12.99 SGD",
@@ -61,6 +65,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/Untitled-1.jpg",
+            "focal_desktop": "",
             "micro_label": "LAYERS",
             "title": "ESSENTIALS",
             "price": "TOPS COLLECTION",
@@ -72,6 +77,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
+            "focal_desktop": "",
             "micro_label": "FINAL STOCK",
             "title": "XL / 2XL CLEARANCE",
             "price": "WHILE STOCK LASTS",
@@ -89,7 +95,7 @@
         "slide_5"
       ],
       "settings": {
-        "image_ratio": "9 / 16",
+        "image_ratio": "3 / 4",
         "image_ratio_desktop": "16 / 9",
         "autoplay": true,
         "autoplay_interval": 5000,
@@ -281,16 +287,16 @@
         "overlay_to": "#0a0a0a52",
         "eyebrow": "Final Clearance",
         "eyebrow_color": "#7c9bdb",
-        "title": "<p>The </p><p>Last          Run.</p>",
+        "title": "<p>The </p><p>Last          </p><p>Run.</p><p></p><h3></h3><h5></h5>",
         "title_size": 120,
-        "subtitle": "<p><span style=\"text-decoration:underline\"><strong>Buy 3 — 15% off · Buy 5 — 25% off</strong></span><strong><br/></strong>Free shipping over $50 · Singapore</p>",
+        "subtitle": "<h6>Free shipping</h6><h6>over $50 · Singapore</h6>",
         "cta_text": "Stock Clearance",
         "cta_url": "shopify://collections/dead-stock-clearance",
         "cta_bg": "#7c9bdb",
         "cta_text_color": "#ffffff",
         "show_urgency": true,
         "urgency_label": "Stock Status",
-        "urgency_text": "<p>Final stock.<br/>No restock.</p>"
+        "urgency_text": "<h6><strong>Buy 3 — 15% off </strong></h6><h6><strong>Buy 5 — 25% off</strong></h6>"
       }
     },
     "features-strip": {
