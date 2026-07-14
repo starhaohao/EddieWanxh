@@ -126,7 +126,7 @@
       "custom_css": [],
       "name": "EDM Signup",
       "settings": {
-        "layout": "centered",
+        "layout": "inline",
         "text_alignment": "left",
         "bg_color": "#0254b2",
         "font_color": "#DFE4EA",
