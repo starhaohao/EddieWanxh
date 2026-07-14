@@ -89,7 +89,7 @@
         "slide_5"
       ],
       "settings": {
-        "image_ratio": "viewport",
+        "image_ratio": "3 / 4",
         "image_ratio_desktop": "16 / 9",
         "autoplay": false,
         "autoplay_interval": 5000,
