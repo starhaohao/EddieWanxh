@@ -1,9 +1,7 @@
 {%- comment -%}
   EDM / email signup (FABRIC V2 blueprint §4.2).
-  Posts to Shopify's native customer form (creates a marketing subscriber) —
-  usable below the hero or dropped between content. Two layouts: centred
-  (editorial) or inline (slim mid-content band). Refined CDLP styling:
-  eyebrow, clean grotesque headline, underline field, tracked uppercase submit.
+  Posts to Shopify's native customer form (creates a marketing subscriber).
+  Layout updated to display side-by-side on desktop and stacked on mobile.
 {%- endcomment -%}
 
 {%- liquid
@@ -34,24 +32,31 @@
     color: var(--edm-ink);
   }
 
-  /* Alignment dynamically set by schema */
+  /* Dynamic Alignment Settings */
   #shopify-section-{{ section.id }} .edm__inner {
     text-align: {{ section.settings.text_alignment }};
+    {% if section.settings.text_alignment == 'left' %}
+      align-items: flex-start;
+    {% elsif section.settings.text_alignment == 'center' %}
+      align-items: center;
+    {% elsif section.settings.text_alignment == 'right' %}
+      align-items: flex-end;
+    {% endif %}
   }
 
-  {% if section.settings.text_alignment == 'left' %}
-    #shopify-section-{{ section.id }} .edm__subtext,
-    #shopify-section-{{ section.id }} .edm__field {
-      margin-left: 0;
-      margin-right: auto;
+  /* Desktop Alignment Adjustments */
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .edm__inner {
+      {% if section.settings.text_alignment == 'left' %}
+        justify-content: flex-start;
+      {% elsif section.settings.text_alignment == 'center' %}
+        justify-content: center;
+      {% elsif section.settings.text_alignment == 'right' %}
+        justify-content: flex-end;
+      {% endif %}
+      align-items: center; /* Always keep vertically centered on desktop */
     }
-  {% elsif section.settings.text_alignment == 'right' %}
-    #shopify-section-{{ section.id }} .edm__subtext,
-    #shopify-section-{{ section.id }} .edm__field {
-      margin-left: auto;
-      margin-right: 0;
-    }
-  {% endif %}
+  }
 
   #shopify-section-{{ section.id }} .edm__input,
   #shopify-section-{{ section.id }} .edm__input::placeholder {
@@ -70,14 +75,11 @@
   #shopify-section-{{ section.id }} .edm__subtext {
     color: var(--edm-soft);
   }
-
-  #shopify-section-{{ section.id }} .edm__field {
-    border-bottom-color: var(--edm-hair);
-  }
 {% endstyle %}
 
 <section class="edm edm--{{ layout }}" id="edm-{{ uid }}">
   <div class="edm__inner">
+    
     <div class="edm__copy">
       {%- if section.settings.eyebrow != blank -%}
         <span class="edm__eyebrow">{{ section.settings.eyebrow }}</span>
@@ -130,14 +132,33 @@
         {%- endif -%}
       {%- endform -%}
     </div>
+    
   </div>
 </section>
 
 {%- style -%}
+  /* Base Layout (Mobile First - Stacked) */
   .edm__inner {
-    max-width: 560px;
+    max-width: 1200px;
     margin: 0 auto;
-    /* Text alignment is now controlled dynamically above */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Desktop Layout (Row - Side by side) */
+  @media screen and (min-width: 750px) {
+    .edm__inner {
+      flex-direction: row;
+      gap: 40px; /* Space between text block and form block */
+    }
+  }
+
+  .edm__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between eyebrow, heading, and sentence */
+    flex: 0 1 auto;
   }
 
   .edm__eyebrow {
@@ -146,7 +167,7 @@
     font-size: 11px;
     letter-spacing: 0.24em;
     text-transform: uppercase;
-    margin-bottom: 18px;
+    margin: 0;
   }
 
   .edm__heading {
@@ -156,14 +177,14 @@
     font-size: clamp(26px, 3.6vw, 40px);
     line-height: 1.08;
     letter-spacing: -0.02em;
-    margin: 0 0 8px;
+    margin: 0;
     text-wrap: balance;
   }
 
   .edm__subtext {
     font-size: 15px;
     line-height: 1.65;
-    margin: 0 auto 16px; /* Base margin; adjusted for L/R align dynamically */
+    margin: 0;
     max-width: 44ch;
   }
 
@@ -176,12 +197,16 @@
     white-space: nowrap;
   }
 
+  .edm__form-wrap {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 420px;
+  }
+
   .edm__field {
     display: flex;
     align-items: center;
     gap: 16px;
-    max-width: 420px;
-    margin: 0 auto; /* Base margin; adjusted for L/R align dynamically */
     background-color: transparent; 
     padding: 0; 
     border: 0; 
@@ -194,12 +219,12 @@
     border: 1px solid transparent; 
     background: transparent;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 8px; /* Half size */
     letter-spacing: 0.01em;
     height: 14px; 
     padding: 10px 18px; 
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.15); 
+    background-color: rgba(255, 255, 255, 0.15); /* Transparent box around input only */
   }
 
   .edm__input:focus {
@@ -229,7 +254,7 @@
   }
 
   .edm__submit > span:first-child {
-    text-decoration: underline;
+    text-decoration: underline; /* Underline ONLY on sign up text */
     text-underline-offset: 4px; 
   }
   
@@ -254,58 +279,6 @@
 
   .edm__msg--err {
     color: #923531;
-  }
-
-  .edm--inline .edm__inner {
-    max-width: 1080px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: clamp(24px, 5vw, 72px);
-    /* Inherits dynamic text-align */
-  }
-
-  .edm--inline .edm__copy {
-    flex: 1 1 auto;
-  }
-
-  .edm--inline .edm__eyebrow {
-    margin-bottom: 12px;
-  }
-
-  .edm--inline .edm__heading {
-    font-size: clamp(24px, 3vw, 34px);
-    margin-bottom: 6px;
-  }
-
-  .edm--inline .edm__subtext {
-    margin: 0;
-    max-width: 46ch;
-  }
-
-  .edm--inline .edm__form-wrap {
-    flex: 0 0 auto;
-    width: min(400px, 100%);
-  }
-
-  .edm--inline .edm__field {
-    margin: 0;
-  }
-
-  @media screen and (max-width: 749px) {
-    .edm--inline .edm__inner {
-      flex-direction: column;
-      align-items: stretch;
-      /* On mobile, fallback to centering for inline layout if preferred, or rely on the setting */
-    }
-
-    .edm--inline .edm__form-wrap {
-      width: 100%;
-    }
-
-    .edm--inline .edm__field {
-      margin: 0 auto;
-    }
   }
 {%- endstyle -%}
 
