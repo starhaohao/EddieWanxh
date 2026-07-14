@@ -2,6 +2,7 @@
   EDM / email signup (FABRIC V2 blueprint §4.2).
   Posts to Shopify's native customer form (creates a marketing subscriber).
   Layout updated: Inline layout spans full width (text left, button right).
+  Customizable typography sizes added.
 {%- endcomment -%}
 
 {%- liquid
@@ -138,7 +139,7 @@
     font-family: var(--font-heading-family);
     font-style: var(--font-heading-style);
     font-weight: var(--font-heading-weight);
-    font-size: clamp(26px, 3.6vw, 40px);
+    font-size: {{ section.settings.heading_size }}px;
     line-height: 1.08;
     letter-spacing: -0.02em;
     margin: 0;
@@ -146,7 +147,7 @@
   }
 
   .edm__subtext {
-    font-size: 15px;
+    font-size: {{ section.settings.subtext_size }}px;
     line-height: 1.65;
     margin: 0;
     max-width: 44ch;
@@ -176,12 +177,12 @@
     min-width: 0;
     border: 1px solid transparent; 
     background: transparent;
-    font-family: inherit; /* Keeps standard theme font */
-    font-size: 11px; /* MATCHES SIGN UP BUTTON SIZE */
+    font-family: inherit;
+    font-size: {{ section.settings.input_size }}px; 
     letter-spacing: 0.01em;
     padding: 8px 14px; 
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.15); /* Transparent box around input */
+    background-color: rgba(255, 255, 255, 0.15); 
   }
 
   .edm__input:focus {
@@ -196,7 +197,7 @@
     background: transparent;
     cursor: pointer;
     font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 11px;
+    font-size: {{ section.settings.button_size }}px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     display: inline-flex;
@@ -265,11 +266,18 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    text-align: left; /* Forces text to the left */
+    text-align: left; 
   }
 
   .edm--inline .edm__form-wrap {
     width: 100%;
+  }
+
+  /* Mobile scaling for heading */
+  @media screen and (max-width: 749px) {
+    .edm__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.85);
+    }
   }
 
   @media screen and (min-width: 750px) {
@@ -277,23 +285,23 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: 60px; /* Space between text and form */
+      gap: 60px; 
     }
 
     .edm--inline .edm__form-wrap {
-      flex: 1 1 auto; /* Allows form to stretch to right margin */
+      flex: 1 1 auto; 
       width: 100%;
-      max-width: none; /* Removes any width restriction */
+      max-width: none; 
     }
 
     .edm--inline .edm__field {
       width: 100%;
       max-width: none;
-      justify-content: space-between; /* Pushes input left, submit right */
+      justify-content: space-between; 
     }
 
     .edm--inline .edm__input {
-      max-width: 320px; /* Adjust this if you want the email box wider/narrower */
+      max-width: 320px; 
     }
   }
 {%- endstyle -%}
@@ -369,6 +377,50 @@
       "step": 5,
       "unit": "%",
       "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Typography Sizes"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "label": "Sentence size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "input_size",
+      "label": "Email input size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "label": "Button size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 11
     },
     {
       "type": "header",
