@@ -1,7 +1,7 @@
 {%- comment -%}
   EDM / email signup (FABRIC V2 blueprint §4.2).
   Posts to Shopify's native customer form (creates a marketing subscriber).
-  Layout updated to display side-by-side on desktop and stacked on mobile.
+  Layout updated: Inline layout spans full width (text left, button right).
 {%- endcomment -%}
 
 {%- liquid
@@ -30,32 +30,6 @@
     --edm-hair: {{ section.settings.font_color | color_modify: 'alpha', font_alpha | times: 0.22 }};
     --edm-input: {{ section.settings.input_color | color_modify: 'alpha', input_alpha }};
     color: var(--edm-ink);
-  }
-
-  /* Dynamic Alignment Settings */
-  #shopify-section-{{ section.id }} .edm__inner {
-    text-align: {{ section.settings.text_alignment }};
-    {% if section.settings.text_alignment == 'left' %}
-      align-items: flex-start;
-    {% elsif section.settings.text_alignment == 'center' %}
-      align-items: center;
-    {% elsif section.settings.text_alignment == 'right' %}
-      align-items: flex-end;
-    {% endif %}
-  }
-
-  /* Desktop Alignment Adjustments */
-  @media screen and (min-width: 750px) {
-    #shopify-section-{{ section.id }} .edm__inner {
-      {% if section.settings.text_alignment == 'left' %}
-        justify-content: flex-start;
-      {% elsif section.settings.text_alignment == 'center' %}
-        justify-content: center;
-      {% elsif section.settings.text_alignment == 'right' %}
-        justify-content: flex-end;
-      {% endif %}
-      align-items: center; /* Always keep vertically centered on desktop */
-    }
   }
 
   #shopify-section-{{ section.id }} .edm__input,
@@ -137,27 +111,17 @@
 </section>
 
 {%- style -%}
-  /* Base Layout (Mobile First - Stacked) */
+  /* Base Container */
   .edm__inner {
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  /* Desktop Layout (Row - Side by side) */
-  @media screen and (min-width: 750px) {
-    .edm__inner {
-      flex-direction: row;
-      gap: 40px; /* Space between text block and form block */
-    }
+    width: 100%;
   }
 
   .edm__copy {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Space between eyebrow, heading, and sentence */
+    gap: 8px;
     flex: 0 1 auto;
   }
 
@@ -197,12 +161,6 @@
     white-space: nowrap;
   }
 
-  .edm__form-wrap {
-    flex: 0 1 auto;
-    width: 100%;
-    max-width: 420px;
-  }
-
   .edm__field {
     display: flex;
     align-items: center;
@@ -218,23 +176,18 @@
     min-width: 0;
     border: 1px solid transparent; 
     background: transparent;
-    font-family: inherit;
-    font-size: 8px; /* Half size */
+    font-family: inherit; /* Keeps standard theme font */
+    font-size: 11px; /* MATCHES SIGN UP BUTTON SIZE */
     letter-spacing: 0.01em;
-    height: 14px; 
-    padding: 10px 18px; 
+    padding: 8px 14px; 
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.15); /* Transparent box around input only */
+    background-color: rgba(255, 255, 255, 0.15); /* Transparent box around input */
   }
 
   .edm__input:focus {
     outline: none;
     background-color: rgba(255, 255, 255, 0.2);
     border-color: var(--edm-hair);
-  }
-
-  .edm__input::placeholder {
-    color: var(--edm-input);
   }
 
   .edm__submit {
@@ -254,7 +207,7 @@
   }
 
   .edm__submit > span:first-child {
-    text-decoration: underline; /* Underline ONLY on sign up text */
+    text-decoration: underline; 
     text-underline-offset: 4px; 
   }
   
@@ -280,6 +233,69 @@
   .edm__msg--err {
     color: #923531;
   }
+
+  /* ===========================
+     LAYOUT: CENTERED (Editorial)
+     =========================== */
+  .edm--centered .edm__inner {
+    text-align: {{ section.settings.text_alignment }};
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    {% if section.settings.text_alignment == 'left' %}
+      align-items: flex-start;
+    {% elsif section.settings.text_alignment == 'right' %}
+      align-items: flex-end;
+    {% else %}
+      align-items: center;
+    {% endif %}
+  }
+
+  .edm--centered .edm__form-wrap,
+  .edm--centered .edm__field {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  /* ===========================
+     LAYOUT: INLINE (Full Width Band)
+     =========================== */
+  .edm--inline .edm__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    text-align: left; /* Forces text to the left */
+  }
+
+  .edm--inline .edm__form-wrap {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    .edm--inline .edm__inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px; /* Space between text and form */
+    }
+
+    .edm--inline .edm__form-wrap {
+      flex: 1 1 auto; /* Allows form to stretch to right margin */
+      width: 100%;
+      max-width: none; /* Removes any width restriction */
+    }
+
+    .edm--inline .edm__field {
+      width: 100%;
+      max-width: none;
+      justify-content: space-between; /* Pushes input left, submit right */
+    }
+
+    .edm--inline .edm__input {
+      max-width: 320px; /* Adjust this if you want the email box wider/narrower */
+    }
+  }
 {%- endstyle -%}
 
 {% schema %}
@@ -299,7 +315,7 @@
     },
     {
       "type": "header",
-      "content": "Alignment"
+      "content": "Alignment (Centered Layout Only)"
     },
     {
       "type": "select",
