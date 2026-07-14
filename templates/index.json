@@ -9,6 +9,135 @@
  */
 {
   "sections": {
+    "gateway_hero": {
+      "type": "gateway-hero",
+      "blocks": {
+        "slide_3LWPWn": {
+          "type": "slide",
+          "source": "{{ metaobjects.gateway_slide[\"stock-sale\"] }}",
+          "settings": {
+            "image": "{{ metaobjects.gateway_slide[\"stock-sale\"].desktop_image.value }}",
+            "micro_label": "{{ metaobjects.gateway_slide[\"stock-sale\"].destination_type.value }}",
+            "title": "{{ metaobjects.gateway_slide[\"stock-sale\"].title.value }}",
+            "price": "{{ metaobjects.gateway_slide[\"stock-sale\"].analytics_label.value }}",
+            "link": "{{ metaobjects.gateway_slide[\"stock-sale\"].custom_url.value }}",
+            "cta_text": "{{ metaobjects.gateway_slide[\"stock-sale\"].cta_text.value }}"
+          }
+        },
+        "slide_kMhbWX": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/2_c6133a58-2b31-4160-85db-75a83d3e7cd2.jpg",
+            "micro_label": "FINAL STOCK",
+            "title": "Y TRANSDRY® BRIEF",
+            "price": "FROM $15.99 SGD",
+            "link": "",
+            "cta_text": ""
+          }
+        },
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/6_2a44df0f-7692-4ef7-a165-57fc699055a5.jpg",
+            "micro_label": "{{ metaobjects.fabric_profile[\"cotton-spandex\"].fabric_name.value }}",
+            "title": "{{ metaobjects.triiiple_product_content[\"v-brief\"].display_name.value }}",
+            "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
+            "link": "shopify://collections/briefs",
+            "cta_text": "{{ metaobjects.triiiple_product_content[\"v-brief\"].signature_quote.value }}"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Untitled-1-Recovered.png",
+            "micro_label": "SHAPE",
+            "title": "BOXER TRUNKS",
+            "price": "FROM $12.99 SGD",
+            "link": "shopify://collections/boxer-trunks",
+            "cta_text": "SHOP BOXER TRUNKS"
+          }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Untitled-1.jpg",
+            "micro_label": "LAYERS",
+            "title": "ESSENTIALS",
+            "price": "TOPS COLLECTION",
+            "link": "shopify://collections/tops",
+            "cta_text": "SHOP TOPS"
+          }
+        },
+        "slide_5": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
+            "micro_label": "FINAL STOCK",
+            "title": "XL / 2XL CLEARANCE",
+            "price": "WHILE STOCK LASTS",
+            "link": "shopify://collections/bundles-xl-2xl-clearance",
+            "cta_text": "SHOP CLEARANCE"
+          }
+        }
+      },
+      "block_order": [
+        "slide_3LWPWn",
+        "slide_kMhbWX",
+        "slide_1",
+        "slide_3",
+        "slide_4",
+        "slide_5"
+      ],
+      "settings": {
+        "image_ratio": "1080 / 1350",
+        "image_ratio_desktop": "16 / 9",
+        "autoplay": false,
+        "autoplay_interval": 5000,
+        "aria_label": "Campaign highlights",
+        "cta_text": "SHOP THE DESIGN",
+        "left_label_1": "UNDERWEAR",
+        "left_link_1": "shopify://collections/underwear",
+        "left_label_2": "Our Hero",
+        "left_link_2": "shopify://products/y-transdry-brief-white",
+        "right_label_1": "BUNDLES",
+        "right_link_1": "shopify://collections/bundles-and-save",
+        "right_label_2": "FINAL SALE",
+        "right_link_2": "shopify://collections/additional-15-off",
+        "slide_metaobjects": [],
+        "rail_bg": "#000000",
+        "cta_bg": "#ffe600",
+        "cta_text_color": "#000000",
+        "cta_size": "compact",
+        "micro_as_badge": true,
+        "badge_height": 20,
+        "badge_bg": "rgba(0,0,0,0)",
+        "badge_border": "#ffffff",
+        "badge_text": "#ffffff"
+      }
+    },
+    "landing_edm_signup_39bzd6": {
+      "type": "landing-edm-signup",
+      "custom_css": [],
+      "name": "EDM Signup",
+      "settings": {
+        "layout": "inline",
+        "bg_color": "#0254b2",
+        "font_color": "#ffffff",
+        "font_opacity": 100,
+        "input_color": "#1cf644",
+        "input_opacity": 95,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 40,
+        "padding_right": 40,
+        "eyebrow": "",
+        "heading": "WELCOME",
+        "subtext": "AN ADDTIONAL 10% OFF",
+        "placeholder": "Email address",
+        "button_label": "Sign up",
+        "success_text": "You’re in — welcome to First Layer."
+      }
+    },
     "sale_hero_8Vwb7N": {
       "type": "sale-hero",
       "blocks": {
@@ -60,29 +189,6 @@
         "urgency_text": "<p>Final stock.<br/>No restock.</p>"
       }
     },
-    "landing_edm_signup_39bzd6": {
-      "type": "landing-edm-signup",
-      "custom_css": [],
-      "name": "EDM Signup",
-      "settings": {
-        "layout": "inline",
-        "bg_color": "#0254b2",
-        "font_color": "#ffffff",
-        "font_opacity": 100,
-        "input_color": "#1cf644",
-        "input_opacity": 95,
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "padding_left": 40,
-        "padding_right": 40,
-        "eyebrow": "",
-        "heading": "WELCOME",
-        "subtext": "AN ADDTIONAL 10% OFF",
-        "placeholder": "Email address",
-        "button_label": "Sign up",
-        "success_text": "You’re in — welcome to First Layer."
-      }
-    },
     "features-strip": {
       "type": "landing-features-strip",
       "disabled": true,
@@ -119,7 +225,7 @@
         "image_2": "shopify://shop_images/x-brief.jpg",
         "link": "shopify://collections/bundles-and-save",
         "width": "wrapper--full",
-        "height": "screen-height-full",
+        "height": "screen-height-three-quarters",
         "flex_align_desktop": "align--bottom-left-desktop",
         "content_width": 100,
         "mobile_image": "shopify://shop_images/Untitled-1.jpg",
@@ -130,7 +236,7 @@
         "overlay_type": "disabled",
         "padding_top": 0,
         "padding_bottom": 0,
-        "show_placeholder": true
+        "show_placeholder": false
       }
     },
     "section_tab_collections_Cc4J84": {
@@ -430,121 +536,15 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
-    },
-    "gateway_hero": {
-      "type": "gateway-hero",
-      "blocks": {
-        "slide_3LWPWn": {
-          "type": "slide",
-          "source": "{{ metaobjects.gateway_slide[\"stock-sale\"] }}",
-          "settings": {
-            "image": "{{ metaobjects.gateway_slide[\"stock-sale\"].desktop_image.value }}",
-            "micro_label": "{{ metaobjects.gateway_slide[\"stock-sale\"].destination_type.value }}",
-            "title": "{{ metaobjects.gateway_slide[\"stock-sale\"].title.value }}",
-            "price": "{{ metaobjects.gateway_slide[\"stock-sale\"].analytics_label.value }}",
-            "link": "{{ metaobjects.gateway_slide[\"stock-sale\"].custom_url.value }}",
-            "cta_text": "{{ metaobjects.gateway_slide[\"stock-sale\"].cta_text.value }}"
-          }
-        },
-        "slide_kMhbWX": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/2_c6133a58-2b31-4160-85db-75a83d3e7cd2.jpg",
-            "micro_label": "FINAL STOCK",
-            "title": "Y TRANSDRY® BRIEF",
-            "price": "FROM $15.99 SGD",
-            "link": "",
-            "cta_text": ""
-          }
-        },
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/6_2a44df0f-7692-4ef7-a165-57fc699055a5.jpg",
-            "micro_label": "{{ metaobjects.fabric_profile[\"cotton-spandex\"].fabric_name.value }}",
-            "title": "{{ metaobjects.triiiple_product_content[\"v-brief\"].display_name.value }}",
-            "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
-            "link": "shopify://collections/briefs",
-            "cta_text": "{{ metaobjects.triiiple_product_content[\"v-brief\"].signature_quote.value }}"
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Untitled-1-Recovered.png",
-            "micro_label": "SHAPE",
-            "title": "BOXER TRUNKS",
-            "price": "FROM $12.99 SGD",
-            "link": "shopify://collections/boxer-trunks",
-            "cta_text": "SHOP BOXER TRUNKS"
-          }
-        },
-        "slide_4": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Untitled-1.jpg",
-            "micro_label": "LAYERS",
-            "title": "ESSENTIALS",
-            "price": "TOPS COLLECTION",
-            "link": "shopify://collections/tops",
-            "cta_text": "SHOP TOPS"
-          }
-        },
-        "slide_5": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
-            "micro_label": "FINAL STOCK",
-            "title": "XL / 2XL CLEARANCE",
-            "price": "WHILE STOCK LASTS",
-            "link": "shopify://collections/bundles-xl-2xl-clearance",
-            "cta_text": "SHOP CLEARANCE"
-          }
-        }
-      },
-      "block_order": [
-        "slide_3LWPWn",
-        "slide_kMhbWX",
-        "slide_1",
-        "slide_3",
-        "slide_4",
-        "slide_5"
-      ],
-      "settings": {
-        "image_ratio": "1080 / 1350",
-        "image_ratio_desktop": "16 / 9",
-        "autoplay": false,
-        "autoplay_interval": 5000,
-        "aria_label": "Campaign highlights",
-        "cta_text": "SHOP THE DESIGN",
-        "left_label_1": "UNDERWEAR",
-        "left_link_1": "shopify://collections/underwear",
-        "left_label_2": "Our Hero",
-        "left_link_2": "shopify://products/y-transdry-brief-white",
-        "right_label_1": "BUNDLES",
-        "right_link_1": "shopify://collections/bundles-and-save",
-        "right_label_2": "FINAL SALE",
-        "right_link_2": "shopify://collections/additional-15-off",
-        "slide_metaobjects": [],
-        "rail_bg": "#000000",
-        "cta_bg": "#ffe600",
-        "cta_text_color": "#000000",
-        "cta_size": "compact",
-        "micro_as_badge": true,
-        "badge_height": 20,
-        "badge_bg": "rgba(0,0,0,0)",
-        "badge_border": "#ffffff",
-        "badge_text": "#ffffff"
-      }
     }
   },
   "order": [
     "gateway_hero",
-    "sale_hero_8Vwb7N",
     "landing_edm_signup_39bzd6",
+    "section_tab_collections_Cc4J84",
+    "sale_hero_8Vwb7N",
     "features-strip",
     "section_hero_ALw4gQ",
-    "section_tab_collections_Cc4J84",
     "homepage-social",
     "178359954937ab782c",
     "homepage-brand-story",
