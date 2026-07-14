@@ -327,7 +327,7 @@
       "type": "sale-brand-story",
       "custom_css": [
         "/* Hide the line break on desktop */.mobile-break {display: none;}",
-        "/* Show the line break on mobile screens (typically under 750px) */@media screen and (max-width: 749px) {.mobile-break {display: block; }}"
+        " /* Show the line break on mobile screens (typically under 750px) */@media screen and (max-width: 749px) {.mobile-break {display: block; }}"
       ],
       "settings": {
         "bg_color": "#FFFFFF",
@@ -336,7 +336,7 @@
         "title_color": "#fff200",
         "body_color": "#fff300",
         "eyebrow": "about us",
-        "title": "<h4>Designed in Singapore.<br/>Crafted in Thailand.</h4><h4></h4>",
+        "title": "<h4>Designed in Singapore.<br/>Crafted in Thailand.</h4>",
         "body": "<p>TRIIPLE believes your first layer <br/><br/>is crafted with precision, not simply produced.<br/><br/>Every fibre and stitch is purposefully chosen—<br/><br/>this is the foundation, never the ordinary.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
