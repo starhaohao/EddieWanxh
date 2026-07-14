@@ -11,6 +11,7 @@
   "sections": {
     "hero": {
       "type": "collection-image-with-title",
+      "disabled": true,
       "settings": {
         "show_title": true,
         "show_description": true,
@@ -34,9 +35,9 @@
           "settings": {
             "column_width": 25,
             "image": "shopify://shop_images/250309_-_TRIIIPLE10707.jpg",
-            "image_width": 100,
+            "image_width": 69,
             "image_aspect_ratio": 1.5,
-            "mobile_image_aspect_ratio": 1.1,
+            "mobile_image_aspect_ratio": 1.5,
             "image_shape": "normal",
             "title": "",
             "heading_font_size": "heading-small",
@@ -58,9 +59,9 @@
           "settings": {
             "column_width": 25,
             "image": "shopify://shop_images/Untitled-3.png",
-            "image_width": 100,
+            "image_width": 69,
             "image_aspect_ratio": 1,
-            "mobile_image_aspect_ratio": 1.1,
+            "mobile_image_aspect_ratio": 1.5,
             "image_shape": "normal",
             "title": "",
             "heading_font_size": "heading-small",
@@ -82,9 +83,9 @@
           "settings": {
             "column_width": 25,
             "image": "shopify://shop_images/fathers-day-edm-grey-socks-bed-lifestyle.jpg",
-            "image_width": 100,
+            "image_width": 69,
             "image_aspect_ratio": 1,
-            "mobile_image_aspect_ratio": 1.1,
+            "mobile_image_aspect_ratio": 1.5,
             "image_shape": "normal",
             "title": "",
             "heading_font_size": "heading-small",
@@ -106,9 +107,9 @@
           "settings": {
             "column_width": 25,
             "image": "shopify://shop_images/ED-Tee-Heathergrey.jpg",
-            "image_width": 100,
+            "image_width": 69,
             "image_aspect_ratio": 1,
-            "mobile_image_aspect_ratio": 1.1,
+            "mobile_image_aspect_ratio": 1.5,
             "image_shape": "normal",
             "title": "",
             "heading_font_size": "heading-small",
@@ -143,7 +144,7 @@
         "align_columns": "flex-align-top",
         "layout_mobile": "slider",
         "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
-        "padding_top": 0,
+        "padding_top": 33,
         "padding_bottom": 20,
         "heading_tag": "h5"
       }
@@ -178,6 +179,66 @@
         "padding_bottom": 0
       }
     },
+    "gateway_hero_ed9Tqb": {
+      "type": "gateway-hero",
+      "blocks": {
+        "slide_RJPKfc": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/7_6ff2ea18-9c14-4690-a3a5-d83d6325f61c.jpg",
+            "focal_desktop": "30%",
+            "micro_label": "TransDRY®",
+            "title": "Y BRIEF",
+            "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
+            "link": "shopify://products/y-transdry-brief-white",
+            "cta_text": "explore"
+          }
+        },
+        "slide_mJhynP": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/gateway-slide1-blackbg.png",
+            "focal_desktop": "30%",
+            "micro_label": "Cotton Spandex",
+            "title": "V BRIEF",
+            "price": "{{ metaobjects.triiiple_product_content[\"v-brief\"].signature_quote.value }}",
+            "link": "shopify://products/y-transdry-brief-white",
+            "cta_text": "explore"
+          }
+        }
+      },
+      "block_order": [
+        "slide_RJPKfc",
+        "slide_mJhynP"
+      ],
+      "name": "Gateway Hero",
+      "settings": {
+        "image_ratio": "9 / 16",
+        "image_ratio_desktop": "16 / 9",
+        "autoplay": true,
+        "autoplay_interval": 5000,
+        "aria_label": "Campaign highlights",
+        "cta_text": "SHOP THE DESIGN",
+        "left_label_1": "HEROS",
+        "left_link_1": "shopify://collections",
+        "left_label_2": "OUR",
+        "left_link_2": "shopify://collections/briefs",
+        "right_label_1": "OUR",
+        "right_link_1": "shopify://collections/underwear",
+        "right_label_2": "HEROS",
+        "right_link_2": "shopify://collections/underwear",
+        "slide_metaobjects": [],
+        "rail_bg": "#0F0F0F",
+        "cta_bg": "#000000",
+        "cta_text_color": "#DEDEDE",
+        "cta_size": "small",
+        "micro_as_badge": false,
+        "badge_height": 14,
+        "badge_bg": "rgba(0,0,0,0)",
+        "badge_border": "#FFFFFF",
+        "badge_text": "#FFFFFF"
+      }
+    },
     "section_recent_products_JGCaih": {
       "type": "section-recent-products",
       "name": "Recently viewed products",
@@ -202,6 +263,7 @@
     "section_multicolumn_yJEQ4T",
     "subcollections",
     "main",
+    "gateway_hero_ed9Tqb",
     "section_recent_products_JGCaih"
   ]
 }

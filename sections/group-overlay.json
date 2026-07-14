@@ -44,6 +44,7 @@
       "blocks": {
         "nav_link_iyYP9W": {
           "type": "nav_link",
+          "disabled": true,
           "settings": {
             "label": "UP TO 60% OFF - Size L & XL",
             "link": ""
@@ -51,6 +52,7 @@
         },
         "nav_link_r6Xx3w": {
           "type": "nav_link",
+          "disabled": true,
           "settings": {
             "label": "Up to 75% OFF - Size XS & S",
             "link": "shopify://collections/bundles-xs-s-clearance"
@@ -125,75 +127,14 @@
         "cta_link": "",
         "use_collection_image": true,
         "image": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
-        "panel_label": "Spotlight",
+        "panel_label": "",
         "padding_top": 32,
         "padding_bottom": 0
-      }
-    },
-    "gateway_hero_K3nYFF": {
-      "type": "gateway-hero",
-      "blocks": {
-        "slide_jPM8kt": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/7_6ff2ea18-9c14-4690-a3a5-d83d6325f61c.jpg",
-            "focal_desktop": "30%",
-            "micro_label": "TransDRY®",
-            "title": "Y BRIEF",
-            "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
-            "link": "shopify://products/y-transdry-brief-white",
-            "cta_text": "explore"
-          }
-        },
-        "slide_3WzVmW": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/gateway-slide1-blackbg.png",
-            "focal_desktop": "30%",
-            "micro_label": "Cotton Spandex",
-            "title": "V BRIEF",
-            "price": "{{ metaobjects.triiiple_product_content[\"v-brief\"].signature_quote.value }}",
-            "link": "shopify://products/y-transdry-brief-white",
-            "cta_text": "explore"
-          }
-        }
-      },
-      "block_order": [
-        "slide_jPM8kt",
-        "slide_3WzVmW"
-      ],
-      "name": "Gateway Hero",
-      "settings": {
-        "image_ratio": "9 / 16",
-        "image_ratio_desktop": "16 / 9",
-        "autoplay": true,
-        "autoplay_interval": 5000,
-        "aria_label": "Campaign highlights",
-        "cta_text": "SHOP THE DESIGN",
-        "left_label_1": "HEROS",
-        "left_link_1": "shopify://collections",
-        "left_label_2": "OUR",
-        "left_link_2": "shopify://collections/briefs",
-        "right_label_1": "OUR",
-        "right_link_1": "shopify://collections/underwear",
-        "right_label_2": "HEROS",
-        "right_link_2": "shopify://collections/underwear",
-        "slide_metaobjects": [],
-        "rail_bg": "#0F0F0F",
-        "cta_bg": "#000000",
-        "cta_text_color": "#DEDEDE",
-        "cta_size": "small",
-        "micro_as_badge": false,
-        "badge_height": 14,
-        "badge_bg": "rgba(0,0,0,0)",
-        "badge_border": "#FFFFFF",
-        "badge_text": "#FFFFFF"
       }
     }
   },
   "order": [
     "178342074450ddcdc7",
-    "collection_product_focus_hero_LGnyG9",
-    "gateway_hero_K3nYFF"
+    "collection_product_focus_hero_LGnyG9"
   ]
 }
