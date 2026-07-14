@@ -39,6 +39,99 @@
         "success_text": "You're in — welcome to First Layer."
       }
     },
+    "collection_product_focus_hero_FqFJ8K": {
+      "type": "collection-product-focus-hero",
+      "blocks": {
+        "nav_link_Vx4YXr": {
+          "type": "nav_link",
+          "disabled": true,
+          "settings": {
+            "label": "UP TO 60% OFF - Size L & XL",
+            "link": ""
+          }
+        },
+        "nav_link_6Wq6nR": {
+          "type": "nav_link",
+          "disabled": true,
+          "settings": {
+            "label": "Up to 75% OFF - Size XS & S",
+            "link": "shopify://collections/bundles-xs-s-clearance"
+          }
+        },
+        "nav_link_6CgaVK": {
+          "type": "nav_link",
+          "disabled": true,
+          "settings": {
+            "label": "Shop All",
+            "link": ""
+          }
+        },
+        "nav_link_WwhjPE": {
+          "type": "nav_link",
+          "disabled": true,
+          "settings": {
+            "label": "Socks",
+            "link": "shopify://collections/socks"
+          }
+        },
+        "nav_link_6xcHWd": {
+          "type": "nav_link",
+          "disabled": true,
+          "settings": {
+            "label": "Tops",
+            "link": "shopify://collections/tops"
+          }
+        },
+        "nav_link_N7z7GM": {
+          "type": "nav_link",
+          "disabled": true,
+          "settings": {
+            "label": "Boxer Trunks",
+            "link": "shopify://collections/boxer-trunks"
+          }
+        },
+        "nav_link_TN9JgG": {
+          "type": "nav_link",
+          "disabled": true,
+          "settings": {
+            "label": "Briefs",
+            "link": "shopify://collections/briefs"
+          }
+        },
+        "nav_link_mttdgK": {
+          "type": "nav_link",
+          "disabled": true,
+          "settings": {
+            "label": "Shop All",
+            "link": "shopify://collections/shop-all"
+          }
+        }
+      },
+      "block_order": [
+        "nav_link_Vx4YXr",
+        "nav_link_6Wq6nR",
+        "nav_link_6CgaVK",
+        "nav_link_WwhjPE",
+        "nav_link_6xcHWd",
+        "nav_link_N7z7GM",
+        "nav_link_TN9JgG",
+        "nav_link_mttdgK"
+      ],
+      "name": "Collection Focus Hero",
+      "settings": {
+        "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
+        "eyebrow": "",
+        "accent_label": "{{ metaobjects.custom_style.sculpt.tagline.value }}",
+        "intro": "<p>{{ shop.brand.short_description }}</p>",
+        "cta_label": "",
+        "cta_link": "",
+        "use_collection_image": true,
+        "image": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
+        "panel_label": "",
+        "padding_top": 32,
+        "padding_bottom": 0
+      }
+    },
     "main": {
       "type": "collection",
       "custom_css": [],
@@ -77,6 +170,7 @@
   },
   "order": [
     "landing_edm_signup_nR6E9f",
+    "collection_product_focus_hero_FqFJ8K",
     "main",
     "section_recent_products_product_focus"
   ]
