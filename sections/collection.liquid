@@ -115,6 +115,19 @@
     {%- assign featured_images_array = featured_images_array | split: '@@' | sort -%}
   {%- endif -%}
 
+  {%- comment -%}
+    Defensive fix: the product grid's own gap/padding areas (visible as a
+    stray light line above/below the tiles, most noticeable since the row
+    gap was increased) should always show the section's own background
+    color, not rely on ambient inheritance through the grid container.
+  {%- endcomment -%}
+  <style>
+    #Collection--{{ section.id }} [data-products-grid],
+    #Collection--{{ section.id }} [data-products-grid] .grid {
+      background-color: var(--COLOR-BG);
+    }
+  </style>
+
   <collection-component
     class="collection collection-products collection-{{ collection.handle }} section-padding {{ color_scheme }}"
     id="Collection--{{ section.id }}"
