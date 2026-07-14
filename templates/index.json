@@ -325,15 +325,19 @@
     },
     "homepage-brand-story": {
       "type": "sale-brand-story",
+      "custom_css": [
+        "/* Hide the line break on desktop */.mobile-break {display: none;}",
+        "/* Show the line break on mobile screens (typically under 750px) */@media screen and (max-width: 749px) {.mobile-break {display: block; }}"
+      ],
       "settings": {
-        "bg_color": "#000000",
+        "bg_color": "#FFFFFF",
         "border_color": "#000000",
         "eyebrow_color": "#868233",
         "title_color": "#fff200",
         "body_color": "#fff300",
         "eyebrow": "about us",
-        "title": "<h4><strong>Designed in Singapore.<br/>Crafted in Thailand.</strong></h4>",
-        "body": "<p>TRIIPLE believes your first layer should be engineered, not just made. Every stitch and fabric choice is intentional—this is the baseline, not basics.</p>",
+        "title": "<h4>Designed in Singapore.<br/>Crafted in Thailand.</h4><h4></h4>",
+        "body": "<p>TRIIPLE believes your first layer <br/><br/>is crafted with precision, not simply produced.<br/><br/>Every fibre and stitch is purposefully chosen—<br/><br/>this is the foundation, never the ordinary.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
     },
@@ -520,7 +524,15 @@
         "right_label_2": "FINAL SALE",
         "right_link_2": "shopify://collections/additional-15-off",
         "slide_metaobjects": [],
-        "rail_bg": "#000000"
+        "rail_bg": "#000000",
+        "cta_bg": "#ffe600",
+        "cta_text_color": "#000000",
+        "cta_size": "compact",
+        "micro_as_badge": true,
+        "badge_height": 20,
+        "badge_bg": "rgba(0,0,0,0)",
+        "badge_border": "#ffffff",
+        "badge_text": "#ffffff"
       }
     }
   },
