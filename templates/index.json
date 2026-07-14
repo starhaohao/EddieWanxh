@@ -330,13 +330,13 @@
         " /* Show the line break on mobile screens (typically under 750px) */@media screen and (max-width: 749px) {.mobile-break {display: block; }}"
       ],
       "settings": {
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "border_color": "#000000",
         "eyebrow_color": "#868233",
         "title_color": "#fff200",
         "body_color": "#fff300",
         "eyebrow": "about us",
-        "title": "<h4>Designed in Singapore.<br/>Crafted in Thailand.</h4>",
+        "title": "<h4>Designed in Singapore.<br/>Crafted in Thailand.</h4><h4></h4>",
         "body": "<p>TRIIPLE believes your first layer <br/><br/>is crafted with precision, not simply produced.<br/><br/>Every fibre and stitch is purposefully chosen—<br/><br/>this is the foundation, never the ordinary.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
@@ -434,6 +434,18 @@
     "gateway_hero": {
       "type": "gateway-hero",
       "blocks": {
+        "slide_3LWPWn": {
+          "type": "slide",
+          "source": "{{ metaobjects.gateway_slide[\"stock-sale\"] }}",
+          "settings": {
+            "image": "{{ metaobjects.gateway_slide[\"stock-sale\"].desktop_image.value }}",
+            "micro_label": "{{ metaobjects.gateway_slide[\"stock-sale\"].destination_type.value }}",
+            "title": "{{ metaobjects.gateway_slide[\"stock-sale\"].title.value }}",
+            "price": "{{ metaobjects.gateway_slide[\"stock-sale\"].analytics_label.value }}",
+            "link": "{{ metaobjects.gateway_slide[\"stock-sale\"].custom_url.value }}",
+            "cta_text": "{{ metaobjects.gateway_slide[\"stock-sale\"].cta_text.value }}"
+          }
+        },
         "slide_kMhbWX": {
           "type": "slide",
           "settings": {
@@ -448,23 +460,12 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/y-trasndry.png",
-            "micro_label": "TransDRY®",
-            "title": "Y BRIEF",
+            "image": "shopify://shop_images/6_2a44df0f-7692-4ef7-a165-57fc699055a5.jpg",
+            "micro_label": "{{ metaobjects.fabric_profile[\"cotton-spandex\"].fabric_name.value }}",
+            "title": "{{ metaobjects.triiiple_product_content[\"v-brief\"].display_name.value }}",
             "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
-            "link": "shopify://products/the-trunk-lover",
-            "cta_text": ""
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/V-cotton-spandex-black-2.png",
-            "micro_label": "EVERYDAY",
-            "title": "V COTTON SPANDEX BRIEF",
-            "price": "FROM $11.99 SGD",
-            "link": "",
-            "cta_text": "SHOP THE DESIGN"
+            "link": "shopify://collections/briefs",
+            "cta_text": "{{ metaobjects.triiiple_product_content[\"v-brief\"].signature_quote.value }}"
           }
         },
         "slide_3": {
@@ -474,43 +475,44 @@
             "micro_label": "SHAPE",
             "title": "BOXER TRUNKS",
             "price": "FROM $12.99 SGD",
-            "link": "",
+            "link": "shopify://collections/boxer-trunks",
             "cta_text": "SHOP BOXER TRUNKS"
           }
         },
         "slide_4": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/trunks.jpg",
+            "image": "shopify://shop_images/Untitled-1.jpg",
             "micro_label": "LAYERS",
             "title": "ESSENTIALS",
             "price": "TOPS COLLECTION",
-            "link": "",
+            "link": "shopify://collections/tops",
             "cta_text": "SHOP TOPS"
           }
         },
         "slide_5": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
             "micro_label": "FINAL STOCK",
             "title": "XL / 2XL CLEARANCE",
             "price": "WHILE STOCK LASTS",
-            "link": "",
+            "link": "shopify://collections/bundles-xl-2xl-clearance",
             "cta_text": "SHOP CLEARANCE"
           }
         }
       },
       "block_order": [
+        "slide_3LWPWn",
         "slide_kMhbWX",
         "slide_1",
-        "slide_2",
         "slide_3",
         "slide_4",
         "slide_5"
       ],
       "settings": {
-        "image_ratio": "viewport",
-        "image_ratio_desktop": "3 / 2",
+        "image_ratio": "1080 / 1350",
+        "image_ratio_desktop": "16 / 9",
         "autoplay": false,
         "autoplay_interval": 5000,
         "aria_label": "Campaign highlights",
@@ -537,6 +539,7 @@
     }
   },
   "order": [
+    "gateway_hero",
     "sale_hero_8Vwb7N",
     "landing_edm_signup_39bzd6",
     "features-strip",
@@ -547,7 +550,6 @@
     "homepage-brand-story",
     "story_salon_feature_TfLYkW",
     "1783598576dfbeb45d",
-    "1783598626bd47c487",
-    "gateway_hero"
+    "1783598626bd47c487"
   ]
 }
