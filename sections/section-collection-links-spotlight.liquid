@@ -13,8 +13,8 @@
   endif
 %}
 
-{%- render 'stylesheet', name: 'custom-content.css' -%}
-{%- render 'stylesheet', name: 'spotlight.css' -%}
+{%- render 'stylesheet', name: 'custom-content.css', async: true, inline: false, blocking: false -%}
+{%- render 'stylesheet', name: 'spotlight.css', async: true, inline: false, blocking: false -%}
 
 {%- if section.blocks.size > 1 -%}
   <script src="{{ 'collections-spotlight.js' | asset_url }}" defer="defer"></script>
@@ -73,6 +73,8 @@
   {%- endif -%}
 {%- endcapture -%}
 
+{%- assign blocks_content = '' -%}
+{%- assign blocks_images = '' -%}
 {%- for block in section.blocks -%}
   {%- liquid
     assign unique = 'SpotlightImage--' | append: '-' | append: block.id
