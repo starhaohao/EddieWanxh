@@ -30,9 +30,23 @@
     {%- endif -%}
 
     {%- if destination_blocks.size > 0 -%}
-      <div class="sh-hub__destinations">
+      <div class="sh-hub__destinations" data-sh-hub-slider>
         {%- for block in destination_blocks -%}
           <a class="sh-hub-card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <span class="sh-hub-card__media">
+                <img
+                  src="{{ block.settings.image | image_url: width: 900 }}"
+                  srcset="{{ block.settings.image | image_url: width: 480 }} 480w, {{ block.settings.image | image_url: width: 720 }} 720w, {{ block.settings.image | image_url: width: 900 }} 900w, {{ block.settings.image | image_url: width: 1080 }} 1080w"
+                  sizes="(min-width: 750px) 33vw, 100vw"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </span>
+            {%- endif -%}
             <div class="sh-hub-card__body">
               {%- if block.settings.label != blank -%}
                 <p class="sh-hub-card__label">{{ block.settings.label | escape }}</p>
@@ -147,10 +161,8 @@
   .sh-hub-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 2rem;
+    gap: 1.25rem;
     min-height: 14rem;
-    padding: 1.75rem;
     background: var(--sh-bg, #fff);
     color: inherit;
     text-decoration: none;
@@ -159,6 +171,32 @@
 
   .sh-hub-card:hover {
     background: color-mix(in srgb, var(--sh-accent, #000) 8%, var(--sh-bg, #fff));
+  }
+
+  /* Banner image, 1080x1350 (4:5 portrait) */
+  .sh-hub-card__media {
+    display: block;
+    aspect-ratio: 1080 / 1350;
+    overflow: hidden;
+    background: color-mix(in srgb, currentColor 8%, transparent);
+  }
+
+  .sh-hub-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 500ms cubic-bezier(.2,.7,.2,1);
+  }
+
+  .sh-hub-card:hover .sh-hub-card__media img { transform: scale(1.03); }
+
+  .sh-hub-card__body {
+    padding: 0 1.75rem;
+  }
+
+  .sh-hub-card:not(:has(.sh-hub-card__media)) .sh-hub-card__body {
+    padding-top: 1.75rem;
   }
 
   .sh-hub-card__label {
@@ -182,6 +220,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    margin: auto 1.75rem 1.75rem;
     font-size: 0.72rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -216,8 +255,33 @@
   }
 
   @media screen and (max-width: 749px) {
-    .sh-hub { padding-inline: 1rem; }
-    .sh-hub__destinations { grid-template-columns: 1fr; }
+    .sh-hub { padding-inline: 0; }
+    .sh-hub__header,
+    .sh-hub__guide { padding-inline: 1rem; }
+
+    /* 3-card grid becomes a swipeable, full-bleed slide-per-card carousel. */
+    .sh-hub__destinations {
+      display: flex;
+      grid-template-columns: none;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0;
+      border: 0;
+      margin-bottom: clamp(2.5rem, 8vw, 4rem);
+    }
+    .sh-hub__destinations::-webkit-scrollbar { display: none; }
+
+    .sh-hub-card {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      min-height: 0;
+      border-right: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+    }
+    .sh-hub-card:last-child { border-right: 0; }
   }
 {% endstylesheet %}
 
@@ -243,6 +307,7 @@
       "type": "destination",
       "name": "Destination card",
       "settings": [
+        { "type": "image_picker", "id": "image", "label": "Banner image", "info": "Portrait works best (1080 x 1350 / 4:5)." },
         { "type": "text", "id": "label", "label": "Label" },
         { "type": "text", "id": "title", "label": "Title" },
         { "type": "text", "id": "text", "label": "Text" },
