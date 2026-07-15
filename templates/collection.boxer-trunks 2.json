@@ -9,8 +9,26 @@
  */
 {
   "sections": {
+    "collection_product_focus_hero_wWzDmE": {
+      "type": "collection-product-focus-hero",
+      "name": "Collection Focus Hero",
+      "settings": {
+        "color_scheme": "",
+        "eyebrow": "Collection",
+        "accent_label": "",
+        "intro": "{{ collection.description }}",
+        "cta_label": "",
+        "cta_link": "",
+        "use_collection_image": true,
+        "image": "{{ collection.image }}",
+        "panel_label": "Browse",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "hero": {
       "type": "collection-image-with-title",
+      "disabled": true,
       "settings": {
         "show_title": true,
         "show_description": true,
@@ -136,6 +154,7 @@
     }
   },
   "order": [
+    "collection_product_focus_hero_wWzDmE",
     "hero",
     "subcollections",
     "main",
