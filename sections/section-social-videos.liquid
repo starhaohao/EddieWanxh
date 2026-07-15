@@ -57,7 +57,7 @@
   endcapture
 -%}
 
-{%- render 'stylesheet', name: 'social-videos.css' -%}
+{%- render 'stylesheet', name: 'social-videos.css', inline: false, async: false, blocking: false -%}
 
 {%- style -%}
   #SocialVideos--{{ section.id }} {
