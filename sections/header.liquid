@@ -180,6 +180,21 @@
       {% endunless %}
       --border-opacity: {{ section.settings.separator_opacity | times: 0.01 }};
     {% endif %}
+
+    /* Apple Frosted Glass Effect - Light Mode */
+    background-color: rgba(255, 255, 255, 0.65) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+
+    /* Apple Frosted Glass Effect - Dark Mode (Uncomment to use instead)
+    background-color: rgba(0, 0, 0, 0.65) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    */
   }
 
   {%- if logo != blank -%}
@@ -273,19 +288,34 @@
 
   assign show_locale_selector = section.settings.show_locale_selector
   assign show_locale_code = section.settings.show_locale_code
-  assign show_locale_selector_toolbar = toolbar_block.settings.show_locale_selector
+  assign show_locale_selector_toolbar = false
+  if toolbar_block
+    assign show_locale_selector_toolbar = toolbar_block.settings.show_locale_selector
+  endif
 
   assign show_globe_icon = section.settings.show_globe_icon
-  assign show_globe_icon_toolbar = toolbar_block.settings.show_globe_icon
+  assign show_globe_icon_toolbar = false
+  if toolbar_block
+    assign show_globe_icon_toolbar = toolbar_block.settings.show_globe_icon
+  endif
 
   assign show_country_selector = section.settings.show_country_selector
-  assign show_country_selector_toolbar = toolbar_block.settings.show_country_selector
+  assign show_country_selector_toolbar = false
+  if toolbar_block
+    assign show_country_selector_toolbar = toolbar_block.settings.show_country_selector
+  endif
 
   assign show_country_name = section.settings.show_country_name
-  assign show_country_name_toolbar = toolbar_block.settings.show_country_name
+  assign show_country_name_toolbar = false
+  if toolbar_block
+    assign show_country_name_toolbar = toolbar_block.settings.show_country_name
+  endif
 
   assign show_country_flag = section.settings.show_country_flag
-  assign show_country_flag_toolbar = toolbar_block.settings.show_country_flag
+  assign show_country_flag_toolbar = false
+  if toolbar_block
+    assign show_country_flag_toolbar = toolbar_block.settings.show_country_flag
+  endif
 
   if show_locale_selector and localization.available_languages.size > 1
     assign languages = true
@@ -355,18 +385,17 @@
     {{ cta }}
 
     {%- if header_popouts -%}
-      {%- assign unique = section.id | append: '-header-mobile-top' -%}
+      {%- assign mobile_unique = section.id | append: '-header-mobile-top' -%}
       <div class="header__mobile__button desktop">
         {%- render 'localization',
-          unique: unique,
+          unique: mobile_unique,
           show_locale_selector: show_locale_selector,
           show_locale_code: show_locale_code,
           show_globe_icon: show_globe_icon,
           show_country_selector: show_country_selector,
           show_country_flag: show_country_flag,
           show_country_name: show_country_name,
-          class: 'header',
-          unique: section.id -%}
+          class: 'header' -%}
       </div>
     {%- endif -%}
 
@@ -413,11 +442,11 @@
     {%- endif -%}
 
     {%- if header_popouts -%}
-      {%- assign unique = section.id | append: '-header-desktop' -%}
+      {%- assign desktop_unique = section.id | append: '-header-desktop' -%}
 
       <div class="header__desktop__button">
         {%- render 'localization'
-          unique: unique,
+          unique: desktop_unique,
           show_locale_selector: show_locale_selector,
           show_locale_code: show_locale_code,
           show_globe_icon: show_globe_icon,
@@ -475,9 +504,9 @@
   </nav>
 {%- endcapture -%}
 
-{%- render 'stylesheet', name: 'header-dropdown.css', async: true -%}
+{%- render 'stylesheet', name: 'header-dropdown.css', async: true, inline: false, blocking: false -%}
 
-{%- if show_toolbar -%}
+{%- if toolbar_block != blank -%}
   <script src="{{ 'ticker.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
