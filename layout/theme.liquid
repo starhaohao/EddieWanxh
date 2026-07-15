@@ -9,6 +9,12 @@
     {{ content_for_header }}
 
 <style>
+/* Liquid glass: shared grain texture used by the top header and bottom
+   sticky bar surfaces below. */
+:root {
+  --glass-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 /* Mobile header */
 @media screen and (max-width: 749px) {
   .header__wrapper .section-padding {
@@ -114,6 +120,28 @@
   top: 0;
   bottom: auto;
 }
+
+/* Liquid glass: bottom sticky bar.
+   Same content/colors/layout as above — only the surface changes from a
+   flat fill to a frosted, refractive pane. Gated behind @supports so
+   browsers without backdrop-filter keep the original solid white bar
+   untouched, exactly as it renders today. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .social-sticky-bar {
+    background-color: rgba(255, 255, 255, 0.55);
+    background-image: var(--glass-grain);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%) url(#liquid-glass-distortion);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      0 -8px 24px -16px rgba(0, 0, 0, 0.2);
+  }
+  .social-sticky-bar .socials svg,
+  .social-sticky-bar__account,
+  .social-sticky-bar__currency {
+    filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
+  }
+}
 .social-sticky-bar .socials {
   display: flex !important;
   align-items: center !important;
@@ -148,6 +176,32 @@
 }
 .header-sections.is-scrolled {
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Liquid glass: top header.
+   The header's own solid fill lives on .theme__header::after (a dedicated
+   background layer behind the logo/menu/icons, defined in theme.css).
+   Overriding it here — rather than touching header.liquid — keeps every
+   icon, link, menu and color scheme exactly as configured; only the fill
+   becomes a frosted, refractive pane instead of a flat color. Gated behind
+   @supports so browsers without backdrop-filter (and without color-mix)
+   keep the header's original solid var(--bg) fill untouched. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) and (color: color-mix(in srgb, red 50%, transparent)) {
+  .theme__header::after {
+    background: color-mix(in srgb, var(--bg) 55%, transparent);
+    background-image: var(--glass-grain);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%) url(#liquid-glass-distortion);
+    box-shadow:
+      inset 0 -1px 0 rgba(255, 255, 255, 0.16),
+      0 8px 24px -16px rgba(0, 0, 0, 0.25);
+  }
+  .theme__header .header__logo img,
+  .theme__header .navlink--toplevel .navtext,
+  .theme__header [data-glyph],
+  .theme__header .header__desktop__buttons .icon {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
 }
 
 /* Social bar — currency + account on right */
@@ -371,6 +425,17 @@ html {
     data-animations="{{ settings.animations_enable }}"
   >
     {%- render 'loading' -%}
+
+    <!-- Liquid glass: shared refraction filter for the header and bottom sticky bar -->
+    <svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="liquid-glass-distortion" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise" />
+          <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="18" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
 
     <a class="in-page-link visually-hidden skip-link" data-skip-content href="#MainContent">
       {{- 'general.accessibility.skip_to_content' | t -}}
