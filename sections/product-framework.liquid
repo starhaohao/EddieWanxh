@@ -87,15 +87,24 @@
 {%- endif -%}
 
 <style>
+  /* Lightened off its original dark full-bleed slab so this section reads
+     as a continuation of the buy-box's own editorial rhythm (hairline
+     rows, tracked-cap labels) rather than a visually separate dark block —
+     same spec-sheet role (Designed For / Size & Fit / Material & Care),
+     same grid, just the surface and type-scale now match the product
+     page's own #E5E5E5 hairlines / near-black text. */
   .pf {
-    --pf-bg:       #1a1d20;
-    --pf-border:   rgba(255,255,255,0.1);
-    --pf-text:     #ffffff;
-    --pf-muted:    rgba(255,255,255,0.42);
-    --pf-accent:   #923531;
+    --pf-bg:       #ffffff;
+    --pf-border:   #E5E5E5;
+    --pf-text:     #0B0B0C;
+    --pf-muted:    rgba(11, 11, 12, 0.55);
+    --pf-body:     rgba(11, 11, 12, 0.72);
+    --pf-accent:   #ED813E;
     --pf-mono:     'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: var(--pf-bg);
     padding: 40px 20px;
+    max-width: 1040px;
+    margin: 0 auto;
   }
 
   /* ── Identity block ── */
@@ -154,7 +163,7 @@
   .pf__disc-text {
     font-size: 14px;
     line-height: 1.65;
-    color: rgba(255,255,255,0.72);
+    color: var(--pf-body);
     margin: 0;
   }
 
@@ -188,7 +197,7 @@
   .pf__cell-body {
     font-size: 13px;
     line-height: 1.55;
-    color: rgba(255,255,255,0.65);
+    color: var(--pf-body);
     margin: 0;
   }
 
