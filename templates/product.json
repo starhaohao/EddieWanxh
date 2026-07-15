@@ -31,7 +31,7 @@
         "description_QwjMiM": {
           "type": "description",
           "settings": {
-            "show_read_more": true,
+            "show_read_more": false,
             "padding_bottom": 16
           }
         },
@@ -72,7 +72,7 @@
             "layout": "slider",
             "autoplay": false,
             "autoplay_speed": 8,
-            "bg_color": "#fafafa",
+            "bg_color": "#FFE696",
             "padding_bottom": 50
           }
         },
@@ -111,6 +111,24 @@
             "padding_bottom": 30
           }
         },
+        "bundle_save_DrnprG": {
+          "type": "bundle-save",
+          "settings": {
+            "bundle_product": "{{ product.metafields.theme.bundle.value }}",
+            "bundle_product_list": [
+              "the-brief-lover",
+              "ed-sleeveless-top-black",
+              "ed-sleeveless-top-white"
+            ],
+            "bundle_title": "Bundle and save 10%",
+            "show_available_bundle_only": true,
+            "layout": "stacked",
+            "autoplay": false,
+            "autoplay_speed": 8,
+            "bg_color": "#FFE696",
+            "padding_bottom": 50
+          }
+        },
         "sharing": {
           "type": "sharing",
           "settings": {
@@ -128,9 +146,11 @@
         "buttons",
         "inventory_countdown",
         "divider",
+        "bundle_save_DrnprG",
         "sharing"
       ],
       "settings": {
+        "text_alignment": "left",
         "product_sticky_enable": true,
         "variant_image_scroll": false,
         "show_cart_bar": true,
