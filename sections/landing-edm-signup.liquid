@@ -281,6 +281,14 @@
   }
 
   @media screen and (min-width: 750px) {
+    /* 1. Force the form block strictly to the right edge on desktop */
+    .edm__form-wrap {
+      margin-left: auto;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    /* 2. Inline Layout specifics (Row: text left, form right) */
     .edm--inline .edm__inner {
       flex-direction: row;
       align-items: center;
@@ -289,19 +297,7 @@
     }
 
     .edm--inline .edm__form-wrap {
-      flex: 1 1 auto; 
-      width: 100%;
-      max-width: none; 
-    }
-
-    .edm--inline .edm__field {
-      width: 100%;
-      max-width: none;
-      justify-content: space-between; 
-    }
-
-    .edm--inline .edm__input {
-      max-width: 320px; 
+      flex: 0 1 auto; 
     }
   }
 {%- endstyle -%}
