@@ -12,6 +12,18 @@
       "content": "Layout"
     },
     {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "left",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Middle"},
+        {"value": "right", "label": "Right"},
+        {"value": "justify", "label": "Even (Justified)"}
+      ]
+    },
+    {
       "type": "checkbox",
       "id": "product_sticky_enable",
       "label": "Enable sticky form",
@@ -1222,8 +1234,7 @@
             {"label": "Box", "value": "icon-box"},
             {"label": "Chat", "value": "icon-chat"},
             {"label": "Check", "value": "icon-check"},
-            {"label": "Check circle", "value": "icon-check-circle"},
-            {"label": "Cloud", "value": "icon-cloud"},
+            {"label": "Check circle", "value": "icon-cloud"},
             {"label": "Diameter", "value": "icon-diameter"},
             {"label": "Discount", "value": "icon-discount"},
             {"label": "Donation", "value": "icon-donation"},
@@ -1285,7 +1296,7 @@
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>Title<\/p>"
+          "default": "<p>Title</p>"
         },
         {
           "type": "select",
@@ -2111,6 +2122,7 @@
   ]
 }
 {% endschema %}
+
 <style>
 /* 1. Add middle line (strikethrough) to the compare price */
 .compare-at-price, 
@@ -2148,5 +2160,35 @@
   width: 100% !important;
   max-width: 100% !important;
   margin-bottom: 5px !important;
+}
+
+/* 4. Product Info Text Alignment */
+.product__info-wrapper,
+.product__info-container,
+.product__title,
+.product__price,
+.product__description,
+.product__description * {
+  text-align: {{ section.settings.text_alignment }} !important;
+}
+
+/* Force buttons to align if middle or right is selected */
+{% if section.settings.text_alignment == 'center' %}
+  .product-form__submit-wrapper,
+  .product-form__controls {
+    align-items: center !important;
+  }
+{% elsif section.settings.text_alignment == 'right' %}
+  .product-form__submit-wrapper,
+  .product-form__controls {
+    align-items: flex-end !important;
+  }
+{% endif %}
+
+/* 5. Mobile 44px Top Margin for Description */
+@media screen and (max-width: 749px) {
+  .product__description {
+    margin-top: 44px !important;
+  }
 }
 </style>
