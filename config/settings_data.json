@@ -10,11 +10,11 @@
 {
   "current": {
     "color_scheme": "scheme-1",
-    "menu_bg_color": "#FFFFFF30",
-    "header_link": "#FFFFFF",
+    "menu_bg_color": "#00000000",
+    "header_link": "#FFFFFFBA",
     "submenu_bg_color": "#FCEC08",
     "submenu_link_color": "#000000",
-    "menu_transparent_color": "#FFFFFF17",
+    "menu_transparent_color": "#17161617",
     "sale_color": "#ED813E",
     "type_nav_font": "sans_serif_n4",
     "nav_font_size": 15,
