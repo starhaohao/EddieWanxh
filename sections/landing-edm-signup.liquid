@@ -1,4 +1,460 @@
+{%- comment -%}
+  EDM / email signup (FABRIC V2 blueprint §4.2).
+  Posts to Shopify's native customer form (creates a marketing subscriber).
+  Layout updated: Inline layout spans full width (text left, button right).
+  Customizable typography sizes added (including eyebrow).
+{%- endcomment -%}
+
+{%- liquid
+  assign uid = section.id
+  assign field_id = 'edm-email-' | append: uid
+  assign form_id = 'edm-form-' | append: uid
+  assign layout = section.settings.layout | default: 'centered'
+  assign font_alpha = section.settings.font_opacity | default: 100 | divided_by: 100.0
+  assign input_alpha = section.settings.input_opacity | default: 100 | divided_by: 100.0
+-%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .edm {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: {{ section.settings.padding_left }}px;
+    padding-right: {{ section.settings.padding_right }}px;
+    --edm-ink: {{ section.settings.font_color | color_modify: 'alpha', font_alpha }};
+    --edm-soft: {{ section.settings.font_color | color_modify: 'alpha', font_alpha | times: 0.55 }};
+    --edm-hair: {{ section.settings.font_color | color_modify: 'alpha', font_alpha | times: 0.22 }};
+    --edm-input: {{ section.settings.input_color | default: section.settings.font_color | color_modify: 'alpha', input_alpha }};
+    color: var(--edm-ink);
+  }
+
+  #shopify-section-{{ section.id }} .edm__input,
+  #shopify-section-{{ section.id }} .edm__input::placeholder {
+    color: var(--edm-input);
+  }
+
+  #shopify-section-{{ section.id }} .edm__heading,
+  #shopify-section-{{ section.id }} .edm__subtext,
+  #shopify-section-{{ section.id }} .edm__eyebrow,
+  #shopify-section-{{ section.id }} .edm__submit,
+  #shopify-section-{{ section.id }} .edm__secondary,
+  #shopify-section-{{ section.id }} .edm__msg--ok {
+    color: var(--edm-ink);
+  }
+
+  #shopify-section-{{ section.id }} .edm__subtext {
+    color: var(--edm-soft);
+  }
+{% endstyle %}
+
+<section class="edm edm--{{ layout }}" id="edm-{{ uid }}">
+  <div class="edm__inner">
+    
+    <div class="edm__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="edm__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="edm__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subtext != blank -%}
+        <p class="edm__subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="edm__form-wrap">
+      {%- form 'customer', id: form_id, class: 'edm__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter, prospect">
+
+        <label class="edm__label" for="{{ field_id }}">
+          {{ section.settings.placeholder }}
+        </label>
+
+        <div class="edm__field">
+          <input
+            type="email"
+            name="contact[email]"
+            id="{{ field_id }}"
+            class="edm__input"
+            value="{% if form.email %}{{ form.email }}{% endif %}"
+            placeholder="{{ section.settings.placeholder }}"
+            autocomplete="email"
+            autocapitalize="off"
+            autocorrect="off"
+            required
+          >
+
+          <button type="submit" class="edm__submit">
+            <span>{{ section.settings.button_label }}</span>
+            <span aria-hidden="true" class="edm__arrow">&#8594;</span>
+          </button>
+        </div>
+
+        {%- if form.posted_successfully? -%}
+          <p class="edm__msg edm__msg--ok">{{ section.settings.success_text }}</p>
+        {%- elsif form.errors -%}
+          <p class="edm__msg edm__msg--err">
+            {{ form.errors.translated_fields.email | default: 'Email' | capitalize }}
+            {{ form.errors.messages.email | default: 'is invalid.' }}
+          </p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+    
+  </div>
+</section>
+
+{%- style -%}
+  /* Base Container */
+  .edm__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .edm__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 0 1 auto;
+  }
+
+  .edm__eyebrow {
+    display: block;
+    font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.eyebrow_size }}px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .edm__heading {
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
+    font-size: {{ section.settings.heading_size }}px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .edm__subtext {
+    font-size: {{ section.settings.subtext_size }}px;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 44ch;
+  }
+
+  .edm__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .edm__field {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: transparent; 
+    padding: 0; 
+    border: 0; 
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .edm__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: 1px solid transparent; 
+    background: transparent;
+    font-family: inherit;
+    font-size: {{ section.settings.input_size }}px; 
+    letter-spacing: 0.01em;
+    padding: 8px 14px; 
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.15); 
+  }
+
+  .edm__input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--edm-hair);
+  }
+
+  .edm__submit {
+    flex: 0 0 auto;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.button_size }}px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .edm__submit > span:first-child {
+    text-decoration: underline; 
+    text-underline-offset: 4px; 
+  }
+  
+  .edm__submit .edm__arrow {
+    text-decoration: none;
+    transition: transform 0.25s ease;
+  }
+
+  .edm__submit:hover {
+    opacity: 0.55;
+  }
+
+  .edm__submit:hover .edm__arrow {
+    transform: translateX(4px);
+  }
+
+  .edm__msg {
+    margin: 16px 0 0;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+
+  .edm__msg--err {
+    color: #923531;
+  }
+
+  /* ===========================
+     LAYOUT: CENTERED (Editorial)
+     =========================== */
+  .edm--centered .edm__inner {
+    text-align: {{ section.settings.text_alignment }};
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    {% if section.settings.text_alignment == 'left' %}
+      align-items: flex-start;
+    {% elsif section.settings.text_alignment == 'right' %}
+      align-items: flex-end;
+    {% else %}
+      align-items: center;
+    {% endif %}
+  }
+
+  .edm--centered .edm__form-wrap,
+  .edm--centered .edm__field {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  /* ===========================
+     LAYOUT: INLINE (Full Width Band)
+     =========================== */
+  .edm--inline .edm__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    text-align: left; 
+  }
+
+  .edm--inline .edm__form-wrap {
+    width: 100%;
+  }
+
+  /* Mobile scaling for heading */
+  @media screen and (max-width: 749px) {
+    .edm__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.85);
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .edm--inline .edm__inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px; 
+    }
+
+    .edm--inline .edm__form-wrap {
+      flex: 1 1 auto; 
+      width: 100%;
+      max-width: none; 
+    }
+
+    .edm--inline .edm__field {
+      width: 100%;
+      max-width: none;
+      justify-content: space-between; 
+    }
+
+    .edm--inline .edm__input {
+      max-width: 320px; 
+    }
+  }
+{%- endstyle -%}
+
+{% schema %}
 {
+  "name": "EDM Signup",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "centered", "label": "Centred (editorial)" },
+        { "value": "inline", "label": "Inline band (between content)" }
+      ],
+      "default": "centered"
+    },
+    {
+      "type": "header",
+      "content": "Alignment (Centered Layout Only)"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F2EEE7"
+    },
+    {
+      "type": "color",
+      "id": "font_color",
+      "label": "Font color (heading, subtext, eyebrow, button)",
+      "default": "#17191C"
+    },
+    {
+      "type": "header",
+      "content": "Typography Sizes"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "label": "Sentence size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "input_size",
+      "label": "Email input size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "label": "Button size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "header",
+      "content": "Section Margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Inner Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
       "type": "range",
       "id": "padding_left",
       "label": "Padding left",
@@ -18,3 +474,51 @@
       "unit": "px",
       "default": 44
     },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "First Layer"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join the list"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Sentence",
+      "default": "First access to drops, restocks and Story Salon."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Field placeholder",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Submit label",
+      "default": "Sign up"
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success message",
+      "default": "You're in — welcome to First Layer."
+    }
+  ],
+  "presets": [
+    {
+      "name": "EDM Signup"
+    }
+  ]
+}
+{% endschema %}
