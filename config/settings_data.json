@@ -11,7 +11,7 @@
   "current": {
     "color_scheme": "scheme-1",
     "menu_bg_color": "#8B8B8B08",
-    "header_link": "#FFFFFFF5",
+    "header_link": "#000000",
     "submenu_bg_color": "#000000",
     "submenu_link_color": "#FFFFFF",
     "menu_transparent_color": "#17161617",
