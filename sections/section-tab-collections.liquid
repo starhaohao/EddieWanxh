@@ -233,21 +233,22 @@
                   {%- endif -%}
 
                     <div class="grid__heading-image">
-                      {%- capture image_animations -%}
-                        data-aos="img-in"
-                        data-aos-duration="800"
-                        data-aos-anchor="{{ animation_anchor }}"
-                        data-aos-easing="ease-out-quart"
-                      {%- endcapture -%}
+                  {%- capture image_animations -%}
+                    data-aos="img-in"
+                    data-aos-duration="800"
+                    data-aos-anchor="{{ animation_anchor }}"
+                    data-aos-easing="ease-out-quart"
+                    data-featured-image
+                   {%- endcapture -%}
 
-                      {%- liquid
-                        assign sizes = '(min-width: 990px) 28vw, (min-width: 750px) 38vw, calc(100vw - 32px - 50px)'
-                        if block_index > 1
-                          assign loading = 'lazy'
-                        endif
+                   {%- liquid
+                     assign sizes = '(min-width: 990px) 28vw, (min-width: 750px) 38vw, calc(100vw - 32px - 50px)'
+                     if block_index > 1
+                        assign loading = 'lazy'
+                     endif
 
-                        render 'image' image: image, sizes: sizes, cover: true, loading: loading, attributes: image_animations, placeholder: image_placeholder, attributes: 'data-featured-image'
-                      -%}
+                     render 'image', image: image, sizes: sizes, cover: true, loading: loading, attributes: image_animations, placeholder: image_placeholder
+                    -%}
                     </div>
 
                     {%- if opacity_overlay -%}
