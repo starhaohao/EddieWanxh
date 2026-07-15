@@ -128,13 +128,13 @@
    untouched, exactly as it renders today. */
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .social-sticky-bar {
-    background-color: rgba(255, 255, 255, 0.55);
+    background-color: rgba(255, 255, 255, 0.68);
     background-image: var(--glass-grain);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    backdrop-filter: blur(16px) saturate(160%) url(#liquid-glass-distortion);
+    -webkit-backdrop-filter: blur(16px) saturate(160%) brightness(1.1);
+    backdrop-filter: blur(16px) saturate(160%) brightness(1.1) url(#liquid-glass-distortion);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.7),
-      0 -8px 24px -16px rgba(0, 0, 0, 0.2);
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 -8px 24px -16px rgba(0, 0, 0, 0.16);
   }
   .social-sticky-bar .socials svg,
   .social-sticky-bar__account,
@@ -183,15 +183,21 @@
    background layer behind the logo/menu/icons, defined in theme.css).
    Overriding it here — rather than touching header.liquid — keeps every
    icon, link, menu and color scheme exactly as configured; only the fill
-   becomes a frosted, refractive pane instead of a flat color. Gated behind
+   becomes a frosted, refractive pane instead of a flat color. A translucent
+   white wash is layered over a light color-mix of the scheme's own --bg
+   (which can be black on transparent-header pages) so the pane reads as
+   bright glass rather than smoked glass, and brightness() in the
+   backdrop-filter chain lifts whatever scrolls behind it too. Gated behind
    @supports so browsers without backdrop-filter (and without color-mix)
    keep the header's original solid var(--bg) fill untouched. */
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) and (color: color-mix(in srgb, red 50%, transparent)) {
   .theme__header::after {
-    background: color-mix(in srgb, var(--bg) 55%, transparent);
-    background-image: var(--glass-grain);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    backdrop-filter: blur(16px) saturate(160%) url(#liquid-glass-distortion);
+    background-color: color-mix(in srgb, var(--bg) 28%, transparent);
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
+      var(--glass-grain);
+    -webkit-backdrop-filter: blur(16px) saturate(160%) brightness(1.2);
+    backdrop-filter: blur(16px) saturate(160%) brightness(1.2) url(#liquid-glass-distortion);
     box-shadow:
       inset 0 -1px 0 rgba(255, 255, 255, 0.16),
       0 8px 24px -16px rgba(0, 0, 0, 0.25);
