@@ -110,7 +110,7 @@
         "right_label_2": "FINAL SALE",
         "right_link_2": "shopify://collections/additional-15-off",
         "slide_metaobjects": [],
-        "rail_bg": "#000000",
+        "rail_bg": "#FFFFFF",
         "cta_bg": "#ffe600",
         "cta_text_color": "#000000",
         "cta_size": "small",
@@ -247,9 +247,9 @@
         "grid": 4,
         "rows": 3,
         "layout_mobile": "slider",
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "color_scheme": "scheme-1",
         "padding_top": 40,
-        "padding_bottom": 40,
+        "padding_bottom": 0,
         "heading_tag": "automatic"
       }
     },

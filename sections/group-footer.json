@@ -22,7 +22,7 @@
             "text": "<p>Find us at</p>",
             "column_width": 40,
             "enable_follow_on_shop": false,
-            "enable_accordion": false
+            "enable_accordion": true
           }
         },
         "footer-1": {
