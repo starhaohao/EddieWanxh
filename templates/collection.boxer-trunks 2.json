@@ -27,128 +27,6 @@
         "padding_bottom": 0
       }
     },
-    "section_multicolumn_yJEQ4T": {
-      "type": "section-multicolumn",
-      "blocks": {
-        "image_overlay_d3XgTL": {
-          "type": "image-overlay",
-          "settings": {
-            "column_width": 25,
-            "image": "shopify://shop_images/250309_-_TRIIIPLE10707.jpg",
-            "image_width": 69,
-            "image_aspect_ratio": 1.5,
-            "mobile_image_aspect_ratio": 1.5,
-            "image_shape": "normal",
-            "title": "",
-            "heading_font_size": "heading-small",
-            "text": "",
-            "text_font_size": "body-medium",
-            "alignment": "align--bottom-right-desktop",
-            "button_text": "BOXER TRUNKS",
-            "button_url": "shopify://collections/boxer-trunks",
-            "button_type": "btn--white",
-            "button_style": "btn--solid",
-            "show_arrow": true,
-            "color": "#01384a",
-            "overlay_type": "text",
-            "heading_tag": "h6"
-          }
-        },
-        "image_overlay_UNCQB9": {
-          "type": "image-overlay",
-          "settings": {
-            "column_width": 25,
-            "image": "shopify://shop_images/Untitled-3.png",
-            "image_width": 69,
-            "image_aspect_ratio": 1.5,
-            "mobile_image_aspect_ratio": 1.5,
-            "image_shape": "normal",
-            "title": "",
-            "heading_font_size": "heading-small",
-            "text": "",
-            "text_font_size": "body-medium",
-            "alignment": "align--bottom-right-desktop",
-            "button_text": "BRIEFS",
-            "button_url": "shopify://collections/briefs",
-            "button_type": "btn--white",
-            "button_style": "btn--solid",
-            "show_arrow": true,
-            "color": "#01384a",
-            "overlay_type": "disabled",
-            "heading_tag": "h6"
-          }
-        },
-        "image_overlay_8FyQTY": {
-          "type": "image-overlay",
-          "settings": {
-            "column_width": 25,
-            "image": "shopify://shop_images/fathers-day-edm-grey-socks-bed-lifestyle.jpg",
-            "image_width": 69,
-            "image_aspect_ratio": 1.5,
-            "mobile_image_aspect_ratio": 1.5,
-            "image_shape": "normal",
-            "title": "",
-            "heading_font_size": "heading-small",
-            "text": "",
-            "text_font_size": "body-medium",
-            "alignment": "align--bottom-right-desktop",
-            "button_text": "SOCKS",
-            "button_url": "shopify://collections/socks",
-            "button_type": "btn--white",
-            "button_style": "btn--solid",
-            "show_arrow": true,
-            "color": "#01384a",
-            "overlay_type": "disabled",
-            "heading_tag": "h6"
-          }
-        },
-        "image_overlay_Ug3VLx": {
-          "type": "image-overlay",
-          "settings": {
-            "column_width": 25,
-            "image": "shopify://shop_images/ED-Tee-Heathergrey.jpg",
-            "image_width": 69,
-            "image_aspect_ratio": 1.5,
-            "mobile_image_aspect_ratio": 1.5,
-            "image_shape": "normal",
-            "title": "",
-            "heading_font_size": "heading-small",
-            "text": "",
-            "text_font_size": "body-medium",
-            "alignment": "align--bottom-right-desktop",
-            "button_text": "TOPS",
-            "button_url": "shopify://collections/tops",
-            "button_type": "btn--white",
-            "button_style": "btn--solid",
-            "show_arrow": true,
-            "color": "#01384a",
-            "overlay_type": "disabled",
-            "heading_tag": "h6"
-          }
-        }
-      },
-      "block_order": [
-        "image_overlay_d3XgTL",
-        "image_overlay_UNCQB9",
-        "image_overlay_8FyQTY",
-        "image_overlay_Ug3VLx"
-      ],
-      "name": "Multi column",
-      "settings": {
-        "title": "",
-        "heading_font_size": "heading-medium",
-        "description": "",
-        "align_heading": "text-left",
-        "align_text": "text-left",
-        "width": "wrapper--full-padded",
-        "align_columns": "flex-align-top",
-        "layout_mobile": "slider",
-        "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
-        "padding_top": 33,
-        "padding_bottom": 20,
-        "heading_tag": "h5"
-      }
-    },
     "subcollections": {
       "type": "subcollections",
       "settings": {
@@ -168,12 +46,12 @@
       "settings": {
         "enable_sort": true,
         "enable_filters": true,
-        "filter_layout": "slide-out",
+        "filter_layout": "inline-closed",
         "default_open": true,
         "collection_linklist": "footer",
-        "grid": 3,
+        "grid": 4,
         "grid_mobile": "2",
-        "products_per_page": 9,
+        "products_per_page": 10,
         "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
         "padding_top": 0,
         "padding_bottom": 0
@@ -228,15 +106,15 @@
         "right_label_2": "HEROS",
         "right_link_2": "shopify://collections/underwear",
         "slide_metaobjects": [],
-        "rail_bg": "#0F0F0F",
+        "rail_bg": "#0f0f0f",
         "cta_bg": "#000000",
-        "cta_text_color": "#DEDEDE",
+        "cta_text_color": "#dedede",
         "cta_size": "small",
         "micro_as_badge": false,
         "badge_height": 14,
         "badge_bg": "rgba(0,0,0,0)",
-        "badge_border": "#FFFFFF",
-        "badge_text": "#FFFFFF"
+        "badge_border": "#ffffff",
+        "badge_text": "#ffffff"
       }
     },
     "section_recent_products_JGCaih": {
@@ -260,7 +138,6 @@
   },
   "order": [
     "hero",
-    "section_multicolumn_yJEQ4T",
     "subcollections",
     "main",
     "gateway_hero_ed9Tqb",
