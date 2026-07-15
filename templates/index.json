@@ -116,9 +116,9 @@
         "cta_size": "small",
         "micro_as_badge": false,
         "badge_height": 20,
-        "badge_bg": "rgba(0,0,0,0)",
+        "badge_bg": "#FFFFFF",
         "badge_border": "#000000",
-        "badge_text": "#FFFFFF"
+        "badge_text": "#000000"
       }
     },
     "landing_edm_signup_39bzd6": {
