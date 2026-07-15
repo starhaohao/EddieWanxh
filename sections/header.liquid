@@ -174,12 +174,19 @@
       --border-opacity: {{ section.settings.separator_opacity | times: 0.01 }};
     {% endif %}
 
-    /* TRIIIPLE Frosted Glass Effect - Light Mode */
-    background-color: rgba(255, 255, 255, 0.65) !important;
+    /* Apple Frosted Glass Effect - Light Mode (Disabled) */
+    /* background-color: rgba(255, 255, 255, 0.65) !important;
     -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
     backdrop-filter: saturate(180%) blur(20px) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important; */
+
+    /* Apple Frosted Glass Effect - Dark Mode (Active) */
+    background-color: rgba(0, 0, 0, 0.45) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+    backdrop-filter: saturate(180%) blur(20px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
   }
   
   /* Remove text shadows globally from header elements */
