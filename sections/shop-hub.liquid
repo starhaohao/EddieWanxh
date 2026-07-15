@@ -1,0 +1,277 @@
+{%- comment -%}
+  Shop Hub — landing page for "Shop by fabric" / "Shop by design", with a
+  set of destination cards and a size/fit guide table below. Prefix: .sh-hub
+{%- endcomment -%}
+
+{%- liquid
+  assign destination_blocks = section.blocks | where: 'type', 'destination'
+  assign size_blocks = section.blocks | where: 'type', 'size_row'
+  assign uid = section.id
+-%}
+
+<section
+  class="sh-hub"
+  id="ShopHub--{{ uid }}"
+  style="--sh-bg: {{ section.settings.background_color }}; --sh-ink: {{ section.settings.text_color }}; --sh-accent: {{ section.settings.accent_color }};"
+>
+  <div class="sh-hub__inner">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.description != blank -%}
+      <header class="sh-hub__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="sh-hub__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h1 class="sh-hub__heading">{{ section.settings.heading | escape }}</h1>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="sh-hub__description rte">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    {%- if destination_blocks.size > 0 -%}
+      <div class="sh-hub__destinations">
+        {%- for block in destination_blocks -%}
+          <a class="sh-hub-card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+            <div class="sh-hub-card__body">
+              {%- if block.settings.label != blank -%}
+                <p class="sh-hub-card__label">{{ block.settings.label | escape }}</p>
+              {%- endif -%}
+              <h2 class="sh-hub-card__title">{{ block.settings.title | escape }}</h2>
+              {%- if block.settings.text != blank -%}
+                <p class="sh-hub-card__text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+            </div>
+            <span class="sh-hub-card__cta">
+              {{ section.settings.card_cta | default: 'Open page' | escape }}
+              <span aria-hidden="true">&#8594;</span>
+            </span>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if size_blocks.size > 0 -%}
+      <div class="sh-hub__guide">
+        {%- if section.settings.guide_eyebrow != blank or section.settings.guide_heading != blank or section.settings.guide_text != blank -%}
+          <header class="sh-hub__guide-header">
+            {%- if section.settings.guide_eyebrow != blank -%}
+              <p class="sh-hub__eyebrow">{{ section.settings.guide_eyebrow | escape }}</p>
+            {%- endif -%}
+            {%- if section.settings.guide_heading != blank -%}
+              <h2 class="sh-hub__guide-heading">{{ section.settings.guide_heading | escape }}</h2>
+            {%- endif -%}
+            {%- if section.settings.guide_text != blank -%}
+              <div class="sh-hub__description rte">{{ section.settings.guide_text }}</div>
+            {%- endif -%}
+          </header>
+        {%- endif -%}
+
+        <table class="sh-hub-table">
+          <thead>
+            <tr>
+              <th scope="col">{{ 'products.general.size' | t | default: 'Size' }}</th>
+              <th scope="col">Chest</th>
+              <th scope="col">Waist</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for block in size_blocks -%}
+              <tr {{ block.shopify_attributes }}>
+                <td>{{ block.settings.size | escape }}</td>
+                <td>{{ block.settings.chest | escape }}</td>
+                <td>{{ block.settings.waist | escape }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .sh-hub {
+    background: var(--sh-bg, #fff);
+    color: var(--sh-ink, #0f1623);
+    padding: clamp(2.5rem, 6vw, 6rem) var(--outer, 32px);
+  }
+
+  .sh-hub__inner {
+    width: 100%;
+    max-width: var(--content-max, 1100px);
+    margin: 0 auto;
+  }
+
+  .sh-hub__header {
+    max-width: 42rem;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+
+  .sh-hub__eyebrow {
+    margin: 0 0 0.6rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sh-accent, currentColor);
+  }
+
+  .sh-hub__heading,
+  .sh-hub-card__title,
+  .sh-hub__guide-heading {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
+    letter-spacing: -0.02em;
+  }
+
+  .sh-hub__heading { font-size: clamp(1.6rem, 4vw, 3rem); line-height: 1; margin-bottom: 0.75rem; }
+  .sh-hub__guide-heading { font-size: clamp(1.3rem, 2.6vw, 2rem); line-height: 1.05; }
+
+  .sh-hub__description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: color-mix(in srgb, currentColor 70%, transparent);
+  }
+
+  .sh-hub__destinations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1px;
+    background: color-mix(in srgb, currentColor 15%, transparent);
+    border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+    margin-bottom: clamp(3rem, 7vw, 6rem);
+  }
+
+  .sh-hub-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 14rem;
+    padding: 1.75rem;
+    background: var(--sh-bg, #fff);
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .sh-hub-card:hover {
+    background: color-mix(in srgb, var(--sh-accent, #000) 8%, var(--sh-bg, #fff));
+  }
+
+  .sh-hub-card__label {
+    margin: 0 0 0.5rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sh-accent, currentColor);
+  }
+
+  .sh-hub-card__title { font-size: clamp(1.1rem, 2vw, 1.5rem); }
+
+  .sh-hub-card__text {
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: color-mix(in srgb, currentColor 65%, transparent);
+  }
+
+  .sh-hub-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sh-accent, currentColor);
+  }
+
+  .sh-hub-card:hover .sh-hub-card__cta span { transform: translateX(3px); }
+  .sh-hub-card__cta span { display: inline-block; transition: transform 0.2s ease; }
+
+  .sh-hub__guide-header { max-width: 40rem; margin-bottom: 1.5rem; }
+
+  .sh-hub-table {
+    width: 100%;
+    max-width: 30rem;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .sh-hub-table th,
+  .sh-hub-table td {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  }
+
+  .sh-hub-table th {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, currentColor 65%, transparent);
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 749px) {
+    .sh-hub { padding-inline: 1rem; }
+    .sh-hub__destinations { grid-template-columns: 1fr; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shop hub",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by fabric." },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "text", "id": "card_cta", "label": "Card link label", "default": "Open page" },
+    { "type": "header", "content": "Size guide" },
+    { "type": "text", "id": "guide_eyebrow", "label": "Guide eyebrow", "default": "Fit guide" },
+    { "type": "text", "id": "guide_heading", "label": "Guide heading", "default": "Size and fit guide" },
+    { "type": "richtext", "id": "guide_text", "label": "Guide text" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#0f1623" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#923531" }
+  ],
+  "blocks": [
+    {
+      "type": "destination",
+      "name": "Destination card",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "size_row",
+      "name": "Size row",
+      "settings": [
+        { "type": "text", "id": "size", "label": "Size", "default": "M" },
+        { "type": "text", "id": "chest", "label": "Chest (in)", "default": "36-38" },
+        { "type": "text", "id": "waist", "label": "Waist (in)", "default": "31-33" }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Shop hub",
+      "blocks": [
+        { "type": "destination", "settings": { "label": "Shop by fabric", "title": "Shop by fabric", "text": "Move through the range by fabric first.", "link": "/collections/all" } },
+        { "type": "destination", "settings": { "label": "Shop by design", "title": "Shop by design", "text": "Jump back to the silhouette-led edit.", "link": "/pages/shop-by-design" } },
+        { "type": "destination", "settings": { "label": "All items", "title": "View all items", "text": "Browse the whole store in one sweep.", "link": "/collections/all" } },
+        { "type": "size_row", "settings": { "size": "XS", "chest": "32-34", "waist": "25-27" } },
+        { "type": "size_row", "settings": { "size": "S", "chest": "34-36", "waist": "28-30" } },
+        { "type": "size_row", "settings": { "size": "M", "chest": "36-38", "waist": "31-33" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
