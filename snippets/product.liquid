@@ -298,19 +298,22 @@
       letter-spacing: 0.08em;
     }
     #MainProduct--{{ section.id }} .product__title {
-      font-size: 26px;
-      font-weight: 600;
-      line-height: 1.2;
+      font-size: 32px !important;
+      font-weight: 700;
+      line-height: 1.05;
       letter-spacing: -0.015em;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-    /* Material line: the reference size that Care/Shipping tabs and the
-       socks upsell title are matched to below, so they read consistently
-       against the now-bolder title. */
+    /* Material line: stays a small tracked-cap label under the now-bolder,
+       larger title — pinned with !important on font-size so it can't be
+       outsized by a per-block heading-size setting the way it was before. */
     #MainProduct--{{ section.id }} .product__subheading {
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.01em;
+      font-size: 13px !important;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.5);
     }
     #MainProduct--{{ section.id }} .product__price__wrap,
     #MainProduct--{{ section.id }} .product__price {
@@ -440,8 +443,11 @@
         padding: 24px 16px 120px 16px;
       }
       #MainProduct--{{ section.id }} .product__title {
-        font-size: 20px;
+        font-size: 24px !important;
         letter-spacing: -0.01em;
+      }
+      #MainProduct--{{ section.id }} .product__subheading {
+        font-size: 12px !important;
       }
       #MainProduct--{{ section.id }} .product__price__wrap,
       #MainProduct--{{ section.id }} .product__price {
@@ -475,8 +481,8 @@
         background-image:
           linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
           var(--glass-grain);
-        -webkit-backdrop-filter: blur(16px) saturate(160%) brightness(1.15);
-        backdrop-filter: blur(16px) saturate(160%) brightness(1.15) url(#liquid-glass-distortion);
+        -webkit-backdrop-filter: blur(11px) saturate(160%) brightness(1.15);
+        backdrop-filter: blur(11px) saturate(160%) brightness(1.15) url(#liquid-glass-distortion);
         box-shadow:
           inset 0 1px 0 rgba(255, 255, 255, 0.7),
           0 -8px 24px -16px rgba(0, 0, 0, 0.18);
@@ -484,27 +490,6 @@
       .cart-bar__product__title,
       .cart-bar__product__price {
         filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
-      }
-    }
-
-    /* ================= Editorial headline: title + material line as a
-       two-tier stack, echoing a bold/regular two-line masthead treatment
-       (bold product name, regular material line right underneath) using
-       the theme's own real title + material data — no new content added. */
-    #MainProduct--{{ section.id }} .product__title__wrapper--with-subtitle .product__title {
-      margin-bottom: 2px;
-    }
-    #MainProduct--{{ section.id }} .product__subheading {
-      font-size: 26px;
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-      text-transform: none;
-      color: rgba(0, 0, 0, 0.55);
-    }
-    @media only screen and (max-width: 749px) {
-      #MainProduct--{{ section.id }} .product__subheading {
-        font-size: 19px;
       }
     }
   {%- endstyle -%}

@@ -107,8 +107,8 @@
   left: 0;
   right: 0;
   height: var(--HEADER-HEIGHT-MOBILE, 64px);
-  background-color: #ffffff;
-  color: #121212;
+  background-color: #0b0b0c;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -122,24 +122,24 @@
 }
 
 /* Liquid glass: bottom sticky bar.
-   Same content/colors/layout as above — only the surface changes from a
-   flat fill to a frosted, refractive pane. Gated behind @supports so
-   browsers without backdrop-filter keep the original solid white bar
-   untouched, exactly as it renders today. */
+   Dark, translucent glass with white icons/text (rather than the earlier
+   light glass) — a lighter blur than the header/cart-bar keeps it reading
+   as clear rather than heavily frosted. Gated behind @supports so browsers
+   without backdrop-filter keep the bar's solid dark fill untouched. */
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .social-sticky-bar {
-    background-color: rgba(255, 255, 255, 0.68);
+    background-color: rgba(11, 11, 12, 0.42);
     background-image: var(--glass-grain);
-    -webkit-backdrop-filter: blur(16px) saturate(160%) brightness(1.1);
-    backdrop-filter: blur(16px) saturate(160%) brightness(1.1) url(#liquid-glass-distortion);
+    -webkit-backdrop-filter: blur(11px) saturate(150%) brightness(1.15);
+    backdrop-filter: blur(11px) saturate(150%) brightness(1.15) url(#liquid-glass-distortion);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.8),
-      0 -8px 24px -16px rgba(0, 0, 0, 0.16);
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 -8px 24px -16px rgba(0, 0, 0, 0.3);
   }
   .social-sticky-bar .socials svg,
   .social-sticky-bar__account,
   .social-sticky-bar__currency {
-    filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
   }
 }
 .social-sticky-bar .socials {
@@ -151,13 +151,13 @@
   list-style: none !important;
 }
 .social-sticky-bar .socials a {
-  color: #121212 !important;
+  color: #ffffff !important;
   display: flex;
   align-items: center;
 }
-.social-sticky-bar .socials svg { color: #121212; }
+.social-sticky-bar .socials svg { color: #ffffff; }
 .social-sticky-bar .socials svg path {
-  stroke: #121212 !important;
+  stroke: #ffffff !important;
   fill: none !important;
 }
 .social-bar-prefooter-wrap { position: relative; }
@@ -196,8 +196,8 @@
     background-image:
       linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
       var(--glass-grain);
-    -webkit-backdrop-filter: blur(16px) saturate(160%) brightness(1.2);
-    backdrop-filter: blur(16px) saturate(160%) brightness(1.2) url(#liquid-glass-distortion);
+    -webkit-backdrop-filter: blur(11px) saturate(160%) brightness(1.2);
+    backdrop-filter: blur(11px) saturate(160%) brightness(1.2) url(#liquid-glass-distortion);
     box-shadow:
       inset 0 -1px 0 rgba(255, 255, 255, 0.16),
       0 8px 24px -16px rgba(0, 0, 0, 0.25);
@@ -221,13 +221,13 @@
 .social-sticky-bar__currency {
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: #121212;
+  color: #ffffff;
   white-space: nowrap;
 }
 .social-sticky-bar__account {
   display: flex;
   align-items: center;
-  color: #121212;
+  color: #ffffff;
   text-decoration: none;
   font-size: 11px;
   letter-spacing: 0.1em;
