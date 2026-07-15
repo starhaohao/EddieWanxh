@@ -298,11 +298,19 @@
       letter-spacing: 0.08em;
     }
     #MainProduct--{{ section.id }} .product__title {
-      font-size: 24px;
-      font-weight: 400;
+      font-size: 26px;
+      font-weight: 600;
       line-height: 1.2;
       letter-spacing: -0.015em;
       margin-bottom: 8px;
+    }
+    /* Material line: the reference size that Care/Shipping tabs and the
+       socks upsell title are matched to below, so they read consistently
+       against the now-bolder title. */
+    #MainProduct--{{ section.id }} .product__subheading {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
     }
     #MainProduct--{{ section.id }} .product__price__wrap,
     #MainProduct--{{ section.id }} .product__price {
@@ -363,6 +371,23 @@
 
     /* Sale badge inset per spec (keeps the brand neon pill styling) */
     #MainProduct--{{ section.id }} .product__media-badges { top: 24px; left: 24px; }
+
+    /* "Final sale" label: brand orange (matches theme's sale_color). */
+    #MainProduct--{{ section.id }} .product__final-sale,
+    #MainProduct--{{ section.id }} .product__final-sale-question {
+      color: #ED813E !important;
+    }
+
+    /* Promo socks upsell card: title matches the material-line size, price
+       and the shared info line render as three separate lines. */
+    #MainProduct--{{ section.id }} [data-promo-socks-offer] .product-upsell__title {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+    #MainProduct--{{ section.id }} [data-promo-socks-offer] .product-upsell__price .new-price {
+      color: #ED813E;
+    }
 
     /* Media badges: halve the pill height (thinner than the base badge-box)
        and center the label both axes. Border thinned to 1px inline. Same

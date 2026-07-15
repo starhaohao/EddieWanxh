@@ -8,7 +8,7 @@
   assign promo_socks_handle = 'pair-with-socks'
   assign is_promo_socks_offer = false
   assign promo_socks_display_title = 'Add L Cotton Spandex Socks'
-  assign promo_socks_info_line = 'Choose 1 colour only. Limited to 1 pair per transaction. Valid with any product purchase.'
+  assign promo_socks_info_line = 'Choose 1 colour only.<br>Limited to 1 pair per transaction.<br>Valid with any product purchase.'
 
   if upsell_product == blank
     assign show_upsell = false
@@ -247,6 +247,9 @@
                         name="add"
                         data-quick-add-btn
                         data-add-to-cart
+                        {% if is_promo_socks_offer %}
+                          data-promo-socks-trigger
+                        {% endif %}
                         {% unless upsell_variant.available %}
                           disabled="disabled"
                         {% endunless %}
@@ -307,4 +310,8 @@
       {%- endunless -%}
     </div>
   </quick-add-product>
+
+  {%- if is_promo_socks_offer -%}
+    <script src="{{ 'promo-socks-limit.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
 {%- endif -%}
