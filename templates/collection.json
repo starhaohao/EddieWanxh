@@ -9,36 +9,6 @@
  */
 {
   "sections": {
-    "landing_edm_signup_nR6E9f": {
-      "type": "landing-edm-signup",
-      "name": "EDM Signup",
-      "settings": {
-        "layout": "inline",
-        "text_alignment": "center",
-        "bg_color": "#FFD900",
-        "font_color": "#000000",
-        "font_opacity": 100,
-        "input_color": "#5A5A5A",
-        "input_opacity": 100,
-        "eyebrow_size": 11,
-        "heading_size": 28,
-        "subtext_size": 13,
-        "input_size": 11,
-        "button_size": 11,
-        "margin_top": 0,
-        "margin_bottom": 24,
-        "padding_top": 52,
-        "padding_bottom": 32,
-        "padding_left": 20,
-        "padding_right": 20,
-        "eyebrow": "First Layer",
-        "heading": "Join the list",
-        "subtext": "unlock 10% off & more?",
-        "placeholder": "Email address",
-        "button_label": "Sign up",
-        "success_text": "You're in — welcome to First Layer."
-      }
-    },
     "collection_product_focus_hero_FqFJ8K": {
       "type": "collection-product-focus-hero",
       "blocks": {
@@ -146,7 +116,34 @@
         "products_per_page": 24,
         "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
         "padding_top": 0,
-        "padding_bottom": 40
+        "padding_bottom": 0
+      }
+    },
+    "landing_edm_signup_nR6E9f": {
+      "type": "landing-edm-signup",
+      "name": "EDM Signup",
+      "settings": {
+        "layout": "inline",
+        "text_alignment": "center",
+        "bg_color": "#ffd900",
+        "font_color": "#000000",
+        "eyebrow_size": 11,
+        "heading_size": 28,
+        "subtext_size": 13,
+        "input_size": 11,
+        "button_size": 11,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 52,
+        "padding_bottom": 40,
+        "padding_left": 44,
+        "padding_right": 44,
+        "eyebrow": "First Layer",
+        "heading": "Join the list",
+        "subtext": "unlock 10% off & more?",
+        "placeholder": "Email address",
+        "button_label": "Sign up",
+        "success_text": "You're in — welcome to First Layer."
       }
     },
     "section_recent_products_product_focus": {
@@ -161,17 +158,17 @@
         "grid": 4,
         "rows": 2,
         "layout_mobile": "slider",
-        "color_scheme": "scheme-2",
-        "padding_top": 18,
+        "color_scheme": "scheme-1",
+        "padding_top": 43,
         "padding_bottom": 44,
         "heading_tag": "automatic"
       }
     }
   },
   "order": [
-    "landing_edm_signup_nR6E9f",
     "collection_product_focus_hero_FqFJ8K",
     "main",
+    "landing_edm_signup_nR6E9f",
     "section_recent_products_product_focus"
   ]
 }
