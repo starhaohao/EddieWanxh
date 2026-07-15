@@ -16,7 +16,7 @@
           "type": "title",
           "settings": {
             "subheading_option": "none",
-            "heading_font_size": "heading-medium",
+            "heading_font_size": "heading-large",
             "padding_bottom": 8
           }
         },
@@ -320,7 +320,7 @@
       ],
       "settings": {
         "enable_tabs": true,
-        "heading_alignment": "text-center",
+        "heading_alignment": "text-left",
         "heading_font_size": "heading-small",
         "limit": 4,
         "layout_desktop": "slider",
