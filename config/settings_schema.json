@@ -1466,6 +1466,26 @@
     ]
   },
   {
+    "name": "Liquid Glass",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Controls the frosted glass surface on the site header and the bottom sticky bar, so both share the same look."
+      },
+      {
+        "type": "range",
+        "id": "liquid_glass_opacity",
+        "label": "Tint opacity",
+        "min": 10,
+        "max": 80,
+        "step": 5,
+        "unit": "%",
+        "default": 42,
+        "info": "Lower = more see-through, higher = more opaque."
+      }
+    ]
+  },
+  {
     "name": "Advanced",
     "settings": [
       {

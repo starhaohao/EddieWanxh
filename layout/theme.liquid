@@ -122,13 +122,14 @@
 }
 
 /* Liquid glass: bottom sticky bar.
-   Dark, translucent glass with white icons/text (rather than the earlier
-   light glass) — a lighter blur than the header/cart-bar keeps it reading
-   as clear rather than heavily frosted. Gated behind @supports so browsers
+   Dark, translucent glass with white icons/text. Shares its tint opacity
+   with .theme__header::after above via the "Liquid Glass > Tint opacity"
+   theme setting, so a merchant can tune both surfaces at once from the
+   customizer without editing code. Gated behind @supports so browsers
    without backdrop-filter keep the bar's solid dark fill untouched. */
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .social-sticky-bar {
-    background-color: rgba(11, 11, 12, 0.42);
+    background-color: rgba(11, 11, 12, {{ settings.liquid_glass_opacity | divided_by: 100.0 }});
     background-image: var(--glass-grain);
     -webkit-backdrop-filter: blur(11px) saturate(150%) brightness(1.15);
     backdrop-filter: blur(11px) saturate(150%) brightness(1.15) url(#liquid-glass-distortion);
@@ -183,24 +184,22 @@
    background layer behind the logo/menu/icons, defined in theme.css).
    Overriding it here — rather than touching header.liquid — keeps every
    icon, link, menu and color scheme exactly as configured; only the fill
-   becomes a frosted, refractive pane instead of a flat color. A translucent
-   white wash is layered over a light color-mix of the scheme's own --bg
-   (which can be black on transparent-header pages) so the pane reads as
-   bright glass rather than smoked glass, and brightness() in the
-   backdrop-filter chain lifts whatever scrolls behind it too. Gated behind
-   @supports so browsers without backdrop-filter (and without color-mix)
-   keep the header's original solid var(--bg) fill untouched. */
-@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) and (color: color-mix(in srgb, red 50%, transparent)) {
+   becomes a frosted, refractive pane instead of a flat color. Uses the
+   exact same dark tint/blur/brightness recipe as .social-sticky-bar below
+   so the header and bottom bar read as one consistent glass material, and
+   both share the merchant-configurable "Liquid Glass > Tint opacity"
+   theme setting. Gated behind @supports so browsers without
+   backdrop-filter keep the header's original solid var(--bg) fill
+   untouched. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .theme__header::after {
-    background-color: color-mix(in srgb, var(--bg) 28%, transparent);
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
-      var(--glass-grain);
-    -webkit-backdrop-filter: blur(11px) saturate(160%) brightness(1.2);
-    backdrop-filter: blur(11px) saturate(160%) brightness(1.2) url(#liquid-glass-distortion);
+    background-color: rgba(11, 11, 12, {{ settings.liquid_glass_opacity | divided_by: 100.0 }});
+    background-image: var(--glass-grain);
+    -webkit-backdrop-filter: blur(11px) saturate(150%) brightness(1.15);
+    backdrop-filter: blur(11px) saturate(150%) brightness(1.15) url(#liquid-glass-distortion);
     box-shadow:
-      inset 0 -1px 0 rgba(255, 255, 255, 0.16),
-      0 8px 24px -16px rgba(0, 0, 0, 0.25);
+      inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+      0 8px 24px -16px rgba(0, 0, 0, 0.3);
   }
   .theme__header .header__logo img,
   .theme__header .navlink--toplevel .navtext,
