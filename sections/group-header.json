@@ -286,10 +286,10 @@
         "image-4"
       ],
       "settings": {
-        "header_sticky": true,
-        "enable_search": true,
+        "header_sticky": false,
+        "enable_search": false,
         "header_style": "logo_beside",
-        "show_separator_line": true,
+        "show_separator_line": false,
         "header_border_color": "#7c9bdb",
         "separator_opacity": 40,
         "show_icons": true,

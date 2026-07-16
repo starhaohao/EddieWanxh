@@ -116,7 +116,7 @@
         "cta_size": "small",
         "micro_as_badge": false,
         "badge_height": 20,
-        "badge_bg": "#FFFFFF",
+        "badge_bg": "#ffffff",
         "badge_border": "#000000",
         "badge_text": "#000000"
       }
