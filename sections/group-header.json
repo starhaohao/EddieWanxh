@@ -305,7 +305,7 @@
         "button_type": "btn--white",
         "show_social_icons": false,
         "secondary_menu_linklist": "",
-        "show_locale_selector": false,
+        "show_locale_selector": true,
         "show_locale_code": true,
         "show_globe_icon": true,
         "show_country_selector": true,

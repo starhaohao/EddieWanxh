@@ -90,8 +90,8 @@
       "name": "Collection Focus Hero",
       "settings": {
         "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
-        "eyebrow": "wear it, own, explain nothing.",
-        "accent_label": "{{ collection.title }}",
+        "eyebrow": "",
+        "accent_label": "wear it, own, explain nothing.",
         "intro": "",
         "cta_label": "",
         "cta_link": "",
