@@ -72,8 +72,8 @@
             "layout": "slider",
             "autoplay": false,
             "autoplay_speed": 8,
-            "bg_color": "#FFE696",
-            "padding_bottom": 50
+            "bg_color": "#ffe696",
+            "padding_bottom": 0
           }
         },
         "buttons": {
@@ -125,7 +125,7 @@
             "layout": "stacked",
             "autoplay": false,
             "autoplay_speed": 8,
-            "bg_color": "#FFE696",
+            "bg_color": "#ffe696",
             "padding_bottom": 50
           }
         },
