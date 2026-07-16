@@ -13,6 +13,11 @@
    sticky bar surfaces below. */
 :root {
   --glass-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Bottom sticky bar height — 50% taller than the header's own mobile
+     height, which it otherwise shares. Kept as its own variable so only
+     the bottom bar (and the page padding/floating elements that clear it)
+     grow, not the top header. */
+  --bottom-bar-height: calc(var(--HEADER-HEIGHT-MOBILE, 64px) * 1.5);
 }
 
 /* Mobile header */
@@ -106,7 +111,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: var(--HEADER-HEIGHT-MOBILE, 64px);
+  height: var(--bottom-bar-height);
   background-color: #0b0b0c;
   color: #ffffff;
   display: flex;
@@ -163,7 +168,7 @@
 }
 .social-bar-prefooter-wrap { position: relative; }
 [data-site-container] {
-  padding-bottom: var(--HEADER-HEIGHT-MOBILE, 64px);
+  padding-bottom: var(--bottom-bar-height);
   padding-top: var(--HEADER-HEIGHT-MOBILE, 64px);
 }
 .header-sections {
@@ -244,7 +249,7 @@
 /* Scroll-to-top button — lift it above the social sticky bar on mobile */
 @media screen and (max-width: 749px) {
   .btn--scroll-top {
-    bottom: calc(var(--HEADER-HEIGHT-MOBILE, 64px) + 16px) !important;
+    bottom: calc(var(--bottom-bar-height) + 16px) !important;
   }
 }
 
@@ -255,7 +260,7 @@
   .tag-floating,
   .promo-tags__tag,
   .floating-tag {
-    bottom: var(--HEADER-HEIGHT-MOBILE, 64px) !important;
+    bottom: var(--bottom-bar-height) !important;
   }
 }
 
