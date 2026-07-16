@@ -10,9 +10,9 @@
 {
   "current": {
     "color_scheme": "scheme-1",
-    "menu_bg_color": "#8B8B8B08",
-    "header_link": "#FFFFFF",
-    "submenu_bg_color": "#000000",
+    "menu_bg_color": "#8B8B8B61",
+    "header_link": "#ffffff",
+    "submenu_bg_color": "#00000000",
     "submenu_link_color": "#FFFFFF",
     "menu_transparent_color": "#17161600",
     "sale_color": "#ED813E",
