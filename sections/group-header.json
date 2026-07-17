@@ -214,7 +214,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "header_sticky": false,
+        "header_sticky": true,
         "enable_search": false,
         "header_style": "logo_beside",
         "show_separator_line": false,
@@ -242,36 +242,20 @@
         "highlight_item": "Final Clearance",
         "highlight_item_color": "#ffe500",
         "transparent_logo": "shopify://shop_images/transparent.png",
-        "transparent_home": false,
-        "transparent_collection": false,
-        "transparent_article": false,
-        "transparent_page": false,
-        "transparent_product_page": false,
+        "transparent_home": true,
+        "transparent_collection": true,
+        "transparent_article": true,
+        "transparent_page": true,
+        "transparent_product_page": true,
         "transparent_logo_pdp": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "padding_top": 5,
         "padding_bottom": 5
-      }
-    },
-    "divider_hnMzUp": {
-      "type": "divider",
-      "name": "t:names.divider_section",
-      "settings": {
-        "background_color": "",
-        "divider_color": "",
-        "section_width": "full-width",
-        "thickness": 1,
-        "corner_radius": "square",
-        "width_percent": 100,
-        "alignment_horizontal": "center",
-        "padding-block-start": 16,
-        "padding-block-end": 16
       }
     }
   },
   "order": [
     "announcement",
     "mobile-menu",
-    "header",
-    "divider_hnMzUp"
+    "header"
   ]
 }
