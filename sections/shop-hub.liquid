@@ -81,24 +81,94 @@
           </header>
         {%- endif -%}
 
-        <table class="sh-hub-table">
-          <thead>
-            <tr>
-              <th scope="col">{{ 'products.general.size' | t | default: 'Size' }}</th>
-              <th scope="col">Chest</th>
-              <th scope="col">Waist</th>
-            </tr>
-          </thead>
-          <tbody>
-            {%- for block in size_blocks -%}
-              <tr {{ block.shopify_attributes }}>
-                <td>{{ block.settings.size | escape }}</td>
-                <td>{{ block.settings.chest | escape }}</td>
-                <td>{{ block.settings.waist | escape }}</td>
-              </tr>
-            {%- endfor -%}
-          </tbody>
-        </table>
+        <shop-hub-size-tabs class="sh-hub-size-tabs">
+          <div
+            class="sh-hub-size-tabs__list"
+            role="tablist"
+            aria-label="{{ section.settings.guide_heading | default: 'Size and fit guide' | escape }}"
+          >
+            <button
+              class="sh-hub-size-tabs__tab"
+              id="ShopHubUnderwearTab--{{ uid }}"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="ShopHubUnderwearPanel--{{ uid }}"
+              data-sh-hub-size-tab="underwear"
+            >
+              {{ section.settings.underwear_tab_label | escape }}
+            </button>
+            <button
+              class="sh-hub-size-tabs__tab"
+              id="ShopHubTopsTab--{{ uid }}"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="ShopHubTopsPanel--{{ uid }}"
+              data-sh-hub-size-tab="tops"
+              tabindex="-1"
+            >
+              {{ section.settings.tops_tab_label | escape }}
+            </button>
+          </div>
+
+          <div
+            class="sh-hub-size-tabs__panel"
+            id="ShopHubUnderwearPanel--{{ uid }}"
+            role="tabpanel"
+            aria-labelledby="ShopHubUnderwearTab--{{ uid }}"
+            data-sh-hub-size-panel="underwear"
+          >
+            <table class="sh-hub-table">
+              <thead>
+                <tr>
+                  <th scope="col">{{ 'products.general.size' | t | default: 'Size' }}</th>
+                  <th scope="col">Waist</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for block in size_blocks -%}
+                  {%- if block.settings.size_range == 'underwear' or block.settings.size_range == blank -%}
+                    <tr {{ block.shopify_attributes }}>
+                      <td>{{ block.settings.size | escape }}</td>
+                      <td>{{ block.settings.waist | escape }}</td>
+                    </tr>
+                  {%- endif -%}
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            class="sh-hub-size-tabs__panel"
+            id="ShopHubTopsPanel--{{ uid }}"
+            role="tabpanel"
+            aria-labelledby="ShopHubTopsTab--{{ uid }}"
+            data-sh-hub-size-panel="tops"
+            hidden
+          >
+            <table class="sh-hub-table">
+              <thead>
+                <tr>
+                  <th scope="col">{{ 'products.general.size' | t | default: 'Size' }}</th>
+                  <th scope="col">Chest</th>
+                  <th scope="col">Waist</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for block in size_blocks -%}
+                  {%- if block.settings.size_range == 'tops' -%}
+                    <tr {{ block.shopify_attributes }}>
+                      <td>{{ block.settings.size | escape }}</td>
+                      <td>{{ block.settings.chest | escape }}</td>
+                      <td>{{ block.settings.waist | escape }}</td>
+                    </tr>
+                  {%- endif -%}
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+        </shop-hub-size-tabs>
       </div>
     {%- endif -%}
   </div>
@@ -232,6 +302,59 @@
 
   .sh-hub__guide-header { max-width: 40rem; margin-bottom: 1.5rem; }
 
+  .sh-hub-size-tabs {
+    display: block;
+  }
+
+  .sh-hub-size-tabs__list {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .sh-hub-size-tabs__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sh-hub-size-tabs__tab {
+    appearance: none;
+    width: auto;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0 0 0.35rem;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    color: color-mix(in srgb, currentColor 58%, transparent);
+    font: inherit;
+    font-size: 0.82rem;
+    line-height: 1.2;
+    text-align: left;
+    text-transform: none;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .sh-hub-size-tabs__tab[aria-selected='true'] {
+    border-bottom-color: currentColor;
+    color: currentColor;
+  }
+
+  .sh-hub-size-tabs__tab:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  .sh-hub-size-tabs__panel[hidden] {
+    display: none;
+  }
+
   .sh-hub-table {
     width: 100%;
     max-width: 30rem;
@@ -285,6 +408,53 @@
   }
 {% endstylesheet %}
 
+{% javascript %}
+  if (!customElements.get('shop-hub-size-tabs')) {
+    class ShopHubSizeTabs extends HTMLElement {
+      connectedCallback() {
+        if (this.isConnectedToTabs) return;
+
+        this.isConnectedToTabs = true;
+        this.tabs = Array.from(this.querySelectorAll('[data-sh-hub-size-tab]'));
+        this.panels = Array.from(this.querySelectorAll('[data-sh-hub-size-panel]'));
+
+        this.tabs.forEach((tab, index) => {
+          tab.addEventListener('click', () => this.activateTab(tab));
+          tab.addEventListener('keydown', (event) => this.handleKeydown(event, index));
+        });
+      }
+
+      activateTab(selectedTab) {
+        const selectedPanel = selectedTab.getAttribute('aria-controls');
+
+        this.tabs.forEach((tab) => {
+          const isSelected = tab === selectedTab;
+          tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+          tab.setAttribute('tabindex', isSelected ? '0' : '-1');
+        });
+
+        this.panels.forEach((panel) => {
+          panel.hidden = panel.id !== selectedPanel;
+        });
+      }
+
+      handleKeydown(event, currentIndex) {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+
+        event.preventDefault();
+        const direction = event.key === 'ArrowRight' ? 1 : -1;
+        const nextIndex = (currentIndex + direction + this.tabs.length) % this.tabs.length;
+        const nextTab = this.tabs[nextIndex];
+
+        this.activateTab(nextTab);
+        nextTab.focus();
+      }
+    }
+
+    customElements.define('shop-hub-size-tabs', ShopHubSizeTabs);
+  }
+{% endjavascript %}
+
 {% schema %}
 {
   "name": "Shop hub",
@@ -297,6 +467,8 @@
     { "type": "text", "id": "guide_eyebrow", "label": "Guide eyebrow", "default": "Fit guide" },
     { "type": "text", "id": "guide_heading", "label": "Guide heading", "default": "Size and fit guide" },
     { "type": "richtext", "id": "guide_text", "label": "Guide text" },
+    { "type": "text", "id": "underwear_tab_label", "label": "Underwear tab label", "default": "Underwear" },
+    { "type": "text", "id": "tops_tab_label", "label": "Tops tab label", "default": "T-shirts / Tops" },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#ffffff" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#0f1623" },
@@ -318,6 +490,16 @@
       "type": "size_row",
       "name": "Size row",
       "settings": [
+        {
+          "type": "select",
+          "id": "size_range",
+          "label": "Size range",
+          "options": [
+            { "value": "underwear", "label": "Underwear" },
+            { "value": "tops", "label": "T-shirts / Tops" }
+          ],
+          "default": "underwear"
+        },
         { "type": "text", "id": "size", "label": "Size", "default": "M" },
         { "type": "text", "id": "chest", "label": "Chest (in)", "default": "36-38" },
         { "type": "text", "id": "waist", "label": "Waist (in)", "default": "31-33" }
@@ -332,9 +514,12 @@
         { "type": "destination", "settings": { "label": "Shop by fabric", "title": "Shop by fabric", "text": "Move through the range by fabric first.", "link": "/collections/all" } },
         { "type": "destination", "settings": { "label": "Shop by design", "title": "Shop by design", "text": "Jump back to the silhouette-led edit.", "link": "/pages/shop-by-design" } },
         { "type": "destination", "settings": { "label": "All items", "title": "View all items", "text": "Browse the whole store in one sweep.", "link": "/collections/all" } },
-        { "type": "size_row", "settings": { "size": "XS", "chest": "32-34", "waist": "25-27" } },
-        { "type": "size_row", "settings": { "size": "S", "chest": "34-36", "waist": "28-30" } },
-        { "type": "size_row", "settings": { "size": "M", "chest": "36-38", "waist": "31-33" } }
+        { "type": "size_row", "settings": { "size_range": "underwear", "size": "XS", "chest": "32-34", "waist": "25-27" } },
+        { "type": "size_row", "settings": { "size_range": "underwear", "size": "S", "chest": "34-36", "waist": "28-30" } },
+        { "type": "size_row", "settings": { "size_range": "underwear", "size": "M", "chest": "36-38", "waist": "31-33" } },
+        { "type": "size_row", "settings": { "size_range": "tops", "size": "XS", "chest": "32-34", "waist": "25-27" } },
+        { "type": "size_row", "settings": { "size_range": "tops", "size": "S", "chest": "34-36", "waist": "28-30" } },
+        { "type": "size_row", "settings": { "size_range": "tops", "size": "M", "chest": "36-38", "waist": "31-33" } }
       ]
     }
   ]
