@@ -11,6 +11,26 @@
   "sections": {
     "collection_product_focus_hero_wWzDmE": {
       "type": "collection-product-focus-hero",
+      "blocks": {
+        "nav_link_Y9gFX6": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Shop All",
+            "link": ""
+          }
+        },
+        "nav_link_eMQdbd": {
+          "type": "nav_link",
+          "settings": {
+            "label": "all size XS - 9.99",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "nav_link_Y9gFX6",
+        "nav_link_eMQdbd"
+      ],
       "name": "Collection Focus Hero",
       "settings": {
         "color_scheme": "",
@@ -110,6 +130,7 @@
       "settings": {
         "image_ratio": "9 / 16",
         "image_ratio_desktop": "16 / 9",
+        "caption_lift": 20,
         "autoplay": true,
         "autoplay_interval": 5000,
         "aria_label": "Campaign highlights",

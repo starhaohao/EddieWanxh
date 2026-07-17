@@ -72,7 +72,7 @@
             "layout": "slider",
             "autoplay": false,
             "autoplay_speed": 8,
-            "bg_color": "#ffe696",
+            "bg_color": "#F7F3E5",
             "padding_bottom": 0
           }
         },
@@ -125,7 +125,7 @@
             "layout": "stacked",
             "autoplay": false,
             "autoplay_speed": 8,
-            "bg_color": "#ffe696",
+            "bg_color": "#FAF1D3",
             "padding_bottom": 48
           }
         },
