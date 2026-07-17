@@ -95,8 +95,8 @@
         "slide_5"
       ],
       "settings": {
-        "image_ratio": "9 / 16",
-        "image_ratio_desktop": "16 / 9",
+        "image_ratio": "1080 / 1350",
+        "image_ratio_desktop": "4 / 3",
         "autoplay": true,
         "autoplay_interval": 5000,
         "aria_label": "Campaign highlights",
@@ -116,7 +116,7 @@
         "cta_size": "small",
         "micro_as_badge": false,
         "badge_height": 20,
-        "badge_bg": "#ffffff",
+        "badge_bg": "#F8F559",
         "badge_border": "#000000",
         "badge_text": "#000000"
       }
