@@ -181,11 +181,12 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important; */
 
-    /* Apple Frosted Glass Effect - Dark Mode (Active) */
-    background-color: rgba(0, 0, 0, 0.45) !important;
-    -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
-    backdrop-filter: saturate(180%) blur(20px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    /* Shared Navigation Style: color, opacity and texture are controlled
+       in Theme settings and remain linked to the Footer. */
+    background: var(--navigation-surface-background, rgba(0, 0, 0, 0.45)) !important;
+    -webkit-backdrop-filter: var(--navigation-surface-filter, saturate(180%) blur(20px)) !important;
+    backdrop-filter: var(--navigation-surface-filter, saturate(180%) blur(20px)) !important;
+    border-bottom: 1px solid var(--navigation-line-color, rgba(255, 255, 255, 0.1)) !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
   }
   
@@ -308,18 +309,10 @@
 
   assign show_locale_selector = section.settings.show_locale_selector
   assign show_locale_code = section.settings.show_locale_code
-  assign show_locale_selector_toolbar = false
-  if toolbar_block
-    assign show_locale_selector_toolbar = toolbar_block.settings.show_locale_selector
-  endif
 
   assign show_globe_icon = section.settings.show_globe_icon
 
   assign show_country_selector = section.settings.show_country_selector
-  assign show_country_selector_toolbar = false
-  if toolbar_block
-    assign show_country_selector_toolbar = toolbar_block.settings.show_country_selector
-  endif
 
   assign show_country_name = section.settings.show_country_name
   assign show_country_flag = section.settings.show_country_flag
@@ -328,16 +321,8 @@
     assign languages = true
   endif
 
-  if show_locale_selector_toolbar and localization.available_languages.size > 1
-    assign languages_toolbar = true
-  endif
-
   if show_country_selector and localization.available_countries.size > 1
     assign countries = true
-  endif
-
-  if show_country_selector_toolbar and localization.available_countries.size > 1
-    assign countries_toolbar = true
   endif
 
   if languages or countries
@@ -516,6 +501,7 @@
 <header-component
   class="header__wrapper"
   data-header-wrapper
+  data-navigation-style
   {% if transparent_header %}
     data-header-transparent
   {% endif %}
