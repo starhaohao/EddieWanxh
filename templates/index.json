@@ -137,8 +137,8 @@
         "button_size": 12,
         "margin_top": 0,
         "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20,
+        "padding_top": 24,
+        "padding_bottom": 24,
         "padding_left": 44,
         "padding_right": 44,
         "eyebrow": "welcome",
@@ -248,8 +248,8 @@
         "rows": 3,
         "layout_mobile": "slider",
         "color_scheme": "scheme-1",
-        "padding_top": 40,
-        "padding_bottom": 0,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "heading_tag": "automatic"
       }
     },
@@ -420,8 +420,8 @@
         "blocks_per_row": 4,
         "layout_mobile": "slider",
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
-        "padding_top": 17,
-        "padding_bottom": 20,
+        "padding_top": 16,
+        "padding_bottom": 24,
         "heading_tag": "h4"
       }
     },

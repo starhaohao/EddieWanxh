@@ -60,7 +60,7 @@
             "size_chart_style": "question",
             "option_font_size": "body-medium",
             "value_font_size": "body-medium",
-            "padding_bottom": 18
+            "padding_bottom": 16
           }
         },
         "upsell": {
@@ -88,7 +88,7 @@
             "button_size_dynamic": "",
             "button_style_dynamic": "btn--solid",
             "show_gift_card_recipient": false,
-            "padding_bottom": 50
+            "padding_bottom": 48
           }
         },
         "inventory_countdown": {
@@ -108,7 +108,7 @@
           "type": "divider",
           "settings": {
             "show_line": true,
-            "padding_bottom": 30
+            "padding_bottom": 32
           }
         },
         "bundle_save_DrnprG": {
@@ -126,7 +126,7 @@
             "autoplay": false,
             "autoplay_speed": 8,
             "bg_color": "#ffe696",
-            "padding_bottom": 50
+            "padding_bottom": 48
           }
         },
         "sharing": {
@@ -299,7 +299,7 @@
         "show_border": false,
         "layout": "marquee",
         "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
-        "padding_top": 19,
+        "padding_top": 16,
         "padding_bottom": 4
       }
     },
@@ -348,8 +348,8 @@
         "rows": 2,
         "layout_mobile": "slider",
         "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
-        "padding_top": 100,
-        "padding_bottom": 100
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },

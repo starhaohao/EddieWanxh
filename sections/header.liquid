@@ -208,6 +208,28 @@
   {%- endunless -%}
 {%- endstyle -%}
 
+{%- comment -%}
+  Mega-menu spacing normalized to the site's 4/8/16/24/32/48/64 scale —
+  base theme.css ships these tighter (30px/14px/5px) than the rest of the
+  UI, scoped here rather than edited in the shared base stylesheet.
+{%- endcomment -%}
+<style>
+  .theme__header .dropdown__family {
+    padding: 32px 0;
+  }
+  .theme__header .grandparent .header__grandparent__links {
+    grid-row-gap: 24px;
+  }
+  .theme__header .header__dropdown__image .hero__content {
+    padding: 16px;
+  }
+  .theme__header .grandparent .navlink--child,
+  .theme__header .grandparent .navlink--grandchild {
+    padding-right: 8px;
+    line-height: 1.4;
+  }
+</style>
+
 {%- capture toolbar -%}
   {%- render 'header-toolbar' block: toolbar_block -%}
 {%- endcapture -%}

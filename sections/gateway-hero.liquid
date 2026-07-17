@@ -365,7 +365,7 @@
   #{{ uid }} .gh__title {
     margin: 0;
     text-transform: uppercase;
-    font-size: clamp(32px, 9vw, 36px);
+    font-size: 32px;
     line-height: 0.96;
     letter-spacing: -0.04em;
   }
@@ -403,6 +403,7 @@
   @media only screen and (min-width: 990px) {
     #{{ uid }} .gh { --gh-rail: 52px; }
     #{{ uid }} .gh__rail-label { font-size: 11px; }
+    #{{ uid }} .gh__title { font-size: 36px; }
     /* Landscape on desktop (default 16:9); portrait stays on mobile. */
     #{{ uid }} .gh__stage { aspect-ratio: var(--gh-ratio-desktop, 16 / 9); }
     #{{ uid }}.gh--fill .gh__stage { aspect-ratio: auto; }
