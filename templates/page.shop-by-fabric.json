@@ -111,9 +111,42 @@
         "text_color": "#0f1623",
         "accent_color": "#923531"
       }
+    },
+    "fabric_type_selector": {
+      "type": "section-type-selector",
+      "blocks": {
+        "cotton_spandex": {
+          "type": "type_card",
+          "settings": { "label": "Cotton Spandex", "value": "Cotton Spandex" }
+        },
+        "transdry": {
+          "type": "type_card",
+          "settings": { "label": "TransDRY®", "value": "TransDRY®" }
+        }
+      },
+      "block_order": ["cotton_spandex", "transdry"],
+      "name": "Choose a fabric",
+      "settings": {
+        "heading": "Choose a fabric",
+        "filter_key": "material_family",
+        "all_label": "All"
+      }
+    },
+    "fabric_type_grid": {
+      "type": "section-type-filtered-grid",
+      "name": "Fabric grid",
+      "settings": {
+        "collection": "all",
+        "filter_key": "material_family",
+        "grid": 4,
+        "grid_mobile": 2,
+        "empty_message": "No products match this fabric yet."
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "fabric_type_selector",
+    "fabric_type_grid"
   ]
 }
