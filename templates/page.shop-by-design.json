@@ -15,6 +15,7 @@
         "design": {
           "type": "destination",
           "settings": {
+            "image": "shopify://shop_images/7_132ac11b-ebf5-4aff-8ea1-bd9d65e59326.jpg",
             "label": "Shop by design",
             "title": "Shop by design",
             "text": "Move through the range by silhouette first.",
@@ -24,6 +25,7 @@
         "fabric": {
           "type": "destination",
           "settings": {
+            "image": "shopify://shop_images/9_4658f947-fd9b-41ff-b23a-e69891ab9bf2.jpg",
             "label": "Shop by fabric",
             "title": "Shop by fabric",
             "text": "Jump back to the material-led edit.",
@@ -33,6 +35,7 @@
         "all_items": {
           "type": "destination",
           "settings": {
+            "image": "shopify://shop_images/91268D2D-441A-4455-A6D5-94B17BD3D7CE.png",
             "label": "All items",
             "title": "View all items",
             "text": "Browse the whole store in one sweep.",
