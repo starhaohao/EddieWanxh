@@ -22,6 +22,7 @@
   assign uid = 'GatewayHero-' | append: section.id
   assign image_ratio = section.settings.image_ratio | default: '1080 / 1350'
   assign image_ratio_desktop = section.settings.image_ratio_desktop | default: '16 / 9'
+  assign caption_lift = section.settings.caption_lift | default: 20
   if image_ratio_desktop == 'match'
     assign image_ratio_desktop = image_ratio
   endif
@@ -87,6 +88,7 @@
     --gh-badge-bg: {{ badge_bg }};
     --gh-badge-border: {{ badge_border }};
     --gh-badge-text: {{ badge_text }};
+    --gh-caption-lift: {{ caption_lift }}px;
   "
   aria-roledescription="carousel"
   aria-label="{{ section.settings.aria_label | default: 'Campaign highlights' | escape }}"
@@ -197,13 +199,21 @@
 </section>
 
 <style>
+  .gateway-hero-section {
+    width: 100%;
+    max-width: none;
+  }
   #{{ uid }}.gh {
     --gh-rail: 44px;
     display: block;
+    width: 100%;
+    max-width: none;
     background: var(--gh-rail-bg, #0F0F0F);
   }
   #{{ uid }} .gh__inner {
     position: relative;
+    width: 100%;
+    max-width: none;
   }
   /* Full-viewport option: height drives the layout instead of the ratio. */
   #{{ uid }}.gh--fill .gh__inner {
@@ -280,6 +290,8 @@
   /* ---- Stage / slides ---- */
   #{{ uid }} .gh__stage {
     position: relative;
+    width: 100%;
+    max-width: none;
     overflow: hidden;
     background: var(--gh-rail-bg, #0F0F0F);
     /* Central image locked to the chosen ratio (default 1080x1350 = 4:5),
@@ -332,7 +344,7 @@
        vertical labels or chevrons at the image edges. */
     left: calc(var(--gh-rail, 44px) + clamp(6px, 2vw, 12px));
     right: calc(var(--gh-rail, 44px) + clamp(6px, 2vw, 12px));
-    bottom: clamp(16px, 4vw, 24px);
+    bottom: calc(clamp(16px, 4vw, 24px) + var(--gh-caption-lift, 20px));
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -517,6 +529,17 @@
       { "value": "1 / 1", "label": "Square 1:1" },
       { "value": "match", "label": "Match mobile ratio" }
     ] },
+    {
+      "type": "range",
+      "id": "caption_lift",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Caption lift",
+      "info": "Moves the complete title, price and CTA group upward from the bottom edge.",
+      "default": 20
+    },
 
     { "type": "header", "content": "Behaviour" },
     { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
