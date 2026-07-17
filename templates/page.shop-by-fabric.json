@@ -13,8 +13,8 @@
           "settings": {
             "label": "Shop by design",
             "title": "Shop by design",
-            "text": "Move by silhouette, cut, and styling direction first.",
-            "link": "/collections/underwear"
+            "text": "Jump back to the silhouette-led edit.",
+            "link": "/pages/shop-by-design"
           }
         },
         "fabric": {
@@ -22,8 +22,8 @@
           "settings": {
             "label": "Shop by fabric",
             "title": "Shop by fabric",
-            "text": "Browse pieces through the fabric story behind them.",
-            "link": "/pages/shop-by-fabric"
+            "text": "Move through the range by fabric first.",
+            "link": "/collections/all"
           }
         },
         "all_items": {
@@ -31,38 +31,26 @@
           "settings": {
             "label": "All items",
             "title": "View all items",
-            "text": "See the complete product range in one place.",
+            "text": "Browse the whole store in one sweep.",
             "link": "/collections/all"
           }
         },
         "size_xs": {
           "type": "size_row",
-          "settings": {
-            "size": "XS",
-            "chest": "32-34",
-            "waist": "25-27"
-          }
+          "settings": { "size": "XS", "chest": "32-34", "waist": "25-27" }
         },
         "size_s": {
           "type": "size_row",
-          "settings": {
-            "size": "S",
-            "chest": "34-36",
-            "waist": "28-30"
-          }
+          "settings": { "size": "S", "chest": "34-36", "waist": "28-30" }
         },
         "size_m": {
           "type": "size_row",
-          "settings": {
-            "size": "M",
-            "chest": "36-38",
-            "waist": "31-33"
-          }
+          "settings": { "size": "M", "chest": "36-38", "waist": "31-33" }
         }
       },
       "block_order": [
-        "design",
         "fabric",
+        "design",
         "all_items",
         "size_xs",
         "size_s",
@@ -70,15 +58,15 @@
       ],
       "settings": {
         "eyebrow": "Shop",
-        "heading": "Shop by design.",
-        "description": "<p>Use this page to guide customers toward the design-led collection path and the broader catalog.</p>",
+        "heading": "Shop by fabric.",
+        "description": "<p>Lead with the material story and let the collection path follow from there.</p>",
         "card_cta": "Open page",
-        "content_field": "about_design",
-        "collections_eyebrow": "Shop by design",
-        "collections_heading": "Pick your silhouette.",
+        "content_field": "about_fabric",
+        "collections_eyebrow": "Shop by fabric",
+        "collections_heading": "Pick your fabric.",
         "guide_eyebrow": "Fit guide",
         "guide_heading": "Size and fit guide",
-        "guide_text": "<p>Keep the fitting notes visible here so customers can decide before they add to cart.</p>",
+        "guide_text": "<p>Keep sizing visible for customers comparing fabrics and cuts.</p>",
         "background_color": "#ffffff",
         "text_color": "#0f1623",
         "accent_color": "#923531"
