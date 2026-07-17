@@ -1,0 +1,515 @@
+<!-- /sections/explore-styles.liquid -->
+{%- comment -%}
+  Explore Styles — 4-up (desktop) / scroll-snap carousel (mobile) row of
+  "style" cards, each a product-on-colored-backdrop photo with a text
+  overlay, a "Discover" CTA pill, and up to 5 color swatch dots.
+
+  Reuses the theme's own <grid-slider> custom element (assets/theme.js)
+  for the carousel mechanics — scroll-snap, prev/next arrows that fade in
+  on hover and auto-disable at the start/end of the row on desktop, and
+  arrow-free touch scrolling on mobile — rather than a bespoke JS carousel.
+
+  Card content can come from either source, metaobject cards render first:
+  - A "style_card" metaobject list (recommended): collection_name,
+    subtitle, variant_name, image, swatch_colors (list of colors),
+    discover_url.
+  - Manual "Card" blocks, for stores not yet using the metaobject.
+
+  Prefix: .explore-styles__
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.heading | default: 'Explore Styles'
+  assign intro_text = section.settings.intro_text
+  assign view_all_text = section.settings.view_all_text | default: 'View All'
+  assign view_all_url = section.settings.view_all_url
+  assign discover_text = section.settings.discover_text | default: 'Discover'
+  assign uid = 'ExploreStyles-' | append: section.id
+
+  assign mo_cards = section.settings.style_cards.value
+  assign mo_count = 0
+  if mo_cards != blank
+    assign mo_count = mo_cards.size
+  endif
+  assign card_blocks = section.blocks | where: 'type', 'card'
+  assign total_cards = mo_count | plus: card_blocks.size
+-%}
+
+<section
+  class="explore-styles section-padding"
+  id="{{ uid }}"
+  style="
+    --PT: {{ section.settings.padding_top }}px;
+    --PB: {{ section.settings.padding_bottom }}px;
+    --explore-styles-discover-bg: {{ section.settings.discover_bg | default: '#EFFF00' }};
+    --explore-styles-discover-text: {{ section.settings.discover_text_color | default: '#000000' }};
+  "
+>
+  <div class="explore-styles__header-row">
+    <h2 class="explore-styles__heading">{{ heading }}</h2>
+  </div>
+  <div class="explore-styles__divider" role="presentation"></div>
+
+  {%- if intro_text != blank or view_all_url != blank -%}
+    <div class="explore-styles__intro-row">
+      {%- if intro_text != blank -%}
+        <p class="explore-styles__intro">{{ intro_text }}</p>
+      {%- endif -%}
+      {%- if view_all_url != blank -%}
+        <a href="{{ view_all_url }}" class="explore-styles__view-all">{{ view_all_text }}</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if total_cards > 0 -%}
+    <grid-slider align-arrows class="explore-styles__slider">
+      <div class="explore-styles__row grid grid--slider grid--mobile-slider" data-grid-slider>
+        {%- if mo_cards != blank -%}
+          {%- for mo in mo_cards -%}
+            {%- liquid
+              assign card_link_raw = mo.discover_url.value
+              assign card_link = card_link_raw.url | default: card_link_raw | default: '#'
+            -%}
+            {%- render 'explore-styles-card',
+              image: mo.image.value,
+              collection_name: mo.collection_name.value,
+              subtitle: mo.subtitle.value,
+              variant_name: mo.variant_name.value,
+              swatches: mo.swatch_colors.value,
+              link: card_link,
+              discover_text: discover_text
+            -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- for block in card_blocks -%}
+          {%- liquid
+            assign swatches = block.settings.swatch_1
+              | append: '|' | append: block.settings.swatch_2
+              | append: '|' | append: block.settings.swatch_3
+              | append: '|' | append: block.settings.swatch_4
+              | append: '|' | append: block.settings.swatch_5
+              | split: '|'
+              | where_exp: 'c', 'c != blank'
+          -%}
+          {%- render 'explore-styles-card',
+            image: block.settings.image,
+            collection_name: block.settings.collection_name,
+            subtitle: block.settings.subtitle,
+            variant_name: block.settings.variant_name,
+            swatches: swatches,
+            link: block.settings.discover_url,
+            discover_text: discover_text,
+            attrs: block.shopify_attributes
+          -%}
+        {%- endfor -%}
+      </div>
+    </grid-slider>
+  {%- elsif request.design_mode -%}
+    <p class="explore-styles__empty">Add cards via a "style_card" metaobject list above, or add "Card" blocks below.</p>
+  {%- endif -%}
+</section>
+
+<style>
+  #{{ uid }} {
+    --gap: 16px;
+  }
+
+  #{{ uid }} .explore-styles__header-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  #{{ uid }} .explore-styles__heading {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: clamp(34px, 3.2vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0 0 20px;
+  }
+  #{{ uid }} .explore-styles__divider {
+    border-top: 1px solid #E5E5E5;
+    margin-bottom: 20px;
+  }
+
+  #{{ uid }} .explore-styles__intro-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  #{{ uid }} .explore-styles__intro {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 1.5;
+    color: #6b6b6b;
+    margin: 0;
+    max-width: 56ch;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  #{{ uid }} .explore-styles__view-all {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    padding: 0 22px;
+    border: 1px solid #000;
+    border-radius: 999px;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+    background: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+  @media (hover: hover) {
+    #{{ uid }} .explore-styles__view-all:hover {
+      background: #000;
+      color: #fff;
+    }
+  }
+
+  #{{ uid }} .explore-styles__empty {
+    font-size: 13px;
+    color: #6b6b6b;
+    padding: 40px 0;
+    text-align: center;
+    border: 1px dashed #E5E5E5;
+  }
+
+  /* ================= Card row sizing =================
+     Overrides the theme's default grid--slider/grid--mobile-slider item
+     widths (which target ~2.6-3.5 up) to this section's own 4-up desktop /
+     1.2-up mobile spec. */
+  @media only screen and (min-width: 990px) {
+    #{{ uid }} .explore-styles__row.grid--slider {
+      --item-width: calc((100vw - var(--scrollbar-width, 0px) - var(--outer) * 2 - var(--gap) * 3) / 4);
+    }
+  }
+  @media only screen and (max-width: 749px) {
+    #{{ uid }} .explore-styles__row.grid--mobile-slider .grid-item {
+      width: 83.33%; /* container / 1.2 -> 1.2 cards visible */
+    }
+  }
+
+  /* ================= Card ================= */
+  #{{ uid }} .explore-styles__card {
+    position: relative;
+    display: block;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    background: #1a1a1a;
+  }
+  #{{ uid }} .explore-styles__card-media,
+  #{{ uid }} .explore-styles__card-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #{{ uid }} .explore-styles__card-img {
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s cubic-bezier(0.33, 0, 0, 1);
+  }
+  @media (hover: hover) {
+    #{{ uid }} .explore-styles__card:hover .explore-styles__card-img {
+      transform: scale(1.04);
+    }
+  }
+  #{{ uid }} .explore-styles__card-img--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2a2a2a;
+  }
+  #{{ uid }} .explore-styles__placeholder-svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.5;
+  }
+
+  #{{ uid }} .explore-styles__card-scrim {
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+  }
+  #{{ uid }} .explore-styles__card-scrim--top {
+    top: 0;
+    height: 45%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent);
+  }
+  #{{ uid }} .explore-styles__card-scrim--bottom {
+    bottom: 0;
+    height: 40%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.55), transparent);
+  }
+
+  #{{ uid }} .explore-styles__card-text {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 2;
+  }
+  #{{ uid }} .explore-styles__card-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0;
+  }
+  #{{ uid }} .explore-styles__card-subtitle {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 4px 0 0;
+  }
+  #{{ uid }} .explore-styles__card-variant {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 2px 0 0;
+  }
+
+  #{{ uid }} .explore-styles__card-cta {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: var(--explore-styles-discover-bg, #EFFF00);
+    color: var(--explore-styles-discover-text, #000);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  #{{ uid }} .explore-styles__card-swatches {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+  }
+  #{{ uid }} .explore-styles__swatch-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+  }
+
+  @media only screen and (max-width: 749px) {
+    #{{ uid }} .explore-styles__heading {
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+    #{{ uid }} .explore-styles__intro-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    #{{ uid }} .explore-styles__intro {
+      font-size: 13px;
+    }
+    #{{ uid }} .explore-styles__view-all {
+      align-self: flex-start;
+    }
+    #{{ uid }} .explore-styles__card {
+      border-radius: 8px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Explore Styles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Explore Styles"
+    },
+    {
+      "type": "text",
+      "id": "intro_text",
+      "label": "Intro text",
+      "info": "Keep to roughly 2 lines — longer text is clipped."
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "\"View all\" label",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "\"View all\" link"
+    },
+    {
+      "type": "header",
+      "content": "Cards from metaobject"
+    },
+    {
+      "type": "paragraph",
+      "content": "Create a metaobject definition of type 'style_card' with fields: collection_name (single line text), subtitle (single line text), variant_name (single line text), image (image), swatch_colors (list of colors), discover_url (URL). Metaobject cards render before any manual Card blocks below."
+    },
+    {
+      "type": "metaobject_list",
+      "id": "style_cards",
+      "label": "Style cards",
+      "metaobject_type": "style_card"
+    },
+    {
+      "type": "header",
+      "content": "Discover button"
+    },
+    {
+      "type": "text",
+      "id": "discover_text",
+      "label": "Button label",
+      "default": "Discover"
+    },
+    {
+      "type": "color",
+      "id": "discover_bg",
+      "label": "Background",
+      "default": "#EFFF00"
+    },
+    {
+      "type": "color",
+      "id": "discover_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Manual fallback for stores not yet using the 'style_card' metaobject. Renders after any metaobject cards above."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "collection_name",
+          "label": "Collection name"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "variant_name",
+          "label": "Variant name"
+        },
+        {
+          "type": "url",
+          "id": "discover_url",
+          "label": "Discover link"
+        },
+        {
+          "type": "header",
+          "content": "Swatch dots (up to 5)"
+        },
+        {
+          "type": "color",
+          "id": "swatch_1",
+          "label": "Swatch 1"
+        },
+        {
+          "type": "color",
+          "id": "swatch_2",
+          "label": "Swatch 2"
+        },
+        {
+          "type": "color",
+          "id": "swatch_3",
+          "label": "Swatch 3"
+        },
+        {
+          "type": "color",
+          "id": "swatch_4",
+          "label": "Swatch 4"
+        },
+        {
+          "type": "color",
+          "id": "swatch_5",
+          "label": "Swatch 5"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Explore Styles"
+    }
+  ]
+}
+{% endschema %}
