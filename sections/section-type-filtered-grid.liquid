@@ -1,0 +1,159 @@
+{%- comment -%}
+  Type Filtered Grid (Component 2) — renders every product from the
+  source collection once, then a client-side controller shows/hides
+  cards based on the metafield value a Type Selector card (Component 1,
+  section-type-selector.liquid) was clicked for. No re-fetch per click,
+  no full page navigation; the current filter is mirrored to the URL
+  (?type=<value>) so the view is shareable/bookmarkable and back/forward
+  works via popstate.
+
+  Filtering runs off product.metafields.custom.<filter_key> — nothing is
+  hardcoded per type, so any newly tagged product picks up the right
+  filter automatically. Prefix: .tfg
+{%- endcomment -%}
+
+{%- liquid
+  assign filter_key = section.settings.filter_key | default: 'design_family'
+  assign source_collection = collections[section.settings.collection]
+  if source_collection == blank
+    assign source_collection = collections['all']
+  endif
+  assign grid_columns = section.settings.grid | default: 4
+  assign grid_mobile = section.settings.grid_mobile | default: 2
+  assign columns_medium = 3
+  if grid_columns == 2 or grid_columns == 4
+    assign columns_medium = 2
+  endif
+  assign empty_message = section.settings.empty_message | default: 'No products match this filter yet.'
+  assign uid = 'TypeGrid-' | append: section.id
+-%}
+
+<section
+  class="tfg"
+  id="{{ uid }}"
+  data-type-grid
+  data-filter-key="{{ filter_key }}"
+  style="--COLUMNS: {{ grid_columns }}; --COLUMNS-MEDIUM: {{ columns_medium }}; --COLUMNS-SMALL: 2; --COLUMNS-MOBILE: {{ grid_mobile }};"
+>
+  <div class="tfg__grid grid" data-type-grid-list>
+    {%- for product in source_collection.products -%}
+      {%- liquid
+        assign filter_value = product.metafields['custom'][filter_key].value | escape
+        assign item_attrs = 'data-filter-value="' | append: filter_value | append: '"'
+      -%}
+      {%- render 'product-grid-item', product: product, index: forloop.index, attributes: item_attrs -%}
+    {%- else -%}
+      <div class="no-results">
+        <p><strong>{{ 'collections.general.no_matches' | t }}</strong></p>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <p class="tfg__empty" data-type-grid-empty hidden>{{ empty_message }}</p>
+</section>
+
+<style>
+  #{{ uid }}.tfg {
+    padding: 24px 0 48px;
+  }
+  /* [hidden] must win over the base theme's unconditional
+     `.grid-item { display: flex }` rule so client-side filtering
+     actually hides non-matching cards. */
+  #{{ uid }} [hidden] {
+    display: none !important;
+  }
+  #{{ uid }} .tfg__empty {
+    text-align: center;
+    padding: 48px 16px;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--text-light, currentColor);
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('{{ uid }}');
+    if (!root || root.dataset.tfgInit === '1') return;
+    root.dataset.tfgInit = '1';
+
+    var list = root.querySelector('[data-type-grid-list]');
+    var empty = root.querySelector('[data-type-grid-empty]');
+    if (!list) return;
+    var items = Array.prototype.slice.call(list.querySelectorAll('[data-filter-value]'));
+    var paramName = 'type';
+
+    function currentParamValue() {
+      var url = new URL(window.location.href);
+      return url.searchParams.get(paramName) || '';
+    }
+
+    function applyFilter(value, updateUrl) {
+      var visibleCount = 0;
+      items.forEach(function (item) {
+        var match = !value || item.getAttribute('data-filter-value') === value;
+        item.hidden = !match;
+        if (match) visibleCount++;
+      });
+      if (empty) empty.hidden = visibleCount !== 0;
+
+      var cards = document.querySelectorAll('[data-type-card]');
+      cards.forEach(function (card) {
+        var cardValue = card.getAttribute('data-type-value') || '';
+        var isActive = cardValue === (value || '');
+        card.classList.toggle('is-active', isActive);
+        card.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      if (updateUrl) {
+        var url = new URL(window.location.href);
+        if (value) {
+          url.searchParams.set(paramName, value);
+        } else {
+          url.searchParams.delete(paramName);
+        }
+        window.history.pushState({ type: value || '' }, '', url);
+      }
+    }
+
+    document.addEventListener('click', function (e) {
+      var card = e.target.closest('[data-type-card]');
+      if (!card) return;
+      e.preventDefault();
+      applyFilter(card.getAttribute('data-type-value') || '', true);
+    });
+
+    window.addEventListener('popstate', function () {
+      applyFilter(currentParamValue(), false);
+    });
+
+    applyFilter(currentParamValue(), false);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Type Filtered Grid",
+  "tag": "section",
+  "class": "type-filtered-grid-section",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Source collection", "info": "Every product in this collection is rendered once; the type selector cards above filter which ones show. Defaults to \"All products\" if left blank." },
+    {
+      "type": "select",
+      "id": "filter_key",
+      "label": "Filters by",
+      "info": "Must match the \"Filters by\" setting on the Type Selector section above it.",
+      "default": "design_family",
+      "options": [
+        { "value": "design_family", "label": "Design (custom.design_family)" },
+        { "value": "material_family", "label": "Fabric (custom.material_family)" }
+      ]
+    },
+    { "type": "range", "id": "grid", "label": "Products per row (desktop)", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "range", "id": "grid_mobile", "label": "Products per row (mobile)", "min": 1, "max": 2, "step": 1, "default": 2 },
+    { "type": "text", "id": "empty_message", "label": "Empty state message", "default": "No products match this filter yet." }
+  ],
+  "presets": [{ "name": "Type Filtered Grid" }],
+  "templates": ["page", "index", "collection"]
+}
+{% endschema %}

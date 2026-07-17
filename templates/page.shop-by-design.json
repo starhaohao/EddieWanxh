@@ -75,9 +75,50 @@
         "text_color": "#0f1623",
         "accent_color": "#923531"
       }
+    },
+    "design_type_selector": {
+      "type": "section-type-selector",
+      "blocks": {
+        "sculpt": {
+          "type": "type_card",
+          "settings": { "label": "Sculpt", "value": "Sculpt" }
+        },
+        "signal": {
+          "type": "type_card",
+          "settings": { "label": "Signal", "value": "Signal" }
+        },
+        "ed_tops": {
+          "type": "type_card",
+          "settings": { "label": "ED Tops", "value": "ED Tops" }
+        },
+        "ed_socks": {
+          "type": "type_card",
+          "settings": { "label": "ED Socks", "value": "ED Socks" }
+        }
+      },
+      "block_order": ["sculpt", "signal", "ed_tops", "ed_socks"],
+      "name": "Choose a type",
+      "settings": {
+        "heading": "Choose a type",
+        "filter_key": "design_family",
+        "all_label": "All"
+      }
+    },
+    "design_type_grid": {
+      "type": "section-type-filtered-grid",
+      "name": "Design grid",
+      "settings": {
+        "collection": "all",
+        "filter_key": "design_family",
+        "grid": 4,
+        "grid_mobile": 2,
+        "empty_message": "No products match this design yet."
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "design_type_selector",
+    "design_type_grid"
   ]
 }
