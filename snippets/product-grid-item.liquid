@@ -1015,5 +1015,29 @@
     .grid:has(.grid-item.product-item) {
       row-gap: calc(var(--gap, 16px) * 3);
     }
+
+    /* Price hierarchy: sale badge %, "From" prefix, sale price and
+       compare-at price each get one fixed size/weight, applied through
+       this shared snippet so it's identical across every collection
+       (Briefs, Boxer Trunks, Tops, Bundles). */
+    .product-item .badge-box.sale-box {
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .product-item__price .new-price {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .product-item__price .new-price small {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .product-item__price .old-price {
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.6;
+    }
   </style>
 {%- endunless -%}
