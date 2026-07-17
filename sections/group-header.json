@@ -213,78 +213,6 @@
     },
     "header": {
       "type": "header",
-      "blocks": {
-        "image_WGYmzN": {
-          "type": "image",
-          "settings": {
-            "position": "1",
-            "image": "shopify://shop_images/Brief_Menu-x-brief.jpg",
-            "aspect_ratio": 1.2,
-            "wide_image": true,
-            "overlay_type": "disabled",
-            "title": "{{ metaobjects.menu_cetegory.briefs.name.value }}",
-            "heading_font_size": "heading-small",
-            "link_text": "{{ metaobjects.menu_cetegory.briefs.one_line_description.value }}",
-            "text_font_size": "body-small",
-            "link": "shopify://collections/briefs",
-            "text_color": "#ffffff"
-          }
-        },
-        "image-1": {
-          "type": "image",
-          "settings": {
-            "position": "1",
-            "image": "shopify://shop_images/Trunks_Menu-x-brief.jpg",
-            "aspect_ratio": 1.2,
-            "wide_image": true,
-            "overlay_type": "disabled",
-            "title": "{{ metaobjects.menu_cetegory[\"boxer-trunks\"].name.value }}",
-            "heading_font_size": "heading-medium",
-            "link_text": "{{ metaobjects.menu_cetegory[\"boxer-trunks\"].one_line_description.value }}",
-            "text_font_size": "body-small",
-            "link": "",
-            "text_color": "#fcfbf9"
-          }
-        },
-        "image-2": {
-          "type": "image",
-          "settings": {
-            "position": "1",
-            "image": "shopify://shop_images/Tops_Menu-x-brief.jpg",
-            "aspect_ratio": 1.2,
-            "wide_image": false,
-            "overlay_type": "disabled",
-            "title": "{{ metaobjects.menu_cetegory.tops.name.value }}",
-            "heading_font_size": "heading-small",
-            "link_text": "{{ metaobjects.menu_cetegory.tops.one_line_description.value }}",
-            "text_font_size": "body-small",
-            "link": "shopify://collections/tops",
-            "text_color": "#fcfbf9"
-          }
-        },
-        "image-4": {
-          "type": "image",
-          "settings": {
-            "position": "1",
-            "image": "shopify://shop_images/Socks_Menu-x-brief.jpg",
-            "aspect_ratio": 1.2,
-            "wide_image": false,
-            "overlay_type": "disabled",
-            "title": "{{ metaobjects.menu_cetegory.socks.name.value }}",
-            "heading_font_size": "heading-small",
-            "link_text": "{{ metaobjects.menu_cetegory.socks.one_line_description.value }}",
-            "text_font_size": "body-small",
-            "link": "shopify://collections/socks",
-            "text_color": "#fcfbf9"
-          }
-        }
-      },
-      "block_order": [
-        "image_WGYmzN",
-        "image-1",
-        "image-2",
-        "image-4"
-      ],
       "settings": {
         "header_sticky": false,
         "enable_search": false,
@@ -314,20 +242,36 @@
         "highlight_item": "Final Clearance",
         "highlight_item_color": "#ffe500",
         "transparent_logo": "shopify://shop_images/transparent.png",
-        "transparent_home": true,
-        "transparent_collection": true,
-        "transparent_article": true,
-        "transparent_page": true,
-        "transparent_product_page": true,
+        "transparent_home": false,
+        "transparent_collection": false,
+        "transparent_article": false,
+        "transparent_page": false,
+        "transparent_product_page": false,
         "transparent_logo_pdp": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "padding_top": 5,
         "padding_bottom": 5
+      }
+    },
+    "divider_hnMzUp": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "background_color": "",
+        "divider_color": "",
+        "section_width": "full-width",
+        "thickness": 1,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 16,
+        "padding-block-end": 16
       }
     }
   },
   "order": [
     "announcement",
     "mobile-menu",
-    "header"
+    "header",
+    "divider_hnMzUp"
   ]
 }
