@@ -12,6 +12,13 @@
     "collection_product_focus_hero_wWzDmE": {
       "type": "collection-product-focus-hero",
       "blocks": {
+        "nav_link_ymVARm": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Explore",
+            "link": "/pages/shop-by-design"
+          }
+        },
         "nav_link_Y9gFX6": {
           "type": "nav_link",
           "settings": {
@@ -28,6 +35,7 @@
         }
       },
       "block_order": [
+        "nav_link_ymVARm",
         "nav_link_Y9gFX6",
         "nav_link_eMQdbd"
       ],
@@ -172,6 +180,35 @@
         "padding_bottom": 49,
         "heading_tag": "automatic"
       }
+    },
+    "collection_merchandising_Tt9BHk": {
+      "type": "collection-merchandising",
+      "name": "EDM Signup",
+      "settings": {
+        "layout": "inline",
+        "text_alignment": "left",
+        "bg_color": "#3d3d3d",
+        "font_color": "#ffffff",
+        "font_opacity": 100,
+        "input_color": "#ffffff",
+        "input_opacity": 100,
+        "heading_size": 32,
+        "subtext_size": 15,
+        "input_size": 11,
+        "button_size": 11,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_left": 44,
+        "padding_right": 44,
+        "eyebrow": "First Layer",
+        "heading": "Join the list",
+        "subtext": "First access to drops, restocks and Story Salon.",
+        "placeholder": "Email address",
+        "button_label": "Sign up",
+        "success_text": "You're in — welcome to First Layer."
+      }
     }
   },
   "order": [
@@ -180,6 +217,7 @@
     "subcollections",
     "main",
     "gateway_hero_ed9Tqb",
-    "section_recent_products_JGCaih"
+    "section_recent_products_JGCaih",
+    "collection_merchandising_Tt9BHk"
   ]
 }
