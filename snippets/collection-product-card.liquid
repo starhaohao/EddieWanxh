@@ -90,37 +90,30 @@
     echo 'data-aos="img-in" data-aos-duration="800" data-aos-anchor="' | append: aos_anchor | append: '" data-aos-easing="ease-out-quart"'
   endcapture
 
-  # Sale % badge — same best-variant-discount computation used by
-  # snippets/product-grid-item.liquid; this is card display logic, not
-  # the native Shopify filter system, so it's not the "duplicated filter
-  # logic" this redesign was told to avoid.
-  assign on_sale = false
-  if product.compare_at_price > product.price and settings.sale_tags_enable
-    assign on_sale = true
-  endif
+  # Sale % badge — best-variant-discount computation, looping
+  # product.variants directly rather than gating on the top-level
+  # product.compare_at_price/product.price fields (which Shopify Liquid
+  # derives from whichever variant happens to be "first," and can be
+  # blank even when other variants -- e.g. on multi-variant bundles --
+  # clearly are discounted, silently hiding the badge). This is card
+  # display logic, not the native Shopify filter system, so it's not
+  # the "duplicated filter logic" this redesign was told to avoid.
+  assign sale_price_compare = 0
+  assign sale_price_difference = 0
 
-  if on_sale
-    assign sale_price = current_variant.price
-    assign sale_price_compare = current_variant.compare_at_price
-    assign sale_price_difference = sale_price_compare | minus: sale_price
-
-    for option in product.options_with_values
-      for value in option.values
-        if value.variant.available and value.variant.compare_at_price > value.variant.price
-          assign variant_price_difference = value.variant.compare_at_price | minus: value.variant.price
-          if variant_price_difference > sale_price_difference
-            assign sale_price = value.variant.price
-            assign sale_price_compare = value.variant.compare_at_price
-            assign sale_price_difference = sale_price_compare | minus: sale_price
-          endif
-        endif
-      endfor
-    endfor
-
-    if sale_price_compare > 0 and sale_price_difference > 0
-      assign percent_off = sale_price_difference | times: 100.0 | divided_by: sale_price_compare
-      assign sale_badge_text = percent_off | floor | append: '%'
+  for variant in product.variants
+    if variant.available and variant.compare_at_price > variant.price
+      assign variant_price_difference = variant.compare_at_price | minus: variant.price
+      if variant_price_difference > sale_price_difference
+        assign sale_price_compare = variant.compare_at_price
+        assign sale_price_difference = variant_price_difference
+      endif
     endif
+  endfor
+
+  if sale_price_compare > 0 and sale_price_difference > 0 and settings.sale_tags_enable
+    assign percent_off = sale_price_difference | times: 100.0 | divided_by: sale_price_compare
+    assign sale_badge_text = percent_off | floor | append: '%'
   endif
 
   assign is_recently_viewed_enabled = settings.show_recently_viewed_indicator
