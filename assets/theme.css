@@ -52,6 +52,52 @@ https://flickity.metafizzy.co
   left: 0;
 }
 
+/* 1. Remove the box around Final Sale and make the font red */
+.product__badge, 
+.badge, 
+.product-badge {
+  background: transparent !important;
+  border: none !important;
+  color: red !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 2. Add a strikethrough to the before price & keep prices on the same row */
+.product__price, 
+.price,
+.price__container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.product__price--compare, 
+.price-item--regular, 
+.compare-at-price {
+  text-decoration: line-through !important;
+}
+
+/* 3. Put Quantity and Add to Cart on separate rows */
+.product-form__controls, 
+.product-form__buttons, 
+.product__form-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+  width: 100% !important;
+}
+
+.product-form__quantity, 
+.quantity-wrapper,
+.product__quantity {
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+
+
 /* draggable */
 .flickity-enabled.is-draggable {
   -webkit-tap-highlight-color: transparent;
@@ -3617,6 +3663,8 @@ body * {
   --padding-bottom: var(--PB);
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bottom);
+  padding-left: var(--outer);
+  padding-right: var(--outer);
 }
 @media only screen and (min-width: 750px) and (max-width: 989px) {
   .section-padding {
@@ -5437,6 +5485,36 @@ form .errors li:last-child,
 
 img.fit-cover {
   object-fit: cover;
+}
+
+/* Global image/media corner reset */
+.image-wrapper,
+.image-wrapper img,
+.product-item__image,
+.product-item__image .product-link,
+.product-item__bg,
+.product-item__bg__inner,
+.product-item__bg__sibling,
+.product-item__bg__under,
+.product-item__bg__slide,
+.product__photo,
+.product__photo .image-wrapper,
+.product__photo img,
+.deferred-media,
+.deferred-media__poster,
+.deferred-media img,
+.deferred-media video,
+.deferred-media iframe,
+.deferred-media model-viewer,
+.hero__media,
+.hero__image,
+.product-upsell__image__thumb,
+.product-upsell__image__thumb .image-wrapper,
+.product-quick-add__images .product__photo,
+.product-quick-add__images .deferred-media,
+.product-quick-add__content,
+.product-modal__notification {
+  border-radius: 0 !important;
 }
 
 /* === snippets/hero.liquid === */
@@ -10361,6 +10439,7 @@ product-siblings {
   display: block;
   margin-bottom: 4px;
   color: var(--text-light);
+  opacity: 0.6;
 }
 .has-siblings .product-item__cutline {
   flex: 0 1 auto;
@@ -13947,3 +14026,40 @@ dialog.is-loading .loader {
      overflow: hidden;
      min-height: 600px;
    }
+/* 1. Add middle line (strikethrough) to the compare price */
+.compare-at-price, 
+.price__compare, 
+.product-price__compare, 
+[data-compare-price] {
+  text-decoration: line-through !important;
+}
+
+/* 2. Remove the box around Final sale and the question mark */
+.product__badge, 
+.badge, 
+.product-badge, 
+.badge--sale {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* 3. Force Quantity and Add to Cart onto 2 separate rows */
+.product-form__buttons, 
+.product-form__controls, 
+.product-form__submit-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  gap: 15px !important;
+}
+
+.product-form__quantity, 
+.quantity,
+.quantity-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-bottom: 5px !important;
+}

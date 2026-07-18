@@ -13,8 +13,8 @@
   endif
 %}
 
-{%- render 'stylesheet', name: 'custom-content.css' -%}
-{%- render 'stylesheet', name: 'spotlight.css' -%}
+{%- render 'stylesheet', name: 'custom-content.css', async: true, inline: false, blocking: false -%}
+{%- render 'stylesheet', name: 'spotlight.css', async: true, inline: false, blocking: false -%}
 
 {%- if section.blocks.size > 1 -%}
   <script src="{{ 'collections-spotlight.js' | asset_url }}" defer="defer"></script>
@@ -24,6 +24,22 @@
   #CollectionsSpotlight--{{ section.id }} {
     --PT: {{ section.settings.padding_top }}px;
     --PB: {{ section.settings.padding_bottom }}px;
+    
+    /* Force Full Width Breakout */
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    max-width: 100vw !important;
+  }
+
+  /* Remove any default theme padding from the inner container */
+  #CollectionsSpotlight--{{ section.id }} .spotlight__container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
   }
 
   {%- if request.visual_preview_mode -%}
@@ -57,6 +73,8 @@
   {%- endif -%}
 {%- endcapture -%}
 
+{%- assign blocks_content = '' -%}
+{%- assign blocks_images = '' -%}
 {%- for block in section.blocks -%}
   {%- liquid
     assign unique = 'SpotlightImage--' | append: '-' | append: block.id

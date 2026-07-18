@@ -1,0 +1,76 @@
+{%- comment -%}
+  Renders one Explore Styles card. Used for both metaobject-sourced cards
+  and manual card blocks so the two share identical markup.
+
+  Accepts:
+  - image           {Object}  image/media object (or blank -> placeholder)
+  - collection_name {String}  bold top line
+  - subtitle        {String}  regular second line
+  - variant_name    {String}  small gray third line
+  - swatches        {Array}   up to 5 color values (hex strings)
+  - link            {String}  card href (default '#')
+  - discover_text   {String}  CTA pill label
+  - attrs           {String}  optional block.shopify_attributes
+{%- endcomment -%}
+{%- liquid
+  assign link = link | default: '#'
+  assign discover_text = discover_text | default: 'Discover'
+  assign card_label = collection_name | default: discover_text
+  if subtitle != blank
+    assign card_label = card_label | append: ' — ' | append: subtitle
+  endif
+-%}
+<a
+  class="explore-styles__card grid-item"
+  data-grid-item
+  href="{{ link }}"
+  aria-label="{{ card_label | strip_html | escape }}"
+  {{ attrs }}
+>
+  <div class="explore-styles__card-media">
+    {%- if image != blank -%}
+      <img
+        class="explore-styles__card-img"
+        src="{{ image | image_url: width: 800 }}"
+        srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1000 }} 1000w"
+        sizes="(min-width: 990px) 25vw, 84vw"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+        alt="{{ image.alt | default: collection_name | escape }}"
+        loading="lazy"
+        decoding="async"
+      >
+    {%- else -%}
+      <div class="explore-styles__card-img explore-styles__card-img--placeholder">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'explore-styles__placeholder-svg' }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="explore-styles__card-scrim explore-styles__card-scrim--top" aria-hidden="true"></div>
+  <div class="explore-styles__card-scrim explore-styles__card-scrim--bottom" aria-hidden="true"></div>
+
+  {%- if collection_name != blank or subtitle != blank or variant_name != blank -%}
+    <div class="explore-styles__card-text">
+      {%- if collection_name != blank -%}
+        <p class="explore-styles__card-title">{{ collection_name }}</p>
+      {%- endif -%}
+      {%- if subtitle != blank -%}
+        <p class="explore-styles__card-subtitle">{{ subtitle }}</p>
+      {%- endif -%}
+      {%- if variant_name != blank -%}
+        <p class="explore-styles__card-variant">{{ variant_name }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <span class="explore-styles__card-cta">{{ discover_text }}</span>
+
+  {%- if swatches != blank -%}
+    <span class="explore-styles__card-swatches" aria-hidden="true">
+      {%- for color in swatches limit: 5 -%}
+        <span class="explore-styles__swatch-dot" style="background-color: {{ color }};"></span>
+      {%- endfor -%}
+    </span>
+  {%- endif -%}
+</a>

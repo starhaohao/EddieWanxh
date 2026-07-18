@@ -1,0 +1,613 @@
+{%- comment -%}
+  Gateway Hero — mobile-first editorial hero carousel, edge-to-edge image
+  with a transparent overlay navigation rail on each side. Prefix: .gh
+
+  - The campaign image runs true full width (no solid side columns). Two
+    transparent overlay rails (44px touch-target wide) float on top of it
+    at the left/right edges, carrying rotated white category labels +
+    prev/next chevrons; only those elements are clickable, the rest of the
+    rail strip passes clicks through to the image link beneath.
+  - Each slide links to its own product/collection with an HTML caption + CTA.
+  - CTA reuses the theme's primary button (.btn--solid.btn--primary), squared,
+    with adjustable color/size via section settings.
+  - Vanilla JS carousel: swipe, chevrons, keyboard, autoplay w/ pause on
+    interaction, honours prefers-reduced-motion.
+{%- endcomment -%}
+
+{%- liquid
+  assign rail_bg = section.settings.rail_bg | default: '#0F0F0F'
+  assign autoplay = section.settings.autoplay
+  assign interval = section.settings.autoplay_interval | default: 5000
+  assign cta_default = section.settings.cta_text | default: 'SHOP THE DESIGN'
+  assign uid = 'GatewayHero-' | append: section.id
+  assign image_ratio = section.settings.image_ratio | default: '1080 / 1350'
+  assign image_ratio_desktop = section.settings.image_ratio_desktop | default: '16 / 9'
+  assign caption_lift = section.settings.caption_lift | default: 20
+  if image_ratio_desktop == 'match'
+    assign image_ratio_desktop = image_ratio
+  endif
+  assign is_fill = false
+  if image_ratio == 'viewport'
+    assign is_fill = true
+  endif
+
+  assign cta_bg = section.settings.cta_bg | default: '#FFE600'
+  assign cta_text_color = section.settings.cta_text_color | default: '#000000'
+  assign cta_size = section.settings.cta_size | default: 'compact'
+  # compact = the halved-height treatment (22px min-height, 4px/16px padding)
+  assign cta_fs = 12
+  assign cta_py = 4
+  assign cta_px = 16
+  assign cta_height = 22
+  case cta_size
+    when 'compact'
+      assign cta_fs = 12
+      assign cta_py = 4
+      assign cta_px = 16
+      assign cta_height = 22
+    when 'small'
+      assign cta_fs = 11
+      assign cta_py = 4
+      assign cta_px = 14
+      assign cta_height = 22
+    when 'medium'
+      assign cta_fs = 12
+      assign cta_py = 8
+      assign cta_px = 16
+      assign cta_height = 32
+    when 'large'
+      assign cta_fs = 14
+      assign cta_py = 12
+      assign cta_px = 22
+      assign cta_height = 44
+  endcase
+
+  assign micro_as_badge = section.settings.micro_as_badge
+  assign badge_height = section.settings.badge_height | default: 20
+  assign badge_bg = section.settings.badge_bg | default: 'rgba(0,0,0,0)'
+  assign badge_border = section.settings.badge_border | default: '#ffffff'
+  assign badge_text = section.settings.badge_text | default: '#ffffff'
+-%}
+
+<section
+  class="gh{% if is_fill %} gh--fill{% endif %}"
+  id="{{ uid }}"
+  data-gh-root
+  data-gh-autoplay="{{ autoplay }}"
+  data-gh-interval="{{ interval }}"
+  style="
+    --gh-rail-bg: {{ rail_bg }};
+    {%- unless is_fill %} --gh-ratio: {{ image_ratio }}; --gh-ratio-desktop: {{ image_ratio_desktop }};{% endunless %}
+    --gh-cta-bg: {{ cta_bg }};
+    --gh-cta-text: {{ cta_text_color }};
+    --gh-cta-fs: {{ cta_fs }}px;
+    --gh-cta-py: {{ cta_py }}px;
+    --gh-cta-px: {{ cta_px }}px;
+    --gh-cta-height: {{ cta_height }}px;
+    --gh-badge-height: {{ badge_height }}px;
+    --gh-badge-bg: {{ badge_bg }};
+    --gh-badge-border: {{ badge_border }};
+    --gh-badge-text: {{ badge_text }};
+    --gh-caption-lift: {{ caption_lift }}px;
+  "
+  aria-roledescription="carousel"
+  aria-label="{{ section.settings.aria_label | default: 'Campaign highlights' | escape }}"
+>
+  <div class="gh__inner">
+
+    {%- comment -%} LEFT RAIL — category links + previous chevron {%- endcomment -%}
+    <nav class="gh__rail gh__rail--left" aria-label="Left navigation">
+      <div class="gh__rail-links gh__rail-links--flip">
+        <a class="gh__rail-label" href="{{ section.settings.left_link_1 | default: '#' }}">{{ section.settings.left_label_1 | default: 'UNDERWEAR' }}</a>
+        <a class="gh__rail-label" href="{{ section.settings.left_link_2 | default: '#' }}">{{ section.settings.left_label_2 | default: 'TOPS' }}</a>
+      </div>
+      <button type="button" class="gh__chev" data-gh-prev aria-label="Previous slide" aria-controls="{{ uid }}-track">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>
+      </button>
+    </nav>
+
+    {%- comment -%} CENTRAL STAGE {%- endcomment -%}
+    <div class="gh__stage" data-gh-stage role="group" aria-label="Campaign slides">
+      <ul class="gh__track" id="{{ uid }}-track" data-gh-track>
+        {%- liquid
+          # Metaobject-sourced slides render first, then manual slide blocks.
+          assign mo_slides = section.settings.slide_metaobjects.value
+          assign mo_count = 0
+          if mo_slides != blank
+            assign mo_count = mo_slides.size
+          endif
+          assign slide_blocks = section.blocks | where: 'type', 'slide'
+          assign total_slides = mo_count | plus: slide_blocks.size
+          assign gi = 0
+        -%}
+
+        {%- if mo_slides != blank -%}
+          {%- for mo in mo_slides -%}
+            {%- liquid
+              assign mo_img = mo.image.value
+              assign mo_img = mo_img.preview_image | default: mo_img
+              assign mo_focal = mo_img.presentation.focal_point | default: 'center'
+
+              assign mo_link_raw = mo.link.value
+              assign mo_link = mo_link_raw.url | default: mo_link_raw | default: '#'
+
+              assign mo_micro = mo.micro_label.value | default: mo.kicker.value
+              assign mo_title = mo.title.value | default: mo.name.value | default: mo.system.handle
+              assign mo_price = mo.price.value | default: mo.price_line.value
+              assign mo_cta = mo.cta_text.value | default: cta_default
+
+              assign gh_first = false
+              if gi == 0
+                assign gh_first = true
+              endif
+              assign gh_pos = gi | plus: 1
+            -%}
+            {%- render 'gateway-hero-slide',
+              image: mo_img, focal: mo_focal, link: mo_link,
+              micro: mo_micro, title: mo_title, price: mo_price, cta: mo_cta,
+              micro_as_badge: micro_as_badge,
+              is_first: gh_first, position: gh_pos, total: total_slides -%}
+            {%- assign gi = gi | plus: 1 -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- for block in slide_blocks -%}
+          {%- liquid
+            assign b_img = block.settings.image
+            assign b_focal = b_img.presentation.focal_point | default: 'center'
+            assign b_focal_desktop = block.settings.focal_desktop
+            assign b_cta = block.settings.cta_text | default: cta_default
+
+            assign gh_first = false
+            if gi == 0
+              assign gh_first = true
+            endif
+            assign gh_pos = gi | plus: 1
+          -%}
+          {%- render 'gateway-hero-slide',
+            image: b_img, focal: b_focal, focal_desktop: b_focal_desktop, link: block.settings.link,
+            micro: block.settings.micro_label, title: block.settings.title,
+            price: block.settings.price, cta: b_cta,
+            micro_as_badge: micro_as_badge,
+            is_first: gh_first, position: gh_pos, total: total_slides,
+            attrs: block.shopify_attributes -%}
+          {%- assign gi = gi | plus: 1 -%}
+        {%- endfor -%}
+
+        {%- if total_slides == 0 -%}
+          {%- render 'gateway-hero-slide',
+            image: blank, link: '#', micro: 'FINAL STOCK',
+            title: 'Y TRANSDRY® BRIEF', price: 'FROM $15.99 SGD',
+            cta: 'SHOP THE DESIGN', micro_as_badge: micro_as_badge,
+            is_first: true, position: 1, total: 1 -%}
+        {%- endif -%}
+      </ul>
+    </div>
+
+    {%- comment -%} RIGHT RAIL — category links + next chevron {%- endcomment -%}
+    <nav class="gh__rail gh__rail--right" aria-label="Right navigation">
+      <div class="gh__rail-links">
+        <a class="gh__rail-label" href="{{ section.settings.right_link_1 | default: '#' }}">{{ section.settings.right_label_1 | default: 'BUNDLES' }}</a>
+        <a class="gh__rail-label" href="{{ section.settings.right_link_2 | default: '#' }}">{{ section.settings.right_label_2 | default: 'FINAL SALE' }}</a>
+      </div>
+      <button type="button" class="gh__chev" data-gh-next aria-label="Next slide" aria-controls="{{ uid }}-track">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg>
+      </button>
+    </nav>
+
+  </div>
+</section>
+
+<style>
+  .gateway-hero-section {
+    width: 100%;
+    max-width: none;
+  }
+  #{{ uid }}.gh {
+    --gh-rail: 44px;
+    display: block;
+    width: 100%;
+    max-width: none;
+    background: var(--gh-rail-bg, #0F0F0F);
+  }
+  #{{ uid }} .gh__inner {
+    position: relative;
+    width: 100%;
+    max-width: none;
+  }
+  /* Full-viewport option: height drives the layout instead of the ratio. */
+  #{{ uid }}.gh--fill .gh__inner {
+    height: calc(100vh - var(--header-height, 80px));
+    height: calc(100svh - var(--header-height, 80px));
+    min-height: 480px;
+  }
+
+  /* ---- Rails: transparent overlay pinned to each edge, floating on top
+     of the image (not a solid side column) so the photo runs true
+     edge-to-edge. Only the label links / chevron button are interactive;
+     the strip itself passes clicks through to the image link beneath. ---- */
+  #{{ uid }} .gh__rail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--gh-rail);
+    min-width: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    z-index: 3;
+    pointer-events: none;
+  }
+  #{{ uid }} .gh__rail--left { left: 0; }
+  #{{ uid }} .gh__rail--right { right: 0; }
+  #{{ uid }} .gh__rail-links {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    pointer-events: auto;
+  }
+  #{{ uid }} .gh__rail-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.92;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+  #{{ uid }} .gh__rail-links--flip .gh__rail-label { transform: rotate(180deg); }
+  #{{ uid }} .gh__rail-label:hover,
+  #{{ uid }} .gh__rail-label:focus-visible { opacity: 1; }
+
+  #{{ uid }} .gh__chev {
+    flex: 0 0 auto;
+    width: var(--gh-rail);
+    min-width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 18px;
+    filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.6));
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #{{ uid }} .gh__chev:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+
+  /* ---- Stage / slides ---- */
+  #{{ uid }} .gh__stage {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    overflow: hidden;
+    background: var(--gh-rail-bg, #0F0F0F);
+    /* Central image locked to the chosen ratio (default 1080x1350 = 4:5),
+       never taller than one viewport. object-fit:cover handles overflow. */
+    aspect-ratio: var(--gh-ratio, 1080 / 1350);
+    max-height: calc(100svh - var(--header-height, 80px));
+  }
+  #{{ uid }}.gh--fill .gh__stage {
+    aspect-ratio: auto;
+    max-height: none;
+  }
+  #{{ uid }} .gh__track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100%;
+    transform: translateX(0);
+    transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  #{{ uid }} .gh__slide {
+    flex: 0 0 100%;
+    position: relative;
+    height: 100%;
+  }
+  #{{ uid }} .gh__slide-link {
+    display: block;
+    position: relative;
+    height: 100%;
+    text-decoration: none;
+    color: #fff;
+  }
+  #{{ uid }} .gh__img,
+  #{{ uid }} .gh__img--placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  #{{ uid }} .gh__placeholder-svg { width: 100%; height: 100%; object-fit: cover; background: #1a1a1a; }
+
+  /* ---- Caption (HTML text; text-shadow keeps contrast, no image gradient) ---- */
+  #{{ uid }} .gh__caption {
+    position: absolute;
+    /* Cleared past the overlay rails so the CTA/text never sit under the
+       vertical labels or chevrons at the image edges. */
+    left: calc(var(--gh-rail, 44px) + clamp(6px, 2vw, 12px));
+    right: calc(var(--gh-rail, 44px) + clamp(6px, 2vw, 12px));
+    bottom: calc(clamp(16px, 4vw, 24px) + var(--gh-caption-lift, 20px));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    color: #fff;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+    z-index: 2;
+  }
+  #{{ uid }} .gh__micro {
+    margin: 0;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    opacity: 0.92;
+  }
+  /* Badge treatment for the micro label: bordered chip, adjustable height. */
+  #{{ uid }} .gh__micro--badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--gh-badge-height, 20px);
+    padding: 0 8px;
+    border: 1px solid var(--gh-badge-border, #ffffff);
+    background-color: var(--gh-badge-bg, transparent);
+    color: var(--gh-badge-text, #ffffff);
+    opacity: 1;
+  }
+  #{{ uid }} .gh__title {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 32px;
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+  }
+  #{{ uid }} .gh__price {
+    margin: 0;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+  }
+  #{{ uid }} .gh__cta.btn {
+    border-radius: 0 !important;
+    margin-top: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    box-shadow: none !important;
+    font-size: var(--gh-cta-fs, 12px);
+    padding: var(--gh-cta-py, 4px) var(--gh-cta-px, 16px);
+    min-height: var(--gh-cta-height, 22px);
+    background-color: var(--gh-cta-bg, #FFE600) !important;
+    color: var(--gh-cta-text, #000000) !important;
+    border-color: var(--gh-cta-bg, #FFE600) !important;
+  }
+  #{{ uid }} .gh__cta.btn::after {
+    background-color: var(--gh-cta-bg, #FFE600) !important;
+    opacity: 1 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #{{ uid }} .gh__track { transition: none; }
+  }
+
+  @media only screen and (min-width: 990px) {
+    #{{ uid }} .gh { --gh-rail: 52px; }
+    #{{ uid }} .gh__rail-label { font-size: 11px; }
+    #{{ uid }} .gh__title { font-size: 36px; }
+    /* Landscape on desktop (default 16:9); portrait stays on mobile. */
+    #{{ uid }} .gh__stage { aspect-ratio: var(--gh-ratio-desktop, 16 / 9); }
+    #{{ uid }}.gh--fill .gh__stage { aspect-ratio: auto; }
+    /* Desktop crop is a very different shape from mobile (landscape vs
+       tall portrait), so a single focal point often can't serve both —
+       use the per-slide desktop override here when one is set. */
+    #{{ uid }} .gh__img { object-position: var(--gh-focal-desktop, var(--gh-focal-mobile, center)); }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('{{ uid }}');
+    if (!root || root.dataset.ghInit === '1') return;
+    root.dataset.ghInit = '1';
+
+    var track = root.querySelector('[data-gh-track]');
+    var stage = root.querySelector('[data-gh-stage]');
+    var slides = Array.prototype.slice.call(root.querySelectorAll('[data-gh-slide]'));
+    var prevBtns = Array.prototype.slice.call(root.querySelectorAll('[data-gh-prev]'));
+    var nextBtns = Array.prototype.slice.call(root.querySelectorAll('[data-gh-next]'));
+    var count = slides.length;
+    if (!track || count === 0) return;
+
+    var index = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var autoplay = root.dataset.ghAutoplay === 'true';
+    var interval = parseInt(root.dataset.ghInterval, 10) || 5000;
+    var timer = null;
+    var resumeTimer = null;
+
+    function render() {
+      track.style.transform = 'translateX(' + (-index * 100) + '%)';
+      slides.forEach(function (s, i) {
+        var current = i === index;
+        s.setAttribute('aria-hidden', current ? 'false' : 'true');
+        var link = s.querySelector('a.gh__slide-link');
+        if (link) link.tabIndex = current ? 0 : -1;
+      });
+    }
+    function go(i) { index = (i % count + count) % count; render(); }
+    function next() { go(index + 1); }
+    function prev() { go(index - 1); }
+
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function play() {
+      if (!autoplay || reduce || count < 2) return;
+      stop();
+      timer = setInterval(next, interval);
+    }
+    function pause() {
+      stop();
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(play, Math.max(interval, 4000));
+    }
+
+    prevBtns.forEach(function (b) { b.addEventListener('click', function () { prev(); pause(); }); });
+    nextBtns.forEach(function (b) { b.addEventListener('click', function () { next(); pause(); }); });
+
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { prev(); pause(); }
+      else if (e.key === 'ArrowRight') { next(); pause(); }
+    });
+
+    // Touch swipe
+    var startX = 0, startY = 0, tracking = false;
+    stage.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX; startY = e.touches[0].clientY; tracking = true; stop();
+    }, { passive: true });
+    stage.addEventListener('touchend', function (e) {
+      if (!tracking) return;
+      tracking = false;
+      var dx = e.changedTouches[0].clientX - startX;
+      var dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); }
+      pause();
+    }, { passive: true });
+
+    // Pause autoplay on hover / focus within
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', play);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', play);
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : play(); });
+
+    render();
+    play();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Gateway Hero",
+  "tag": "section",
+  "class": "gateway-hero-section",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio (mobile)", "default": "1080 / 1350", "options": [
+      { "value": "9 / 16", "label": "Tall portrait 9:16" },
+      { "value": "1080 / 1350", "label": "Portrait 1080 x 1350 (4:5)" },
+      { "value": "2 / 3", "label": "Portrait 2:3" },
+      { "value": "3 / 4", "label": "Portrait 3:4" },
+      { "value": "1 / 1", "label": "Square 1:1" },
+      { "value": "viewport", "label": "Full viewport height" }
+    ] },
+    { "type": "select", "id": "image_ratio_desktop", "label": "Image ratio (desktop)", "default": "16 / 9", "options": [
+      { "value": "16 / 9", "label": "Landscape 16:9" },
+      { "value": "3 / 2", "label": "Landscape 3:2" },
+      { "value": "2 / 1", "label": "Landscape 2:1" },
+      { "value": "4 / 3", "label": "Landscape 4:3" },
+      { "value": "1 / 1", "label": "Square 1:1" },
+      { "value": "match", "label": "Match mobile ratio" }
+    ] },
+    {
+      "type": "range",
+      "id": "caption_lift",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Caption lift",
+      "info": "Moves the complete title, price and CTA group upward from the bottom edge.",
+      "default": 20
+    },
+
+    { "type": "header", "content": "Behaviour" },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "range", "id": "autoplay_interval", "min": 3000, "max": 8000, "step": 500, "unit": "ms", "label": "Autoplay interval", "default": 5000 },
+    { "type": "text", "id": "aria_label", "label": "Accessible section label", "default": "Campaign highlights" },
+    { "type": "text", "id": "cta_text", "label": "Default CTA text", "default": "SHOP THE DESIGN" },
+
+    { "type": "header", "content": "Left rail" },
+    { "type": "text", "id": "left_label_1", "label": "Label 1", "default": "UNDERWEAR" },
+    { "type": "url", "id": "left_link_1", "label": "Link 1" },
+    { "type": "text", "id": "left_label_2", "label": "Label 2", "default": "TOPS" },
+    { "type": "url", "id": "left_link_2", "label": "Link 2" },
+
+    { "type": "header", "content": "Right rail" },
+    { "type": "text", "id": "right_label_1", "label": "Label 1", "default": "BUNDLES" },
+    { "type": "url", "id": "right_link_1", "label": "Link 1" },
+    { "type": "text", "id": "right_label_2", "label": "Label 2", "default": "FINAL SALE" },
+    { "type": "url", "id": "right_link_2", "label": "Link 2" },
+
+    { "type": "header", "content": "Slides from metaobjects (optional)" },
+    { "type": "paragraph", "content": "Pick entries from a 'Gateway slide' metaobject to auto-populate slides. Metaobject slides render before any manual Slide blocks below. Create a metaobject definition of type gateway_slide with fields: image (image), title (single line text), micro_label (single line text), price (single line text), link (URL, or a product/collection reference), cta_text (single line text)." },
+    { "type": "metaobject_list", "id": "slide_metaobjects", "label": "Metaobject slides", "metaobject_type": "gateway_slide" },
+
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "rail_bg", "label": "Image backdrop (shows behind loading/placeholder image)", "default": "#0F0F0F", "info": "The side rails are a transparent overlay on the image, not a solid bar — this color only shows briefly behind the photo while it loads." },
+
+    { "type": "header", "content": "CTA button" },
+    { "type": "color", "id": "cta_bg", "label": "Button background", "default": "#FFE600" },
+    { "type": "color", "id": "cta_text_color", "label": "Button text", "default": "#000000" },
+    { "type": "select", "id": "cta_size", "label": "Button size", "default": "compact", "options": [
+      { "value": "small", "label": "Small (22px)" },
+      { "value": "compact", "label": "Compact (22px, tighter width)" },
+      { "value": "medium", "label": "Medium (32px)" },
+      { "value": "large", "label": "Large (44px)" }
+    ] },
+
+    { "type": "header", "content": "Micro label / badge" },
+    { "type": "checkbox", "id": "micro_as_badge", "label": "Style micro label as a bordered badge", "default": true },
+    { "type": "range", "id": "badge_height", "min": 14, "max": 40, "step": 1, "unit": "px", "label": "Badge height", "default": 20 },
+    { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "rgba(0,0,0,0)", "alpha": true },
+    { "type": "color", "id": "badge_border", "label": "Badge border", "default": "#ffffff" },
+    { "type": "color", "id": "badge_text", "label": "Badge text", "default": "#ffffff" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Campaign image", "info": "Portrait works best. Set the focal point on the image so the product/waistband stays visible when cropped." },
+        { "type": "text", "id": "focal_desktop", "label": "Desktop focal point override (optional)", "info": "e.g. \"70% 30%\". The image's own focal point is used on mobile; if the wide desktop crop looks off-center, set a separate position here — one focal point often can't serve both a tall mobile crop and a wide desktop crop." },
+        { "type": "text", "id": "micro_label", "label": "Micro label", "default": "FINAL STOCK" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Y TRANSDRY® BRIEF" },
+        { "type": "text", "id": "price", "label": "Price line", "default": "FROM $15.99 SGD" },
+        { "type": "url", "id": "link", "label": "Slide link", "info": "Link to the exact product PDP or matched collection shown." },
+        { "type": "text", "id": "cta_text", "label": "CTA text (optional override)" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Gateway Hero",
+      "blocks": [
+        { "type": "slide", "settings": { "micro_label": "FINAL STOCK", "title": "Y TRANSDRY® BRIEF", "price": "FROM $15.99 SGD" } },
+        { "type": "slide", "settings": { "micro_label": "EVERYDAY", "title": "V COTTON SPANDEX BRIEF", "price": "FROM $11.99 SGD" } },
+        { "type": "slide", "settings": { "micro_label": "SHAPE", "title": "BOXER TRUNKS", "price": "FROM $12.99 SGD" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

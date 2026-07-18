@@ -5,6 +5,10 @@
   assign upsell_description = upsell_description | default: ''
   assign upsell_description_font_size = upsell_description_font_size | default: ''
   assign is_product_block = is_product_block | default: false
+  assign promo_socks_handle = 'pair-with-socks'
+  assign is_promo_socks_offer = false
+  assign promo_socks_display_title = 'Add L Cotton Spandex Socks'
+  assign promo_socks_info_line = 'Choose 1 colour only.<br>Limited to 1 pair per transaction.<br>Valid with any product purchase.'
 
   if upsell_product == blank
     assign show_upsell = false
@@ -53,6 +57,10 @@
     assign show_upsell = false
   endif
 
+  if upsell_product.handle == promo_socks_handle
+    assign is_promo_socks_offer = true
+  endif
+
   assign product_title = 'products.general.upsell_error_title' | t
   assign product_info = 'products.general.upsell_error_info' | t
 
@@ -73,6 +81,9 @@
     <div
       class="product-upsell__holder{% if upsell_error %} product-upsell__holder--onboarding{% endif %}{% if is_cart %} product-upsell__holder--cart{% elsif upsell_quick_add_hide == false %} product-upsell__holder--button{% endif %}"
       data-quick-add-holder="{{ upsell_product.id }}"
+      {% if is_promo_socks_offer %}
+        data-promo-socks-offer
+      {% endif %}
     >
       <div data-cart-errors-container class="product-upsell__errors"></div>
 
@@ -126,7 +137,13 @@
             {%- endif -%}
           {%- else -%}
             <a href="{{ upsell_product.url }}" class="product-upsell__link">
-              <p class="product-upsell__title h3">{{ upsell_product.title | strip_html }}</p>
+              <p class="product-upsell__title h3">
+                {% if is_promo_socks_offer %}
+                  {{ promo_socks_display_title }}
+                {% else %}
+                  {{ upsell_product.title | strip_html }}
+                {% endif %}
+              </p>
 
               {%- unless sibling_color == blank or upsell_product.title contains sibling_color -%}
                 <p class="product-upsell__variant-title h4">{{ 'general.siblings.label' | t }}: {{ sibling_color }}</p>
@@ -183,6 +200,12 @@
                   {{ upsell_description }}
                 </div>
               {%- endif -%}
+
+              {%- if is_promo_socks_offer -%}
+                <p class="product-upsell__description body-x-small">
+                  {{ promo_socks_info_line }}
+                </p>
+              {%- endif -%}
             </a>
             {%- if all_variants_soldout -%}
               <span class="product-upsell__out-of-stock">{{ 'products.general.upsell_out_of_stock' | t }}</span>
@@ -224,6 +247,9 @@
                         name="add"
                         data-quick-add-btn
                         data-add-to-cart
+                        {% if is_promo_socks_offer %}
+                          data-promo-socks-trigger
+                        {% endif %}
                         {% unless upsell_variant.available %}
                           disabled="disabled"
                         {% endunless %}
@@ -249,9 +275,18 @@
                       type="button"
                       data-quick-add-btn
                       data-quick-add-modal-handle="{{ upsell_product.handle }}"
+                      {% if is_promo_socks_offer %}
+                        data-promo-socks-trigger
+                      {% endif %}
                     >
                       <span class="btn__plus"></span>
-                      <span class="btn__text">{{ upsell_button_text }}</span>
+                      <span class="btn__text">
+                        {%- if is_promo_socks_offer -%}
+                          Choose color
+                        {%- else -%}
+                          {{ upsell_button_text }}
+                        {%- endif -%}
+                      </span>
 
                       <span class="btn__loader">
                         <svg height="18" width="18" class="svg-loader">
@@ -275,4 +310,8 @@
       {%- endunless -%}
     </div>
   </quick-add-product>
+
+  {%- if is_promo_socks_offer -%}
+    <script src="{{ 'promo-socks-limit.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
 {%- endif -%}

@@ -1,0 +1,97 @@
+{% doc %}
+  @prompt
+    Add custom CSS to remove the gap/margin between photos in the "Shop the look: Gallery" section with section ID "template--24463093137431__section_look_gallery_ePcTQJ". Set the gap, grid-gap, and any margin between images to 0 so photos sit flush against each other with no spacing.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-custom-css-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ .gallery,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ .gallery-grid,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ .grid,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ [class*="gallery"],
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ [class*="grid"] {
+    gap: 0 !important;
+    grid-gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ .gallery img,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ .gallery-grid img,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ .grid img,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ [class*="gallery"] img,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ [class*="grid"] img {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
+  }
+
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ .gallery > *,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ .gallery-grid > *,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ .grid > *,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ [class*="gallery"] > *,
+  #shopify-section-template--24463093137431__section_look_gallery_ePcTQJ [class*="grid"] > * {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  {% if block.settings.apply_to_all_galleries %}
+    .gallery,
+    .gallery-grid,
+    [class*="gallery"] {
+      gap: 0 !important;
+      grid-gap: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .gallery img,
+    .gallery-grid img,
+    [class*="gallery"] img {
+      margin: 0 !important;
+      padding: 0 !important;
+      display: block;
+    }
+
+    .gallery > *,
+    .gallery-grid > *,
+    [class*="gallery"] > * {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  {% endif %}
+{% endstyle %}
+
+<div class="ai-custom-css-{{ ai_gen_id }}" {{ block.shopify_attributes }}></div>
+
+{% schema %}
+{
+  "name": "Remove gallery gaps",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Target section"
+    },
+    {
+      "type": "paragraph",
+      "content": "This block removes gaps between photos in section: template--24463093137431__section_look_gallery_ePcTQJ"
+    },
+    {
+      "type": "checkbox",
+      "id": "apply_to_all_galleries",
+      "label": "Apply to all gallery sections",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Remove gallery gaps"
+    }
+  ]
+}
+{% endschema %}

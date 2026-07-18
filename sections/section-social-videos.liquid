@@ -23,7 +23,7 @@
   endif
 
   if layout_mobile == 'slider'
-    assign columns_mobile = 2
+  assign columns_mobile = 1
   endif
 
   capture grid_classes
@@ -57,7 +57,7 @@
   endcapture
 -%}
 
-{%- render 'stylesheet', name: 'social-videos.css' -%}
+{%- render 'stylesheet', name: 'social-videos.css', inline: false, async: false, blocking: false -%}
 
 {%- style -%}
   #SocialVideos--{{ section.id }} {

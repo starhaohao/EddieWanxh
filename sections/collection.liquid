@@ -1,4 +1,4 @@
-<!-- /sections/collections.liquid -->
+<!-- /sections/collection.liquid -->
 
 {%- liquid
   assign enable_infinity_scroll = settings.enable_infinity_scroll
@@ -16,7 +16,6 @@
   endcomment
 
   assign product_limit = section.settings.products_per_page
-  assign blocks_featured_image = section.blocks | where: 'type', 'featured_image'
 
   assign columns_desktop = section.settings.grid | plus: 0
   assign columns_medium = 3
@@ -26,9 +25,6 @@
   if columns_desktop == 2 or columns_desktop == 4
     assign columns_medium = 2
   endif
-
-  assign animation_anchor = '.collection-' | append: collection.handle
-  assign animation_duration = 800
 
   assign items_container_tag = 'div'
   if enable_infinity_scroll
@@ -52,10 +48,10 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- render 'stylesheet', name: 'collections.css', inline: true -%}
+{%- render 'stylesheet', name: 'collections.css', inline: true, async: false, blocking: true -%}
 
 {%- if enable_sort or enable_filters -%}
-  {%- render 'stylesheet', name: 'collection-bar.css' -%}
+  {%- render 'stylesheet', name: 'collection-bar.css', inline: true, async: false, blocking: true -%}
 {%- endif -%}
 
 {%- style -%}
@@ -68,6 +64,7 @@
     --COLUMNS-SMALL: {{ columns_small }};
     --COLUMNS-MOBILE: {{ columns_mobile }};
 
+    {%- assign border_color = settings.border_color | default: 'rgba(0,0,0,0)' -%}
     {% unless border_color == 'rgba(0,0,0,0)' or border_color == blank %}
       --border-hairline: {{ border_color }};
     {% endunless %}
@@ -115,6 +112,50 @@
     {%- assign featured_images_array = featured_images_array | split: '@@' | sort -%}
   {%- endif -%}
 
+  <style>
+    #Collection--{{ section.id }} [data-products-grid],
+    #Collection--{{ section.id }} [data-products-grid] .grid {
+      background-color: var(--COLOR-BG);
+    }
+
+    /* Grid: edge-to-edge cards (no gap between tiles), outer edges
+       align to the page's 44px side margin on desktop; fully
+       edge-to-edge (0 outer margin) on mobile, matching the Figma
+       reference layout. */
+    #Collection--{{ section.id }} .collection__products .grid-outer {
+      padding: var(--gutter) 0;
+    }
+    #Collection--{{ section.id }} .grid {
+      gap: 0;
+    }
+    @media screen and (min-width: 990px) {
+      #Collection--{{ section.id }} .collection__products .grid-outer {
+        padding: var(--gutter) 44px;
+      }
+    }
+
+    /* Filter sidebar: match the site's 11-13px label scale and a
+       consistent, quieter checkbox treatment — no structural change. */
+    #Collection--{{ section.id }} .filter-group__heading {
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    #Collection--{{ section.id }} .sidebar__item label,
+    #Collection--{{ section.id }} .filter-group__content label span:last-child {
+      font-size: 12px;
+    }
+    #Collection--{{ section.id }} .sidebar__item input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      accent-color: #000000;
+    }
+    #Collection--{{ section.id }} .filter__price__input,
+    #Collection--{{ section.id }} .filter__price__currency {
+      font-size: 12px;
+    }
+  </style>
+
   <collection-component
     class="collection collection-products collection-{{ collection.handle }} section-padding {{ color_scheme }}"
     id="Collection--{{ section.id }}"
@@ -123,6 +164,8 @@
     data-sort="{{ enable_sort }}"
     data-collection="{{ collection.url | default: '/collections/all' }}"
   >
+    {%- render 'collection-type-links', heading: 'Choose a Type:' -%}
+
     {%- assign align_classes = '' -%}
     {%- if enable_sort -%}
       {%- assign align_classes = align_classes | append: ' collection__nav--sort ' -%}
@@ -270,18 +313,15 @@
                   assign items_on_row_remaining = items_on_row_remaining | minus: 1
 
                   if collection
-                    render 'product-grid-item', product: product, index: forloop.index, sizes: image_sizes
+                    render 'collection-product-card', product: product, index: forloop.index, sizes: image_sizes
                   endif
                 endfor
               -%}
 
             {%- else -%}
               {%- for product in collection.products -%}
-                {%- assign grid_int = section.settings.grid | times: 1 -%}
-                {%- assign animation_delay = forloop.index0 | modulo: grid_int | times: 1 -%}
-                {%- render 'product-grid-item',
+                {%- render 'collection-product-card',
                   product: product,
-                  animation_delay: animation_delay,
                   index: forloop.index,
                   sizes: image_sizes
                 -%}
@@ -307,7 +347,7 @@
         </{{ items_container_tag }}>
 
         {%- if enable_infinity_scroll -%}
-          {%- render 'stylesheet', name: 'pagination.css' -%}
+          {%- render 'stylesheet', name: 'pagination.css', inline: true, async: false, blocking: true -%}
 
           <div
             class="pagination"

@@ -1,13 +1,6 @@
 {%- liquid
-  assign animation_name = 'drawer-items-fade'
-  assign animation_duration = 500
-  assign animation_delay = 0
-  assign animation_delay_increment = 50
-
   assign toolbar_block = section.blocks | where: 'type', 'toolbar'
   assign toolbar_block = toolbar_block[0]
-  assign show_toolbar_socials = false
-  assign show_toolbar_gift_card = toolbar_block.settings.show_gift_card | default: false
   assign show_separator_line = section.settings.show_separator_line
   assign border_color = section.settings.header_border_color
   assign show_socials = false
@@ -180,6 +173,27 @@
       {% endunless %}
       --border-opacity: {{ section.settings.separator_opacity | times: 0.01 }};
     {% endif %}
+
+    /* Apple Frosted Glass Effect - Light Mode (Disabled) */
+    /* background-color: rgba(255, 255, 255, 0.65) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+    backdrop-filter: saturate(180%) blur(20px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important; */
+
+    /* Shared Navigation Style: color, opacity and texture are controlled
+       in Theme settings and remain linked to the Footer. */
+    background: var(--navigation-surface-background, rgba(0, 0, 0, 0.45)) !important;
+    -webkit-backdrop-filter: var(--navigation-surface-filter, saturate(180%) blur(20px)) !important;
+    backdrop-filter: var(--navigation-surface-filter, saturate(180%) blur(20px)) !important;
+    border-bottom: 1px solid var(--navigation-line-color, rgba(255, 255, 255, 0.1)) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+  }
+  
+  /* Remove text shadows globally from header elements */
+  .theme__header *, 
+  .header__wrapper * {
+    text-shadow: none !important;
   }
 
   {%- if logo != blank -%}
@@ -194,6 +208,28 @@
     .main-content > .shopify-section:first-of-type .backdrop--linear:before { display: none; }
   {%- endunless -%}
 {%- endstyle -%}
+
+{%- comment -%}
+  Mega-menu spacing normalized to the site's 4/8/16/24/32/48/64 scale —
+  base theme.css ships these tighter (30px/14px/5px) than the rest of the
+  UI, scoped here rather than edited in the shared base stylesheet.
+{%- endcomment -%}
+<style>
+  .theme__header .dropdown__family {
+    padding: 32px 0;
+  }
+  .theme__header .grandparent .header__grandparent__links {
+    grid-row-gap: 24px;
+  }
+  .theme__header .header__dropdown__image .hero__content {
+    padding: 16px;
+  }
+  .theme__header .grandparent .navlink--child,
+  .theme__header .grandparent .navlink--grandchild {
+    padding-right: 8px;
+    line-height: 1.4;
+  }
+</style>
 
 {%- capture toolbar -%}
   {%- render 'header-toolbar' block: toolbar_block -%}
@@ -273,42 +309,24 @@
 
   assign show_locale_selector = section.settings.show_locale_selector
   assign show_locale_code = section.settings.show_locale_code
-  assign show_locale_selector_toolbar = toolbar_block.settings.show_locale_selector
 
   assign show_globe_icon = section.settings.show_globe_icon
-  assign show_globe_icon_toolbar = toolbar_block.settings.show_globe_icon
 
   assign show_country_selector = section.settings.show_country_selector
-  assign show_country_selector_toolbar = toolbar_block.settings.show_country_selector
 
   assign show_country_name = section.settings.show_country_name
-  assign show_country_name_toolbar = toolbar_block.settings.show_country_name
-
   assign show_country_flag = section.settings.show_country_flag
-  assign show_country_flag_toolbar = toolbar_block.settings.show_country_flag
 
   if show_locale_selector and localization.available_languages.size > 1
     assign languages = true
-  endif
-
-  if show_locale_selector_toolbar and localization.available_languages.size > 1
-    assign languages_toolbar = true
   endif
 
   if show_country_selector and localization.available_countries.size > 1
     assign countries = true
   endif
 
-  if show_country_selector_toolbar and localization.available_countries.size > 1
-    assign countries_toolbar = true
-  endif
-
   if languages or countries
     assign header_popouts = true
-  endif
-
-  if languages or languages_toolbar or countries or countries_toolbar
-    assign header_popouts_mobile = true
   endif
 -%}
 
@@ -355,18 +373,17 @@
     {{ cta }}
 
     {%- if header_popouts -%}
-      {%- assign unique = section.id | append: '-header-mobile-top' -%}
+      {%- assign mobile_unique = section.id | append: '-header-mobile-top' -%}
       <div class="header__mobile__button desktop">
         {%- render 'localization',
-          unique: unique,
+          unique: mobile_unique,
           show_locale_selector: show_locale_selector,
           show_locale_code: show_locale_code,
           show_globe_icon: show_globe_icon,
           show_country_selector: show_country_selector,
           show_country_flag: show_country_flag,
           show_country_name: show_country_name,
-          class: 'header',
-          unique: section.id -%}
+          class: 'header' -%}
       </div>
     {%- endif -%}
 
@@ -413,11 +430,11 @@
     {%- endif -%}
 
     {%- if header_popouts -%}
-      {%- assign unique = section.id | append: '-header-desktop' -%}
+      {%- assign desktop_unique = section.id | append: '-header-desktop' -%}
 
       <div class="header__desktop__button">
         {%- render 'localization'
-          unique: unique,
+          unique: desktop_unique,
           show_locale_selector: show_locale_selector,
           show_locale_code: show_locale_code,
           show_globe_icon: show_globe_icon,
@@ -475,15 +492,16 @@
   </nav>
 {%- endcapture -%}
 
-{%- render 'stylesheet', name: 'header-dropdown.css', async: true -%}
+{%- render 'stylesheet', name: 'header-dropdown.css', async: true, inline: false, blocking: false -%}
 
-{%- if show_toolbar -%}
+{%- if toolbar_block != blank -%}
   <script src="{{ 'ticker.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 <header-component
   class="header__wrapper"
   data-header-wrapper
+  data-navigation-style
   {% if transparent_header %}
     data-header-transparent
   {% endif %}

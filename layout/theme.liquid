@@ -9,6 +9,17 @@
     {{ content_for_header }}
 
 <style>
+/* Liquid glass: shared grain texture used by the top header and bottom
+   sticky bar surfaces below. */
+:root {
+  --glass-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Bottom sticky bar height — 50% taller than the header's own mobile
+     height, which it otherwise shares. Kept as its own variable so only
+     the bottom bar (and the page padding/floating elements that clear it)
+     grow, not the top header. */
+  --bottom-bar-height: calc(var(--HEADER-HEIGHT-MOBILE, 64px) * 1.5);
+}
+
 /* Mobile header */
 @media screen and (max-width: 749px) {
   .header__wrapper .section-padding {
@@ -18,19 +29,13 @@
   .header__mobile {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    position: relative;
+    justify-content: flex-start !important;
     padding: 0 !important;
     margin: 0 !important;
   }
-  /* CDLP orientation: hamburger left, centred logo, account/cart right */
   .header__mobile .header__logo {
-    order: 2;
+    order: 1;
     flex: 0 0 auto;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 52%;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -39,7 +44,7 @@
     margin: 0 !important;
   }
   .header__mobile .header__mobile__right {
-    order: 3;
+    order: 2;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -48,7 +53,7 @@
     margin-right: 0 !important;
   }
   .header__mobile .header__mobile__left {
-    order: 1;
+    order: 3;
     display: flex;
     align-items: center;
     margin: 0 !important;
@@ -76,41 +81,28 @@
   }
 }
 
-/* CDLP orientation: drawer slides in from the left as a full-height panel */
+/* Mobile menu — slide down from top */
 @media screen and (max-width: 749px) {
   .drawer.drawer--header {
     top: 0 !important;
     left: 0 !important;
-    right: auto !important;
+    right: 0 !important;
     bottom: 0 !important;
     width: 100% !important;
-    transform: translateX(-100%) !important;
+    transform: translateY(-100%) !important;
   }
   .drawer.drawer--header.is-open {
-    transform: translateX(0) !important;
+    transform: translateY(0) !important;
   }
   .drawer.drawer--header.is-closing {
-    transform: translateX(-100%) !important;
+    transform: translateY(-100%) !important;
   }
   .drawer.drawer--header .drawer__inner {
     width: 100% !important;
     max-width: 100% !important;
-    height: 100% !important;
-    max-height: 100% !important;
+    max-height: 85vh !important;
     overflow-y: auto !important;
   }
-}
-
-/* CDLP orientation: white drawer, left-aligned links, restrained type (blueprint §3) */
-.drawer.drawer--header .drawer__inner { background: #ffffff !important; }
-.drawer.drawer--header .drawer__main-menu,
-.drawer.drawer--header .drawer__menu { text-align: left !important; }
-.drawer.drawer--header .drawer__main-menu a {
-  font-size: clamp(18px, 5vw, 21px) !important;
-  letter-spacing: 0.01em;
-}
-@media screen and (min-width: 750px) {
-  .drawer.drawer--header .drawer__main-menu a { font-size: 21px !important; }
 }
 
 /* Social sticky bottom bar */
@@ -119,9 +111,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: var(--HEADER-HEIGHT-MOBILE, 64px);
-  background-color: #ffffff;
-  color: #121212;
+  height: var(--bottom-bar-height);
+  background-color: #0b0b0c;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -133,6 +125,29 @@
   top: 0;
   bottom: auto;
 }
+
+/* Liquid glass: bottom sticky bar.
+   Dark, translucent glass with white icons/text. Shares its tint opacity
+   with .theme__header::after above via the "Liquid Glass > Tint opacity"
+   theme setting, so a merchant can tune both surfaces at once from the
+   customizer without editing code. Gated behind @supports so browsers
+   without backdrop-filter keep the bar's solid dark fill untouched. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .social-sticky-bar {
+    background-color: rgba(11, 11, 12, {{ settings.liquid_glass_opacity | divided_by: 100.0 }});
+    background-image: var(--glass-grain);
+    -webkit-backdrop-filter: blur(11px) saturate(150%) brightness(1.15);
+    backdrop-filter: blur(11px) saturate(150%) brightness(1.15) url(#liquid-glass-distortion);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 -8px 24px -16px rgba(0, 0, 0, 0.3);
+  }
+  .social-sticky-bar .socials svg,
+  .social-sticky-bar__account,
+  .social-sticky-bar__currency {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  }
+}
 .social-sticky-bar .socials {
   display: flex !important;
   align-items: center !important;
@@ -142,17 +157,62 @@
   list-style: none !important;
 }
 .social-sticky-bar .socials a {
-  color: #121212 !important;
+  color: #ffffff !important;
   display: flex;
   align-items: center;
 }
-.social-sticky-bar .socials svg { color: #121212; }
+.social-sticky-bar .socials svg { color: #ffffff; }
 .social-sticky-bar .socials svg path {
-  stroke: #121212 !important;
+  stroke: #ffffff !important;
   fill: none !important;
 }
 .social-bar-prefooter-wrap { position: relative; }
-[data-site-container] { padding-bottom: var(--HEADER-HEIGHT-MOBILE, 64px); }
+[data-site-container] {
+  padding-bottom: var(--bottom-bar-height);
+  padding-top: var(--HEADER-HEIGHT-MOBILE, 64px);
+}
+.header-sections {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: #000000;
+  transition: background-color 0.3s ease;
+}
+.header-sections.is-scrolled {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Liquid glass: top header.
+   The header's own solid fill lives on .theme__header::after (a dedicated
+   background layer behind the logo/menu/icons, defined in theme.css).
+   Overriding it here — rather than touching header.liquid — keeps every
+   icon, link, menu and color scheme exactly as configured; only the fill
+   becomes a frosted, refractive pane instead of a flat color. Uses the
+   exact same dark tint/blur/brightness recipe as .social-sticky-bar below
+   so the header and bottom bar read as one consistent glass material, and
+   both share the merchant-configurable "Liquid Glass > Tint opacity"
+   theme setting. Gated behind @supports so browsers without
+   backdrop-filter keep the header's original solid var(--bg) fill
+   untouched. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .theme__header::after {
+    background-color: rgba(11, 11, 12, {{ settings.liquid_glass_opacity | divided_by: 100.0 }});
+    background-image: var(--glass-grain);
+    -webkit-backdrop-filter: blur(11px) saturate(150%) brightness(1.15);
+    backdrop-filter: blur(11px) saturate(150%) brightness(1.15) url(#liquid-glass-distortion);
+    box-shadow:
+      inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+      0 8px 24px -16px rgba(0, 0, 0, 0.3);
+  }
+  .theme__header .header__logo img,
+  .theme__header .navlink--toplevel .navtext,
+  .theme__header [data-glyph],
+  .theme__header .header__desktop__buttons .icon {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+}
 
 /* Social bar — currency + account on right */
 .social-sticky-bar__utils {
@@ -165,13 +225,13 @@
 .social-sticky-bar__currency {
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: #121212;
+  color: #ffffff;
   white-space: nowrap;
 }
 .social-sticky-bar__account {
   display: flex;
   align-items: center;
-  color: #121212;
+  color: #ffffff;
   text-decoration: none;
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -189,7 +249,7 @@
 /* Scroll-to-top button — lift it above the social sticky bar on mobile */
 @media screen and (max-width: 749px) {
   .btn--scroll-top {
-    bottom: calc(var(--HEADER-HEIGHT-MOBILE, 64px) + 16px) !important;
+    bottom: calc(var(--bottom-bar-height) + 16px) !important;
   }
 }
 
@@ -200,7 +260,7 @@
   .tag-floating,
   .promo-tags__tag,
   .floating-tag {
-    bottom: var(--HEADER-HEIGHT-MOBILE, 64px) !important;
+    bottom: var(--bottom-bar-height) !important;
   }
 }
 
@@ -209,14 +269,6 @@
   gap: 12px !important;
 }
 
-/* Galdeano custom font */
-@font-face {
-  font-family: 'Galdeano';
-  src: url('{{ 'GaldeanoRegular.ttf' | asset_url }}') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif !important;
 }
@@ -225,7 +277,7 @@ body {
 .navlink--grandchild .navtext,
 .header__logo__text span,
 h1, h2, h3 {
-  font-family: 'Galdeano', sans-serif !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 html {
   scrollbar-gutter: stable;
@@ -256,6 +308,23 @@ html {
   .product-item__image,
   .lookbook-grid__image { border-radius: 14px; }
 }
+/* Product media — full-bleed edge-to-edge on mobile (no side gutter, no rounded corners) */
+@media screen and (max-width: 749px) {
+  body.template-product .product-single__photos,
+  body.template-product .product__slides {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 0;
+  }
+  body.template-product .product-single__photos img,
+  body.template-product .product__slides img,
+  body.template-product .product-single__photos .image img {
+    border-radius: 0 !important;
+  }
+}
+
 @media screen and (max-width: 749px) {
   body.template-index .slideshow .hero__content {
     width: calc(100% - (var(--outer) * 2)) !important;
@@ -290,7 +359,7 @@ html {
 .klaviyo-form-SKhdji h1,
 .klaviyo-form-SKhdji h2,
 .klaviyo-form-SKhdji h3 {
-  font-family: 'Galdeano', sans-serif !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   color: var(--COLOR-TEXT) !important;
   letter-spacing: 0.04em !important;
 }
@@ -321,7 +390,7 @@ html {
   color: var(--COLOR-BG) !important;
   width: 100% !important;
   border: none !important;
-  font-family: 'Galdeano', sans-serif !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   font-weight: 600 !important;
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
@@ -349,7 +418,7 @@ html {
 .klaviyo-form-V3iqKn button[type="submit"]:hover { background-color: #e8e8e8 !important; }
 .klaviyo-form-V3iqKn h1,
 .klaviyo-form-V3iqKn h2,
-.klaviyo-form-V3iqKn h3 { font-family: 'Galdeano', sans-serif !important; }
+.klaviyo-form-V3iqKn h3 { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important; }
 .klaviyo-form-V3iqKn p,
 .klaviyo-form-V3iqKn label {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif !important;
@@ -357,11 +426,6 @@ html {
 </style>
 <script src="{{ 'cart-progress.js' | asset_url }}" defer></script>
 
-{% if template == 'index' %}
-  <script>
-    window.location.replace("/pages/sale");
-  </script>
-{% endif %}
 
 </head>
 
@@ -371,6 +435,17 @@ html {
     data-animations="{{ settings.animations_enable }}"
   >
     {%- render 'loading' -%}
+
+    <!-- Liquid glass: shared refraction filter for the header and bottom sticky bar -->
+    <svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="liquid-glass-distortion" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise" />
+          <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="18" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
 
     <a class="in-page-link visually-hidden skip-link" data-skip-content href="#MainContent">
       {{- 'general.accessibility.skip_to_content' | t -}}
@@ -446,6 +521,20 @@ html {
         });
       }, { threshold: 0 });
       observer.observe(wrap);
+    })();
+
+    // Header scroll transparency: solid black at top, semi-transparent when scrolling
+    (function() {
+      var headerSections = document.querySelector('.header-sections');
+      if (!headerSections) return;
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 10) {
+          headerSections.classList.add('is-scrolled');
+        } else {
+          headerSections.classList.remove('is-scrolled');
+        }
+      });
     })();
     </script>
 

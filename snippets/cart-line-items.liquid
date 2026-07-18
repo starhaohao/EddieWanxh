@@ -28,6 +28,10 @@
       data-item="{{ line_item.key }}"
       data-item-index="{{ forloop.index }}"
       data-item-title="{{ line_item.title | strip_html }}"
+      data-item-handle="{{ line_item.product.handle }}"
+      {% if line_item.product.handle == 'pair-with-socks' %}
+        data-promo-socks-line
+      {% endif %}
       data-animation="{{ animation_name }}"
       data-animation-duration="500"
       data-animation-delay="{{ animation_delay }}"

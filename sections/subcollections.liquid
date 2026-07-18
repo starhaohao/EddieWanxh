@@ -67,7 +67,10 @@
                 </div>
                 <div class="image-overlay-bottom"></div>
                 <div class="subcollection__text">
-                  <p class="subcollection__title h4">{{ sub_collection.title }}</p>
+                  <p class="subcollection__title h4">
+                    {{ sub_collection.title }}
+                    <span class="subcollection__arrow" aria-hidden="true">&rsaquo;</span>
+                  </p>
                   {%- if sub_collection.description != '' and section.settings.subcollection_description -%}
                     <div class="subcollection__description">{{ sub_collection.description }}</div>
                   {%- endif -%}

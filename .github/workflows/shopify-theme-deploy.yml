@@ -1,0 +1,52 @@
+name: Deploy Shopify Theme
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'sections/**'
+      - 'templates/**'
+      - 'snippets/**'
+      - 'assets/**'
+      - 'layout/**'
+      - 'locales/**'
+      - 'config/**'
+      - '.github/workflows/shopify-theme-deploy.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to Shopify Theme
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli@latest
+
+      - name: Deploy theme
+        run: |
+          shopify theme push \
+            --store=${{ secrets.SHOPIFY_STORE_URL }} \
+            --path=. \
+            --theme-id=${{ secrets.SHOPIFY_THEME_ID }}
+        env:
+          SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_CLI_PARTNERS_TOKEN }}
+
+      - name: Comment on push
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}' === 'success' ? '✅ Deployed' : '❌ Deployment failed';
+            console.log(`${status} to Shopify theme`);

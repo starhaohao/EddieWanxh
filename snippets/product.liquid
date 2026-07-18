@@ -10,6 +10,15 @@
   assign mobile_image_style = section.settings.mobile_image_style
   assign featured_media = current_variant.featured_media | default: product.featured_media
   assign featured_media_aspect_ratio = featured_media.aspect_ratio | default: 1
+  comment
+    TEMP PATCH — taller product image.
+    The image container height follows this ratio (width / height), so a
+    smaller number = taller image. The photo's own natural ratio was making
+    the container short, leaving a big gap before the vendor/title text.
+    0.75 = 3:4 portrait. Try 0.7 for even taller, or remove this override
+    entirely to go back to each photo's natural ratio.
+  endcomment
+  assign featured_media_aspect_ratio = 0.75
   assign is_title_linked = true
   if template.name == 'product' and featured_product == false
     assign is_title_linked = false
@@ -21,7 +30,6 @@
 
   if featured_product
     assign product_sticky_enable = false
-    assign variant_image_scroll = false
     assign enable_history_state = false
   endif
 
@@ -110,8 +118,10 @@
   endif
 
   assign on_sale = false
-  if product.compare_at_price > product.price
+  assign sale_percent = blank
+  if current_variant.compare_at_price > current_variant.price
     assign on_sale = true
+    assign sale_percent = current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round
   endif
 
   assign badge = ''
@@ -119,6 +129,70 @@
     assign badge = product_tags | split: '_badge_'
     assign badge = badge[1] | split: ',' | first | replace: '_', ' '
   endif
+
+  assign product_badge_source = product.type | append: ' ' | append: product.handle | append: ' ' | append: product.title | append: ' ' | append: product_tags | downcase
+  assign product_family_badge = ''
+
+  if product_badge_source contains 'bundle'
+    assign product_family_badge = 'Bundle'
+  elsif product_badge_source contains 'boxer' or product_badge_source contains 'trunk'
+    assign product_family_badge = 'Boxer Trunks'
+  elsif product_badge_source contains 'brief'
+    assign product_family_badge = 'Brief'
+  elsif product_badge_source contains 'sock'
+    assign product_family_badge = 'Socks'
+  elsif product_badge_source contains 't-shirt' or product_badge_source contains 'tshirt' or product_badge_source contains 'tee'
+    assign product_family_badge = 'T-Shirt'
+  elsif product_badge_source contains 'sleeveless' or product_badge_source contains 'top'
+    assign product_family_badge = 'Top'
+  endif
+
+  comment
+    Material badge(s), shown on ALL products from theme.cutline.
+    A cutline naming both fabrics splits into two badges:
+    COTTON SPANDEX + TransDRY®. Same normalization used everywhere:
+    contains 'transdry' -> 'TransDRY®'; anything else -> UPPERCASE.
+  endcomment
+  assign product_material_badge = ''
+  assign product_material_badge_2 = ''
+  assign raw_cutline = product.metafields.theme.cutline.value | strip_html | strip
+  assign normalized_cutline = raw_cutline | downcase | remove: '®' | strip
+
+  if raw_cutline != blank
+    assign has_transdry = false
+    assign has_cotton = false
+    if normalized_cutline contains 'transdry'
+      assign has_transdry = true
+    endif
+    if normalized_cutline contains 'cotton' or normalized_cutline contains 'spandex'
+      assign has_cotton = true
+    endif
+
+    if has_transdry and has_cotton
+      assign product_material_badge = 'COTTON SPANDEX'
+      assign product_material_badge_2 = 'TransDRY®'
+    elsif has_transdry
+      assign product_material_badge = 'TransDRY®'
+    else
+      assign product_material_badge = raw_cutline | upcase
+    endif
+  endif
+
+  comment
+    Line 2 under the title. Single products only: the material label.
+    Bundles get their Line 2 (included product names) inside product-title
+    via product_content / bundle_list, so leave title_material blank for them.
+  endcomment
+  assign title_material = ''
+  unless product_badge_source contains 'bundle'
+    if normalized_cutline contains 'transdry' and normalized_cutline contains 'cotton'
+      assign title_material = 'COTTON SPANDEX & TransDRY®'
+    elsif normalized_cutline contains 'transdry'
+      assign title_material = 'TransDRY®'
+    elsif raw_cutline != blank
+      assign title_material = raw_cutline | upcase
+    endif
+  endunless
 
   assign color_scheme = 'color-' | append: section.settings.color_scheme
 -%}
@@ -149,6 +223,275 @@
 
       --swatch-size: var(--swatch-size-product);
     }
+
+    /* Badge overlay: this theme ships no base `.product__media-badges`
+       rule, so pin the container over the top-left of the product image
+       instead of letting it sit in normal flow (which pushed a white band
+       above the image on mobile). */
+    #MainProduct--{{ section.id }} product-images {
+      position: relative;
+      display: block;
+    }
+    #MainProduct--{{ section.id }} .product__media-badges {
+      position: absolute;
+      top: 16px;
+      left: 12px;
+      right: 12px;
+      z-index: 4;
+      margin: 0;
+      display: flex;
+      flex-flow: row wrap;
+      gap: 6px;
+      width: auto;
+      pointer-events: none;
+    }
+    @media screen and (max-width: 749px) {
+      #MainProduct--{{ section.id }} .product__media-badges {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        gap: 5px;
+      }
+    }
+  {%- endstyle -%}
+
+  {%- comment -%}
+    CDLP-style dimension retrofit. Scoped to this product section only.
+    Enforces a 50/50 desktop split with a centered 480px text column, the
+    editorial type scale, 48px size squares, a full-width black Add-to-Bag,
+    styled accordions, and mobile spacing + a 64px sticky cart-bar. The
+    media gallery is intentionally left to the theme's own product.css
+    (already flush / full-height cover on desktop, edge-to-edge 3:4 on
+    mobile). Prices keep the brand neon-yellow treatment, so no price
+    colors are set here.
+  {%- endcomment -%}
+  {%- style -%}
+    /* ================= DESKTOP (>=990px): 50/50 split ================= */
+    @media only screen and (min-width: 990px) {
+      #MainProduct--{{ section.id }} .product__page {
+        grid-template-columns: 50% 50%;
+        gap: 0;
+      }
+
+      /* Right: 480px content column with generous padding.
+         The media column deliberately keeps the theme's tuned flush /
+         full-height stacked-cover treatment from product.css — overriding
+         it here would clamp the stacked gallery to one viewport height. */
+      #MainProduct--{{ section.id }} .product__content {
+        padding: 40px;
+      }
+      #MainProduct--{{ section.id }} .product__content .form__width {
+        max-width: 480px;
+        width: 100%;
+        margin: 0 auto;
+      }
+    }
+    /* Wider right gutter on large screens (spec: 40–80px) */
+    @media only screen and (min-width: 1400px) {
+      #MainProduct--{{ section.id }} .product__content { padding: 40px 80px; }
+    }
+
+    /* ================= Editorial type scale ================= */
+    #MainProduct--{{ section.id }} .product__breadcrumbs {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+    #MainProduct--{{ section.id }} .product__title {
+      font-size: 32px !important;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      margin-bottom: 6px;
+    }
+    /* Material line: stays a small tracked-cap label under the now-bolder,
+       larger title — pinned with !important on font-size so it can't be
+       outsized by a per-block heading-size setting the way it was before. */
+    #MainProduct--{{ section.id }} .product__subheading {
+      font-size: 13px !important;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.5);
+    }
+    #MainProduct--{{ section.id }} .product__price__wrap,
+    #MainProduct--{{ section.id }} .product__price {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0;
+      margin-bottom: 32px;
+    }
+
+    /* ================= Size selector: 48px squares ================= */
+    #MainProduct--{{ section.id }} .radio__button label {
+      min-width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      border: 1px solid #E5E5E5;
+      transition: background-color 0.2s ease;
+    }
+    @media (hover: hover) {
+      #MainProduct--{{ section.id }} .radio__button label:hover {
+        background-color: #F0F0F0;
+      }
+    }
+
+    /* ================= Add to Bag: full-width black, 56px =================
+       Scoped to the main submit button so upsell / quick-add buttons that
+       may render inside the product section are left untouched. */
+    #MainProduct--{{ section.id }} .product__submit__item [data-add-to-cart] {
+      width: 100%;
+      height: 56px;
+      min-height: 56px;
+      background: #000;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 32px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    #MainProduct--{{ section.id }} .product__submit__item [data-add-to-cart]:not([disabled]):hover {
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+
+    /* ================= Accordions ================= */
+    #MainProduct--{{ section.id }} .accordion {
+      border-top: 1px solid #E5E5E5;
+    }
+    #MainProduct--{{ section.id }} .accordion__title {
+      padding: 16px 0;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Sale badge inset per spec (keeps the brand neon pill styling) */
+    #MainProduct--{{ section.id }} .product__media-badges { top: 24px; left: 24px; }
+
+    /* "Final sale" label: brand orange (matches theme's sale_color). */
+    #MainProduct--{{ section.id }} .product__final-sale,
+    #MainProduct--{{ section.id }} .product__final-sale-question {
+      color: #ED813E !important;
+    }
+
+    /* Promo socks upsell card: title matches the material-line size, price
+       and the shared info line render as three separate lines. */
+    #MainProduct--{{ section.id }} [data-promo-socks-offer] .product-upsell__title {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+    #MainProduct--{{ section.id }} [data-promo-socks-offer] .product-upsell__price .new-price {
+      color: #ED813E;
+    }
+
+    /* Media badges: halve the pill height (thinner than the base badge-box)
+       and center the label both axes. Border thinned to 1px inline. Same
+       padding/border used on the collection card badges so they match. */
+    #MainProduct--{{ section.id }} .product__media-badge {
+      --padding-vertical: 0.22rem;
+      padding-top: 0.22rem;
+      padding-bottom: 0.22rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Before + after price on one row (was stacking on mobile). */
+    #MainProduct--{{ section.id }} .price__sale {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    /* Halve the empty mobile thumbnail-strip gap before the vendor/title. */
+    @media only screen and (max-width: 749px) {
+      #MainProduct--{{ section.id }} .product__thumbs {
+        min-height: 42px;
+        margin: 5px 0;
+      }
+    }
+
+    /* Below desktop (<=989px): stack the page and make the media full-bleed
+       edge-to-edge, overriding the theme's gutter-based margins. */
+    @media only screen and (max-width: 989px) {
+      #MainProduct--{{ section.id }} .product__page {
+        display: block !important;
+      }
+      #MainProduct--{{ section.id }} .product__images {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin-left: calc(50% - 50vw) !important;
+        margin-right: calc(50% - 50vw) !important;
+      }
+    }
+
+    /* ================= MOBILE (<=749px): unified stack ================= */
+    @media only screen and (max-width: 749px) {
+      /* Media column keeps the theme's edge-to-edge 3:4 treatment. */
+      #MainProduct--{{ section.id }} .product__content {
+        padding: 24px 16px 120px 16px;
+      }
+      #MainProduct--{{ section.id }} .product__title {
+        font-size: 24px !important;
+        letter-spacing: -0.01em;
+      }
+      #MainProduct--{{ section.id }} .product__subheading {
+        font-size: 12px !important;
+      }
+      #MainProduct--{{ section.id }} .product__price__wrap,
+      #MainProduct--{{ section.id }} .product__price {
+        margin-bottom: 24px;
+      }
+      #MainProduct--{{ section.id }} .radio__button label {
+        min-width: 44px;
+        height: 44px;
+      }
+      #MainProduct--{{ section.id }} .product__media-badges { top: 16px; left: 16px; }
+    }
+
+    /* Mobile sticky Add-to-Bag: the theme's own cart-bar, sized to spec */
+    @media only screen and (max-width: 749px) {
+      .cart-bar {
+        min-height: 64px;
+        padding-bottom: env(safe-area-inset-bottom);
+        z-index: 50;
+      }
+    }
+
+    /* Liquid glass: mobile sticky Add-to-Bag bar.
+       Same recipe as the header/footer glass in layout/theme.liquid — reuses
+       the shared --glass-grain texture and #liquid-glass-distortion SVG
+       filter defined there, with the same brightened white-wash tuning.
+       Gated so browsers without backdrop-filter keep the bar's solid
+       var(--bg) fill untouched. */
+    @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) and (color: color-mix(in srgb, red 50%, transparent)) {
+      .cart-bar {
+        background-color: color-mix(in srgb, var(--bg, #fff) 28%, transparent);
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
+          var(--glass-grain);
+        -webkit-backdrop-filter: blur(11px) saturate(160%) brightness(1.15);
+        backdrop-filter: blur(11px) saturate(160%) brightness(1.15) url(#liquid-glass-distortion);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.7),
+          0 -8px 24px -16px rgba(0, 0, 0, 0.18);
+      }
+      .cart-bar__product__title,
+      .cart-bar__product__price {
+        filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
+      }
+    }
   {%- endstyle -%}
 
   <{{ wrapper_tag }} class="product__wrapper {{ product_wrapper_modifier }}" data-product>
@@ -164,6 +507,58 @@
             data-fader-mobile
           {% endif %}
         >
+          {%- if product_family_badge != blank or product_material_badge != blank or product_material_badge_2 != blank or on_sale -%}
+            {%- comment -%}
+              Badge overlay. This theme has NO base .product__media-badges
+              rule, so the container is positioned by the scoped CSS in the
+              section style block above (absolute, top-left of the image).
+              Only the neon fill token is passed inline here.
+            {%- endcomment -%}
+            <div
+              class="product__media-badges {{ settings.badge_font_size }}"
+              aria-label="Product details"
+              style="--triiiple-neon: #EFFF00;"
+            >
+              {%- if product_family_badge != blank -%}
+                <span
+                  class="badge-box category-box product__media-badge product__media-badge--left"
+                  style="border: 1px solid #000 !important; color: #000 !important;"
+                >
+                  {{ product_family_badge }}
+                </span>
+              {%- endif -%}
+              {%- comment -%} Sale %: percentage only, never the word "Sale". Shows whenever marked down. {%- endcomment -%}
+              {%- if on_sale and product.available and sale_percent != blank -%}
+                <span
+                  class="badge-box sale-box product__media-badge product__media-badge--left"
+                  style="
+                    background-color: var(--triiiple-neon) !important;
+                    border: 1px solid #000 !important;
+                    color: #000 !important;
+                  "
+                >
+                  {{ sale_percent }}%
+                </span>
+              {%- endif -%}
+              {%- if product_material_badge != blank -%}
+                <span
+                  class="badge-box product__media-badge product__media-badge--right"
+                  style="border: 1px solid #000 !important; color: #000 !important;"
+                >
+                  {{ product_material_badge }}
+                </span>
+              {%- endif -%}
+              {%- if product_material_badge_2 != blank -%}
+                <span
+                  class="badge-box product__media-badge product__media-badge--right"
+                  style="border: 1px solid #000 !important; color: #000 !important;"
+                >
+                  {{ product_material_badge_2 }}
+                </span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
           {%- if product.media.size > 0 -%}
             {%- capture product_slides_attributes -%}
               class="product__slides product-single__photos"
@@ -404,7 +799,8 @@
                       block: block,
                       block_style: block_style,
                       is_title_linked: is_title_linked,
-                      onboarding_product: onboarding_product
+                      onboarding_product: onboarding_product,
+                      title_material: title_material
                     -%}
 
                   {%- when 'price' -%}
@@ -582,7 +978,7 @@
                     <script src="{{ 'complementary-products.js' | asset_url }}" defer="defer"></script>
 
                   {%- when 'pickup' -%}
-                    {%- render 'stylesheet', name: 'pickup-availability.css' -%}
+                    {%- render 'stylesheet', name: 'pickup-availability.css', async: false, inline: false, blocking: true -%}
 
                     {%- assign pick_up_availabilities = current_variant.store_availabilities
                       | where: 'pick_up_enabled', true
@@ -659,15 +1055,11 @@
                       product_form_id: product_form_id
                     -%}
 
-                  {%- when 'features' -%}
+                    {%- when 'features' -%}
                     {%- liquid
                       assign block_id = block.id
                       assign text = block.settings.text
                       assign title = block.settings.title
-                      assign prev_index = forloop.index0 | minus: 1
-                      assign next_index = forloop.index0 | plus: 1
-                      assign prev_block = section.blocks[prev_index]
-                      assign next_block = section.blocks[next_index]
                       assign image = block.settings.icon_alt
                       assign bg_color = block.settings.bg_color
                       assign text_color = block.settings.color
@@ -691,18 +1083,16 @@
                       endcapture
                     -%}
 
-                    {%- render 'stylesheet', name: 'feature.css' -%}
+                    {%- render 'stylesheet', name: 'feature.css', async: false, inline: false, blocking: true -%}
 
-                    {%- if forloop.index0 == 0 or prev_block.type != 'features' -%}
-                      <slider-component
-                        class="product__block product__features block-padding"
-                        {{ block_style }}
-                        data-slider
-                        data-slider-fullwidth
-                        data-dots="{{ dots_style }}"
-                        data-options='{"pageDots": true, "adaptiveHeight": true, "autoPlay": false, "prevNextButtons": false, "fade": false, "draggable": ">1"}'
-                      >
-                    {%- endif -%}
+                    <slider-component
+                      class="product__block product__features block-padding"
+                      {{ block_style }}
+                      data-slider
+                      data-slider-fullwidth
+                      data-dots="{{ dots_style }}"
+                      data-options='{"pageDots": true, "adaptiveHeight": true, "autoPlay": false, "prevNextButtons": false, "fade": false, "draggable": ">1"}'
+                    >
 
                     <div
                       class="product__feature"
@@ -744,9 +1134,7 @@
                       </div>
                     </div>
 
-                    {%- if forloop.index == section.blocks.size or next_block.type != 'features' -%}
-                      </slider-component>
-                    {%- endif -%}
+                    </slider-component>
 
                   {%- when 'popup' -%}
                     {%- render 'product-popup', block: block -%}
@@ -759,26 +1147,28 @@
                       {{ block_style }}
                     >
                       {%- if badge != '' and block.settings.product_badges -%}
-                        <span class="badge-box">{{ badge }}</span>
+                        <span class="badge-box" style="border: 1px solid #000 !important; color: #000 !important;">{{ badge }}</span>
                       {%- endif -%}
 
                       {%- if preorder and product.available and block.settings.product_badges -%}
-                        <span class="badge-box preorder-box" data-preorder-badge>
+                        <span
+                          class="badge-box preorder-box"
+                          data-preorder-badge
+                          style="border: 1px solid #000 !important; color: #000 !important;"
+                        >
                           {{- 'products.product.pre_order' | t -}}
                         </span>
                       {%- endif -%}
 
                       {%- if on_sale and product.available and block.settings.sale_badge -%}
-                        {%- liquid
-                          # Blueprint §5: percentage only, never the word "Sale".
-                          assign pct_compare = current_variant.compare_at_price
-                          if pct_compare == blank or pct_compare == 0
-                            assign pct_compare = product.compare_at_price
-                          endif
-                        -%}
-                        {%- if pct_compare > 0 -%}
-                          <span class="badge-box sale-box">{{ pct_compare | minus: current_variant.price | times: 100.00 | divided_by: pct_compare | round }}%</span>
-                        {%- endif -%}
+                        <span
+                          class="badge-box sale-box"
+                          style="
+                            background-color: var(--triiiple-neon, #EFFF00) !important;
+                            border: 1px solid #000 !important;
+                            color: #000 !important;
+                          "
+                        >{{ sale_percent }}%</span>
                       {%- endif -%}
 
                       {% for i in (1..3) %}
@@ -786,7 +1176,7 @@
                         {% assign badge = block.settings[key] %}
 
                         {% if badge != blank %}
-                          <span class="badge-box custom-box">{{ badge }}</span>
+                          <span class="badge-box custom-box" style="border: 1px solid #000 !important; color: #000 !important;">{{ badge }}</span>
                         {% endif %}
                       {% endfor %}
                     </div>
@@ -794,7 +1184,7 @@
                   {%- when 'countdown' -%}
                     {%- assign layout = block.settings.text_align -%}
 
-                    {%- render 'stylesheet', name: 'countdown.css' -%}
+                    {%- render 'stylesheet', name: 'countdown.css', async: false, inline: false, blocking: true -%}
 
                     <div
                       class="product__block countdown-block block-padding flex-column {{ layout }}"
@@ -833,10 +1223,17 @@
                     </div>
 
                   {%- when 'fit-guide' -%}
-                    {%- render 'stylesheet', name: 'guide.css' -%}
+                    {%- render 'stylesheet', name: 'guide.css', async: false, inline: false, blocking: true -%}
 
                     {%- liquid
+                      assign product_content = product.metafields.custom.product_content.value
                       assign fit_color = block.settings.fit_color
+                      assign fit_segment_selected = block.settings.segment_selected | plus: 0
+
+                      if product_content != blank and product_content.fit_guide.value != blank
+                        assign fit_segment_selected = product_content.fit_guide.value | plus: 0
+                      endif
+
                       unless fit_color.alpha == 0.0 or fit_color == blank
                         capture style
                           echo '--text:' | append: fit_color
@@ -854,10 +1251,9 @@
                       {%- endif -%}
 
                       <div class="guide__line" style="{{ style }}">
-                        {%- assign segment_selected = block.settings.segment_selected | plus: 0 -%}
                         {%- for idx in (1..5) -%}
                           <span
-                            {% if forloop.index == segment_selected %}
+                            {% if forloop.index == fit_segment_selected %}
                               class="is-active"
                             {% endif %}
                           >

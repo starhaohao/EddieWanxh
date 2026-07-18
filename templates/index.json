@@ -9,234 +9,558 @@
  */
 {
   "sections": {
-    "landing-hero": {
-      "type": "landing-hero",
+    "gateway_hero": {
+      "type": "gateway-hero",
       "blocks": {
-        "ghost-briefs": {
-          "type": "ghost_cta",
+        "slide_3LWPWn": {
+          "type": "slide",
+          "source": "{{ metaobjects.gateway_slide[\"stock-sale\"] }}",
           "settings": {
-            "label": "Briefs",
-            "url": "/collections/briefs"
+            "image": "{{ metaobjects.gateway_slide[\"stock-sale\"].desktop_image.value }}",
+            "focal_desktop": "",
+            "micro_label": "{{ metaobjects.gateway_slide[\"stock-sale\"].destination_type.value }}",
+            "title": "{{ metaobjects.gateway_slide[\"stock-sale\"].title.value }}",
+            "price": "{{ metaobjects.gateway_slide[\"stock-sale\"].analytics_label.value }}",
+            "link": "{{ metaobjects.gateway_slide[\"stock-sale\"].custom_url.value }}",
+            "cta_text": "{{ metaobjects.gateway_slide[\"stock-sale\"].cta_text.value }}"
           }
         },
-        "ghost-trunks": {
-          "type": "ghost_cta",
+        "slide_kMhbWX": {
+          "type": "slide",
           "settings": {
-            "label": "Boxer Trunks",
-            "url": "/collections/boxer-trunks"
+            "image": "shopify://shop_images/2_c6133a58-2b31-4160-85db-75a83d3e7cd2.jpg",
+            "focal_desktop": "",
+            "micro_label": "FINAL STOCK",
+            "title": "Y TRANSDRY® BRIEF",
+            "price": "FROM $15.99 SGD",
+            "link": "",
+            "cta_text": ""
           }
         },
-        "ghost-tops": {
-          "type": "ghost_cta",
+        "slide_1": {
+          "type": "slide",
           "settings": {
-            "label": "Tops",
-            "url": "/collections/tops"
+            "image": "shopify://shop_images/6_2a44df0f-7692-4ef7-a165-57fc699055a5.jpg",
+            "focal_desktop": "",
+            "micro_label": "{{ metaobjects.fabric_profile[\"cotton-spandex\"].fabric_name.value }}",
+            "title": "{{ metaobjects.triiiple_product_content[\"v-brief\"].display_name.value }}",
+            "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
+            "link": "shopify://collections/briefs",
+            "cta_text": "{{ metaobjects.triiiple_product_content[\"v-brief\"].signature_quote.value }}"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Untitled-1-Recovered.png",
+            "focal_desktop": "",
+            "micro_label": "SHAPE",
+            "title": "BOXER TRUNKS",
+            "price": "FROM $12.99 SGD",
+            "link": "shopify://collections/boxer-trunks",
+            "cta_text": "SHOP BOXER TRUNKS"
+          }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Untitled-1.jpg",
+            "focal_desktop": "",
+            "micro_label": "LAYERS",
+            "title": "ESSENTIALS",
+            "price": "TOPS COLLECTION",
+            "link": "shopify://collections/tops",
+            "cta_text": "SHOP TOPS"
+          }
+        },
+        "slide_5": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
+            "focal_desktop": "",
+            "micro_label": "FINAL STOCK",
+            "title": "XL / 2XL CLEARANCE",
+            "price": "WHILE STOCK LASTS",
+            "link": "shopify://collections/bundles-xl-2xl-clearance",
+            "cta_text": "SHOP CLEARANCE"
           }
         }
       },
       "block_order": [
-        "ghost-briefs",
-        "ghost-trunks",
-        "ghost-tops"
+        "slide_3LWPWn",
+        "slide_kMhbWX",
+        "slide_1",
+        "slide_3",
+        "slide_4",
+        "slide_5"
       ],
       "settings": {
-        "bg_type": "image",
-        "image": "shopify://shop_images/1780115423632.jpg",
-        "hero_height": 92,
-        "overlay_from": "rgba(10,10,10,0.75)",
-        "overlay_to": "rgba(10,10,10,0.32)",
+        "image_ratio": "1080 / 1350",
+        "image_ratio_desktop": "4 / 3",
+        "autoplay": true,
+        "autoplay_interval": 5000,
+        "aria_label": "Campaign highlights",
+        "cta_text": "SHOP THE DESIGN",
+        "left_label_1": "UNDERWEAR",
+        "left_link_1": "shopify://collections/underwear",
+        "left_label_2": "Our Hero",
+        "left_link_2": "shopify://products/y-transdry-brief-white",
+        "right_label_1": "BUNDLES",
+        "right_link_1": "shopify://collections/bundles-and-save",
+        "right_label_2": "FINAL SALE",
+        "right_link_2": "shopify://collections/additional-15-off",
+        "slide_metaobjects": [],
+        "rail_bg": "#ffffff",
+        "cta_bg": "#ffe600",
+        "cta_text_color": "#000000",
+        "cta_size": "small",
+        "micro_as_badge": false,
+        "badge_height": 20,
+        "badge_bg": "#F8F559",
+        "badge_border": "#000000",
+        "badge_text": "#000000"
+      }
+    },
+    "landing_edm_signup_39bzd6": {
+      "type": "landing-edm-signup",
+      "custom_css": [],
+      "name": "EDM Signup",
+      "settings": {
+        "layout": "inline",
+        "text_alignment": "left",
+        "bg_color": "#0254b2",
+        "font_color": "#dfe4ea",
+        "eyebrow_size": 8,
+        "heading_size": 20,
+        "subtext_size": 12,
+        "input_size": 13,
+        "button_size": 12,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_left": 44,
+        "padding_right": 44,
+        "eyebrow": "welcome",
+        "heading": "Your first layer",
+        "subtext": "unlock 10% off & more?",
+        "placeholder": "Email address",
+        "button_label": "Sign up",
+        "success_text": "You’re in — welcome to First Layer."
+      }
+    },
+    "section_tab_collections_Cc4J84": {
+      "type": "section-tab-collections",
+      "blocks": {
+        "collection_x9Nxnd": {
+          "type": "collection",
+          "settings": {
+            "title": "BRIEF",
+            "featured_collection": "briefs",
+            "show_image": true,
+            "align_with_product_images": false,
+            "image": "shopify://shop_images/9.jpg",
+            "overlay_type": "disabled",
+            "description": "",
+            "color": "",
+            "link_text": "View products",
+            "link": "shopify://collections/briefs",
+            "button_type": "btn--primary",
+            "button_size": "btn--large",
+            "button_style": "btn--text",
+            "show_arrow": true
+          }
+        },
+        "collection_hqfPkt": {
+          "type": "collection",
+          "settings": {
+            "title": "TRUNKS",
+            "featured_collection": "boxer-trunks",
+            "show_image": true,
+            "align_with_product_images": false,
+            "image": "shopify://shop_images/X01.png",
+            "overlay_type": "disabled",
+            "description": "",
+            "color": "",
+            "link_text": "View products",
+            "link": "shopify://collections/boxer-trunks",
+            "button_type": "btn--primary",
+            "button_size": "btn--large",
+            "button_style": "btn--text",
+            "show_arrow": true
+          }
+        },
+        "collection_P3Aqwc": {
+          "type": "collection",
+          "settings": {
+            "title": "TOPS",
+            "featured_collection": "tops",
+            "show_image": true,
+            "align_with_product_images": false,
+            "image": "shopify://shop_images/banner_ML.jpg",
+            "overlay_type": "disabled",
+            "description": "",
+            "color": "",
+            "link_text": "View products",
+            "link": "shopify://collections/tops",
+            "button_type": "btn--primary",
+            "button_size": "btn--large",
+            "button_style": "btn--text",
+            "show_arrow": true
+          }
+        },
+        "collection_8fiAcW": {
+          "type": "collection",
+          "settings": {
+            "title": "BUNDLES",
+            "featured_collection": "bundles-and-save",
+            "show_image": true,
+            "align_with_product_images": false,
+            "overlay_type": "disabled",
+            "description": "",
+            "color": "",
+            "link_text": "View products",
+            "link": "shopify://collections/bundles-and-save",
+            "button_type": "btn--primary",
+            "button_size": "btn--large",
+            "button_style": "btn--text",
+            "show_arrow": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_x9Nxnd",
+        "collection_hqfPkt",
+        "collection_P3Aqwc",
+        "collection_8fiAcW"
+      ],
+      "name": "Tab collections",
+      "settings": {
+        "show_product_count": true,
+        "title": "",
+        "heading_font_size": "heading-x-large",
+        "text": "",
+        "text_font_size": "body-x-small",
+        "layout": "stacked",
+        "layout_desktop": "slider",
+        "product_limit": 5,
+        "grid": 4,
+        "rows": 3,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "heading_tag": "automatic"
+      }
+    },
+    "sale_hero_8Vwb7N": {
+      "type": "sale-hero",
+      "blocks": {
+        "ghost_cta_zRnaVy": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "XS/S Clearance",
+            "url": "shopify://collections/bundles-xs-s-clearance"
+          }
+        },
+        "ghost_cta_XRkDR4": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "XL/2XL Clearance",
+            "url": "shopify://collections/bundles-xl-2xl-clearance"
+          }
+        },
+        "ghost_cta_KCETby": {
+          "type": "ghost_cta",
+          "settings": {
+            "label": "Shop all",
+            "url": "shopify://collections/shop-all"
+          }
+        }
+      },
+      "block_order": [
+        "ghost_cta_zRnaVy",
+        "ghost_cta_XRkDR4",
+        "ghost_cta_KCETby"
+      ],
+      "custom_css": [],
+      "name": "Sale Hero",
+      "settings": {
+        "image": "shopify://shop_images/Landing_Page.jpg",
+        "hero_height": 100,
+        "overlay_from": "#0a0a0abf",
+        "overlay_to": "#0a0a0a52",
         "eyebrow": "Final Clearance",
-        "eyebrow_color": "#923531",
-        "title": "<p>Wear Less.<br/>Feel More.</p>",
-        "title_size": 84,
-        "subtitle": "<p>Buy 5, get 1 free — final stock, no restock.</p>",
-        "show_urgency": false,
-        "show_countdown": false,
-        "countdown_end": "2025-12-31T23:59:59",
-        "cta_text": "Shop Final Clearance",
-        "cta_url": "/collections/dead-stock-clearance",
-        "cta_bg": "#923531",
-        "cta_text_color": "#ffffff"
+        "eyebrow_color": "#7c9bdb",
+        "title": "<p>The </p><p>Last          </p><p>Run.</p><p></p><h3></h3><h5></h5>",
+        "title_size": 120,
+        "subtitle": "<h6>Free shipping</h6><h6>over $50 · Singapore</h6>",
+        "cta_text": "Stock Clearance",
+        "cta_url": "shopify://collections/dead-stock-clearance",
+        "cta_bg": "#7c9bdb",
+        "cta_text_color": "#ffffff",
+        "show_urgency": true,
+        "urgency_label": "Stock Status",
+        "urgency_text": "<h6><strong>Buy 3 — 15% off </strong></h6><h6><strong>Buy 5 — 25% off</strong></h6>"
       }
     },
     "features-strip": {
       "type": "landing-features-strip",
+      "disabled": true,
+      "settings": {}
+    },
+    "section_hero_ALw4gQ": {
+      "type": "section-hero",
       "blocks": {
-        "feat-1": {
-          "type": "feature",
+        "heading_VUtNMe": {
+          "type": "heading",
           "settings": {
-            "category": "Shipping",
-            "title": "Free over $50",
-            "description": "SG & MY. 2-4 business days."
+            "title": "THE BUNDLE EDIT.",
+            "heading_font_size": "heading-x-small",
+            "heading_tag": "automatic",
+            "padding_bottom": 0
           }
         },
-        "feat-2": {
-          "type": "feature",
+        "text_xFjcXF": {
+          "type": "text",
           "settings": {
-            "category": "Materials",
-            "title": "OEKO-TEX",
-            "description": "Certified safe for skin."
-          }
-        },
-        "feat-3": {
-          "type": "feature",
-          "settings": {
-            "category": "Returns",
-            "title": "30-Day Policy",
-            "description": "Hassle-free exchanges."
-          }
-        },
-        "feat-4": {
-          "type": "feature",
-          "settings": {
-            "category": "Origin",
-            "title": "Designed in SG",
-            "description": "Crafted in Thailand."
-          }
-        },
-        "feature_tBF6p6": {
-          "type": "feature",
-          "settings": {
-            "category": "Shipping",
-            "title": "Free over $50",
-            "description": "Singapore & Malaysia. 2–4 days."
+            "text": "<p>Considered pairings. Better value.</p>",
+            "text_font_size": "body-x-small",
+            "padding_bottom": 0
           }
         }
       },
       "block_order": [
-        "feat-1",
-        "feat-2",
-        "feat-3",
-        "feat-4",
-        "feature_tBF6p6"
+        "heading_VUtNMe",
+        "text_xFjcXF"
       ],
+      "name": "Image banner",
       "settings": {
-        "bg_color": "#212529",
-        "border_color": "#ffffff1c",
-        "cat_color": "#923531",
-        "title_color": "#ffffff",
-        "desc_color": "#ffffff6b"
+        "image_1": "shopify://shop_images/Untitled-1.jpg",
+        "image_2": "shopify://shop_images/x-brief.jpg",
+        "link": "shopify://collections/bundles-and-save",
+        "width": "wrapper--full",
+        "height": "screen-height-three-quarters",
+        "flex_align_desktop": "align--bottom-left-desktop",
+        "content_width": 100,
+        "mobile_image": "shopify://shop_images/24.png",
+        "mobile_height": "screen-height-one-third--mobile",
+        "flex_align_mobile": "align--bottom-left-mobile",
+        "color_scheme": "scheme-1",
+        "show_text_background": true,
+        "overlay_type": "disabled",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": false
       }
     },
-    "collections-grid": {
-      "type": "landing-collections-grid",
+    "homepage-social": {
+      "type": "section-social-videos",
       "blocks": {
-        "coll-1": {
-          "type": "collection_card",
+        "video_aYzaJy": {
+          "type": "video",
           "settings": {
-            "collection": "briefs",
-            "label": "Briefs",
-            "tag": "Best Seller",
-            "link": "/collections/briefs"
+            "image": "shopify://shop_images/1_81f69c5b-34c0-4c90-be77-0b5c6efe44c8.png",
+            "badge_text": ""
           }
         },
-        "coll-2": {
-          "type": "collection_card",
+        "vid-1": {
+          "type": "video",
           "settings": {
-            "collection": "tops",
-            "label": "Boxer Trunks",
-            "tag": "",
-            "link": "/collections/boxer-trunks"
+            "image": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg",
+            "badge_text": ""
           }
         },
-        "collection_card_hAU9x8": {
-          "type": "collection_card",
+        "vid-2": {
+          "type": "video",
           "settings": {
-            "collection": "boxer-trunks",
-            "label": "",
-            "tag": "",
-            "link": ""
+            "image": "shopify://shop_images/LP_-_ethan-001_-_Ethan_Cheng_4_5.jpg",
+            "badge_text": ""
           }
         },
-        "coll-3": {
-          "type": "collection_card",
+        "vid-3": {
+          "type": "video",
           "settings": {
-            "collection": "socks",
-            "label": "Tops",
-            "tag": "New",
-            "link": "/collections/tops"
+            "image": "shopify://shop_images/In_TRIIIPLE.jpg",
+            "badge_text": ""
+          }
+        },
+        "video_DBiwMF": {
+          "type": "video",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-06-08_at_3.08.14_pm.png",
+            "badge_text": ""
+          }
+        },
+        "vid-4": {
+          "type": "video",
+          "settings": {
+            "image": "shopify://shop_images/2.png",
+            "badge_text": ""
           }
         }
       },
       "block_order": [
-        "coll-1",
-        "coll-2",
-        "collection_card_hAU9x8",
-        "coll-3"
+        "video_aYzaJy",
+        "vid-1",
+        "vid-2",
+        "vid-3",
+        "video_DBiwMF",
+        "vid-4"
       ],
       "settings": {
-        "bg_color": "#FFFFFF",
-        "border_color": "#ffffff1c",
-        "text_color": "#ffffff",
-        "sub_color": "#ffffff6b",
-        "eyebrow": "Shop by Category",
-        "heading": "Collections",
-        "columns": 4,
-        "cta_text": "View All",
-        "cta_url": "/collections"
+        "heading": "Worn in the wild.",
+        "heading_font_size": "heading-medium",
+        "text": "<p>Tag us @<a href=\"https://www.instagram.com/triiiple_studio/\" target=\"_blank\" title=\"https://www.instagram.com/triiiple_studio/\">triiiple_studio</a></p>",
+        "text_font_size": "body-medium",
+        "align_text": "text-left",
+        "width": "wrapper--full",
+        "aspect_ratio": 1.1,
+        "layout_desktop": "slider",
+        "blocks_per_row": 4,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
+        "padding_top": 16,
+        "padding_bottom": 24,
+        "heading_tag": "h4"
       }
     },
-    "testimonials": {
-      "type": "landing-testimonials",
+    "178359954937ab782c": {
+      "type": "apps",
       "blocks": {
-        "rev-1": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "The most comfortable underwear I've ever worn. Fabric quality is unreal.",
-            "name": "James T.",
-            "product": "Classic Brief 3-Pack"
-          }
-        },
-        "rev-2": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "Finally a local brand that gets it. Fits perfectly, feels premium.",
-            "name": "Wei H.",
-            "product": "Boxer Trunk"
-          }
-        },
-        "rev-3": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "Ordered 5. Will order 5 more. That's all I need to say.",
-            "name": "Raj K.",
-            "product": "Bundle Pack"
-          }
-        },
-        "rev-4": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "Best basics I've owned. Worth every cent.",
-            "name": "Daniel L.",
-            "product": "Cotton Spandex Brief"
-          }
+        "klaviyo_reviews_featured_reviews_carousel_DBTGYV": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
         }
       },
       "block_order": [
-        "rev-1",
-        "rev-2",
-        "rev-3",
-        "rev-4"
+        "klaviyo_reviews_featured_reviews_carousel_DBTGYV"
       ],
       "settings": {
-        "bg_color": "#1a1d20",
-        "title_color": "#ffffff",
-        "card_bg": "#212529",
-        "star_color": "#c8a96e",
-        "quote_color": "rgba(255,255,255,0.85)",
-        "who_color": "rgba(255,255,255,0.45)",
-        "heading": "Worn, Felt, Reviewed"
+        "include_margins": true
+      }
+    },
+    "homepage-brand-story": {
+      "type": "sale-brand-story",
+      "custom_css": [
+        "/* Hide the line break on desktop */.mobile-break {display: none;}",
+        " /* Show the line break on mobile screens (typically under 750px) */@media screen and (max-width: 749px) {.mobile-break {display: block; }}"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "border_color": "#000000",
+        "eyebrow_color": "#868233",
+        "title_color": "#fff200",
+        "body_color": "#fff300",
+        "eyebrow": "about us",
+        "title": "<h4>Designed in Singapore.<br/>Crafted in Thailand.</h4><h4></h4>",
+        "body": "<p>TRIIPLE believes your first layer <br/><br/>is crafted with precision, not simply produced.<br/><br/>Every fibre and stitch is purposefully chosen—<br/><br/>this is the foundation, never the ordinary.</p>",
+        "image": "shopify://shop_images/image-1773771710888.jpg"
+      }
+    },
+    "story_salon_feature_TfLYkW": {
+      "type": "story-salon-feature",
+      "name": "Story Salon feature",
+      "settings": {
+        "article_label": "{{ metaobjects.story_salon[\"with-justin-foo\"].name.value }}",
+        "placeholder_title": "{{ metaobjects.story_salon[\"with-justin-foo\"].tagline.value }}",
+        "placeholder_text": "{{ metaobjects.story_salon[\"with-justin-foo\"].theme.value }}",
+        "article": "{{ metaobjects.story_salon[\"with-justin-foo\"].blog_post.value }}",
+        "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg",
+        "link": "shopify://metaobjects/story_salon/story-salon",
+        "background_color": "#ffffff",
+        "text_color": "#0f1623",
+        "accent_color": "#923531"
+      }
+    },
+    "1783598576dfbeb45d": {
+      "type": "_blocks",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "1783598626bd47c487": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_6b8197f_yiV7yz": {
+          "type": "ai_gen_block_6b8197f",
+          "settings": {
+            "scroll_threshold": 10,
+            "scroll_text_color": "#0099cc"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_6b8197f_yiV7yz"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     }
   },
   "order": [
-    "landing-hero",
-    "collections-grid",
+    "gateway_hero",
+    "landing_edm_signup_39bzd6",
+    "section_tab_collections_Cc4J84",
+    "sale_hero_8Vwb7N",
     "features-strip",
-    "testimonials"
+    "section_hero_ALw4gQ",
+    "homepage-social",
+    "178359954937ab782c",
+    "homepage-brand-story",
+    "story_salon_feature_TfLYkW",
+    "1783598576dfbeb45d",
+    "1783598626bd47c487"
   ]
 }

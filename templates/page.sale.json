@@ -15,13 +15,13 @@
         "msg_1": {
           "type": "message",
           "settings": {
-            "text": "Buy 5, Get 1 Free"
+            "text": "Buy 3 · 15% Off"
           }
         },
         "msg_2": {
           "type": "message",
           "settings": {
-            "text": "Dead Stock · Final Sizes"
+            "text": "Buy 5 · 25% Off"
           }
         },
         "msg_3": {
@@ -72,29 +72,29 @@
         "ghost_cta_RgqEx3": {
           "type": "ghost_cta",
           "settings": {
-            "label": "Briefs",
-            "url": ""
+            "label": "All Bundles",
+            "url": "/collections/bundles-and-save"
           }
         },
         "ghost_1": {
           "type": "ghost_cta",
           "settings": {
-            "label": "Briefs",
-            "url": "shopify://collections/briefs"
+            "label": "Bundle XS/S",
+            "url": "/collections/bundles-xs-s-clearance"
           }
         },
         "ghost_2": {
           "type": "ghost_cta",
           "settings": {
-            "label": "Boxer Trunks",
-            "url": "shopify://collections/boxer-trunks"
+            "label": "Bundle XL/2XL",
+            "url": "/collections/bundles-xl-2xl-clearance"
           }
         },
         "ghost_3": {
           "type": "ghost_cta",
           "settings": {
-            "label": "Essentials",
-            "url": "shopify://collections/essentials"
+            "label": "Dead Stock",
+            "url": "/collections/bundles-xs-s-clearance"
           }
         }
       },
@@ -113,9 +113,9 @@
         "eyebrow_color": "#f1f4f5",
         "title": "<p>The<br/>Last Run.</p>",
         "title_size": 84,
-        "subtitle": "<p>Buy 5, Get 1 Free — auto-applied at checkout.<br/>Dead stock styles, final sizes. No code needed.</p>",
-        "cta_text": "Shop Final Clearance",
-        "cta_url": "shopify://collections/dead-stock-clearance",
+        "subtitle": "<p><strong>Buy 3</strong> — 15% off · <strong>Buy 5</strong> — 25% off<br/>Free shipping over $50 · Singapore</p>",
+        "cta_text": "Shop All",
+        "cta_url": "shopify://pages/fabric-and-size-guide",
         "cta_bg": "#344e5c",
         "cta_text_color": "#f1f4f5",
         "show_urgency": true,
@@ -195,7 +195,7 @@
       "type": "section-collection",
       "name": "Featured collection",
       "settings": {
-        "featured_collection": "landing-heros",
+        "featured_collection": "view-all-new",
         "heading": "Best Sellers",
         "heading_font_size": "heading-small",
         "description": "",

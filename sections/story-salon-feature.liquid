@@ -1,0 +1,196 @@
+{% liquid
+  assign featured_article = section.settings.article
+%}
+
+<section
+  class="ssf"
+  data-story-salon-feature
+  style="
+    --ssf-bg: {{ section.settings.background_color }};
+    --ssf-ink: {{ section.settings.text_color }};
+    --ssf-accent: {{ section.settings.accent_color }};
+  "
+>
+  <a class="ssf__image" href="{{ featured_article.url | default: section.settings.link }}">
+    {% if featured_article != blank and featured_article.image != blank %}
+      {{
+        featured_article.image
+        | image_url: width: 1600
+        | image_tag:
+          widths: '500, 800, 1100, 1600',
+          sizes: '100vw',
+          loading: 'lazy',
+          alt: featured_article.title
+      }}
+    {% elsif section.settings.image != blank %}
+      {{
+        section.settings.image
+        | image_url: width: 1600
+        | image_tag:
+          widths: '500, 800, 1100, 1600',
+          sizes: '100vw',
+          loading: 'lazy',
+          alt: section.settings.heading
+      }}
+    {% endif %}
+
+    <div class="ssf__overlay">
+      {% if featured_article != blank %}
+        <span class="ssf__kicker">{{ section.settings.article_label | escape }}</span>
+        <strong>{{ featured_article.title | escape }}</strong>
+        {% if featured_article.excerpt_or_content != blank %}
+          <p>{{ featured_article.excerpt_or_content | strip_html | strip_newlines | truncate: 120 }}</p>
+        {% endif %}
+      {% else %}
+        <span class="ssf__kicker">{{ section.settings.article_label | escape }}</span>
+        <strong>{{ section.settings.placeholder_title | escape }}</strong>
+        <p>{{ section.settings.placeholder_text | escape }}</p>
+      {% endif %}
+    </div>
+  </a>
+</section>
+
+<style>
+  .ssf {
+    overflow-x: hidden;
+    box-sizing: border-box;
+    max-width: 100%;
+    background: var(--ssf-bg);
+    color: var(--ssf-ink);
+  }
+
+  .ssf__image {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    min-height: clamp(28rem, 52vw, 44rem);
+    background: #dfe1e3;
+  }
+
+  .ssf__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.12) contrast(1.08) brightness(1.02);
+    transform: scale(1.01);
+  }
+
+  .ssf__image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 30%, rgb(255 255 255 / 0.14), transparent 42%),
+      linear-gradient(to top, rgb(15 11 8 / 0.58), transparent 58%);
+    mix-blend-mode: screen;
+    opacity: 0.92;
+  }
+
+  .ssf__overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 1;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    color: #ffffff;
+  }
+
+  .ssf__kicker {
+    display: block;
+    margin-bottom: 0.55rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .ssf__overlay strong {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-size: clamp(1.6rem, 3vw, 3rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    max-width: 12ch;
+  }
+
+  .ssf__overlay p {
+    margin: 0.75rem 0 0;
+    max-width: 34rem;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    opacity: 0.82;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Story Salon feature",
+  "enabled_on": {
+    "templates": [
+      "index",
+      "page"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "article_label",
+      "label": "Article label",
+      "default": "Featured story"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_title",
+      "label": "Placeholder title",
+      "default": "Add a featured Story Salon post"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Placeholder text",
+      "default": "Select an article in the theme editor to show the story preview here."
+    },
+    {
+      "type": "article",
+      "id": "article",
+      "label": "Featured article"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fallback image"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#0f1623"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#923531"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story Salon feature"
+    }
+  ]
+}
+{% endschema %}

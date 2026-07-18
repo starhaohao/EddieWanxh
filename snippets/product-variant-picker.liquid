@@ -15,15 +15,53 @@
   assign show_size_chart = false
   assign has_size_option = false
   assign tags_string = product.tags | join: ','
+  assign product_handle_downcase = product.handle | downcase
+  assign product_title_downcase = product.title | downcase
+  assign product_type_downcase = product.type | downcase
+  assign product_tags_downcase = tags_string | downcase
   assign size_separator = '_size_'
   assign specific_pages = ''
   assign show_size_link_separated = true
   assign uniq_id = 'product-' | append: product.id | append: '-' | append: product.handle
   assign size_style = block.settings.size_chart_style
+  assign tops_size_page = pages['t-shirt-sleeveless-top-size-chart']
+  assign underwear_size_page = pages['size-guide-v2']
 
   if block.settings.info_page != blank
     assign size_translation = 'general.size_chart.size' | t
     assign info_page = pages[block.settings.info_page]
+  endif
+
+  assign is_tops_product = false
+  assign is_underwear_family = false
+  if product_handle_downcase contains 't-shirt'
+    assign is_tops_product = true
+  elsif product_handle_downcase contains 'sleeveless-top'
+    assign is_tops_product = true
+  elsif product_title_downcase contains 't-shirt'
+    assign is_tops_product = true
+  elsif product_title_downcase contains 'sleeveless top'
+    assign is_tops_product = true
+  elsif product_tags_downcase contains 'tank top'
+    assign is_tops_product = true
+  elsif product_tags_downcase contains 'top'
+    assign is_tops_product = true
+  endif
+
+  if product_type_downcase contains 'underwear'
+    assign is_underwear_family = true
+  elsif product_handle_downcase contains 'brief'
+    assign is_underwear_family = true
+  elsif product_handle_downcase contains 'boxer-trunk'
+    assign is_underwear_family = true
+  elsif product_handle_downcase contains 'bundle' and is_tops_product == false
+    assign is_underwear_family = true
+  endif
+
+  if is_tops_product and tops_size_page != blank
+    assign info_page = tops_size_page
+  elsif is_underwear_family and underwear_size_page != blank
+    assign info_page = underwear_size_page
   endif
 
   if tags_string contains size_separator
@@ -506,10 +544,6 @@
                       block: block,
                       picker_type: picker_type
                     %}
-
-                    <span class="svg-wrapper">
-                      {{- 'icon-caret.svg' | inline_asset_content -}}
-                    </span>
                   </popout-select>
                 </div>
               {%- endif -%}

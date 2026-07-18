@@ -91,6 +91,7 @@
         },
         "text_ihqzDx": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p><strong>Buy 3 or more</strong></p>",
             "text_font_size": "body-small",

@@ -1,6 +1,47 @@
-{%- assign onboarding_product = onboarding_product | default: false -%}
+{%- liquid
+  assign onboarding_product = onboarding_product | default: false
+  assign title_material = title_material | default: blank
+  assign product_display_name = product.title | strip_html
+  assign product_subheading = blank
 
-{%- render 'stylesheet', name: 'breadcrumbs.css' -%}
+  if onboarding_product == false and product != blank
+    assign product_content = product.metafields.custom.product_content.value
+
+    comment
+      Prefer the clean Display Name metafield, then product_content, then title.
+    endcomment
+    assign direct_display_name = product.metafields.custom.display_name.value | strip_html | strip
+    if direct_display_name != blank
+      assign product_display_name = direct_display_name
+    elsif product_content != blank
+      assign meta_display_name = product_content.display_name.value | strip_html | strip
+      if meta_display_name != blank
+        assign product_display_name = meta_display_name
+      endif
+    endif
+
+    comment
+      Line 2 (subheading):
+      - Single product: the material label passed in as title_material.
+      - Bundle: title_material is blank, so fall back to product_content
+        (fabric_profile / signature_quote) as before.
+    endcomment
+    if title_material != blank
+      assign product_subheading = title_material
+    elsif product_content != blank
+      assign meta_fabric_profile = product_content.fabric_profile.value | strip_html | strip
+      assign meta_signature_quote = product_content.signature_quote.value | strip_html | strip
+
+      if meta_fabric_profile != blank
+        assign product_subheading = meta_fabric_profile
+      elsif meta_signature_quote != blank
+        assign product_subheading = meta_signature_quote
+      endif
+    endif
+  endif
+-%}
+
+{{ 'breadcrumbs.css' | asset_url | stylesheet_tag }}
 
 <div
   class="product__block product__head block-padding"
@@ -30,37 +71,23 @@
       {% render 'breadcrumbs', breadcrumbs_modifier: 'breadcrumbs--no-padding product__breadcrumbs' %}
   {%- endcase -%}
 
-  <div class="product__title__wrapper" {{ block.shopify_attributes }}>
+  <div class="product__title__wrapper{% if product_subheading != blank %} product__title__wrapper--with-subtitle{% endif %}" {{ block.shopify_attributes }}>
     <h1 class="product__title {{ block.settings.heading_font_size | default: 'heading-small' }}">
       {%- if onboarding_product -%}
         <span data-zoom-caption>{{ 'home_page.onboarding.product_title' | t }}</span>
       {%- else -%}
         {%- unless is_title_linked -%}
-          <span data-zoom-caption>{% render 'product-display-name', product: product %}</span>
+          <span data-zoom-caption>{{ product_display_name | escape }}</span>
         {%- else -%}
           <a href="{{ product.url }}">
-            <span data-zoom-caption>{% render 'product-display-name', product: product %}</span>
+            <span data-zoom-caption>{{ product_display_name | escape }}</span>
           </a>
         {%- endunless -%}
       {%- endif -%}
     </h1>
 
-    {%- unless onboarding_product -%}
-      {%- capture product_subtitle -%}{% render 'product-fabric-subtitle', product: product %}{%- endcapture -%}
-      {%- if product_subtitle != blank -%}
-        <p class="product__subtitle">{{ product_subtitle }}</p>
-      {%- endif -%}
-    {%- endunless -%}
+    {%- if product_subheading != blank -%}
+      <p class="product__subheading">{{ product_subheading | escape }}</p>
+    {%- endif -%}
   </div>
 </div>
-
-{%- style -%}
-  /* Blueprint §6: fabric/technology subtitle, visually separate from the product title */
-  .product__subtitle {
-    margin-top: 6px;
-    font-size: 14px;
-    line-height: 1.4;
-    letter-spacing: 0;
-    color: rgba(23, 25, 28, 0.60);
-  }
-{%- endstyle -%}

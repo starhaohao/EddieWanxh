@@ -1,4 +1,22 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
+  "actions": {
+    "sort": "Sort by"
+  },
+  "content": {
+    "item_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    }
+  },
   "general": {
     "swatches": {
       "color": "Color, Colour"

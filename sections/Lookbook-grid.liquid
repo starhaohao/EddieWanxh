@@ -29,7 +29,7 @@
   <div class="lpg__grid">
     {%- for block in section.blocks -%}
       {%- assign cat_slug = block.settings.category | handleize -%}
-      <a class="lpg__card lpg__card--{{ block.settings.variant }}{% if block.settings.name_galdeano %} lpg__card--gald{% endif %}{% if block.settings.show_grid_lines %} lpg__card--lined{% endif %}"
+      <a class="lpg__card lpg__card--{{ block.settings.variant }}{% if block.settings.show_grid_lines %} lpg__card--lined{% endif %}"
          href="{{ block.settings.url | default: '#' }}"
          data-cat="{{ cat_slug }}"
          style="--lpg-align:{{ block.settings.text_align }};--lpg-card-ns:{{ block.settings.name_size_override | default: 0 }}px;"
@@ -102,7 +102,7 @@
   .lpg__card[style*="--lpg-align:right"]  .lpg__body { align-items:flex-end; }
   .lpg__body--model { flex-direction:row; justify-content:flex-end; align-items:center; padding:10px 13px 14px; }
   .lpg__name { font-size:var(--lpg-card-ns, var(--lpg-ns)); letter-spacing:-0.03em; color:var(--lpg-nc); line-height:1.15; }
-  .lpg__card--gald .lpg__name { font-family:'Galdeano', 'Helvetica Neue', Helvetica, sans-serif; font-weight:400; letter-spacing:-0.04em; }
+  .lpg__name { font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight:400; letter-spacing:-0.04em; }
   .lpg__sub { font-size:12px; color:var(--lpg-sc); letter-spacing:0.02em; line-height:1.4; }
   .lpg__sku { font-family:monospace; font-size:8px; text-transform:uppercase; letter-spacing:0.1em; color:var(--lpg-sc); }
   .lpg__foot { display:flex; justify-content:space-between; align-items:center; margin-top:5px; width:100%; gap:12px; }
@@ -175,7 +175,6 @@
         { "type":"text","id":"compare_price","label":"Compare-at price (strikethrough)","info":"e.g. SGD 369 — shown struck through next to price" },
         { "type":"url","id":"url","label":"Link" },
         { "type":"header","content":"Card style" },
-        { "type":"checkbox","id":"name_galdeano","label":"Use Galdeano font for name","default":false },
         { "type":"select","id":"text_align","label":"Text direction","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}],"default":"left" },
         { "type":"range","id":"name_size_override","label":"Name size override (px, 0 = use default)","min":0,"max":48,"step":1,"default":0 },
         { "type":"checkbox","id":"show_shop","label":"Show Shop link","default":false },

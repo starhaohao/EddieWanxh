@@ -74,13 +74,25 @@
       ],
       "settings": {
         "text_font_size": "body-medium",
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "color_scheme": "scheme-1",
         "padding_top": 32,
         "padding_bottom": 50
+      }
+    },
+    "triiiple_shop_strip_BGDH8a": {
+      "type": "triiiple-shop-strip",
+      "name": "Shop Strip",
+      "settings": {
+        "title": "add on",
+        "collection": "essentials",
+        "side_margin": 20,
+        "card_size": "calc(20% - 12px)",
+        "card_size_mobile": "calc(75% - 12px)"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "triiiple_shop_strip_BGDH8a"
   ]
 }

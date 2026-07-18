@@ -13,9 +13,9 @@
       "type": "collection-image-with-title",
       "settings": {
         "show_title": true,
-        "show_description": true,
+        "show_description": false,
         "flex_align": "align--bottom-left",
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "color_scheme": "scheme-3",
         "show_text_background": false,
         "overlay_type": "disabled",
         "show_image": false,
@@ -28,36 +28,6 @@
     },
     "content_dual_banner_JjrU7w": {
       "type": "content-dual-banner",
-      "blocks": {
-        "slide_nJiPCR": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/V_Brief.jpg",
-            "eyebrow": "",
-            "title": "Briefs",
-            "heading_size": "Medium",
-            "footer_line": "",
-            "btn_label": "Explore",
-            "btn_link": "shopify://collections/briefs"
-          }
-        },
-        "slide_xExCRb": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/H-Boxer-Trunks-White-1_ed6e24e9-f8bc-4568-be92-650fcdccf893.jpg",
-            "eyebrow": "",
-            "title": "Boxer Trunks",
-            "heading_size": "Medium",
-            "footer_line": "",
-            "btn_label": "Explore",
-            "btn_link": "shopify://collections/boxer-trunks"
-          }
-        }
-      },
-      "block_order": [
-        "slide_nJiPCR",
-        "slide_xExCRb"
-      ],
       "name": "Dual-Image Banner",
       "settings": {
         "auto_rotate": false,

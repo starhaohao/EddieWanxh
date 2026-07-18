@@ -1,0 +1,93 @@
+{% doc %}
+  @prompt
+    For the Collections Grid section on mobile: disable the horizontal slider/carousel behavior and instead display the collection cards stacked vertically one per row (full width). Apply as CSS overrides targeting the mobile breakpoint only, without affecting the desktop 3-column grid layout.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-collections-grid-mobile-fix-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-collections-grid-mobile-fix-{{ ai_gen_id }} .collection-list__slider {
+      display: block !important;
+      overflow: visible !important;
+      transform: none !important;
+    }
+
+    .ai-collections-grid-mobile-fix-{{ ai_gen_id }} .collection-list__slider .collection-list__item {
+      width: 100% !important;
+      max-width: 100% !important;
+      flex: 0 0 100% !important;
+      margin-bottom: {{ block.settings.spacing_between_cards }}px;
+    }
+
+    .ai-collections-grid-mobile-fix-{{ ai_gen_id }} .collection-list__slider .collection-list__item:last-child {
+      margin-bottom: 0;
+    }
+
+    .ai-collections-grid-mobile-fix-{{ ai_gen_id }} .flickity-viewport {
+      overflow: visible !important;
+      height: auto !important;
+    }
+
+    .ai-collections-grid-mobile-fix-{{ ai_gen_id }} .flickity-slider {
+      display: block !important;
+      transform: none !important;
+      left: 0 !important;
+    }
+
+    .ai-collections-grid-mobile-fix-{{ ai_gen_id }} .flickity-button,
+    .ai-collections-grid-mobile-fix-{{ ai_gen_id }} .flickity-page-dots {
+      display: none !important;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-collections-grid-mobile-fix-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <style>
+    {{ block.settings.custom_css }}
+  </style>
+</div>
+
+{% schema %}
+{
+  "name": "Collections grid fix",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "paragraph",
+      "content": "This block disables the horizontal slider on mobile and stacks collection cards vertically. Desktop layout remains unchanged."
+    },
+    {
+      "type": "range",
+      "id": "spacing_between_cards",
+      "label": "Spacing between cards",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Additional CSS overrides"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections grid fix"
+    }
+  ]
+}
+{% endschema %}

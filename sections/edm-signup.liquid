@@ -1,0 +1,543 @@
+<section
+  class="edm-signup"
+  data-edm-signup
+  style="
+    --edm-bg: {{ section.settings.background_color }};
+    --edm-ink: {{ section.settings.text_color }};
+    --edm-accent: {{ section.settings.accent_color }};
+  "
+>
+  <div class="edm-signup__inner">
+    <div class="edm-signup__hero">
+      <div class="edm-signup__copy">
+        {% if section.settings.eyebrow != blank %}
+          <p class="edm-signup__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h1>{{ section.settings.heading | escape }}</h1>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="edm-signup__description rte">{{ section.settings.description }}</div>
+        {% endif %}
+
+        {% if section.settings.mode == 'signup' %}
+          <div class="edm-signup__benefits" aria-label="{{ section.settings.benefits_label | escape }}">
+            {% if section.settings.benefit_1 != blank %}
+              <span>{{ section.settings.benefit_1 | escape }}</span>
+            {% endif %}
+            {% if section.settings.benefit_2 != blank %}
+              <span>{{ section.settings.benefit_2 | escape }}</span>
+            {% endif %}
+            {% if section.settings.benefit_3 != blank %}
+              <span>{{ section.settings.benefit_3 | escape }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="edm-signup__card">
+          {% if section.settings.form_heading != blank %}
+            <h2>{{ section.settings.form_heading | escape }}</h2>
+          {% endif %}
+
+          {% if section.settings.form_text != blank %}
+            <p>{{ section.settings.form_text | escape }}</p>
+          {% endif %}
+
+          {% if section.settings.mode == 'signup' %}
+            {%- form 'customer', class: 'edm-signup__form' -%}
+              <input type="hidden" name="contact[tags]" value="{{ section.settings.tag_label | escape }}">
+
+              <label class="visually-hidden" for="EDMEmail-{{ section.id }}">
+                {{ 'blocks.email_signup.label' | t }}
+              </label>
+              <div class="edm-signup__input-row">
+                <input
+                  id="EDMEmail-{{ section.id }}"
+                  class="edm-signup__input"
+                  type="email"
+                  name="contact[email]"
+                  autocomplete="email"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  required
+                  placeholder="{{ 'blocks.email_signup.placeholder' | t }}"
+                  {% if form.errors %}
+                    aria-invalid="true"
+                  {% endif %}
+                >
+                <button class="edm-signup__submit" type="submit">
+                  {{ section.settings.button_label | escape }}
+                </button>
+              </div>
+
+              {%- if form.errors -%}
+                <p class="edm-signup__message edm-signup__message--error" role="alert">
+                  {{ form.errors.messages.email | default: form.errors | default_errors }}
+                </p>
+              {%- endif -%}
+
+              {%- if form.posted_successfully? -%}
+                <p class="edm-signup__message edm-signup__message--success" role="status">
+                  {{ 'blocks.email_signup.success' | t }}
+                </p>
+              {%- endif -%}
+            {%- endform -%}
+          {% else %}
+            <div class="edm-signup__actions">
+              {% if section.settings.primary_button_label != blank and section.settings.primary_button_url != blank %}
+                <a class="edm-signup__submit edm-signup__submit--link" href="{{ section.settings.primary_button_url }}">
+                  {{ section.settings.primary_button_label | escape }}
+                </a>
+              {% endif %}
+
+              {% if section.settings.secondary_button_label != blank and section.settings.secondary_button_url != blank %}
+                <a class="edm-signup__secondary" href="{{ section.settings.secondary_button_url }}">
+                  {{ section.settings.secondary_button_label | escape }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if section.settings.note != blank %}
+            <p class="edm-signup__note">{{ section.settings.note | escape }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="edm-signup__visual">
+        <div class="edm-signup__image-wrap edm-signup__image-wrap--primary">
+          {% if section.settings.image != blank %}
+            {{
+              section.settings.image
+              | image_url: width: 1600
+              | image_tag:
+                widths: '600, 900, 1200, 1600',
+                sizes: '(min-width: 990px) 58vw, 100vw',
+                loading: 'eager',
+                alt: section.settings.heading
+            }}
+          {% endif %}
+        </div>
+
+        {% if section.settings.image_2 != blank %}
+          <div class="edm-signup__image-wrap edm-signup__image-wrap--secondary">
+            {{
+              section.settings.image_2
+              | image_url: width: 1200
+              | image_tag:
+                widths: '400, 700, 1000, 1200',
+                sizes: '(min-width: 990px) 28vw, 60vw',
+                loading: 'lazy',
+                alt: section.settings.heading
+            }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .edm-signup {
+    background: var(--edm-bg, #ffffff);
+    color: var(--edm-ink, #0f1623);
+  }
+
+  .edm-signup__inner {
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem) var(--page-margin) clamp(3rem, 7vw, 6rem);
+  }
+
+  .edm-signup__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: start;
+    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .edm-signup__copy {
+    position: sticky;
+    top: calc(var(--header-height, 0px) + 1.5rem);
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+  }
+
+  .edm-signup__eyebrow {
+    margin: 0;
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.58;
+  }
+
+  .edm-signup h1 {
+    margin: 0;
+    max-width: 10ch;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(2.6rem, 7vw, 6.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+  }
+
+  .edm-signup__description {
+    max-width: 36rem;
+    font-size: clamp(0.96rem, 1.4vw, 1.08rem);
+    line-height: 1.75;
+  }
+
+  .edm-signup__benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .edm-signup__benefits span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.2rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+    border-radius: 999px;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .edm-signup__card {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.2rem, 2.4vw, 1.8rem);
+    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    background: color-mix(in srgb, var(--edm-bg, #ffffff) 96%, var(--edm-ink, #0f1623) 4%);
+  }
+
+  .edm-signup__card h2 {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .edm-signup__card p,
+  .edm-signup__note {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    opacity: 0.74;
+  }
+
+  .edm-signup__form {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .edm-signup__input-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.65rem;
+  }
+
+  .edm-signup__input,
+  .edm-signup__submit {
+    min-height: 3.25rem;
+    padding: 0.8rem 1rem;
+    border-radius: 0;
+    border: 1px solid currentColor;
+    font: inherit;
+  }
+
+  .edm-signup__input {
+    width: 100%;
+    color: inherit;
+    background: transparent;
+  }
+
+  .edm-signup__input::placeholder {
+    color: color-mix(in srgb, currentColor 48%, transparent);
+  }
+
+  .edm-signup__submit {
+    padding-inline: 1.2rem;
+    color: var(--edm-bg, #ffffff);
+    background: var(--edm-ink, #0f1623);
+    cursor: pointer;
+    transition: transform 160ms ease, background-color 160ms ease;
+  }
+
+  .edm-signup__submit:hover {
+    transform: translateY(-1px);
+    background: color-mix(in srgb, var(--edm-ink, #0f1623) 88%, white);
+  }
+
+  .edm-signup__submit--link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .edm-signup__actions {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .edm-signup__secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.25rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid currentColor;
+    color: inherit;
+    font: inherit;
+    background: transparent;
+  }
+
+  .edm-signup__message {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  .edm-signup__message--error {
+    color: #8a1f1f;
+  }
+
+  .edm-signup__message--success {
+    color: color-mix(in srgb, var(--edm-ink, #0f1623) 88%, var(--edm-accent, #923531));
+  }
+
+  .edm-signup__note {
+    font-size: 0.78rem;
+  }
+
+  .edm-signup__visual {
+    display: grid;
+    gap: 1rem;
+    align-self: stretch;
+  }
+
+  .edm-signup__image-wrap {
+    position: relative;
+    overflow: hidden;
+    background: #dfe1e3;
+  }
+
+  .edm-signup__image-wrap--primary {
+    min-height: clamp(28rem, 56vw, 46rem);
+  }
+
+  .edm-signup__image-wrap--secondary {
+    width: min(100%, 38rem);
+    justify-self: end;
+    min-height: clamp(12rem, 22vw, 18rem);
+  }
+
+  .edm-signup__image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.18) contrast(1.12) brightness(1.03);
+    transform: scale(1.01);
+  }
+
+  .edm-signup__image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 25%, rgb(255 255 255 / 0.16), transparent 38%),
+      linear-gradient(to top, rgb(15 11 8 / 0.36), transparent 44%);
+    mix-blend-mode: screen;
+    opacity: 0.9;
+  }
+
+  @media screen and (max-width: 989px) {
+    .edm-signup__hero {
+      grid-template-columns: 1fr;
+    }
+
+    .edm-signup__copy {
+      position: static;
+    }
+
+    .edm-signup__image-wrap--secondary {
+      width: 100%;
+      justify-self: stretch;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .edm-signup__input-row {
+      grid-template-columns: 1fr;
+    }
+
+    .edm-signup__submit {
+      width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "EDM signup",
+  "enabled_on": {
+    "templates": [
+      "page"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Join the list"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get first access to the next drop."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Be the first to hear about launches, restocks, campaign edits, and exclusive email-only offers from TRIIIPLE.</p>"
+    },
+    {
+      "type": "text",
+      "id": "benefits_label",
+      "label": "Benefits label",
+      "default": "What you get"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "Early drop access"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "Restock alerts"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "EDM-only offers"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Subscribe for updates"
+    },
+    {
+      "type": "text",
+      "id": "form_text",
+      "label": "Form text",
+      "default": "Drop your email below and we’ll keep you posted."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Sign up"
+    },
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "Mode",
+      "options": [
+        {
+          "value": "signup",
+          "label": "Signup"
+        },
+        {
+          "value": "sign-out",
+          "label": "Sign out"
+        }
+      ],
+      "default": "signup"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Primary button label",
+      "default": "Manage preferences"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_url",
+      "label": "Primary button URL"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary button label",
+      "default": "Unsubscribe"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_url",
+      "label": "Secondary button URL"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "No spam. Just the useful stuff."
+    },
+    {
+      "type": "text",
+      "id": "tag_label",
+      "label": "Customer tag",
+      "default": "EDM Signup"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Primary image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Secondary image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#0f1623"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#923531"
+    }
+  ],
+  "presets": [
+    {
+      "name": "EDM signup"
+    }
+  ]
+}
+{% endschema %}

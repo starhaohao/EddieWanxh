@@ -1,0 +1,65 @@
+{% doc %}
+  @prompt
+    In the mobile menu drawer, the Menu columns block currently shows 2 menu items side by side in one row. Apply a CSS override to force each menu item to display full width (1 per row), stacked vertically. Target only the mobile menu columns block without affecting other layouts.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-mobile-menu-fix-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .drawer__menu .menu-columns__item {
+      width: 100% !important;
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+
+    .drawer__menu .menu-columns {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: {{ block.settings.item_spacing }}px;
+    }
+
+    .drawer__menu .menu-columns__item a,
+    .drawer__menu .menu-columns__item .menu-columns__link {
+      width: 100% !important;
+      display: block !important;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-mobile-menu-fix-{{ ai_gen_id }}" {{ block.shopify_attributes }}></div>
+
+{% schema %}
+{
+  "name": "Mobile menu fix",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Mobile menu columns override"
+    },
+    {
+      "type": "paragraph",
+      "content": "Forces menu items to display full width (1 per row) in the mobile drawer menu."
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "label": "Spacing between items",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mobile menu fix"
+    }
+  ]
+}
+{% endschema %}

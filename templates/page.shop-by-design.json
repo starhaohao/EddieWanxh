@@ -1,6 +1,10 @@
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
 {
@@ -11,33 +15,37 @@
         "design": {
           "type": "destination",
           "settings": {
+            "image": "shopify://shop_images/7_132ac11b-ebf5-4aff-8ea1-bd9d65e59326.jpg",
             "label": "Shop by design",
             "title": "Shop by design",
-            "text": "Move by silhouette, cut, and styling direction first.",
-            "link": "/collections/underwear"
+            "text": "Move through the range by silhouette first.",
+            "link": "/collections/all"
           }
         },
         "fabric": {
           "type": "destination",
           "settings": {
+            "image": "shopify://shop_images/9_4658f947-fd9b-41ff-b23a-e69891ab9bf2.jpg",
             "label": "Shop by fabric",
             "title": "Shop by fabric",
-            "text": "Browse pieces through the fabric story behind them.",
+            "text": "Jump back to the material-led edit.",
             "link": "/pages/shop-by-fabric"
           }
         },
         "all_items": {
           "type": "destination",
           "settings": {
+            "image": "shopify://shop_images/91268D2D-441A-4455-A6D5-94B17BD3D7CE.png",
             "label": "All items",
             "title": "View all items",
-            "text": "See the complete product range in one place.",
+            "text": "Browse the whole store in one sweep.",
             "link": "/collections/all"
           }
         },
         "size_xs": {
           "type": "size_row",
           "settings": {
+            "size_range": "underwear",
             "size": "XS",
             "chest": "32-34",
             "waist": "25-27"
@@ -46,6 +54,7 @@
         "size_s": {
           "type": "size_row",
           "settings": {
+            "size_range": "underwear",
             "size": "S",
             "chest": "34-36",
             "waist": "28-30"
@@ -54,6 +63,7 @@
         "size_m": {
           "type": "size_row",
           "settings": {
+            "size_range": "underwear",
             "size": "M",
             "chest": "36-38",
             "waist": "31-33"
@@ -69,113 +79,22 @@
         "size_m"
       ],
       "settings": {
-        "eyebrow": "Shop",
+        "eyebrow": "Explore",
         "heading": "Shop by design.",
-        "description": "<p>Use this page to guide customers toward the design-led collection path and the broader catalog.</p>",
+        "description": "<p>Lead with the silhouette and let the fabric story follow from there.</p>",
         "card_cta": "Open page",
-        "content_field": "about_design",
-        "collections_eyebrow": "Shop by design",
-        "collections_heading": "Pick your silhouette.",
         "guide_eyebrow": "Fit guide",
         "guide_heading": "Size and fit guide",
-        "guide_text": "<p>Keep the fitting notes visible here so customers can decide before they add to cart.</p>",
+        "guide_text": "<p>Keep sizing visible for customers comparing designs and cuts.</p>",
+        "underwear_tab_label": "Underwear",
+        "tops_tab_label": "T-shirts / Tops",
         "background_color": "#ffffff",
         "text_color": "#0f1623",
         "accent_color": "#923531"
       }
-    },
-    "signup": {
-      "type": "edm-signup",
-      "settings": {
-        "eyebrow": "Join the list",
-        "heading": "Get first access to the next drop.",
-        "description": "<p>Be the first to hear about launches, restocks, campaign edits, and exclusive email-only offers from TRIIIPLE.</p>",
-        "benefits_label": "What you get",
-        "benefit_1": "Early drop access",
-        "benefit_2": "Restock alerts",
-        "benefit_3": "EDM-only offers",
-        "form_heading": "Subscribe for updates",
-        "form_text": "Drop your email below and we’ll keep you posted.",
-        "button_label": "Sign up",
-        "mode": "signup",
-        "note": "No spam. Just the useful stuff.",
-        "tag_label": "First Layer Perks",
-        "background_color": "#ffffff",
-        "text_color": "#0f1623",
-        "accent_color": "#923531"
-      }
-    },
-    "about": {
-      "type": "page-about-us",
-      "settings": {
-        "eyebrow": "About us",
-        "heading": "Who we are",
-        "intro": "<p>TRIIIPLE Studio is a men’s underwear and intimate wear brand built around a sharper idea of comfort: clean lines, considered fit, and a quiet kind of confidence.</p>",
-        "primary_label": "Shop all",
-        "primary_link": "/collections/all",
-        "secondary_label": "Story Salon",
-        "secondary_link": "/pages/story-salon",
-        "image_1": "shopify://shop_images/About-us-1.jpg",
-        "image_2": "shopify://shop_images/About-us-2.jpg",
-        "image_3": "shopify://shop_images/About-us-3.jpg",
-        "image_4": "shopify://shop_images/About-us-4.jpg",
-        "manifesto_eyebrow": "Why this works",
-        "manifesto_heading": "Engineered, not just made.",
-        "manifesto_body": "<p>Founded in Singapore and crafted in Asia, we design body-aware underwear that feels urban, timeless, and calm on the skin. Every cut is deliberate. Every layer is meant to work quietly.</p>",
-        "principles_eyebrow": "Product details",
-        "principles_heading": "The baseline.",
-        "closing_eyebrow": "The first layer",
-        "closing_heading": "Built for bodies that do more.",
-        "closing_body": "<p>We craft enduring essentials and reworked classics - each made with materials that move with you, wick moisture fast, and feel refined against the skin.</p><p>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones, with sizes ranging from XS to 2XL.</p>",
-        "background_color": "#ffffff",
-        "ink_color": "#17191c",
-        "accent_color": "#4a1024"
-      },
-      "blocks": {
-        "principle_1": {
-          "type": "principle",
-          "settings": {
-            "kicker": "Fit",
-            "heading": "Made to move",
-            "body": "<p>Patterned for comfort, built to stay put, and refined enough for everyday wear.</p>"
-          }
-        },
-        "principle_2": {
-          "type": "principle",
-          "settings": {
-            "kicker": "Fabric",
-            "heading": "Performance first",
-            "body": "<p>Moisture-wicking, soft-touch fabrics that stay relevant beyond the trend cycle.</p>"
-          }
-        },
-        "principle_3": {
-          "type": "principle",
-          "settings": {
-            "kicker": "Design",
-            "heading": "Measured confidence",
-            "body": "<p>Minimal, editorial, and body-aware - built to look sharp without trying too hard.</p>"
-          }
-        },
-        "principle_4": {
-          "type": "principle",
-          "settings": {
-            "kicker": "Range",
-            "heading": "All bodies welcome",
-            "body": "<p>Sizes from XS to 2XL, because confidence should never come in one shape.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "principle_1",
-        "principle_2",
-        "principle_3",
-        "principle_4"
-      ]
     }
   },
   "order": [
-    "main",
-    "signup",
-    "about"
+    "main"
   ]
 }

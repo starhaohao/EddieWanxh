@@ -14,24 +14,35 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "social_yqkA6e": {
+          "type": "social",
+          "settings": {
+            "title": "",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Find us at</p>",
+            "column_width": 40,
+            "enable_follow_on_shop": false,
+            "enable_accordion": true
+          }
+        },
         "footer-1": {
           "type": "linklist",
           "settings": {
-            "linklist": "footer",
-            "title": "",
-            "heading_font_size": "heading-mini",
-            "column_width": 33,
-            "enable_accordion": false
+            "linklist": "triiiple-about",
+            "title": "Wear it. Own it. Explain nothing.",
+            "heading_font_size": "heading-large",
+            "column_width": 50,
+            "enable_accordion": true
           }
         }
       },
       "block_order": [
+        "social_yqkA6e",
         "footer-1"
       ],
       "settings": {
-        "logo": "shopify://shop_images/TRIIIPLE-logo-black.png",
         "logo_image_width": 70,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
         "border_color": "#212121",
         "padding_top": 6,
         "padding_bottom": 15
@@ -40,8 +51,8 @@
     "supporting-menu": {
       "type": "section-supporting-menu",
       "settings": {
-        "linklist": "footer",
-        "text_font_size": "body-x-small",
+        "linklist": "main-menu-mobile",
+        "text_font_size": "body-medium",
         "footer_payment_enable": true,
         "enable_greyscale": true,
         "show_locale_selector": true,
@@ -50,8 +61,8 @@
         "show_country_selector": true,
         "show_country_name": true,
         "show_country_flag": false,
-        "color_scheme": "scheme-7",
-        "padding_top": 30,
+        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
+        "padding_top": 22,
         "padding_bottom": 100
       }
     }

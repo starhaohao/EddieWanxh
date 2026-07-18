@@ -1,0 +1,65 @@
+{% doc %}
+  @prompt
+    For the mobile menu drawer: 1) Change the drawer so it opens from the right side instead of the left side. 2) Change the mobile menu items layout so each item stacks one per row (full width) instead of 2 items displayed side by side in one row. Apply these as CSS overrides without breaking existing theme styles.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-mobile-menu-fix-{{ ai_gen_id }} {
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    /* Change drawer to open from right side */
+    .drawer--mobile {
+      left: auto !important;
+      right: 0 !important;
+      transform: translateX(100%) !important;
+    }
+
+    .drawer--mobile.is-open {
+      transform: translateX(0) !important;
+    }
+
+    /* Change menu items to stack full width (one per row) */
+    .drawer__menu .navmenu,
+    .drawer__menu .navmenu > .navmenu-item,
+    .drawer__menu .navmenu-depth-1,
+    .drawer__menu .navmenu-depth-1 > .navmenu-item {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+    }
+
+    .drawer__menu .navmenu > .navmenu-item,
+    .drawer__menu .navmenu-depth-1 > .navmenu-item {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+
+    .drawer__menu .navmenu-link {
+      width: 100% !important;
+      display: block !important;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-mobile-menu-fix-{{ ai_gen_id }}" {{ block.shopify_attributes }}></div>
+
+{% schema %}
+{
+  "name": "Mobile menu fix",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "This block fixes the mobile menu drawer to open from the right side and stacks menu items one per row (full width)."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mobile menu fix"
+    }
+  ]
+}
+{% endschema %}

@@ -24,8 +24,6 @@
 
   assign compare_at_price = target.compare_at_price
   assign price = target.price
-  assign price_min = product.price_min
-  assign price_max = product.price_max
   assign available = target.available | default: false
 
   if compare_at_price > price
@@ -37,10 +35,6 @@
   else
     assign money_price = target.price | money
   endif
-
-  assign money_price_min = price_min | money
-  assign money_price_max = price_max | money
-
   assign has_units = false
   if target.unit_price_measurement != null
     assign has_units = true
@@ -57,9 +51,6 @@
     if has_units
       assign unit_price = target.unit_price | money_with_currency
     endif
-
-    assign money_price_min = price_min | money_with_currency
-    assign money_price_max = price_max | money_with_currency
   endif
 
   if target == product and product.price_varies
@@ -102,13 +93,24 @@
       {% if compare_at_price > price %}
         <div class="price__sale">
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
-          <span class="price-item price-item--sale price-item--last">
+          <span
+            class="price-item price-item--sale price-item--last"
+            style="color: var(--triiiple-neon, #EFFF00) !important; background-color: #000 !important; padding: 2px 8px; border-radius: 3px; display: inline-block;"
+          >
             {{ money_price }}
           </span>
 
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
-            <s class="price-item price-item--regular">
+            {%- comment -%}
+              Compare-at ("before") price renders in black with no
+              strikethrough line. The <s> tag is kept for semantics /
+              accessibility; text-decoration:none suppresses the visual line.
+            {%- endcomment -%}
+            <s
+              class="price-item price-item--regular"
+              style="color: #000 !important; text-decoration: line-through !important;"
+            >
               {% if settings.currency_code_enable %}
                 {{ compare_at_price | money_with_currency }}
               {% else %}
@@ -140,34 +142,49 @@
         class="product__sale"
         data-price-off
       >
-        {%- if sale_badge and is_on_sale -%}
-          <span
-            class="product__price--off"
-            data-price-off-badge
-          >
-            {% if settings.sale_badge_type == 'percentage' %}
-              <span>{{ compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round }}%</span>
-            {% else %}
-              {%- liquid
-                assign price_difference = compare_at_price | minus: price
-
-                if settings.currency_code_enable
-                  assign price_difference = price_difference | money_with_currency
-                else
-                  assign price_difference = price_difference | money
-                endif
-              -%}
-              <span>{{ price_difference }}</span>
-            {% endif %}
-            {{ 'products.product.off' | t }}
-          </span>
-        {%- endif -%}
+      {%- comment -%}
+        TEMP PATCH — badge styling per brief:
+          - all badges: black border + black text
+          - the %OFF badge additionally gets a neon-yellow fill
+        --triiiple-neon default #EFFF00; edit here and in product.liquid's
+        matching var to keep the two in sync until a shared CSS var exists.
+      {%- endcomment -%}
+      {%- if sale_badge and is_on_sale -%}
+        <span
+          class="product__price--off"
+          data-price-off-badge
+          style="
+            background-color: var(--triiiple-neon, #EFFF00) !important;
+            border: 1px solid #000 !important;
+            border-radius: 4px;
+            color: #000 !important;
+            padding: 2px 8px;
+            display: inline-block;
+          "
+        >
+          <span style="color: #000 !important;">{{ compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round }}%</span>
+        </span>
+      {%- endif -%}
 
         {%- if is_on_sale and final_sale -%}
           <div class="product__final-sale-wrap">
-            <div class="product__final-sale">{{ 'products.product.final_sale' | t }}</div>
+            <div
+              class="product__final-sale"
+              style="
+                border: none !important;
+                border-radius: 0 !important;
+                color: #000 !important;
+                padding: 0 !important;
+                display: inline-block;
+              "
+            >{{ 'products.product.final_sale' | t }}</div>
             <tooltip-component
               class="product__final-sale-question"
+              style="
+                border: none !important;
+                border-radius: 0 !important;
+                color: #000 !important;
+              "
               data-tooltip="<div style='--text: var(--COLOR-SALE);'>{{ settings.final_sale_tooltip | replace: '"', "'" }}</div>"
             >
               {%- render 'icon-question' -%}

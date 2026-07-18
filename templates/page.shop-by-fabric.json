@@ -1,126 +1,63 @@
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
 {
   "sections": {
     "main": {
-      "type": "shop-hub",
-      "blocks": {
-        "design": {
-          "type": "destination",
-          "settings": {
-            "label": "Shop by design",
-            "title": "Shop by design",
-            "text": "Jump back to the silhouette-led edit.",
-            "link": "/pages/shop-by-design"
-          }
-        },
-        "fabric": {
-          "type": "destination",
-          "settings": {
-            "label": "Shop by fabric",
-            "title": "Shop by fabric",
-            "text": "Move through the range by fabric first.",
-            "link": "/collections/all"
-          }
-        },
-        "all_items": {
-          "type": "destination",
-          "settings": {
-            "label": "All items",
-            "title": "View all items",
-            "text": "Browse the whole store in one sweep.",
-            "link": "/collections/all"
-          }
-        },
-        "size_xs": {
-          "type": "size_row",
-          "settings": { "size": "XS", "chest": "32-34", "waist": "25-27" }
-        },
-        "size_s": {
-          "type": "size_row",
-          "settings": { "size": "S", "chest": "34-36", "waist": "28-30" }
-        },
-        "size_m": {
-          "type": "size_row",
-          "settings": { "size": "M", "chest": "36-38", "waist": "31-33" }
-        }
-      },
-      "block_order": [
-        "fabric",
-        "design",
-        "all_items",
-        "size_xs",
-        "size_s",
-        "size_m"
-      ],
+      "type": "main-page",
       "settings": {
-        "eyebrow": "Shop",
-        "heading": "Shop by fabric.",
-        "description": "<p>Lead with the material story and let the collection path follow from there.</p>",
-        "card_cta": "Open page",
-        "content_field": "about_fabric",
-        "collections_eyebrow": "Shop by fabric",
-        "collections_heading": "Pick your fabric.",
-        "guide_eyebrow": "Fit guide",
-        "guide_heading": "Size and fit guide",
-        "guide_text": "<p>Keep sizing visible for customers comparing fabrics and cuts.</p>",
-        "background_color": "#ffffff",
-        "text_color": "#0f1623",
-        "accent_color": "#923531"
+        "subheading": "{{ metaobjects.triiiple_collection_content.underwear.subtitle.value }}",
+        "show_title": true,
+        "heading_font_size": "heading-small",
+        "show_content": true,
+        "text_font_size": "body-medium",
+        "align_text": "text-left",
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
       }
     },
-    "signup": {
-      "type": "edm-signup",
+    "collection_merchandising_wUyQja": {
+      "type": "collection-merchandising",
+      "name": "EDM Signup",
       "settings": {
-        "eyebrow": "Join the list",
-        "heading": "Get first access to the next drop.",
-        "description": "<p>Be the first to hear about launches, restocks, campaign edits, and exclusive email-only offers from TRIIIPLE.</p>",
-        "benefits_label": "What you get",
-        "benefit_1": "Early drop access",
-        "benefit_2": "Restock alerts",
-        "benefit_3": "EDM-only offers",
-        "form_heading": "Subscribe for updates",
-        "form_text": "Drop your email below and we’ll keep you posted.",
+        "layout": "centered",
+        "text_alignment": "left",
+        "bg_color": "#0381FF",
+        "font_color": "#FFFFFF",
+        "font_opacity": 100,
+        "input_color": "#17191C",
+        "input_opacity": 100,
+        "heading_size": 32,
+        "subtext_size": 15,
+        "input_size": 11,
+        "button_size": 11,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_left": 20,
+        "padding_right": 20,
+        "eyebrow": "First Layer",
+        "heading": "Join the list",
+        "subtext": "First access to drops, restocks and Story Salon.",
+        "placeholder": "Email address",
         "button_label": "Sign up",
-        "mode": "signup",
-        "note": "No spam. Just the useful stuff.",
-        "tag_label": "First Layer Perks",
-        "background_color": "#ffffff",
-        "text_color": "#0f1623",
-        "accent_color": "#923531"
+        "success_text": "You're in — welcome to First Layer."
       }
     },
-    "about": {
+    "page_about_us_X874Pm": {
       "type": "page-about-us",
-      "settings": {
-        "eyebrow": "About us",
-        "heading": "Who we are",
-        "intro": "<p>TRIIIPLE Studio is a men’s underwear and intimate wear brand built around a sharper idea of comfort: clean lines, considered fit, and a quiet kind of confidence.</p>",
-        "primary_label": "Shop all",
-        "primary_link": "/collections/all",
-        "secondary_label": "Story Salon",
-        "secondary_link": "/pages/story-salon",
-        "image_1": "shopify://shop_images/About-us-1.jpg",
-        "image_2": "shopify://shop_images/About-us-2.jpg",
-        "image_3": "shopify://shop_images/About-us-3.jpg",
-        "image_4": "shopify://shop_images/About-us-4.jpg",
-        "manifesto_eyebrow": "Why this works",
-        "manifesto_heading": "Engineered, not just made.",
-        "manifesto_body": "<p>Founded in Singapore and crafted in Asia, we design body-aware underwear that feels urban, timeless, and calm on the skin. Every cut is deliberate. Every layer is meant to work quietly.</p>",
-        "principles_eyebrow": "Product details",
-        "principles_heading": "The baseline.",
-        "closing_eyebrow": "The first layer",
-        "closing_heading": "Built for bodies that do more.",
-        "closing_body": "<p>We craft enduring essentials and reworked classics - each made with materials that move with you, wick moisture fast, and feel refined against the skin.</p><p>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones, with sizes ranging from XS to 2XL.</p>",
-        "background_color": "#ffffff",
-        "ink_color": "#17191c",
-        "accent_color": "#4a1024"
-      },
       "blocks": {
-        "principle_1": {
+        "principle_tHRtD4": {
           "type": "principle",
           "settings": {
             "kicker": "Fit",
@@ -128,7 +65,7 @@
             "body": "<p>Patterned for comfort, built to stay put, and refined enough for everyday wear.</p>"
           }
         },
-        "principle_2": {
+        "principle_XjRPnP": {
           "type": "principle",
           "settings": {
             "kicker": "Fabric",
@@ -136,7 +73,7 @@
             "body": "<p>Moisture-wicking, soft-touch fabrics that stay relevant beyond the trend cycle.</p>"
           }
         },
-        "principle_3": {
+        "principle_YPJ73F": {
           "type": "principle",
           "settings": {
             "kicker": "Design",
@@ -144,7 +81,7 @@
             "body": "<p>Minimal, editorial, and body-aware - built to look sharp without trying too hard.</p>"
           }
         },
-        "principle_4": {
+        "principle_98gL6M": {
           "type": "principle",
           "settings": {
             "kicker": "Range",
@@ -154,16 +91,79 @@
         }
       },
       "block_order": [
-        "principle_1",
-        "principle_2",
-        "principle_3",
-        "principle_4"
-      ]
+        "principle_tHRtD4",
+        "principle_XjRPnP",
+        "principle_YPJ73F",
+        "principle_98gL6M"
+      ],
+      "name": "About us page",
+      "settings": {
+        "eyebrow": "About us",
+        "heading": "Who we are",
+        "intro": "<p>TRIIIPLE Studio is a men’s underwear and intimate wear brand redefining comfort, confidence, and self-expression - starting from the first layer.</p>",
+        "primary_label": "Shop all",
+        "primary_link": "",
+        "secondary_label": "Story Salon",
+        "secondary_link": "",
+        "image_1": "shopify://shop_images/9_4658f947-fd9b-41ff-b23a-e69891ab9bf2.jpg",
+        "image_2": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
+        "image_3": "shopify://shop_images/1_017d8082-3aa0-4caa-a3ca-6560b00e7147.png",
+        "image_4": "shopify://shop_images/2_06fea64a-3e1e-4062-8dd0-c57fede7dab8.jpg",
+        "manifesto_eyebrow": "Why this works",
+        "manifesto_heading": "Engineered, not just made.",
+        "manifesto_body": "<p>Founded in Singapore and crafted in Asia, we design bold, body-inclusive underwear that merges high-performance fabrics with elevated aesthetics. Every cut is deliberate. Every layer is meant to be felt.</p>",
+        "principles_eyebrow": "Product details",
+        "principles_heading": "The baseline.",
+        "closing_eyebrow": "The first layer",
+        "closing_heading": "Built for bodies that do more.",
+        "closing_body": "<p>We craft enduring essentials and reinvented classics - each made with innovative materials that move with you, wick moisture fast, and feel luxuriously soft against the skin.</p><p>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones, with sizes ranging from XS to 2XL.</p>",
+        "background_color": "#000000",
+        "ink_color": "#FFFFFF",
+        "accent_color": "#FFFFFF"
+      }
+    },
+    "fabrics": {
+      "type": "list-collections",
+      "blocks": {
+        "collection_cotton_spandex": {
+          "type": "collection",
+          "source": "{{ metaobjects.triiiple_collection_content[\"cotton-spandex\"] }}",
+          "settings": {
+            "collection": "{{ metaobjects.triiiple_collection_content[\"cotton-spandex\"].shop_all_destination.value }}",
+            "collection_name": "{{ metaobjects.triiiple_collection_content[\"cotton-spandex\"].collection_name.value }}"
+          }
+        },
+        "collection_transdry": {
+          "type": "collection",
+          "source": "{{ metaobjects.triiiple_collection_content.transdry }}",
+          "settings": {
+            "collection": "{{ metaobjects.triiiple_collection_content.transdry.shop_all_destination.value }}",
+            "collection_name": "{{ metaobjects.triiiple_collection_content.transdry.collection_name.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "collection_cotton_spandex",
+        "collection_transdry"
+      ],
+      "settings": {
+        "display_type": "selected",
+        "title": "",
+        "heading_font_size": "heading-small",
+        "grid": 2,
+        "rows": 1,
+        "layout_mobile": "slider",
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "heading_tag": "automatic"
+      }
     }
   },
   "order": [
     "main",
-    "signup",
-    "about"
+    "fabrics",
+    "collection_merchandising_wUyQja",
+    "page_about_us_X874Pm"
   ]
 }

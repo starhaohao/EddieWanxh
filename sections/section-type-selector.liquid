@@ -1,0 +1,182 @@
+{%- comment -%}
+  Type Selector — "Choose a Type" card row (Component 1).
+  Pairs with section-type-filtered-grid.liquid (Component 2): clicking a
+  card here filters that section's grid in place, client-side, no page
+  reload. The two sections talk to each other only through the DOM
+  ([data-type-card] / [data-type-grid]) so either can be reordered or
+  reused independently. Prefix: .tsel
+{%- endcomment -%}
+
+{%- liquid
+  assign filter_key = section.settings.filter_key | default: 'design_family'
+  assign all_label = section.settings.all_label | default: 'All'
+  assign uid = 'TypeSelector-' | append: section.id
+-%}
+
+<section class="tsel" id="{{ uid }}" data-type-selector data-filter-key="{{ filter_key }}">
+  {%- if section.settings.heading != blank -%}
+    <h2 class="tsel__heading">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+
+  <div class="tsel__row" role="tablist" aria-label="{{ section.settings.heading | default: 'Filter by type' | escape }}">
+    <button
+      type="button"
+      class="tsel__card tsel__card--all is-active"
+      data-type-card
+      data-type-value=""
+      role="tab"
+      aria-selected="true"
+    >
+      <span class="tsel__label">{{ all_label }}</span>
+    </button>
+
+    {%- for block in section.blocks -%}
+      <button
+        type="button"
+        class="tsel__card"
+        data-type-card
+        data-type-value="{{ block.settings.value | escape }}"
+        role="tab"
+        aria-selected="false"
+        {{ block.shopify_attributes }}
+      >
+        {%- if block.settings.image != blank -%}
+          <span class="tsel__img">
+            <img
+              src="{{ block.settings.image | image_url: width: 200 }}"
+              alt=""
+              loading="lazy"
+              width="100"
+              height="100"
+            >
+          </span>
+        {%- endif -%}
+        <span class="tsel__label">{{ block.settings.label }}</span>
+      </button>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  #{{ uid }}.tsel {
+    padding: 24px 0;
+  }
+  #{{ uid }} .tsel__heading {
+    margin: 0 0 16px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  #{{ uid }} .tsel__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 30px;
+  }
+  #{{ uid }} .tsel__card {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+    margin: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    color: var(--text-light, currentColor);
+    -webkit-tap-highlight-color: transparent;
+  }
+  #{{ uid }} .tsel__label {
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+  }
+  #{{ uid }} .tsel__label::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: currentColor;
+    transition: width 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  }
+  #{{ uid }} .tsel__card:hover .tsel__label::after {
+    width: 100%;
+  }
+  #{{ uid }} .tsel__card.is-active {
+    color: var(--text-dark, #0f1623);
+    font-weight: 600;
+  }
+  #{{ uid }} .tsel__card.is-active .tsel__label::after {
+    width: 100%;
+  }
+  #{{ uid }} .tsel__img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  #{{ uid }} .tsel__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    #{{ uid }} .tsel__row {
+      gap: 8px 20px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+    #{{ uid }} .tsel__card {
+      flex: 0 0 auto;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Type Selector",
+  "tag": "section",
+  "class": "type-selector-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Choose a type" },
+    {
+      "type": "select",
+      "id": "filter_key",
+      "label": "Filters by",
+      "info": "Must match the metafield key used by the Type Filtered Grid section below it.",
+      "default": "design_family",
+      "options": [
+        { "value": "design_family", "label": "Design (custom.design_family)" },
+        { "value": "material_family", "label": "Fabric (custom.material_family)" }
+      ]
+    },
+    { "type": "text", "id": "all_label", "label": "\"All\" card label", "default": "All" }
+  ],
+  "blocks": [
+    {
+      "type": "type_card",
+      "name": "Type card",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Card label", "info": "What the customer sees, e.g. \"Cotton Spandex\".", "default": "Type" },
+        { "type": "text", "id": "value", "label": "Metafield value to match", "info": "Must exactly match the product metafield value, e.g. \"Cotton Spandex\" or \"Sculpt\"." },
+        { "type": "image_picker", "id": "image", "label": "Image (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Type Selector",
+      "blocks": [{ "type": "type_card" }, { "type": "type_card" }]
+    }
+  ],
+  "templates": ["page", "index", "collection"]
+}
+{% endschema %}

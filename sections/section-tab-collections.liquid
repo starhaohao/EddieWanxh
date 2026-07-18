@@ -76,7 +76,7 @@
   {%- endif -%}
 {%- endcapture -%}
 
-{%- render 'stylesheet', name: 'tabs.css' -%}
+{%- render 'stylesheet', name: 'tabs.css', async: true, inline: false, blocking: false -%}
 
 {%- style -%}
   #TabCollections--{{ section.id }} {
@@ -91,6 +91,22 @@
     --COLUMNS-MEDIUM: {{ columns_medium }};
     --COLUMNS-SMALL: {{ columns_small }};
     --COLUMNS-MOBILE: {{ columns_mobile }};
+
+    /* Force Full Width Breakout */
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    max-width: 100vw !important;
+  }
+
+  /* Remove any default theme padding from the inner container */
+  #TabCollections--{{ section.id }} .grid-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
   }
 {%- endstyle -%}
 
@@ -222,6 +238,7 @@
                         data-aos-duration="800"
                         data-aos-anchor="{{ animation_anchor }}"
                         data-aos-easing="ease-out-quart"
+                        data-featured-image
                       {%- endcapture -%}
 
                       {%- liquid
@@ -230,7 +247,7 @@
                           assign loading = 'lazy'
                         endif
 
-                        render 'image' image: image, sizes: sizes, cover: true, loading: loading, attributes: image_animations, placeholder: image_placeholder, attributes: 'data-featured-image'
+                        render 'image' image: image, sizes: sizes, cover: true, loading: loading, attributes: image_animations, placeholder: image_placeholder
                       -%}
                     </div>
 

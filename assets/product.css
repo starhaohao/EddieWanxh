@@ -30,7 +30,7 @@ product-sticky {
 }
 
 .product__wrapper {
-  margin: 0 var(--outer);
+  margin: 0;
 }
 
 .product__wrapper .select-popout__toggle::before {

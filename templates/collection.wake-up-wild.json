@@ -13,74 +13,17 @@
       "type": "collection-image-with-title",
       "settings": {
         "show_title": true,
-        "show_description": true,
-        "flex_align": "align--top-left",
-        "color_scheme": "",
+        "show_description": false,
+        "flex_align": "align--bottom-left",
+        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
         "show_text_background": false,
         "overlay_type": "disabled",
         "show_image": false,
-        "banner_layout": "overlay",
+        "banner_layout": "inline",
         "height": "screen-height-one-third",
-        "mobile_height": "screen-height-one-half--mobile",
-        "padding_top": 0,
+        "mobile_height": "screen-height-one-third--mobile",
+        "padding_top": 34,
         "padding_bottom": 0
-      }
-    },
-    "section_look_gallery_DLddd7": {
-      "type": "section-look-gallery",
-      "blocks": {
-        "image_zRAcDh": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/X01-front.png",
-            "product": "x-transdry-brief-white"
-          }
-        },
-        "image_PKABBp": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/image-1781021361e01.png",
-            "product": "ed-sleeveless-top-white"
-          }
-        },
-        "image_YKcBHX": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/X01.png",
-            "product": "x-transdry-boxer-trunk-black"
-          }
-        },
-        "image_3NdzWN": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/black-2.png",
-            "product": "ed-sleeveless-top-black"
-          }
-        }
-      },
-      "block_order": [
-        "image_zRAcDh",
-        "image_PKABBp",
-        "image_YKcBHX",
-        "image_3NdzWN"
-      ],
-      "name": "Shop the look: Gallery",
-      "settings": {
-        "featured_type": "video",
-        "featured_video": "shopify://files/videos/morninng.mp4",
-        "featured_product": "h-cotton-spandex-boxer-trunk-white",
-        "featured_position": "is-reversed",
-        "image_aspect_ratio": 1.4,
-        "layout_desktop": "grid",
-        "grid": 4,
-        "layout_mobile": "slider",
-        "reverse_blocks": false,
-        "width": "wrapper--full-padded",
-        "color_scheme": "",
-        "dot_color": "rgba(0,0,0,0)",
-        "dot_background": "rgba(0,0,0,0)",
-        "padding_top": 32,
-        "padding_bottom": 32
       }
     },
     "subcollections": {
@@ -89,7 +32,7 @@
         "subcollection_layout": "grid",
         "subcollection_description": false,
         "select_image": "collection",
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "color": "#ffffff",
         "bg_color": "",
         "padding_top": 20,
@@ -98,24 +41,47 @@
     },
     "main": {
       "type": "collection",
+      "blocks": {
+        "featured_image_3KhVCK": {
+          "type": "featured_image",
+          "settings": {
+            "featured_image": "shopify://shop_images/0DAA98F2-A1CA-4213-804A-BE08F5CFB063_L0_001-21_06_2026_4_18_28_PM.jpg",
+            "position": 5,
+            "featured_heading": "",
+            "heading_font_size": "heading-large",
+            "featured_text": "<p>Minimum stock of 3. No restocking while stock lasts.</p>",
+            "featured_button_text": "",
+            "featured_button_link": "",
+            "button_type": "btn--primary",
+            "button_size": "btn--small",
+            "button_style": "btn--outline",
+            "show_arrow": false,
+            "featured_color_text": "#ffffff",
+            "overlay_type": "disabled",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "featured_image_3KhVCK"
+      ],
       "settings": {
-        "enable_sort": true,
+        "enable_sort": false,
         "enable_filters": false,
         "filter_layout": "slide-out",
         "default_open": true,
-        "collection_linklist": "",
-        "grid": 2,
+        "collection_linklist": "customer-account-main-menu",
+        "grid": 4,
         "grid_mobile": "2",
         "products_per_page": 12,
-        "color_scheme": "",
+        "color_scheme": "scheme-fbd4c470-dcb5-45cd-af70-7c3c7a55e46e",
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 100
       }
     }
   },
   "order": [
     "hero",
-    "section_look_gallery_DLddd7",
     "subcollections",
     "main"
   ]

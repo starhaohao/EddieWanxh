@@ -1,0 +1,52 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "collection",
+      "custom_css": [],
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "slide-out",
+        "default_open": true,
+        "collection_linklist": "",
+        "grid": 3,
+        "grid_mobile": "2",
+        "products_per_page": 24,
+        "color_scheme": "scheme-9b3afd14-67ff-4f68-a798-655d45b5f34b",
+        "padding_top": 18,
+        "padding_bottom": 40
+      }
+    },
+    "section_recent_products_product_focus": {
+      "type": "section-recent-products",
+      "name": "Recently viewed products",
+      "settings": {
+        "product_recently_limit": 8,
+        "product_recently_minimum": 4,
+        "product_recently_heading": "Viewed",
+        "heading_font_size": "heading-mini",
+        "layout_desktop": "slider",
+        "grid": 4,
+        "rows": 2,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-2",
+        "padding_top": 18,
+        "padding_bottom": 44,
+        "heading_tag": "automatic"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_recent_products_product_focus"
+  ]
+}

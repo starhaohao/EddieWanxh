@@ -9,7 +9,7 @@
   assign mc   = product.metafields.custom.material_care.value
 
   assign has_any = false
-  if pq or dp or aag or df or pww or br
+  if pq or dp or aag or df or pww or br or sf or mc
     assign has_any = true
   endif
 -%}
@@ -42,13 +42,27 @@
   </details>
   {%- endif -%}
 
-  {%- if df or pww or br -%}
+  {%- if df or sf or mc or pww or br -%}
   <div class="pf__grid">
 
     {%- if df -%}
     <div class="pf__cell">
       <p class="pf__cell-label">{{ section.settings.df_label }}</p>
       <p class="pf__cell-body">{{ df | newline_to_br }}</p>
+    </div>
+    {%- endif -%}
+
+    {%- if sf -%}
+    <div class="pf__cell">
+      <p class="pf__cell-label">{{ section.settings.sf_label }}</p>
+      <p class="pf__cell-body">{{ sf | newline_to_br }}</p>
+    </div>
+    {%- endif -%}
+
+    {%- if mc -%}
+    <div class="pf__cell">
+      <p class="pf__cell-label">{{ section.settings.mc_label }}</p>
+      <p class="pf__cell-body">{{ mc | newline_to_br }}</p>
     </div>
     {%- endif -%}
 
@@ -73,22 +87,31 @@
 {%- endif -%}
 
 <style>
+  /* Lightened off its original dark full-bleed slab so this section reads
+     as a continuation of the buy-box's own editorial rhythm (hairline
+     rows, tracked-cap labels) rather than a visually separate dark block —
+     same spec-sheet role (Designed For / Size & Fit / Material & Care),
+     same grid, just the surface and type-scale now match the product
+     page's own #E5E5E5 hairlines / near-black text. */
   .pf {
-    --pf-bg:       #1a1d20;
-    --pf-border:   rgba(255,255,255,0.1);
-    --pf-text:     #ffffff;
-    --pf-muted:    rgba(255,255,255,0.42);
-    --pf-accent:   #923531;
+    --pf-bg:       #ffffff;
+    --pf-border:   #E5E5E5;
+    --pf-text:     #0B0B0C;
+    --pf-muted:    rgba(11, 11, 12, 0.55);
+    --pf-body:     rgba(11, 11, 12, 0.72);
+    --pf-accent:   #ED813E;
     --pf-mono:     'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: var(--pf-bg);
-    padding: 40px 24px;
+    padding: 32px 24px;
+    max-width: 1040px;
+    margin: 0 auto;
   }
 
   /* ── Identity block ── */
   .pf__identity {
     border-left: 2px solid var(--pf-accent);
-    padding-left: 20px;
-    margin-bottom: 36px;
+    padding-left: 16px;
+    margin-bottom: 32px;
   }
   .pf__quote {
     font-size: clamp(20px, 4vw, 26px);
@@ -136,11 +159,11 @@
     align-items: center;
   }
   .pf__disclosure[open] .pf__disc-icon { transform: rotate(180deg); }
-  .pf__disc-body { padding-bottom: 20px; }
+  .pf__disc-body { padding-bottom: 16px; }
   .pf__disc-text {
     font-size: 14px;
     line-height: 1.65;
-    color: rgba(255,255,255,0.72);
+    color: var(--pf-body);
     margin: 0;
   }
 
@@ -154,7 +177,7 @@
   }
   .pf__cell {
     background: var(--pf-bg);
-    padding: 20px 18px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -174,12 +197,12 @@
   .pf__cell-body {
     font-size: 13px;
     line-height: 1.55;
-    color: rgba(255,255,255,0.65);
+    color: var(--pf-body);
     margin: 0;
   }
 
   @media screen and (max-width: 749px) {
-    .pf { padding: 32px 20px; }
+    .pf { padding: 24px 16px; }
     .pf__grid { grid-template-columns: 1fr; }
     .pf__cell--full { grid-column: 1; border-top: 1px solid var(--pf-border); }
   }
@@ -209,6 +232,18 @@
     },
     {
       "type": "text",
+      "id": "sf_label",
+      "label": "Size & Fit label",
+      "default": "Size & Fit"
+    },
+    {
+      "type": "text",
+      "id": "mc_label",
+      "label": "Material & Care label",
+      "default": "Material & Care"
+    },
+    {
+      "type": "text",
       "id": "pww_label",
       "label": "Pairs Well With label",
       "default": "Pairs Well With"
@@ -224,7 +259,6 @@
     {
       "name": "Product Framework"
     }
-  ],
-  "templates": ["product"]
+  ]
 }
 {% endschema %}

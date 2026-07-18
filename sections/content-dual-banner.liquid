@@ -1,11 +1,11 @@
 {%- comment -%}
   TRIIIPLE Dual-Image Campaign Banner
-  Dependencies: Assumes theme handles color schemes (Scheme 1, 2, 3) and has access to Galdeano, Archivo, and DM Sans.
+  Dependencies: Assumes theme handles color schemes (Scheme 1, 2, 3) and has access to Helvetica, Archivo, and DM Sans.
 {%- endcomment -%}
 
 {%- style -%}
   /* Font Imports for standalone compatibility */
-  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=DM+Sans:wght@400;500&family=Galdeano&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=DM+Sans:wght@400;500&display=swap');
 
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top }}px;
@@ -16,7 +16,7 @@
     --ink: #1a1a1a;
     --lime: #cdff00;
     --crimson: #923531;
-    --font-heading: 'Galdeano', serif;
+    --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --font-ui: 'Archivo', sans-serif;
     --font-body: 'DM Sans', sans-serif;
     
