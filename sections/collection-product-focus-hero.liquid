@@ -2,6 +2,7 @@
   assign color_scheme = 'color-' | append: section.settings.color_scheme
   assign eyebrow = section.settings.eyebrow
   assign title = collection.title
+  assign tagline = section.settings.tagline
   assign description = collection.description
   assign intro = section.settings.intro
   assign cta_label = section.settings.cta_label
@@ -14,6 +15,19 @@
     assign image = collection.image
   endif
 
+  # Short per-collection description: prefer the merchant's manual
+  # "Intro copy" override; otherwise pull from the collection's own
+  # Collection Content metaobject (custom.collection_content) so the
+  # copy differs per collection with no per-collection template
+  # duplication; fall back to the native collection description.
+  assign collection_content = collection.metafields.custom.collection_content.value
+  if intro == blank and collection_content != blank
+    if collection_content.about_design.value != blank
+      assign intro = collection_content.about_design.value | newline_to_br
+    elsif collection_content.about_fabric.value != blank
+      assign intro = collection_content.about_fabric.value | newline_to_br
+    endif
+  endif
   if intro == blank
     assign intro = description
   endif
@@ -38,6 +52,10 @@
           <p class="pfh__accent">{{ accent_label }}</p>
         {% endif %}
       </div>
+
+      {% if tagline != blank %}
+        <p class="pfh__tagline">{{ tagline }}</p>
+      {% endif %}
 
       {% if intro != blank %}
         <div class="pfh__copy rte">{{ intro }}</div>
@@ -170,6 +188,17 @@
     opacity: 0.8;
   }
 
+  .pfh__tagline {
+    font-family: var(--FONT-STACK-NAV);
+    margin: 14px 0 0;
+    font-size: max(11px, var(--font-body-x-small));
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-variant-caps: small-caps;
+    opacity: 0.68;
+  }
+
   .pfh__copy {
     font-family: var(--FONT-STACK-BODY);
     margin-top: 28px;
@@ -251,6 +280,17 @@
     transform: translateY(-1px);
   }
 
+  /* Desktop only: the image rail breaks the page's side margin and
+     bleeds to the true browser edge, while .pfh__intro (the text
+     column) stays inset at the normal --outer gutter. Standard
+     one-sided breakout: pull the element's right edge out by half the
+     gap between the viewport and its containing block. */
+  @media screen and (min-width: 990px) {
+    .pfh__rail {
+      margin-right: calc(-1 * (100vw - 100%) / 2);
+    }
+  }
+
   @media screen and (max-width: 989px) {
     .pfh__shell {
       grid-template-columns: minmax(0, 1fr);
@@ -302,10 +342,16 @@
       "default": "Product Focus Layout"
     },
     {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "WEAR IT. OWN. EXPLAIN NOTHING."
+    },
+    {
       "type": "richtext",
       "id": "intro",
-      "label": "Intro copy",
-      "default": "<p>A sharper collection landing with a stronger editorial feel, clean filtering, and the product grid taking center stage.</p>"
+      "label": "Intro copy override",
+      "info": "Leave blank to pull the description automatically from the collection's Collection Content metafield (custom.collection_content), so copy differs per collection with no manual duplication."
     },
     {
       "type": "text",

@@ -1,0 +1,93 @@
+{%- comment -%}
+  Choose a Type — pipe-separated Category quick-filter row for the
+  collection page. Reuses the native Category filter already powering
+  the sidebar checkboxes (collection.filters); it does not maintain any
+  filter state of its own.
+
+  Wiring note: assets/collection-filters-form.js resolves its click
+  target list as `this.closest('[data-section-id]').querySelectorAll('[data-filter-update-url]')`
+  from the <collection-filters-form> custom element instantiated inside
+  snippets/collection-filters-sidebar.liquid. That means any
+  [data-filter-update-url] element only gets picked up by the existing
+  AJAX (no-reload) controller if it lives inside the same
+  [data-section-id] container as the collection grid — i.e. inside
+  sections/collection.liquid's own markup. This is why this snippet is
+  rendered from collection.liquid itself (right above the filter/sort
+  nav) rather than as a separate top-level section — a separate section
+  would sit outside that DOM scope and its clicks would fall through to
+  a normal full-page navigation instead of the AJAX swap.
+
+  Accepts:
+  - heading: {String} Row heading, e.g. "Choose a Type:"
+{%- endcomment -%}
+
+{%- liquid
+  assign category_filter = collection.filters | where: 'label', 'Category' | first
+-%}
+
+{%- if category_filter and category_filter.values.size > 0 -%}
+  <div class="ctl">
+    {%- if heading != blank -%}<p class="ctl__heading">{{ heading }}</p>{%- endif -%}
+    <div class="ctl__row">
+      {%- for value in category_filter.values -%}
+        {%- unless value.count == 0 and value.active == false -%}
+          {%- unless forloop.first -%}<span class="ctl__sep" aria-hidden="true">|</span>{%- endunless -%}
+          {%- liquid
+            assign link_url = value.url_to_add
+            if value.active
+              assign link_url = value.url_to_remove
+            endif
+          -%}
+          <a
+            href="{{ link_url }}"
+            class="ctl__link{% if value.active %} is-active{% endif %}"
+            data-filter-update-url
+            aria-pressed="{{ value.active }}"
+          >{{ value.label }}</a>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  .ctl {
+    padding: 16px 44px 24px;
+  }
+  .ctl__heading {
+    margin: 0 0 12px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(var(--text), 0.68);
+  }
+  .ctl__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  .ctl__link {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 400;
+  }
+  .ctl__link.is-active {
+    font-weight: 700;
+  }
+  .ctl__sep {
+    opacity: 0.4;
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ctl {
+      padding: 12px 20px 16px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+</style>
