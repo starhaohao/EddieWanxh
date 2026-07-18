@@ -70,6 +70,11 @@
     echo 'pcard-' | append: section.id | append: '-' | append: product.id
   endcapture
 
+  assign aos_anchor = '#' | append: item_unique
+  capture image_animations
+    echo 'data-aos="img-in" data-aos-duration="800" data-aos-anchor="' | append: aos_anchor | append: '" data-aos-easing="ease-out-quart"'
+  endcapture
+
   # Sale % badge — same best-variant-discount computation used by
   # snippets/product-grid-item.liquid; this is card display logic, not
   # the native Shopify filter system, so it's not the "duplicated filter
@@ -120,6 +125,7 @@
           sizes: sizes,
           widths: widths,
           loading: loading,
+          attributes: image_animations,
           cover: true
         -%}
       {%- else -%}
