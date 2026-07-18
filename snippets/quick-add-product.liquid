@@ -7,6 +7,8 @@
   - sibling_property_value: {String} Sibling property value
   - mobile_mini_button: {Boolean} Mini button on mobile
   - use_icon: {Boolean} Use icon instead of text (default: false)
+  - icon: {String} Icon to render when use_icon is true — "bag" (default) or "plus"
+  - icon_button_class: {String} Extra class appended to the icon button, for callers that need their own positioning/skin instead of the .look__dot__button default
 
   Usage:
   {% render 'quick-add-product', product: product, holder_modifier: holder_modifier, btn_style: btn_style, sibling_property_value: sibling_property_value %}
@@ -22,6 +24,8 @@
   assign sibling_property_value = sibling_property_value | default: ''
   assign mobile_mini_button = mobile_mini_button | default: false
   assign use_icon = use_icon | default: false
+  assign icon = icon | default: 'bag'
+  assign icon_button_class = icon_button_class | default: ''
 
   if current_variant.available and product.metafields.theme.preorder.type == 'boolean' and product.metafields.theme.preorder.value == true
     assign has_preorder_meta = true
@@ -71,7 +75,7 @@
     {%- endif -%}
 
     <button
-      class="{% if use_icon %}look__dot__button{% else %}quick-add__button {{ btn_style }}{% endif %}"
+      class="{% if use_icon %}look__dot__button {{ icon_button_class }}{% else %}quick-add__button {{ btn_style }}{% endif %}"
       {% if one_variant %}
         type="submit"
         name="add"
@@ -86,7 +90,11 @@
       {% endif %}
     >
       {%- if use_icon -%}
-        {%- render 'icon-bag' -%}
+        {%- if icon == 'plus' -%}
+          {%- render 'icon-plus' -%}
+        {%- else -%}
+          {%- render 'icon-bag' -%}
+        {%- endif -%}
         <span class="btn__error" data-message-error>&nbsp;</span>
       {%- else -%}
         {%- if mobile_mini_button -%}
