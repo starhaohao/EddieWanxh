@@ -38,7 +38,7 @@
         "accent_label": "",
         "intro": "{{ collection.description }}",
         "cta_label": "",
-        "cta_link": "",
+        "cta_link": "shopify://collections/dead-stock-clearance",
         "use_collection_image": true,
         "image": "{{ collection.image }}",
         "panel_label": "Browse",
