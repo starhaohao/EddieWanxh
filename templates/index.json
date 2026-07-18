@@ -97,6 +97,7 @@
       "settings": {
         "image_ratio": "1080 / 1350",
         "image_ratio_desktop": "4 / 3",
+        "caption_lift": 20,
         "autoplay": true,
         "autoplay_interval": 5000,
         "aria_label": "Campaign highlights",
@@ -116,7 +117,7 @@
         "cta_size": "small",
         "micro_as_badge": false,
         "badge_height": 20,
-        "badge_bg": "#F8F559",
+        "badge_bg": "#f8f559",
         "badge_border": "#000000",
         "badge_text": "#000000"
       }
@@ -256,15 +257,9 @@
     "sale_hero_8Vwb7N": {
       "type": "sale-hero",
       "blocks": {
-        "ghost_cta_zRnaVy": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "XS/S Clearance",
-            "url": "shopify://collections/bundles-xs-s-clearance"
-          }
-        },
         "ghost_cta_XRkDR4": {
           "type": "ghost_cta",
+          "disabled": true,
           "settings": {
             "label": "XL/2XL Clearance",
             "url": "shopify://collections/bundles-xl-2xl-clearance"
@@ -279,7 +274,6 @@
         }
       },
       "block_order": [
-        "ghost_cta_zRnaVy",
         "ghost_cta_XRkDR4",
         "ghost_cta_KCETby"
       ],
