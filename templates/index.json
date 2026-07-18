@@ -430,21 +430,6 @@
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
     },
-    "story_salon_feature_TfLYkW": {
-      "type": "story-salon-feature",
-      "name": "Story Salon feature",
-      "settings": {
-        "article_label": "{{ metaobjects.story_salon[\"with-justin-foo\"].name.value }}",
-        "placeholder_title": "{{ metaobjects.story_salon[\"with-justin-foo\"].tagline.value }}",
-        "placeholder_text": "{{ metaobjects.story_salon[\"with-justin-foo\"].theme.value }}",
-        "article": "{{ metaobjects.story_salon[\"with-justin-foo\"].blog_post.value }}",
-        "image": "shopify://shop_images/LP_-_justin-001_-_Justin_Foo_4_5.jpg",
-        "link": "shopify://metaobjects/story_salon/story-salon",
-        "background_color": "#ffffff",
-        "text_color": "#0f1623",
-        "accent_color": "#923531"
-      }
-    },
     "1783598576dfbeb45d": {
       "type": "_blocks",
       "settings": {
@@ -531,7 +516,6 @@
     "homepage-social",
     "178359954937ab782c",
     "homepage-brand-story",
-    "story_salon_feature_TfLYkW",
     "1783598576dfbeb45d",
     "1783598626bd47c487"
   ]
