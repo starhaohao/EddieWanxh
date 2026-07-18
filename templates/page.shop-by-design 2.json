@@ -14,10 +14,10 @@
       "settings": {
         "subheading": "{{ metaobjects.triiiple_collection_content.underwear.subtitle.value }}",
         "show_title": true,
-        "heading_font_size": "heading-small",
+        "heading_font_size": "heading-x-large",
         "show_content": true,
         "text_font_size": "body-medium",
-        "align_text": "text-left",
+        "align_text": "text-center",
         "width": "wrapper",
         "color_scheme": "",
         "padding_top": 50,
@@ -86,10 +86,10 @@
       "settings": {
         "layout": "centered",
         "text_alignment": "left",
-        "bg_color": "#0381FF",
-        "font_color": "#FFFFFF",
+        "bg_color": "#0381ff",
+        "font_color": "#ffffff",
         "font_opacity": 100,
-        "input_color": "#17191C",
+        "input_color": "#17191c",
         "input_opacity": 100,
         "heading_size": 32,
         "subtext_size": 15,
@@ -173,8 +173,8 @@
         "closing_heading": "Built for bodies that do more.",
         "closing_body": "<p>We craft enduring essentials and reinvented classics - each made with innovative materials that move with you, wick moisture fast, and feel luxuriously soft against the skin.</p><p>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones, with sizes ranging from XS to 2XL.</p>",
         "background_color": "#000000",
-        "ink_color": "#FFFFFF",
-        "accent_color": "#FFFFFF"
+        "ink_color": "#ffffff",
+        "accent_color": "#ffffff"
       }
     }
   },
