@@ -117,7 +117,7 @@
 
 {%- unless hidden_product -%}
   <grid-item class="pcard" id="{{ item_unique }}" data-grid-item data-url="{{ product.url }}">
-    <a href="{{ product_url }}" class="pcard__image" aria-label="{{ product_display_name | escape }}">
+    <a href="{{ product_url }}" class="pcard__image" style="aspect-ratio: {{ aspect_ratio }};" aria-label="{{ product_display_name | escape }}">
       {%- if product.featured_media != blank -%}
         {%- render 'image',
           image: product.featured_media.preview_image,
@@ -194,6 +194,7 @@
     position: relative;
     display: block;
     overflow: hidden;
+    aspect-ratio: 3 / 4;
   }
   .pcard__image img {
     display: block;
