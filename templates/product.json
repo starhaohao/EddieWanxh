@@ -28,13 +28,6 @@
             "padding_bottom": 0
           }
         },
-        "description_QwjMiM": {
-          "type": "description",
-          "settings": {
-            "show_read_more": false,
-            "padding_bottom": 16
-          }
-        },
         "variants": {
           "type": "variants",
           "settings": {
@@ -104,29 +97,11 @@
             ],
             "bundle_title": "Bundle and save 10%",
             "show_available_bundle_only": true,
-            "layout": "stacked",
+            "layout": "slider",
             "autoplay": false,
             "autoplay_speed": 8,
             "bg_color": "#faf1d3",
             "padding_bottom": 48
-          }
-        },
-        "tab_richtext": {
-          "type": "tab_richtext",
-          "settings": {
-            "show_description": false,
-            "show_read_more": true,
-            "title_1": "Care",
-            "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
-            "title_2": "Shipping",
-            "raw_content_2": "<p>Free shipping on orders over $50 within Singapore. Standard delivery 2–4 business days. International shipping available.</p>",
-            "title_3": "",
-            "raw_content_3": "",
-            "title_4": "",
-            "raw_content_4": "",
-            "title_5": "",
-            "raw_content_5": "",
-            "padding_bottom": 0
           }
         },
         "sharing": {
@@ -139,14 +114,12 @@
       "block_order": [
         "title",
         "price",
-        "description_QwjMiM",
         "variants",
         "upsell",
         "buttons",
         "inventory_countdown",
         "divider",
         "bundle_save_DrnprG",
-        "tab_richtext",
         "sharing"
       ],
       "settings": {
@@ -162,6 +135,189 @@
         "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
         "padding_top": 0,
         "padding_bottom": 0
+      }
+    },
+    "product_detail_story_A9DYNb": {
+      "type": "product-detail-story",
+      "blocks": {
+        "detail_TMMKeC": {
+          "type": "detail",
+          "settings": {
+            "heading": "Description",
+            "content": "<p>Add useful product detail here.</p>",
+            "use_product_description": true,
+            "metafield_namespace": "",
+            "metafield_key": "",
+            "open_by_default": true
+          }
+        },
+        "detail_GGdmxD": {
+          "type": "detail",
+          "settings": {
+            "heading": "Size & fit",
+            "content": "<p>Add the intended fit, rise, coverage, and model reference.</p>",
+            "use_product_description": false,
+            "metafield_namespace": "custom",
+            "metafield_key": "size_fit",
+            "open_by_default": false
+          }
+        },
+        "detail_M4pXJW": {
+          "type": "detail",
+          "settings": {
+            "heading": "Material & care",
+            "content": "<p>Add fabric composition and care instructions.</p>",
+            "use_product_description": false,
+            "metafield_namespace": "custom",
+            "metafield_key": "material_care",
+            "open_by_default": false
+          }
+        },
+        "feature_mWhC6c": {
+          "type": "feature",
+          "settings": {
+            "symbol": "/",
+            "heading": "Moves with you",
+            "text": "Flexible construction follows the body without fighting it."
+          }
+        },
+        "feature_jrMYGU": {
+          "type": "feature",
+          "settings": {
+            "symbol": "~",
+            "heading": "Breathes easier",
+            "text": "Designed to manage daily heat and moisture."
+          }
+        },
+        "feature_HcE69J": {
+          "type": "feature",
+          "settings": {
+            "symbol": "-",
+            "heading": "Smoother seams",
+            "text": "Reduced bulk where comfort matters most."
+          }
+        },
+        "feature_7BkLcf": {
+          "type": "feature",
+          "settings": {
+            "symbol": "o",
+            "heading": "Built to repeat",
+            "text": "A dependable layer for the weekly rotation."
+          }
+        },
+        "size_row_gEEC8e": {
+          "type": "size_row",
+          "settings": {
+            "size": "XS",
+            "waist_cm": "59–63",
+            "waist_in": "23.2–24.8",
+            "eu": "42–44",
+            "uk_us": "26–28"
+          }
+        },
+        "size_row_VPy4EH": {
+          "type": "size_row",
+          "settings": {
+            "size": "S",
+            "waist_cm": "64–68",
+            "waist_in": "25.2–26.8",
+            "eu": "44–46",
+            "uk_us": "28–30"
+          }
+        },
+        "size_row_HePLHQ": {
+          "type": "size_row",
+          "settings": {
+            "size": "M",
+            "waist_cm": "69–73",
+            "waist_in": "27.2–28.7",
+            "eu": "46–48",
+            "uk_us": "30–32"
+          }
+        },
+        "size_row_xjTadb": {
+          "type": "size_row",
+          "settings": {
+            "size": "L",
+            "waist_cm": "74–78",
+            "waist_in": "29.1–30.7",
+            "eu": "48–50",
+            "uk_us": "32–34"
+          }
+        },
+        "size_row_Tpjzj4": {
+          "type": "size_row",
+          "settings": {
+            "size": "XL",
+            "waist_cm": "79–83",
+            "waist_in": "31.1–32.7",
+            "eu": "50–52",
+            "uk_us": "34–36"
+          }
+        },
+        "size_row_JUEzrF": {
+          "type": "size_row",
+          "settings": {
+            "size": "2XL",
+            "waist_cm": "84–88",
+            "waist_in": "33.1–34.6",
+            "eu": "52–54",
+            "uk_us": "36–38"
+          }
+        },
+        "image_ptiiQ7": {
+          "type": "image",
+          "settings": {
+            "heading": "Fit in motion",
+            "caption": "Product reference"
+          }
+        },
+        "image_fRciwi": {
+          "type": "image",
+          "settings": {
+            "heading": "Fabric up close",
+            "caption": "Material reference"
+          }
+        }
+      },
+      "block_order": [
+        "detail_TMMKeC",
+        "detail_GGdmxD",
+        "detail_M4pXJW",
+        "feature_mWhC6c",
+        "feature_jrMYGU",
+        "feature_HcE69J",
+        "feature_7BkLcf",
+        "size_row_gEEC8e",
+        "size_row_VPy4EH",
+        "size_row_HePLHQ",
+        "size_row_xjTadb",
+        "size_row_Tpjzj4",
+        "size_row_JUEzrF",
+        "image_ptiiQ7",
+        "image_fRciwi"
+      ],
+      "name": "Product detail story",
+      "settings": {
+        "details_eyebrow": "Product details",
+        "details_heading": "Made for the way you move.",
+        "features_eyebrow": "Why this works",
+        "features_heading": "Less fuss. Better function.",
+        "size_eyebrow": "Fit reference",
+        "size_heading": "Find your size.",
+        "size_intro": "<p>Use the body measurements below as a starting point. If you sit between sizes, choose based on your preferred level of ease.</p>",
+        "size_label": "Size",
+        "waist_cm_label": "Waist (cm)",
+        "waist_in_label": "Waist (in)",
+        "eu_label": "EU",
+        "uk_us_label": "UK / US",
+        "size_note": "Tolerance ±2.5 cm. Product fit may vary slightly by fabric and cut.",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_left": 44,
+        "padding_right": 44
       }
     },
     "product-framework": {
@@ -355,6 +511,7 @@
   },
   "order": [
     "main",
+    "product_detail_story_A9DYNb",
     "product-framework",
     "luxury-spacing",
     "section_look_gallery_ePcTQJ",
