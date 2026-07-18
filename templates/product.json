@@ -35,31 +35,13 @@
             "padding_bottom": 16
           }
         },
-        "tab_richtext": {
-          "type": "tab_richtext",
-          "settings": {
-            "show_description": false,
-            "show_read_more": true,
-            "title_1": "Care",
-            "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
-            "title_2": "Shipping",
-            "raw_content_2": "<p>Free shipping on orders over $50 within Singapore. Standard delivery 2–4 business days. International shipping available.</p>",
-            "title_3": "",
-            "raw_content_3": "",
-            "title_4": "",
-            "raw_content_4": "",
-            "title_5": "",
-            "raw_content_5": "",
-            "padding_bottom": 0
-          }
-        },
         "variants": {
           "type": "variants",
           "settings": {
             "info_page": "size-guide",
             "size_chart_style": "question",
-            "option_font_size": "body-medium",
-            "value_font_size": "body-medium",
+            "option_font_size": "body-large",
+            "value_font_size": "body-large",
             "padding_bottom": 16
           }
         },
@@ -129,6 +111,24 @@
             "padding_bottom": 48
           }
         },
+        "tab_richtext": {
+          "type": "tab_richtext",
+          "settings": {
+            "show_description": false,
+            "show_read_more": true,
+            "title_1": "Care",
+            "raw_content_1": "<p>Machine wash cold (30°C). Tumble dry low. Do not bleach. Do not iron print.</p>",
+            "title_2": "Shipping",
+            "raw_content_2": "<p>Free shipping on orders over $50 within Singapore. Standard delivery 2–4 business days. International shipping available.</p>",
+            "title_3": "",
+            "raw_content_3": "",
+            "title_4": "",
+            "raw_content_4": "",
+            "title_5": "",
+            "raw_content_5": "",
+            "padding_bottom": 0
+          }
+        },
         "sharing": {
           "type": "sharing",
           "settings": {
@@ -140,13 +140,13 @@
         "title",
         "price",
         "description_QwjMiM",
-        "tab_richtext",
         "variants",
         "upsell",
         "buttons",
         "inventory_countdown",
         "divider",
         "bundle_save_DrnprG",
+        "tab_richtext",
         "sharing"
       ],
       "settings": {

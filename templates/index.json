@@ -72,18 +72,6 @@
             "link": "shopify://collections/tops",
             "cta_text": "SHOP TOPS"
           }
-        },
-        "slide_5": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
-            "focal_desktop": "",
-            "micro_label": "FINAL STOCK",
-            "title": "XL / 2XL CLEARANCE",
-            "price": "WHILE STOCK LASTS",
-            "link": "shopify://collections/bundles-xl-2xl-clearance",
-            "cta_text": "SHOP CLEARANCE"
-          }
         }
       },
       "block_order": [
@@ -91,8 +79,7 @@
         "slide_kMhbWX",
         "slide_1",
         "slide_3",
-        "slide_4",
-        "slide_5"
+        "slide_4"
       ],
       "settings": {
         "image_ratio": "1080 / 1350",
