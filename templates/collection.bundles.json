@@ -1,0 +1,214 @@
+{
+  "sections": {
+    "collection_product_focus_hero_wWzDmE": {
+      "type": "collection-product-focus-hero",
+      "blocks": {
+        "nav_link_ymVARm": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Explore",
+            "link": "/pages/shop-by-design"
+          }
+        },
+        "nav_link_Y9gFX6": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Shop All",
+            "link": ""
+          }
+        },
+        "nav_link_eMQdbd": {
+          "type": "nav_link",
+          "settings": {
+            "label": "all size XS - 9.99",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "nav_link_ymVARm",
+        "nav_link_Y9gFX6",
+        "nav_link_eMQdbd"
+      ],
+      "name": "Collection Focus Hero",
+      "settings": {
+        "color_scheme": "",
+        "eyebrow": "Collection",
+        "accent_label": "",
+        "intro": "",
+        "cta_label": "",
+        "cta_link": "shopify://collections/dead-stock-clearance",
+        "use_collection_image": true,
+        "image": "{{ collection.image }}",
+        "panel_label": "Browse",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "hero": {
+      "type": "collection-image-with-title",
+      "disabled": true,
+      "settings": {
+        "show_title": true,
+        "show_description": true,
+        "flex_align": "align--top-left",
+        "color_scheme": "scheme-1",
+        "show_text_background": false,
+        "overlay_type": "opacity",
+        "show_image": false,
+        "banner_layout": "inline",
+        "height": "screen-height-one-third",
+        "mobile_height": "screen-height-one-half--mobile",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "subcollections": {
+      "type": "subcollections",
+      "settings": {
+        "subcollection_layout": "slider",
+        "subcollection_description": false,
+        "select_image": "product",
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "color": "#ffffff",
+        "bg_color": "",
+        "padding_top": 83,
+        "padding_bottom": 64
+      }
+    },
+    "main": {
+      "type": "collection",
+      "custom_css": [],
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "inline-closed",
+        "default_open": true,
+        "collection_linklist": "footer",
+        "grid": 3,
+        "grid_mobile": "2",
+        "products_per_page": 10,
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "gateway_hero_ed9Tqb": {
+      "type": "gateway-hero",
+      "blocks": {
+        "slide_RJPKfc": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/7_6ff2ea18-9c14-4690-a3a5-d83d6325f61c.jpg",
+            "focal_desktop": "30%",
+            "micro_label": "TransDRY®",
+            "title": "Y BRIEF",
+            "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
+            "link": "shopify://products/y-transdry-brief-white",
+            "cta_text": "explore"
+          }
+        },
+        "slide_mJhynP": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/gateway-slide1-blackbg.png",
+            "focal_desktop": "30%",
+            "micro_label": "Cotton Spandex",
+            "title": "V BRIEF",
+            "price": "{{ metaobjects.triiiple_product_content[\"v-brief\"].signature_quote.value }}",
+            "link": "shopify://products/y-transdry-brief-white",
+            "cta_text": "explore"
+          }
+        }
+      },
+      "block_order": [
+        "slide_RJPKfc",
+        "slide_mJhynP"
+      ],
+      "name": "Gateway Hero",
+      "settings": {
+        "image_ratio": "9 / 16",
+        "image_ratio_desktop": "16 / 9",
+        "caption_lift": 20,
+        "autoplay": true,
+        "autoplay_interval": 5000,
+        "aria_label": "Campaign highlights",
+        "cta_text": "SHOP THE DESIGN",
+        "left_label_1": "HEROS",
+        "left_link_1": "shopify://collections",
+        "left_label_2": "OUR",
+        "left_link_2": "shopify://collections/briefs",
+        "right_label_1": "OUR",
+        "right_link_1": "shopify://collections/underwear",
+        "right_label_2": "HEROS",
+        "right_link_2": "shopify://collections/underwear",
+        "slide_metaobjects": [],
+        "rail_bg": "#0f0f0f",
+        "cta_bg": "#000000",
+        "cta_text_color": "#dedede",
+        "cta_size": "small",
+        "micro_as_badge": false,
+        "badge_height": 14,
+        "badge_bg": "rgba(0,0,0,0)",
+        "badge_border": "#ffffff",
+        "badge_text": "#ffffff"
+      }
+    },
+    "section_recent_products_JGCaih": {
+      "type": "section-recent-products",
+      "name": "Recently viewed products",
+      "settings": {
+        "product_recently_limit": 10,
+        "product_recently_minimum": 6,
+        "product_recently_heading": "Viewed",
+        "heading_font_size": "heading-mini",
+        "layout_desktop": "slider",
+        "grid": 3,
+        "rows": 3,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
+        "padding_top": 30,
+        "padding_bottom": 49,
+        "heading_tag": "automatic"
+      }
+    },
+    "collection_merchandising_Tt9BHk": {
+      "type": "collection-merchandising",
+      "name": "EDM Signup",
+      "settings": {
+        "layout": "inline",
+        "text_alignment": "left",
+        "bg_color": "#3d3d3d",
+        "font_color": "#ffffff",
+        "font_opacity": 100,
+        "input_color": "#ffffff",
+        "input_opacity": 100,
+        "heading_size": 32,
+        "subtext_size": 15,
+        "input_size": 11,
+        "button_size": 11,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_left": 44,
+        "padding_right": 44,
+        "eyebrow": "First Layer",
+        "heading": "Join the list",
+        "subtext": "First access to drops, restocks and Story Salon.",
+        "placeholder": "Email address",
+        "button_label": "Sign up",
+        "success_text": "You're in — welcome to First Layer."
+      }
+    }
+  },
+  "order": [
+    "collection_product_focus_hero_wWzDmE",
+    "hero",
+    "subcollections",
+    "main",
+    "gateway_hero_ed9Tqb",
+    "section_recent_products_JGCaih",
+    "collection_merchandising_Tt9BHk"
+  ]
+}

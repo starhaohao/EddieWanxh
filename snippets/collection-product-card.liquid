@@ -39,12 +39,27 @@
     assign product_display_name = pc_meta.display_name.value | strip_html | strip
   endif
 
+  # Bundles don't follow the "<design code> <type>" naming convention
+  # (e.g. "First Layer Duo", "The Brief Lover") — splitting on the first
+  # word would bold an arbitrary article/word instead of a real design
+  # code, so bundles render their whole name as one bold string instead.
+  assign product_card_source = product.type | append: ' ' | append: product.handle | append: ' ' | append: product.title | append: ' ' | append: product.tags | downcase
+  assign is_bundle_product = false
+  if product_card_source contains 'bundle'
+    assign is_bundle_product = true
+  endif
+
   # Product Information Standard v2.0 naming is always "<design code>
   # <type>" as one string (e.g. "V Brief", "ED Sleeveless Top") — split
   # on the first space so the code renders Bold and the type renders
   # Medium, generically for any code, no hardcoded V/W/H/Y/X/ED/L list.
-  assign name_code = product_display_name | split: ' ' | first
-  assign name_type = product_display_name | remove_first: name_code | strip
+  if is_bundle_product
+    assign name_code = product_display_name
+    assign name_type = blank
+  else
+    assign name_code = product_display_name | split: ' ' | first
+    assign name_type = product_display_name | remove_first: name_code | strip
+  endif
 
   assign material_label = product.metafields.theme.cutline.value | strip_html | strip
   assign normalized_material = material_label | downcase | remove: '®' | strip
