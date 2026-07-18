@@ -39,12 +39,27 @@
     assign product_display_name = pc_meta.display_name.value | strip_html | strip
   endif
 
+  # Bundles don't follow the "<design code> <type>" naming convention
+  # (e.g. "First Layer Duo", "The Brief Lover") — splitting on the first
+  # word would bold an arbitrary article/word instead of a real design
+  # code, so bundles render their whole name as one bold string instead.
+  assign product_card_source = product.type | append: ' ' | append: product.handle | append: ' ' | append: product.title | append: ' ' | append: product.tags | downcase
+  assign is_bundle_product = false
+  if product_card_source contains 'bundle'
+    assign is_bundle_product = true
+  endif
+
   # Product Information Standard v2.0 naming is always "<design code>
   # <type>" as one string (e.g. "V Brief", "ED Sleeveless Top") — split
   # on the first space so the code renders Bold and the type renders
   # Medium, generically for any code, no hardcoded V/W/H/Y/X/ED/L list.
-  assign name_code = product_display_name | split: ' ' | first
-  assign name_type = product_display_name | remove_first: name_code | strip
+  if is_bundle_product
+    assign name_code = product_display_name
+    assign name_type = blank
+  else
+    assign name_code = product_display_name | split: ' ' | first
+    assign name_type = product_display_name | remove_first: name_code | strip
+  endif
 
   assign material_label = product.metafields.theme.cutline.value | strip_html | strip
   assign normalized_material = material_label | downcase | remove: '®' | strip
@@ -108,6 +123,15 @@
     endif
   endif
 
+  # Sold out — same settings.show_sold_out_badge toggle and translation
+  # key snippets/product-grid-item.liquid already uses. Mutually
+  # exclusive with the sale badge (that one only renders when
+  # product.available), so it can reuse the same top-left slot.
+  assign show_sold_out_badge = false
+  if settings.show_sold_out_badge and product.available == false
+    assign show_sold_out_badge = true
+  endif
+
   assign is_recently_viewed_enabled = settings.show_recently_viewed_indicator
   assign hidden_product = false
   if product.tags contains 'hide'
@@ -132,7 +156,15 @@
         <div class="pcard__image-empty"></div>
       {%- endif -%}
 
-      {%- if sale_badge_text != blank and product.available -%}
+      {%- if show_sold_out_badge -%}
+        {%- render 'product-badge',
+          badge_class: 'pcard__badge pcard__badge--soldout',
+          badge_text: 'products.product.sold_out' | t,
+          aos_delay: 0,
+          aos_duration: 0,
+          aos_anchor: ''
+        -%}
+      {%- elsif sale_badge_text != blank and product.available -%}
         {%- render 'product-badge',
           badge_class: 'pcard__badge pcard__badge--sale',
           badge_text: sale_badge_text,
@@ -226,6 +258,12 @@
     background-color: #000000;
     color: #ffffff;
     box-shadow: inset 0 0 0 0.5px #ffffff;
+  }
+  .pcard__badge--soldout {
+    left: 10px;
+    background-color: rgb(var(--bg));
+    color: rgba(var(--text), 0.7);
+    box-shadow: inset 0 0 0 0.5px rgba(var(--text), 0.3);
   }
   .pcard__badge--viewed {
     right: 10px;

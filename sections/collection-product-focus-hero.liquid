@@ -135,7 +135,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.85fr);
     gap: 0;
-    align-items: stretch;
+    align-items: start;
   }
 
   .pfh__intro,
@@ -235,12 +235,12 @@
 
   .pfh__rail {
     display: grid;
-    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
     border-left: 1px solid rgba(var(--text), 0.18);
   }
 
   .pfh__image-wrap {
-    min-height: 320px;
+    aspect-ratio: 1350 / 1080;
     background: rgba(var(--text), 0.06);
   }
 
@@ -248,7 +248,6 @@
     display: block;
     width: 100%;
     height: 100%;
-    min-height: 320px;
     object-fit: cover;
   }
 
@@ -312,10 +311,6 @@
       border-top: 1px solid rgba(var(--bg), 0.18);
     }
 
-    .pfh__image,
-    .pfh__image-wrap {
-      min-height: 240px;
-    }
   }
 </style>
 
