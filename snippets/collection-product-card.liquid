@@ -123,15 +123,6 @@
     endif
   endif
 
-  # Sold out — same settings.show_sold_out_badge toggle and translation
-  # key snippets/product-grid-item.liquid already uses. Mutually
-  # exclusive with the sale badge (that one only renders when
-  # product.available), so it can reuse the same top-left slot.
-  assign show_sold_out_badge = false
-  if settings.show_sold_out_badge and product.available == false
-    assign show_sold_out_badge = true
-  endif
-
   assign is_recently_viewed_enabled = settings.show_recently_viewed_indicator
   assign hidden_product = false
   if product.tags contains 'hide'
@@ -156,15 +147,7 @@
         <div class="pcard__image-empty"></div>
       {%- endif -%}
 
-      {%- if show_sold_out_badge -%}
-        {%- render 'product-badge',
-          badge_class: 'pcard__badge pcard__badge--soldout',
-          badge_text: 'products.product.sold_out' | t,
-          aos_delay: 0,
-          aos_duration: 0,
-          aos_anchor: ''
-        -%}
-      {%- elsif sale_badge_text != blank and product.available -%}
+      {%- if sale_badge_text != blank and product.available -%}
         {%- render 'product-badge',
           badge_class: 'pcard__badge pcard__badge--sale',
           badge_text: sale_badge_text,
@@ -258,12 +241,6 @@
     background-color: #000000;
     color: #ffffff;
     box-shadow: inset 0 0 0 0.5px #ffffff;
-  }
-  .pcard__badge--soldout {
-    left: 10px;
-    background-color: rgb(var(--bg));
-    color: rgba(var(--text), 0.7);
-    box-shadow: inset 0 0 0 0.5px rgba(var(--text), 0.3);
   }
   .pcard__badge--viewed {
     right: 10px;
