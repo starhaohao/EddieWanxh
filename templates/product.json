@@ -72,7 +72,7 @@
             "layout": "slider",
             "autoplay": false,
             "autoplay_speed": 8,
-            "bg_color": "#F7F3E5",
+            "bg_color": "#f7f3e5",
             "padding_bottom": 0
           }
         },
@@ -125,7 +125,7 @@
             "layout": "stacked",
             "autoplay": false,
             "autoplay_speed": 8,
-            "bg_color": "#FAF1D3",
+            "bg_color": "#faf1d3",
             "padding_bottom": 48
           }
         },
@@ -150,7 +150,7 @@
         "sharing"
       ],
       "settings": {
-        "text_alignment": "left",
+        "text_alignment": "justify",
         "product_sticky_enable": true,
         "variant_image_scroll": false,
         "show_cart_bar": true,
