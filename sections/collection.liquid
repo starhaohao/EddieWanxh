@@ -142,6 +142,16 @@
       text-transform: uppercase;
     }
 
+    /* Match "Show Filters" / "Sort by" to the "Choose Your Design"
+       links' fixed type scale (snippets/collection-type-links.liquid),
+       overriding the global --BTN-FONT-SIZE for this section only. */
+    #Collection--{{ section.id }} .popout--group .popout__toggle,
+    #Collection--{{ section.id }} .popout--sort .popout__toggle {
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
     #Collection--{{ section.id }} .sidebar__item label,
     #Collection--{{ section.id }} .filter-group__content label span:last-child {
       font-size: 12px;
