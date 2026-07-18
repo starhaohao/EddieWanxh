@@ -259,23 +259,14 @@
       "blocks": {
         "ghost_cta_XRkDR4": {
           "type": "ghost_cta",
-          "disabled": true,
           "settings": {
             "label": "XL/2XL Clearance",
-            "url": "shopify://collections/bundles-xl-2xl-clearance"
-          }
-        },
-        "ghost_cta_KCETby": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "Shop all",
-            "url": "shopify://collections/shop-all"
+            "url": "shopify://collections/dead-stock-clearance"
           }
         }
       },
       "block_order": [
-        "ghost_cta_XRkDR4",
-        "ghost_cta_KCETby"
+        "ghost_cta_XRkDR4"
       ],
       "custom_css": [],
       "name": "Sale Hero",
