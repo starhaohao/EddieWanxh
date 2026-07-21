@@ -82,7 +82,7 @@
         "slide_4"
       ],
       "settings": {
-        "image_ratio": "9 / 16",
+        "image_ratio": "1080 / 1350",
         "image_ratio_desktop": "4 / 3",
         "caption_lift": 20,
         "autoplay": true,
