@@ -87,7 +87,8 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    padding: 40px 20px;
+    box-sizing: border-box;
+    padding: 40px var(--outer, 20px);
     max-width: {{ block.settings.content_max_width }}px;
     margin: 0 auto;
     width: 100%;
@@ -115,17 +116,12 @@
     color: {{ block.settings.text_color }};
     margin: 0 0 20px;
     text-shadow: {{ block.settings.text_shadow_x }}px {{ block.settings.text_shadow_y }}px {{ block.settings.text_shadow_blur }}px {{ block.settings.text_shadow_color }};
-    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
-    font-weight: {{ block.settings.heading_font.weight }};
-    font-style: {{ block.settings.heading_font.style }};
-    letter-spacing: {{ block.settings.heading_letter_spacing }}px;
+    font-family: var(--FONT-STACK-HEADING);
+    font-weight: var(--FONT-WEIGHT-HEADING);
+    font-style: var(--FONT-STYLE-HEADING);
+    letter-spacing: var(--LETTER-SPACING-HEADING);
+    text-transform: var(--FONT-UPPERCASE-HEADING, none);
   }
-
-  {% if block.settings.heading_uppercase %}
-    .ai-zoom-banner-heading-{{ ai_gen_id }} {
-      text-transform: uppercase;
-    }
-  {% endif %}
 
   @media screen and (min-width: 750px) {
     .ai-zoom-banner-heading-{{ ai_gen_id }} {
@@ -146,17 +142,12 @@
     margin: 0 0 30px;
     max-width: 600px;
     text-shadow: {{ block.settings.text_shadow_x }}px {{ block.settings.text_shadow_y }}px {{ block.settings.text_shadow_blur }}px {{ block.settings.text_shadow_color }};
-    font-family: {{ block.settings.subheading_font.family }}, {{ block.settings.subheading_font.fallback_families }};
-    font-weight: {{ block.settings.subheading_font.weight }};
-    font-style: {{ block.settings.subheading_font.style }};
-    letter-spacing: {{ block.settings.subheading_letter_spacing }}px;
+    font-family: var(--FONT-STACK-SUBHEADING);
+    font-weight: var(--FONT-WEIGHT-SUBHEADING);
+    font-style: var(--FONT-STYLE-SUBHEADING);
+    letter-spacing: var(--LETTER-SPACING-SUBHEADING);
+    text-transform: var(--FONT-UPPERCASE-SUBHEADING, none);
   }
-
-  {% if block.settings.subheading_uppercase %}
-    .ai-zoom-banner-subheading-{{ ai_gen_id }} {
-      text-transform: uppercase;
-    }
-  {% endif %}
 
   @media screen and (min-width: 750px) {
     .ai-zoom-banner-subheading-{{ ai_gen_id }} {
@@ -179,17 +170,12 @@
     text-decoration: none;
     border-radius: {{ block.settings.button_border_radius }}px;
     transition: background-color 0.3s ease;
-    font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
-    font-weight: {{ block.settings.button_font.weight }};
-    font-style: {{ block.settings.button_font.style }};
-    letter-spacing: {{ block.settings.button_letter_spacing }}px;
+    font-family: var(--BTN-FONT-STACK);
+    font-weight: var(--BTN-FONT-WEIGHT);
+    font-style: var(--BTN-FONT-STYLE);
+    letter-spacing: var(--BTN-LETTER-SPACING);
+    text-transform: var(--BTN-UPPERCASE);
   }
-
-  {% if block.settings.button_uppercase %}
-    .ai-zoom-banner-button-{{ ai_gen_id }} {
-      text-transform: uppercase;
-    }
-  {% endif %}
 
   @media screen and (min-width: 750px) {
     .ai-zoom-banner-button-{{ ai_gen_id }} {
@@ -548,10 +534,8 @@
       "content": "Heading style"
     },
     {
-      "type": "font_picker",
-      "id": "heading_font",
-      "label": "Font",
-      "default": "helvetica_n7"
+      "type": "paragraph",
+      "content": "Font, weight, letter spacing and case follow the theme's Heading typography setting."
     },
     {
       "type": "range",
@@ -592,30 +576,12 @@
       "default": 1.2
     },
     {
-      "type": "range",
-      "id": "heading_letter_spacing",
-      "label": "Letter spacing",
-      "min": -2,
-      "max": 5,
-      "step": 0.1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "heading_uppercase",
-      "label": "Uppercase",
-      "default": false
-    },
-    {
       "type": "header",
       "content": "Subheading style"
     },
     {
-      "type": "font_picker",
-      "id": "subheading_font",
-      "label": "Font",
-      "default": "helvetica_n4"
+      "type": "paragraph",
+      "content": "Font, weight, letter spacing and case follow the theme's Subheading typography setting."
     },
     {
       "type": "range",
@@ -654,22 +620,6 @@
       "max": 2,
       "step": 0.1,
       "default": 1.5
-    },
-    {
-      "type": "range",
-      "id": "subheading_letter_spacing",
-      "label": "Letter spacing",
-      "min": -2,
-      "max": 5,
-      "step": 0.1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "subheading_uppercase",
-      "label": "Uppercase",
-      "default": false
     },
     {
       "type": "header",
@@ -727,10 +677,8 @@
       "label": "Button link"
     },
     {
-      "type": "font_picker",
-      "id": "button_font",
-      "label": "Font",
-      "default": "helvetica_n4"
+      "type": "paragraph",
+      "content": "Font, weight, letter spacing and case follow the theme's Button typography setting."
     },
     {
       "type": "range",
@@ -771,22 +719,6 @@
       "step": 2,
       "unit": "px",
       "default": 12
-    },
-    {
-      "type": "range",
-      "id": "button_letter_spacing",
-      "label": "Letter spacing",
-      "min": -2,
-      "max": 5,
-      "step": 0.1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "button_uppercase",
-      "label": "Uppercase",
-      "default": false
     },
     {
       "type": "color",
