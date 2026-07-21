@@ -243,18 +243,6 @@
     },
     "sale_hero_8Vwb7N": {
       "type": "sale-hero",
-      "blocks": {
-        "ghost_cta_XRkDR4": {
-          "type": "ghost_cta",
-          "settings": {
-            "label": "XL/2XL Clearance",
-            "url": "shopify://collections/dead-stock-clearance"
-          }
-        }
-      },
-      "block_order": [
-        "ghost_cta_XRkDR4"
-      ],
       "custom_css": [],
       "name": "Sale Hero",
       "settings": {
@@ -312,13 +300,13 @@
         "image_2": "shopify://shop_images/x-brief.jpg",
         "link": "shopify://collections/dead-stock-clearance",
         "width": "wrapper--full",
-        "height": "screen-height-three-quarters",
+        "height": "screen-height-two-thirds",
         "flex_align_desktop": "align--bottom-left-desktop",
         "content_width": 100,
-        "mobile_image": "shopify://shop_images/24.png",
-        "mobile_height": "screen-height-one-third--mobile",
+        "mobile_image": "shopify://shop_images/x_5b35728f-e2a1-4108-a2d7-794d6a6fbe31.jpg",
+        "mobile_height": "screen-height-one-half--mobile",
         "flex_align_mobile": "align--bottom-left-mobile",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-fbd4c470-dcb5-45cd-af70-7c3c7a55e46e",
         "show_text_background": true,
         "overlay_type": "disabled",
         "padding_top": 0,
