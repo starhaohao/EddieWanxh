@@ -1,0 +1,478 @@
+{%- comment -%}
+  Product details accordion — renders below the buy buttons block.
+  Handles BOTH single products and bundles from one snippet.
+
+  ── Metafield binding (confirmed with Eddie 2026-07-21) ──
+  SINGLES:
+    product.metafields.custom.product_content -> fabric_profile:
+      short_description  -> collapsed summary line
+      full_description   -> expanded lead line
+      key_benefits       -> DETAILS bullet rows (list.single_line_text_field)
+      composition        -> MATERIALS line
+
+  BUNDLES:
+    Components come from the EXISTING theme.bundle_list metafield
+    (list.product_reference) — NOT a new custom.bundle_components field.
+    Each component's copy is read from that component's own fabric_profile
+    (same keys as singles), so bundle copy is never duplicated and updates
+    automatically when a component's copy changes.
+    The bundle's own summary/lead come from the bundle product's own
+    fabric_profile (short_description / full_description) if populated.
+
+  Guardrails:
+    - Never renders on Internal-DoNotPublish / "Full Range" products.
+    - Renders nothing when there is no content, so unpopulated products
+      never show an empty accordion. Bundles missing components show an
+      editor-only warning in the theme customizer (request.design_mode).
+{%- endcomment -%}
+
+{%- liquid
+  # ---------- guardrail: internal reference products ----------
+  assign pdp_is_internal = false
+  if product.tags contains 'Internal-DoNotPublish'
+    assign pdp_is_internal = true
+  endif
+  assign pdp_handle_title = product.handle | append: ' ' | append: product.title | downcase
+  if pdp_handle_title contains 'full range'
+    assign pdp_is_internal = true
+  endif
+
+  # ---------- mode detection ----------
+  assign pdp_components = product.metafields.theme.bundle_list.value
+  assign pdp_has_components = false
+  if pdp_components != blank and pdp_components.size > 0
+    assign pdp_has_components = true
+  endif
+
+  assign pdp_is_bundle = false
+  if pdp_has_components
+    assign pdp_is_bundle = true
+  elsif product.type == 'Bundle' or product.tags contains 'Bundle'
+    assign pdp_is_bundle = true
+  endif
+
+  # ---------- bundle-level summary + lead (bundle's own fabric_profile) ----------
+  # ---------- single content ----------
+  assign pdp_content = product.metafields.custom.product_content.value
+  assign pdp_fabric = pdp_content.fabric_profile.value
+  assign pdp_summary = pdp_fabric.short_description.value
+  assign pdp_lead = pdp_fabric.full_description.value
+  assign pdp_bullets = pdp_fabric.key_benefits.value
+  assign pdp_composition = pdp_fabric.composition.value
+
+  # ---------- labels ----------
+  assign pdp_details_label = block.settings.details_label | default: 'Details'
+  assign pdp_materials_label = block.settings.materials_label | default: 'Materials'
+  assign pdp_included_label = block.settings.included_label | default: 'What' | append: '&#39;s Included'
+  assign pdp_apart_label = block.settings.apart_label | default: 'What Sets Each Apart'
+  assign pdp_shared_label = block.settings.shared_label | default: 'Shared Across the Set'
+  assign pdp_more_label = block.settings.toggle_more_label | default: 'Read More'
+  assign pdp_less_label = block.settings.toggle_less_label | default: 'Read Less'
+
+  assign pdp_uid = section.id | append: '-' | append: block.id
+  assign pdp_panel_id = 'PdpDetailsPanel-' | append: pdp_uid
+
+  # ---------- decide whether there is anything to show ----------
+  assign pdp_has_content = false
+  if pdp_is_bundle
+    if pdp_has_components
+      assign pdp_has_content = true
+    endif
+  else
+    if pdp_summary != blank or pdp_lead != blank or pdp_bullets.size > 0 or pdp_composition != blank
+      assign pdp_has_content = true
+    endif
+  endif
+-%}
+
+{%- comment -%} Editor-only warning: bundle flagged but no components set. {%- endcomment -%}
+{%- if pdp_is_internal == false and pdp_is_bundle and pdp_has_components == false and request.design_mode -%}
+  <div class="pdp-details pdp-details--warning" {{ block.shopify_attributes }}>
+    <p class="pdp-details__warning">Bundle components not set — add products to the “Bundle List” (<code>theme.bundle_list</code>) metafield on this product for the details accordion to render.</p>
+  </div>
+{%- endif -%}
+
+{%- if pdp_is_internal == false and pdp_has_content -%}
+  {%- liquid
+    # ================= BUNDLE: precompute path + shared/signature =================
+    if pdp_is_bundle
+      # Path A vs B: all components the same base product?
+      assign pdp_first_handle = pdp_components[0].handle
+      assign pdp_all_same = true
+      for pdp_c in pdp_components
+        unless pdp_c.handle == pdp_first_handle
+          assign pdp_all_same = false
+        endunless
+      endfor
+
+      assign pdp_path = 'B'
+      if pdp_all_same
+        assign pdp_path = 'A'
+      endif
+
+      # distinct compositions across components (for MATERIALS)
+      assign pdp_comp_set = ''
+      for pdp_c in pdp_components
+        assign pdp_c_fab = pdp_c.metafields.custom.product_content.value.fabric_profile.value
+        assign pdp_c_comp = pdp_c_fab.composition.value
+        if pdp_c_comp != blank
+          unless pdp_comp_set contains pdp_c_comp
+            assign pdp_comp_set = pdp_comp_set | append: pdp_c_comp | append: '||'
+          endunless
+        endif
+      endfor
+      assign pdp_comp_list = pdp_comp_set | split: '||'
+
+      # shared bullets = bullets present in every component, excluding "Signature …"
+      if pdp_path == 'B'
+        assign pdp_first_bullets = pdp_components[0].metafields.custom.product_content.value.fabric_profile.value.key_benefits.value
+        assign pdp_shared_set = ''
+        for pdp_b in pdp_first_bullets
+          assign pdp_b_head = pdp_b | slice: 0, 9
+          assign pdp_in_all = true
+          for pdp_c in pdp_components
+            assign pdp_c_bullets = pdp_c.metafields.custom.product_content.value.fabric_profile.value.key_benefits.value
+            unless pdp_c_bullets contains pdp_b
+              assign pdp_in_all = false
+            endunless
+          endfor
+          if pdp_in_all and pdp_b_head != 'Signature'
+            assign pdp_shared_set = pdp_shared_set | append: pdp_b | append: '||'
+          endif
+        endfor
+        assign pdp_shared_list = pdp_shared_set | split: '||'
+      endif
+    endif
+  -%}
+
+  <pdp-details-accordion
+    id="PdpDetails-{{ pdp_uid }}"
+    class="pdp-details"
+    {{ block_style }}
+    {{ block.shopify_attributes }}
+  >
+    <div class="pdp-details__summary-row">
+      {%- if pdp_summary != blank -%}
+        <p class="pdp-details__summary">{{ pdp_summary | escape }}</p>
+      {%- endif -%}
+
+      <button
+        type="button"
+        class="pdp-details__toggle"
+        aria-expanded="false"
+        aria-controls="{{ pdp_panel_id }}"
+        data-pdp-details-toggle
+      >
+        <span class="pdp-details__toggle-label">
+          <span data-pdp-details-label-more aria-hidden="false">{{ pdp_more_label | escape }}</span>
+          <span data-pdp-details-label-less aria-hidden="true">{{ pdp_less_label | escape }}</span>
+        </span>
+      </button>
+    </div>
+
+    <div id="{{ pdp_panel_id }}-outer" class="pdp-details__reveal-outer" data-pdp-details-reveal data-expanded="false">
+      <div class="pdp-details__reveal-inner">
+        <div
+          class="pdp-details__reveal-content"
+          id="{{ pdp_panel_id }}"
+          role="region"
+        >
+          {%- if pdp_lead != blank -%}
+            <p class="pdp-details__lead">{{ pdp_lead | escape }}</p>
+          {%- endif -%}
+
+          {%- if pdp_is_bundle -%}
+            {%- comment -%} ================= BUNDLE MODE ================= {%- endcomment -%}
+
+            {%- if pdp_path == 'A' -%}
+              {%- comment -%} ---- Path A: same-style multipack ---- {%- endcomment -%}
+              {%- assign pdp_comp = pdp_components[0] -%}
+              {%- assign pdp_comp_name = pdp_comp.metafields.custom.display_name.value | default: pdp_comp.title -%}
+              {%- assign pdp_comp_fab = pdp_comp.metafields.custom.product_content.value.fabric_profile.value -%}
+              {%- assign pdp_comp_bullets = pdp_comp_fab.key_benefits.value -%}
+
+              <p class="pdp-details__eyebrow">{{ pdp_included_label }}</p>
+              <ul class="pdp-details__bullets">
+                <li>{{ pdp_components.size }} &times; {{ pdp_comp_name | escape }}</li>
+              </ul>
+
+              {%- if pdp_comp_bullets.size > 0 -%}
+                <p class="pdp-details__eyebrow">{{ pdp_details_label | escape }}</p>
+                <ul class="pdp-details__bullets">
+                  {%- for pdp_b in pdp_comp_bullets -%}
+                    <li>{%- render 'pdp-bullet-emphasis', text: pdp_b -%}</li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+
+            {%- else -%}
+              {%- comment -%} ---- Path B: mixed set ---- {%- endcomment -%}
+              <p class="pdp-details__eyebrow">{{ pdp_included_label }}</p>
+              <ul class="pdp-details__bullets">
+                {%- for pdp_c in pdp_components -%}
+                  {%- assign pdp_c_name = pdp_c.metafields.custom.display_name.value | default: pdp_c.title -%}
+                  {%- assign pdp_c_fab = pdp_c.metafields.custom.product_content.value.fabric_profile.value -%}
+                  {%- assign pdp_c_short = pdp_c_fab.short_description.value -%}
+                  <li>
+                    <span class="pdp-details__row-name">{{ pdp_c_name | escape }}</span>
+                    {%- if pdp_c_short != blank %} — {{ pdp_c_short | escape }}{%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+
+              {%- comment -%} WHAT SETS EACH APART — one signature bullet per component {%- endcomment -%}
+              {%- assign pdp_has_any_sig = false -%}
+              {%- capture pdp_apart_rows -%}
+                {%- for pdp_c in pdp_components -%}
+                  {%- assign pdp_c_name = pdp_c.metafields.custom.display_name.value | default: pdp_c.title -%}
+                  {%- assign pdp_c_bullets = pdp_c.metafields.custom.product_content.value.fabric_profile.value.key_benefits.value -%}
+                  {%- assign pdp_sig = '' -%}
+                  {%- for pdp_b in pdp_c_bullets -%}
+                    {%- assign pdp_b_head = pdp_b | slice: 0, 9 -%}
+                    {%- if pdp_sig == '' and pdp_b_head == 'Signature' -%}
+                      {%- assign pdp_sig = pdp_b -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if pdp_sig != '' -%}
+                    {%- assign pdp_has_any_sig = true -%}
+                    <li>
+                      <span class="pdp-details__row-name">{{ pdp_c_name | escape }}</span> — {%- render 'pdp-bullet-emphasis', text: pdp_sig -%}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {%- if pdp_has_any_sig -%}
+                <p class="pdp-details__eyebrow">{{ pdp_apart_label | escape }}</p>
+                <ul class="pdp-details__bullets">{{ pdp_apart_rows }}</ul>
+              {%- endif -%}
+
+              {%- comment -%} SHARED ACROSS THE SET — intersection, shown once {%- endcomment -%}
+              {%- if pdp_shared_list.size > 0 -%}
+                <p class="pdp-details__eyebrow">{{ pdp_shared_label | escape }}</p>
+                <ul class="pdp-details__bullets">
+                  {%- for pdp_b in pdp_shared_list -%}
+                    <li>{%- render 'pdp-bullet-emphasis', text: pdp_b -%}</li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} MATERIALS — collapse when uniform, else split per composition {%- endcomment -%}
+            {%- if pdp_comp_list.size > 0 -%}
+              <p class="pdp-details__eyebrow">{{ pdp_materials_label | escape }}</p>
+              {%- if pdp_comp_list.size == 1 -%}
+                <p class="pdp-details__composition">All pieces — {{ pdp_comp_list[0] | escape }}</p>
+              {%- else -%}
+                <ul class="pdp-details__bullets">
+                  {%- for pdp_comp_val in pdp_comp_list -%}
+                    {%- assign pdp_comp_norm = pdp_comp_val | downcase -%}
+                    {%- if pdp_comp_norm contains 'transdry' -%}
+                      <li><span class="pdp-details__row-name">TransDRY&reg; pieces</span> — {{ pdp_comp_val | escape }}</li>
+                    {%- else -%}
+                      <li><span class="pdp-details__row-name">Cotton-spandex pieces</span> — {{ pdp_comp_val | escape }}</li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            {%- endif -%}
+
+          {%- else -%}
+            {%- comment -%} ================= SINGLE MODE ================= {%- endcomment -%}
+            {%- if pdp_bullets.size > 0 -%}
+              <p class="pdp-details__eyebrow">{{ pdp_details_label | escape }}</p>
+              <ul class="pdp-details__bullets">
+                {%- for pdp_b in pdp_bullets -%}
+                  <li>{%- render 'pdp-bullet-emphasis', text: pdp_b -%}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            {%- if pdp_composition != blank -%}
+              <p class="pdp-details__eyebrow">{{ pdp_materials_label | escape }}</p>
+              <p class="pdp-details__composition">{{ pdp_composition | escape }}</p>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <noscript>
+      <style>
+        #{{ pdp_panel_id }} { opacity: 1 !important; }
+        #{{ pdp_panel_id }}-outer { grid-template-rows: 1fr !important; }
+        #PdpDetails-{{ pdp_uid }} [data-pdp-details-toggle] { display: none !important; }
+      </style>
+    </noscript>
+  </pdp-details-accordion>
+
+  <script src="{{ 'pdp-details.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<style>
+  .pdp-details {
+    background: #FFFFFF;
+    color: #1D1D1F;
+    border-top: 1px solid #E5E5E5;
+    margin-top: 48px;
+  }
+  .pdp-details--warning { padding: 16px 0; }
+  .pdp-details__warning {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #B4232C;
+  }
+  .pdp-details__warning code {
+    font-size: 12px;
+    background: #F0F0F0;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .pdp-details__summary-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 0;
+  }
+
+  .pdp-details__summary {
+    margin: 0;
+    max-width: 60ch;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1D1D1F;
+  }
+  @media screen and (min-width: 750px) {
+    .pdp-details__summary { font-size: 17px; }
+  }
+
+  .pdp-details__toggle {
+    appearance: none;
+    background: none;
+    border: 0;
+    margin: 0;
+    padding: 12px 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6E6E73;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  .pdp-details__toggle:hover {
+    color: #1D1D1F;
+    text-decoration: underline;
+  }
+  .pdp-details__toggle:focus-visible {
+    outline: 2px solid var(--focus, #1D1D1F);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .pdp-details__toggle-label {
+    position: relative;
+    display: inline-block;
+  }
+  .pdp-details__toggle-label span {
+    transition: opacity 150ms ease;
+  }
+  .pdp-details__toggle-label span[aria-hidden="true"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .pdp-details__toggle-label span[aria-hidden="false"] {
+    position: relative;
+    opacity: 1;
+  }
+
+  .pdp-details__reveal-outer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .pdp-details__reveal-outer[data-expanded="true"] {
+    grid-template-rows: 1fr;
+    transition-duration: 380ms;
+  }
+  .pdp-details__reveal-inner {
+    overflow: hidden;
+  }
+  .pdp-details__reveal-content {
+    opacity: 0;
+    padding-bottom: 8px;
+    transition: opacity 150ms ease;
+  }
+  .pdp-details__reveal-outer[data-expanded="true"] .pdp-details__reveal-content {
+    opacity: 1;
+    transition: opacity 200ms ease 80ms;
+  }
+
+  .pdp-details__lead {
+    margin: 4px 0 24px;
+    max-width: 60ch;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1D1D1F;
+  }
+
+  .pdp-details__eyebrow {
+    margin: 0 0 4px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #86868B;
+  }
+  .pdp-details__eyebrow + .pdp-details__eyebrow {
+    margin-top: 28px;
+  }
+  .pdp-details__bullets + .pdp-details__eyebrow,
+  .pdp-details__composition + .pdp-details__eyebrow {
+    margin-top: 28px;
+  }
+
+  .pdp-details__bullets {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+  }
+  .pdp-details__bullets li {
+    padding: 16px 0;
+    border-bottom: 1px solid #F0F0F0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1D1D1F;
+  }
+  .pdp-details__bullets li:first-child {
+    border-top: 1px solid #F0F0F0;
+  }
+  .pdp-details__bullets strong,
+  .pdp-details__row-name {
+    font-weight: 500;
+  }
+
+  .pdp-details__composition {
+    margin: 0 0 4px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1D1D1F;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pdp-details__reveal-outer {
+      transition: none;
+    }
+    .pdp-details__reveal-content {
+      transition: opacity 150ms ease;
+    }
+  }
+</style>

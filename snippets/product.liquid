@@ -843,6 +843,9 @@
                   {%- when 'inventory_countdown' -%}
                     {%- render 'product-inventory', product: product, block: block, block_style: block_style -%}
 
+                  {%- when 'pdp_details_accordion' -%}
+                    {%- render 'product-details-accordion', product: product, section: section, block: block, block_style: block_style -%}
+
                   {%- when 'upsell', 'bundle-save' -%}
                     {%- liquid
                       if block.type == 'upsell'

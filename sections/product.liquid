@@ -444,6 +444,55 @@
       ]
     },
     {
+      "type": "pdp_details_accordion",
+      "name": "Product details accordion",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Pulls copy from product.metafields.custom.product_content → fabric_profile (short_description, full_description, key_benefits, composition). Populate that metaobject per product in Admin — this block renders nothing if it's empty."
+        },
+        {
+          "type": "text",
+          "id": "details_label",
+          "label": "Details eyebrow",
+          "default": "Details"
+        },
+        {
+          "type": "text",
+          "id": "materials_label",
+          "label": "Materials eyebrow",
+          "default": "Materials"
+        },
+        {
+          "type": "text",
+          "id": "toggle_more_label",
+          "label": "\"Read more\" label",
+          "default": "Read More"
+        },
+        {
+          "type": "text",
+          "id": "toggle_less_label",
+          "label": "\"Read less\" label",
+          "default": "Read Less"
+        },
+        {
+          "type": "header",
+          "content": "Padding"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "min": 0,
+          "max": 50,
+          "step": 2,
+          "unit": "px",
+          "label": "Bottom",
+          "default": 0
+        }
+      ]
+    },
+    {
       "type": "siblings",
       "name": "Siblings",
       "limit": 1,
