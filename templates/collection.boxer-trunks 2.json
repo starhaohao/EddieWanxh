@@ -12,32 +12,56 @@
     "collection_product_focus_hero_wWzDmE": {
       "type": "collection-product-focus-hero",
       "blocks": {
-        "nav_link_ymVARm": {
+        "nav_link_eMQdbd": {
           "type": "nav_link",
           "settings": {
-            "label": "Explore",
-            "link": "/pages/shop-by-design"
+            "label": "BRIEFS",
+            "link": "shopify://collections/briefs"
           }
         },
-        "nav_link_Y9gFX6": {
+        "nav_link_WAfz3m": {
+          "type": "nav_link",
+          "settings": {
+            "label": "TOPS",
+            "link": "shopify://collections/tops"
+          }
+        },
+        "nav_link_F8W94c": {
+          "type": "nav_link",
+          "settings": {
+            "label": "SOCKS",
+            "link": "shopify://collections/socks"
+          }
+        },
+        "nav_link_8ztbGt": {
           "type": "nav_link",
           "settings": {
             "label": "Shop All",
             "link": ""
           }
         },
-        "nav_link_eMQdbd": {
+        "nav_link_e3E4Bp": {
           "type": "nav_link",
           "settings": {
-            "label": "all size XS - 9.99",
-            "link": ""
+            "label": "TRUNKS",
+            "link": "shopify://collections/briefs"
+          }
+        },
+        "nav_link_WPLmUN": {
+          "type": "nav_link",
+          "settings": {
+            "label": "SALE",
+            "link": "shopify://collections/dead-stock-clearance"
           }
         }
       },
       "block_order": [
-        "nav_link_ymVARm",
-        "nav_link_Y9gFX6",
-        "nav_link_eMQdbd"
+        "nav_link_eMQdbd",
+        "nav_link_WAfz3m",
+        "nav_link_F8W94c",
+        "nav_link_8ztbGt",
+        "nav_link_e3E4Bp",
+        "nav_link_WPLmUN"
       ],
       "name": "Collection Focus Hero",
       "settings": {
