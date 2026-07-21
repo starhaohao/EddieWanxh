@@ -220,7 +220,7 @@
             "sku": "Cotton Spandex",
             "price": "16.99",
             "compare_price": "31.99",
-            "url": "shopify://products/h-cotton-spandex-boxer-trunk-white",
+            "url": "shopify://products/h-cotton-spandex-boxer-trunk-test",
             "text_align": "left",
             "name_size_override": 20,
             "show_shop": false,
@@ -428,11 +428,11 @@
         "card_bg": "#000000",
         "name_color": "#ffffff",
         "sku_color": "#fcfcfc",
-        "price_color": "#FFFFFF",
+        "price_color": "#FFBB00",
         "shop_color": "#FFFFFF",
         "tag_color": "#000000",
         "tag_bg": "#FFFFFF",
-        "grid_line_color": "#FFFFFF",
+        "grid_line_color": "#FFC445",
         "name_size": 14,
         "price_size": 12
       }
