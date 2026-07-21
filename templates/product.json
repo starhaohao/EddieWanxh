@@ -66,6 +66,16 @@
             "padding_bottom": 48
           }
         },
+        "pdp_details_accordion": {
+          "type": "pdp_details_accordion",
+          "settings": {
+            "details_label": "Details",
+            "materials_label": "Materials",
+            "toggle_more_label": "Read More",
+            "toggle_less_label": "Read Less",
+            "padding_bottom": 0
+          }
+        },
         "inventory_countdown": {
           "type": "inventory_countdown",
           "settings": {
@@ -117,6 +127,7 @@
         "variants",
         "upsell",
         "buttons",
+        "pdp_details_accordion",
         "inventory_countdown",
         "divider",
         "bundle_save_DrnprG",
