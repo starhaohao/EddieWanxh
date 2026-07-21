@@ -270,7 +270,7 @@
           "name": "ED T Grey",
           "settings": {
             "variant": "product",
-            "image": "shopify://shop_images/In_TRIIIPLE_2.png",
+            "image": "shopify://shop_images/4_dde67c12-be57-4994-9014-502582e7039f.png",
             "category": "Tops",
             "name": "ED Sleeveless Top",
             "subtitle": "a new daily rotation",
@@ -423,18 +423,86 @@
       "name": "Lookbook Product Grid",
       "settings": {
         "show_filters": true,
-        "categories": "Briefs, Boxer Trunks, Tops, Socks, Bundles",
+        "categories": "Briefs, Boxer Trunks, Tops, Socks",
         "bg_color": "#000000",
         "card_bg": "#000000",
         "name_color": "#ffffff",
         "sku_color": "#fcfcfc",
-        "price_color": "#EFFD31",
-        "shop_color": "#FCEC08",
+        "price_color": "#FFFFFF",
+        "shop_color": "#FFFFFF",
         "tag_color": "#000000",
-        "tag_bg": "#FCEC08",
-        "grid_line_color": "#FCEC08",
+        "tag_bg": "#FFFFFF",
+        "grid_line_color": "#FFFFFF",
         "name_size": 14,
         "price_size": 12
+      }
+    },
+    "page_about_us_d6AkYV": {
+      "type": "page-about-us",
+      "blocks": {
+        "principle_G7YytB": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Fit",
+            "heading": "Made to move",
+            "body": "<p>Patterned for comfort, built to stay put, and refined enough for everyday wear.</p>"
+          }
+        },
+        "principle_6jqbAw": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Fabric",
+            "heading": "Performance first",
+            "body": "<p>Moisture-wicking, soft-touch fabrics that stay relevant beyond the trend cycle.</p>"
+          }
+        },
+        "principle_RYUtFt": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Design",
+            "heading": "Measured confidence",
+            "body": "<p>Minimal, editorial, and body-aware - built to look sharp without trying too hard.</p>"
+          }
+        },
+        "principle_BE7jVR": {
+          "type": "principle",
+          "settings": {
+            "kicker": "Range",
+            "heading": "All bodies welcome",
+            "body": "<p>Sizes from XS to 2XL, because confidence should never come in one shape.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "principle_G7YytB",
+        "principle_6jqbAw",
+        "principle_RYUtFt",
+        "principle_BE7jVR"
+      ],
+      "name": "About us page",
+      "settings": {
+        "eyebrow": "About us",
+        "heading": "Who we are",
+        "intro": "<p>TRIIIPLE Studio is a men’s underwear and intimate wear brand redefining comfort, confidence, and self-expression - starting from the first layer.</p>",
+        "primary_label": "Shop all",
+        "primary_link": "",
+        "secondary_label": "Story Salon",
+        "secondary_link": "",
+        "image_1": "shopify://shop_images/Banner_2_13thAugl__Original.jpg",
+        "image_2": "shopify://shop_images/01ABE7BB-EB35-48A1-826E-E26C5CCEB84D_Original.jpg",
+        "image_3": "shopify://shop_images/23.png",
+        "image_4": "shopify://shop_images/3_4c75415b-e1b3-446f-8169-80990088108a.jpg",
+        "manifesto_eyebrow": "Why this works",
+        "manifesto_heading": "Engineered, not just made.",
+        "manifesto_body": "<p>Founded in Singapore and crafted in Asia, we design bold, body-inclusive underwear that merges high-performance fabrics with elevated aesthetics. Every cut is deliberate. Every layer is meant to be felt.</p>",
+        "principles_eyebrow": "Product details",
+        "principles_heading": "The baseline.",
+        "closing_eyebrow": "The first layer",
+        "closing_heading": "Built for bodies that do more.",
+        "closing_body": "<p>We craft enduring essentials and reinvented classics - each made with innovative materials that move with you, wick moisture fast, and feel luxuriously soft against the skin.</p><p>TRIIIPLE Studio celebrates all bodies, all identities, and all skin tones, with sizes ranging from XS to 2XL.</p>",
+        "background_color": "#ffffff",
+        "ink_color": "#17191c",
+        "accent_color": "#4a1024"
       }
     },
     "lb_zoom": {
@@ -525,9 +593,9 @@
       "type": "lookbook-brand-close",
       "settings": {
         "bg_color": "#111214",
-        "headline_color": "#FFFFFF",
+        "headline_color": "#ffffff",
         "spec_color": "#ffffff33",
-        "cta_bg": "#FCEC08",
+        "cta_bg": "#fcec08",
         "cta_text": "#000000",
         "headline_size": 36,
         "headline": "Engineered underwear. Nothing more.",
@@ -541,6 +609,7 @@
     "lb_banner",
     "lb_strip",
     "lookbook_grid_7YfNFL",
+    "page_about_us_d6AkYV",
     "lb_zoom",
     "lb_close"
   ]
