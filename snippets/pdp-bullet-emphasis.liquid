@@ -1,9 +1,24 @@
 {%- comment -%}
   Renders a single bullet line, bolding any registered-trademark term
   (e.g. TransDRY®) as the lead-in. All other words stay regular weight.
+  Spaces between words are preserved (built explicitly in Liquid rather than
+  via whitespace-controlled tags, which previously collapsed them).
   Usage: {%- render 'pdp-bullet-emphasis', text: bullet_string -%}
 {%- endcomment -%}
-{%- assign pdp_words = text | split: ' ' -%}
-{%- for pdp_word in pdp_words -%}
-{%- if pdp_word contains '®' -%}<strong>{{ pdp_word }}</strong>{%- else -%}{{ pdp_word }}{%- endif -%}{%- unless forloop.last %} {% endunless -%}
-{%- endfor -%}
+{%- liquid
+  assign pdp_words = text | split: ' '
+  assign pdp_out = ''
+  for pdp_word in pdp_words
+    if pdp_word contains '®'
+      assign pdp_piece = '<strong>' | append: pdp_word | append: '</strong>'
+    else
+      assign pdp_piece = pdp_word
+    endif
+    if forloop.first
+      assign pdp_out = pdp_piece
+    else
+      assign pdp_out = pdp_out | append: ' ' | append: pdp_piece
+    endif
+  endfor
+-%}
+{{- pdp_out -}}

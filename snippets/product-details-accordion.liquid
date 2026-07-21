@@ -3,12 +3,15 @@
   Handles BOTH single products and bundles from one snippet.
 
   ── Metafield binding (confirmed with Eddie 2026-07-21) ──
-  SINGLES:
-    product.metafields.custom.product_content -> fabric_profile:
-      short_description  -> collapsed summary line
-      full_description   -> expanded lead line
-      key_benefits       -> DETAILS bullet rows (list.single_line_text_field)
-      composition        -> MATERIALS line
+  SINGLES: read DESIGN copy from the per-product triiiple_product_content
+  metaobject; read only MATERIALS from its shared fabric_profile reference.
+    product.metafields.custom.product_content ->
+      at_a_glance        -> collapsed summary line     (per product)
+      full_description   -> expanded lead line          (per product)
+      key_benefits       -> DETAILS bullet rows          (per product, list)
+      fabric_profile.composition -> MATERIALS line       (shared per material)
+    Do NOT read descriptive copy from fabric_profile — it is shared across
+    every product of the same material and would render identical copy.
 
   BUNDLES:
     Components come from the EXISTING theme.bundle_list metafield
@@ -51,13 +54,15 @@
     assign pdp_is_bundle = true
   endif
 
-  # ---------- bundle-level summary + lead (bundle's own fabric_profile) ----------
-  # ---------- single content ----------
+  # ---------- content ----------
+  # DESIGN copy (per garment) from product_content; MATERIALS from the shared
+  # fabric_profile composition. Fabric descriptive fields are used only as a
+  # last-resort fallback so a partially-populated product still renders.
   assign pdp_content = product.metafields.custom.product_content.value
   assign pdp_fabric = pdp_content.fabric_profile.value
-  assign pdp_summary = pdp_fabric.short_description.value
-  assign pdp_lead = pdp_fabric.full_description.value
-  assign pdp_bullets = pdp_fabric.key_benefits.value
+  assign pdp_summary = pdp_content.at_a_glance.value | default: pdp_content.signature_quote.value | default: pdp_fabric.short_description.value
+  assign pdp_lead = pdp_content.full_description.value | default: pdp_fabric.full_description.value
+  assign pdp_bullets = pdp_content.key_benefits.value | default: pdp_fabric.key_benefits.value
   assign pdp_composition = pdp_fabric.composition.value
 
   # ---------- labels ----------
@@ -113,8 +118,7 @@
       # distinct compositions across components (for MATERIALS)
       assign pdp_comp_set = ''
       for pdp_c in pdp_components
-        assign pdp_c_fab = pdp_c.metafields.custom.product_content.value.fabric_profile.value
-        assign pdp_c_comp = pdp_c_fab.composition.value
+        assign pdp_c_comp = pdp_c.metafields.custom.product_content.value.fabric_profile.value.composition.value
         if pdp_c_comp != blank
           unless pdp_comp_set contains pdp_c_comp
             assign pdp_comp_set = pdp_comp_set | append: pdp_c_comp | append: '||'
@@ -125,13 +129,13 @@
 
       # shared bullets = bullets present in every component, excluding "Signature …"
       if pdp_path == 'B'
-        assign pdp_first_bullets = pdp_components[0].metafields.custom.product_content.value.fabric_profile.value.key_benefits.value
+        assign pdp_first_bullets = pdp_components[0].metafields.custom.product_content.value.key_benefits.value
         assign pdp_shared_set = ''
         for pdp_b in pdp_first_bullets
           assign pdp_b_head = pdp_b | slice: 0, 9
           assign pdp_in_all = true
           for pdp_c in pdp_components
-            assign pdp_c_bullets = pdp_c.metafields.custom.product_content.value.fabric_profile.value.key_benefits.value
+            assign pdp_c_bullets = pdp_c.metafields.custom.product_content.value.key_benefits.value
             unless pdp_c_bullets contains pdp_b
               assign pdp_in_all = false
             endunless
@@ -187,9 +191,9 @@
             {%- if pdp_path == 'A' -%}
               {%- comment -%} ---- Path A: same-style multipack ---- {%- endcomment -%}
               {%- assign pdp_comp = pdp_components[0] -%}
-              {%- assign pdp_comp_name = pdp_comp.metafields.custom.display_name.value | default: pdp_comp.title -%}
-              {%- assign pdp_comp_fab = pdp_comp.metafields.custom.product_content.value.fabric_profile.value -%}
-              {%- assign pdp_comp_bullets = pdp_comp_fab.key_benefits.value -%}
+              {%- assign pdp_comp_pc = pdp_comp.metafields.custom.product_content.value -%}
+              {%- assign pdp_comp_name = pdp_comp_pc.display_name.value | default: pdp_comp.metafields.custom.display_name.value | default: pdp_comp.title -%}
+              {%- assign pdp_comp_bullets = pdp_comp_pc.key_benefits.value | default: pdp_comp_pc.fabric_profile.value.key_benefits.value -%}
 
               <p class="pdp-details__eyebrow">{{ pdp_included_label }}</p>
               <ul class="pdp-details__bullets">
@@ -210,9 +214,9 @@
               <p class="pdp-details__eyebrow">{{ pdp_included_label }}</p>
               <ul class="pdp-details__bullets">
                 {%- for pdp_c in pdp_components -%}
-                  {%- assign pdp_c_name = pdp_c.metafields.custom.display_name.value | default: pdp_c.title -%}
-                  {%- assign pdp_c_fab = pdp_c.metafields.custom.product_content.value.fabric_profile.value -%}
-                  {%- assign pdp_c_short = pdp_c_fab.short_description.value -%}
+                  {%- assign pdp_c_pc = pdp_c.metafields.custom.product_content.value -%}
+                  {%- assign pdp_c_name = pdp_c_pc.display_name.value | default: pdp_c.metafields.custom.display_name.value | default: pdp_c.title -%}
+                  {%- assign pdp_c_short = pdp_c_pc.at_a_glance.value | default: pdp_c_pc.signature_quote.value | default: pdp_c_pc.fabric_profile.value.short_description.value -%}
                   <li>
                     <span class="pdp-details__row-name">{{ pdp_c_name | escape }}</span>
                     {%- if pdp_c_short != blank %} — {{ pdp_c_short | escape }}{%- endif -%}
@@ -224,8 +228,9 @@
               {%- assign pdp_has_any_sig = false -%}
               {%- capture pdp_apart_rows -%}
                 {%- for pdp_c in pdp_components -%}
-                  {%- assign pdp_c_name = pdp_c.metafields.custom.display_name.value | default: pdp_c.title -%}
-                  {%- assign pdp_c_bullets = pdp_c.metafields.custom.product_content.value.fabric_profile.value.key_benefits.value -%}
+                  {%- assign pdp_c_pc = pdp_c.metafields.custom.product_content.value -%}
+                  {%- assign pdp_c_name = pdp_c_pc.display_name.value | default: pdp_c.metafields.custom.display_name.value | default: pdp_c.title -%}
+                  {%- assign pdp_c_bullets = pdp_c_pc.key_benefits.value | default: pdp_c_pc.fabric_profile.value.key_benefits.value -%}
                   {%- assign pdp_sig = '' -%}
                   {%- for pdp_b in pdp_c_bullets -%}
                     {%- assign pdp_b_head = pdp_b | slice: 0, 9 -%}
@@ -361,8 +366,8 @@
     align-items: center;
     flex-shrink: 0;
     font-size: 14px;
-    font-weight: 500;
-    color: #6E6E73;
+    font-weight: 400;
+    color: #86868B;
     cursor: pointer;
     transition: color 0.2s ease;
   }
@@ -408,6 +413,9 @@
   }
   .pdp-details__reveal-content {
     opacity: 0;
+    /* separation between the toggle row and the body block (clipped while
+       collapsed, so it only reads as space once expanded) */
+    padding-top: 12px;
     padding-bottom: 8px;
     transition: opacity 150ms ease;
   }
