@@ -433,7 +433,7 @@
   }
 
   .pdp-details__eyebrow {
-    margin: 0 0 4px;
+    margin: 0 0 8px;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.06em;
@@ -441,27 +441,28 @@
     color: #86868B;
   }
   .pdp-details__eyebrow + .pdp-details__eyebrow {
-    margin-top: 28px;
+    margin-top: 20px;
   }
   .pdp-details__bullets + .pdp-details__eyebrow,
   .pdp-details__composition + .pdp-details__eyebrow {
-    margin-top: 28px;
+    margin-top: 20px;
   }
 
+  /* Pitaka-tight list — grey disc marker against near-black text, no
+     hairlines between rows so the eye reads it as one dense block. */
   .pdp-details__bullets {
-    list-style: none;
-    margin: 0 0 28px;
-    padding: 0;
+    list-style: disc;
+    margin: 0 0 18px;
+    padding: 0 0 0 20px;
   }
   .pdp-details__bullets li {
-    padding: 16px 0;
-    border-bottom: 1px solid #F0F0F0;
+    padding: 4px 0;
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.55;
     color: #1D1D1F;
   }
-  .pdp-details__bullets li:first-child {
-    border-top: 1px solid #F0F0F0;
+  .pdp-details__bullets li::marker {
+    color: #86868B;
   }
   .pdp-details__bullets strong,
   .pdp-details__row-name {
