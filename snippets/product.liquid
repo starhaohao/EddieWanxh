@@ -424,6 +424,23 @@
       margin-top: 12px;
     }
 
+    /* Mobile: collapse qty to a slim numeric strip — half the ATC height,
+       no ± buttons (they read as clutter next to the black ATC). */
+    @media screen and (max-width: 749px) {
+      #MainProduct--{{ section.id }} .product-form__quantity .quantity {
+        grid-template-columns: 1fr;
+        height: 28px;
+      }
+      #MainProduct--{{ section.id }} .product-form__quantity .quantity__button {
+        display: none;
+      }
+      #MainProduct--{{ section.id }} .product-form__quantity .quantity__input {
+        border-left: 0;
+        border-right: 0;
+        font-size: 13px;
+      }
+    }
+
     /* ================= Accordions ================= */
     #MainProduct--{{ section.id }} .accordion {
       border-top: 1px solid #E5E5E5;
