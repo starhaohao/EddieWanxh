@@ -155,8 +155,11 @@
 
   .triiiple-product-story__why { margin-top: clamp(5rem, 11vw, 11rem); padding: clamp(2rem, 6vw, 5rem); color: #fff; background: #17191c; scroll-margin-top: 7rem; }
   .triiiple-product-story__why .triiiple-product-story__section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
-  .triiiple-product-story__feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem; border-top: 1px solid #ffffff55; border-inline-end: 1px solid #ffffff2b; }
+  /* Extend the feature-grid edge-to-edge across the black box so the horizontal
+     top-border and vertical column dividers reach the container edges — matches
+     the "lines go through" spec (Eddie 2026-07-22 review). */
+  .triiiple-product-story__feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-inline: calc(clamp(2rem, 6vw, 5rem) * -1); }
+  .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem clamp(2rem, 6vw, 5rem); border-top: 1px solid #ffffff55; border-inline-end: 1px solid #ffffff2b; }
   .triiiple-product-story__feature-grid article:last-child { border-inline-end: 0; }
   .triiiple-product-story__feature-grid article > span { display: block; min-height: 3rem; font-size: 1.4rem; }
   .triiiple-product-story__feature-grid h3 { margin: 1.5rem 0 0.5rem; font-size: 1rem; }

@@ -493,6 +493,15 @@
       gap: 8px;
     }
 
+    /* Mobile: the sticky cart-bar at the bottom already renders one compare-at
+       strike. Hide the inline black-strike inside the PDP sale block so only
+       one "before + after" pair shows on mobile (Eddie 2026-07-22 review). */
+    @media only screen and (max-width: 749px) {
+      #MainProduct--{{ section.id }} .price__sale s.price-item--regular {
+        display: none;
+      }
+    }
+
     /* Halve the empty mobile thumbnail-strip gap before the vendor/title. */
     @media only screen and (max-width: 749px) {
       #MainProduct--{{ section.id }} .product__thumbs {
