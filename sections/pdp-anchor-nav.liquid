@@ -1,0 +1,202 @@
+{%- comment -%}
+  PDP anchor navigation + uploadable image.
+  A horizontal row of hairline-separated text links that smooth-scroll to
+  page anchors, above a full-width merchant-uploadable image. Sits between
+  the product buy area and the Product detail story section. Anchor targets
+  default to the ids added on that section (product-details / product-why /
+  product-size-guide) and are editable per nav item in the theme editor.
+  Quiet-luxury system: #FFFFFF bg, #1D1D1F text, #E5E5E5 hairlines.
+{%- endcomment -%}
+
+{%- liquid
+  assign pan_uid = section.id
+  assign pan_sticky = section.settings.sticky_enabled
+  assign pan_has_nav = false
+  for block in section.blocks
+    if block.type == 'link' and block.settings.label != blank
+      assign pan_has_nav = true
+    endif
+  endfor
+-%}
+
+<section class="pan" data-pdp-anchor-nav>
+  {%- if pan_has_nav -%}
+    <nav
+      class="pan__nav{% if pan_sticky %} pan__nav--sticky{% endif %}"
+      aria-label="{{ section.settings.nav_aria_label | escape }}"
+    >
+      <ul class="pan__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'link' and block.settings.label != blank -%}
+            {%- assign pan_target = block.settings.anchor | strip | remove: '#' -%}
+            <li class="pan__item" {{ block.shopify_attributes }}>
+              <a class="pan__link" href="#{{ pan_target }}" data-pdp-anchor-link>{{ block.settings.label | escape }}</a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+  {%- endif -%}
+
+  {%- if section.settings.image != blank -%}
+    <div class="pan__media">
+      {{
+        section.settings.image
+        | image_url: width: 2400
+        | image_tag:
+          widths: '600, 900, 1200, 1600, 2000, 2400',
+          sizes: '100vw',
+          loading: 'lazy',
+          alt: section.settings.image_alt
+      }}
+    </div>
+  {%- elsif request.design_mode -%}
+    <div class="pan__media pan__media--placeholder">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'pan__placeholder-svg' }}
+    </div>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .pan { background: #FFFFFF; color: #1D1D1F; }
+  .pan__nav {
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    background: #FFFFFF;
+  }
+  .pan__nav--sticky {
+    position: sticky;
+    top: var(--header-height, 0px);
+    z-index: 5;
+  }
+  .pan__list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0 var(--outer, 20px);
+    max-width: var(--page-width, 1200px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .pan__item + .pan__item { border-left: 1px solid #E5E5E5; }
+  .pan__link {
+    display: inline-block;
+    padding: 16px 20px;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: #1D1D1F;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .pan__link:hover { text-decoration: underline; }
+  .pan__link:focus-visible {
+    outline: 2px solid var(--focus, #1D1D1F);
+    outline-offset: -2px;
+  }
+  .pan__media { margin: 0; }
+  .pan__media img,
+  .pan__media svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .pan__media--placeholder svg { background: #F4F4F4; aspect-ratio: 16 / 9; }
+
+  @media screen and (max-width: 749px) {
+    .pan__link { padding: 14px 16px; font-size: 12px; }
+  }
+{% endstylesheet %}
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    var scope = document.querySelectorAll('[data-pdp-anchor-nav]');
+    scope.forEach(function (section) {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      section.querySelectorAll('[data-pdp-anchor-link]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var id = link.getAttribute('href').slice(1);
+          var target = document.getElementById(id);
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          if (history.replaceState) history.replaceState(null, '', '#' + id);
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "PDP anchor nav",
+  "tag": "section",
+  "class": "shopify-section--pdp-anchor-nav",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_aria_label",
+      "label": "Nav accessible label",
+      "default": "Product sections"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_enabled",
+      "label": "Stick nav under header on scroll",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "info": "Describe the image for screen readers and SEO."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Nav link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Details"
+        },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Target anchor id",
+          "info": "The id of the area to scroll to (with or without #). Product detail story uses: product-details, product-why, product-size-guide.",
+          "default": "product-details"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "PDP anchor nav",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Details", "anchor": "product-details" } },
+        { "type": "link", "settings": { "label": "Why This Works", "anchor": "product-why" } },
+        { "type": "link", "settings": { "label": "Find Your Size", "anchor": "product-size-guide" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

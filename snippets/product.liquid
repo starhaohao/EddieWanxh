@@ -362,6 +362,68 @@
       transform: scale(0.98);
     }
 
+    /* ================= Quantity stepper: full-width hairline, above ATC =====
+       Stacks the quantity control above the Add-to-Bag button at the exact
+       same width. [ − ] [ qty ] [ + ], 48px tall, ≥44px hit targets,
+       1px hairline (no fill), near-black glyphs. */
+    #MainProduct--{{ section.id }} .product__submit__item--inline {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+    #MainProduct--{{ section.id }} .product__submit__item--inline .product-form__quantity {
+      width: 100%;
+      margin: 0;
+    }
+    #MainProduct--{{ section.id }} .product-form__quantity .quantity {
+      display: grid;
+      grid-template-columns: 48px 1fr 48px;
+      align-items: center;
+      width: 100%;
+      height: 48px;
+      border: 1px solid #E5E5E5;
+      background: transparent;
+    }
+    #MainProduct--{{ section.id }} .product-form__quantity .quantity__button {
+      min-width: 44px;
+      min-height: 44px;
+      height: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: 0;
+      color: #1D1D1F;
+      cursor: pointer;
+    }
+    #MainProduct--{{ section.id }} .product-form__quantity .quantity__button svg {
+      width: 14px;
+      height: 14px;
+    }
+    #MainProduct--{{ section.id }} .product-form__quantity .quantity__input {
+      height: 100%;
+      border: 0;
+      border-left: 1px solid #E5E5E5;
+      border-right: 1px solid #E5E5E5;
+      background: transparent;
+      text-align: center;
+      font-size: 15px;
+      color: #1D1D1F;
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+    #MainProduct--{{ section.id }} .product-form__quantity .quantity__input::-webkit-outer-spin-button,
+    #MainProduct--{{ section.id }} .product-form__quantity .quantity__input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /* The ATC keeps its 32px top gap only when there is no quantity above it;
+       with the stepper present, tighten to a consistent 12px rhythm. */
+    #MainProduct--{{ section.id }} .product__submit__item--inline [data-add-to-cart] {
+      margin-top: 12px;
+    }
+
     /* ================= Accordions ================= */
     #MainProduct--{{ section.id }} .accordion {
       border-top: 1px solid #E5E5E5;
@@ -1044,7 +1106,7 @@
                   {%- when 'sharing' -%}
                     <div class="product__block block-padding" {{ block.shopify_attributes }} {{ block_style }}>
                       {%- assign share_url = current_variant.url | prepend: request.origin -%}
-                      {%- render 'share-button', share_url: share_url -%}
+                      {%- render 'pdp-share', share_url: share_url, share_title: product.title, product: product, section: section, block: block -%}
                     </div>
 
                   {%- when 'divider' -%}

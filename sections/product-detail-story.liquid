@@ -22,7 +22,7 @@
 <section class="triiiple-product-story" style="--story-accent: {{ section.settings.accent_color }}; --story-ink: {{ section.settings.ink_color }}; --pt: {{ section.settings.padding_top }}px; --pb: {{ section.settings.padding_bottom }}px; --pl: {{ section.settings.padding_left }}px; --pr: {{ section.settings.padding_right }}px;">
   <div class="triiiple-product-story__inner">
     {% if detail_count > 0 %}
-      <div class="triiiple-product-story__details">
+      <div class="triiiple-product-story__details" id="product-details">
         <div class="triiiple-product-story__section-heading">
           <p>{{ section.settings.details_eyebrow | escape }}</p>
           <h2>{{ section.settings.details_heading | escape }}</h2>
@@ -57,7 +57,7 @@
     {% endif %}
 
     {% if feature_count > 0 %}
-      <div class="triiiple-product-story__why">
+      <div class="triiiple-product-story__why" id="product-why">
         <div class="triiiple-product-story__section-heading">
           <p>{{ section.settings.features_eyebrow | escape }}</p>
           <h2>{{ section.settings.features_heading | escape }}</h2>
@@ -141,7 +141,7 @@
     padding-right: var(--pr);
   }
   
-  .triiiple-product-story__details { display: grid; grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr); gap: clamp(2rem, 8vw, 8rem); }
+  .triiiple-product-story__details { display: grid; grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr); gap: clamp(2rem, 8vw, 8rem); scroll-margin-top: 7rem; }
   .triiiple-product-story__section-heading > p { margin: 0 0 0.75rem; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; }
   .triiiple-product-story__section-heading h2 { margin: 0; max-width: 12ch; font-family: var(--font-heading--family); font-size: clamp(1rem, 2.5vw, 2.5rem); line-height: 0.94; letter-spacing: -0.035em; }
   .triiiple-product-story__section-heading .rte { max-width: 34rem; margin-top: 1.25rem; }
@@ -153,7 +153,7 @@
   .triiiple-product-story__accordions summary span:last-child { transition: transform 180ms ease; }
   .triiiple-product-story__detail-body { max-width: 44rem; padding: 0 2rem 1.75rem 0; color: color-mix(in srgb, currentColor 72%, transparent); }
 
-  .triiiple-product-story__why { margin-top: clamp(5rem, 11vw, 11rem); padding: clamp(2rem, 6vw, 5rem); color: #fff; background: #17191c; }
+  .triiiple-product-story__why { margin-top: clamp(5rem, 11vw, 11rem); padding: clamp(2rem, 6vw, 5rem); color: #fff; background: #17191c; scroll-margin-top: 7rem; }
   .triiiple-product-story__why .triiiple-product-story__section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
   .triiiple-product-story__feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem; border-top: 1px solid #ffffff55; border-inline-end: 1px solid #ffffff2b; }
