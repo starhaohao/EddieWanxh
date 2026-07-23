@@ -271,11 +271,23 @@
     width: 100%;
   }
 
-  /* Mobile scaling for heading */
+  /* Mobile: keep the section compact so it doesn't crowd or cover
+     the title of the section directly above (Eddie 2026-07-22 review). */
   @media screen and (max-width: 749px) {
-    .edm__heading {
-      font-size: calc({{ section.settings.heading_size }}px * 0.85);
+    #shopify-section-{{ section.id }} .edm {
+      padding-top: min({{ section.settings.padding_top }}px, 20px);
+      padding-bottom: min({{ section.settings.padding_bottom }}px, 20px);
+      padding-left: 20px;
+      padding-right: 20px;
     }
+    .edm--inline .edm__inner { gap: 14px; }
+    .edm__copy { gap: 6px; }
+    .edm__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.75);
+      line-height: 1.15;
+    }
+    .edm__subtext { line-height: 1.5; }
+    .edm__msg { margin-top: 10px; }
   }
 
   @media screen and (min-width: 750px) {
