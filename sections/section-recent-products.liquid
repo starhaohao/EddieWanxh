@@ -33,6 +33,23 @@
     --PT: {{ section.settings.padding_top }}px;
     --PB: {{ section.settings.padding_bottom }}px;
   }
+  /* Text-only override to dark grey — background untouched
+     (Eddie 2026-07-23 review). Overrides the color scheme's --text var
+     without changing --bg, so the section keeps its scheme background. */
+  #RecentProducts--{{ section.id }} {
+    --text: #4a4a4a;
+  }
+  #RecentProducts--{{ section.id }},
+  #RecentProducts--{{ section.id }} .grid__heading-holder,
+  #RecentProducts--{{ section.id }} .tabs,
+  #RecentProducts--{{ section.id }} .tab-link,
+  #RecentProducts--{{ section.id }} .product-item__vendor,
+  #RecentProducts--{{ section.id }} .product-item__title,
+  #RecentProducts--{{ section.id }} .product-item__title a,
+  #RecentProducts--{{ section.id }} .price,
+  #RecentProducts--{{ section.id }} .price-item {
+    color: #4a4a4a;
+  }
 {%- endstyle -%}
 
 <script src="{{ 'related-products.js' | asset_url }}" defer="defer"></script>
