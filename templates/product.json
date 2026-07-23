@@ -162,7 +162,7 @@
         "link_why": {
           "type": "link",
           "settings": {
-            "label": "| Why This Works |",
+            "label": "|  Why This Works  |",
             "anchor": "product-why"
           }
         },
