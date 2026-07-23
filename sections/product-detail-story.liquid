@@ -154,8 +154,12 @@
   .triiiple-product-story__detail-body { max-width: 44rem; padding: 0 2rem 1.75rem 0; color: color-mix(in srgb, currentColor 72%, transparent); }
 
   /* Vertical dividers are drawn as background gradients on the container so
-     they span the ENTIRE black box (not just each article) — matches
-     Eddie's "divider lines must pass through the block" spec 2026-07-23. */
+     they span the FULL height of the black box, matching mobile's "line
+     spans full container" behaviour (Eddie 2026-07-23 review — desktop).
+     `background-origin: border-box` is CRITICAL — without it the gradients
+     sit inside the container's padding-box, so at 25/50/75% they miss the
+     feature-grid column boundaries (which extend edge-to-edge via the
+     negative margin-inline below) and read as "misaligned / cut short". */
   .triiiple-product-story__why {
     position: relative;
     margin-top: clamp(5rem, 11vw, 11rem);
@@ -169,18 +173,28 @@
     background-repeat: no-repeat;
     background-size: 1px 100%, 1px 100%, 1px 100%;
     background-position: 25% 0, 50% 0, 75% 0;
+    background-origin: border-box;
+    background-clip: border-box;
     scroll-margin-top: 7rem;
   }
   .triiiple-product-story__why .triiiple-product-story__section-heading { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
-  /* Kill any inherited text-shadow / font-smoothing artifacts that were
-     reading as ghosting on the desktop heading. */
+  /* Mask the vertical divider gradients where the heading text sits so
+     they don't slice through "Less fuss. Better function." on desktop —
+     that was reading as ghosting/double-render. The mask uses the same
+     background-color as the container so the dividers stay visible
+     everywhere except behind the text runs themselves. */
+  .triiiple-product-story__why .triiiple-product-story__section-heading > * {
+    background-color: #17191c;
+    padding: 0.1rem 0.35rem;
+    margin: -0.1rem -0.35rem;
+  }
   .triiiple-product-story__why .triiiple-product-story__section-heading h2 {
     text-shadow: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  .triiiple-product-story__feature-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-inline: calc(clamp(2rem, 6vw, 5rem) * -1); }
-  .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem clamp(2rem, 6vw, 5rem); border-top: 1px solid #ffffff55; }
+  .triiiple-product-story__feature-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-inline: calc(clamp(2rem, 6vw, 5rem) * -1); align-items: stretch; }
+  .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem clamp(2rem, 6vw, 5rem); border-top: 1px solid #ffffff55; height: 100%; }
   .triiiple-product-story__feature-grid article > span { display: block; min-height: 3rem; font-size: 1.4rem; }
   .triiiple-product-story__feature-grid h3 { margin: 1.5rem 0 0.5rem; font-size: 1rem; }
   .triiiple-product-story__feature-grid p { margin: 0; color: #ffffffb8; font-size: 0.88rem; }
