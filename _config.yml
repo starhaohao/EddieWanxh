@@ -1,0 +1,34 @@
+# Jekyll GitHub Pages config.
+#
+# This repo is a Shopify theme extension, not a Jekyll site — its .liquid and
+# .md files contain Shopify Liquid syntax (e.g. `{% liquid %}`, `{% schema %}`)
+# that Jekyll's Liquid parser doesn't understand and errors on. Excluding the
+# theme surfaces so `actions/jekyll-build-pages` succeeds even though nothing
+# in this repo needs to be published as a Pages site.
+
+theme: jekyll-theme-primer
+
+exclude:
+  - CLAUDE.md
+  - README.md
+  - META-PIXEL-MIGRATION.md
+  - MARGIN-LINE-AUDIT.md
+  - docs
+  - assets
+  - config
+  - hydrogen-starter
+  - layout
+  - locales
+  - sections
+  - snippets
+  - templates
+  - "*.liquid"
+  - "**/*.liquid"
+  - "**/*.json"
+  - .claude
+  - .github
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
