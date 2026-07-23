@@ -153,14 +153,34 @@
   .triiiple-product-story__accordions summary span:last-child { transition: transform 180ms ease; }
   .triiiple-product-story__detail-body { max-width: 44rem; padding: 0 2rem 1.75rem 0; color: color-mix(in srgb, currentColor 72%, transparent); }
 
-  .triiiple-product-story__why { margin-top: clamp(5rem, 11vw, 11rem); padding: clamp(2rem, 6vw, 5rem); color: #fff; background: #17191c; scroll-margin-top: 7rem; }
-  .triiiple-product-story__why .triiiple-product-story__section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
-  /* Extend the feature-grid edge-to-edge across the black box so the horizontal
-     top-border and vertical column dividers reach the container edges — matches
-     the "lines go through" spec (Eddie 2026-07-22 review). */
-  .triiiple-product-story__feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-inline: calc(clamp(2rem, 6vw, 5rem) * -1); }
-  .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem clamp(2rem, 6vw, 5rem); border-top: 1px solid #ffffff55; border-inline-end: 1px solid #ffffff2b; }
-  .triiiple-product-story__feature-grid article:last-child { border-inline-end: 0; }
+  /* Vertical dividers are drawn as background gradients on the container so
+     they span the ENTIRE black box (not just each article) — matches
+     Eddie's "divider lines must pass through the block" spec 2026-07-23. */
+  .triiiple-product-story__why {
+    position: relative;
+    margin-top: clamp(5rem, 11vw, 11rem);
+    padding: clamp(2rem, 6vw, 5rem);
+    color: #fff;
+    background-color: #17191c;
+    background-image:
+      linear-gradient(#ffffff2b, #ffffff2b),
+      linear-gradient(#ffffff2b, #ffffff2b),
+      linear-gradient(#ffffff2b, #ffffff2b);
+    background-repeat: no-repeat;
+    background-size: 1px 100%, 1px 100%, 1px 100%;
+    background-position: 25% 0, 50% 0, 75% 0;
+    scroll-margin-top: 7rem;
+  }
+  .triiiple-product-story__why .triiiple-product-story__section-heading { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
+  /* Kill any inherited text-shadow / font-smoothing artifacts that were
+     reading as ghosting on the desktop heading. */
+  .triiiple-product-story__why .triiiple-product-story__section-heading h2 {
+    text-shadow: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .triiiple-product-story__feature-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-inline: calc(clamp(2rem, 6vw, 5rem) * -1); }
+  .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem clamp(2rem, 6vw, 5rem); border-top: 1px solid #ffffff55; }
   .triiiple-product-story__feature-grid article > span { display: block; min-height: 3rem; font-size: 1.4rem; }
   .triiiple-product-story__feature-grid h3 { margin: 1.5rem 0 0.5rem; font-size: 1rem; }
   .triiiple-product-story__feature-grid p { margin: 0; color: #ffffffb8; font-size: 0.88rem; }
@@ -185,13 +205,20 @@
     .triiiple-product-story__details,
     .triiiple-product-story__size { grid-template-columns: 1fr; }
     .triiiple-product-story__why .triiiple-product-story__section-heading { display: grid; }
+    /* Mobile 2x2 grid: one vertical + one horizontal divider, both edge-to-edge. */
+    .triiiple-product-story__why {
+      background-image:
+        linear-gradient(#ffffff2b, #ffffff2b),
+        linear-gradient(#ffffff2b, #ffffff2b);
+      background-size: 1px 100%, 100% 1px;
+      background-position: 50% 0, 0 50%;
+    }
     .triiiple-product-story__feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .triiiple-product-story__feature-grid article:nth-child(2n) { border-inline-end: 0; }
     .triiiple-product-story__size-note { grid-column: 1; }
     .triiiple-product-story__editorial { grid-template-columns: 1fr; }
-    
+
     /* Slight scaling for mobile padding */
-    .triiiple-product-story__inner { 
+    .triiiple-product-story__inner {
       padding-top: calc(var(--pt) * 0.75);
       padding-bottom: calc(var(--pb) * 0.75);
     }

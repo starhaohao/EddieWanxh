@@ -362,10 +362,13 @@
       transform: scale(0.98);
     }
 
-    /* ================= Quantity stepper: full-width hairline, above ATC =====
-       Stacks the quantity control above the Add-to-Bag button at the exact
-       same width. [ − ] [ qty ] [ + ], 48px tall, ≥44px hit targets,
-       1px hairline (no fill), near-black glyphs. */
+    /* ================= Quantity selector: full-width above ATC ==============
+       Store is on quantity_style = "dropdown" — theme hides the stepper
+       by default via `.select-popout + .quantity { display: none }` and
+       reveals it only when the shopper picks 10+ (theme adds `.is-active`).
+       Prior grid override forced the hidden stepper to render, producing a
+       duplicate "1" between the dropdown and ATC (Eddie 2026-07-23 review).
+       Now we only style the stepper — never force it visible. */
     #MainProduct--{{ section.id }} .product__submit__item--inline {
       display: flex;
       flex-direction: column;
@@ -376,14 +379,34 @@
       width: 100%;
       margin: 0;
     }
+    /* Ensure the quantity-input custom element (which wraps both the
+       dropdown and the stepper) spans the full width so the dropdown
+       toggle stretches edge-to-edge, matching the black ATC below. */
+    #MainProduct--{{ section.id }} .product-form__quantity quantity-input {
+      display: block;
+      width: 100%;
+    }
+    #MainProduct--{{ section.id }} .product-form__quantity .select-popout--quantity,
+    #MainProduct--{{ section.id }} .product-form__quantity .select-popout--quantity .select-popout__toggle {
+      width: 100%;
+      height: 48px;
+    }
+    /* Style the stepper for the case it IS revealed (dropdown active or
+       standard quantity_style). Layout properties without display so the
+       theme's toggle stays authoritative. */
     #MainProduct--{{ section.id }} .product-form__quantity .quantity {
-      display: grid;
       grid-template-columns: 48px 1fr 48px;
       align-items: center;
       width: 100%;
       height: 48px;
       border: 1px solid #E5E5E5;
       background: transparent;
+    }
+    /* Only turn on grid display when the stepper is actually meant to be
+       visible — either the dropdown flipped to .is-active, or there's no
+       dropdown at all. */
+    #MainProduct--{{ section.id }} .product-form__quantity .select-popout.is-active + .quantity {
+      display: grid;
     }
     #MainProduct--{{ section.id }} .product-form__quantity .quantity__button {
       min-width: 44px;
@@ -418,27 +441,8 @@
       -webkit-appearance: none;
       margin: 0;
     }
-    /* The ATC keeps its 32px top gap only when there is no quantity above it;
-       with the stepper present, tighten to a consistent 12px rhythm. */
     #MainProduct--{{ section.id }} .product__submit__item--inline [data-add-to-cart] {
       margin-top: 12px;
-    }
-
-    /* Mobile: collapse qty to a slim numeric strip — half the ATC height,
-       no ± buttons (they read as clutter next to the black ATC). */
-    @media screen and (max-width: 749px) {
-      #MainProduct--{{ section.id }} .product-form__quantity .quantity {
-        grid-template-columns: 1fr;
-        height: 28px;
-      }
-      #MainProduct--{{ section.id }} .product-form__quantity .quantity__button {
-        display: none;
-      }
-      #MainProduct--{{ section.id }} .product-form__quantity .quantity__input {
-        border-left: 0;
-        border-right: 0;
-        font-size: 13px;
-      }
     }
 
     /* ================= Accordions ================= */

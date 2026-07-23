@@ -59,6 +59,17 @@
 
 {% stylesheet %}
   .pan { background: #FFFFFF; color: #1D1D1F; }
+  /* Tighten the gap from the buy area (share row) to this nav — the theme's
+     default section spacing was reading as too much air on mobile
+     (Eddie 2026-07-23 review). Match the intra-section rhythm (~16px). */
+  .shopify-section--pdp-anchor-nav {
+    margin-top: 0;
+  }
+  @media screen and (max-width: 749px) {
+    .shopify-section--pdp-anchor-nav {
+      margin-top: -20px;
+    }
+  }
   /* Outer wrapper centers the strip; hairlines live on the inner list so
      they only span the content column (Pitaka-style), not edge-to-edge. */
   .pan__nav {
