@@ -1,10 +1,15 @@
 {%- comment -%}
-  PDP anchor navigation + uploadable image.
+  PDP anchor navigation + uploadable media (image OR video).
   A horizontal row of hairline-separated text links that smooth-scroll to
-  page anchors, above a full-width merchant-uploadable image. Sits between
-  the product buy area and the Product detail story section. Anchor targets
-  default to the ids added on that section (product-details / product-why /
-  product-size-guide) and are editable per nav item in the theme editor.
+  page anchors, above a full-width merchant-uploadable image OR video.
+  Media picker supports:
+    • Shopify-hosted video (native <video>, autoplay-muted-loop by default)
+    • External video URL (YouTube / Vimeo, embedded via <iframe>)
+    • Static image (existing behaviour)
+  Sits between the product buy area and the Product detail story section.
+  Anchor targets default to the ids added on that section
+  (product-details / product-why / product-size-guide) and are editable
+  per nav item in the theme editor.
   Quiet-luxury system: #FFFFFF bg, #1D1D1F text, #E5E5E5 hairlines.
 {%- endcomment -%}
 
@@ -17,6 +22,39 @@
       assign pan_has_nav = true
     endif
   endfor
+
+  # ── Resolve which media to render ──
+  # Priority: video (Shopify-hosted) → video_url (YouTube/Vimeo) → image.
+  # `media_type` in the schema forces a specific slot; blank = auto.
+  assign pan_media_type = section.settings.media_type
+  assign pan_has_video = false
+  assign pan_has_video_url = false
+  assign pan_has_image = false
+  if section.settings.video != blank
+    assign pan_has_video = true
+  endif
+  if section.settings.video_url != blank
+    assign pan_has_video_url = true
+  endif
+  if section.settings.image != blank
+    assign pan_has_image = true
+  endif
+  assign pan_media = 'none'
+  if pan_media_type == 'video' and pan_has_video
+    assign pan_media = 'video'
+  elsif pan_media_type == 'video_url' and pan_has_video_url
+    assign pan_media = 'video_url'
+  elsif pan_media_type == 'image' and pan_has_image
+    assign pan_media = 'image'
+  else
+    if pan_has_video
+      assign pan_media = 'video'
+    elsif pan_has_video_url
+      assign pan_media = 'video_url'
+    elsif pan_has_image
+      assign pan_media = 'image'
+    endif
+  endif
 -%}
 
 <section class="pan" data-pdp-anchor-nav>
@@ -38,23 +76,84 @@
     </nav>
   {%- endif -%}
 
-  {%- if section.settings.image != blank -%}
-    <div class="pan__media">
-      {{
-        section.settings.image
-        | image_url: width: 2400
-        | image_tag:
-          widths: '600, 900, 1200, 1600, 2000, 2400',
-          sizes: '100vw',
-          loading: 'lazy',
-          alt: section.settings.image_alt
-      }}
-    </div>
-  {%- elsif request.design_mode -%}
-    <div class="pan__media pan__media--placeholder">
-      {{ 'lifestyle-1' | placeholder_svg_tag: 'pan__placeholder-svg' }}
-    </div>
-  {%- endif -%}
+  {%- case pan_media -%}
+    {%- when 'video' -%}
+      {%- comment -%} Shopify-hosted video: <video> with all sources. Autoplay
+        requires `muted` + `playsinline`. `loading` on <video> isn't
+        universally supported, so we lazy-load via IntersectionObserver in
+        the script below. {%- endcomment -%}
+      <div class="pan__media pan__media--video">
+        <video
+          data-pan-video
+          {% if section.settings.video_autoplay %}autoplay muted playsinline{% endif %}
+          {% if section.settings.video_loop %}loop{% endif %}
+          {% if section.settings.video_muted %}muted{% endif %}
+          {% if section.settings.video_controls %}controls{% endif %}
+          preload="metadata"
+          {%- if section.settings.video.preview_image != blank %} poster="{{ section.settings.video.preview_image | image_url: width: 2400 }}"{% endif %}
+        >
+          {%- for source in section.settings.video.sources -%}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
+        </video>
+      </div>
+
+    {%- when 'video_url' -%}
+      {%- comment -%} External video URL (YouTube / Vimeo). Embed via <iframe>
+        so the browser gets the correct player. Query params keep the embed
+        minimal and enable autoplay-muted-loop when the merchant asked
+        for it. {%- endcomment -%}
+      {%- assign pan_vid_id = section.settings.video_url.id -%}
+      {%- if section.settings.video_url.type == 'youtube' -%}
+        {%- assign pan_yt_qs = 'autoplay=0&mute=0&controls=1&modestbranding=1&rel=0&playsinline=1' -%}
+        {%- if section.settings.video_autoplay -%}{%- assign pan_yt_qs = 'autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&loop=1&playlist=' | append: pan_vid_id -%}{%- endif -%}
+        <div class="pan__media pan__media--video pan__media--embed">
+          <iframe
+            data-pan-embed
+            src="https://www.youtube.com/embed/{{ pan_vid_id }}?{{ pan_yt_qs }}"
+            title="{{ section.settings.image_alt | default: 'Product video' | escape }}"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      {%- elsif section.settings.video_url.type == 'vimeo' -%}
+        {%- assign pan_vm_qs = 'byline=0&title=0&portrait=0' -%}
+        {%- if section.settings.video_autoplay -%}{%- assign pan_vm_qs = 'autoplay=1&muted=1&loop=1&background=1&byline=0&title=0&portrait=0' -%}{%- endif -%}
+        <div class="pan__media pan__media--video pan__media--embed">
+          <iframe
+            data-pan-embed
+            src="https://player.vimeo.com/video/{{ pan_vid_id }}?{{ pan_vm_qs }}"
+            title="{{ section.settings.image_alt | default: 'Product video' | escape }}"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      {%- endif -%}
+
+    {%- when 'image' -%}
+      <div class="pan__media">
+        {{
+          section.settings.image
+          | image_url: width: 2400
+          | image_tag:
+            widths: '600, 900, 1200, 1600, 2000, 2400',
+            sizes: '100vw',
+            loading: 'lazy',
+            alt: section.settings.image_alt
+        }}
+      </div>
+
+    {%- else -%}
+      {%- if request.design_mode -%}
+        <div class="pan__media pan__media--placeholder">
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'pan__placeholder-svg' }}
+        </div>
+      {%- endif -%}
+  {%- endcase -%}
 </section>
 
 {% stylesheet %}
@@ -114,10 +213,27 @@
   }
   .pan__media { margin: 0; }
   .pan__media img,
-  .pan__media svg {
+  .pan__media svg,
+  .pan__media video {
     display: block;
     width: 100%;
     height: auto;
+  }
+  /* Embedded video URL (YouTube/Vimeo) needs a fixed aspect ratio wrapper
+     because iframes have no intrinsic size. 16:9 matches both platforms'
+     default player. */
+  .pan__media--embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+  .pan__media--embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
   .pan__media--placeholder svg { background: #F4F4F4; aspect-ratio: 16 / 9; }
 
@@ -128,7 +244,6 @@
 
 <script>
   (function () {
-    var root = document.currentScript && document.currentScript.previousElementSibling;
     var scope = document.querySelectorAll('[data-pdp-anchor-nav]');
     scope.forEach(function (section) {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -142,6 +257,22 @@
           if (history.replaceState) history.replaceState(null, '', '#' + id);
         });
       });
+
+      // Lazy-load Shopify-hosted <video> when it enters the viewport, so we
+      // don't fire a video download on pages the shopper never scrolls to.
+      var video = section.querySelector('[data-pan-video]');
+      if (!video || !('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          if (video.paused && video.hasAttribute('autoplay')) {
+            var p = video.play();
+            if (p && typeof p.catch === 'function') p.catch(function () {});
+          }
+          obs.unobserve(video);
+        });
+      }, { rootMargin: '200px 0px' });
+      io.observe(video);
     });
   })();
 </script>
@@ -171,7 +302,20 @@
     },
     {
       "type": "header",
-      "content": "Image"
+      "content": "Media"
+    },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "Media type",
+      "info": "Auto uses whichever slot below is filled — video wins over image if both are set.",
+      "options": [
+        { "value": "auto", "label": "Auto" },
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video (uploaded)" },
+        { "value": "video_url", "label": "Video URL (YouTube / Vimeo)" }
+      ],
+      "default": "auto"
     },
     {
       "type": "image_picker",
@@ -181,8 +325,47 @@
     {
       "type": "text",
       "id": "image_alt",
-      "label": "Image alt text",
-      "info": "Describe the image for screen readers and SEO."
+      "label": "Image / video alt text",
+      "info": "Describe the media for screen readers and SEO."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video (uploaded)",
+      "info": "Upload an .mp4 to your Shopify Files. Autoplay works only when muted."
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Video URL",
+      "accept": ["youtube", "vimeo"],
+      "info": "Paste a YouTube or Vimeo URL. Autoplay-muted-loop is applied when 'Autoplay' below is on."
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_loop",
+      "label": "Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_muted",
+      "label": "Muted",
+      "info": "Required for autoplay in most browsers.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_controls",
+      "label": "Show video controls",
+      "info": "Uploaded videos only. External embeds follow the platform's defaults.",
+      "default": false
     }
   ],
   "blocks": [
