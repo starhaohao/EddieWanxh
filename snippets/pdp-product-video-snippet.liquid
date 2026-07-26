@@ -1,0 +1,31 @@
+{%- comment -%}
+  Returns the Shopify CDN video URL used by the PDP anchor-nav section.
+  All colours within a product family share one reel.
+  All bundles use the X Trunks reel except the Everyday T-Shirt Bundle.
+{%- endcomment -%}
+
+{%- liquid
+  assign pdp_product_video_url = blank
+
+  if product.handle contains 'x-transdry-brief'
+    assign pdp_product_video_url = 'https://cdn.shopify.com/videos/c/vp/8f46fa89b9e24508ad0e5cd4700d30b4/8f46fa89b9e24508ad0e5cd4700d30b4.HD-1080p-2.5Mbps-89947552.mp4'
+  elsif product.handle contains 'ed-sleeveless-top'
+    assign pdp_product_video_url = 'https://cdn.shopify.com/videos/c/vp/8a7024d4dca845c288827cadc6201b8d/8a7024d4dca845c288827cadc6201b8d.HD-1080p-2.5Mbps-89947553.mp4'
+  elsif product.handle contains 'l-socks' or product.handle == 'l-cotton-spandex-socks-copy'
+    assign pdp_product_video_url = 'https://cdn.shopify.com/videos/c/vp/155140ac6e3940e591449164ba2bdde8/155140ac6e3940e591449164ba2bdde8.HD-1080p-2.5Mbps-89947554.mp4'
+  elsif product.handle contains 'y-transdry-brief'
+    assign pdp_product_video_url = 'https://cdn.shopify.com/videos/c/vp/90996c929510459faa916d3025b38269/90996c929510459faa916d3025b38269.HD-1080p-2.5Mbps-89947555.mp4'
+  elsif product.handle contains 'x-transdry-boxer-trunk'
+    assign pdp_product_video_url = 'https://cdn.shopify.com/videos/c/vp/fdc699274fd643e8a0c88510c6486568/fdc699274fd643e8a0c88510c6486568.HD-1080p-2.5Mbps-89947556.mp4'
+  elsif product.handle == 'ed-dual-t-shirt-bundle'
+    assign pdp_product_video_url = blank
+  elsif product.type contains 'Bundle'
+    assign pdp_product_video_url = 'https://cdn.shopify.com/videos/c/vp/fdc699274fd643e8a0c88510c6486568/fdc699274fd643e8a0c88510c6486568.HD-1080p-2.5Mbps-89947556.mp4'
+  elsif product.tags contains 'BUNDLE'
+    assign pdp_product_video_url = 'https://cdn.shopify.com/videos/c/vp/fdc699274fd643e8a0c88510c6486568/fdc699274fd643e8a0c88510c6486568.HD-1080p-2.5Mbps-89947556.mp4'
+  elsif product.handle contains 'bundle'
+    assign pdp_product_video_url = 'https://cdn.shopify.com/videos/c/vp/fdc699274fd643e8a0c88510c6486568/fdc699274fd643e8a0c88510c6486568.HD-1080p-2.5Mbps-89947556.mp4'
+  endif
+
+  echo pdp_product_video_url
+-%}
