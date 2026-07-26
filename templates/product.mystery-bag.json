@@ -149,6 +149,9 @@
         "bundle_save_DrnprG",
         "sharing"
       ],
+      "custom_css": [
+        ".price__regular .price-item--regular {text-decoration: none !important;}"
+      ],
       "settings": {
         "text_alignment": "justify",
         "product_sticky_enable": true,
