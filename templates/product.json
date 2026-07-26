@@ -170,8 +170,8 @@
       ],
       "settings": {
         "nav_aria_label": "Product sections",
-        "sticky_enabled": false,
-        "media_type": "auto",
+        "sticky_enabled": true,
+        "media_type": "video_url",
         "image": "shopify://shop_images/6_096a4f79-1026-42e2-8ce1-39f2919dc53e.jpg",
         "image_alt": "",
         "video_url": "",
