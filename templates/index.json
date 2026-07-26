@@ -140,6 +140,24 @@
     "section_tab_collections_Cc4J84": {
       "type": "section-tab-collections",
       "blocks": {
+        "collection_8fiAcW": {
+          "type": "collection",
+          "settings": {
+            "title": "BUNDLES",
+            "featured_collection": "bundles",
+            "show_image": false,
+            "align_with_product_images": false,
+            "overlay_type": "disabled",
+            "description": "",
+            "color": "",
+            "link_text": "View products",
+            "link": "shopify://collections/bundles-and-save",
+            "button_type": "btn--primary",
+            "button_size": "btn--large",
+            "button_style": "btn--text",
+            "show_arrow": true
+          }
+        },
         "collection_x9Nxnd": {
           "type": "collection",
           "settings": {
@@ -196,31 +214,13 @@
             "button_style": "btn--text",
             "show_arrow": true
           }
-        },
-        "collection_8fiAcW": {
-          "type": "collection",
-          "settings": {
-            "title": "BUNDLES",
-            "featured_collection": "bundles",
-            "show_image": true,
-            "align_with_product_images": false,
-            "overlay_type": "disabled",
-            "description": "",
-            "color": "",
-            "link_text": "View products",
-            "link": "shopify://collections/bundles-and-save",
-            "button_type": "btn--primary",
-            "button_size": "btn--large",
-            "button_style": "btn--text",
-            "show_arrow": true
-          }
         }
       },
       "block_order": [
+        "collection_8fiAcW",
         "collection_x9Nxnd",
         "collection_hqfPkt",
-        "collection_P3Aqwc",
-        "collection_8fiAcW"
+        "collection_P3Aqwc"
       ],
       "name": "Tab collections",
       "settings": {
