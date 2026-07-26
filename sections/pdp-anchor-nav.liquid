@@ -14,7 +14,6 @@
 {%- endcomment -%}
 
 {%- liquid
-  assign pan_uid = section.id
   assign pan_sticky = section.settings.sticky_enabled
   assign pan_has_nav = false
   for block in section.blocks
@@ -55,6 +54,17 @@
       assign pan_media = 'image'
     endif
   endif
+
+  # Resolve the product-family reel through the dedicated snippet.
+  capture pan_product_video_url
+    render 'pdp-product-video-snippet', product: product
+  endcapture
+  assign pan_product_video_url = pan_product_video_url | strip
+  assign pan_product_video_alt = product.title | append: ' product video'
+
+  if pan_product_video_url != blank
+    assign pan_media = 'product_video'
+  endif
 -%}
 
 <section class="pan" data-pdp-anchor-nav>
@@ -77,6 +87,21 @@
   {%- endif -%}
 
   {%- case pan_media -%}
+    {%- when 'product_video' -%}
+      <div class="pan__media pan__media--video pan__media--product-video">
+        <video
+          data-pan-video
+          autoplay
+          muted
+          playsinline
+          loop
+          preload="metadata"
+          aria-label="{{ pan_product_video_alt | escape }}"
+        >
+          <source src="{{ pan_product_video_url }}" type="video/mp4">
+        </video>
+      </div>
+
     {%- when 'video' -%}
       {%- comment -%} Shopify-hosted video: <video> with all sources. Autoplay
         requires `muted` + `playsinline`. `loading` on <video> isn't
@@ -219,6 +244,19 @@
     width: 100%;
     height: auto;
   }
+  .pan__media--product-video {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background: #000;
+  }
+  .pan__media--product-video video {
+    width: auto;
+    max-width: 100%;
+    height: min(90vh, 1080px);
+    max-height: 90vh;
+    object-fit: contain;
+  }
   /* Embedded video URL (YouTube/Vimeo) needs a fixed aspect ratio wrapper
      because iframes have no intrinsic size. 16:9 matches both platforms'
      default player. */
@@ -239,6 +277,11 @@
 
   @media screen and (max-width: 749px) {
     .pan__link { padding: 10px 2px; font-size: 12px; letter-spacing: 0.06em; }
+    .pan__media--product-video video {
+      width: 100%;
+      height: auto;
+      max-height: none;
+    }
   }
 {% endstylesheet %}
 
