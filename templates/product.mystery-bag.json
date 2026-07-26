@@ -38,6 +38,20 @@
             "padding_bottom": 16
           }
         },
+        "line_item_FHVE4a": {
+          "type": "line-item",
+          "settings": {
+            "label": "Underwear Size (XS to 2XL)",
+            "type": "text",
+            "required": true,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "option_1": "XS",
+            "option_2": "S",
+            "option_3": "M",
+            "padding_bottom": 38
+          }
+        },
         "upsell": {
           "type": "upsell",
           "settings": {
@@ -126,6 +140,7 @@
         "title",
         "price",
         "variants",
+        "line_item_FHVE4a",
         "upsell",
         "buttons",
         "pdp_details_accordion",
