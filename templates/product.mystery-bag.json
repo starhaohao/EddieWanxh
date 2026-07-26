@@ -16,7 +16,7 @@
           "type": "title",
           "settings": {
             "subheading_option": "none",
-            "heading_font_size": "heading-large",
+            "heading_font_size": "heading-medium",
             "padding_bottom": 8
           }
         },
@@ -153,7 +153,7 @@
         ".price__regular .price-item--regular {text-decoration: none !important;}"
       ],
       "settings": {
-        "text_alignment": "justify",
+        "text_alignment": "left",
         "product_sticky_enable": true,
         "variant_image_scroll": false,
         "show_cart_bar": true,
