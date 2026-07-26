@@ -16,7 +16,7 @@
           "type": "slide",
           "source": "{{ metaobjects.gateway_slide[\"stock-sale\"] }}",
           "settings": {
-            "image": "shopify://shop_images/img_2026-03-12_old-triiiple_x.jpg",
+            "image": "shopify://shop_images/Screenshot_2026-07-27_at_5.02.13_am.png",
             "focal_desktop": "",
             "micro_label": "{{ metaobjects.gateway_slide[\"stock-sale\"].destination_type.value }}",
             "title": "{{ metaobjects.gateway_slide[\"stock-sale\"].title.value }}",
