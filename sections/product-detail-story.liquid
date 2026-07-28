@@ -153,48 +153,27 @@
   .triiiple-product-story__accordions summary span:last-child { transition: transform 180ms ease; }
   .triiiple-product-story__detail-body { max-width: 44rem; padding: 0 2rem 1.75rem 0; color: color-mix(in srgb, currentColor 72%, transparent); }
 
-  /* Vertical dividers are drawn as background gradients on the container so
-     they span the FULL height of the black box, matching mobile's "line
-     spans full container" behaviour (Eddie 2026-07-23 review — desktop).
-     `background-origin: border-box` is CRITICAL — without it the gradients
-     sit inside the container's padding-box, so at 25/50/75% they miss the
-     feature-grid column boundaries (which extend edge-to-edge via the
-     negative margin-inline below) and read as "misaligned / cut short". */
+  /* Divider lines are real `border` properties confined to the feature
+     grid itself — not full-height background gradients spanning up into
+     the heading. The gradient approach required a hack (opaque patches
+     glued behind the heading text) to stop the divider from visually
+     slicing through "Less fuss. Better function."; that patch technique
+     was itself the source of the reported ghost/double-text artifact.
+     Removing it entirely — rather than patching it again — is the fix
+     (Eddie 2026-07-24 review). */
   .triiiple-product-story__why {
-    position: relative;
     margin-top: clamp(5rem, 11vw, 11rem);
     padding: clamp(2rem, 6vw, 5rem);
     color: #fff;
-    background-color: #17191c;
-    background-image:
-      linear-gradient(#ffffff2b, #ffffff2b),
-      linear-gradient(#ffffff2b, #ffffff2b),
-      linear-gradient(#ffffff2b, #ffffff2b);
-    background-repeat: no-repeat;
-    background-size: 1px 100%, 1px 100%, 1px 100%;
-    background-position: 25% 0, 50% 0, 75% 0;
-    background-origin: border-box;
-    background-clip: border-box;
+    background: #17191c;
     scroll-margin-top: 7rem;
   }
-  .triiiple-product-story__why .triiiple-product-story__section-heading { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
-  /* Mask the vertical divider gradients where the heading text sits so
-     they don't slice through "Less fuss. Better function." on desktop —
-     that was reading as ghosting/double-render. The mask uses the same
-     background-color as the container so the dividers stay visible
-     everywhere except behind the text runs themselves. */
-  .triiiple-product-story__why .triiiple-product-story__section-heading > * {
-    background-color: #17191c;
-    padding: 0.1rem 0.35rem;
-    margin: -0.1rem -0.35rem;
-  }
-  .triiiple-product-story__why .triiiple-product-story__section-heading h2 {
-    text-shadow: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  .triiiple-product-story__feature-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-inline: calc(clamp(2rem, 6vw, 5rem) * -1); align-items: stretch; }
-  .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem clamp(2rem, 6vw, 5rem); border-top: 1px solid #ffffff55; height: 100%; }
+  .triiiple-product-story__why .triiiple-product-story__section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; }
+  .triiiple-product-story__feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-inline: calc(clamp(2rem, 6vw, 5rem) * -1); align-items: stretch; }
+  .triiiple-product-story__feature-grid article { min-height: 13rem; padding: 1.5rem clamp(2rem, 6vw, 5rem); height: 100%; }
+  /* Desktop: vertical dividers only, between pillars — no line separating
+     the header from the pillar row (Bug C, 2026-07-24). */
+  .triiiple-product-story__feature-grid article + article { border-left: 1px solid #ffffff55; }
   .triiiple-product-story__feature-grid article > span { display: block; min-height: 3rem; font-size: 1.4rem; }
   .triiiple-product-story__feature-grid h3 { margin: 1.5rem 0 0.5rem; font-size: 1rem; }
   .triiiple-product-story__feature-grid p { margin: 0; color: #ffffffb8; font-size: 0.88rem; }
@@ -219,15 +198,17 @@
     .triiiple-product-story__details,
     .triiiple-product-story__size { grid-template-columns: 1fr; }
     .triiiple-product-story__why .triiiple-product-story__section-heading { display: grid; }
-    /* Mobile 2x2 grid: one vertical + one horizontal divider, both edge-to-edge. */
-    .triiiple-product-story__why {
-      background-image:
-        linear-gradient(#ffffff2b, #ffffff2b),
-        linear-gradient(#ffffff2b, #ffffff2b);
-      background-size: 1px 100%, 100% 1px;
-      background-position: 50% 0, 0 50%;
+    /* Mobile: single line separates the header from the 2x2 pillar block;
+       no divider between individual pillars (Bug B, 2026-07-24). Cancel
+       the desktop vertical-between-pillars border explicitly, per
+       breakpoint, rather than a blanket override. */
+    .triiiple-product-story__feature-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid #ffffff55;
     }
-    .triiiple-product-story__feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .triiiple-product-story__feature-grid article + article {
+      border-left: 0;
+    }
     .triiiple-product-story__size-note { grid-column: 1; }
     .triiiple-product-story__editorial { grid-template-columns: 1fr; }
 
