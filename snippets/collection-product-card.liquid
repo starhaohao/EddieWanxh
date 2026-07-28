@@ -280,17 +280,21 @@
     gap: 8px;
   }
 
-  /* ── Price: sale/current price always medium-weight brand red,
-     whether or not there's a discount; compare-at stays grey +
-     strikethrough (already conditional in product-grid-price.liquid);
-     "From" prefix already conditional on price_varies there too. ── */
+  /* ── Price: sale/current price always brand red, whether or not
+     there's a discount; compare-at stays grey + strikethrough (already
+     conditional in product-grid-price.liquid); "From" prefix already
+     conditional on price_varies there too. Sale and compare-at share the
+     same font-size/weight/line-height so they sit on one visual line —
+     only the color and strikethrough differ. ── */
   .pcard__price .price {
     gap: 6px !important;
+    align-items: baseline !important;
   }
   .pcard__price .new-price {
     color: #923531;
-    font-weight: 500;
-    font-size: 14px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.2;
   }
   .pcard__price .new-price small {
     font-size: 10px;
@@ -302,6 +306,8 @@
   .pcard__price .old-price {
     color: rgba(var(--text), 0.45);
     font-size: 12px;
+    font-weight: 400;
+    line-height: 1.2;
     text-decoration: line-through;
   }
 
@@ -341,7 +347,7 @@
       font-size: 11px;
     }
     .pcard__price .new-price {
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 </style>
