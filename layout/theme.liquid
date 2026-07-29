@@ -168,7 +168,10 @@
 }
 .social-bar-prefooter-wrap { position: relative; }
 [data-site-container] {
-  padding-bottom: var(--bottom-bar-height);
+  /* Extra clearance beyond the sticky bar's own height so the last
+     section's content isn't hidden behind app-embed widgets (chat
+     bubble, review badge, promo tags) that float above the bar. */
+  padding-bottom: calc(var(--bottom-bar-height) + 56px);
   padding-top: var(--HEADER-HEIGHT-MOBILE, 64px);
 }
 .header-sections {
@@ -177,11 +180,6 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: #000000;
-  transition: background-color 0.3s ease;
-}
-.header-sections.is-scrolled {
-  background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* Liquid glass: top header.
@@ -521,20 +519,6 @@ html {
         });
       }, { threshold: 0 });
       observer.observe(wrap);
-    })();
-
-    // Header scroll transparency: solid black at top, semi-transparent when scrolling
-    (function() {
-      var headerSections = document.querySelector('.header-sections');
-      if (!headerSections) return;
-
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 10) {
-          headerSections.classList.add('is-scrolled');
-        } else {
-          headerSections.classList.remove('is-scrolled');
-        }
-      });
     })();
     </script>
 
