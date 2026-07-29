@@ -181,11 +181,12 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important; */
 
-    /* Shared Navigation Style: color, opacity and texture are controlled
-       in Theme settings and remain linked to the Footer. */
-    background: var(--navigation-surface-background, rgba(0, 0, 0, 0.45)) !important;
-    -webkit-backdrop-filter: var(--navigation-surface-filter, saturate(180%) blur(20px)) !important;
-    backdrop-filter: var(--navigation-surface-filter, saturate(180%) blur(20px)) !important;
+    /* Shared Navigation Style: the actual frosted fill now lives on
+       .theme__header::after (layout/theme.liquid, driven by the "Liquid
+       Glass > Tint opacity" setting) so it can match the bottom sticky
+       bar exactly. Leaving a second translucent background + blur here
+       stacked two glass layers on top of each other, making the header
+       read as noticeably more opaque than the bottom bar. */
     border-bottom: 1px solid var(--navigation-line-color, rgba(255, 255, 255, 0.1)) !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
   }

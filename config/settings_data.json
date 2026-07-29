@@ -137,6 +137,7 @@
     "empty_cart_products": [],
     "show_recently_viewed_products": true,
     "currency_code_enable": true,
+    "liquid_glass_opacity": 20,
     "sections": {
       "gift-card": {
         "type": "gift-card",
