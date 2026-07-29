@@ -116,6 +116,9 @@
       "settings": {
         "layout": "inline",
         "text_alignment": "left",
+        "background_image": "shopify://shop_images/Untitled-1-Recovered.png",
+        "background_image_position": "center",
+        "overlay_opacity": 55,
         "bg_color": "#0254b2",
         "font_color": "#dfe4ea",
         "eyebrow_size": 8,

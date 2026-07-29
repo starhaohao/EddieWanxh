@@ -12,6 +12,11 @@
   assign layout = section.settings.layout | default: 'centered'
   assign font_alpha = section.settings.font_opacity | default: 100 | divided_by: 100.0
   assign input_alpha = section.settings.input_opacity | default: 100 | divided_by: 100.0
+  assign has_bg_image = false
+  if section.settings.background_image != blank
+    assign has_bg_image = true
+  endif
+  assign overlay_alpha = section.settings.overlay_opacity | default: 45 | divided_by: 100.0
 -%}
 
 {% style %}
@@ -21,6 +26,8 @@
   }
 
   #shopify-section-{{ section.id }} .edm {
+    position: relative;
+    overflow: hidden;
     background-color: {{ section.settings.bg_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -32,6 +39,31 @@
     --edm-input: {{ section.settings.input_color | default: section.settings.font_color | color_modify: 'alpha', input_alpha }};
     color: var(--edm-ink);
   }
+
+  {%- if has_bg_image -%}
+    #shopify-section-{{ section.id }} .edm__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    #shopify-section-{{ section.id }} .edm__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: {{ section.settings.background_image_position | default: 'center' }};
+      display: block;
+    }
+    #shopify-section-{{ section.id }} .edm__scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(0, 0, 0, {{ overlay_alpha }});
+    }
+    #shopify-section-{{ section.id }} .edm__inner {
+      position: relative;
+      z-index: 2;
+    }
+  {%- endif -%}
 
   #shopify-section-{{ section.id }} .edm__input,
   #shopify-section-{{ section.id }} .edm__input::placeholder {
@@ -53,6 +85,13 @@
 {% endstyle %}
 
 <section class="edm edm--{{ layout }}" id="edm-{{ uid }}">
+  {%- if has_bg_image -%}
+    <div class="edm__bg">
+      {{- section.settings.background_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1600, 2000', sizes: '100vw' -}}
+    </div>
+    <div class="edm__scrim"></div>
+  {%- endif -%}
+
   <div class="edm__inner">
     
     <div class="edm__copy">
@@ -344,12 +383,47 @@
     },
     {
       "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Optional. When set, this photo replaces the flat background color and a dark scrim is added so the text stays readable on top of it."
+    },
+    {
+      "type": "select",
+      "id": "background_image_position",
+      "label": "Image focal point",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Image overlay darkness",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 45,
+      "info": "Only applies when a background image is set."
+    },
+    {
+      "type": "header",
       "content": "Colors"
     },
     {
       "type": "color",
       "id": "bg_color",
       "label": "Background color",
+      "info": "Used only when no background image is set.",
       "default": "#F2EEE7"
     },
     {
