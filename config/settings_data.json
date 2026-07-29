@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
+    "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
     "menu_bg_color": "#0000000A",
     "header_link": "#FFFFFF",
     "submenu_bg_color": "#00000012",
@@ -485,16 +485,16 @@
       "scheme-ff77e332-a231-4fac-81c4-656ee801fc86": {
         "settings": {
           "section_text": "#000000",
-          "section_bg": "#f1f4f5",
+          "section_bg": "#DCDCDC",
           "section_bg_light": "#f1f4f591",
           "section_bg_gradient": "",
           "btn_primary_bg": "#7c9bdb",
-          "btn_primary_text": "#f1f4f5",
+          "btn_primary_text": "#FFFFFF",
           "btn_primary_border": "rgba(0,0,0,0)",
           "btn_secondary_bg": "#f1f4f5",
           "btn_secondary_text": "#000000",
           "btn_secondary_border": "rgba(0,0,0,0)",
-          "accent": "#fcec08",
+          "accent": "#3371CD",
           "lines_and_border": "rgba(0,0,0,0)",
           "overlay": "#cdcdcd30",
           "links": "#f0f1f3"
