@@ -15,7 +15,7 @@
         "ai_gen_block_1ede56f_heLfGc": {
           "type": "ai_gen_block_1ede56f",
           "settings": {
-            "background_image": "shopify://shop_images/7_132ac11b-ebf5-4aff-8ea1-bd9d65e59326.jpg",
+            "background_image": "shopify://shop_images/9_4658f947-fd9b-41ff-b23a-e69891ab9bf2.jpg",
             "zoom_start": 1.2,
             "zoom_end": 1,
             "mobile_height": 50,
@@ -24,7 +24,7 @@
             "overlay_opacity": 0,
             "heading": "{{ closest.page.title }}",
             "subheading": "Wear it. Own it. Explain nothing.",
-            "text_color": "#ffffff",
+            "text_color": "#FFFFFF",
             "content_max_width": 1100,
             "desktop_vertical_alignment": "center",
             "desktop_horizontal_alignment": "flex-start",
@@ -41,11 +41,11 @@
             "subheading_line_height_desktop": 1.5,
             "subheading_line_height_mobile": 1.5,
             "text_shadow_x": 0,
-            "text_shadow_y": 2,
-            "text_shadow_blur": 4,
+            "text_shadow_y": 0,
+            "text_shadow_blur": 0,
             "text_shadow_color": "#000000",
             "button_text": "Shop now",
-            "button_link": "",
+            "button_link": "shopify://collections",
             "button_font_size_desktop": 16,
             "button_font_size_mobile": 14,
             "button_padding_desktop": 16,
@@ -89,16 +89,6 @@
         "border_radius": 0,
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
-    },
-    "lb_strip": {
-      "type": "lookbook-info-strip",
-      "settings": {
-        "bg_color": "#ffc445",
-        "text_color": "#000000",
-        "border_color": "#11121414",
-        "left_text": "Buy 3 — 15% OFF. Buy 5 — 25% OFF.  No code needed.",
-        "right_text": ""
       }
     },
     "lookbook_grid_7YfNFL": {
@@ -500,7 +490,7 @@
         "tag_color": "#000000",
         "tag_bg": "#ffffff",
         "grid_line_color": "#ffc445",
-        "name_size": 14,
+        "name_size": 12,
         "price_size": 12
       }
     },
@@ -674,7 +664,6 @@
   },
   "order": [
     "blocks_8BmpkJ",
-    "lb_strip",
     "lookbook_grid_7YfNFL",
     "page_about_us_d6AkYV",
     "lb_zoom",
