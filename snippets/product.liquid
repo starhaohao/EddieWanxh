@@ -464,6 +464,17 @@
       color: #ED813E !important;
     }
 
+    /* %-off badge + "Final sale ?" tooltip: wrap onto their own line
+       instead of overflowing past the viewport edge on narrow screens,
+       same treatment already applied to .price__sale above so no badge
+       or label ever sits on top of another. */
+    #MainProduct--{{ section.id }} .product__sale,
+    #MainProduct--{{ section.id }} .product__final-sale-wrap {
+      flex-wrap: wrap;
+      row-gap: 6px;
+      column-gap: 10px;
+    }
+
     /* Promo socks upsell card: title matches the material-line size, price
        and the shared info line render as three separate lines. */
     #MainProduct--{{ section.id }} [data-promo-socks-offer] .product-upsell__title {
