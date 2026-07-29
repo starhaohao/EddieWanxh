@@ -81,14 +81,19 @@
   }
 }
 
-/* Mobile menu — slide down from top */
+/* Mobile menu — slide down from top.
+   z-index raised above .header-sections (100) and .social-sticky-bar (99)
+   so the fully-open menu always renders on top of the persistent header
+   bar instead of being covered by it. */
 @media screen and (max-width: 749px) {
   .drawer.drawer--header {
+    position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
     width: 100% !important;
+    z-index: 150 !important;
     transform: translateY(-100%) !important;
   }
   .drawer.drawer--header.is-open {
@@ -102,6 +107,7 @@
     max-width: 100% !important;
     max-height: 85vh !important;
     overflow-y: auto !important;
+    z-index: 150 !important;
   }
 }
 
