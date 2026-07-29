@@ -89,7 +89,7 @@
     "show_gift_card_recipient": false,
     "quick_add_bg_color": "#000000",
     "quick_add_text_color": "#FFFFFF",
-    "quick_add_mobile_style": "mini_button",
+    "quick_add_mobile_style": "button",
     "quickview_hide_mobile": true,
     "show_siblings": true,
     "show_grid_swatches": false,
@@ -457,7 +457,7 @@
           "btn_secondary_bg": "#cdff00",
           "btn_secondary_text": "#000000",
           "btn_secondary_border": "#cdff00",
-          "accent": "#0154B2",
+          "accent": "#0154b2",
           "lines_and_border": "#061923",
           "overlay": "#000000",
           "links": "#020303"

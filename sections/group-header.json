@@ -202,13 +202,13 @@
         "show_country_flag": false,
         "highlight_item": "Final Clearance",
         "highlight_item_color": "#ffe500",
-        "transparent_logo": "shopify://shop_images/transparent.png",
+        "transparent_logo": "shopify://shop_images/TRIIIPLE-logo-white.png",
         "transparent_home": true,
         "transparent_collection": true,
         "transparent_article": true,
         "transparent_page": true,
         "transparent_product_page": true,
-        "transparent_logo_pdp": "shopify://shop_images/transparent_ee0c8235-36a7-491a-b959-97a546ed9add.png",
+        "transparent_logo_pdp": "shopify://shop_images/TRIIIPLE-logo-white.png",
         "padding_top": 5,
         "padding_bottom": 5
       }
