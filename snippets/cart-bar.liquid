@@ -106,7 +106,7 @@
                 {{ 'products.product.sold_out' | t }}
               {%- endif -%}
             {%- elsif any_variant_available -%}
-              {{ 'products.product.configure' | t }}
+              {%- comment -%} No label — the right-pointing arrow alone signals "scroll up to pick options." {%- endcomment -%}
             {%- else -%}
               {{ 'products.product.sold_out' | t }}
             {%- endif -%}
@@ -122,7 +122,7 @@
           <span class="btn__added">&nbsp;</span>
 
           {%- unless button_add or any_variant_available == false -%}
-            {%- render 'icon-nav-arrow-up' -%}
+            {%- render 'icon-nav-arrow-right' -%}
           {%- endunless -%}
         </button>
 
