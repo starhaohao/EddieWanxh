@@ -23,6 +23,13 @@
   assign search_block = search_block[0]
 -%}
 
+{%- style -%}
+  /* Grey cover behind the open mobile menu (site-wide default is black). */
+  #mobile-menu-{{ section.id }} .drawer__underlay {
+    --underlay-bg: rgba(128, 128, 128, 0.5);
+  }
+{%- endstyle -%}
+
 <mobile-menu
   class="mobile-menu {{ color_scheme }}"
   data-section-id="{{ section.id }}"
