@@ -118,8 +118,8 @@
         "text_alignment": "left",
         "background_image_position": "center",
         "overlay_opacity": 55,
-        "bg_color": "#0254b2",
-        "font_color": "#dfe4ea",
+        "bg_color": "#000000",
+        "font_color": "#ffffff",
         "eyebrow_size": 8,
         "heading_size": 20,
         "subtext_size": 12,
@@ -237,7 +237,7 @@
         "grid": 4,
         "rows": 3,
         "layout_mobile": "slider",
-        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
+        "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
         "padding_top": 40,
         "padding_bottom": 0,
         "heading_tag": "automatic"
@@ -253,13 +253,13 @@
         "overlay_from": "#0a0a0abf",
         "overlay_to": "#0a0a0a52",
         "eyebrow": "Final Clearance",
-        "eyebrow_color": "#7c9bdb",
+        "eyebrow_color": "#ffffff",
         "title": "<p>The </p><p>Last          </p><p>Run.</p><p></p><h3></h3><h5></h5>",
-        "title_size": 120,
+        "title_size": 46,
         "subtitle": "<h6>Free shipping</h6><h6>over $50 · Singapore</h6>",
         "cta_text": "Stock Clearance",
         "cta_url": "shopify://collections/dead-stock-clearance",
-        "cta_bg": "#7c9bdb",
+        "cta_bg": "#000000",
         "cta_text_color": "#ffffff",
         "show_urgency": true,
         "urgency_label": "Stock Status",
@@ -308,7 +308,7 @@
         "mobile_image": "shopify://shop_images/x_5b35728f-e2a1-4108-a2d7-794d6a6fbe31.jpg",
         "mobile_height": "screen-height-one-half--mobile",
         "flex_align_mobile": "align--bottom-left-mobile",
-        "color_scheme": "scheme-fbd4c470-dcb5-45cd-af70-7c3c7a55e46e",
+        "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
         "show_text_background": true,
         "overlay_type": "disabled",
         "padding_top": 0,
@@ -381,7 +381,7 @@
         "layout_desktop": "slider",
         "blocks_per_row": 4,
         "layout_mobile": "slider",
-        "color_scheme": "scheme-b4a37967-d23c-4efa-91ea-3e1289d0941a",
+        "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
         "padding_top": 16,
         "padding_bottom": 24,
         "heading_tag": "h4"
@@ -411,88 +411,13 @@
       "settings": {
         "bg_color": "#ffffff",
         "border_color": "#000000",
-        "eyebrow_color": "#868233",
-        "title_color": "#fff200",
-        "body_color": "#fff300",
+        "eyebrow_color": "#716e2b",
+        "title_color": "#000000",
+        "body_color": "#000000",
         "eyebrow": "about us",
         "title": "<h4>Designed in Singapore.<br/>Crafted in Thailand.</h4><h4></h4>",
         "body": "<p>TRIIPLE believes your first layer <br/><br/>is crafted with precision, not simply produced.<br/><br/>Every fibre and stitch is purposefully chosen—<br/><br/>this is the foundation, never the ordinary.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
-      }
-    },
-    "1783598576dfbeb45d": {
-      "type": "_blocks",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "1783598626bd47c487": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_6b8197f_yiV7yz": {
-          "type": "ai_gen_block_6b8197f",
-          "settings": {
-            "scroll_threshold": 10,
-            "scroll_text_color": "#0099cc"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_6b8197f_yiV7yz"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
       }
     }
   },
@@ -500,13 +425,11 @@
     "gateway_hero",
     "landing_edm_signup_39bzd6",
     "section_tab_collections_Cc4J84",
-    "sale_hero_8Vwb7N",
     "features-strip",
     "section_hero_ALw4gQ",
+    "sale_hero_8Vwb7N",
     "homepage-social",
     "178359954937ab782c",
-    "homepage-brand-story",
-    "1783598576dfbeb45d",
-    "1783598626bd47c487"
+    "homepage-brand-story"
   ]
 }
