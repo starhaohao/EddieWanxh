@@ -144,21 +144,21 @@
         "link_details": {
           "type": "link",
           "settings": {
-            "label": "- Details -",
+            "label": "Details",
             "anchor": "product-details"
           }
         },
         "link_why": {
           "type": "link",
           "settings": {
-            "label": "- Why This Works -",
+            "label": "Why This Works",
             "anchor": "product-why"
           }
         },
         "link_size": {
           "type": "link",
           "settings": {
-            "label": "- Find Your Size -",
+            "label": "Find Your Size",
             "anchor": "product-size-guide"
           }
         }

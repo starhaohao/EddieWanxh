@@ -217,21 +217,38 @@
     justify-content: space-between;
     align-items: center;
   }
+  /* Pitaka-style pipe dividers: one flanking each end of the strip, one
+     between each pair of items. ::before/::after generated content acts
+     as a flex item here, so it shares the space-between distribution. */
+  .pan__list::before,
+  .pan__list::after {
+    content: '|';
+    color: #C7C7C7;
+    font-weight: 300;
+  }
   .pan__item {
+    display: flex;
+    align-items: center;
     padding: 0;
+  }
+  .pan__item:not(:first-child)::before {
+    content: '|';
+    color: #C7C7C7;
+    font-weight: 300;
+    margin-right: 20px;
   }
   .pan__link {
     display: inline-block;
     padding: 12px 4px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #000;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    color: #8A8A8A;
     text-decoration: none;
-    transition: opacity 0.2s ease;
+    transition: color 0.2s ease;
   }
-  .pan__link:hover { text-decoration: underline; }
+  .pan__link:hover { color: #1D1D1F; }
   .pan__link:focus-visible {
     outline: 2px solid var(--focus, #1D1D1F);
     outline-offset: -2px;
@@ -276,7 +293,8 @@
   .pan__media--placeholder svg { background: #F4F4F4; aspect-ratio: 16 / 9; }
 
   @media screen and (max-width: 749px) {
-    .pan__link { padding: 10px 2px; font-size: 12px; letter-spacing: 0.06em; }
+    .pan__link { padding: 10px 2px; font-size: 14px; }
+    .pan__item:not(:first-child)::before { margin-right: 12px; }
     .pan__media--product-video video {
       width: 100%;
       height: auto;
