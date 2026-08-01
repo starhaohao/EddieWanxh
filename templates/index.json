@@ -82,7 +82,7 @@
         "slide_4"
       ],
       "settings": {
-        "image_ratio": "1080 / 1350",
+        "image_ratio": "9 / 16",
         "image_ratio_desktop": "4 / 3",
         "caption_lift": 20,
         "autoplay": true,
@@ -118,8 +118,8 @@
         "text_alignment": "left",
         "background_image_position": "center",
         "overlay_opacity": 55,
-        "bg_color": "#000000",
-        "font_color": "#ffffff",
+        "bg_color": "#F7D367",
+        "font_color": "#000000",
         "eyebrow_size": 8,
         "heading_size": 20,
         "subtext_size": 12,
@@ -371,7 +371,7 @@
       "settings": {
         "image": "shopify://shop_images/Landing_Page.jpg",
         "hero_height": 100,
-        "overlay_from": "#0a0a0abf",
+        "overlay_from": "#2A2A22",
         "overlay_to": "#0a0a0a52",
         "eyebrow": "Final Clearance",
         "eyebrow_color": "#ffffff",
@@ -409,14 +409,14 @@
         " /* Show the line break on mobile screens (typically under 750px) */@media screen and (max-width: 749px) {.mobile-break {display: block; }}"
       ],
       "settings": {
-        "bg_color": "#ffffff",
+        "bg_color": "#000000",
         "border_color": "#000000",
-        "eyebrow_color": "#716e2b",
+        "eyebrow_color": "#FFF96C",
         "title_color": "#000000",
         "body_color": "#000000",
         "eyebrow": "about us",
         "title": "<h4>Designed in Singapore.<br/>Crafted in Thailand.</h4><h4></h4>",
-        "body": "<p>TRIIPLE believes your first layer <br/><br/>is crafted with precision, not simply produced.<br/><br/>Every fibre and stitch is purposefully chosen—<br/><br/>this is the foundation, never the ordinary.</p>",
+        "body": "<p>TRIIPLE believes your first layer is crafted with precision, not simply produced. Every fibre and stitch is purposefully chosen — this is the foundation, never the ordinary.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
     }

@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "color_scheme": "scheme-ff77e332-a231-4fac-81c4-656ee801fc86",
+    "color_scheme": "scheme-black",
     "menu_bg_color": "#0000000A",
     "header_link": "#FFFFFF",
     "submenu_bg_color": "#00000012",
@@ -62,6 +62,7 @@
     "show_scroll_top_button": true,
     "loading_image_1": "shopify://shop_images/TRIIIPLE_Studio_Logo_Black.png",
     "loading_image_2": "shopify://shop_images/TRIIIPLE_Studio_Logo_White.png",
+    "loading_image_width": 100,
     "empty_search_menu": "main-menu",
     "empty_search_product_list": [
       "the-brief-lover",
@@ -485,16 +486,16 @@
       "scheme-ff77e332-a231-4fac-81c4-656ee801fc86": {
         "settings": {
           "section_text": "#000000",
-          "section_bg": "#DCDCDC",
+          "section_bg": "#dcdcdc",
           "section_bg_light": "#f1f4f591",
           "section_bg_gradient": "",
           "btn_primary_bg": "#7c9bdb",
-          "btn_primary_text": "#FFFFFF",
+          "btn_primary_text": "#ffffff",
           "btn_primary_border": "rgba(0,0,0,0)",
           "btn_secondary_bg": "#f1f4f5",
           "btn_secondary_text": "#000000",
           "btn_secondary_border": "rgba(0,0,0,0)",
-          "accent": "#3371CD",
+          "accent": "#3371cd",
           "lines_and_border": "rgba(0,0,0,0)",
           "overlay": "#cdcdcd30",
           "links": "#f0f1f3"
