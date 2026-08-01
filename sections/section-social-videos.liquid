@@ -74,6 +74,18 @@
      --COLUMNS-MOBILE: {{ columns_mobile }};
      --SOCIAL-VIDEO-ASPECT-RATIO: {{ 1 | divided_by: aspect_ratio }};
    }
+
+   /* Force true edge-to-edge breakout — .wrapper--full only spans the
+      site's max content width, not the browser viewport. */
+   #SocialVideos--{{ section.id }} .grid-container.wrapper--full {
+     width: 100vw !important;
+     position: relative;
+     left: 50%;
+     right: 50%;
+     margin-left: -50vw !important;
+     margin-right: -50vw !important;
+     max-width: 100vw !important;
+   }
 {%- endstyle -%}
 
 <script src="{{ 'social-videos.js' | asset_url }}" defer="defer"></script>
