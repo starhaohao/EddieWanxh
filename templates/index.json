@@ -226,12 +226,12 @@
       ],
       "name": "Tab collections",
       "settings": {
-        "show_product_count": true,
+        "show_product_count": false,
         "title": "",
         "heading_font_size": "heading-x-large",
         "text": "",
         "text_font_size": "body-x-small",
-        "layout": "inline",
+        "layout": "left",
         "layout_desktop": "slider",
         "product_limit": 4,
         "grid": 4,
@@ -241,29 +241,6 @@
         "padding_top": 40,
         "padding_bottom": 0,
         "heading_tag": "automatic"
-      }
-    },
-    "sale_hero_8Vwb7N": {
-      "type": "sale-hero",
-      "custom_css": [],
-      "name": "Sale Hero",
-      "settings": {
-        "image": "shopify://shop_images/Landing_Page.jpg",
-        "hero_height": 100,
-        "overlay_from": "#0a0a0abf",
-        "overlay_to": "#0a0a0a52",
-        "eyebrow": "Final Clearance",
-        "eyebrow_color": "#ffffff",
-        "title": "<p>The </p><p>Last          </p><p>Run.</p><p></p><h3></h3><h5></h5>",
-        "title_size": 46,
-        "subtitle": "<h6>Free shipping</h6><h6>over $50 · Singapore</h6>",
-        "cta_text": "Stock Clearance",
-        "cta_url": "shopify://collections/dead-stock-clearance",
-        "cta_bg": "#000000",
-        "cta_text_color": "#ffffff",
-        "show_urgency": true,
-        "urgency_label": "Stock Status",
-        "urgency_text": "<h6><strong>Buy 3 — 15% off </strong></h6><h6><strong>Buy 5 — 25% off</strong></h6>"
       }
     },
     "features-strip": {
@@ -308,12 +285,12 @@
         "mobile_image": "shopify://shop_images/x_5b35728f-e2a1-4108-a2d7-794d6a6fbe31.jpg",
         "mobile_height": "screen-height-one-half--mobile",
         "flex_align_mobile": "align--bottom-left-mobile",
-        "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
-        "show_text_background": true,
-        "overlay_type": "disabled",
+        "color_scheme": "scheme-black",
+        "show_text_background": false,
+        "overlay_type": "text",
         "padding_top": 0,
         "padding_bottom": 0,
-        "show_placeholder": false
+        "show_placeholder": true
       }
     },
     "homepage-social": {
@@ -375,7 +352,7 @@
         "heading_font_size": "heading-medium",
         "text": "<p>Tag us @<a href=\"https://www.instagram.com/triiiple_studio/\" target=\"_blank\" title=\"https://www.instagram.com/triiiple_studio/\">triiiple_studio</a></p>",
         "text_font_size": "body-medium",
-        "align_text": "text-left",
+        "align_text": "text-center",
         "width": "wrapper--full",
         "aspect_ratio": 1.1,
         "layout_desktop": "slider",
@@ -385,6 +362,29 @@
         "padding_top": 16,
         "padding_bottom": 24,
         "heading_tag": "h4"
+      }
+    },
+    "sale_hero_8Vwb7N": {
+      "type": "sale-hero",
+      "custom_css": [],
+      "name": "Sale Hero",
+      "settings": {
+        "image": "shopify://shop_images/Landing_Page.jpg",
+        "hero_height": 100,
+        "overlay_from": "#0a0a0abf",
+        "overlay_to": "#0a0a0a52",
+        "eyebrow": "Final Clearance",
+        "eyebrow_color": "#ffffff",
+        "title": "<p>The </p><p>Last          </p><p>Run.</p><p></p><h3></h3><h5></h5>",
+        "title_size": 46,
+        "subtitle": "<h6>Free shipping</h6><h6>over $50 · Singapore</h6>",
+        "cta_text": "Stock Clearance",
+        "cta_url": "shopify://collections/dead-stock-clearance",
+        "cta_bg": "#000000",
+        "cta_text_color": "#ffffff",
+        "show_urgency": true,
+        "urgency_label": "Stock Status",
+        "urgency_text": "<h6><strong>Buy 3 — 15% off </strong></h6><h6><strong>Buy 5 — 25% off</strong></h6>"
       }
     },
     "178359954937ab782c": {
@@ -399,7 +399,7 @@
         "klaviyo_reviews_featured_reviews_carousel_DBTGYV"
       ],
       "settings": {
-        "include_margins": true
+        "include_margins": false
       }
     },
     "homepage-brand-story": {
@@ -427,8 +427,8 @@
     "section_tab_collections_Cc4J84",
     "features-strip",
     "section_hero_ALw4gQ",
-    "sale_hero_8Vwb7N",
     "homepage-social",
+    "sale_hero_8Vwb7N",
     "178359954937ab782c",
     "homepage-brand-story"
   ]
