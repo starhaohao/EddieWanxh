@@ -93,7 +93,7 @@
         "eyebrow": "",
         "accent_label": "",
         "tagline": "WEAR IT. OWN. EXPLAIN NOTHING.",
-        "intro": "",
+        "intro": "<p>Buy 5, wear 6 — one free pair included.<br/><br/>3+ pairs: 15% off with <span style=\"text-decoration:underline\">AUTO15</span>. </p><p>5+ pairs: 25% off with <span style=\"text-decoration:underline\">AUTO25</span>.<br/></p>",
         "cta_label": "",
         "cta_link": "",
         "use_collection_image": true,
@@ -126,6 +126,8 @@
       "settings": {
         "layout": "inline",
         "text_alignment": "center",
+        "background_image_position": "center",
+        "overlay_opacity": 45,
         "bg_color": "#ffd900",
         "font_color": "#000000",
         "eyebrow_size": 11,
