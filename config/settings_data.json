@@ -548,11 +548,11 @@
           "btn_primary_border": "#ffffff",
           "btn_secondary_bg": "#cdff00",
           "btn_secondary_text": "#000000",
-          "btn_secondary_border": "#cdff00",
+          "btn_secondary_border": "#8FAD16",
           "accent": "#ffffff",
           "lines_and_border": "#ffffff",
           "overlay": "#000000",
-          "links": "#cdff00"
+          "links": "#84A209"
         }
       }
     }
