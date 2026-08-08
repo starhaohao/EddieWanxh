@@ -42,12 +42,14 @@
           "type": "upsell",
           "settings": {
             "upsell_product": "pair-with-socks",
-            "upsell_product_list": [],
+            "upsell_product_list": [
+              "h-cotton-spandex-boxer-trunk-test"
+            ],
             "show_available_upsell_only": false,
-            "layout": "slider",
+            "layout": "stacked",
             "autoplay": false,
             "autoplay_speed": 8,
-            "bg_color": "#f4f3ef",
+            "bg_color": "#FBEBAC",
             "padding_bottom": 0
           }
         },
