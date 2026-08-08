@@ -95,10 +95,21 @@
      padding-right: var(--outer) !important;
    }
 
-   /* No gap between tiles on mobile — full-bleed, edge-to-edge grid. */
+   /* No gap between tiles on mobile — full-bleed, edge-to-edge grid.
+      On mobile, layout style is usually "Slider" (grid--mobile-slider),
+      whose spacing comes from margin-right on each .grid-item (plus a
+      calc(100% - 50px) "peek" width) rather than the grid gap property,
+      so both have to be zeroed out here. */
    @media screen and (max-width: 749px) {
      #SocialVideos--{{ section.id }} .grid {
        gap: 0;
+     }
+     #SocialVideos--{{ section.id }} .grid--mobile-slider {
+       padding-left: 0;
+     }
+     #SocialVideos--{{ section.id }} .grid--mobile-slider .grid-item {
+       width: 100%;
+       margin-right: 0;
      }
    }
 {%- endstyle -%}
@@ -167,6 +178,20 @@
               if link != blank
                 assign wrapper_tag = 'a'
               endif
+
+              assign badge_style = ''
+              if block.settings.badge_bg_color != blank
+                assign badge_style = badge_style | append: '--bg: ' | append: block.settings.badge_bg_color | append: ';'
+              endif
+              if block.settings.badge_text_color != blank
+                assign badge_style = badge_style | append: '--text: ' | append: block.settings.badge_text_color | append: ';'
+              endif
+              if block.settings.badge_text_size != blank
+                assign badge_style = badge_style | append: 'font-size: ' | append: block.settings.badge_text_size | append: 'px;'
+              endif
+              if block.settings.badge_border_width > 0
+                assign badge_style = badge_style | append: 'border: ' | append: block.settings.badge_border_width | append: 'px solid ' | append: block.settings.badge_border_color | append: ';'
+              endif
             -%}
 
             <div
@@ -208,7 +233,7 @@
                       {%- endif -%}
 
                       {%- if badge_text != blank -%}
-                        <span class="badge-box">
+                        <span class="badge-box" {% if badge_style != blank %}style="{{ badge_style }}"{% endif %}>
                           {{- badge_text -}}
                         </span>
                       {%- endif -%}
@@ -455,6 +480,48 @@
           "id": "badge_text",
           "label": "Badge text",
           "default": "@instagram"
+        },
+        {
+          "type": "header",
+          "content": "Badge style"
+        },
+        {
+          "type": "color",
+          "id": "badge_bg_color",
+          "label": "Background",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "badge_text_color",
+          "label": "Text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "badge_text_size",
+          "min": 8,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Text size",
+          "default": 12
+        },
+        {
+          "type": "color",
+          "id": "badge_border_color",
+          "label": "Outline color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "badge_border_width",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "unit": "px",
+          "label": "Outline width",
+          "default": 0
         }
       ]
     }
