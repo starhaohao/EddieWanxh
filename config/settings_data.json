@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "color_scheme": "scheme-black",
+    "color_scheme": "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc",
     "menu_bg_color": "#0000000A",
     "header_link": "#FFFFFF",
     "submenu_bg_color": "#00000073",
@@ -182,8 +182,6 @@
           "background_color": "#FFFFFF",
           "font_color": "#000000",
           "button_color": "#01384A",
-          "secondary_color": "#ffffff",
-          "ternary_color": "#212529",
           "button_icon": "chat_bubble",
           "button_text": "no_text",
           "button_horizontal_position": "bottom_right",
@@ -548,11 +546,11 @@
           "btn_primary_border": "#ffffff",
           "btn_secondary_bg": "#cdff00",
           "btn_secondary_text": "#000000",
-          "btn_secondary_border": "#8FAD16",
+          "btn_secondary_border": "#8fad16",
           "accent": "#ffffff",
           "lines_and_border": "#ffffff",
           "overlay": "#000000",
-          "links": "#84A209"
+          "links": "#84a209"
         }
       }
     }
