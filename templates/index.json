@@ -300,8 +300,8 @@
           "type": "video",
           "settings": {
             "image": "shopify://shop_images/1_81f69c5b-34c0-4c90-be77-0b5c6efe44c8.png",
-            "link": "",
-            "badge_text": ""
+            "link": "shopify://products/y-transdry-brief-white",
+            "badge_text": "Y TransDRY® Brief"
           }
         },
         "vid-1": {
