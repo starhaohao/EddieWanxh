@@ -118,8 +118,8 @@
         "text_alignment": "left",
         "background_image_position": "center",
         "overlay_opacity": 55,
-        "bg_color": "#F9F9F9",
-        "font_color": "#000000",
+        "bg_color": "#C0E81C",
+        "font_color": "#353434",
         "eyebrow_size": 8,
         "heading_size": 20,
         "subtext_size": 12,
@@ -409,9 +409,9 @@
         " /* Show the line break on mobile screens (typically under 750px) */@media screen and (max-width: 749px) {.mobile-break {display: block; }}"
       ],
       "settings": {
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "border_color": "#000000",
-        "eyebrow_color": "#8FAD16",
+        "eyebrow_color": "#8fad16",
         "title_color": "#000000",
         "body_color": "#000000",
         "eyebrow": "about us",
