@@ -287,6 +287,15 @@ html {
   scrollbar-gutter: stable;
   overflow-x: hidden;
 }
+/* Safari (desktop and mobile) doesn't reliably clip horizontal overflow
+   from overflow-x: hidden set only on <html> — it treats <body> as the
+   actual scrolling element, so the rule must be duplicated here or
+   full-bleed (100vw) breakout sections cause real horizontal scroll /
+   extra page width in Safari specifically, even though Chrome/Firefox
+   look fine. */
+body {
+  overflow-x: hidden;
+}
 .image img,
 .banner img,
 .section-image img {
