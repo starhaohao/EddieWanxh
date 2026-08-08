@@ -118,7 +118,7 @@
         "text_alignment": "left",
         "background_image_position": "center",
         "overlay_opacity": 55,
-        "bg_color": "#C0E81C",
+        "bg_color": "#c0e81c",
         "font_color": "#353434",
         "eyebrow_size": 8,
         "heading_size": 20,
@@ -300,6 +300,7 @@
           "type": "video",
           "settings": {
             "image": "shopify://shop_images/1_81f69c5b-34c0-4c90-be77-0b5c6efe44c8.png",
+            "link": "",
             "badge_text": ""
           }
         },
@@ -307,6 +308,7 @@
           "type": "video",
           "settings": {
             "image": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg",
+            "link": "",
             "badge_text": ""
           }
         },
@@ -314,6 +316,7 @@
           "type": "video",
           "settings": {
             "image": "shopify://shop_images/LP_-_ethan-001_-_Ethan_Cheng_4_5.jpg",
+            "link": "",
             "badge_text": ""
           }
         },
@@ -321,6 +324,7 @@
           "type": "video",
           "settings": {
             "image": "shopify://shop_images/In_TRIIIPLE.jpg",
+            "link": "",
             "badge_text": ""
           }
         },
@@ -328,6 +332,7 @@
           "type": "video",
           "settings": {
             "image": "shopify://shop_images/Screenshot_2026-06-08_at_3.08.14_pm.png",
+            "link": "",
             "badge_text": ""
           }
         },
@@ -335,6 +340,7 @@
           "type": "video",
           "settings": {
             "image": "shopify://shop_images/2.png",
+            "link": "",
             "badge_text": ""
           }
         }
@@ -352,15 +358,15 @@
         "heading_font_size": "heading-medium",
         "text": "<p>Tag us @<a href=\"https://www.instagram.com/triiiple_studio/\" target=\"_blank\" title=\"https://www.instagram.com/triiiple_studio/\">triiiple_studio</a></p>",
         "text_font_size": "body-medium",
-        "align_text": "text-center",
+        "align_text": "text-left",
         "width": "wrapper--full",
-        "aspect_ratio": 1.1,
+        "aspect_ratio": 1.4,
         "layout_desktop": "slider",
         "blocks_per_row": 4,
         "layout_mobile": "slider",
         "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
-        "padding_top": 16,
-        "padding_bottom": 24,
+        "padding_top": 0,
+        "padding_bottom": 0,
         "heading_tag": "h4"
       }
     },
