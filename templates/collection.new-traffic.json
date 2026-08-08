@@ -14,16 +14,16 @@
       "custom_css": [],
       "settings": {
         "enable_sort": true,
-        "enable_filters": false,
+        "enable_filters": true,
         "filter_layout": "slide-out",
         "default_open": true,
-        "collection_linklist": "",
+        "collection_linklist": "triiiple-shop",
         "grid": 3,
         "grid_mobile": "2",
         "products_per_page": 24,
-        "color_scheme": "scheme-3",
-        "padding_top": 18,
-        "padding_bottom": 40
+        "color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "section_recent_products_product_focus": {
@@ -38,7 +38,7 @@
         "grid": 4,
         "rows": 2,
         "layout_mobile": "slider",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-3",
         "padding_top": 18,
         "padding_bottom": 44,
         "heading_tag": "automatic"
