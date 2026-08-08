@@ -218,6 +218,35 @@
   }
 }
 
+/* Liquid glass: header text/logo stay white at all times.
+   The header's effective background is always dark — either the
+   liquid-glass tint above once .js__header__stuck (scrolled), or the
+   dark hero photo showing through while the header is still fully
+   transparent pre-scroll — so black text/logo would be unreadable
+   either way. This overrides the theme's native "transparent header"
+   behavior, which defaults transparent-state text to near-black
+   (settings.menu_transparent_color) and reverts both text and the logo
+   to their black/default colors once .js__header__stuck is added. */
+.header__wrapper,
+.header__wrapper .header__desktop,
+.header__wrapper .header__mobile,
+.header__wrapper .toolbar {
+  /* !important: the native pre-scroll transparent-header rule (in
+     theme.css) that also sets these variables uses a long, highly
+     specific selector chain (body:has(...) [data-header-transparent]
+     :not(...):not(...)) that outranks this plain class selector on
+     specificity alone, regardless of source order. */
+  --text: #ffffff !important;
+  --link: #ffffff !important;
+  --link-hover: rgba(255, 255, 255, 0.72) !important;
+  --text-dark: #ffffff !important;
+  --text-light: rgba(255, 255, 255, 0.72) !important;
+  --icons: #ffffff !important;
+}
+.theme__header .header__logo img {
+  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
 /* Social bar — currency + account on right */
 .social-sticky-bar__utils {
   display: flex;
