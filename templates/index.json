@@ -237,9 +237,9 @@
         "grid": 4,
         "rows": 3,
         "layout_mobile": "slider",
-        "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
+        "color_scheme": "scheme-06d8c44c-5174-4ce8-a30b-db9d0a78855e",
         "padding_top": 40,
-        "padding_bottom": 0,
+        "padding_bottom": 30,
         "heading_tag": "automatic"
       }
     },
