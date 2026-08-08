@@ -49,6 +49,30 @@
     padding-left: var(--outer) !important;
     padding-right: var(--outer) !important;
   }
+
+  {%- if widget_type == 'featured_carousel' -%}
+    /* Best-effort: stretch the carousel (and its slide media) to fill
+       this height. Klaviyo renders its own DOM inside #klaviyo-
+       featured-reviews-carousel, so this can only reach elements that
+       don't have their own fixed height set by Klaviyo's widget script
+       — if a slide still looks letterboxed after publishing, set the
+       actual height from Klaviyo: open the widget > Layout & style. */
+    #KlaviyoReviews--{{ section.id }} .kr__widget-holder {
+      min-height: {{ section.settings.carousel_height }}vh;
+      display: flex;
+    }
+    #KlaviyoReviews--{{ section.id }} .kr__widget-holder,
+    #KlaviyoReviews--{{ section.id }} .kr__widget-holder > *,
+    #KlaviyoReviews--{{ section.id }} #klaviyo-featured-reviews-carousel,
+    #KlaviyoReviews--{{ section.id }} #klaviyo-featured-reviews-carousel > * {
+      height: 100%;
+      width: 100%;
+    }
+    #KlaviyoReviews--{{ section.id }} .kr__widget-holder img {
+      height: 100% !important;
+      object-fit: cover !important;
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
 <section
@@ -100,10 +124,6 @@
   .kr__rating-badge {
     display: inline-flex;
     margin-bottom: 16px;
-  }
-
-  .kr__widget-holder {
-    min-height: 40px;
   }
 </style>
 
@@ -201,6 +221,18 @@
         {"value": "all_reviews", "label": "All reviews (SEO wall)"}
       ],
       "info": "Star rating, review summary, review list, and product reviews all require a specific product, so they belong on the product page (Klaviyo's own Product reviews widget block), not here.\n\nOne-time setup in Klaviyo, before this renders anything:\n1. Reviews > Settings > Installation — confirm the site script is installed (Shopify 2.0 stores usually have this on already).\n2. For the carousel: Reviews > All reviews, then click Feature next to each review you want shown here.\n3. Card colors/fonts/spacing are styled from inside Klaviyo, not this theme: open the widget, then Layout & style."
+    },
+    {
+      "type": "range",
+      "id": "carousel_height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Carousel height",
+      "default": 80,
+      "visible_if": "{{ section.settings.widget_type == 'featured_carousel' }}",
+      "info": "Stretches the carousel to this height. Only reaches elements Klaviyo hasn't already given a fixed height — if a slide still shows empty space, set the height inside Klaviyo instead: open the widget > Layout & style."
     },
     {
       "type": "header",
