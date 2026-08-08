@@ -301,7 +301,12 @@
           "settings": {
             "video": "shopify://files/videos/morninng.mp4",
             "link": "shopify://products/x-transdry-brief-black",
-            "badge_text": "X TransDRY® Brief"
+            "badge_text": "X TransDRY® Brief",
+            "badge_bg_color": "#000000",
+            "badge_text_color": "#ffffff",
+            "badge_text_size": 12,
+            "badge_border_color": "#000000",
+            "badge_border_width": 0
           }
         },
         "vid-1": {
@@ -309,7 +314,12 @@
           "settings": {
             "image": "shopify://shop_images/Justin_Foo_-_Hero_Image_4_5_Portrait.jpg",
             "link": "shopify://products/y-transdry-brief-white",
-            "badge_text": "Y TransDRY® Brief"
+            "badge_text": "Y TransDRY® Brief",
+            "badge_bg_color": "#000000",
+            "badge_text_color": "#ffffff",
+            "badge_text_size": 12,
+            "badge_border_color": "#000000",
+            "badge_border_width": 0
           }
         },
         "vid-2": {
@@ -317,7 +327,12 @@
           "settings": {
             "image": "shopify://shop_images/LP_-_ethan-001_-_Ethan_Cheng_4_5.jpg",
             "link": "shopify://products/the-brief-lover",
-            "badge_text": "Brief Lover Duo"
+            "badge_text": "Brief Lover Duo",
+            "badge_bg_color": "#000000",
+            "badge_text_color": "#ffffff",
+            "badge_text_size": 12,
+            "badge_border_color": "#000000",
+            "badge_border_width": 0
           }
         },
         "vid-3": {
@@ -325,7 +340,12 @@
           "settings": {
             "image": "shopify://shop_images/In_TRIIIPLE.jpg",
             "link": "shopify://products/daily-trunks-four",
-            "badge_text": "Daily Trunks Four"
+            "badge_text": "Daily Trunks Four",
+            "badge_bg_color": "#000000",
+            "badge_text_color": "#ffffff",
+            "badge_text_size": 12,
+            "badge_border_color": "#000000",
+            "badge_border_width": 0
           }
         },
         "vid-4": {
@@ -333,7 +353,12 @@
           "settings": {
             "image": "shopify://shop_images/11EC33D4-E96E-439A-9B7F-A86952515689_L0_001-05_10_2025_8_44_09_AM.jpg",
             "link": "shopify://products/ed-dual-t-shirt-bundle",
-            "badge_text": "ED Cotton Spandex T-shirt"
+            "badge_text": "ED Cotton Spandex T-shirt",
+            "badge_bg_color": "#000000",
+            "badge_text_color": "#ffffff",
+            "badge_text_size": 12,
+            "badge_border_color": "#000000",
+            "badge_border_width": 0
           }
         }
       },
@@ -356,7 +381,7 @@
         "blocks_per_row": 4,
         "layout_mobile": "slider",
         "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
-        "padding_top": 0,
+        "padding_top": 30,
         "padding_bottom": 0,
         "heading_tag": "h4"
       }
@@ -384,21 +409,6 @@
         "urgency_text": "<h6><strong>Buy 3 — 15% off </strong></h6><h6><strong>Buy 5 — 25% off</strong></h6>"
       }
     },
-    "178359954937ab782c": {
-      "type": "apps",
-      "blocks": {
-        "klaviyo_reviews_featured_reviews_carousel_DBTGYV": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "klaviyo_reviews_featured_reviews_carousel_DBTGYV"
-      ],
-      "settings": {
-        "include_margins": false
-      }
-    },
     "homepage-brand-story": {
       "type": "sale-brand-story",
       "custom_css": [
@@ -416,24 +426,6 @@
         "body": "<p>TRIIPLE believes your first layer is crafted with precision, not simply produced. Every fibre and stitch is purposefully chosen — this is the foundation, never the ordinary.</p>",
         "image": "shopify://shop_images/image-1773771710888.jpg"
       }
-    },
-    "klaviyo_reviews_home": {
-      "type": "section-klaviyo-reviews",
-      "settings": {
-        "rating_badge_text": "★★★★★ 4.9 · 200+ reviews",
-        "badge_bg_color": "#000000",
-        "badge_text_color": "#ffffff",
-        "heading": "Loved by the community.",
-        "heading_font_size": "heading-medium",
-        "text": "<p>Real reviews from real customers.</p>",
-        "text_font_size": "body-medium",
-        "align_text": "text-center",
-        "widget_type": "featured_carousel",
-        "width": "wrapper--full-padded",
-        "color_scheme": "scheme-cc608ce1-37c5-4c1c-b009-b8166cb530d5",
-        "padding_top": 50,
-        "padding_bottom": 50
-      }
     }
   },
   "order": [
@@ -443,9 +435,7 @@
     "features-strip",
     "section_hero_ALw4gQ",
     "homepage-social",
-    "klaviyo_reviews_home",
     "sale_hero_8Vwb7N",
-    "178359954937ab782c",
     "homepage-brand-story"
   ]
 }
