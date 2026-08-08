@@ -14,14 +14,14 @@
       "custom_css": [],
       "settings": {
         "enable_sort": true,
-        "enable_filters": true,
+        "enable_filters": false,
         "filter_layout": "slide-out",
         "default_open": true,
         "collection_linklist": "",
         "grid": 3,
         "grid_mobile": "2",
         "products_per_page": 24,
-        "color_scheme": "scheme-9b3afd14-67ff-4f68-a798-655d45b5f34b",
+        "color_scheme": "scheme-3",
         "padding_top": 18,
         "padding_bottom": 40
       }

@@ -16,7 +16,6 @@
       "blocks": {
         "text_Dpc9YJ": {
           "type": "text",
-          "disabled": true,
           "settings": {
             "text": "<p><a href=\"/pages/unlock-first-layer-perks\" target=\"_blank\" title=\"Unlock First Layer Perks\"><strong>New customers save 10% with code TRIIIPLE10</strong></a><strong>.</strong></p>",
             "target_url_enabled": true,
@@ -29,7 +28,6 @@
         },
         "message_Y6tLRR": {
           "type": "message",
-          "disabled": true,
           "settings": {
             "show_wheel": true,
             "message": "You are ||amount|| away from free shipping.",
@@ -46,6 +44,7 @@
         "text_Dpc9YJ",
         "message_Y6tLRR"
       ],
+      "disabled": true,
       "settings": {
         "show_border": false,
         "layout": "slider",
