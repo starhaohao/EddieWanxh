@@ -90,8 +90,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
-  border-radius: var(--radius);
+  background: none;
 }
 
 .social-video__button .icon-pause {
