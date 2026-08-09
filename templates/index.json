@@ -84,7 +84,7 @@
       "settings": {
         "image_ratio": "9 / 16",
         "image_ratio_desktop": "4 / 3",
-        "caption_lift": 20,
+        "caption_lift": 36,
         "autoplay": true,
         "autoplay_interval": 5000,
         "aria_label": "Campaign highlights",
@@ -125,7 +125,7 @@
         "subtext_size": 12,
         "input_size": 13,
         "button_size": 12,
-        "margin_top": 0,
+        "margin_top": 20,
         "margin_bottom": 0,
         "padding_top": 24,
         "padding_bottom": 24,
