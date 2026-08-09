@@ -41,7 +41,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/6_2a44df0f-7692-4ef7-a165-57fc699055a5.jpg",
-            "focal_desktop": "",
+            "focal_desktop": "70% 30%",
             "micro_label": "{{ metaobjects.fabric_profile[\"cotton-spandex\"].fabric_name.value }}",
             "title": "{{ metaobjects.triiiple_product_content[\"v-brief\"].display_name.value }}",
             "price": "{{ metaobjects.triiiple_product_content[\"y-brief\"].signature_quote.value }}",
