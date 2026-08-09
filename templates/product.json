@@ -180,7 +180,7 @@
         "video_autoplay": true,
         "video_loop": true,
         "video_muted": true,
-        "video_controls": false
+        "video_controls": true
       }
     },
     "product_detail_story_A9DYNb": {
@@ -362,8 +362,8 @@
         "accent_color": "#4a1024",
         "padding_top": 80,
         "padding_bottom": 80,
-        "padding_left": 44,
-        "padding_right": 44
+        "padding_left": 14,
+        "padding_right": 14
       }
     },
     "product-framework": {
