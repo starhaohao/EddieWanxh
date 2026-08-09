@@ -180,15 +180,18 @@
           "featured_products": [
             "the-five"
           ],
-          "background_color": "#FFFFFF",
+          "background_color": "#57F32C",
           "font_color": "#000000",
-          "button_color": "#01384A",
-          "button_icon": "chat_bubble",
-          "button_text": "no_text",
+          "agent_invert_activator_colors": false,
+          "button_color": "#01384a",
+          "button_icon": "question_mark",
+          "button_text": "chat_with_us",
           "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "highest",
+          "button_vertical_position": "higher",
           "agent_inherit_fonts": true,
           "agent_font": "system_ui_n4",
+          "agent_font_size": 14,
+          "agent_activator_font_size": 13,
           "agent_border_radius": 16
         }
       }
@@ -449,7 +452,7 @@
       "scheme-f8c3f3f9-2f45-4353-8427-d25210a2a3bc": {
         "settings": {
           "section_text": "#000000",
-          "section_bg": "#FFFFFF",
+          "section_bg": "#ffffff",
           "section_bg_light": "#ffffff",
           "section_bg_gradient": "",
           "btn_primary_bg": "#979797",
