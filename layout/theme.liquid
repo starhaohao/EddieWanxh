@@ -82,9 +82,16 @@
 }
 
 /* Mobile menu — slide down from top.
-   z-index raised above .header-sections (100) and .social-sticky-bar (99)
-   so the fully-open menu always renders on top of the persistent header
-   bar instead of being covered by it. */
+   z-index raised above .header-sections (100), .social-sticky-bar (99),
+   AND the header's own .js__header__stuck state (5600, set natively in
+   theme.css once the page has been scrolled — see the sticky-header rule
+   below) so the fully-open menu always renders on top of the persistent
+   header bar instead of being covered by it. 150 used to be enough while
+   the header sat at its unscrolled z-index of 100, but once the user had
+   scrolled before opening the menu, the header's stuck z-index of 5600
+   put it back on top of the menu. 6001 matches the z-index the theme's
+   own .drawer__inner already uses natively for the cart drawer, which
+   sits above the stuck header for the same reason. */
 @media screen and (max-width: 749px) {
   .drawer.drawer--header {
     position: fixed !important;
@@ -93,7 +100,7 @@
     right: 0 !important;
     bottom: 0 !important;
     width: 100% !important;
-    z-index: 150 !important;
+    z-index: 6001 !important;
     transform: translateY(-100%) !important;
   }
   .drawer.drawer--header.is-open {
@@ -107,7 +114,7 @@
     max-width: 100% !important;
     max-height: 85vh !important;
     overflow-y: auto !important;
-    z-index: 150 !important;
+    z-index: 6001 !important;
   }
 }
 
