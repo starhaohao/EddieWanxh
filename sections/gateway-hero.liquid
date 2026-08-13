@@ -325,6 +325,20 @@
     text-decoration: none;
     color: #fff;
   }
+  /* Scrim behind the caption so the title stays legible even when the
+     underlying image is light there (e.g. a pale backdrop/garment) —
+     without this, white caption text can blend into the photo. */
+  #{{ uid }} .gh__slide-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.26) 50%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
   #{{ uid }} .gh__img,
   #{{ uid }} .gh__img--placeholder {
     position: absolute;
@@ -360,6 +374,7 @@
     letter-spacing: 0.16em;
     line-height: 1;
     opacity: 0.92;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
   }
   /* Badge treatment for the micro label: bordered chip, adjustable height. */
   #{{ uid }} .gh__micro--badge {
@@ -379,11 +394,13 @@
     font-size: 32px;
     line-height: 0.96;
     letter-spacing: -0.04em;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
   }
   #{{ uid }} .gh__price {
     margin: 0;
     font-size: 13px;
     letter-spacing: 0.01em;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
   }
   #{{ uid }} .gh__cta.btn {
     border-radius: 0 !important;
