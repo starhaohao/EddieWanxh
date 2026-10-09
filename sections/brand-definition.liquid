@@ -1,0 +1,260 @@
+{%- comment -%}
+  Brand Definition — editorial banner
+  Desktop (>=750px): centred text above up to three equal image panels.
+  Mobile (<750px): text on the left beside image 1; images 2 + 3 side by side below.
+
+  Typography and spacing come from the Broadcast theme:
+  - .section-padding (--PT / --PB / --PT-MOBILE) for vertical spacing and --outer side margins
+  - --gutter for the gap between panels and between text and images
+  - .subheading (eyebrow + captions), .hero__title + .heading-* (heading), .hero__rte + .body-* (text),
+    .btn.btn--text (link), .color-{scheme} (--text / --bg)
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign color_scheme = 'color-' | append: s.color_scheme
+  assign image_blocks = section.blocks | where: 'type', 'image'
+  assign count = image_blocks.size
+  if count == 0
+    assign count = 3
+  endif
+  if section.index > 2
+    assign loading = 'lazy'
+  else
+    assign loading = 'eager'
+  endif
+  assign has_text = false
+  if s.subheading != blank or s.heading != blank or s.text != blank or s.link_label != blank
+    assign has_text = true
+  endif
+-%}
+
+<section
+  id="BrandDefinition--{{ section.id }}"
+  class="bd section-padding {{ color_scheme }}"
+  style="--PT: {{ s.padding_top }}px; --PB: {{ s.padding_bottom }}px; --PT-MOBILE: {{ s.padding_top_mobile }}px; --bd-pb-mobile: {{ s.padding_bottom_mobile }}px; --bd-count: {{ count }}; --bd-ratio: {{ s.image_ratio }}; --bd-ratio-mobile: {{ s.image_ratio_mobile }};"
+>
+  <div class="bd__grid bd__grid--align-{{ s.mobile_text_align }}">
+    {%- if has_text -%}
+      <div class="bd__content">
+        {%- if s.subheading != blank -%}
+          <p class="hero__subheading subheading">{{ s.subheading }}</p>
+        {%- endif -%}
+        {%- if s.heading != blank -%}
+          <h2 class="hero__title {{ s.heading_size }}">{{ s.heading }}</h2>
+        {%- endif -%}
+        {%- if s.text != blank -%}
+          <div class="hero__rte {{ s.text_size }}">{{ s.text }}</div>
+        {%- endif -%}
+        {%- if s.link_label != blank and s.link != blank -%}
+          <a href="{{ s.link }}" class="bd__cta btn btn--text"><span>{{ s.link_label }}</span></a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if image_blocks.size > 0 -%}
+      {%- for block in image_blocks limit: 3 -%}
+        {%- liquid
+          assign image = block.settings.image
+          assign pos = block.settings.image_position
+          if pos == 'focal' and image != blank
+            assign pos = image.presentation.focal_point
+          endif
+          assign pos = pos | default: 'center center'
+          assign img_style = 'object-position: ' | append: pos | append: ';'
+        -%}
+        <figure class="bd__panel" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="bd__link" aria-label="{{ block.settings.caption | default: image.alt | default: shop.name | strip_html | escape }}">{%- endif -%}
+          <div class="bd__media">
+            {%- if image != blank -%}
+              {{ image | image_url: width: 1800 | image_tag:
+                class: 'bd__img',
+                style: img_style,
+                loading: loading,
+                alt: image.alt,
+                sizes: '(min-width: 750px) 33vw, 50vw',
+                widths: '375, 550, 750, 1100, 1500, 1800'
+              }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'bd__img bd__placeholder' }}
+            {%- endif -%}
+          </div>
+          {%- if block.settings.link != blank -%}</a>{%- endif -%}
+          {%- if block.settings.caption != blank -%}
+            <figcaption class="bd__caption subheading">{{ block.settings.caption }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..3) -%}
+        <figure class="bd__panel">
+          <div class="bd__media">{{ 'lifestyle-1' | placeholder_svg_tag: 'bd__img bd__placeholder' }}</div>
+        </figure>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  /* Mobile: 2 columns — text | image 1, then image 2 | image 3. Gap = theme --gutter. */
+  #BrandDefinition--{{ section.id }} .bd__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gutter);
+  }
+  #BrandDefinition--{{ section.id }} .bd__grid--align-top .bd__content { align-self: start; }
+  #BrandDefinition--{{ section.id }} .bd__grid--align-center .bd__content { align-self: center; }
+  #BrandDefinition--{{ section.id }} .bd__grid--align-bottom .bd__content { align-self: end; }
+
+  #BrandDefinition--{{ section.id }} .bd__content {
+    min-width: 0;
+    text-align: left;
+    color: var(--text);
+  }
+  #BrandDefinition--{{ section.id }} .hero__title,
+  #BrandDefinition--{{ section.id }} .hero__rte,
+  #BrandDefinition--{{ section.id }} .hero__subheading { color: var(--text); }
+  #BrandDefinition--{{ section.id }} .hero__title { margin-top: 0; }
+  #BrandDefinition--{{ section.id }} .bd__content > :last-child { margin-bottom: 0; }
+  #BrandDefinition--{{ section.id }} .bd__cta { --btn-text: var(--text, currentColor); }
+
+  #BrandDefinition--{{ section.id }} .bd__panel { margin: 0; min-width: 0; }
+  #BrandDefinition--{{ section.id }} .bd__link { display: block; }
+  #BrandDefinition--{{ section.id }} .bd__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: var(--bd-ratio-mobile);
+    background: var(--bg-accent, var(--bg));
+  }
+  #BrandDefinition--{{ section.id }} .bd__img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #BrandDefinition--{{ section.id }} .bd__caption {
+    margin: var(--line) 0 0;
+    color: var(--text);
+  }
+
+  @media only screen and (max-width: 749px) {
+    #BrandDefinition--{{ section.id }} { padding-bottom: var(--bd-pb-mobile); }
+  }
+
+  /* Tablet + desktop: centred text row above equal image columns. */
+  @media only screen and (min-width: 750px) {
+    #BrandDefinition--{{ section.id }} .bd__grid {
+      grid-template-columns: repeat(var(--bd-count), minmax(0, 1fr));
+    }
+    #BrandDefinition--{{ section.id }} .bd__content {
+      grid-column: 1 / -1;
+      justify-self: center;
+      align-self: auto;
+      max-width: 45em;
+      padding-bottom: var(--gutter);
+      text-align: center;
+    }
+    #BrandDefinition--{{ section.id }} .bd__media { aspect-ratio: var(--bd-ratio); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Brand definition",
+  "class": "section-brand-definition",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "TRIIIPLE STUDIO" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The first layer, considered." },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "heading-medium",
+      "options": [
+        { "value": "heading-x-small", "label": "Extra small" },
+        { "value": "heading-small", "label": "Small" },
+        { "value": "heading-medium", "label": "Medium" },
+        { "value": "heading-large", "label": "Large" }
+      ]
+    },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Essentials designed in Singapore, made to sit closest to you. Honest fabrics, precise fits and nothing that does not need to be there.</p>" },
+    {
+      "type": "select", "id": "text_size", "label": "Text size", "default": "body-medium",
+      "options": [
+        { "value": "body-x-small", "label": "Extra small" },
+        { "value": "body-small", "label": "Small" },
+        { "value": "body-medium", "label": "Medium" },
+        { "value": "body-large", "label": "Large" }
+      ]
+    },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "text", "id": "link_label", "label": "Link label" },
+    {
+      "type": "select", "id": "mobile_text_align", "label": "Mobile text position beside image 1", "default": "center",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+    { "type": "header", "content": "Images" },
+    {
+      "type": "select", "id": "image_ratio", "label": "Desktop image ratio", "default": "3 / 4",
+      "options": [
+        { "value": "2 / 3", "label": "Portrait 2:3" },
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" }
+      ]
+    },
+    {
+      "type": "select", "id": "image_ratio_mobile", "label": "Mobile image ratio", "default": "3 / 4",
+      "options": [
+        { "value": "2 / 3", "label": "Portrait 2:3" },
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" }
+      ]
+    },
+    { "type": "header", "content": "Colors" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme_1" },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 60 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 36 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 36 }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image panel",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "1200 x 1600px recommended." },
+        {
+          "type": "select", "id": "image_position", "label": "Focal position", "default": "focal",
+          "options": [
+            { "value": "focal", "label": "Use image focal point" },
+            { "value": "center center", "label": "Center" },
+            { "value": "center top", "label": "Top" },
+            { "value": "center bottom", "label": "Bottom" }
+          ]
+        },
+        { "type": "text", "id": "caption", "label": "Caption" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand definition",
+      "blocks": [
+        { "type": "image", "settings": { "caption": "FABRIC" } },
+        { "type": "image", "settings": { "caption": "FIT" } },
+        { "type": "image", "settings": { "caption": "FORM" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
