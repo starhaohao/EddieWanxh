@@ -1,0 +1,631 @@
+{%- liquid
+  assign hero_left = section.settings.hero_left_product
+  assign hero_right = section.settings.hero_right_product
+  assign hero_left_image = section.settings.hero_left_image
+  assign hero_right_image = section.settings.hero_right_image
+  if hero_left_image == blank
+    assign hero_left_image = hero_left.featured_image
+  endif
+  if hero_right_image == blank
+    assign hero_right_image = hero_right.featured_image
+  endif
+  assign hero_left_link = section.settings.hero_left_link | default: hero_left.url
+  assign hero_right_link = section.settings.hero_right_link | default: hero_right.url | default: section.settings.limited_collection.url
+  assign limited_drop = section.settings.limited_collection
+  assign feature_image = section.settings.feature_image
+  if feature_image == blank
+    assign feature_image = limited_drop.products.first.featured_image
+  endif
+  assign feature_link = section.settings.feature_link
+  if feature_link == blank and section.settings.feature_page != blank
+    assign feature_link = section.settings.feature_page.url
+  endif
+  if feature_link == blank
+    assign feature_link = limited_drop.url
+  endif
+  assign salon_entry = section.settings.salon_entry
+  if salon_entry == blank
+    assign salon_entry = metaobjects.story_salon['with-justin-foo']
+  endif
+  assign salon_heading = section.settings.drop_heading
+  assign salon_description = section.settings.feature_description
+  assign craft_heading = section.settings.craft_heading
+  assign craft_body = section.settings.craft_body
+  assign craft_link = section.settings.craft_link | default: section.settings.story_page.url
+  if salon_entry != blank
+    assign salon_heading = salon_heading | default: salon_entry.tagline.value
+    assign salon_description = salon_description | default: salon_entry.theme.value
+    assign craft_heading = craft_heading | default: salon_entry.name.value
+    assign craft_body = craft_body | default: salon_entry.pull_quote.value
+    assign salon_url = salon_entry.blog_post.value.url | default: salon_entry.page.value.url | default: salon_entry.system.url
+    assign feature_link = feature_link | default: salon_url
+    assign craft_link = craft_link | default: salon_url
+    if feature_image == blank
+      assign feature_image = salon_entry.hero_image.value
+    endif
+  endif
+  assign story_product = section.settings.story_product
+  assign craft_product = section.settings.craft_product
+  assign story_left_image = section.settings.story_left_image | default: story_product.media[1].preview_image | default: story_product.featured_image
+  assign story_right_image = section.settings.story_right_image | default: story_product.featured_image
+  assign salon_slides = section.blocks | where: 'type', 'salon_slide'
+  assign story_heading = section.settings.story_heading
+  assign story_body = section.settings.story_body
+  assign story_link = section.settings.essentials_collection.url
+  if story_product != blank
+    assign story_link = story_product.url
+    if section.settings.story_use_product_content
+      assign story_heading = story_product.metafields.custom.display_name.value | default: story_product.title
+      assign story_body = story_product.description | strip_html | strip | truncate: 220
+    endif
+  endif
+-%}
+
+{%- capture action_arrow -%}
+  <svg class="teh__action-arrow" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+{%- endcapture -%}
+
+<div class="teh">
+
+
+  <section class="teh__hero">
+    <div class="teh__hero-panel teh__hero-panel--left">
+      {%- if hero_left_image != blank -%}
+        {{ hero_left_image | image_url: width: 1350 | image_tag: widths: '540, 720, 900, 1080, 1350', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'eager', fetchpriority: 'high', class: 'teh__image' }}
+      {%- endif -%}
+      <div class="teh__panel-copy">
+        <h1>{{ section.settings.hero_left_heading }}</h1>
+        {%- if hero_left_link != blank -%}
+          <a class="teh__button teh__button--light" href="{{ hero_left_link }}">{{ section.settings.hero_left_cta }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="teh__hero-panel teh__hero-panel--right">
+      {%- if hero_right_image != blank -%}
+        {{ hero_right_image | image_url: width: 1350 | image_tag: widths: '540, 720, 900, 1080, 1350', sizes: '(min-width: 750px) 50vw, 100vw', loading: 'eager', fetchpriority: 'high', class: 'teh__image' }}
+      {%- endif -%}
+      <div class="teh__panel-copy teh__panel-copy--limited">
+        <h2>{{ section.settings.hero_right_heading }}</h2>
+        {%- if hero_right_link != blank -%}
+          <a class="teh__button teh__button--light" href="{{ hero_right_link }}">{{ section.settings.hero_right_cta }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="teh__action">
+    <h2>{{ section.settings.action_heading }}</h2>
+    <div class="teh__action-grid">
+      <a class="teh__action-button" style="--action-link-color: {{ section.settings.action_color_1 | default: '#2a2a2a' }};" href="{{ section.settings.action_collection_1.url }}"><span>{{ section.settings.action_label_1 | escape }}</span>{{ action_arrow }}</a>
+      <a class="teh__action-button" style="--action-link-color: {{ section.settings.action_color_2 | default: '#2a2a2a' }};" href="{{ section.settings.action_url_2 | default: section.settings.action_collection_2.url }}"><span>{{ section.settings.action_label_2 | escape }}</span>{{ action_arrow }}</a>
+      <a class="teh__action-button" style="--action-link-color: {{ section.settings.action_color_3 | default: '#2a2a2a' }};" href="{{ section.settings.action_collection_3.url }}"><span>{{ section.settings.action_label_3 | escape }}</span>{{ action_arrow }}</a>
+      <a class="teh__action-button" style="--action-link-color: {{ section.settings.action_color_4 | default: '#ff5a1f' }};" href="{{ section.settings.action_collection_4.url }}"><span>{{ section.settings.action_label_4 | escape }}</span>{{ action_arrow }}</a>
+    </div>
+  </section>
+
+  <section class="teh__categories">
+    <div class="teh__section-head">
+      <h2>{{ section.settings.category_heading }}</h2>
+      <a class="teh__view-all teh__text-action" style="--action-link-color: {{ section.settings.category_link_color | default: '#2a2a2a' }};" href="{{ section.settings.showcase_collection.url }}"><span>{{ section.settings.category_view_all | escape }}</span>{{ action_arrow }}</a>
+    </div>
+    <div class="teh__category-track">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'category' -%}
+          {%- assign card_collection = block.settings.collection -%}
+          <a class="teh__category-card" href="{{ card_collection.url }}" {{ block.shopify_attributes }}>
+            <div class="teh__media">
+              {%- if block.settings.product != blank and block.settings.product.featured_image != blank -%}
+                {{ block.settings.product.featured_image | image_url: width: 1200 | image_tag: widths: '420, 640, 900, 1200', sizes: '(min-width: 750px) 33vw, 82vw', loading: 'lazy', class: 'teh__image' }}
+              {%- elsif card_collection.image != blank -%}
+                {{ card_collection.image | image_url: width: 1200 | image_tag: widths: '420, 640, 900, 1200', sizes: '(min-width: 750px) 33vw, 82vw', loading: 'lazy', class: 'teh__image' }}
+              {%- endif -%}
+            </div>
+            <span>{{ block.settings.label | default: card_collection.title | escape }}</span>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+
+
+  <section class="teh__story">
+    <div class="teh__story-detail">
+      {%- if story_left_image != blank -%}
+        {{ story_left_image | image_url: width: 1200 | image_tag: widths: '500, 800, 1000, 1200', sizes: '(min-width: 750px) 40vw, 100vw', loading: 'lazy', class: 'teh__image' }}
+      {%- endif -%}
+    </div>
+    <div class="teh__story-form">
+      {%- if story_right_image != blank -%}
+        {{ story_right_image | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 750px) 60vw, 100vw', loading: 'lazy', class: 'teh__image' }}
+      {%- endif -%}
+      <div class="teh__story-copy">
+        <h2>{{ story_heading | escape }}</h2>
+        <p>{{ story_body | escape }}</p>
+        <a class="teh__button teh__button--light" href="{{ story_link }}">{{ section.settings.story_cta }}</a>
+      </div>
+    </div>
+  </section>
+
+  {%- if salon_slides.size > 0 -%}
+    <triiiple-story-carousel class="teh__salon" aria-label="{{ section.settings.drop_eyebrow | escape }}">
+      <div class="teh__salon-track" id="SalonTrack-{{ section.id }}" tabindex="0" role="region" aria-label="{{ section.settings.drop_eyebrow | escape }}">
+        {%- for block in salon_slides -%}
+          {%- liquid
+            assign slide_image = block.settings.image | default: block.settings.article.image
+            assign slide_title = block.settings.heading | default: block.settings.article.title | default: block.settings.page.title
+            assign slide_link = block.settings.link | default: block.settings.page.url | default: block.settings.article.url
+          -%}
+          <section class="teh__feature teh__salon-slide" data-salon-slide aria-label="{{ forloop.index }} / {{ forloop.length }} — {{ slide_title | escape }}" {{ block.shopify_attributes }}>
+            {%- if slide_image != blank -%}
+              {{ slide_image | image_url: width: 2400 | image_tag: widths: '540, 800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy', class: 'teh__image' }}
+            {%- endif -%}
+            <p class="teh__eyebrow teh__feature-eyebrow">{{ block.settings.eyebrow | default: section.settings.drop_eyebrow | escape }}</p>
+            <div class="teh__feature-copy">
+              <h2>{{ slide_title | escape }}</h2>
+              {%- if block.settings.description != blank -%}<p class="teh__feature-description">{{ block.settings.description | escape | newline_to_br }}</p>{%- endif -%}
+              {%- if slide_link != blank -%}<a class="teh__button teh__button--light" href="{{ slide_link }}">{{ block.settings.button_label | escape }}</a>{%- endif -%}
+            </div>
+          </section>
+        {%- endfor -%}
+      </div>
+      {%- if salon_slides.size > 1 -%}
+        <div class="teh__salon-controls">
+          {%- for block in salon_slides -%}
+            <button type="button" data-salon-index="{{ forloop.index0 }}" aria-controls="SalonTrack-{{ section.id }}" aria-label="{{ block.settings.heading | default: block.settings.page.title | default: block.settings.article.title | escape }}" {% if forloop.first %}aria-current="true"{% endif %}><span aria-hidden="true"></span></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </triiiple-story-carousel>
+  {%- else -%}
+  <section class="teh__feature">
+    {%- if feature_image != blank -%}
+      {{ feature_image | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy', class: 'teh__image' }}
+    {%- endif -%}
+    <p class="teh__eyebrow teh__feature-eyebrow">{{ section.settings.drop_eyebrow }}</p>
+    <div class="teh__feature-copy">
+      <h2>{{ salon_heading | escape }}</h2>
+      {%- if salon_description != blank -%}
+        <p class="teh__feature-description">{{ salon_description | escape | newline_to_br }}</p>
+      {%- endif -%}
+      {%- if feature_link != blank -%}
+        <a class="teh__button teh__button--light" href="{{ feature_link }}">{{ section.settings.drop_cta }}</a>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- endif -%}
+
+  <section class="teh__edit">
+    <div class="teh__section-head">
+      <h2>{{ section.settings.edit_heading }}</h2>
+    </div>
+    {%- if section.settings.edit_supporting_line != blank or section.settings.edit_offer_text != blank -%}
+      <div class="teh__edit-notes">
+        {%- if section.settings.edit_supporting_line != blank -%}<p>{{ section.settings.edit_supporting_line | escape }}</p>{%- endif -%}
+        {%- if section.settings.edit_offer_text != blank -%}<p class="teh__edit-offer" style="--action-link-color: {{ section.settings.edit_offer_color | default: '#ff8a57' }};">{% if section.settings.edit_offer_link != blank %}<a class="teh__text-action" href="{{ section.settings.edit_offer_link }}"><span>{{ section.settings.edit_offer_text | escape }}</span>{{ action_arrow }}</a>{% else %}{{ section.settings.edit_offer_text | escape }}{% endif %}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+    <div class="teh__product-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'product' and block.settings.product != blank -%}
+          {%- assign featured_product = block.settings.product -%}
+          <a class="teh__product" href="{{ featured_product.url }}" {{ block.shopify_attributes }}>
+            <div class="teh__media">
+              {{ featured_product.featured_image | image_url: width: 1000 | image_tag: widths: '360, 520, 760, 1000', sizes: '(min-width: 750px) 25vw, 50vw', loading: 'lazy', class: 'teh__image' }}
+            </div>
+            <div class="teh__product-meta">
+              <span>{{ featured_product.metafields.custom.display_name.value | default: featured_product.title }}</span>
+              {%- unless featured_product.available -%}<span class="teh__sold-out">SOLD OUT</span>{%- endunless -%}
+              <span class="teh__prices">
+                {%- if featured_product.compare_at_price > featured_product.price -%}
+                  <s>{{ featured_product.compare_at_price | money_with_currency }}</s>
+                {%- endif -%}
+                <span>{{ featured_product.price | money_with_currency }}</span>
+              </span>
+            </div>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <section class="teh__craft">
+    <div class="teh__craft-media">
+      {%- if section.settings.craft_video != blank -%}
+        {{ section.settings.craft_video | video_tag: autoplay: true, loop: true, muted: true, controls: true, playsinline: true, class: 'teh__craft-asset' }}
+      {%- elsif section.settings.craft_image != blank -%}
+        {{ section.settings.craft_image | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1600, 1800', sizes: '(min-width: 750px) 55vw, 100vw', loading: 'lazy', class: 'teh__image' }}
+      {%- elsif craft_product != blank and craft_product.featured_image != blank -%}
+        {{ craft_product.featured_image | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 750px) 55vw, 100vw', loading: 'lazy', class: 'teh__image' }}
+      {%- endif -%}
+    </div>
+    <div class="teh__craft-copy">
+      <h2>{{ craft_heading | escape }}</h2>
+      <p>{{ craft_body | escape | newline_to_br }}</p>
+      <a class="teh__button teh__button--dark" href="{{ craft_link }}">{{ section.settings.craft_cta }}</a>
+    </div>
+  </section>
+
+  <section class="teh__community">
+    <div class="teh__section-head">
+      <h2>{{ section.settings.community_heading }}</h2>
+      {%- if section.settings.instagram_url != blank -%}<a class="teh__view-all teh__text-action" style="--action-link-color: {{ section.settings.community_link_color | default: '#ffffff' }};" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener"><span>{{ section.settings.community_follow_label | escape }}</span>{{ action_arrow }}</a>{%- endif -%}
+    </div>
+    {%- if section.settings.community_supporting_line != blank -%}<p class="teh__community-note">{{ section.settings.community_supporting_line | escape }}</p>{%- endif -%}
+    <div class="teh__community-grid" tabindex="0" role="region" aria-label="{{ section.settings.community_heading | escape }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'community' -%}
+          {%- assign community_image = block.settings.image -%}
+          {%- if community_image == blank and block.settings.product != blank -%}
+            {%- assign community_image = block.settings.product.featured_image -%}
+          {%- endif -%}
+          {%- assign community_link = block.settings.link -%}
+          {%- if community_link == blank and block.settings.image == blank and block.settings.product != blank -%}
+            {%- assign community_link = block.settings.product.url -%}
+          {%- endif -%}
+          {%- assign community_link = community_link | default: section.settings.instagram_url -%}
+          {%- if community_image != blank -%}
+            <a href="{{ community_link }}" target="_blank" rel="noopener" class="teh__community-item" {{ block.shopify_attributes }}>
+              {{ community_image | image_url: width: 1080 | image_tag: widths: '360, 540, 720, 900, 1080', sizes: '(min-width: 768px) 26vw, 78vw', loading: 'lazy', class: 'teh__image' }}
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+</div>
+
+{% stylesheet %}
+  .teh { background: #000; color: #f4f4f0; }
+  .teh * { box-sizing: border-box; }
+  .teh__image { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .teh__hero { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #080808; }
+  .teh__hero-panel { position: relative; min-width: 0; aspect-ratio: 4 / 5; overflow: hidden; }
+  .teh__hero-panel--left { border-right: 1px solid rgba(255,255,255,.3); }
+  .teh__panel-copy { position: absolute; z-index: 2; inset: 28px 28px auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.55); }
+  .teh__panel-copy h1, .teh__panel-copy h2 { max-width: 320px; margin: 0; font-size: clamp(18px, 1.65vw, 28px); line-height: 1.15; font-weight: 400; letter-spacing: .01em; }
+  .teh__panel-copy--limited h2 { color: #ff5a1f; }
+  .teh__eyebrow { margin: 0 0 12px; font-size: 11px; line-height: 1.2; letter-spacing: .13em; text-transform: uppercase; }
+  .teh h1, .teh h2, .teh p { color: inherit; }
+  .teh h1 { max-width: 760px; margin: 0 0 24px; font-size: clamp(28px, 4vw, 58px); line-height: 1.05; font-weight: 400; letter-spacing: 0; }
+  .teh h2 { margin: 0; font-size: clamp(24px, 2.7vw, 42px); line-height: 1.12; font-weight: 400; letter-spacing: .005em; }
+  .teh__button { display: inline-flex; align-items: center; min-height: 42px; padding: 0 18px; border: 1px solid currentColor; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; transition: background-color .2s ease, color .2s ease; }
+  .teh__button--light { color: #fff; }
+  .teh__button--light:hover { background: #fff; color: #000; }
+  .teh__button--dark { color: #000; }
+  .teh__button--dark:hover { background: #000; color: #fff; }
+  .teh__action { display: flex; min-height: clamp(420px, 62vh, 720px); flex-direction: column; align-items: center; justify-content: center; padding: 72px 32px; background: #fff; color: #2a2a2a; text-align: center; }
+  .teh__action h2 { margin-bottom: 48px; font-size: clamp(22px, 2.35vw, 34px); font-weight: 400; letter-spacing: .01em; }
+  .teh__action-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 220px)); justify-content: center; gap: 14px; }
+  .teh__action-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 16px; border: 1px solid var(--action-link-color, #2a2a2a); color: var(--action-link-color, #2a2a2a); font-size: 11px; line-height: 1.25; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; transition: background-color .2s ease, color .2s ease; }
+  .teh__action-button:hover { background: var(--action-link-color, #2a2a2a); color: #fff; }
+  .teh__categories { padding-bottom: 84px; background: #efefed; color: #2a2a2a; }
+  .teh__section-head { display: flex; align-items: end; justify-content: space-between; padding: 26px 32px 20px; border-top: 1px solid rgba(255,255,255,.22); }
+  .teh__categories .teh__section-head { padding-top: 42px; border-top: 0; }
+  .teh__categories .teh__section-head h2 { font-size: clamp(21px, 2.1vw, 30px); font-weight: 400; }
+  .teh__view-all { color: inherit; font-size: 12px; text-underline-offset: 4px; }
+  .teh .teh__text-action { display: inline-flex; align-items: center; gap: 8px; color: var(--action-link-color, inherit); font-weight: 400; }
+  .teh__action-arrow { display: block; width: 18px; height: 18px; flex: 0 0 18px; }
+  .teh__text-action:focus-visible, .teh__action-button:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+  .teh__category-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; padding: 0 32px; }
+  .teh__category-card { min-width: 0; color: #000; text-decoration: none; }
+  .teh__category-card .teh__media { aspect-ratio: 4 / 5; overflow: hidden; }
+  .teh__category-card span { display: block; padding: 14px 0 0; font-size: 12px; line-height: 1.35; }
+  .teh__category-card .teh__image, .teh__product .teh__image { transition: transform .5s ease; }
+  .teh__category-card:hover .teh__image, .teh__product:hover .teh__image { transform: scale(1.025); }
+  .teh__feature { position: relative; min-height: 76vh; overflow: hidden; }
+  .teh__feature-copy { position: absolute; left: clamp(22px, 4vw, 64px); bottom: clamp(30px, 6vw, 80px); max-width: 680px; text-shadow: 0 2px 24px rgba(0,0,0,.6); }
+  .teh__feature-copy h2 { max-width: 560px; margin-bottom: 28px; font-size: clamp(26px, 3vw, 44px); }
+  .teh__story { display: grid; grid-template-columns: 2fr 3fr; min-height: 720px; }
+  .teh__story-detail, .teh__story-form { min-width: 0; overflow: hidden; }
+  .teh__story-form { position: relative; }
+  .teh__story-copy { position: absolute; left: 40px; right: 40px; bottom: 40px; max-width: 620px; }
+  .teh__story-copy p, .teh__craft-copy p { max-width: 540px; margin: 18px 0 24px; font-size: 14px; line-height: 1.65; }
+  .teh__edit { background: #000; }
+  .teh__edit-notes { display: flex; justify-content: space-between; gap: 12px 32px; padding: 0 32px 22px; font-size: 12px; line-height: 1.5; }
+  .teh__edit-notes p, .teh__community-note { margin: 0; }
+  .teh .teh__edit-offer { color: var(--action-link-color, #ff8a57); }
+  .teh__community-note { padding: 0 32px 20px; font-size: 12px; line-height: 1.5; }
+  .teh__product-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .teh__product { color: #fff; text-decoration: none; border-right: 1px solid rgba(255,255,255,.18); }
+  .teh__product .teh__media { aspect-ratio: 3 / 4; overflow: hidden; background: #111; }
+  .teh__product-meta { display: flex; justify-content: space-between; gap: 14px; padding: 14px 16px 24px; font-size: 11px; line-height: 1.35; text-transform: uppercase; }
+  .teh__prices { display: flex; justify-content: flex-end; gap: 8px; white-space: nowrap; }
+  .teh__prices s { color: rgba(255,255,255,.55); }
+  .teh__prices > span { color: #ff5a1f; }
+  .teh__craft { display: grid; grid-template-columns: 1.2fr .8fr; background: #e9e6df; color: #2a2a2a; }
+  .teh__craft-media { min-height: 650px; }
+  .teh__craft-asset { display: block; width: 100%; height: 100%; min-height: 650px; object-fit: cover; }
+  .teh__craft-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(44px, 7vw, 110px); }
+  .teh__community-grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; scroll-behavior: smooth; scroll-padding-inline: 32px; padding: 0 32px 16px; scrollbar-width: thin; }
+  .teh__community-item { flex: 0 0 clamp(220px, 26vw, 420px); aspect-ratio: 4 / 5; overflow: hidden; scroll-snap-align: start; }
+  .teh__community-grid:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+  @media (prefers-reduced-motion: reduce) { .teh__community-grid { scroll-behavior: auto; } }
+  @media screen and (max-width: 749px) {
+    .teh__hero { grid-template-columns: 1fr; min-height: 0; }
+    .teh__hero-panel { min-height: 0; aspect-ratio: 4 / 5; }
+    .teh__hero-panel--left { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.3); }
+    .teh__panel-copy { inset: auto 20px 22px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .teh__panel-copy h1, .teh__panel-copy h2 { max-width: 290px; font-size: clamp(24px, 7vw, 32px); line-height: 1.12; }
+    .teh__action { min-height: 480px; padding: 56px 20px; }
+    .teh__action h2 { margin-bottom: 30px; }
+    .teh__action-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .teh__action-button { min-height: 54px; }
+    .teh__categories { padding-bottom: 52px; }
+    .teh__categories .teh__section-head { padding: 32px 20px 18px; }
+    .teh__category-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
+    .teh__category-track { gap: 10px; width: calc(100% - 10px); margin-left: 10px; padding: 0 10px 14px 0; scrollbar-width: none; }
+    .teh__category-track::-webkit-scrollbar { display: none; }
+    .teh__category-card { flex: 0 0 78vw; scroll-snap-align: start; }
+    .teh__feature { min-height: 66svh; }
+    .teh__story { display: flex; flex-direction: column; min-height: 0; }
+    .teh__story-detail { aspect-ratio: 4 / 5; }
+    .teh__story-form { min-height: 72svh; }
+    .teh__story-copy { left: 20px; right: 20px; bottom: 24px; }
+    .teh__product-grid { grid-template-columns: repeat(2, 1fr); }
+    .teh__edit-notes { flex-direction: column; padding-inline: 20px; }
+    .teh__community-note { padding-inline: 20px; }
+    .teh__product-meta { flex-direction: column; padding: 12px 10px 20px; }
+    .teh__craft { grid-template-columns: 1fr; }
+    .teh__craft-media { min-height: 58svh; }
+    .teh__craft-asset { min-height: 58svh; }
+    .teh__craft-copy { padding: 60px 22px 70px; }
+    .teh__community-grid { padding-inline: 20px; scroll-padding-inline: 20px; }
+    .teh__community-item { flex-basis: 78vw; }
+
+  }
+
+  .teh__feature-eyebrow { position: absolute; z-index: 2; top: 28px; left: clamp(22px, 4vw, 64px); margin: 0; text-shadow: 0 2px 18px rgba(0,0,0,.6); }
+  .teh__feature-description { margin: 0 0 24px; max-width: 560px; font-size: 14px; line-height: 1.6; }
+  @media screen and (max-width: 767px) {
+    .teh__story { display: flex; flex-direction: column; min-height: 0; gap: 0; }
+    .teh__story-detail { aspect-ratio: 4 / 5; }
+    .teh__story-form { min-height: 0; width: 100%; }
+    .teh__story-form > .teh__image { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+    .teh__story-copy { position: static; width: 100%; max-width: none; padding: 24px 20px 32px; margin: 0; }
+    .teh__story-copy p { max-width: none; margin: 16px 0 24px; }
+    .teh__feature { display: flex; flex-direction: column; justify-content: space-between; min-height: 125vw; padding: 20px; gap: 48px; isolation: isolate; }
+    .teh__feature > .teh__image { position: absolute; inset: 0; height: 100%; width: 100%; z-index: -2; }
+    .teh__feature::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.3), transparent 35%, rgba(0,0,0,.6)); pointer-events: none; }
+    .teh__feature .teh__feature-eyebrow { position: static; margin: 0; }
+    body .teh__feature .teh__feature-copy { position: static; inset: auto; width: 100%; max-width: none; padding: 0; }
+    .teh__feature-copy h2 { margin-bottom: 16px; }
+    .teh__feature-description { max-width: none; margin-bottom: 24px; }
+    .teh__community .teh__section-head { padding-inline: 20px; }
+  }
+  .teh__salon { position: relative; display: block; background: #000; color: #fff; }
+  .teh__salon-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .teh__salon-track::-webkit-scrollbar { display: none; }
+  .teh__salon-slide { flex: 0 0 100%; width: 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; isolation: isolate; }
+  .teh__salon-slide > .teh__image { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+  .teh__salon-slide::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg,rgba(0,0,0,.25),transparent 35%,rgba(0,0,0,.65)); pointer-events: none; }
+  .teh__salon-controls { position: absolute; z-index: 3; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; justify-content: center; gap: 0; padding: 0; filter: drop-shadow(0 1px 3px rgba(0,0,0,.8)); }
+  @media screen and (max-width: 767px) { .teh__salon-slide { padding-bottom: 76px; } }
+  .teh__salon-controls button { position: relative; display: grid; place-items: center; flex: 0 0 28px; width: 28px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #fff; cursor: pointer; }
+  .teh__salon-controls button span { display: block; width: 6px; height: 6px; border-radius: 50%; background: #fff; opacity: .5; transition: opacity 180ms ease; }
+  .teh__salon-controls button::after { content: ''; position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; box-sizing: border-box; transform: translate(-50%, -50%); border: 1px solid #fff; border-radius: 50%; opacity: 0; transition: opacity 180ms ease; }
+  .teh__salon-controls button[aria-current='true'] span, .teh__salon-controls button[aria-current='true']::after { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .teh__salon-controls button span, .teh__salon-controls button::after { transition: none; } }
+  .teh__salon-controls button:focus-visible, .teh__salon-track:focus-visible { outline: 2px solid #ff8a57; outline-offset: -2px; }
+  @media screen and (max-width: 767px) { .teh__salon-slide { box-sizing: border-box; } }
+
+  .teh__community-grid { scrollbar-color: rgba(255,255,255,.38) transparent; }
+  .teh__community-grid::-webkit-scrollbar { height: 6px; background: transparent; }
+  .teh__community-grid::-webkit-scrollbar-track { background: transparent; }
+  .teh__community-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,.38); border-radius: 999px; }
+  @media screen and (max-width: 767px) {
+    .teh__craft { grid-template-columns: 1fr; }
+    .teh__craft-media { position: relative; width: 100%; aspect-ratio: 4 / 5; min-height: 0; overflow: hidden; }
+    .teh__craft-media > .teh__image, .teh__craft-media > .teh__craft-asset { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; object-fit: cover; }
+  }
+
+  @media screen and (max-width: 767px) {
+    .teh__salon-slide { aspect-ratio: 1080 / 1550; min-height: 0; }
+    .teh__edit .teh__section-head { padding-inline: 20px; }
+    .teh__edit-notes { flex-direction: column; padding-inline: 20px; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('triiiple-story-carousel')) {
+    customElements.define('triiiple-story-carousel', class extends HTMLElement {
+      connectedCallback() {
+        this.abortController = new AbortController();
+        const options = { signal: this.abortController.signal };
+        const track = this.querySelector('.teh__salon-track');
+        const slides = Array.from(this.querySelectorAll('[data-salon-slide]'));
+        const buttons = Array.from(this.querySelectorAll('[data-salon-index]'));
+        if (!track || !slides.length) return;
+        const current = () => Math.round(track.scrollLeft / track.clientWidth);
+        const go = (index) => {
+          const target = (index + slides.length) % slides.length;
+          track.scrollTo({ left: target * track.clientWidth, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+        };
+        this.addEventListener('click', (event) => {
+          const button = event.target.closest('button');
+          if (!button || !this.contains(button)) return;
+          if (button.hasAttribute('data-salon-index')) go(Number(button.dataset.salonIndex));
+          if (button.hasAttribute('data-salon-step')) go(current() + Number(button.dataset.salonStep));
+        }, options);
+        track.addEventListener('keydown', (event) => {
+          if (event.target !== track) return;
+          if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+            event.preventDefault(); go(current() + (event.key === 'ArrowRight' ? 1 : -1));
+          }
+        }, options);
+        track.addEventListener('scroll', () => {
+          buttons.forEach((button, index) => {
+            if (index === current()) button.setAttribute('aria-current', 'true');
+            else button.removeAttribute('aria-current');
+          });
+        }, { ...options, passive: true });
+        this.addEventListener('shopify:block:select', (event) => {
+          const index = slides.indexOf(event.target.closest('[data-salon-slide]'));
+          if (index >= 0) go(index);
+        }, options);
+      }
+      disconnectedCallback() { this.abortController?.abort(); }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "TRIIIPLE editorial home",
+  "settings": [
+    { "type": "color", "id": "action_color_1", "label": "Shopping link 1 color", "default": "#2a2a2a" },
+    { "type": "color", "id": "action_color_2", "label": "Shopping link 2 color", "default": "#2a2a2a" },
+    { "type": "color", "id": "action_color_3", "label": "Shopping link 3 color", "default": "#2a2a2a" },
+    { "type": "color", "id": "action_color_4", "label": "Shopping link 4 color", "default": "#ff5a1f" },
+    { "type": "color", "id": "category_link_color", "label": "View all link color", "default": "#2a2a2a" },
+    { "type": "color", "id": "community_link_color", "label": "Follow link color", "default": "#ffffff" },
+    { "type": "color", "id": "edit_offer_color", "label": "Offer reminder color", "default": "#ff8a57" },
+    { "type": "url", "id": "edit_offer_link", "label": "Offer reminder link", "info": "Optional. Select an accurate eligible collection to make the reminder a link." },
+    { "type": "product", "id": "hero_left_product", "label": "Hero left product" },
+    { "type": "product", "id": "hero_right_product", "label": "Hero right product" },
+    { "type": "image_picker", "id": "hero_left_image", "label": "Hero left image (recommended 1080 × 1350)" },
+    { "type": "image_picker", "id": "hero_right_image", "label": "Hero right image (recommended 1080 × 1350)" },
+    { "type": "url", "id": "hero_left_link", "label": "Hero left link" },
+    { "type": "url", "id": "hero_right_link", "label": "Hero right link" },
+    { "type": "text", "id": "hero_left_heading", "label": "Hero left heading", "default": "BUILT FOR THE FIRST LAYER" },
+    { "type": "text", "id": "hero_left_cta", "label": "Hero left button", "default": "DISCOVER ESSENTIALS →" },
+    { "type": "text", "id": "hero_right_heading", "label": "Hero right heading", "default": "LIMITED DROP. NO REPEAT." },
+    { "type": "text", "id": "hero_right_cta", "label": "Hero right button", "default": "EXPLORE THE DROP →" },
+    { "type": "collection", "id": "limited_collection", "label": "Limited Drop collection" },
+    { "type": "text", "id": "action_heading", "label": "Action heading", "default": "FIND YOUR FIRST LAYER" },
+    { "type": "collection", "id": "action_collection_1", "label": "Action link 1" },
+    { "type": "text", "id": "action_label_1", "label": "Action label 1", "default": "SHOP ALL" },
+    { "type": "collection", "id": "action_collection_2", "label": "Action link 2" },
+    { "type": "url", "id": "action_url_2", "label": "Action 2 custom URL", "info": "Overrides the collection picker for a destination such as the full Underwear collection." },
+    { "type": "text", "id": "action_label_2", "label": "Action label 2", "default": "SHOP UNDERWEAR" },
+    { "type": "collection", "id": "action_collection_3", "label": "Action link 3" },
+    { "type": "text", "id": "action_label_3", "label": "Action label 3", "default": "BUNDLES & SAVE" },
+    { "type": "collection", "id": "action_collection_4", "label": "Action link 4" },
+    { "type": "text", "id": "action_label_4", "label": "Action label 4", "default": "LIMITED DROP" },
+    { "type": "text", "id": "category_heading", "label": "Showcase heading", "default": "SHOP THE COLLECTIONS" },
+    { "type": "collection", "id": "showcase_collection", "label": "View all collection" },
+    { "type": "text", "id": "category_view_all", "label": "View all label", "default": "VIEW ALL" },
+    { "type": "metaobject", "id": "salon_entry", "metaobject_type": "story_salon", "label": "Story Salon fallback entry", "info": "Supplies fallback copy and destination when the corresponding fields below are empty." },
+    { "type": "image_picker", "id": "feature_image", "label": "Story Salon feature image" },
+    { "type": "page", "id": "feature_page", "label": "Story Salon page" },
+    { "type": "url", "id": "feature_link", "label": "Story Salon custom link" },
+    { "type": "text", "id": "drop_eyebrow", "label": "Feature eyebrow", "default": "STORY SALON" },
+    { "type": "text", "id": "drop_heading", "label": "Feature heading", "default": "Stories from the first layer." },
+    { "type": "textarea", "id": "feature_description", "label": "Story Salon description", "default": "Explore the stories, people, and ideas behind the first layer." },
+    { "type": "text", "id": "drop_cta", "label": "Feature button", "default": "ENTER THE STORY SALON →" },
+    { "type": "image_picker", "id": "story_left_image", "label": "Product story left image", "info": "Upload your own image. Leave empty to use the selected product image." },
+    { "type": "image_picker", "id": "story_right_image", "label": "Product story right image", "info": "Upload your own image. Leave empty to use the selected product image." },
+    { "type": "text", "id": "salon_previous_label", "label": "Story Salon previous label", "default": "Previous story" },
+    { "type": "text", "id": "salon_next_label", "label": "Story Salon next label", "default": "Next story" },
+    { "type": "product", "id": "story_product", "label": "Product story product" },
+    { "type": "checkbox", "id": "story_use_product_content", "label": "Use selected product title and description", "default": true },
+    { "type": "text", "id": "story_heading", "label": "Product story heading", "default": "BUILT CLOSE. WORN DAILY." },
+    { "type": "textarea", "id": "story_body", "label": "Product story body", "default": "Clean lines, considered fabric, and the kind of comfort that disappears into your day." },
+    { "type": "collection", "id": "essentials_collection", "label": "Essentials collection" },
+    { "type": "text", "id": "story_cta", "label": "Product story button", "default": "DISCOVER ESSENTIALS →" },
+    { "type": "text", "id": "edit_heading", "label": "Product edit heading", "default": "THE DAILY EDIT" },
+    { "type": "text", "id": "edit_supporting_line", "label": "Product edit supporting line" },
+    { "type": "text", "id": "edit_offer_text", "label": "Product edit offer reminder" },
+    { "type": "product", "id": "craft_product", "label": "Craft story product" },
+    { "type": "image_picker", "id": "craft_image", "label": "Craft story image" },
+    { "type": "video", "id": "craft_video", "label": "Craft story video" },
+    { "type": "text", "id": "craft_heading", "label": "Craft story heading", "default": "DESIGNED FOR REAL LIFE." },
+    { "type": "textarea", "id": "craft_body", "label": "Craft story body", "default": "TRIIIPLE makes the everyday layer feel considered—through proportion, material, and repetition." },
+    { "type": "page", "id": "story_page", "label": "Our story page" },
+    { "type": "url", "id": "craft_link", "label": "Craft story custom link" },
+    { "type": "text", "id": "craft_cta", "label": "Craft story button", "default": "OUR STORY →" },
+    { "type": "text", "id": "community_heading", "label": "Community heading", "default": "WORN YOUR WAY. @TRIIIPLE_STUDIO" },
+    { "type": "text", "id": "community_supporting_line", "label": "Community supporting line" },
+    { "type": "text", "id": "community_follow_label", "label": "Community follow link", "default": "FOLLOW ALONG" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" }
+  ],
+  "blocks": [
+{
+  "type": "salon_slide",
+  "name": "Story Salon slide",
+  "limit": 3,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Upload an image or leave empty to use the selected article image."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "STORY SALON"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "READ THE STORY"
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "Story page"
+    },
+    {
+      "type": "article",
+      "id": "article",
+      "label": "Story article"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Custom link",
+      "info": "Overrides the selected page or article."
+    }
+  ]
+},
+    {
+      "type": "category",
+      "name": "Category",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "product", "id": "product", "label": "Image source product" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Featured product",
+      "limit": 4,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" }
+      ]
+    },
+    {
+      "type": "community",
+      "name": "Community image",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "link", "label": "Instagram post or reel link" },
+        { "type": "product", "id": "product", "label": "Fallback image source product" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "TRIIIPLE editorial home" }
+  ]
+}
+{% endschema %}
+
+
