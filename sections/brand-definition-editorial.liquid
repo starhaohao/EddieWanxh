@@ -1,0 +1,364 @@
+{%- comment -%}
+  Brand Definition — Editorial Three-Image Banner
+  Desktop (>=750px): row 1 = label row (left / centre / right) + centred heading and text;
+                     row 2 = three equal, edge-to-edge image panels.
+  Mobile (<750px):   row 1 = left-aligned text | image 1 (50/50); row 2 = image 2 | image 3. No gaps.
+
+  Typography and spacing come from the Broadcast theme:
+  - .section-padding (--PT / --PB / --PT-MOBILE) for vertical spacing
+  - --outer for text margins at the page edges, --gutter for the space between text and image on mobile
+  - --outer-offset lets the image row bleed to the viewport edges
+  - .subheading (labels, overlays), .hero__title + .heading-* (heading), .hero__rte + .body-* (text)
+  - .color-{scheme} for --text / --bg, with optional section colour overrides
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign color_scheme = 'color-' | append: s.color_scheme
+  assign panels = section.blocks | where: 'type', 'panel'
+  if section.index > 2
+    assign loading = 'lazy'
+  else
+    assign loading = 'eager'
+  endif
+-%}
+
+{%- capture bde_style -%}
+  --PT: {{ s.padding_top }}px; --PB: {{ s.padding_bottom }}px; --PT-MOBILE: {{ s.padding_top_mobile }}px;
+  --bde-pb-mobile: {{ s.padding_bottom_mobile }}px;
+  --bde-label-gap: {{ s.label_gap }}px; --bde-text-gap: {{ s.text_gap }}px; --bde-text-gap-mobile: {{ s.text_gap_mobile }}px;
+  --bde-ratio: {{ s.image_ratio }}; --bde-ratio-mobile: {{ s.image_ratio_mobile }};
+  {%- if s.background_color != blank %} --bg: {{ s.background_color }};{% endif -%}
+  {%- if s.text_color != blank %} --text: {{ s.text_color }};{% endif -%}
+{%- endcapture -%}
+
+<section
+  id="BrandDefinitionEditorial--{{ section.id }}"
+  class="bde section-padding {{ color_scheme }}"
+  style="{{ bde_style | strip_newlines }}"
+>
+  <div class="bde__grid">
+    <div class="bde__content">
+      {%- liquid
+        assign show_brand = false
+        assign show_category = false
+        assign show_site = false
+        if s.show_brand_label and s.brand_label != blank
+          assign show_brand = true
+        endif
+        if s.show_category_label and s.category_label != blank
+          assign show_category = true
+        endif
+        if s.show_website_label and s.website_label != blank
+          assign show_site = true
+        endif
+      -%}
+      {%- if show_brand or show_category or show_site -%}
+        <div class="bde__labels">
+          <p class="bde__label bde__label--brand subheading">{% if show_brand %}{{ s.brand_label }}{% endif %}</p>
+          <p class="bde__label bde__label--category subheading">{% if show_category %}{{ s.category_label }}{% endif %}</p>
+          <p class="bde__label bde__label--site subheading">
+            {%- if show_site -%}
+              {%- if s.website_link != blank -%}<a href="{{ s.website_link }}">{{ s.website_label }}</a>{%- else -%}{{ s.website_label }}{%- endif -%}
+            {%- endif -%}
+          </p>
+        </div>
+      {%- endif -%}
+
+      {%- if s.heading != blank or s.text != blank -%}
+        <div class="bde__copy">
+          {%- if s.heading != blank -%}
+            <h2 class="hero__title {{ s.heading_size }}">{{ s.heading }}</h2>
+          {%- endif -%}
+          {%- if s.text != blank -%}
+            <div class="hero__rte {{ s.text_size }}">{{ s.text }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- for i in (1..3) -%}
+      {%- liquid
+        assign panel = panels[forloop.index0]
+        if panel
+          assign b = panel.settings
+          assign image = b.image
+          assign image_mobile = b.image_mobile | default: image
+          assign pos = b.image_position
+          if pos == 'focal' and image != blank
+            assign pos = image.presentation.focal_point
+          endif
+          assign pos = pos | default: 'center center'
+          assign pos_mobile = b.image_position
+          if pos_mobile == 'focal' and image_mobile != blank
+            assign pos_mobile = image_mobile.presentation.focal_point
+          endif
+          assign pos_mobile = pos_mobile | default: 'center center'
+          assign style_desktop = 'object-position: ' | append: pos | append: ';'
+          assign style_mobile = 'object-position: ' | append: pos_mobile | append: ';'
+        endif
+        assign has_overlay = false
+        if panel and b.show_overlay
+          if b.number != blank or b.title != blank
+            assign has_overlay = true
+          endif
+        endif
+      -%}
+      <div
+        class="bde__panel bde__panel--{{ forloop.index }}"
+        {% if panel %}{{ panel.shopify_attributes }}{% if b.overlay_color != blank %} style="--bde-overlay: {{ b.overlay_color }};"{% endif %}{% endif %}
+      >
+        {%- if panel and b.link != blank -%}<a href="{{ b.link }}" class="bde__link" aria-label="{{ b.title | default: image.alt | default: shop.name | escape }}">{%- endif -%}
+        <div class="bde__media">
+          {%- if panel and image != blank -%}
+            {%- assign alt = image.alt | escape -%}
+            {{ image | image_url: width: 2000 | image_tag:
+              class: 'bde__img bde__img--desktop',
+              style: style_desktop,
+              loading: loading,
+              alt: alt,
+              sizes: '34vw',
+              widths: '600, 900, 1200, 1600, 2000'
+            }}
+            {{ image_mobile | image_url: width: 1100 | image_tag:
+              class: 'bde__img bde__img--mobile',
+              style: style_mobile,
+              loading: loading,
+              alt: alt,
+              sizes: '50vw',
+              widths: '300, 450, 600, 800, 1100'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'bde__img bde__placeholder' }}
+          {%- endif -%}
+          {%- if has_overlay -%}
+            <div class="bde__overlay">
+              {%- if b.number != blank -%}<span class="bde__overlay-number subheading">{{ b.number }}</span>{%- endif -%}
+              {%- if b.title != blank -%}<span class="bde__overlay-title subheading">{{ b.title }}</span>{%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- if panel and b.corner_text != blank -%}
+            <span class="bde__corner subheading">{{ b.corner_text }}</span>
+          {%- endif -%}
+        </div>
+        {%- if panel and b.link != blank -%}</a>{%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  /* Mobile: 2 x 2 grid — text | image 1, image 2 | image 3, no gaps. Bleeds through the section's --outer padding. */
+  #BrandDefinitionEditorial--{{ section.id }} { background: var(--bg); color: var(--text); }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-left: var(--outer-offset);
+    margin-right: var(--outer-offset);
+  }
+
+  #BrandDefinitionEditorial--{{ section.id }} .bde__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--bde-text-gap-mobile);
+    min-width: 0;
+    padding: var(--gutter) calc(var(--gutter) / 2) var(--gutter) var(--outer);
+    text-align: left;
+  }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__labels {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gutter) / 4);
+  }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__label { margin: 0; color: var(--text); overflow-wrap: anywhere; }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__label:empty { display: none; }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__label a { color: inherit; text-decoration: none; }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__copy > :last-child { margin-bottom: 0; }
+  #BrandDefinitionEditorial--{{ section.id }} .hero__title,
+  #BrandDefinitionEditorial--{{ section.id }} .hero__rte { color: var(--text); overflow-wrap: break-word; }
+  #BrandDefinitionEditorial--{{ section.id }} .hero__title { margin-top: 0; }
+
+  #BrandDefinitionEditorial--{{ section.id }} .bde__panel { position: relative; min-width: 0; }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__link { display: block; height: 100%; color: inherit; }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__media {
+    position: relative;
+    height: 100%;
+    min-height: 100%;
+    aspect-ratio: var(--bde-ratio-mobile);
+    overflow: hidden;
+    background: var(--bg-accent, var(--bg));
+  }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__img--desktop { display: none !important; }
+
+  #BrandDefinitionEditorial--{{ section.id }} .bde__overlay {
+    position: absolute;
+    top: var(--gutter);
+    left: 50%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--gutter) / 4);
+    width: calc(100% - var(--gutter) * 2);
+    transform: translateX(-50%);
+    color: var(--bde-overlay, #ffffff);
+    text-align: center;
+    pointer-events: none;
+  }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__overlay .subheading { color: inherit; }
+  #BrandDefinitionEditorial--{{ section.id }} .bde__corner {
+    position: absolute;
+    right: calc(var(--gutter) / 2);
+    bottom: calc(var(--gutter) / 2);
+    z-index: 1;
+    margin: 0;
+    color: var(--bde-overlay, #ffffff);
+    pointer-events: none;
+  }
+
+  @media only screen and (max-width: 749px) {
+    #BrandDefinitionEditorial--{{ section.id }} { padding-bottom: var(--bde-pb-mobile); }
+  }
+
+  /* Tablet + desktop: centred text row above three equal edge-to-edge panels. */
+  @media only screen and (min-width: 750px) {
+    #BrandDefinitionEditorial--{{ section.id }} .bde__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__content {
+      grid-column: 1 / -1;
+      gap: var(--bde-label-gap);
+      padding: 0 var(--outer) var(--bde-text-gap);
+      text-align: center;
+    }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__labels {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: var(--gutter);
+      align-items: start;
+    }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__label:empty { display: block; }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__label--brand { text-align: left; }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__label--category { text-align: center; }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__label--site { text-align: right; }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__copy { max-width: 40em; margin: 0 auto; }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__media { aspect-ratio: var(--bde-ratio); }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__img--desktop { display: block !important; }
+    #BrandDefinitionEditorial--{{ section.id }} .bde__img--mobile { display: none !important; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Brand definition banner",
+  "class": "section-brand-definition-editorial",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "header", "content": "Labels" },
+    { "type": "checkbox", "id": "show_brand_label", "label": "Show brand label", "default": true },
+    { "type": "text", "id": "brand_label", "label": "Brand label", "default": "TRIIIPLE STUDIO" },
+    { "type": "checkbox", "id": "show_category_label", "label": "Show category label", "default": true },
+    { "type": "text", "id": "category_label", "label": "Category label", "default": "BRAND GUIDELINES" },
+    { "type": "checkbox", "id": "show_website_label", "label": "Show website label", "default": true },
+    { "type": "text", "id": "website_label", "label": "Website label", "default": "TRIIIPLESTUDIO.COM" },
+    { "type": "url", "id": "website_link", "label": "Website label link" },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "BRAND DEFINITION" },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "heading-small",
+      "options": [
+        { "value": "heading-x-small", "label": "Extra small" },
+        { "value": "heading-small", "label": "Small" },
+        { "value": "heading-medium", "label": "Medium" },
+        { "value": "heading-large", "label": "Large" }
+      ]
+    },
+    { "type": "richtext", "id": "text", "label": "Description", "default": "<p>TRIIIPLE — a name built on three layers: Fabric, Fit and Form. It reflects our pursuit of everyday essentials that sit closest to you, designed in Singapore with honest materials and precise cuts.</p>" },
+    {
+      "type": "select", "id": "text_size", "label": "Description size", "default": "body-small",
+      "options": [
+        { "value": "body-x-small", "label": "Extra small" },
+        { "value": "body-small", "label": "Small" },
+        { "value": "body-medium", "label": "Medium" },
+        { "value": "body-large", "label": "Large" }
+      ]
+    },
+    { "type": "header", "content": "Images" },
+    {
+      "type": "select", "id": "image_ratio", "label": "Desktop image ratio", "default": "4 / 5",
+      "options": [
+        { "value": "2 / 3", "label": "Portrait 2:3" },
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" }
+      ]
+    },
+    {
+      "type": "select", "id": "image_ratio_mobile", "label": "Mobile image ratio", "default": "3 / 4",
+      "options": [
+        { "value": "2 / 3", "label": "Portrait 2:3" },
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" }
+      ]
+    },
+    { "type": "header", "content": "Colors" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme_1" },
+    { "type": "color", "id": "background_color", "label": "Background color", "info": "Leave empty to use the color scheme." },
+    { "type": "color", "id": "text_color", "label": "Text color", "info": "Leave empty to use the color scheme." },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "label_gap", "label": "Space between labels and heading", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 16 },
+    { "type": "range", "id": "text_gap", "label": "Space between text and images", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 40 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "text_gap_mobile", "label": "Space between labels and heading", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 20 }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Image panel",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "1200 x 1600px recommended." },
+        { "type": "image_picker", "id": "image_mobile", "label": "Mobile image", "info": "Optional. Falls back to the image above." },
+        {
+          "type": "select", "id": "image_position", "label": "Focal position", "default": "focal",
+          "options": [
+            { "value": "focal", "label": "Use image focal point" },
+            { "value": "center center", "label": "Center" },
+            { "value": "center top", "label": "Top" },
+            { "value": "center bottom", "label": "Bottom" },
+            { "value": "left center", "label": "Left" },
+            { "value": "right center", "label": "Right" }
+          ]
+        },
+        { "type": "checkbox", "id": "show_overlay", "label": "Show number and title", "default": true },
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "corner_text", "label": "Corner text", "info": "Optional small text, bottom right (e.g. a page number)." },
+        { "type": "color", "id": "overlay_color", "label": "Number and title color", "default": "#ffffff" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand definition banner",
+      "blocks": [
+        { "type": "panel", "settings": { "number": "01", "title": "FABRIC" } },
+        { "type": "panel", "settings": { "number": "02", "title": "FIT" } },
+        { "type": "panel", "settings": { "number": "03", "title": "FORM" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
