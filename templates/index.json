@@ -277,7 +277,7 @@
       "settings": {
         "image_1": "shopify://shop_images/Untitled-1.jpg",
         "image_2": "shopify://shop_images/x-brief.jpg",
-        "link": "shopify://collections/dead-stock-clearance",
+        "link": "shopify://collections/stock-clearance",
         "width": "wrapper--full",
         "height": "screen-height-two-thirds",
         "flex_align_desktop": "align--bottom-left-desktop",
@@ -401,7 +401,7 @@
         "title_size": 46,
         "subtitle": "<h6>Free shipping</h6><h6>over $50 · Singapore</h6>",
         "cta_text": "Stock Clearance",
-        "cta_url": "shopify://collections/dead-stock-clearance",
+        "cta_url": "shopify://collections/stock-clearance",
         "cta_bg": "#000000",
         "cta_text_color": "#ffffff",
         "show_urgency": true,

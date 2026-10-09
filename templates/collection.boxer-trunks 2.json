@@ -51,7 +51,7 @@
           "type": "nav_link",
           "settings": {
             "label": "SALE",
-            "link": "shopify://collections/dead-stock-clearance"
+            "link": "shopify://collections/stock-clearance"
           }
         }
       },
@@ -71,7 +71,7 @@
         "tagline": "",
         "intro": "<p>Enjoy 15% off with <span style=\"text-decoration:underline\"><strong>FINAL15</strong></span> with a min. of 3 items, while stock lasts.</p>",
         "cta_label": "",
-        "cta_link": "shopify://collections/dead-stock-clearance",
+        "cta_link": "shopify://collections/stock-clearance",
         "use_collection_image": true,
         "image": "{{ collection.image }}",
         "panel_label": "Browse",

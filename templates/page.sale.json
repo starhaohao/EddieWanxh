@@ -94,7 +94,7 @@
           "type": "ghost_cta",
           "settings": {
             "label": "Dead Stock",
-            "url": "/collections/dead-stock-clearance"
+            "url": "/collections/stock-clearance"
           }
         }
       },
