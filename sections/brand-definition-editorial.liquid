@@ -79,9 +79,9 @@
 
     {%- for i in (1..3) -%}
       {%- liquid
-        assign block = panels[forloop.index0]
-        if block
-          assign b = block.settings
+        assign panel = panels[forloop.index0]
+        if panel
+          assign b = panel.settings
           assign image = b.image
           assign image_mobile = b.image_mobile | default: image
           assign pos = b.image_position
@@ -98,7 +98,7 @@
           assign style_mobile = 'object-position: ' | append: pos_mobile | append: ';'
         endif
         assign has_overlay = false
-        if block and b.show_overlay
+        if panel and b.show_overlay
           if b.number != blank or b.title != blank
             assign has_overlay = true
           endif
@@ -106,11 +106,11 @@
       -%}
       <div
         class="bde__panel bde__panel--{{ forloop.index }}"
-        {% if block %}{{ block.shopify_attributes }}{% if b.overlay_color != blank %} style="--bde-overlay: {{ b.overlay_color }};"{% endif %}{% endif %}
+        {% if panel %}{{ panel.shopify_attributes }}{% if b.overlay_color != blank %} style="--bde-overlay: {{ b.overlay_color }};"{% endif %}{% endif %}
       >
-        {%- if block and b.link != blank -%}<a href="{{ b.link }}" class="bde__link" aria-label="{{ b.title | default: image.alt | default: shop.name | escape }}">{%- endif -%}
+        {%- if panel and b.link != blank -%}<a href="{{ b.link }}" class="bde__link" aria-label="{{ b.title | default: image.alt | default: shop.name | escape }}">{%- endif -%}
         <div class="bde__media">
-          {%- if block and image != blank -%}
+          {%- if panel and image != blank -%}
             {%- assign alt = image.alt | escape -%}
             {{ image | image_url: width: 2000 | image_tag:
               class: 'bde__img bde__img--desktop',
@@ -138,7 +138,7 @@
             </div>
           {%- endif -%}
         </div>
-        {%- if block and b.link != blank -%}</a>{%- endif -%}
+        {%- if panel and b.link != blank -%}</a>{%- endif -%}
       </div>
     {%- endfor -%}
   </div>
