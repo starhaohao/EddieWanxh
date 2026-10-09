@@ -372,6 +372,13 @@ body {
   body.template-product .product-single__photos .image img {
     border-radius: 0 !important;
   }
+  /* Mobile image slider: 1px hairline between slides instead of the theme gutter (--gap) */
+  body.template-product .product__images--mobile-slider .product__slide {
+    margin-right: 1px;
+  }
+  body.template-product .product__images--mobile-slider .product__slide:last-child {
+    margin-right: 0;
+  }
 }
 
 @media screen and (max-width: 749px) {
