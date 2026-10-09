@@ -296,7 +296,7 @@
         "title_size": 120,
         "subtitle": "<h6>Free shipping</h6><h6>over $50 · Singapore</h6>",
         "cta_text": "Stock Clearance",
-        "cta_url": "shopify://collections/dead-stock-clearance",
+        "cta_url": "shopify://collections/stock-clearance",
         "cta_bg": "#7c9bdb",
         "cta_text_color": "#ffffff",
         "show_urgency": true,
