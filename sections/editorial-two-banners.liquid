@@ -1,0 +1,530 @@
+{%- comment -%}
+  Editorial Two Banners
+  Composition: Figma "Two editorial banners" (g8SH4U1vNryaHX0gs576b6, frames 1:5 desktop / 1:21 mobile).
+    Banner 1 — main image left | content right (secondary image, top-right label, central statement, bottom-right label).
+    Banner 2 — content left (meta, chapter number + heading, paragraph, central label, three footer labels) | main image right.
+    Mobile — Banner 1: image -> content. Banner 2: content -> image (DOM order).
+
+  Typography and spacing come from the Broadcast theme, not from Figma:
+  - .section-padding (--PT / --PB / --PT-MOBILE) for vertical section spacing
+  - --outer (page edge gutter) and --gutter (column gap); the centre seam gets half a --gutter per side
+  - --outer-offset lets images bleed through .section-padding's side padding to the viewport edge
+  - .subheading (labels), .hero__title + .heading-* (headings), .hero__rte + .body-* (paragraphs), .btn.btn--text (links)
+  - .color-{scheme} for --text / --bg; optional per-banner colour overrides
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign color_scheme = 'color-' | append: s.color_scheme
+  if section.index > 2
+    assign loading = 'lazy'
+  else
+    assign loading = 'eager'
+  endif
+-%}
+
+{%- capture edt_style -%}
+  --PT: {{ s.padding_top }}px;
+  --PB: {{ s.padding_bottom }}px;
+  --PT-MOBILE: {{ s.padding_top_mobile }}px;
+  --edt-pb-mobile: {{ s.padding_bottom_mobile }}px;
+{%- endcapture -%}
+
+{%- if s.show_banner_1 or s.show_banner_2 -%}
+<section
+  id="EditorialTwoBanners--{{ section.id }}"
+  class="edt section-padding {{ color_scheme }}"
+  style="{{ edt_style | strip_newlines }}"
+>
+  {%- comment -%} ===== Banner 1: image | content ===== {%- endcomment -%}
+  {%- if s.show_banner_1 -%}
+    {%- liquid
+      assign b1_image = s.b1_image
+      assign b1_image_mobile = s.b1_image_mobile | default: b1_image
+      assign b1_pos = s.b1_image_position
+      if b1_pos == 'focal' and b1_image != blank
+        assign b1_pos = b1_image.presentation.focal_point
+      endif
+      assign b1_pos_mobile = s.b1_image_position
+      if b1_pos_mobile == 'focal' and b1_image_mobile != blank
+        assign b1_pos_mobile = b1_image_mobile.presentation.focal_point
+      endif
+      assign b1_pos = b1_pos | default: 'center center'
+      assign b1_pos_mobile = b1_pos_mobile | default: 'center center'
+      assign b1_style = 'object-position: ' | append: b1_pos | append: ';'
+      assign b1_style_mobile = 'object-position: ' | append: b1_pos_mobile | append: ';'
+      assign b1_inset_style = ''
+      if s.b1_secondary_image != blank
+        assign b1_inset_pos = s.b1_secondary_image.presentation.focal_point | default: 'center center'
+        assign b1_inset_style = 'object-position: ' | append: b1_inset_pos | append: ';'
+      endif
+    -%}
+    <div
+      class="edt__banner edt__banner--1"
+      style="--edt-ratio: {{ s.b1_ratio }}; --edt-ratio-mobile: {{ s.b1_ratio_mobile }}; --edt-content-ratio-mobile: {{ s.b1_content_ratio_mobile }};{% if s.b1_bg_color != blank %} --bg: {{ s.b1_bg_color }};{% endif %}{% if s.b1_text_color != blank %} --text: {{ s.b1_text_color }};{% endif %} --edt-inset-w: {{ s.b1_secondary_width }}%; --edt-inset-w-mobile: {{ s.b1_secondary_width_mobile }}%;"
+    >
+      <div class="edt__media">
+        {%- if s.b1_link != blank -%}<a href="{{ s.b1_link }}" class="edt__media-link" aria-label="{{ s.b1_statement | default: s.b1_label_top | default: shop.name | strip_html | escape }}">{%- endif -%}
+        {%- if b1_image != blank -%}
+          {%- assign alt = b1_image.alt | escape -%}
+          {{ b1_image | image_url: width: 2400 | image_tag:
+            class: 'edt__img edt__img--desktop',
+            style: b1_style,
+            loading: loading,
+            alt: alt,
+            sizes: '50vw',
+            widths: '750, 1100, 1500, 1920, 2400'
+          }}
+          {{ b1_image_mobile | image_url: width: 1500 | image_tag:
+            class: 'edt__img edt__img--mobile',
+            style: b1_style_mobile,
+            loading: loading,
+            alt: alt,
+            sizes: '100vw',
+            widths: '430, 750, 1100, 1500'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'edt__img edt__placeholder' }}
+        {%- endif -%}
+        {%- if s.b1_link != blank -%}</a>{%- endif -%}
+      </div>
+
+      <div class="edt__content edt__content--1">
+        <div class="edt__row edt__row--top">
+          {%- if s.b1_secondary_image != blank -%}
+            <div class="edt__inset edt__inset--{{ s.b1_secondary_ratio }}">
+              {{ s.b1_secondary_image | image_url: width: 1100 | image_tag:
+                class: 'edt__img',
+                style: b1_inset_style,
+                loading: loading,
+                sizes: '(min-width: 750px) 20vw, 45vw',
+                widths: '300, 500, 700, 1100'
+              }}
+            </div>
+          {%- endif -%}
+          {%- if s.b1_label_top != blank -%}
+            <p class="edt__label edt__label--end subheading">{{ s.b1_label_top }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="edt__row edt__row--middle">
+          {%- if s.b1_statement != blank or s.b1_link_label != blank -%}
+            <div class="edt__statement">
+              {%- if s.b1_statement != blank -%}
+                <h2 class="hero__title {{ s.b1_statement_size }}">{{ s.b1_statement }}</h2>
+              {%- endif -%}
+              {%- if s.b1_link_label != blank and s.b1_link != blank -%}
+                <a href="{{ s.b1_link }}" class="edt__cta btn btn--text"><span>{{ s.b1_link_label }}</span></a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if s.b1_label_bottom != blank -%}
+          <div class="edt__row edt__row--foot">
+            <p class="edt__label edt__label--end subheading">{{ s.b1_label_bottom }}</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ===== Banner 2: content | image ===== {%- endcomment -%}
+  {%- if s.show_banner_2 -%}
+    {%- liquid
+      assign b2_image = s.b2_image
+      assign b2_image_mobile = s.b2_image_mobile | default: b2_image
+      assign b2_pos = s.b2_image_position
+      if b2_pos == 'focal' and b2_image != blank
+        assign b2_pos = b2_image.presentation.focal_point
+      endif
+      assign b2_pos_mobile = s.b2_image_position
+      if b2_pos_mobile == 'focal' and b2_image_mobile != blank
+        assign b2_pos_mobile = b2_image_mobile.presentation.focal_point
+      endif
+      assign b2_pos = b2_pos | default: 'center center'
+      assign b2_pos_mobile = b2_pos_mobile | default: 'center center'
+      assign b2_style = 'object-position: ' | append: b2_pos | append: ';'
+      assign b2_style_mobile = 'object-position: ' | append: b2_pos_mobile | append: ';'
+    -%}
+    <div
+      class="edt__banner edt__banner--2"
+      style="--edt-ratio: {{ s.b2_ratio }}; --edt-ratio-mobile: {{ s.b2_ratio_mobile }}; --edt-content-ratio-mobile: {{ s.b2_content_ratio_mobile }};{% if s.b2_bg_color != blank %} --bg: {{ s.b2_bg_color }};{% endif %}{% if s.b2_text_color != blank %} --text: {{ s.b2_text_color }};{% endif %}"
+    >
+      <div class="edt__content edt__content--2">
+        {%- if s.b2_meta_1 != blank or s.b2_meta_2 != blank -%}
+          <div class="edt__row edt__row--top">
+            <p class="edt__label subheading">
+              {%- if s.b2_meta_1 != blank -%}<span>{{ s.b2_meta_1 }}</span>{%- endif -%}
+              {%- if s.b2_meta_1 != blank and s.b2_meta_2 != blank -%}<span class="edt__sep" aria-hidden="true">/</span>{%- endif -%}
+              {%- if s.b2_meta_2 != blank -%}<span>{{ s.b2_meta_2 }}</span>{%- endif -%}
+            </p>
+          </div>
+        {%- endif -%}
+
+        {%- if s.b2_heading != blank or s.b2_text != blank -%}
+          <div class="edt__body">
+            {%- if s.b2_heading != blank -%}
+              <h2 class="hero__title edt__heading {{ s.b2_heading_size }}">
+                {%- if s.b2_number != blank -%}<span class="edt__num">{{ s.b2_number }}</span>{%- endif -%}
+                <span>{{ s.b2_heading }}</span>
+              </h2>
+            {%- endif -%}
+            {%- if s.b2_text != blank -%}
+              <div class="hero__rte edt__text {{ s.b2_text_size }}">{{ s.b2_text }}</div>
+            {%- endif -%}
+            {%- if s.b2_link_label != blank and s.b2_link != blank -%}
+              <a href="{{ s.b2_link }}" class="edt__cta btn btn--text"><span>{{ s.b2_link_label }}</span></a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="edt__row edt__row--middle">
+          {%- if s.b2_chapter != blank -%}
+            <p class="edt__label edt__chapter subheading">{{ s.b2_chapter }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- if s.b2_nav_1 != blank or s.b2_nav_2 != blank or s.b2_nav_3 != blank -%}
+          <div class="edt__row edt__row--foot edt__nav">
+            {%- for i in (1..3) -%}
+              {%- liquid
+                assign label_key = 'b2_nav_' | append: i
+                assign link_key = 'b2_nav_' | append: i | append: '_link'
+                assign label = s[label_key]
+                assign nav_link = s[link_key]
+              -%}
+              {%- if label != blank -%}
+                {%- if nav_link != blank -%}
+                  <a href="{{ nav_link }}" class="edt__label edt__nav-item subheading">{{ label }}</a>
+                {%- else -%}
+                  <p class="edt__label edt__nav-item subheading">{{ label }}</p>
+                {%- endif -%}
+              {%- else -%}
+                <span class="edt__nav-item" aria-hidden="true"></span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="edt__media">
+        {%- if s.b2_link != blank -%}<a href="{{ s.b2_link }}" class="edt__media-link" aria-label="{{ s.b2_heading | default: shop.name | strip_html | escape }}">{%- endif -%}
+        {%- if b2_image != blank -%}
+          {%- assign alt = b2_image.alt | escape -%}
+          {{ b2_image | image_url: width: 2400 | image_tag:
+            class: 'edt__img edt__img--desktop',
+            style: b2_style,
+            loading: 'lazy',
+            alt: alt,
+            sizes: '50vw',
+            widths: '750, 1100, 1500, 1920, 2400'
+          }}
+          {{ b2_image_mobile | image_url: width: 1500 | image_tag:
+            class: 'edt__img edt__img--mobile',
+            style: b2_style_mobile,
+            loading: 'lazy',
+            alt: alt,
+            sizes: '100vw',
+            widths: '430, 750, 1100, 1500'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'edt__img edt__placeholder' }}
+        {%- endif -%}
+        {%- if s.b2_link != blank -%}</a>{%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+{%- endif -%}
+
+<style>
+  #EditorialTwoBanners--{{ section.id }} {
+    /* Panel side padding: page edge = --outer; centre seam = half a --gutter (from 750px). */
+    --edt-edge: var(--outer);
+    --edt-seam: var(--outer);
+  }
+
+  #EditorialTwoBanners--{{ section.id }} .edt__banner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    margin-left: var(--outer-offset);
+    margin-right: var(--outer-offset);
+    color: var(--text);
+  }
+
+  /* ---- Images ---- */
+  #EditorialTwoBanners--{{ section.id }} .edt__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: var(--edt-ratio-mobile);
+    background: var(--bg-accent, var(--bg));
+  }
+  #EditorialTwoBanners--{{ section.id }} .edt__media-link { display: block; height: 100%; }
+  #EditorialTwoBanners--{{ section.id }} .edt__media .edt__img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #EditorialTwoBanners--{{ section.id }} .edt__img--desktop { display: none !important; }
+
+  /* ---- Content panels ---- */
+  #EditorialTwoBanners--{{ section.id }} .edt__content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    aspect-ratio: var(--edt-content-ratio-mobile);
+    padding: var(--edt-edge);
+    background: var(--bg);
+    color: var(--text);
+  }
+  #EditorialTwoBanners--{{ section.id }} .edt__row { display: flex; align-items: flex-start; gap: var(--gutter); }
+  #EditorialTwoBanners--{{ section.id }} .edt__row--middle {
+    flex: 1 1 auto;
+    align-items: center;
+    padding: var(--outer) 0;
+  }
+  #EditorialTwoBanners--{{ section.id }} .edt__row--foot { margin-top: auto; }
+
+  #EditorialTwoBanners--{{ section.id }} .edt__label {
+    margin: 0;
+    color: var(--text);
+  }
+  #EditorialTwoBanners--{{ section.id }} .edt__label--end { margin-left: auto; text-align: right; }
+  #EditorialTwoBanners--{{ section.id }} .edt__sep { padding: 0 0.5em; }
+
+  #EditorialTwoBanners--{{ section.id }} .hero__title,
+  #EditorialTwoBanners--{{ section.id }} .hero__rte { color: var(--text); }
+  #EditorialTwoBanners--{{ section.id }} .edt__statement > :last-child,
+  #EditorialTwoBanners--{{ section.id }} .edt__body > :last-child { margin-bottom: 0; }
+  #EditorialTwoBanners--{{ section.id }} .edt__cta { --btn-text: var(--text, currentColor); }
+
+  /* Banner 1 secondary image */
+  #EditorialTwoBanners--{{ section.id }} .edt__inset {
+    position: relative;
+    flex: 0 0 var(--edt-inset-w-mobile);
+    overflow: hidden;
+  }
+  #EditorialTwoBanners--{{ section.id }} .edt__inset .edt__img { display: block; width: 100%; height: auto; }
+  #EditorialTwoBanners--{{ section.id }} .edt__inset--square,
+  #EditorialTwoBanners--{{ section.id }} .edt__inset--portrait { aspect-ratio: 1 / 1; }
+  #EditorialTwoBanners--{{ section.id }} .edt__inset--portrait { aspect-ratio: 4 / 5; }
+  #EditorialTwoBanners--{{ section.id }} .edt__inset--square .edt__img,
+  #EditorialTwoBanners--{{ section.id }} .edt__inset--portrait .edt__img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Banner 2 heading: number + title share one line, separated by the theme gutter */
+  #EditorialTwoBanners--{{ section.id }} .edt__heading {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--gutter);
+    margin-top: var(--outer);
+  }
+  #EditorialTwoBanners--{{ section.id }} .edt__text { max-width: 45em; }
+
+  /* Footer navigation labels sit on a 3-column grid (gap = theme --gutter) */
+  #EditorialTwoBanners--{{ section.id }} .edt__nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+  #EditorialTwoBanners--{{ section.id }} a.edt__nav-item { text-decoration: none; }
+
+  @media only screen and (max-width: 749px) {
+    #EditorialTwoBanners--{{ section.id }} { padding-bottom: var(--edt-pb-mobile); }
+  }
+
+  /* ---- Tablet + desktop: 50/50 ---- */
+  @media only screen and (min-width: 750px) {
+    #EditorialTwoBanners--{{ section.id }} { --edt-seam: calc(var(--gutter) / 2); }
+    #EditorialTwoBanners--{{ section.id }} .edt__banner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #EditorialTwoBanners--{{ section.id }} .edt__media { aspect-ratio: var(--edt-ratio); height: 100%; }
+    #EditorialTwoBanners--{{ section.id }} .edt__img--desktop { display: block !important; }
+    #EditorialTwoBanners--{{ section.id }} .edt__img--mobile { display: none !important; }
+    #EditorialTwoBanners--{{ section.id }} .edt__content { aspect-ratio: auto; }
+
+    /* Banner 1 content is the right column; Banner 2 content is the left column. */
+    #EditorialTwoBanners--{{ section.id }} .edt__content--1 { padding-left: var(--edt-seam); padding-right: var(--edt-edge); }
+    #EditorialTwoBanners--{{ section.id }} .edt__content--2 { padding-left: var(--edt-edge); padding-right: var(--edt-seam); }
+
+    #EditorialTwoBanners--{{ section.id }} .edt__inset { flex-basis: var(--edt-inset-w); }
+
+    /* Central text starts on column 2 of the panel's 3-column grid, as in the Figma composition. */
+    #EditorialTwoBanners--{{ section.id }} .edt__statement,
+    #EditorialTwoBanners--{{ section.id }} .edt__chapter {
+      margin-left: calc((100% - var(--gutter) * 2) / 3 + var(--gutter));
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Editorial two banners",
+  "class": "section-editorial-two-banners",
+  "settings": [
+    { "type": "header", "content": "General" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme_1" },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 0 },
+
+    { "type": "header", "content": "Banner 1 — image left, content right" },
+    { "type": "checkbox", "id": "show_banner_1", "label": "Show banner 1", "default": true },
+    { "type": "image_picker", "id": "b1_image", "label": "Main image", "info": "1600 x 1800px recommended." },
+    { "type": "image_picker", "id": "b1_image_mobile", "label": "Mobile main image", "info": "Optional. Falls back to the main image." },
+    {
+      "type": "select", "id": "b1_image_position", "label": "Main image focal position", "default": "focal",
+      "options": [
+        { "value": "focal", "label": "Use image focal point" },
+        { "value": "center center", "label": "Center" },
+        { "value": "center top", "label": "Top" },
+        { "value": "center bottom", "label": "Bottom" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select", "id": "b1_ratio", "label": "Desktop image ratio", "default": "8 / 9",
+      "options": [
+        { "value": "8 / 9", "label": "8:9 (Figma)" },
+        { "value": "4 / 5", "label": "4:5" },
+        { "value": "3 / 4", "label": "3:4" },
+        { "value": "2 / 3", "label": "2:3" },
+        { "value": "1 / 1", "label": "Square" }
+      ]
+    },
+    {
+      "type": "select", "id": "b1_ratio_mobile", "label": "Mobile image ratio", "default": "39 / 46",
+      "options": [
+        { "value": "39 / 46", "label": "Figma (390 x 460)" },
+        { "value": "4 / 5", "label": "4:5" },
+        { "value": "3 / 4", "label": "3:4" },
+        { "value": "1 / 1", "label": "Square" }
+      ]
+    },
+    { "type": "image_picker", "id": "b1_secondary_image", "label": "Secondary image" },
+    {
+      "type": "select", "id": "b1_secondary_ratio", "label": "Secondary image shape", "default": "square",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait 4:5" },
+        { "value": "natural", "label": "Original" }
+      ]
+    },
+    { "type": "range", "id": "b1_secondary_width", "label": "Secondary image width (desktop)", "min": 20, "max": 60, "step": 1, "unit": "%", "default": 36 },
+    { "type": "range", "id": "b1_secondary_width_mobile", "label": "Secondary image width (mobile)", "min": 25, "max": 70, "step": 1, "unit": "%", "default": 41 },
+    { "type": "text", "id": "b1_label_top", "label": "Top-right label", "default": "EDITORIAL / 01" },
+    { "type": "text", "id": "b1_statement", "label": "Editorial text", "default": "VOLUME. THOUGHTFUL. FORM." },
+    {
+      "type": "select", "id": "b1_statement_size", "label": "Editorial text size", "default": "heading-x-small",
+      "options": [
+        { "value": "heading-mini", "label": "Mini" },
+        { "value": "heading-x-small", "label": "Extra small" },
+        { "value": "heading-small", "label": "Small" },
+        { "value": "heading-medium", "label": "Medium" }
+      ]
+    },
+    { "type": "text", "id": "b1_label_bottom", "label": "Bottom-right label", "default": "TRIIIPLE STUDIO" },
+    { "type": "url", "id": "b1_link", "label": "Link" },
+    { "type": "text", "id": "b1_link_label", "label": "Link label", "info": "Shown under the editorial text when a link is set." },
+    {
+      "type": "select", "id": "b1_content_ratio_mobile", "label": "Mobile content height", "default": "6 / 7",
+      "options": [
+        { "value": "6 / 7", "label": "Figma proportion" },
+        { "value": "auto", "label": "Fit content" }
+      ]
+    },
+    { "type": "color", "id": "b1_bg_color", "label": "Background color", "info": "Leave empty to use the color scheme." },
+    { "type": "color", "id": "b1_text_color", "label": "Text color", "info": "Leave empty to use the color scheme." },
+
+    { "type": "header", "content": "Banner 2 — content left, image right" },
+    { "type": "checkbox", "id": "show_banner_2", "label": "Show banner 2", "default": true },
+    { "type": "text", "id": "b2_meta_1", "label": "Top label", "default": "TRIIIPLE STUDIO" },
+    { "type": "text", "id": "b2_meta_2", "label": "Top label (second part)", "default": "2026" },
+    { "type": "text", "id": "b2_number", "label": "Chapter number", "default": "5.3" },
+    { "type": "text", "id": "b2_heading", "label": "Heading", "default": "Composition" },
+    {
+      "type": "select", "id": "b2_heading_size", "label": "Heading size", "default": "heading-medium",
+      "options": [
+        { "value": "heading-small", "label": "Small" },
+        { "value": "heading-medium", "label": "Medium" },
+        { "value": "heading-large", "label": "Large" },
+        { "value": "heading-x-large", "label": "Extra large" }
+      ]
+    },
+    { "type": "richtext", "id": "b2_text", "label": "Description", "default": "<p>The spacing between design elements and the flow of visual hierarchy shape how every piece is seen. Our layouts rely on a clear grid, generous whitespace and a balanced rhythm.</p>" },
+    {
+      "type": "select", "id": "b2_text_size", "label": "Description size", "default": "body-medium",
+      "options": [
+        { "value": "body-x-small", "label": "Extra small" },
+        { "value": "body-small", "label": "Small" },
+        { "value": "body-medium", "label": "Medium" },
+        { "value": "body-large", "label": "Large" }
+      ]
+    },
+    { "type": "text", "id": "b2_chapter", "label": "Central label", "default": "CHAPTER ONE / ESSENCE" },
+    { "type": "text", "id": "b2_nav_1", "label": "Bottom label 1", "default": "PROFILE" },
+    { "type": "url", "id": "b2_nav_1_link", "label": "Bottom label 1 link" },
+    { "type": "text", "id": "b2_nav_2", "label": "Bottom label 2", "default": "SPACE" },
+    { "type": "url", "id": "b2_nav_2_link", "label": "Bottom label 2 link" },
+    { "type": "text", "id": "b2_nav_3", "label": "Bottom label 3", "default": "MOVEMENT" },
+    { "type": "url", "id": "b2_nav_3_link", "label": "Bottom label 3 link" },
+    { "type": "url", "id": "b2_link", "label": "Link" },
+    { "type": "text", "id": "b2_link_label", "label": "Link label", "info": "Shown under the description when a link is set." },
+    { "type": "image_picker", "id": "b2_image", "label": "Main image", "info": "1600 x 2200px recommended." },
+    { "type": "image_picker", "id": "b2_image_mobile", "label": "Mobile main image", "info": "Optional. Falls back to the main image." },
+    {
+      "type": "select", "id": "b2_image_position", "label": "Main image focal position", "default": "focal",
+      "options": [
+        { "value": "focal", "label": "Use image focal point" },
+        { "value": "center center", "label": "Center" },
+        { "value": "center top", "label": "Top" },
+        { "value": "center bottom", "label": "Bottom" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select", "id": "b2_ratio", "label": "Desktop image ratio", "default": "8 / 11",
+      "options": [
+        { "value": "8 / 11", "label": "8:11 (Figma)" },
+        { "value": "2 / 3", "label": "2:3" },
+        { "value": "3 / 4", "label": "3:4" },
+        { "value": "4 / 5", "label": "4:5" },
+        { "value": "8 / 9", "label": "8:9" }
+      ]
+    },
+    {
+      "type": "select", "id": "b2_ratio_mobile", "label": "Mobile image ratio", "default": "13 / 18",
+      "options": [
+        { "value": "13 / 18", "label": "Figma (390 x 540)" },
+        { "value": "4 / 5", "label": "4:5" },
+        { "value": "3 / 4", "label": "3:4" },
+        { "value": "2 / 3", "label": "2:3" }
+      ]
+    },
+    {
+      "type": "select", "id": "b2_content_ratio_mobile", "label": "Mobile content height", "default": "8 / 13",
+      "options": [
+        { "value": "8 / 13", "label": "Figma proportion" },
+        { "value": "auto", "label": "Fit content" }
+      ]
+    },
+    { "type": "color", "id": "b2_bg_color", "label": "Background color", "info": "Leave empty to use the color scheme." },
+    { "type": "color", "id": "b2_text_color", "label": "Text color", "info": "Leave empty to use the color scheme." }
+  ],
+  "presets": [
+    { "name": "Editorial two banners" }
+  ]
+}
+{% endschema %}
