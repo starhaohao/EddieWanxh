@@ -39,7 +39,25 @@
   {%- comment -%} ===== Banner 1: image | content ===== {%- endcomment -%}
   {%- if s.show_banner_1 -%}
     {%- liquid
+      assign b1_col = s.b1_collection
+      assign b1_link = s.b1_link
+      assign b1_statement = s.b1_statement
+      assign b1_link_label = s.b1_link_label
       assign b1_image = s.b1_image
+      if b1_col != blank
+        if b1_link == blank
+          assign b1_link = b1_col.url
+        endif
+        if b1_statement == blank
+          assign b1_statement = b1_col.title
+        endif
+        if b1_link_label == blank
+          assign b1_link_label = 'Shop ' | append: b1_col.title
+        endif
+        if b1_image == blank
+          assign b1_image = b1_col.image
+        endif
+      endif
       assign b1_image_mobile = s.b1_image_mobile | default: b1_image
       assign b1_pos = s.b1_image_position
       if b1_pos == 'focal' and b1_image != blank
@@ -64,7 +82,7 @@
       style="--edt-ratio: {{ s.b1_ratio }}; --edt-ratio-mobile: {{ s.b1_ratio_mobile }}; --edt-content-ratio-mobile: {{ s.b1_content_ratio_mobile }};{% if s.b1_bg_color != blank %} --bg: {{ s.b1_bg_color }};{% endif %}{% if s.b1_text_color != blank %} --text: {{ s.b1_text_color }};{% endif %} --edt-inset-w: {{ s.b1_secondary_width }}%; --edt-inset-w-mobile: {{ s.b1_secondary_width_mobile }}%;"
     >
       <div class="edt__media">
-        {%- if s.b1_link != blank -%}<a href="{{ s.b1_link }}" class="edt__media-link" aria-label="{{ s.b1_statement | default: s.b1_label_top | default: shop.name | strip_html | escape }}">{%- endif -%}
+        {%- if b1_link != blank -%}<a href="{{ b1_link }}" class="edt__media-link" aria-label="{{ b1_statement | default: s.b1_label_top | default: shop.name | strip_html | escape }}">{%- endif -%}
         {%- if b1_image != blank -%}
           {%- assign alt = b1_image.alt | escape -%}
           {{ b1_image | image_url: width: 2400 | image_tag:
@@ -86,7 +104,7 @@
         {%- else -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'edt__img edt__placeholder' }}
         {%- endif -%}
-        {%- if s.b1_link != blank -%}</a>{%- endif -%}
+        {%- if b1_link != blank -%}</a>{%- endif -%}
       </div>
 
       <div class="edt__content edt__content--1">
@@ -108,13 +126,13 @@
         </div>
 
         <div class="edt__row edt__row--middle">
-          {%- if s.b1_statement != blank or s.b1_link_label != blank -%}
+          {%- if b1_statement != blank or b1_link_label != blank -%}
             <div class="edt__statement">
-              {%- if s.b1_statement != blank -%}
-                <h2 class="hero__title {{ s.b1_statement_size }}">{{ s.b1_statement }}</h2>
+              {%- if b1_statement != blank -%}
+                <h2 class="hero__title {{ s.b1_statement_size }}">{{ b1_statement }}</h2>
               {%- endif -%}
-              {%- if s.b1_link_label != blank and s.b1_link != blank -%}
-                <a href="{{ s.b1_link }}" class="edt__cta btn btn--text"><span>{{ s.b1_link_label }}</span></a>
+              {%- if b1_link_label != blank and b1_link != blank -%}
+                <a href="{{ b1_link }}" class="edt__cta btn btn--text"><span>{{ b1_link_label }}</span></a>
               {%- endif -%}
             </div>
           {%- endif -%}
@@ -132,7 +150,29 @@
   {%- comment -%} ===== Banner 2: content | image ===== {%- endcomment -%}
   {%- if s.show_banner_2 -%}
     {%- liquid
+      assign b2_col = s.b2_collection
+      assign b2_link = s.b2_link
+      assign b2_heading = s.b2_heading
+      assign b2_text = s.b2_text
+      assign b2_link_label = s.b2_link_label
       assign b2_image = s.b2_image
+      if b2_col != blank
+        if b2_link == blank
+          assign b2_link = b2_col.url
+        endif
+        if b2_heading == blank
+          assign b2_heading = b2_col.title
+        endif
+        if b2_text == blank
+          assign b2_text = b2_col.description
+        endif
+        if b2_link_label == blank
+          assign b2_link_label = 'Shop ' | append: b2_col.title
+        endif
+        if b2_image == blank
+          assign b2_image = b2_col.image
+        endif
+      endif
       assign b2_image_mobile = s.b2_image_mobile | default: b2_image
       assign b2_pos = s.b2_image_position
       if b2_pos == 'focal' and b2_image != blank
@@ -149,7 +189,7 @@
     -%}
     <div
       class="edt__banner edt__banner--2"
-      style="--edt-ratio: {{ s.b2_ratio }}; --edt-ratio-mobile: {{ s.b2_ratio_mobile }}; --edt-content-ratio-mobile: {{ s.b2_content_ratio_mobile }};{% if s.b2_bg_color != blank %} --bg: {{ s.b2_bg_color }};{% endif %}{% if s.b2_text_color != blank %} --text: {{ s.b2_text_color }};{% endif %}"
+      style="--edt-ratio: {{ s.b2_ratio }}; --edt-ratio-mobile: {{ s.b2_ratio_mobile }}; --edt-content-ratio-mobile: {{ s.b2_content_ratio_mobile }};{% if s.b2_bg_color != blank %} --bg: {{ s.b2_bg_color }};{% endif %}{% if b2_text_color != blank %} --text: {{ b2_text_color }};{% endif %}"
     >
       <div class="edt__content edt__content--2">
         {%- if s.b2_meta_1 != blank or s.b2_meta_2 != blank -%}
@@ -162,19 +202,19 @@
           </div>
         {%- endif -%}
 
-        {%- if s.b2_heading != blank or s.b2_text != blank -%}
+        {%- if b2_heading != blank or b2_text != blank -%}
           <div class="edt__body">
-            {%- if s.b2_heading != blank -%}
+            {%- if b2_heading != blank -%}
               <h2 class="hero__title edt__heading {{ s.b2_heading_size }}">
                 {%- if s.b2_number != blank -%}<span class="edt__num">{{ s.b2_number }}</span>{%- endif -%}
-                <span>{{ s.b2_heading }}</span>
+                <span>{{ b2_heading }}</span>
               </h2>
             {%- endif -%}
-            {%- if s.b2_text != blank -%}
-              <div class="hero__rte edt__text {{ s.b2_text_size }}">{{ s.b2_text }}</div>
+            {%- if b2_text != blank -%}
+              <div class="hero__rte edt__text {{ s.b2_text_size }}">{{ b2_text }}</div>
             {%- endif -%}
-            {%- if s.b2_link_label != blank and s.b2_link != blank -%}
-              <a href="{{ s.b2_link }}" class="edt__cta btn btn--text"><span>{{ s.b2_link_label }}</span></a>
+            {%- if b2_link_label != blank and b2_link != blank -%}
+              <a href="{{ b2_link }}" class="edt__cta btn btn--text"><span>{{ b2_link_label }}</span></a>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -209,7 +249,7 @@
       </div>
 
       <div class="edt__media">
-        {%- if s.b2_link != blank -%}<a href="{{ s.b2_link }}" class="edt__media-link" aria-label="{{ s.b2_heading | default: shop.name | strip_html | escape }}">{%- endif -%}
+        {%- if b2_link != blank -%}<a href="{{ b2_link }}" class="edt__media-link" aria-label="{{ b2_heading | default: shop.name | strip_html | escape }}">{%- endif -%}
         {%- if b2_image != blank -%}
           {%- assign alt = b2_image.alt | escape -%}
           {{ b2_image | image_url: width: 2400 | image_tag:
@@ -231,7 +271,7 @@
         {%- else -%}
           {{ 'lifestyle-2' | placeholder_svg_tag: 'edt__img edt__placeholder' }}
         {%- endif -%}
-        {%- if s.b2_link != blank -%}</a>{%- endif -%}
+        {%- if b2_link != blank -%}</a>{%- endif -%}
       </div>
     </div>
   {%- endif -%}
@@ -380,6 +420,7 @@
 
     { "type": "header", "content": "Banner 1 — image left, content right" },
     { "type": "checkbox", "id": "show_banner_1", "label": "Show banner 1", "default": true },
+    { "type": "collection", "id": "b1_collection", "label": "Featured collection", "info": "e.g. Underwear. Links the banner to this collection. Empty text, link label and main image fields are filled from it." },
     { "type": "image_picker", "id": "b1_image", "label": "Main image", "info": "1600 x 1800px recommended." },
     { "type": "image_picker", "id": "b1_image_mobile", "label": "Mobile main image", "info": "Optional. Falls back to the main image." },
     {
@@ -449,6 +490,7 @@
 
     { "type": "header", "content": "Banner 2 — content left, image right" },
     { "type": "checkbox", "id": "show_banner_2", "label": "Show banner 2", "default": true },
+    { "type": "collection", "id": "b2_collection", "label": "Featured collection", "info": "e.g. Underwear. Links the banner to this collection. Empty heading, description, link label and main image fields are filled from it." },
     { "type": "text", "id": "b2_meta_1", "label": "Top label", "default": "TRIIIPLE STUDIO" },
     { "type": "text", "id": "b2_meta_2", "label": "Top label (second part)", "default": "2026" },
     { "type": "text", "id": "b2_number", "label": "Chapter number", "default": "5.3" },
