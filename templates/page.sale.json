@@ -73,28 +73,28 @@
           "type": "ghost_cta",
           "settings": {
             "label": "All Bundles",
-            "url": "/collections/bundles-and-save"
+            "url": "/collections/bundle-deals-15-off"
           }
         },
         "ghost_1": {
           "type": "ghost_cta",
           "settings": {
-            "label": "Bundle XS/S",
-            "url": "/collections/bundles-xs-s-clearance"
+            "label": "Final Clearance",
+            "url": "/collections/final-clearance"
           }
         },
         "ghost_2": {
           "type": "ghost_cta",
           "settings": {
-            "label": "Bundle XL/2XL",
-            "url": "/collections/bundles-xl-2xl-clearance"
+            "label": "XL/2XL 30% Off",
+            "url": "/collections/xl-2xl-30-off"
           }
         },
         "ghost_3": {
           "type": "ghost_cta",
           "settings": {
             "label": "Dead Stock",
-            "url": "/collections/bundles-xs-s-clearance"
+            "url": "/collections/dead-stock-clearance"
           }
         }
       },
