@@ -313,6 +313,8 @@
   .teh__action-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 220px)); justify-content: center; gap: 14px; }
   .teh__action-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 16px; border: 1px solid var(--action-link-color, #2a2a2a); color: var(--action-link-color, #2a2a2a); font-size: 11px; line-height: 1.25; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; transition: background-color .2s ease, color .2s ease; }
   .teh__action-button:hover { background: var(--action-link-color, #2a2a2a); color: #fff; }
+  /* Labels start on the same left edge and arrows sit on the same right edge on every button. */
+  .teh__action-button { justify-content: space-between; text-align: left; padding-left: 16px; padding-right: 16px; }
   .teh__categories { padding-bottom: 84px; background: #efefed; color: #2a2a2a; }
   .teh__section-head { display: flex; align-items: end; justify-content: space-between; padding: 26px 32px 20px; border-top: 1px solid rgba(255,255,255,.22); }
   .teh__categories .teh__section-head { padding-top: 42px; border-top: 0; }
