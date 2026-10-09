@@ -2,6 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> **Start with `AGENTS.md`** (current rules, theme tokens, branch and deploy setup, shared with Codex) and
+> `docs/CHANGELOG.md` (everything built so far). Both are more current than the notes below.
+
 ## What This Is
 
 A custom Shopify theme extension for **First Layer / TRIIIPLE Studio**, a Singapore-based premium menswear brand selling underwear and basics. The repo contains only the custom sections and templates that extend a base Shopify theme — it does not contain the full theme.
