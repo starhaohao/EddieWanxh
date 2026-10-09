@@ -1,0 +1,384 @@
+{%- comment -%}
+  Brand Values List — editorial image + numbered list
+  Desktop (>=750px): label row (left / centre / right); below it one edge-to-edge image on one side
+                     and the heading, intro and numbered value list on the other (sides switchable).
+  Mobile (<750px):   labels, heading and intro, full-width image, then the numbered list.
+
+  Same theme vocabulary as brand-definition-editorial:
+  - .section-padding (--PT / --PB / --PT-MOBILE), --outer, --gutter, --outer-offset
+  - .subheading (labels, numbers), .hero__title + .heading-* (heading, value titles), .hero__rte + .body-* (text)
+  - .color-{scheme} for --text / --bg, with optional section colour overrides
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign color_scheme = 'color-' | append: s.color_scheme
+  assign values = section.blocks | where: 'type', 'value'
+  if section.index > 2
+    assign loading = 'lazy'
+  else
+    assign loading = 'eager'
+  endif
+
+  assign image = s.image
+  assign image_mobile = s.image_mobile | default: image
+  assign pos = s.image_position
+  if pos == 'focal' and image != blank
+    assign pos = image.presentation.focal_point
+  endif
+  assign pos = pos | default: 'center center'
+  assign pos_mobile = s.image_position
+  if pos_mobile == 'focal' and image_mobile != blank
+    assign pos_mobile = image_mobile.presentation.focal_point
+  endif
+  assign pos_mobile = pos_mobile | default: 'center center'
+  assign style_desktop = 'object-position: ' | append: pos | append: ';'
+  assign style_mobile = 'object-position: ' | append: pos_mobile | append: ';'
+
+  assign show_brand = false
+  assign show_category = false
+  assign show_site = false
+  if s.show_brand_label and s.brand_label != blank
+    assign show_brand = true
+  endif
+  if s.show_category_label and s.category_label != blank
+    assign show_category = true
+  endif
+  if s.show_website_label and s.website_label != blank
+    assign show_site = true
+  endif
+-%}
+
+{%- capture bvl_style -%}
+  --PT: {{ s.padding_top }}px; --PB: {{ s.padding_bottom }}px; --PT-MOBILE: {{ s.padding_top_mobile }}px;
+  --bvl-pb-mobile: {{ s.padding_bottom_mobile }}px;
+  --bvl-label-gap: {{ s.label_gap }}px; --bvl-item-gap: {{ s.item_gap }}px;
+  --bvl-ratio: {{ s.image_ratio }}; --bvl-ratio-mobile: {{ s.image_ratio_mobile }};
+  {%- if s.background_color != blank %} --bg: {{ s.background_color }};{% endif -%}
+  {%- if s.text_color != blank %} --text: {{ s.text_color }};{% endif -%}
+{%- endcapture -%}
+
+<section
+  id="BrandValuesList--{{ section.id }}"
+  class="bvl section-padding {{ color_scheme }}"
+  style="{{ bvl_style | strip_newlines }}"
+>
+  {%- if show_brand or show_category or show_site -%}
+    <div class="bvl__labels">
+      <p class="bvl__label bvl__label--brand subheading">{% if show_brand %}{{ s.brand_label }}{% endif %}</p>
+      <p class="bvl__label bvl__label--category subheading">{% if show_category %}{{ s.category_label }}{% endif %}</p>
+      <p class="bvl__label bvl__label--site subheading">
+        {%- if show_site -%}
+          {%- if s.website_link != blank -%}<a href="{{ s.website_link }}">{{ s.website_label }}</a>{%- else -%}{{ s.website_label }}{%- endif -%}
+        {%- endif -%}
+      </p>
+    </div>
+  {%- endif -%}
+
+  <div class="bvl__grid bvl__grid--image-{{ s.image_side }}">
+    <div class="bvl__media">
+      {%- if image != blank -%}
+        {%- assign alt = image.alt | default: s.heading | escape -%}
+        {{ image | image_url: width: 2400 | image_tag:
+          class: 'bvl__img bvl__img--desktop',
+          style: style_desktop,
+          loading: loading,
+          alt: alt,
+          sizes: '50vw',
+          widths: '800, 1200, 1600, 2000, 2400'
+        }}
+        {{ image_mobile | image_url: width: 1500 | image_tag:
+          class: 'bvl__img bvl__img--mobile',
+          style: style_mobile,
+          loading: loading,
+          alt: alt,
+          sizes: '100vw',
+          widths: '450, 750, 1100, 1500'
+        }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'bvl__img bvl__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    {%- if s.heading != blank or s.text != blank -%}
+      <div class="bvl__copy">
+        {%- if s.heading != blank -%}
+          <h2 class="hero__title {{ s.heading_size }}{% if s.heading_bold %} bvl__bold{% endif %}">{{ s.heading }}</h2>
+        {%- endif -%}
+        {%- if s.text != blank -%}
+          <div class="hero__rte {{ s.text_size }}">{{ s.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if values.size > 0 -%}
+      <ol class="bvl__list{% if s.show_dividers %} bvl__list--dividers{% endif %}">
+        {%- for value in values -%}
+          {%- assign v = value.settings -%}
+          <li class="bvl__item" {{ value.shopify_attributes }}>
+            {%- if v.number != blank -%}<span class="bvl__number subheading">{{ v.number }}</span>{%- endif -%}
+            <div class="bvl__item-body">
+              {%- if v.title != blank -%}
+                <h3 class="bvl__item-title hero__title {{ s.item_title_size }}{% if s.item_title_bold %} bvl__bold{% endif %}">
+                  {%- if v.link != blank -%}<a href="{{ v.link }}">{{ v.title }}</a>{%- else -%}{{ v.title }}{%- endif -%}
+                </h3>
+              {%- endif -%}
+              {%- if v.text != blank -%}
+                <div class="bvl__item-text hero__rte {{ s.item_text_size }}"><p>{{ v.text | escape | newline_to_br }}</p></div>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  /* Mobile: labels, copy, full-bleed image, list. */
+  #BrandValuesList--{{ section.id }} { background: var(--bg); color: var(--text); }
+
+  #BrandValuesList--{{ section.id }} .bvl__labels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: calc(var(--gutter) / 4) var(--gutter);
+    margin-bottom: var(--bvl-label-gap);
+  }
+  #BrandValuesList--{{ section.id }} .bvl__label { margin: 0; color: var(--text); }
+  #BrandValuesList--{{ section.id }} .bvl__label:empty,
+  #BrandValuesList--{{ section.id }} .bvl__label--site { display: none; }
+  #BrandValuesList--{{ section.id }} .bvl__label a { color: inherit; text-decoration: none; }
+
+  #BrandValuesList--{{ section.id }} .bvl__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "copy" "media" "list";
+  }
+  #BrandValuesList--{{ section.id }} .bvl__copy { grid-area: copy; padding-bottom: var(--gutter); }
+  #BrandValuesList--{{ section.id }} .bvl__copy > :last-child { margin-bottom: 0; }
+  #BrandValuesList--{{ section.id }} .hero__title,
+  #BrandValuesList--{{ section.id }} .hero__rte { color: var(--text); overflow-wrap: break-word; }
+  #BrandValuesList--{{ section.id }} .hero__title { margin-top: 0; }
+  #BrandValuesList--{{ section.id }} .bvl__copy .hero__title { margin-bottom: calc(var(--gutter) * 0.75); }
+  #BrandValuesList--{{ section.id }} .bvl__bold { font-weight: 700; }
+
+  #BrandValuesList--{{ section.id }} .bvl__media {
+    grid-area: media;
+    position: relative;
+    margin: 0 var(--outer-offset);
+    aspect-ratio: var(--bvl-ratio-mobile);
+    overflow: hidden;
+    background: var(--bg-accent, var(--bg));
+  }
+  #BrandValuesList--{{ section.id }} .bvl__img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #BrandValuesList--{{ section.id }} .bvl__img--desktop { display: none !important; }
+
+  #BrandValuesList--{{ section.id }} .bvl__list {
+    grid-area: list;
+    display: flex;
+    flex-direction: column;
+    gap: var(--bvl-item-gap);
+    margin: 0;
+    padding: var(--gutter) 0 0;
+    list-style: none;
+  }
+  #BrandValuesList--{{ section.id }} .bvl__item {
+    display: grid;
+    grid-template-columns: 3em minmax(0, 1fr);
+    gap: var(--gutter);
+    align-items: baseline;
+    margin: 0;
+  }
+  #BrandValuesList--{{ section.id }} .bvl__list--dividers { gap: 0; }
+  #BrandValuesList--{{ section.id }} .bvl__list--dividers .bvl__item {
+    padding: var(--bvl-item-gap) 0;
+    border-top: 1px solid var(--border, rgba(0, 0, 0, 0.12));
+  }
+  #BrandValuesList--{{ section.id }} .bvl__list--dividers .bvl__item:first-child { padding-top: 0; border-top: 0; }
+  #BrandValuesList--{{ section.id }} .bvl__list--dividers .bvl__item:last-child { padding-bottom: 0; }
+  #BrandValuesList--{{ section.id }} .bvl__number { margin: 0; color: var(--text); }
+  #BrandValuesList--{{ section.id }} .bvl__item-title { margin-bottom: calc(var(--gutter) / 4); }
+  #BrandValuesList--{{ section.id }} .bvl__item-title a { color: inherit; text-decoration: none; }
+  #BrandValuesList--{{ section.id }} .bvl__item-text > :last-child { margin-bottom: 0; }
+
+  @media only screen and (max-width: 749px) {
+    #BrandValuesList--{{ section.id }} { padding-bottom: var(--bvl-pb-mobile); }
+  }
+
+  /* Tablet + desktop: image bleeds to its edge of the viewport; copy and list share the other half. */
+  @media only screen and (min-width: 750px) {
+    #BrandValuesList--{{ section.id }} .bvl__labels {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: var(--gutter);
+    }
+    #BrandValuesList--{{ section.id }} .bvl__label:empty,
+    #BrandValuesList--{{ section.id }} .bvl__label--site { display: block; }
+    #BrandValuesList--{{ section.id }} .bvl__label--category { text-align: center; }
+    #BrandValuesList--{{ section.id }} .bvl__label--site { text-align: right; }
+
+    #BrandValuesList--{{ section.id }} .bvl__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: 1fr auto auto 1fr;
+      grid-template-areas: "media ." "media copy" "media list" "media .";
+      column-gap: calc(var(--gutter) * 2);
+    }
+    #BrandValuesList--{{ section.id }} .bvl__grid--image-right { grid-template-areas: ". media" "copy media" "list media" ". media"; }
+    #BrandValuesList--{{ section.id }} .bvl__copy { padding-bottom: calc(var(--gutter) * 1.5); }
+    #BrandValuesList--{{ section.id }} .bvl__list { padding-top: 0; }
+
+    #BrandValuesList--{{ section.id }} .bvl__media {
+      margin: 0 0 0 var(--outer-offset);
+      aspect-ratio: var(--bvl-ratio);
+    }
+    #BrandValuesList--{{ section.id }} .bvl__grid--image-right .bvl__media { margin: 0 var(--outer-offset) 0 0; }
+    #BrandValuesList--{{ section.id }} .bvl__img--desktop { display: block !important; }
+    #BrandValuesList--{{ section.id }} .bvl__img--mobile { display: none !important; }
+  }
+
+  @media only screen and (min-width: 990px) {
+    #BrandValuesList--{{ section.id }} .bvl__grid { column-gap: calc(var(--gutter) * 3); }
+    #BrandValuesList--{{ section.id }} .bvl__copy,
+    #BrandValuesList--{{ section.id }} .bvl__list { max-width: 34em; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Brand values list",
+  "class": "section-brand-values-list",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "header", "content": "Labels" },
+    { "type": "checkbox", "id": "show_brand_label", "label": "Show brand label", "default": true },
+    { "type": "text", "id": "brand_label", "label": "Brand label", "default": "TRIIIPLE STUDIO" },
+    { "type": "checkbox", "id": "show_category_label", "label": "Show category label", "default": true },
+    { "type": "text", "id": "category_label", "label": "Category label", "default": "BRAND VALUES" },
+    { "type": "checkbox", "id": "show_website_label", "label": "Show website label", "default": true },
+    { "type": "text", "id": "website_label", "label": "Website label", "default": "TRIIIPLESTUDIO.COM" },
+    { "type": "url", "id": "website_link", "label": "Website label link" },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "WHAT WE STAND FOR" },
+    { "type": "checkbox", "id": "heading_bold", "label": "Bold heading", "default": true },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "heading-small",
+      "options": [
+        { "value": "heading-x-small", "label": "Extra small" },
+        { "value": "heading-small", "label": "Small" },
+        { "value": "heading-medium", "label": "Medium" },
+        { "value": "heading-large", "label": "Large" }
+      ]
+    },
+    { "type": "richtext", "id": "text", "label": "Intro", "default": "<p>Three principles behind every piece we make. Everyday essentials, designed in Singapore to sit closest to you.</p>" },
+    {
+      "type": "select", "id": "text_size", "label": "Intro size", "default": "body-small",
+      "options": [
+        { "value": "body-x-small", "label": "Extra small" },
+        { "value": "body-small", "label": "Small" },
+        { "value": "body-medium", "label": "Medium" },
+        { "value": "body-large", "label": "Large" }
+      ]
+    },
+    { "type": "header", "content": "Value list" },
+    {
+      "type": "select", "id": "item_title_size", "label": "Value title size", "default": "heading-x-small",
+      "options": [
+        { "value": "heading-mini", "label": "Mini" },
+        { "value": "heading-x-small", "label": "Extra small" },
+        { "value": "heading-small", "label": "Small" }
+      ]
+    },
+    { "type": "checkbox", "id": "item_title_bold", "label": "Bold value titles", "default": true },
+    {
+      "type": "select", "id": "item_text_size", "label": "Value text size", "default": "body-small",
+      "options": [
+        { "value": "body-x-small", "label": "Extra small" },
+        { "value": "body-small", "label": "Small" },
+        { "value": "body-medium", "label": "Medium" }
+      ]
+    },
+    { "type": "checkbox", "id": "show_dividers", "label": "Show divider lines", "default": true },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "1600 x 2000px recommended." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image", "info": "Optional. Falls back to the image above." },
+    {
+      "type": "select", "id": "image_side", "label": "Desktop image side", "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select", "id": "image_position", "label": "Focal position", "default": "focal",
+      "options": [
+        { "value": "focal", "label": "Use image focal point" },
+        { "value": "center center", "label": "Center" },
+        { "value": "center top", "label": "Top" },
+        { "value": "center bottom", "label": "Bottom" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select", "id": "image_ratio", "label": "Desktop image ratio", "default": "4 / 5",
+      "options": [
+        { "value": "2 / 3", "label": "Portrait 2:3" },
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" }
+      ]
+    },
+    {
+      "type": "select", "id": "image_ratio_mobile", "label": "Mobile image ratio", "default": "4 / 5",
+      "options": [
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 3", "label": "Landscape 4:3" }
+      ]
+    },
+    { "type": "header", "content": "Colors" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme_1" },
+    { "type": "color", "id": "background_color", "label": "Background color", "info": "Leave empty to use the color scheme." },
+    { "type": "color", "id": "text_color", "label": "Text color", "info": "Leave empty to use the color scheme." },
+    { "type": "header", "content": "Desktop spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "label_gap", "label": "Space below labels", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "item_gap", "label": "Space between values", "min": 4, "max": 80, "step": 2, "unit": "px", "default": 24 },
+    { "type": "header", "content": "Mobile spacing" },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "FABRIC" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "url", "id": "link", "label": "Title link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand values list",
+      "blocks": [
+        { "type": "value", "settings": { "number": "01", "title": "FABRIC", "text": "Modal-cotton blends chosen for how they feel at the end of the day, not just on the hanger." } },
+        { "type": "value", "settings": { "number": "02", "title": "FIT", "text": "Cut and tested on real bodies to stay put. No ride-up, no readjusting." } },
+        { "type": "value", "settings": { "number": "03", "title": "FORM", "text": "Clean lines, flat seams and nothing that does not need to be there." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
