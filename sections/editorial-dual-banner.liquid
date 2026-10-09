@@ -1,0 +1,364 @@
+{%- comment -%}
+  Editorial Dual Banner — two 50/50 editorial panels.
+  Layout and type are inherited from the Broadcast theme system:
+  - Vertical padding: .section-padding (--PT / --PB, auto-scaled 0.8 tablet / 0.6 mobile)
+  - Horizontal gutters: --outer / --gutter (32/22/20px and 32/22/16px on the "compact" grid)
+  - Image bleed: --outer-offset cancels .section-padding's side padding so images reach the edges
+  - Type: .hero__subheading, .hero__title + .heading-*, .hero__rte + .body-*, .btn.btn--text
+  - Colors: .color-{scheme} (--text / --bg)
+{%- endcomment -%}
+
+{%- liquid
+  assign color_scheme = 'color-' | append: section.settings.color_scheme
+  assign gap_class = ''
+  if section.settings.image_gap
+    assign gap_class = ' edb--gap'
+  endif
+-%}
+
+<section
+  id="EditorialDualBanner--{{ section.id }}"
+  class="edb section-padding {{ color_scheme }} edb--{{ section.settings.text_position }}{{ gap_class }}"
+  style="--PT: {{ section.settings.padding_top }}px; --PB: {{ section.settings.padding_bottom }}px; --edb-ratio: {{ section.settings.aspect_ratio }}; --edb-ratio-mobile: {{ section.settings.aspect_ratio_mobile }};"
+>
+  <div class="edb__grid">
+    {%- for block in section.blocks limit: 2 -%}
+      {%- liquid
+        assign link = block.settings.link
+        assign image = block.settings.image
+        assign image_mobile = block.settings.image_mobile | default: image
+      -%}
+      <div class="edb__panel" {{ block.shopify_attributes }}>
+        <div class="edb__media">
+          {%- if link != blank -%}<a href="{{ link }}" class="edb__media-link" aria-label="{{ block.settings.title | default: block.settings.link_label | default: shop.name | escape }}">{%- endif -%}
+          {%- if image != blank -%}
+            {%- liquid
+              assign alt = image.alt | default: block.settings.title | escape
+              if section.index > 2
+                assign loading = 'lazy'
+              else
+                assign loading = 'eager'
+              endif
+            -%}
+            {{ image | image_url: width: 2400 | image_tag:
+              class: 'edb__img edb__img--desktop',
+              loading: loading,
+              alt: alt,
+              sizes: '(min-width: 750px) 50vw, 100vw',
+              widths: '750, 1100, 1500, 1800, 2400'
+            }}
+            {{ image_mobile | image_url: width: 1500 | image_tag:
+              class: 'edb__img edb__img--mobile',
+              loading: loading,
+              alt: alt,
+              sizes: '100vw',
+              widths: '550, 750, 1100, 1500'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'edb__img edb__placeholder' }}
+          {%- endif -%}
+          {%- if link != blank -%}</a>{%- endif -%}
+        </div>
+
+        {%- if block.settings.subheading != blank or block.settings.title != blank or block.settings.text != blank or block.settings.link_label != blank -%}
+          <div class="edb__content">
+            {%- if block.settings.subheading != blank -%}
+              <p class="hero__subheading">{{ block.settings.subheading }}</p>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h2 class="hero__title {{ block.settings.heading_font_size }}">{{ block.settings.title }}</h2>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="hero__rte {{ block.settings.text_font_size }}">{{ block.settings.text }}</div>
+            {%- endif -%}
+            {%- if block.settings.link_label != blank and link != blank -%}
+              <a href="{{ link }}" class="edb__cta btn btn--text"><span>{{ block.settings.link_label }}</span></a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  /* Grid bleeds through .section-padding's --outer side padding, so images run to the viewport edge. */
+  #EditorialDualBanner--{{ section.id }} .edb__grid {
+    --edb-gap: 0px;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: var(--gutter);
+    margin-left: var(--outer-offset);
+    margin-right: var(--outer-offset);
+  }
+  #EditorialDualBanner--{{ section.id }}.edb--gap .edb__grid { --edb-gap: var(--gutter); }
+
+  #EditorialDualBanner--{{ section.id }} .edb__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  #EditorialDualBanner--{{ section.id }} .edb__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: var(--edb-ratio-mobile);
+    background: var(--bg-accent, var(--bg));
+  }
+  #EditorialDualBanner--{{ section.id }} .edb__media-link { display: block; height: 100%; }
+  #EditorialDualBanner--{{ section.id }} .edb__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #EditorialDualBanner--{{ section.id }} .edb__img--desktop { display: none; }
+
+  /* Text sits on the theme content grid: --outer on the page edges. */
+  #EditorialDualBanner--{{ section.id }} .edb__content {
+    padding-top: var(--gutter);
+    padding-left: var(--outer);
+    padding-right: var(--outer);
+    margin-bottom: var(--line-offset);
+  }
+  #EditorialDualBanner--{{ section.id }} .edb__cta { --btn-text: var(--text, currentColor); }
+
+  /* Overlay variant: same gutters, pinned to the bottom of the image. */
+  #EditorialDualBanner--{{ section.id }}.edb--overlay .edb__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 0;
+    padding-bottom: var(--outer);
+    margin-bottom: 0;
+    pointer-events: none;
+  }
+  #EditorialDualBanner--{{ section.id }}.edb--overlay .edb__cta { pointer-events: auto; }
+  #EditorialDualBanner--{{ section.id }}.edb--overlay .edb__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }}) 0%, rgba(0, 0, 0, 0) 55%);
+    pointer-events: none;
+  }
+  #EditorialDualBanner--{{ section.id }}.edb--overlay .edb__content .hero__subheading,
+  #EditorialDualBanner--{{ section.id }}.edb--overlay .edb__content .hero__title,
+  #EditorialDualBanner--{{ section.id }}.edb--overlay .edb__content .hero__rte,
+  #EditorialDualBanner--{{ section.id }}.edb--overlay .edb__cta {
+    --text: {{ section.settings.overlay_text_color }};
+  }
+  #EditorialDualBanner--{{ section.id }}.edb--overlay .edb__content > :last-child { margin-bottom: 0; }
+
+  /* Tablet + desktop: 50/50. Text aligns to a 2-column theme grid
+     (page edge = --outer, centre seam = half of --gutter on each side). */
+  @media only screen and (min-width: 750px) {
+    #EditorialDualBanner--{{ section.id }} .edb__grid {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--edb-gap);
+      row-gap: 0;
+    }
+    #EditorialDualBanner--{{ section.id }} .edb__media { aspect-ratio: var(--edb-ratio); }
+    #EditorialDualBanner--{{ section.id }} .edb__img--desktop { display: block; }
+    #EditorialDualBanner--{{ section.id }} .edb__img--mobile { display: none; }
+
+    #EditorialDualBanner--{{ section.id }} .edb__panel:nth-child(odd) .edb__content {
+      padding-left: var(--outer);
+      padding-right: calc((var(--gutter) - var(--edb-gap)) / 2);
+    }
+    #EditorialDualBanner--{{ section.id }} .edb__panel:nth-child(even) .edb__content {
+      padding-left: calc((var(--gutter) - var(--edb-gap)) / 2);
+      padding-right: var(--outer);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Editorial dual banner",
+  "class": "section-editorial-dual-banner",
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position",
+      "default": "below",
+      "options": [
+        { "value": "below", "label": "Below image" },
+        { "value": "overlay", "label": "Over image (bottom)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "image_gap",
+      "label": "Gap between images",
+      "info": "Uses the theme grid gutter.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Desktop image ratio",
+      "default": "4 / 5",
+      "options": [
+        { "value": "2 / 3", "label": "Portrait 2:3" },
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "5 / 4", "label": "Landscape 5:4" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio_mobile",
+      "label": "Mobile image ratio",
+      "default": "4 / 5",
+      "options": [
+        { "value": "2 / 3", "label": "Portrait 2:3" },
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Overlay text color",
+      "info": "Used only when text sits over the image.",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay shade",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1600 x 2000px .jpg recommended."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Mobile image",
+          "info": "Optional. Falls back to the image above."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_font_size",
+          "label": "Heading size",
+          "default": "heading-x-small",
+          "options": [
+            { "value": "heading-mini", "label": "Mini" },
+            { "value": "heading-x-small", "label": "Extra small" },
+            { "value": "heading-small", "label": "Small" },
+            { "value": "heading-medium", "label": "Medium" },
+            { "value": "heading-large", "label": "Large" },
+            { "value": "heading-x-large", "label": "Extra large" }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "text_font_size",
+          "label": "Text size",
+          "default": "body-x-small",
+          "options": [
+            { "value": "body-x-small", "label": "Extra small" },
+            { "value": "body-small", "label": "Small" },
+            { "value": "body-medium", "label": "Medium" },
+            { "value": "body-large", "label": "Large" },
+            { "value": "body-x-large", "label": "Extra large" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "info": "Shown as a text link when a link is set."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial dual banner",
+      "blocks": [
+        { "type": "panel", "settings": { "subheading": "New season", "title": "The Essentials", "link_label": "Shop now" } },
+        { "type": "panel", "settings": { "subheading": "Editorial", "title": "The Lookbook", "link_label": "Discover" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
