@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "easyparcel": {
+      "command": "npx",
+      "args": ["-y", "@aisar-labs/easyparcel-mcp@0.1.2"],
+      "env": {
+        "EASYPARCEL_API_KEY": "${EASYPARCEL_API_KEY}",
+        "EASYPARCEL_SANDBOX": "${EASYPARCEL_SANDBOX:-true}"
+      }
+    }
+  }
+}
